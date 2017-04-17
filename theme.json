@@ -361,6 +361,9 @@
     }
   ],
   "settings": {
+    "randomText":"default",
+    "enableOverdrive":false,
+    "selectInterests":[],
     "backofficeDateTimeFormat": "m/d/Y H:i:s O",
     "extendedPropertiesEnabled": false,
     "extendedPropertyParameters": "",
@@ -417,7 +420,7 @@
     "suggestPriorSearchTerms": true,
     "searchExpandOnFocus": true,
     "showAddressTypeDropdown": true,
-    "showBreadcrumbs": true,
+    "showBreadcrumbs": false,
     "showCartItemDimensions": true,
     "showCartItemImage": true,
     "showCartItemOptions": true,
@@ -428,7 +431,7 @@
     "showMSRP": true,
     "showProductDetailMeasurements": true,
     "showProductDetailMfgPartNumber": true,
-    "showProductDetailProperties": true,
+    "showProductDetailProperties": false,
     "showProductDetailShortDesc": true,
     "showProductDetailUPC": true,
     "textColor": "#444444",
@@ -782,6 +785,109 @@
     }
   ],
   "widgets": [
+    {
+      "defaultConfig": {
+        "field1": "Name",
+        "field2": "Age",
+        "employeeRecommendation" : "I suggest..."
+      },
+      "displayName": "Employee Picks",
+      "displayTemplate": "misc/employee-picks",
+      "editViewFields": [
+        {
+          "anchor": "100%",
+          "fieldLabel": "Card background",
+          "name": "cardBackground",
+          "xtype": "mz-input-image"
+        },
+        {
+          "anchor": "100%",
+          "fieldLabel": "Employee Image",
+          "name": "employeeImage",
+          "xtype": "mz-input-image"
+        },        
+        {
+          "anchor": "100%",
+          "fieldLabel": "Field 1",
+          "name": "field1",
+          "xtype": "mz-input-text"
+        },
+        {
+          "anchor": "100%",
+          "fieldLabel": "Field 1 Value",
+          "name": "field1Value",
+          "xtype": "mz-input-text"
+        },        
+        {
+          "anchor": "100%",
+          "fieldLabel": "Field 2",
+          "name": "field2",
+          "xtype": "mz-input-text"
+        },  
+        {
+          "anchor": "100%",
+          "fieldLabel": "Field 2 Value",
+          "name": "field2Value",
+          "xtype": "mz-input-text"
+        },        
+        {
+          "anchor": "100%",
+          "fieldLabel": "Employee Recommendation",
+          "name": "employeeRecommendation",
+          "xtype": "mz-input-textarea"
+        }       
+      ],
+      "icon": "/resources/admin/widgets/30_employee_picks.png",
+      "id": "employee-picks",
+      "validPageTypes": [
+        "*"
+      ]
+    },   
+    {
+      "defaultConfig": {
+      },
+      "displayName": "Best season Picker",
+      "displayTemplate": "misc/best-season-picker.live",
+      "editViewFields": [
+        {
+          "anchor": "100%",
+          "fieldLabel": "Select Season",
+          "name": "seasons",
+          "xtype": "mz-input-selectmulti",
+          "store" : [
+            "Spring",
+            "Summer",
+            "Fall",
+            "Winter"
+
+          ]
+        }      
+      ],
+      "icon": "/resources/admin/widgets/30_employee_picks.png",
+      "id": "best-seasons",
+      "validPageTypes": [
+        "*"
+      ]
+    },    
+    {
+      "defaultConfig": {
+      },
+      "displayName": "Recently Added test",
+      "displayTemplate": "misc/recently-added",
+      "editViewFields": [
+        {
+          "anchor": "100%",
+          "fieldLabel": "Set Price Cap",
+          "name": "price",
+          "xtype": "mz-input-text"
+        }    
+      ],
+      "icon": "/resources/admin/widgets/30_employee_picks.png",
+      "id": "recently-added",
+      "validPageTypes": [
+        "*"
+      ]
+    },          
     {
       "defaultConfig": {
         "template": "modules/product/product-list"

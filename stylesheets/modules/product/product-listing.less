@@ -1,4 +1,5 @@
 ﻿.mz-productlisting {
+    position:relative;
     .mz-productlisting-info {
         margin-top: 5px;
     }
@@ -35,5 +36,25 @@
             float: left;
             margin: @gutter/2;
         }
+    }
+
+    .quick-view{
+        background: #eee;
+        border: 1px solid #000;
+        display: none;
+        padding: 5px;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        box-shadow: 1px 1px 10px #eee;
+        z-index:2;
+        span{
+            font-weight:bold;
+        }
+    }
+    &:hover{
+        .quick-view{
+            display:block;
+        }    
     }
 }

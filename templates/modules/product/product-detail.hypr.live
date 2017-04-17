@@ -17,6 +17,14 @@
 {% include "modules/product/price-stack" %}
 </div>
 
+<div>
+    {% for property in model.properties %}        
+    {% if property.attributeDetail.name|lower == 'best season' %}
+        <div>{{property.attributeDetail.name}} : {{ property.values|first|prop('value')}}</div>
+    {% endif %}    
+    {% endfor %}        
+</div>
+
 <dl class="mz-productcodes mz-propertylist mz-pagetitle-note mz-l-stack-section">
 	<dt class="mz-productcodes-productcode-label">{{ labels.productCode }}</dt>
 	<dd class="mz-productcodes-productcode" itemprop="sku">{{ model.variationProductCode|default(model.productCode) }}</dd>

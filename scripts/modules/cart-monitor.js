@@ -9,10 +9,11 @@ define(['modules/jquery-mozu', 'modules/api'], function ($, api) {
         userId = user.userId,
         $document = $(document),
         CartMonitor = {
+            setAmount: function(count) {
+                this.$amountEl.text("$"+count);
+            },           
             setCount: function(count) {
                 this.$el.text(count);
-                savedCounts[userId] = count;
-                $.cookie('mozucartcount', JSON.stringify(savedCounts), { path: '/' });
             },
             addToCount: function(count) {
                 this.setCount(this.getCount() + count);
@@ -22,28 +23,33 @@ define(['modules/jquery-mozu', 'modules/api'], function ($, api) {
             },
             update: function() {
                 api.get('cartsummary').then(function(summary) {
+                    $.cookie('mozucart', JSON.stringify(summary.data), { path: '/' });
+                    savedCarts[userId] = summary.data;
+                    console.log(summary);
                     $document.ready(function() {
-                        CartMonitor.setCount(summary.count());
+                        CartMonitor.setCount(summary.data.itemCount);
+                        CartMonitor.setAmount(summary.data.total);
                     });
                 });
             }
         },
-        savedCounts,
-        savedCount;
+        savedCarts,
+        savedCart;
 
     try {
-        savedCounts = JSON.parse($.cookie('mozucartcount'));
+        savedCarts = JSON.parse($.cookie('mozucart'));
     } catch(e) {}
 
-    if (!savedCounts) savedCounts = {};
-    savedCount = savedCounts && savedCounts[userId];
+    if (!savedCarts) savedCarts = {};
+    savedCart = savedCarts || savedCarts[userId];
 
-    if (isNaN(savedCount)) {
+    //if (isNaN(savedCount)) {
         CartMonitor.update();
-    }
+    //}
 
     $document.ready(function () {
-        CartMonitor.$el = $('[data-mz-role="cartmonitor"]').text(savedCount || 0);
+        CartMonitor.$el = $('[data-mz-role="cartcount"]').text(savedCart.itemCount || 0);
+        CartMonitor.$amountEl = $('[data-mz-role="cartamount"]').text(savedCart.total || 0);
     });
 
     return CartMonitor;

@@ -1,6 +1,23 @@
 ﻿<div class="mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ model.productCode }}">
-    
+    <a class="mz-productlisting-title" href="{% make_url "product" model %}">{{model.content.productName}}</a>    
     <div class="mz-productlisting-image">
+        <!--
+        <div class="quick-view">
+            {% with model.content.productImages|first as image %}
+                <img class="mz-productimages-thumbimage"  src="{% make_url "image" image with max=themeSettings.maxProductImageThumbnailSize as_parameters %}" {% if image.altText %}alt="{{ image.altText }}"{% endif %} />
+            {% endwith%}
+            <div><span>Title</span> : 
+                <a href="{% make_url "product" model %}">    
+                    {{model.content.productName}}
+                </a>
+            </div>
+            <div><span>Price</span> : {{model.price.price|currency}}</div>
+            <div><span>Desc</span> : {{ model.content.productShortDescription|truncatewords(themeSettings.maxProductSummaryWords)|safe }}</div>
+            <button id="add-to-cart"  data-mz-action="addToCart" >
+            {{ labels.addToCart }}
+            </button>
+        </div>
+        -->
         {% block product-image %}
         <a href="{% make_url "product" model %}">
             {% if model.mainImage.imageUrl %}
@@ -12,7 +29,17 @@
         {% endblock product-image %}
     </div>
     <div class="mz-productlisting-info">
-        <a class="mz-productlisting-title" href="{% make_url "product" model %}">{{model.content.productName}}</a>
+    <div>
+    {% for property in model.properties %}
+        
+    {% if property.attributeDetail.name|lower == 'Best Season' %}
+        <div>{{property.attributeDetail.name}} : {{ property.values|first|prop('value')}}</div>
+    {% endif %}    
+    {% endfor %}        
+    </div>
+
+
+
         {% if model.content.productShortDescription and themeSettings.listProductShortDesc %}
         <p class="mz-productlisting-shortdesc">{{ model.content.productShortDescription|truncatewords(themeSettings.maxProductSummaryWords)|safe }}</p>
         {% endif %}
