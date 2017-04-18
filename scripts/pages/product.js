@@ -83,9 +83,9 @@
 
         product.on('addedtocart', function (cartitem) {
             if (cartitem && cartitem.prop('id')) {
-                product.isLoading(true);
+                //product.isLoading(true);
                 CartMonitor.addToCount(product.get('quantity'));
-                window.location.href = "/cart";
+                //window.location.href = "/cart";
             } else {
                 product.trigger("error", { message: Hypr.getLabel('unexpectedError') });
             }

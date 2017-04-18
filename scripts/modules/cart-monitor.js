@@ -2,7 +2,7 @@
  * Watches for changes to the quantity of items in the shopping cart, to update
  * cart count indicators on the storefront.
  */
-define(['modules/jquery-mozu', 'modules/api'], function ($, api) {
+define(['modules/jquery-mozu', 'modules/api', 'bootstrap', 'modules/page-header/global-cart'], function ($, api, Bootstrap, GlobalCart) {
 
     var $cartCount,
         user = require.mozuData('user'),
@@ -16,21 +16,23 @@ define(['modules/jquery-mozu', 'modules/api'], function ($, api) {
                 this.$el.text(count);
             },
             addToCount: function(count) {
-                this.setCount(this.getCount() + count);
+                this.update(true);
             },
             getCount: function() {
                 return parseInt(this.$el.text(), 10) || 0;
             },
-            update: function() {
+            update: function(showGlobalCart) {
                 api.get('cartsummary').then(function(summary) {
                     $.cookie('mozucart', JSON.stringify(summary.data), { path: '/' });
                     savedCarts[userId] = summary.data;
                     console.log(summary);
                     $document.ready(function() {
                         CartMonitor.setCount(summary.data.itemCount);
-                        CartMonitor.setAmount(summary.data.total);
+                        CartMonitor.setAmount(summary.data.total); 
+                        GlobalCart.update(showGlobalCart);                         
                     });
                 });
+                
             }
         },
         savedCarts,
@@ -43,7 +45,7 @@ define(['modules/jquery-mozu', 'modules/api'], function ($, api) {
     if (!savedCarts) savedCarts = {};
     savedCart = savedCarts || savedCarts[userId];
 
-    //if (isNaN(savedCount)) {
+    //if (isNaN(savedCart.itemCount)) {
         CartMonitor.update();
     //}
 

@@ -164,7 +164,7 @@ define(['modules/backbone-mozu', 'underscore', 'modules/jquery-mozu', 'modules/m
         });
 
         cartModel.on('sync', function() {
-            CartMonitor.setCount(cartModel.count());
+            CartMonitor.update();
         });
 
         window.cartView = cartViews;

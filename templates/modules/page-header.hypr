@@ -23,9 +23,9 @@
                 {% endblock utility-nav %}            
             </div>
             <div class="ml-header-global-cart-wrapper">
-                {% block global-cart %}
-                    {% include "modules/page-header/global-cart" %}
-                {% endblock global-cart %}              
+                {% block global-cart-container %}
+                    {% include "modules/page-header/global-cart-container" %}
+                {% endblock global-cart-container %}              
             </div>
         </div>
     </div>

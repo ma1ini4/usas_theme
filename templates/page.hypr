@@ -69,7 +69,7 @@
 
         {% block stylesheets %}
         <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/storefront.less" %}" title="default" />
-        <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/vendor/bootstrap-3.3.7/css/bootstrap.css" %}" title="default" />
+        <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/vendor/bootstrap-3.3.7/css/bootstrap.css" %}" title="default" />        
         {% endblock stylesheets %}
         
         {% block head-tag-scripts %}
@@ -137,7 +137,6 @@
         {% endblock trailing-scripts %}
 
         {% visitor_tracking_pixel %}
-
     </body>
     {% endblock body-tag %}
 
