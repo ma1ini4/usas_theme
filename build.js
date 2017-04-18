@@ -5,7 +5,8 @@
         hyprlive: "empty:",
         hyprlivecontext: "empty:",
         underscore: "vendor/underscore/underscore",
-        backbone: "vendor/backbone/backbone"
+        backbone: "vendor/backbone/backbone",
+        bootstrap:"vendor/bootstrap/js/bootstrap.min"
     },
     dir: "compiled/scripts/",
     locale: "en-us",
