@@ -180,6 +180,28 @@
         },
         {
             "xtype": "panel",
+            "title": "Global Cart",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "Pick an image for Empty Basket",
+                    "xtype": "mz-input-image",
+                    "name": "globalCartEmptyBasketFooter"
+                },
+                {
+                    "fieldLabel": "Enable Cross sells",
+                    "xtype": "mz-input-checkbox",
+                    "name": "globalCartRelatedProducts"
+                },
+                {
+                    "fieldLabel": "Maximum number of Cross sells products",
+                    "xtype": "mz-input-number",
+                    "name": "globalCartRelatedProductsSize"
+                }                 
+            ]
+        },         
+        {
+            "xtype": "panel",
             "title": "Paging",
             "collapsed": false,
             "items": [
@@ -238,38 +260,6 @@
                     "allowBlank": false
                 }
             ]
-        },
-        {
-            "xtype": "panel",
-            "name": "QuickStart",
-            "collapsed":false,
-            "items":[
-                {
-                    "xtype": "mz-input-text",
-                    "name": "randomText",
-                    "fieldLabel": "Type randomly here"
-                },
-                {
-                    "xtype": "mz-input-checkbox",
-                    "name": "enableOverdrive",
-                    "fieldLabel": "Enable Overdrive"
-                },
-                {
-                    "xtype": "mz-input-selectmulti",
-                    "name": "selectInterests",
-                    "fieldLabel": "Which Theme components are you interested in ?",
-                    "allowBlank":false,
-                    "forceSelection":true,
-                    "store":[
-                        "Theme Settings",
-                        "Hypr Temapltes",
-                        "Widgets",
-                        "Stylesheets",
-                        "javascript"
-                    ]
-                }
-
-            ]
-        }      
+        } 
     ]
 }

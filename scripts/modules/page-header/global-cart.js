@@ -2,16 +2,61 @@ define([
     'modules/backbone-mozu',
     'modules/jquery-mozu',
     "modules/api",
-    "hyprlive"
-], function(Backbone, $, Api, Hypr) {
+    "hyprlive",
+    'underscore',
+    "modules/models-product"
+], function(Backbone, $, Api, Hypr, _, ProductModels) {
+
+    var globalCartRelatedProducts = Hypr.getThemeSetting('globalCartRelatedProducts'),
+        globalCartRelatedProductsSize = Hypr.getThemeSetting('globalCartRelatedProductsSize'),
+        coerceBoolean = function(x) {
+            return !!x;
+        };
     var GlobalCartView = Backbone.MozuView.extend({
-        templateName: "modules/page-header/global-cart1",
+        templateName: "modules/page-header/global-cart-flyout",
         initialize: function() {
             var me = this;
         },
         render: function() {
             var me = this;
             Backbone.MozuView.prototype.render.apply(this);
+        },
+        showRelatedProducts: function(productCollection) {
+            var me = this;
+            var productCodes = [];
+            for (var i = 0; i < productCollection.length; i++) {
+                var currentProduct = productCollection[i].product;
+                if (currentProduct && currentProduct.properties) {
+                    for (var x = 0; x < currentProduct.properties.length; x++) {
+                        if (currentProduct.properties[x].attributeFQN == 'tenant~product-upsell') {
+                            var temp = _.pluck(currentProduct.properties[x].values, "value");
+                            productCodes = productCodes.concat($.grep(temp || [], coerceBoolean));
+
+                        }
+                    }
+                }
+            }
+            console.log("productCodes", productCodes);
+            var filter = _.map(productCodes, function(c) {
+                return "ProductCode eq " + c;
+            }).join(' or ');
+            console.log("filter", filter);
+            Api.get("search", { filter: filter, pageSize : globalCartRelatedProductsSize}).then(function(collection) {
+                console.log("collection.data",collection.data);
+                var template = 'modules/product/product-list-carousel';
+                var RelatedProductsView = Backbone.MozuView.extend({
+                    templateName: template
+                });
+                var relatedProductsCollection = new ProductModels.ProductCollection(collection.data);
+                var relatedProductsView = new RelatedProductsView({
+                    model: relatedProductsCollection,
+                    el: me.$el.find('.related-products')
+                });
+                relatedProductsView.render();
+            }, function() {
+                console.log("Got some error at cross sell in Global Cart");
+            });
+
         },
         update: function(showGlobalCart) {
             var me = this;
@@ -21,8 +66,11 @@ define([
                 if (showGlobalCart) {
                     me.$el.show();
                     setTimeout(function() {
-                        me.$el.attr('style','');
+                        me.$el.attr('style', '');
                     }, 5000);
+                }
+                if (globalCartRelatedProducts) {
+                    me.showRelatedProducts(resp.data.items);
                 }
             });
         }

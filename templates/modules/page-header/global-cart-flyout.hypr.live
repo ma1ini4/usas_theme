@@ -51,10 +51,20 @@
 			<a href="/checkout" class="btn btn-default">Checkout</a>
 		</div>
 	</div>
+
+	{% if themeSettings.globalCartRelatedProducts %}
+		<h5>You may also like</h5>
+		<div class="related-products"></div>
+	{% endif %}
+
 {% endif %}
 {% if model.items.length==0 %}
 	<div class="text-center">
 		<div class=>Your shopping basket is empty</div>
-		<div></div>
+		{% if themeSettings.globalCartEmptyBasketFooter %}
+		  <div>
+		  	<img src="{% make_url "image" themeSettings.globalCartEmptyBasketFooter.imageUrl with width=370 as_parameters %}"  />
+		  </div>
+		{% endif %}		
 	</div>
 {% endif %}

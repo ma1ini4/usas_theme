@@ -361,9 +361,9 @@
     }
   ],
   "settings": {
-    "randomText":"default",
-    "enableOverdrive":false,
-    "selectInterests":[],
+    "globalCartEmptyBasketFooter":"",
+    "globalCartRelatedProducts":"false",
+    "globalCartRelatedProductsSize":5,
     "backofficeDateTimeFormat": "m/d/Y H:i:s O",
     "extendedPropertiesEnabled": false,
     "extendedPropertyParameters": "",
