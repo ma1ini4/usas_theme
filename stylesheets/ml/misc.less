@@ -44,7 +44,7 @@
                     width: 100%;
                     .ml-header-search-field {
                         height: 32px;
-                        padding-right: 6px 35px 6px 12px;
+                        padding: 6px 35px 6px 12px;
                         border-radius: 3px;
                         border: 1px solid #ccc;
                     }
@@ -224,4 +224,33 @@
             }
         }
     }
+}
+
+
+//Secondary navigation
+.ml-navbar-secondary {
+    .container {
+        padding: 0;
+        .panel + .panel{
+            margin-top: 0;
+        }        
+    }
+    .panel{
+        border-radius:0;
+    }
+    .panel-title{
+        a{
+            display:block;
+            text-decoration:none;
+        }
+        .collapsed{
+            .glyphicon-test:before {
+                content: "\002b";
+            }
+        }
+        .glyphicon-test:before {
+            content: "\2212";
+        }
+    }
+
 }
