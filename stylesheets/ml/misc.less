@@ -8,6 +8,14 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.mz-cms-content {
+    padding: 0 !important;
+}
+
+.form-control {
+    border-radius: 3px;
+}
+
 //Site-wide rules
 //Page header
 .mz-pageheader {
@@ -66,9 +74,6 @@
             }
             .mz-utilitynav-item {
                 padding: 0 15px 0 0;
-                .mz-cms-content {
-                    padding: 0;
-                }
                 &.site-msg {
                     display: none;
                     color: #444444;
@@ -226,24 +231,23 @@
     }
 }
 
-
 //Secondary navigation
 .ml-navbar-secondary {
     .container {
         padding: 0;
-        .panel + .panel{
+        .panel + .panel {
             margin-top: 0;
-        }        
-    }
-    .panel{
-        border-radius:0;
-    }
-    .panel-title{
-        a{
-            display:block;
-            text-decoration:none;
         }
-        .collapsed{
+    }
+    .panel {
+        border-radius: 0 !important
+    }
+    .panel-title {
+        a {
+            display: block;
+            text-decoration: none;
+        }
+        .collapsed {
             .glyphicon-test:before {
                 content: "\002b";
             }
@@ -252,5 +256,78 @@
             content: "\2212";
         }
     }
+}
 
+//Footer
+.mz-pagefooter {
+    color: #fff;
+    padding: 10px 0;
+    background: #494a49;
+}
+
+footer {
+    padding: 10px 0;
+    .email-container {
+        margin-right: 70px;
+    }
+    .top-pad {
+        padding-top: 5px;
+    }
+    .ml-footer-email-signup-button {
+        background: #ffce06;
+        border: 0;
+        border-radius: 0;
+        text-align: center;
+        font-size: 12px;
+        color: #383333;
+        text-transform: uppercase;
+        height: 34px;
+        float: right;
+    }
+    .social-links {
+        .ml-icon.ml-icon-pintrest {
+            width: 28px;
+            height: 28px;
+            background-position: -239px -2px;
+        }
+        .ml-icon.ml-icon-twitter {
+            width: 28px;
+            height: 28px;
+            background-position: -209px -2px;
+        }
+        .ml-icon.ml-icon-facebook {
+            width: 28px;
+            height: 28px;
+            background-position: -179px -2px;
+        }
+        .ml-icon.ml-icon-google {
+            width: 28px;
+            height: 28px;
+            background-position: -269px -2px;
+        }
+        .ml-icon.ml-icon-instagram {
+            width: 28px;
+            height: 28px;
+            background-position: -299px -2px;
+        }
+        .ml-icon.ml-icon-youtube {
+            width: 28px;
+            height: 28px;
+            background-position: -329px -2px;
+        }
+        .ml-icon {
+            background: url('../resources/images/sprites.png');
+            display: inline-block;
+        }
+    }
+    a {
+        color: #333;
+        font-size: 12px;
+    }
+    a:hover {
+        text-decoration: none;
+    }
+    .mz-pagefooter-copyright {
+        font-size: 13px;
+    }
 }
