@@ -887,7 +887,26 @@
       "validPageTypes": [
         "*"
       ]
-    },          
+    },  
+    {
+      "defaultConfig": {
+      },
+      "displayName": "Product carousel",
+      "displayTemplate": "misc/product-carousel",
+      "editViewFields": [
+        {
+          
+          "fieldLabel": "Select Products",
+          "name": "products",
+          "xtype": "mz-input-productmulti"
+        }    
+      ],
+      "icon": "/resources/admin/widgets/city-carousel-icon.png",
+      "id": "product-carousel-widget",
+      "validPageTypes": [
+        "*"
+      ]
+    },             
     {
       "defaultConfig": {
         "template": "modules/product/product-list"
