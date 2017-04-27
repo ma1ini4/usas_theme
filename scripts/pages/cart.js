@@ -170,6 +170,35 @@ define(['modules/backbone-mozu', 'underscore', 'modules/jquery-mozu', 'modules/m
         window.cartView = cartViews;
 
         CartMonitor.setCount(cartModel.count());
+
+
+        /*var attr = $('.mz-carttable-qty-field').attr('type');
+        if(attr == "number")
+            $('.mz-carttable-qty-field').attr('type', 'text');*/
+        $('body').on('click', '.minus-cart', function () {
+            //alert($(this).next('input').val());
+            var qty = $(this).next('input').val();
+            if(qty !== 0){
+                $(this).parents('.mz-carttable-item-qty').find('.plus-cart').attr('disabled', false);
+                qty--;
+                $(this).next('input').val(qty);
+            }
+            if(qty === 0){
+                $(this).attr('disabled', true);
+            }         
+        });
+        $('body').on('click', '.plus-cart', function () {
+            //alert($(this).prev('input').val());
+            var qty = $(this).prev('input').val();
+            if(qty !== 10){
+                $(this).parents('.mz-carttable-item-qty').find('.minus-cart').attr('disabled', false);
+                qty++;
+                $(this).prev('input').val(qty);
+            }
+            if(qty === 10){
+                $(this).attr('disabled', true);
+            } 
+        });
     });
 
 });
