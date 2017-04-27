@@ -137,6 +137,18 @@
     .container {
         padding: 0;
     }
+    .mz-sitenav-sub-container{
+        background-color: #fff;
+        -webkit-box-shadow: 0 6px 12px rgba(0,0,0,0.175);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.175);
+        top: 35px;
+        left: -12px;
+        padding: 15px;
+        border: 1px solid rgba(0,0,0,0.15);
+        background: white;
+        z-index: 2;
+        border-radius: 3px;    
+    }
     .mz-sitenav-item {
         float: none;
         display: block;
@@ -185,6 +197,13 @@
                 }
             }
         }
+        .mz-sitenav-sub{
+            -webkit-box-shadow: none;
+            box-shadow: none;  
+            padding:0;
+            border:0;
+            border-radius: 0;
+        }        
     }
     .mz-sitenav-link {
         font-size: 13px;
@@ -212,7 +231,7 @@
         z-index: 2;
         border-radius: 3px;
         &>.mz-sitenav-item {
-            padding: 0 10px 20px 20px;
+            padding: 0 20px 10px 0px;
             .mz-sitenav-link {
                 font-size: 13px;
             }
