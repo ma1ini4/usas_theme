@@ -21,13 +21,30 @@
 
 <div class="mz-l-container">
 	<h1 class="mz-pagetitle">{{ labels.cart }}</h1>
-	<form method="post" action="{{ siteContext.secureHost }}/cart/checkout" id="cartform">
-		{% dropzone "cart-top" scope="template" %}
-		<input type="hidden" name="id" value="{{model.id}}" />
-        {% include "modules/common/message-bar" with model=model.messages %}
-        <table class="mz-table mz-table-cart" id="cart">
-            {% include "modules/cart/cart-table" %}
-        </table>
-	</form>
+	<!-- Check if model is not empty and form product table if not-->
+	{% if not model.isEmpty %}  
+		<form method="post" action="{{ siteContext.secureHost }}/cart/checkout" id="cartform">
+			{% dropzone "cart-top" scope="template" %}
+			<input type="hidden" name="id" value="{{model.id}}" />
+	        {% include "modules/common/message-bar" with model=model.messages %}
+	        <table class="mz-table mz-table-cart" id="cart">
+	            {% include "modules/cart/cart-table" %}
+	        </table>
+		</form>
+	<!-- Show empty cart if model is empty -->
+	{% else %}
+		<div class="cart-div">Your bag is empty - continue shopping!</div>
+		<div class="cart-div">
+            <a href="/" class="btn">
+            	<div class="cart-btn-continue"> Continue Shopping</div>
+            </a>
+        </div>
+	{% endif %}
+	<!-- Widget code -->
+	<div class="row" style="padding-top: 10px;">
+		<div class="col-xs-12">
+			{% dropzone "cart-advert" scope="page" %}
+		</div>
+	</div>
 </div>
 {% endblock body-content %}
