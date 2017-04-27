@@ -1,0 +1,7 @@
+{% if model %}
+	{% with model|first as entityModel %}
+		<a href="{{entityModel.mainUrl}}">
+			<img width="300px" src="{% make_url "image" entityModel.mainImage with width=370 as_parameters %}"  />
+		</a>
+	{% endwith %}
+{% endif %}
