@@ -1,0 +1,92 @@
+@grayBtnColor:#656868;
+@yelloBtnColor:#FFCE06;
+@font-size:12px;
+@no-decoration:none;
+@yellow-btn-outline:0 solid #81ccf6;
+
+.mz-utilitynav-item{
+    a{
+        color: #383333; text-decoration: none; 
+        &:hover{color: #383333; text-decoration: none; }
+    }
+}
+.modal-dialog.login-modal{ 
+    width: 370px!important;
+    .modal-content{
+        position: relative;
+        top: 30px;
+        display: inline-block;
+        width: 100%;  
+        border-radius: 0px;  
+        padding-bottom: 13px;    
+        p.login-text{text-align: left; margin-top: 8px; margin-left: 2px;}
+        .link-button{
+            a{text-decoration: underline;}            
+        }
+        a{ 
+            color: #383333; text-decoration: none;   
+            &:hover{color: #383333; text-decoration: none; }
+        }        
+        .input-group{padding: 6px 2px;}
+        .left-column,.bottom-text{padding-left: 0px;}        
+        select{width: 100%}
+        .login-btn{ 
+            height: 34px;
+            line-height: 34px;
+            font-size: @font-size;
+            border: 0;
+            cursor: pointer;           
+            background: @yelloBtnColor;
+            text-align: center;
+            padding: 0 36px;
+            color: #383333;
+            outline: @yellow-btn-outline;
+            outline-offset: -3px;
+            text-decoration: @no-decoration;
+            width: 100%;
+            border-radius: 0px;
+        }
+        .tab-pane{
+            .login-tab-btn{ background: @grayBtnColor; margin-right: 20px; border:1px solid red;}
+        }
+        .arrow{   
+            display: none; 
+            position: absolute; 
+            top:34px;     
+            width: 0;
+            height: 0;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-top: 7px solid #ffce06;
+            text-align: center;           
+            right: 50%;
+            margin-right: -7px;
+        }
+        .tab-pane.active{            
+            .arrow{display: block;}
+        }   
+        .nav-tabs {  
+            position: absolute;
+            top: -42px;          
+            border-bottom: none;
+            li:first-child{margin-right: 5px;}  
+        }
+        li.first-tab{
+            .login-btn{ 
+                background-color: @grayBtnColor; color: #fff; 
+                min-width: 168px!important;
+            }           
+        }      
+        li.second-tab{ 
+            .login-btn{ background-color: @grayBtnColor; color: #fff;}  
+        } 
+         li.first-tab.active, li.second-tab.active{
+           .arrow{display: block;} 
+           .login-btn{ background-color: @yelloBtnColor;color: #363636;}            
+        }      
+        .input-group-addon{position: relative; top: 0px;}
+        .login-btn-row .link-button{float: left; margin-right: 20px;}
+        .link-button{text-align: left; margin: 10px 0; }
+    }
+}
+
