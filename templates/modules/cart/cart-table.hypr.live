@@ -53,9 +53,7 @@
       {% include "modules/common/item-price" %}
     </td>
     <td class="mz-carttable-item-qty">
-      <input class="minus-cart" type="button" value="-">
-      <input class="mz-carttable-qty-field" type="text" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" value="{{ item.quantity }}" />
-      <input class="plus-cart" type="button" value="+">
+      <input class="mz-carttable-qty-field" type="number" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" value="{{ item.quantity }}" />
     </td>
     <td class="mz-carttable-item-total">
         {% include "modules/common/item-total" %}
