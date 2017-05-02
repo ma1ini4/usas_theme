@@ -54,10 +54,10 @@
                                         </div>
                                         <div class="link-button"><a href="#">Forget Password</a></div>    
                                         <div class="login-btn-row">
-                                            <div class="col-xs-4 left-column">
+                                            <div class="col-xs-2 left-column">
                                                 <div class="link-button"><a href="#">CANCEL</a></div>
                                             </div>
-                                            <div class="col-xs-8">                                    
+                                            <div class="col-xs-10 right-column">                                    
                                                 <button class="btn login-btn" type="submit">LOGIN</button>
                                             </div>
                                         </div>
@@ -78,7 +78,7 @@
                                             <input type="text" class="form-control" placeholder="Re-enter Password" aria-describedby="basic-addon1">
                                         </div>                                    
                                         <div class = "input-group">
-                                            <span class="input-group-addon glyphicon glyphicons glyphicons-question-sign" id="list" aria-hidden="true"></span>                                 
+                                            <span class="input-group-addon glyphicon glyphicon-question-sign" id="list" aria-hidden="true"></span>                                 
                                             <select id="list">
                                                 <option>Select a recovery question</option>
                                                 <option>What is your city of birth?</option>
@@ -89,17 +89,17 @@
                                             </select>
                                         </div>
                                         <div class="input-group">
-                                            <span class="input-group-addon glyphicons glyphicons-chat" id="" aria-hidden="true"></span>                                 
+                                            <span class="input-group-addon glyphicon glyphicon-comment" id="" aria-hidden="true"></span>                                 
                                             <input type="text" class="form-control" placeholder="Enter Answer" aria-describedby="basic-addon1">
                                         </div>                                    
                                         <div class="checkbox">
                                             <label><input type="checkbox"> Sign me up for Kibo Training Email Updates about new services and special offers!</label>
                                         </div>                                    
                                         <div class="login-btn-row">
-                                            <div class="col-xs-4 left-column">
+                                            <div class="col-xs-2 left-column">
                                                 <div class="link-button"><a href="#">CANCEL</a></div>
                                             </div>
-                                            <div class="col-xs-8">                                    
+                                            <div class="col-xs-10 right-column">                                    
                                                 <button class="btn login-btn" type="submit">REGISTER</button>
                                             </div>
                                         </div>
