@@ -9,6 +9,7 @@ define([
 
     var globalCartRelatedProducts = Hypr.getThemeSetting('globalCartRelatedProducts'),
         globalCartRelatedProductsSize = Hypr.getThemeSetting('globalCartRelatedProductsSize'),
+        globalCartMaxItemCount = Hypr.getThemeSetting('globalCartMaxItemCount'),
         coerceBoolean = function(x) {
             return !!x;
         };
@@ -62,6 +63,7 @@ define([
         update: function(showGlobalCart) {
             var me = this;
             Api.get("cart").then(function(resp) {
+                resp.data.reversedItems = resp.data.items.reverse().slice(0,globalCartMaxItemCount);
                 me.model.attributes = resp.data;
                 me.render();
                 if (showGlobalCart) {

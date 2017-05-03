@@ -364,6 +364,7 @@
     "globalCartEmptyBasketFooter":"",
     "globalCartRelatedProducts":"false",
     "globalCartRelatedProductsSize":5,
+    "globalCartMaxItemCount":3,
     "backofficeDateTimeFormat": "m/d/Y H:i:s O",
     "extendedPropertiesEnabled": false,
     "extendedPropertyParameters": "",
