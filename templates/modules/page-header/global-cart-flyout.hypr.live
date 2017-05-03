@@ -1,31 +1,32 @@
 <div class="arrow-up"></div>
 {% if model.items.length>0 %}
 	<ul class="media-list">
-	    {% for items in model.items %}
-	    	<div class="media">
-				<div class="media-left">
-					<a href="#">
-					  <img class="media-object" width=64 src="{{ items.product.imageUrl }}" />
-					</a>
-				</div>
-				<div class="media-body">
-					<div class="col-xs-8">
-						<h5 class="media-heading">{{ items.product.name }}</h5>
-						{% if items.product.options %}
-							{% for option in items.product.options %}
-							<div><b>{{ option.name }}</b>  <span>{% if option.stringname %}{{ option.stringname }}{% else %}{{ option.value }}{% endif %}</span></div>
-							{% endfor %}
-						{% endif %}			
+		    {% for items in model.reversedItems  %}
+		    	<div class="media">
+					<div class="media-left">
+						<a href="#">
+						  <img class="media-object" width=64 src="{{ items.product.imageUrl }}" />
+						</a>
 					</div>
-					<div class="col-xs-4">
-						<div class="row">
-							<div class="col-xs-3">{{ items.quantity }}</div>
-							<div class="col-xs-8">{{ items.total|currency }}</div>			
+					<div class="media-body">
+						<div class="col-xs-8">
+							<h5 class="media-heading">{{ items.product.name }}</h5>
+							{% if items.product.options %}
+								{% for option in items.product.options %}
+								<div><b>{{ option.name }}</b>  <span>{% if option.stringname %}{{ option.stringname }}{% else %}{{ option.value }}{% endif %}</span></div>
+								{% endfor %}
+							{% endif %}			
+						</div>
+						<div class="col-xs-4">
+							<div class="row">
+								<div class="col-xs-3">{{ items.quantity }}</div>
+								<div class="col-xs-8">{{ items.total|currency }}</div>			
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-	    {% endfor %}
+
+		    {% endfor %}
 	</ul>
 	<div class="row">
 	    <div class="col-xs-12 text-right">
@@ -38,7 +39,12 @@
 		    	<span>{{ model.discountTotal|currency }}</span>
 		    </div>	
 	    {% endif %}
-	    <div class="col-xs-12 text-right">
+	    {% if model.items.length > themeSettings.globalCartMaxItemCount %}
+	    <div class="col-xs-6 text-left ">
+	    	<a href="/cart"> {{model.items.length-themeSettings.globalCartMaxItemCount}} more item(s)... </a>
+	    </div>
+	    {% endif%}
+	    <div class="{% if model.items.length > themeSettings.globalCartMaxItemCount %}col-xs-6{% else %}col-xs-12{% endif %} text-right">
 	    	<b>Total: </b>
 	    	<span>{{ model.total|currency }}</span>
 	    </div>	    
@@ -59,8 +65,7 @@
 		<div class="related-products"></div>
 	{% endif %}
 
-{% endif %}
-{% if model.items.length==0 %}
+{% else %}
 	<div class="text-center">
 		<div class=>Your shopping basket is empty</div>
 		{% if themeSettings.globalCartEmptyBasketFooter %}

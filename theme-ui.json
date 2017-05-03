@@ -197,7 +197,12 @@
                     "fieldLabel": "Maximum number of Cross sells products",
                     "xtype": "mz-input-number",
                     "name": "globalCartRelatedProductsSize"
-                }                 
+                },
+                {
+                    "fieldLabel": "Maximum number of items to show in global Cart",
+                    "xtype": "mz-input-number",
+                    "name": "globalCartMaxItemCount"
+                }                                  
             ]
         },         
         {
