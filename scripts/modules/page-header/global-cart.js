@@ -60,6 +60,9 @@ define([
             });
 
         },
+        saveCart:function(){
+            $('#myModal').modal('show');
+        },
         update: function(showGlobalCart) {
             var me = this;
             Api.get("cart").then(function(resp) {

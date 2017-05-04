@@ -199,6 +199,11 @@
                     "name": "globalCartRelatedProductsSize"
                 },
                 {
+                    "fieldLabel": "Enable Save Cart",
+                    "xtype": "mz-input-checkbox",
+                    "name": "globalCartEnableSaveCart"
+                },                
+                {
                     "fieldLabel": "Maximum number of items to show in global Cart",
                     "xtype": "mz-input-number",
                     "name": "globalCartMaxItemCount"
