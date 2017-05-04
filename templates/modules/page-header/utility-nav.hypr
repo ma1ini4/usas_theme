@@ -46,12 +46,15 @@
                                     <div class="tab-pane active" id="login">
                                         <p class="login-text">Login with an email address and password.</p>
                                         <div class="input-group">
-                                            <span class="input-group-addon glyphicon glyphicon-envelope" id="email" aria-hidden="true"></span>                                 
-                                            <input type="text" class="form-control" placeholder="Email Address" aria-describedby="basic-addon1">
+                                            <span class="input-group-addon glyphicon glyphicon-envelope" aria-hidden="true" id="email"></span>
+                                            <input type="email" class="form-control" data-mz-login-email placeholder="Email Address" aria-describedby="basic-addon1">
                                         </div>
                                         <div class="input-group">
                                             <span class="input-group-addon glyphicon glyphicon-lock" id="password"></span>
-                                            <input type="text" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
+                                            <input type="password" class="form-control"  data-mz-login-password  placeholder="Password" aria-describedby="basic-addon1">
+                                        </div>
+                                        <div class="input-group">
+                                            <label data-mz-role="popover-message" class="popover-message"></label>
                                         </div>
                                         <div class="link-button"><a href="#">Forget Password</a></div>    
                                         <div class="login-btn-row">
@@ -59,49 +62,55 @@
                                                 <div class="link-button"><a href="#" data-dismiss="modal">CANCEL</a></div>
                                             </div>
                                             <div class="col-xs-10 right-column">                                    
-                                                <button class="btn login-btn" type="submit" data-mz-action="doLogin">LOGIN</button>
+                                                <button class="btn login-btn submit-btn" type="submit" data-mz-action="doLogin">LOGIN</button>
+                                                <input type="hidden" class="hidden-return" name="returnUrl" id="returnUrl" value="" />
+                                                <script>document.getElementById('returnUrl').value = window.location.href;</script>
                                             </div>
                                         </div>
                                         <div class="col-xs-12 bottom-text"><p class="login-text"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Your Connection to this website is secure.</p></div>
-                                    </div>    
+                                    </div>
+                                    <!------- Signup start-------->    
                                     <div class="tab-pane " id="newshopper">
                                         <p class="login-text">Register with an email address and password.</p>
                                         <div class="input-group">
-                                            <span class="input-group-addon glyphicon glyphicon-envelope" id="email" aria-hidden="true"></span>                                 
-                                            <input type="text" class="form-control" placeholder="Email Address" aria-describedby="basic-addon1">
+                                            <span class="input-group-addon glyphicon glyphicon-envelope" aria-hidden="true"></span>                                 
+                                            <input type="email" class="form-control" data-mz-signup-emailaddress placeholder="Email Address" aria-describedby="basic-addon1">
                                         </div>
                                         <div class="input-group">
-                                            <span class="input-group-addon glyphicon glyphicon-lock" id="password"></span>
-                                            <input type="text" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
-                                        </div>
+                                            <span class="input-group-addon glyphicon glyphicon-lock"></span>
+                                            <input type="password" class="form-control" data-mz-signup-password placeholder="Password" aria-describedby="basic-addon1">
+                                        </div> 
                                         <div class="input-group">
-                                            <span class="input-group-addon glyphicon glyphicon-lock" id="password"></span>
-                                            <input type="text" class="form-control" placeholder="Re-enter Password" aria-describedby="basic-addon1">
+                                            <span class="input-group-addon glyphicon glyphicon-lock"></span>
+                                            <input type="password" class="form-control" data-mz-signup-confirmpassword placeholder="Re-enter Password" aria-describedby="basic-addon1">
                                         </div>                                    
                                         <div class = "input-group">
                                             <span class="input-group-addon glyphicon glyphicon-question-sign" id="list" aria-hidden="true"></span>                                 
-                                            <select id="list">
-                                                <option>Select a recovery question</option>
-                                                <option>What is your city of birth?</option>
-                                                <option>What is your mother's  maiden name?</option>
-                                                <option>What is your father's  first name?</option>
-                                                <option>What is your pet's  name?</option>
-                                                <option>What is the year you were born?</option>
+                                            <select id="list" data-mz-signup-recoveryquestion>
+                                                <option value="0">Select a recovery question</option>
+                                                <option value="1">What is your city of birth?</option>
+                                                <option value="2">What is your mother's  maiden name?</option>
+                                                <option value="3">What is your father's  first name?</option>
+                                                <option value="4">What is your pet's  name?</option>
+                                                <option value="5">What is the year you were born?</option>
                                             </select>
                                         </div>
                                         <div class="input-group">
-                                            <span class="input-group-addon glyphicon glyphicon-comment" id="" aria-hidden="true"></span>                                 
-                                            <input type="text" class="form-control" placeholder="Enter Answer" aria-describedby="basic-addon1">
+                                            <span class="input-group-addon glyphicon glyphicon-comment" id="" aria-hidden="true"></span>
+                                            <input type="text" class="form-control" data-mz-signup-recoveryanswer placeholder="Enter Answer" aria-describedby="basic-addon1">
                                         </div>                                    
                                         <div class="checkbox">
-                                            <label><input type="checkbox"> Sign me up for Kibo Training Email Updates about new services and special offers!</label>
-                                        </div>                                    
+                                            <label><input type="checkbox" data-mz-signup-emailupdates> Sign me up for Kibo Training Email Updates about new services and special offers!</label>
+                                        </div> 
+                                        <div class="input-group">
+                                            <label data-mz-role="popover-message" class="popover-message"></label>
+                                        </div>                                   
                                         <div class="login-btn-row">
                                             <div class="col-xs-2 left-column">
                                                 <div class="link-button"><a href="#" data-dismiss="modal">CANCEL</a></div>
                                             </div>
                                             <div class="col-xs-10 right-column">                                    
-                                                <button class="btn login-btn" type="submit">REGISTER</button>
+                                                <button class="btn login-btn" type="submit" data-mz-action="doSignup">REGISTER</button>
                                             </div>
                                         </div>
                                         <div class="col-xs-12 bottom-text"><p class="login-text"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Your Connection to this website is secure.</p></div>

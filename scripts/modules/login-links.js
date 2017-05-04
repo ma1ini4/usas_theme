@@ -2,7 +2,7 @@
  * Adds a login popover to all login links on a page.
  */
 define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modules/jquery-mozu=jQuery]>jQuery=jQuery]>jQuery', 'modules/api', 'hyprlive', 'underscore', 'vendor/jquery-placeholder/jquery.placeholder'], function ($, api, Hypr, _) {
-
+    var current = "";
     var usePopovers = function() {
         return !Modernizr.mq('(max-width: 480px)');
     },
@@ -38,6 +38,20 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
         setLoading: function (yes) {
             this.loading = yes;
             this.$parent[yes ? 'addClass' : 'removeClass']('is-loading');
+        },
+        newsetLoading: function (yes) {
+            this.loading = yes;
+            $(current)[yes ? 'addClass' : 'removeClass']('is-loading');
+        },
+        newdisplayMessage: function (el, msg) {
+            this.newsetLoading(false);
+            $(el).parents('.tab-pane').find('[data-mz-role="popover-message"]').html('<span class="mz-validationmessage">' + msg + '</span>');
+        },
+        newdisplayApiMessage: function (xhr) {
+            console.log(current);
+            var msg = xhr.message || (xhr && xhr.responseJSON && xhr.responseJSON.message) || Hypr.getLabel('unexpectedError');
+            $(current).parents('.tab-pane').find('[data-mz-role="popover-message"]').html('<span class="mz-validationmessage">' + msg + '</span>');
+            //this.newdisplayMessage(current, (xhr.message || (xhr && xhr.responseJSON && xhr.responseJSON.message) || Hypr.getLabel('unexpectedError')));
         },
         onPopoverShow: function () {
             var self = this;
@@ -298,12 +312,15 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
         this.init = function(el){
             self.modalEl = $('#liteRegistrationModal');
             self.bindListeners.call(el, true);
+            self.doLogin = _.debounce(self.doLogin, 150);
+            self.doSignup = _.debounce(self.doSignup, 150);
         };
 
         this.bindListeners =  function (on) {
             var onOrOff = on ? "on" : "off";
             $(this).parent()[onOrOff]('click', '[data-mz-action="lite-registration"]', self.openLiteModal);
             $(this).parent()[onOrOff]('click', '[data-mz-action="doLogin"]', self.doLogin);
+            $(this).parent()[onOrOff]('click', '[data-mz-action="doSignup"]', self.doSignup);
             // bind other events
         };
 
@@ -313,15 +330,86 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
 
         this.doLogin = function(){
             console.log("Write business logic for Login form submition");
+            var returnUrl = $('#returnUrl').val();
+            console.log($(this).parents('#login').find('[data-mz-login-email]').val(), $(this).parents('#login').find('[data-mz-login-password]').val());
+            var payload = {
+                email: $(this).parents('#login').find('[data-mz-login-email]').val(),
+                password: $(this).parents('#login').find('[data-mz-login-password]').val()
+            };
+            current = this;
+            if (self.validateLogin(this, payload)) {   
+                //var user = api.createSync('user', payload);
+                (LoginPopover.prototype).newsetLoading(true);
+                return api.action('customer', 'loginStorefront', {
+                    email: $(this).parents('#login').find('[data-mz-login-email]').val(), 
+                    password: $(this).parents('#login').find('[data-mz-login-password]').val()
+                }).then(function () {
+                    if ( returnUrl ){
+                        window.location.href= returnUrl;
+                    }else{
+                        window.location.reload();
+                    } 
+                }, (LoginPopover.prototype).newdisplayApiMessage);
+            } 
+        };
+        this.validateLogin = function (el, payload) { 
+            if (!payload.email) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailMissing')), false;
+            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(payload.email))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailwrongpattern')), false;
+            if (!payload.password) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordMissing')), false;
+            if (!(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(payload.password))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
+            return true;
+        };
+        this.doSignup = function(){
+            console.log("Signup Code");
+            var redirectTemplate = 'myaccount';
+            var email = $(this).parents('#newshopper').find('[data-mz-signup-emailaddress]').val();            
+            var payload = {
+                account: {
+                    emailAddress: email,
+                    userName: email,
+                    contacts: [{
+                        email: email
+                    }]
+                },
+                password: $(this).parents('#newshopper').find('[data-mz-signup-password]').val(),
+                recoveryquestion: $(this).parents('#newshopper').find('[data-mz-signup-recoveryquestion]').val(),
+                recoveryanswer: $(this).parents('#newshopper').find('[data-mz-signup-recoveryanswer]').val(),
+                emailupdates: $(this).parents('#newshopper').find('[data-mz-signup-emailupdates]').val()
+            };
+            console.log(this, payload);
+            current = this;
+            //console.log(this.validateSignup(payload));
+            console.log(self.validateSignup(this, payload));
+            if (self.validateSignup(this, payload)) {   
+                //var user = api.createSync('user', payload);
+                (LoginPopover.prototype).newsetLoading(true);
+                return api.action('customer', 'createStorefront', payload).then(function () {
+                    if (redirectTemplate) {
+                        window.location.pathname = redirectTemplate;
+                    }
+                    else {
+                        window.location.reload();
+                    }
+                }, (LoginPopover.prototype).newdisplayApiMessage);
+            }
+        };
+        this.validateSignup = function (el, payload) { 
+            if (!payload.account.emailAddress) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailMissing')), false;
+            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(payload.account.emailAddress))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailwrongpattern')), false;
+            if (!payload.password) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordMissing')), false;
+            if (!(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(payload.password))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
+            if (payload.password !== $(el).parents('#newshopper').find('[data-mz-signup-confirmpassword]').val()) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordsDoNotMatch')), false;
+            if (payload.recoveryquestion === "0") return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('chooseRecoveryQuestion')), false;
+            if (!payload.recoveryanswer) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('recoveryAnswerMissing')), false;
+            return true;
         };
     };
-
     $(document).ready(function() {
         $docBody = $(document.body);
         $('[data-mz-action="lite-registration"]').each(function() {
             var modal = new LoginRegistrationModal();
             modal.init(this);
-        });        
+        });      
         $('[data-mz-action="login"]').each(function() {
             var popover = new LoginPopover();
             popover.init(this);
