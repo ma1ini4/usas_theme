@@ -27,12 +27,13 @@
              <!--<a href="/user/login" data-mz-action="login" data-placement="bottom" class="mz-utilitynav-link">{{ labels.logIn }}</a>-->
             
             <!-- Button trigger modal -->
-            <a type="button" class="login-link-text" data-toggle="modal" data-target="#myModal">
+            <a type="button" class="login-link-text" data-toggle="modal" data-mz-action="lite-registration" >
               login
-            </a><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            </a>
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 
             <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal fade" id="liteRegistrationModal" >
                 <div class="modal-dialog login-modal" role="document">
                     <div class="modal-content">                  
                         <div class="modal-body">
@@ -55,10 +56,10 @@
                                         <div class="link-button"><a href="#">Forget Password</a></div>    
                                         <div class="login-btn-row">
                                             <div class="col-xs-2 left-column">
-                                                <div class="link-button"><a href="#">CANCEL</a></div>
+                                                <div class="link-button"><a href="#" data-dismiss="modal">CANCEL</a></div>
                                             </div>
                                             <div class="col-xs-10 right-column">                                    
-                                                <button class="btn login-btn" type="submit">LOGIN</button>
+                                                <button class="btn login-btn" type="submit" data-mz-action="doLogin">LOGIN</button>
                                             </div>
                                         </div>
                                         <div class="col-xs-12 bottom-text"><p class="login-text"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Your Connection to this website is secure.</p></div>
@@ -97,7 +98,7 @@
                                         </div>                                    
                                         <div class="login-btn-row">
                                             <div class="col-xs-2 left-column">
-                                                <div class="link-button"><a href="#">CANCEL</a></div>
+                                                <div class="link-button"><a href="#" data-dismiss="modal">CANCEL</a></div>
                                             </div>
                                             <div class="col-xs-10 right-column">                                    
                                                 <button class="btn login-btn" type="submit">REGISTER</button>

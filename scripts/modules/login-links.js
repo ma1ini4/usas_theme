@@ -293,8 +293,35 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
         }
     });
 
+    var LoginRegistrationModal = function(){
+        var self = this;
+        this.init = function(el){
+            self.modalEl = $('#liteRegistrationModal');
+            self.bindListeners.call(el, true);
+        };
+
+        this.bindListeners =  function (on) {
+            var onOrOff = on ? "on" : "off";
+            $(this).parent()[onOrOff]('click', '[data-mz-action="lite-registration"]', self.openLiteModal);
+            $(this).parent()[onOrOff]('click', '[data-mz-action="doLogin"]', self.doLogin);
+            // bind other events
+        };
+
+        this.openLiteModal = function(){
+            self.modalEl.modal('show');
+        };
+
+        this.doLogin = function(){
+            console.log("Write business logic for Login form submition");
+        };
+    };
+
     $(document).ready(function() {
         $docBody = $(document.body);
+        $('[data-mz-action="lite-registration"]').each(function() {
+            var modal = new LoginRegistrationModal();
+            modal.init(this);
+        });        
         $('[data-mz-action="login"]').each(function() {
             var popover = new LoginPopover();
             popover.init(this);
