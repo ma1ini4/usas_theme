@@ -362,9 +362,10 @@
   ],
   "settings": {
     "globalCartEmptyBasketFooter":"",
-    "globalCartRelatedProducts":"false",
+    "globalCartRelatedProducts":"true",
     "globalCartRelatedProductsSize":5,
     "globalCartMaxItemCount":3,
+    "globalCartEnableSaveCart":"true",
     "backofficeDateTimeFormat": "m/d/Y H:i:s O",
     "extendedPropertiesEnabled": false,
     "extendedPropertyParameters": "",
