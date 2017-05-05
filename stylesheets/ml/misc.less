@@ -353,3 +353,60 @@ footer {
         font-size: 13px;
     }
 }
+@media (max-width: 767px) {     
+    //login popup       
+    .modal-dialog.login-modal{      
+        width:87%!important;        
+        .modal-content{         
+            top: 48px!important;                        
+            .nav-tabs{          
+                top: -37px!important;                   
+                li{     
+                    width: 48%!important;                           
+                    margin-bottom: 7px;     
+                    .arrow{top: 27px; right: 62%;}      
+                    .login-btn{height: 28px; line-height: 28px; padding: 0 13px;}       
+                }       
+                li.second-tab{      
+                    width: 51%!important;       
+                    .arrow{right: 52%;}     
+                }       
+            }       
+            .login-btn{width:99%!important; padding: 0 32px;}       
+        }       
+    } 
+
+   .mz-l-paginatedlist{
+        .mz-pagingcontrols, .mz-pagenumbers{
+            float: left;
+        }
+
+    } 
+    .mz-l-pagecontent{ padding: 25px 8.5px;}
+
+}
+
+@media (max-width: 360px) {
+    //login popup
+    .modal-dialog.login-modal{       
+        .modal-content{
+            top: 77px!important;            
+            .nav-tabs{
+                top: -70px!important;;
+                li{
+                    width: 51%!important;
+                    left: 24%;
+                    margin-bottom: 7px;
+                    .arrow{top: 26px; right: 62%;}
+                    .login-btn{height: 27px; line-height: 27px; padding: 0 13px;}
+                }
+                li.second-tab{
+                    width: 51%!important; 
+                    left: 51px;
+                    .arrow{right: 50%;}
+                }
+            }            
+        }
+    }
+
+}
