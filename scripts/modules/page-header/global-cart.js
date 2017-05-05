@@ -61,7 +61,7 @@ define([
 
         },
         saveCart:function(){
-            $('#myModal').modal('show');
+            $('#liteRegistrationModal').modal('show');
         },
         update: function(showGlobalCart) {
             var me = this;
