@@ -354,6 +354,12 @@
   "emailMissing"         : "Please enter a valid email address",
   "passwordMissing"      : "Please enter a password",
   "passwordsDoNotMatch"  : "Passwords did not match, please reenter",
+  // signup form new fields validation added(gagandeep 4 may 2017)
+  "emailwrongpattern"    : "Email does not appear to be a valid e-mail address. Please use the format name@domain.xxx.",
+  "passwordlength"       : "Password must be a minimum of 6 characters with at least 1 number and 1 alphabetic character.",
+  "chooseRecoveryQuestion" : "Please select a recovery question.",
+  "recoveryAnswerMissing"      : "Please enter a recovery answer.",
+  // ends
   "chooseShippingMethod" : "Please select a shipping method.",
   "didNotAgreeToTerms"   : "You must agree to the terms and conditions",
   "enterProductQuantity" : "Please enter a product quantity above 0",

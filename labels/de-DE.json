@@ -326,6 +326,12 @@
     "emailMissing"   : "Bitte geben Sie eine gültige E-Mail-Adresse",
     "passwordMissing"   : "Bitte geben Sie ein Passwort",
     "passwordsDoNotMatch"   : "Passwörter nicht überein, bitte neu eingeben",
+    // signup form new fields validation added(gagandeep 4 may 2017)
+    "emailwrongpattern"    : "Email does not appear to be a valid e-mail address. Please use the format name@domain.xxx.",
+    "passwordlength"       : "Password must be a minimum of 6 characters with at least 1 number and 1 alphabetic character.",
+    "chooseRecoveryQuestion" : "Please select a recovery question.",
+    "recoveryAnswerMissing"      : "Please enter a recovery answer.",
+    // ends
     "chooseShippingMethod"   : "Bitte wählen Sie eine Versandmethode.",
     "didNotAgreeToTerms"   : "Sie müssen zu den Bedingungen einverstanden",
     "enterProductQuantity"   : "Bitte geben Sie eine Produktmenge über 0",
