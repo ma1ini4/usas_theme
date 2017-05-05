@@ -120,11 +120,7 @@
                         </div>
                     </div>
             </div> 
-        </li>
-        <li class="mz-utilitynav-item">
-            <a href="/user/signup" data-mz-action="signup" data-placement="bottom" class="mz-utilitynav-link">{{ labels.signUp }}</a>
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>            
-        </li>        
+        </li>                
         <li class="mz-utilitynav-item">
             <a href="/templates/location" data-mz-action="stores" data-placement="bottom" class="mz-utilitynav-link">{{ labels.localStores }}</a>
             <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>            
