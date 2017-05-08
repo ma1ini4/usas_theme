@@ -320,7 +320,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
         this.openPopover = function(e){
             //self.popoverEl.popover('show');
             e.preventDefault(); 
-            console.log(self.popoverEl.html());
+            //console.log(self.popoverEl.html());
             $("#my-account").popover({
                 html : true, 
                 placement: 'bottom',
