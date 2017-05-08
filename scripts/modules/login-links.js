@@ -306,7 +306,31 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             }
         }
     });
-
+    var MyAccountPopover = function(e){
+        var self = this;
+        this.init = function(el){
+            self.popoverEl = $('#my-account-content');
+            self.bindListeners.call(el, true);
+        };
+        this.bindListeners =  function (on) {
+            var onOrOff = on ? "on" : "off";
+            $(this).parent()[onOrOff]('click', '[data-mz-action="my-account"]', self.openPopover);
+            // bind other events
+        };
+        this.openPopover = function(e){
+            //self.popoverEl.popover('show');
+            e.preventDefault(); 
+            console.log(self.popoverEl.html());
+            $("#my-account").popover({
+                html : true, 
+                placement: 'bottom',
+                content: function() {
+                  return self.popoverEl.html();
+                }                
+            }).popover('show');
+        };
+    };
+        
     var LoginRegistrationModal = function(){
         var self = this;
         this.init = function(el){
@@ -409,7 +433,18 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
         $('[data-mz-action="lite-registration"]').each(function() {
             var modal = new LoginRegistrationModal();
             modal.init(this);
-        });      
+        });
+        $('[data-mz-action="my-account"]').each(function() {
+            var popover = new MyAccountPopover();
+            popover.init(this);
+            $(this).data('mz.popover', popover);
+        }); 
+        $('body').on('click', function (e) {
+            //only buttons
+            if ($(e.target).data('toggle') !== 'popover' && $(e.target).parents('.popover.in').length === 0) { 
+                $('[data-toggle="popover"]').popover('hide');
+            }
+        });
         $('[data-mz-action="login"]').each(function() {
             var popover = new LoginPopover();
             popover.init(this);
