@@ -314,7 +314,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
         };
         this.bindListeners =  function (on) {
             var onOrOff = on ? "on" : "off";
-            $(this).parent()[onOrOff]('click', '[data-mz-action="my-account"]', self.openPopover);
+            $(this).parent()[onOrOff]('mouseover', '[data-mz-action="my-account"]', self.openPopover);
             // bind other events
         };
         this.openPopover = function(e){
@@ -434,16 +434,19 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             var modal = new LoginRegistrationModal();
             modal.init(this);
         });
-        $('[data-mz-action="my-account"]').each(function() {
+        $('[data-mz-action="my-account"]').hover(function() {
             var popover = new MyAccountPopover();
             popover.init(this);
             $(this).data('mz.popover', popover);
-        }); 
+        });
         $('body').on('click', function (e) {
             //only buttons
             if ($(e.target).data('toggle') !== 'popover' && $(e.target).parents('.popover.in').length === 0) { 
                 $('[data-toggle="popover"]').popover('hide');
             }
+        }); 
+        $(document).on('mouseleave','.popover-content',function(){
+            $('#my-account').popover('hide');
         });
         $('[data-mz-action="login"]').each(function() {
             var popover = new LoginPopover();
