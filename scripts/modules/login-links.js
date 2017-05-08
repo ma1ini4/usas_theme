@@ -320,7 +320,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
         this.openPopover = function(e){
             //self.popoverEl.popover('show');
             e.preventDefault(); 
-            console.log(self.popoverEl.html());
+            //console.log(self.popoverEl.html());
             $("#my-account").popover({
                 html : true, 
                 placement: 'bottom',
@@ -361,7 +361,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                 password: $(this).parents('#login').find('[data-mz-login-password]').val()
             };
             current = this;
-            if (self.validateLogin(this, payload)) {   
+            if (self.validatePassword(this, payload) && self.validateLogin(this, payload)) {   
                 //var user = api.createSync('user', payload);
                 (LoginPopover.prototype).newsetLoading(true);
                 return api.action('customer', 'loginStorefront', {
@@ -378,9 +378,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
         };
         this.validateLogin = function (el, payload) { 
             if (!payload.email) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailMissing')), false;
-            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(payload.email))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailwrongpattern')), false;
-            if (!payload.password) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordMissing')), false;
-            if (!(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(payload.password))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
+            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(payload.email))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailwrongpattern')), false;            
             return true;
         };
         this.doSignup = function(){
@@ -404,7 +402,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             current = this;
             //console.log(this.validateSignup(payload));
             //console.log(self.validateSignup(this, payload));
-            if (self.validateSignup(this, payload)) {   
+            if (self.validatePassword(this, payload) && self.validateSignup(this, payload)) {   
                 //var user = api.createSync('user', payload);
                 (LoginPopover.prototype).newsetLoading(true);
                 return api.action('customer', 'createStorefront', payload).then(function () {
@@ -417,11 +415,25 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                 }, (LoginPopover.prototype).newdisplayApiMessage);
             }
         };
+        this.validatePassword = function(el, payload){
+            if (!payload.password) 
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordMissing')), false; 
+            if (payload.password.length < 6) {
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
+            } else if (payload.password.length > 50) {
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
+            } else if (payload.password.search(/\d/) == -1) {
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
+            } else if (payload.password.search(/[a-zA-Z]/) == -1) {
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
+            } else if (payload.password.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\+\.\,\;\:]/) != -1) {
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
+            }
+            return true;
+        };
         this.validateSignup = function (el, payload) { 
             if (!payload.account.emailAddress) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailMissing')), false;
-            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(payload.account.emailAddress))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailwrongpattern')), false;
-            if (!payload.password) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordMissing')), false;
-            if (!(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(payload.password))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
+            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(payload.account.emailAddress))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailwrongpattern')), false;                       
             if (payload.password !== $(el).parents('#newshopper').find('[data-mz-signup-confirmpassword]').val()) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordsDoNotMatch')), false;
             if (payload.recoveryquestion === "0") return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('chooseRecoveryQuestion')), false;
             if (!payload.recoveryanswer) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('recoveryAnswerMissing')), false;
