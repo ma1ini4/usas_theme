@@ -15,8 +15,30 @@
             <div id="mz-logged-in-notice">
             Welcome, <a href="/myaccount" data-mz-action="my-account" id="my-account" role="button" data-html="true" data-trigger="click" data-toggle="popover" data-content="" class="mz-utilitynav-link">{{user.firstName|default(user.email)}}</a>! (<a href="/logout" data-mz-action="logout" class="mz-utilitynav-link">{{ labels.logOut }}</a>)
                 <div id="my-account-content" style="display:none;">
-                    <button>A</button>
-                    <button>B</button>
+                    <div class="my-account-details">
+                        <h4><a href="#">My Information</a></h4>
+                        <p><a href="#">Review and edit your email address, password, your password hint information and/or your billing address </a></p>
+                    </div>
+                    <div class="my-account-details">
+                        <h4><a href="#">Address Book</a></h4>
+                        <p><a href="#">View, edit or delete addresses in your personal address book</a></p>
+                    </div>
+                    <div class="my-account-details">
+                        <h4><a href="#">Order History</a></h4>
+                        <p><a href="#">Review all orders placed with us using this account</a></p>
+                    </div>
+                    <div class="my-account-details">
+                        <h4><a href="#">Item History</a></h4>
+                        <p><a href="#">Review all of the items you've purchased</a></p>  
+                    </div>
+                    <div class="my-account-details">
+                        <h4><a href="#">Wish Lists</a></h4>
+                        <p><a href="#">Create and maintain lists of the items you'd like to receive, then email them to your friends and family </a></p>
+                    </div>
+                    <div class="my-account-details">
+                        <h4><a href="#">Logout</a></h4>
+                        <p><a href="#">Sign out og your account</a></p>
+                    </div>
                 </div>  
             </div> 
             
