@@ -27,7 +27,7 @@ define(['modules/jquery-mozu', 'modules/api', 'bootstrap', 'modules/page-header/
                     savedCarts[userId] = summary.data;
                     console.log(summary);
                     $document.ready(function() {
-                        CartMonitor.setCount(summary.data.itemCount);
+                        CartMonitor.setCount(summary.data.totalQuantity);
                         CartMonitor.setAmount(summary.data.total); 
                         GlobalCart.update(showGlobalCart);                         
                     });
@@ -50,7 +50,7 @@ define(['modules/jquery-mozu', 'modules/api', 'bootstrap', 'modules/page-header/
     //}
 
     $document.ready(function () {
-        CartMonitor.$el = $('[data-mz-role="cartcount"]').text(savedCart.itemCount || 0);
+        CartMonitor.$el = $('[data-mz-role="cartcount"]').text(savedCart.totalQuantity || 0);
         CartMonitor.$amountEl = $('[data-mz-role="cartamount"]').text(savedCart.total || 0);
     });
 
