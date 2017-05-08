@@ -451,6 +451,11 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             popover.init(this);
             $(this).data('mz.popover', popover);
         });
+        $('[data-mz-action="my-account"]').click(function() {
+            var popover = new MyAccountPopover();
+            popover.init(this);
+            $(this).data('mz.popover', popover);
+        });
         $('body').on('click', function (e) {
             //only buttons
             if ($(e.target).data('toggle') !== 'popover' && $(e.target).parents('.popover.in').length === 0) { 
