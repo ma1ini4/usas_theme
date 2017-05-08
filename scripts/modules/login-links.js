@@ -445,7 +445,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                 $('[data-toggle="popover"]').popover('hide');
             }
         }); 
-        $(document).on('mouseleave','.popover-content',function(){
+        $(document).on('mouseleave','#mz-logged-in-notice',function(){
             $('#my-account').popover('hide');
         });
         $('[data-mz-action="login"]').each(function() {
