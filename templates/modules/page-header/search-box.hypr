@@ -1,6 +1,6 @@
 ﻿<form id="searchbox" class="mz-searchbox" action="/search">
     <span class="mz-searchbox-field">
-        <input placeholder="{{ labels.search }}" type="search" class="mz-searchbox-input ml-header-search-field form-control" autocomplete="off" name="query" data-mz-role="searchquery" />
+        <input placeholder="{{ labels.search }}" id="search-field" type="search" class="mz-searchbox-input ml-header-search-field form-control" autocomplete="off" name="query" data-mz-role="searchquery" />
         <button class="mz-searchbox-button" type="submit">{{ labels.search }}</button>
     </span>
     <!--

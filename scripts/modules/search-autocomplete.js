@@ -109,6 +109,12 @@
         $field.on('typeahead:selected', function (e, data, set) {
             if (data.suggestion.productCode) window.location = "/p/" + data.suggestion.productCode;
         });
+        $('#searchbox').on('submit', function(e){
+            if($('#search-field').val() === ""){
+                alert(Hypr.getLabel('blankSearchResult'));
+                e.preventDefault();
+            }
+        });
     });
 
     return AutocompleteManager;
