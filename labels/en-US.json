@@ -127,7 +127,7 @@
   "resetPasswordDone"    : "Your new password has been set. Please login.",
   "unexpectedError"      : "Sorry, an unexpected error occurred. Please refresh the page and try again, or contact Support.",
   "navMore"              : "More...",
-  // for blank search added by gagandeep(10 may 2017)
+  // for blank search
   "blankSearchResult"    : "Please enter a keyword or item number.", 
   //ends
   "searchResults"        : "Search Results",
