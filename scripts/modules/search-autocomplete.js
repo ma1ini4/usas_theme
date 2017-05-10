@@ -111,7 +111,7 @@
         });
         $('#searchbox').on('submit', function(e){
             if($('#search-field').val() === ""){
-                alert("Please enter a keyword or item number.");
+                alert(Hypr.getLabel('blankSearchResult'));
                 e.preventDefault();
             }
         });
