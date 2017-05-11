@@ -384,19 +384,23 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
         this.doSignup = function(){
             //console.log("Signup Code");
             var redirectTemplate = 'myaccount';
+            var emailupdates = $(this).parents('#newshopper').find('[data-mz-signup-emailupdates]').val();
+            var accMarketing = false;
+            if(emailupdates === "on")
+                accMarketing = true;
             var email = $(this).parents('#newshopper').find('[data-mz-signup-emailaddress]').val();            
             var payload = {
                 account: {
                     emailAddress: email,
                     userName: email,
+                    acceptsMarketing: accMarketing,
                     contacts: [{
                         email: email
                     }]
                 },
                 password: $(this).parents('#newshopper').find('[data-mz-signup-password]').val(),
                 recoveryquestion: $(this).parents('#newshopper').find('[data-mz-signup-recoveryquestion]').val(),
-                recoveryanswer: $(this).parents('#newshopper').find('[data-mz-signup-recoveryanswer]').val(),
-                emailupdates: $(this).parents('#newshopper').find('[data-mz-signup-emailupdates]').val()
+                recoveryanswer: $(this).parents('#newshopper').find('[data-mz-signup-recoveryanswer]').val()
             };
             //console.log(this, payload);
             current = this;
