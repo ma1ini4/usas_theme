@@ -22,7 +22,7 @@
                     {% include "modules/page-header/utility-nav" %}
                 {% endblock utility-nav %}            
             </div>
-            <div class="ml-header-global-cart-wrapper">
+            <div class="ml-header-global-cart-wrapper" style="display:none;">
                 {% block global-cart-container %}
                     {% include "modules/page-header/global-cart-container" %}
                 {% endblock global-cart-container %}              
