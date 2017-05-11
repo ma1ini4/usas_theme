@@ -338,6 +338,17 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             self.bindListeners.call(el, true);
             self.doLogin = _.debounce(self.doLogin, 150);
             self.doSignup = _.debounce(self.doSignup, 150);
+            api.get('attributedefinition').then(function(attribute) {
+                console.log(attribute.data.items);
+                for(var i=0; i< attribute.data.items.length; i++){
+                    if(attribute.data.items[i].attributeCode === "recovery-question"){
+                        var recVals = attribute.data.items[i].vocabularyValues;
+                        for(var j=0; j<recVals.length; j++){
+                            $('<option/>').text(recVals[j].content.value).attr('value',recVals[j].value).appendTo('#recoveryQuestionList');
+                        }
+                    }
+                }
+            });
         };
 
         this.bindListeners =  function (on) {
@@ -348,7 +359,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             // bind other events
         };
 
-        this.openLiteModal = function(){
+        this.openLiteModal = function(){            
             self.modalEl.modal('show');
         };
 
@@ -396,7 +407,19 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                     acceptsMarketing: accMarketing,
                     contacts: [{
                         email: email
-                    }]
+                    }]/*,
+                    attributes: [
+                      {
+                         "attributeDefinitionId": "14",
+                         "fullyQualifiedName": "Recovery Question",
+                         "values": {
+                            "content":{
+                                "value":"What is your city of birth?"
+                            },
+                            "value":"1"
+                        }
+                      }
+                   ]*/                
                 },
                 password: $(this).parents('#newshopper').find('[data-mz-signup-password]').val(),
                 recoveryquestion: $(this).parents('#newshopper').find('[data-mz-signup-recoveryquestion]').val(),
