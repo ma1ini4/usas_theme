@@ -37,7 +37,7 @@
                     </div>
                     <div class="my-account-details">
                         <h4><a href="/logout">Logout</a></h4>
-                        <p><a href="/logout">Sign out og your account</a></p>
+                        <p><a href="/logout">Sign out of your account</a></p>
                     </div>
                 </div>  
             </div> 
