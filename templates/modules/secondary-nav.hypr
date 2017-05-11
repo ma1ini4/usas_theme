@@ -5,7 +5,7 @@
       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         {% partial_cache %}
           {% for link in navigation.tree %}
-            {% if not link.isHidden and not link.isEmpty %}          
+            {% if not link.isHidden and not link.isEmpty and link.url != "/home" %}          
               <div class="panel panel-default">
                 <div class="panel-heading" role="tab" id="main-nav-heading-{{link.categoryCode}}">
                   <h4 class="panel-title">
