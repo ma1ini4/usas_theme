@@ -13,7 +13,7 @@
         {% if not user.isAnonymous %}
         <li class="mz-utilitynav-item">
             <div id="mz-logged-in-notice">
-            Welcome, <a href="#" data-mz-action="my-account" id="my-account" role="button" data-html="true" data-trigger="click" data-toggle="popover" data-content="" class="mz-utilitynav-link">{{user.firstName|default(user.email)}}</a> <!-- ! (<a href="/logout" data-mz-action="logout" class="mz-utilitynav-link">{{ labels.logOut }}</a>)--> 
+            Welcome, <a href="/myaccount" data-mz-action="my-account" id="my-account" role="button" data-html="true" data-trigger="click" data-toggle="popover" data-content="" class="mz-utilitynav-link">{{user.firstName|default(user.email)}}</a> <!-- ! (<a href="/logout" data-mz-action="logout" class="mz-utilitynav-link">{{ labels.logOut }}</a>)--> 
                 <div id="my-account-content" style="display:none;">
                     <div class="my-account-details">
                         <h4><a href="/myaccount#settings">My Information</a></h4>

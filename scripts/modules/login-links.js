@@ -450,6 +450,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             var modal = new LoginRegistrationModal();
             modal.init(this);
         });
+        $('#my-account').attr('href','#');
         $('[data-mz-action="my-account"]').hover(function() {
             var popover = new MyAccountPopover();
             popover.init(this);
