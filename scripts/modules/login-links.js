@@ -385,9 +385,9 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             //console.log("Signup Code");
             var redirectTemplate = 'myaccount';
             var emailupdates = $(this).parents('#newshopper').find('[data-mz-signup-emailupdates]').val();
-            var accMarketing = "false";
+            var accMarketing = false;
             if(emailupdates === "on")
-                accMarketing = "true";
+                accMarketing = true;
             var email = $(this).parents('#newshopper').find('[data-mz-signup-emailaddress]').val();            
             var payload = {
                 account: {
