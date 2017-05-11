@@ -209,7 +209,24 @@
                     "name": "globalCartMaxItemCount"
                 }                                  
             ]
-        },         
+        },  
+        {
+            "xtype": "panel",
+            "title": "Customers",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "Please select recovery question",
+                    "xtype": "mz-input-selectmulti",
+                    "name": "customerSecretQuestion",
+                    "store":[
+                        "q1",
+                        "q2",
+                        "q3"
+                    ]
+                }                               
+            ]
+        },                
         {
             "xtype": "panel",
             "title": "Paging",

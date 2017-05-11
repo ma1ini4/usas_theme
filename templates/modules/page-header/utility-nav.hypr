@@ -112,7 +112,8 @@
                                             <input type="password" class="form-control" data-mz-signup-confirmpassword placeholder="Re-enter Password" aria-describedby="basic-addon1">
                                         </div>                                    
                                         <div class = "input-group">
-                                            <span class="input-group-addon glyphicon glyphicon-question-sign" id="list" aria-hidden="true"></span>                                 
+                                            <span class="input-group-addon glyphicon glyphicon-question-sign" id="list" aria-hidden="true"></span>   
+                                            {% dump themeSettings.customerSecretQuestion %}                              
                                             <select id="list" data-mz-signup-recoveryquestion>
                                                 <option value="0">Select a recovery question</option>
                                                 <option value="1">What is your city of birth?</option>
