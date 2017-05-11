@@ -46,7 +46,7 @@
         {%else%}
         <li class="mz-utilitynav-item navbar-collapse-control">
             <a data-target="#ml-nav"  data-toggle="collapse" class="mz-utilitynav-link">
-                {{ labels.product }}
+                {% dropzone "products-collapsible-label" scope="site" %}
                 <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
             </a>
         </li>        
