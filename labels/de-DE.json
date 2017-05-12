@@ -5,10 +5,14 @@
     "logOut"   : "Abmeldung",
     "logIn"   : "Einloggen",
     "logIn2"  : "Melden Sie sich bei Ihrem Konto",
-
+    "recoveryQuestion"     : "Select a recovery question",
+    "recoveryAnswer"     : "Enter Answer",
+    "signupEmailupdates"   : "Sign me up for Kibo Training Email Updates about new services and special offers!",
+    "secureConnectionMessage" : "Your Connection to this website is secure.",
     "signUp"   : "Anmeldung",
     "signUpLink"           : "Ein Konto erstellen",
     "forgotPassword"       : "Passwort vergessen",
+    "liteRegForgotPasswordLabel"       : "Forgot Password?",
     "orderStatus": "Bestellstatus",
     "order": "Bestellen",
     "verifyWith"           : "Stellen Sie sicher, mit",
@@ -69,6 +73,7 @@
     "creditCard"   : "Kreditkarte",
     "payPal"   : "Paypal Express",
     "password"   : "Passwort",
+    "reEnterPassword"             : "Re-enter Password",
     "newPassword"   : "Neues Passwort",
     "oldPassword": "Altes Passwort",
     "change": "ändern",
@@ -118,7 +123,8 @@
     "unexpectedError"   : "Leider ist ein unerwarteter Fehler aufgetreten. Bitte aktualisieren Sie die Seite und versuchen Sie es erneut, oder kontaktieren Sie den Support.",
     "navMore"   : "Mehr ...",
     // for blank search
-    "blankSearchResult"    : "Please enter a keyword or item number.", 
+    "blankSearchResult"    : "Please enter a keyword or item number.",
+    "searchLessCharacters" :"Your keyword or item number must be at least 3 characters long", 
     //ends
     "searchResults"   : "Suchergebnisse",
     "searchTitle"   : "Suchergebnisse für {0}",

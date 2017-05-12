@@ -186,7 +186,12 @@
                 {
                     "fieldLabel": "Pick an image for Empty Basket",
                     "xtype": "mz-input-image",
-                    "name": "globalCartEmptyBasketFooter"
+                    "name": "globalCartEmptyBasketFooter" 
+                },
+                {
+                    "fieldLabel": "Empty basket kicker link",
+                    "xtype": "mz-input-text",
+                    "name": "globalCartEmptyBasketKickerLink"
                 },
                 {
                     "fieldLabel": "Enable Cross sells",
@@ -209,7 +214,7 @@
                     "name": "globalCartMaxItemCount"
                 }                                  
             ]
-        },         
+        },               
         {
             "xtype": "panel",
             "title": "Paging",
