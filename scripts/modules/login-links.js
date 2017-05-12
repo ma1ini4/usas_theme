@@ -320,7 +320,6 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
         this.openPopover = function(e){
             //self.popoverEl.popover('show');
             e.preventDefault(); 
-            //console.log(self.popoverEl.html());
             $("#my-account").popover({
                 html : true, 
                 placement: 'bottom',
@@ -366,7 +365,6 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
         this.doLogin = function(){
             //console.log("Write business logic for Login form submition");
             var returnUrl = $('#returnUrl').val();
-            //console.log($(this).parents('#login').find('[data-mz-login-email]').val(), $(this).parents('#login').find('[data-mz-login-password]').val());
             var payload = {
                 email: $(this).parents('#login').find('[data-mz-login-email]').val(),
                 password: $(this).parents('#login').find('[data-mz-login-password]').val()
@@ -393,7 +391,6 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             return true;
         };
         this.doSignup = function(){
-            //console.log("Signup Code");
             var redirectTemplate = 'myaccount';
             var emailupdates = $(this).parents('#newshopper').find('[data-mz-signup-emailupdates]').val();
             var accMarketing = false;
@@ -425,10 +422,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                 },
                 password: $(this).parents('#newshopper').find('[data-mz-signup-password]').val()
             };
-            console.log(payload);
             current = this; 
-            //console.log(this.validateSignup(payload));
-            //console.log(self.validateSignup(this, payload)); 
             if (self.validateSignup(this, payload) && self.validatePassword(this, payload)) {   
                 //var user = api.createSync('user', payload);
                 (LoginPopover.prototype).newsetLoading(true);
@@ -470,7 +464,6 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
     };
     $(document).ready(function() {
         $docBody = $(document.body);
-        //$("#ms_num").attr('maxlength','6');
         $('[data-mz-action="lite-registration"]').each(function() {
             var modal = new LoginRegistrationModal();
             modal.init(this);
