@@ -71,10 +71,10 @@
 {% else %}
 	<div class="text-center">
 		<div class=>Your shopping basket is empty</div>
-		{% if themeSettings.globalCartEmptyBasketFooter %}
-		  <div>
+		{% if themeSettings.globalCartEmptyBasketFooter %} 
+		  <a {% if themeSettings.globalCartEmptyBasketKickerLink %} href="{{ themeSettings.globalCartEmptyBasketKickerLink }}"{% else %} href="/home" {% endif %}>
 		  	<img src="{% make_url "image" themeSettings.globalCartEmptyBasketFooter.imageUrl with width=370 as_parameters %}"  />
-		  </div>
+		  </a>
 		{% endif %}		
 	</div>
 {% endif %}
