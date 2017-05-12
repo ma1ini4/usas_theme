@@ -16,7 +16,7 @@
     border-radius: 3px;
 }
 .checkout-hide-element{
-    .ml-header-search-wrapper, .ml-header-links-wrapper, ml-header-global-cart-wrapper{display: none!important;}    
+    .ml-header-search-wrapper, .ml-header-links-wrapper, .ml-header-global-cart-wrapper{display: none!important;}    
 }
 
 //Site-wide rules
@@ -156,11 +156,7 @@
         }
     }
 }
-.mz-checkout {
-    .ml-header-search-wrapper, .ml-header-links-wrapper, .ml-header-global-cart-wrapper, .global-header-wrapper{
-        display: none!important;
-    }
-}
+
 //Navigation
 .mz-sitenav {
     border-bottom: 1px solid #e7e7e7;
@@ -188,7 +184,10 @@
         float: none;
         display: block;
         padding: 3px 17px;
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid #ccc; 
+        .mz-sitenav-link{
+            width: 100%;
+        }          
         &.mz-sitenav-item-more {
             display: none;
         }
@@ -311,7 +310,11 @@
         }
     }
 }
-
+.mz-checkout {
+    .mz-pageheader {
+        height: 60px;
+    }
+} 
 
 //Footer
 .mz-pagefooter {
@@ -391,6 +394,7 @@ footer {
         margin-top: 30px;
     }
 }
+
 @media (max-width: 767px) {     
     //login popup       
     .modal-dialog.login-modal{      
@@ -434,9 +438,9 @@ footer {
         .mz-pagingcontrols, .mz-pagenumbers{
             float: left;
         }
-
     } 
     .mz-l-pagecontent{ padding: 25px 8.5px;}
+    
 
     footer {
         .email-container {
