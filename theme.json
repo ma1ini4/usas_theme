@@ -361,7 +361,8 @@
     }
   ],
   "settings": {
-    "globalCartEmptyBasketFooter":"",
+    "globalCartEmptyBasketFooter":"", 
+    "globalCartEmptyBasketKickerLink":"",
     "globalCartRelatedProducts":"true",
     "globalCartRelatedProductsSize":5,
     "globalCartMaxItemCount":3,
