@@ -2,15 +2,16 @@
  * Watches for changes to the quantity of items in the shopping cart, to update
  * cart count indicators on the storefront.
  */
-define(['modules/jquery-mozu', 'modules/api', 'bootstrap', 'modules/page-header/global-cart'], function ($, api, Bootstrap, GlobalCart) {
+define(['modules/jquery-mozu', 'modules/api', 'bootstrap', 'modules/page-header/global-cart', 'hyprlive'], function ($, api, Bootstrap, GlobalCart, Hypr) {
 
     var $cartCount,
         user = require.mozuData('user'),
         userId = user.userId,
         $document = $(document),
         CartMonitor = {
-            setAmount: function(count) {
-                this.$amountEl.text("$"+count);
+            setAmount: function(amount) {
+                var localAmount = Hypr.engine.render("{{price|currency}}",{ locals: { price: amount }});
+                this.$amountEl.text(localAmount);
             },           
             setCount: function(count) {
                 this.$el.text(count);
