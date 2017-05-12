@@ -135,6 +135,7 @@
   "navMore"              : "More...",
   // for blank search
   "blankSearchResult"    : "Please enter a keyword or item number.", 
+  "searchLessCharacters" :"Your keyword or item number must be at least 3 characters long",
   //ends
   "searchResults"        : "Search Results",
   "searchTitle"          : "Search Results for {0}",

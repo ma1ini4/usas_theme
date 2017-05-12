@@ -123,7 +123,8 @@
     "unexpectedError"   : "Leider ist ein unerwarteter Fehler aufgetreten. Bitte aktualisieren Sie die Seite und versuchen Sie es erneut, oder kontaktieren Sie den Support.",
     "navMore"   : "Mehr ...",
     // for blank search
-    "blankSearchResult"    : "Please enter a keyword or item number.", 
+    "blankSearchResult"    : "Please enter a keyword or item number.",
+    "searchLessCharacters" :"Your keyword or item number must be at least 3 characters long", 
     //ends
     "searchResults"   : "Suchergebnisse",
     "searchTitle"   : "Suchergebnisse für {0}",

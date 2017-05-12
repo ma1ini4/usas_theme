@@ -8,8 +8,7 @@
           {% for link in navigation.tree %}
             
 
-            {% if not link.isHidden and not link.isEmpty and forloop.counter0 < themeSettings.maxTopLevelNavItems %}
-            {% if link.url != "/home" %}
+            {% if not link.isHidden and not link.isEmpty and forloop.counter0 < themeSettings.maxTopLevelNavItems and link.url != "/home" %}
             <li class="mz-sitenav-item">
               <div class="mz-sitenav-item-inner">
                 <a class="mz-sitenav-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{link.url}}">{{link.name|truncatechars(themeSettings.maxTopLevelNavLabelLength)|safe}}</a>
@@ -50,7 +49,6 @@
               </div>
             </li>
             <li class="ml-navbar-separator"></li>
-            {% endif %}
             {% endif %}
           {% endfor %}
           {% if navigation.tree.length > themeSettings.maxTopLevelNavItems %}
