@@ -1,11 +1,6 @@
 <div class="arrow-up"></div>
 {% if model.items.length>0 %}
-	<ul class="media-list">
-			<table>
-				<th>Item</th>
-				<th>Quantity</th>
-				<th>Price</th>
-			</table>
+	<ul class="media-list">			
 		    {% for items in model.cartItems  %}
 		    	<div class="media">
 					<div class="media-left">
