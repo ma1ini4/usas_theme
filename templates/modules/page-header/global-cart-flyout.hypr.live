@@ -1,6 +1,11 @@
 <div class="arrow-up"></div>
 {% if model.items.length>0 %}
 	<ul class="media-list">
+			<table>
+				<th>Item</th>
+				<th>Quantity</th>
+				<th>Price</th>
+			</table>
 		    {% for items in model.cartItems  %}
 		    	<div class="media">
 					<div class="media-left">
@@ -28,7 +33,7 @@
 
 		    {% endfor %}
 	</ul>
-	<div class="row">
+	<div class="row total-amount">
 	    <div class="col-xs-12 text-right">
 	    	<b>Subtotal: </b>
 	    	<span>{{ model.subtotal|currency }}</span>
