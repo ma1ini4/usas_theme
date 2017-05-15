@@ -161,12 +161,6 @@
         }
     }
 }
-
-.mz-checkout {
-    .ml-header-search-wrapper, .ml-header-links-wrapper, .ml-header-global-cart-wrapper, .global-header-wrapper{
-        display: none!important;
-    }
-}
 .mz-utilitynav-link-cart{
     &:hover{
         text-decoration:none;
@@ -290,6 +284,7 @@
                 .mz-sitenav-item {
                     display: block;
                     float: none;
+                    width: 100%;
                     .mz-sitenav-link {
                         font-weight: normal;
                     }
@@ -334,9 +329,10 @@
     }
 }
 .mz-checkout {
-    .ml-header-search-wrapper, .ml-header-links-wrapper, .ml-header-global-cart-wrapper, #global-header-wrapper{
+    .ml-header-search-wrapper, .mz-utilitynav-item, .ml-header-global-cart-wrapper, #global-header-wrapper{
         display: none!important;
     }
+    .site-msg{display: block!important;}
     .mz-pageheader {
         height: 60px;
     }
@@ -416,7 +412,7 @@ footer {
     }
     .mz-pagefooter-copyright {
         font-size: 13px;
-        float: right;
+        float: left;
         margin-top: 30px;
     }
     #mz-drop-zone-copyright{
