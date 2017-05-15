@@ -303,12 +303,20 @@
         }
     }
     .panel {
-        border-radius: 0 !important
+        border-radius: 0 !important;
+        .panel-heading{
+            padding :0;
+        }
     }
     .panel-title {
         a {
+            padding: 10px 15px;
             display: block;
             text-decoration: none;
+            &[aria-expanded=true] {
+                color: #fff;
+                background: #373433;
+            }            
         }
         .collapsed {
             .glyphicon-test:before {
