@@ -4,19 +4,6 @@
 		    {% for items in model.cartItems  %}
 		    	<div class="media">
 					<div class="media-left">
-						<h5>Item</h5>
-					</div>
-					<div class="media-body">
-						<div class="col-xs-8">
-							<h5>Quantity</h5>										
-						</div>
-						<div class="col-xs-4">
-							<h5>Price</h5>							
-						</div>
-					</div>
-				</div>
-		    	<div class="media">
-					<div class="media-left">
 						<a href="#">
 						  <img class="media-object" width=64 src="{{ items.product.imageUrl }}" />
 						</a>
@@ -41,7 +28,7 @@
 
 		    {% endfor %}
 	</ul>
-	<div class="row total-amount">
+	<div class="row">
 	    <div class="col-xs-12 text-right">
 	    	<b>Subtotal: </b>
 	    	<span>{{ model.subtotal|currency }}</span>
