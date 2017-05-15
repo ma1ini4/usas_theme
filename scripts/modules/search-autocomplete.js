@@ -103,7 +103,7 @@
     $(document).ready(function() {
         var $field = AutocompleteManager.$typeaheadField = $('[data-mz-role="searchquery"]');
         AutocompleteManager.typeaheadInstance = $field.typeahead({
-            minLength: 3
+            minLength: 1
         }, dataSetConfigs).data('ttTypeahead');
         // user hits enter key while menu item is selected;
         $field.on('typeahead:selected', function (e, data, set) {
