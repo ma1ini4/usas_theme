@@ -66,7 +66,7 @@ define([
         update: function(showGlobalCart) {
             var me = this;
             Api.get("cart").then(function(resp) {
-                resp.data.reversedItems = resp.data.items.reverse().slice(0,globalCartMaxItemCount);
+                resp.data.cartItems = resp.data.items.slice(0,globalCartMaxItemCount);
                 me.model.attributes = resp.data;
                 me.render();
                 if (showGlobalCart) {

@@ -2,7 +2,7 @@
 
   "dateFormat"       : "F j, Y",
 
-  "logOut"               : "Log Out",
+  "logOut"               : "Logout",
   "logIn"                : "Log In",
   "logIn2": "Sign in to your account",
   "anonOrderNumberMissing": "The order number you provided was not found. Please validate the order number and try again or contact customer service.",
@@ -415,7 +415,7 @@
   "width"        : "Width",
   "height"         : "Height",
 
-  "localStores"          : "Local Stores",
+  "localStores"          : "Stores",
   "findAtLocalStore"     : "Find it at a Local Store",
   "locationWait"         : "We're searching for local stores. Your browser may ask for permission to use your location. Click \"Allow\" to sort the search results by distance.",
   "locationWaitProd"     : "We're searching local stores for <strong>{0}</strong>. Your browser may ask for permission to use your location. Click \"Allow\" to sort the search results by distance.",

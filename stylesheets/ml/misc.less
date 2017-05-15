@@ -35,7 +35,13 @@
             top: 3px;
         }
 
-    }        
+    }   
+    .mz-utilitynav-link-cart{
+        color: inherit;
+        &:hover{
+            color: inherit;
+        }
+    }     
     .ml-header-content {
         height: 128px;
         position: relative;
@@ -154,12 +160,6 @@
                 z-index: 9;
             }
         }
-    }
-}
-
-.mz-checkout {
-    .ml-header-search-wrapper, .ml-header-links-wrapper, .ml-header-global-cart-wrapper, .global-header-wrapper{
-        display: none!important;
     }
 }
 .mz-utilitynav-link-cart{
@@ -284,7 +284,8 @@
             .mz-sitenav-sub-sub {
                 .mz-sitenav-item {
                     display: block;
-                    float: left;
+                    float: none;
+                    width: 100%;
                     .mz-sitenav-link {
                         font-weight: normal;
                     }
@@ -303,12 +304,20 @@
         }
     }
     .panel {
-        border-radius: 0 !important
+        border-radius: 0 !important;
+        .panel-heading{
+            padding :0;
+        }
     }
     .panel-title {
         a {
+            padding: 10px 15px;
             display: block;
             text-decoration: none;
+            &[aria-expanded=true] {
+                color: #fff;
+                background: #373433;
+            }            
         }
         .collapsed {
             .glyphicon-test:before {
@@ -321,9 +330,19 @@
     }
 }
 .mz-checkout {
+    .ml-header-search-wrapper, .mz-utilitynav-item, .ml-header-global-cart-wrapper, #global-header-wrapper{
+        display: none!important;
+    }
+    .site-msg{display: block!important;}
     .mz-pageheader {
         height: 60px;
     }
+    .ml-header-links-wrapper{
+        top: 20px!important;
+        left: auto!important;
+        right: -10px!important;
+    }
+
 } 
 
 //Footer
@@ -400,8 +419,11 @@ footer {
     }
     .mz-pagefooter-copyright {
         font-size: 13px;
-        float: right;
+        float: left;
         margin-top: 30px;
+    }
+    #mz-drop-zone-copyright{
+        float: right;
     }
 }
 

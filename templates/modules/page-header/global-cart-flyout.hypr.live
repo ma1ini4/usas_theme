@@ -1,7 +1,7 @@
 <div class="arrow-up"></div>
 {% if model.items.length>0 %}
-	<ul class="media-list">
-		    {% for items in model.reversedItems  %}
+	<ul class="media-list">			
+		    {% for items in model.cartItems  %}
 		    	<div class="media">
 					<div class="media-left">
 						<a href="/p/{{items.product.productCode}}">
