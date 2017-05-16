@@ -26,28 +26,40 @@
             <!-- ! (<a href="/logout" data-mz-action="logout" class="mz-utilitynav-link">{{ labels.logOut }}</a>)--> 
                 <div id="my-account-content" style="display:none;">
                     <div class="my-account-details">
-                        <h4><a href="/myaccount#settings">My Information</a></h4>
-                        <p><a href="/myaccount#settings">Review and edit your email address, password, your password hint information and/or your billing address </a></p>
+                        <a href="/myaccount#settings">
+                            <h4>My Information</h4>
+                            <p>Review and edit your email address, password, your password hint information and/or your billing address </p>
+                        </a> 
                     </div>
                     <div class="my-account-details">
-                        <h4><a href="/myaccount#addressbook">Address Book</a></h4>
-                        <p><a href="/myaccount#addressbook">View, edit or delete addresses in your personal address book</a></p>
+                        <a href="/myaccount#addressbook">
+                            <h4>Address Book</h4>
+                            <p>View, edit or delete addresses in your personal address book</p>
+                        </a>
                     </div>
                     <div class="my-account-details">
-                        <h4><a href="/myaccount#orderhistory">Order History</a></h4>
-                        <p><a href="/myaccount#orderhistory">Review all orders placed with us using this account</a></p>
+                        <a href="/myaccount#orderhistory">
+                            <h4>Order History</h4>
+                            <p>Review all orders placed with us using this account</p>
+                        </a>
                     </div>
                     <div class="my-account-details">
-                        <h4><a href="#">Item History</a></h4>
-                        <p><a href="#">Review all of the items you've purchased</a></p>  
+                        <a href="#">
+                            <h4>Item History</h4>
+                            <p>Review all of the items you've purchased</p>  
+                        </a>
                     </div>
                     <div class="my-account-details">
-                        <h4><a href="#">Wish Lists</a></h4>
-                        <p><a href="#">Create and maintain lists of the items you'd like to receive, then email them to your friends and family </a></p>
+                        <a href="#">
+                            <h4>Wish Lists</h4>
+                            <p>Create and maintain lists of the items you'd like to receive, then email them to your friends and family </p>
+                        </a>
                     </div>
                     <div class="my-account-details">
-                        <h4><a href="/logout">Logout</a></h4>
-                        <p><a href="/logout">Sign out of your account</a></p>
+                        <a href="/logout">
+                            <h4>Logout</h4>
+                            <p>Sign out of your account</p>
+                        </a>
                     </div>
                 </div>  
             </div> 
