@@ -37,6 +37,9 @@
 						<a title="YouTube" href="#" class="ml-icon ml-social-icon ml-icon-youtube">&nbsp;</a>
 					</div>
 				</div>
+				<div class="ml-footer-phone-number">
+					{% dropzone "ml-footer-phone-number" scope="site" %}
+				</div>
 			</div>
 			<div class="col-xs-12 col-sm-8 regular-footer {% if themeSettings.footerEnableMini %}mini-footer-on{% else %}mini-footer-off{% endif %}">
 				<div class="row">
