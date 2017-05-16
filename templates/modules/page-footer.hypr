@@ -9,7 +9,7 @@
 </div>
 <footer>
 	<div class="container">
-		<div class="row">
+		<div class="row ">
 			<div class="col-xs-12 col-sm-4 pull-right">
 				<div>
 					{% dropzone "email-signup-tag-line" scope="site" %}
@@ -38,46 +38,22 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-xs-12 col-sm-8">
+			<div class="col-xs-12 col-sm-8 regular-footer {% if themeSettings.footerEnableMini %}mini-footer-on{% else %}mini-footer-off{% endif %}">
 				<div class="row">
-					<div class="col-xs-6">
-						<div class="row">
-							<div class="col-xs-12 col-sm-6">
-								{% dropzone "catlink-1-1" scope="site" %}
-								{% dropzone "catlink-2-1" scope="site" %}
-								{% dropzone "catlink-3-1" scope="site" %}
-								{% dropzone "catlink-4-1" scope="site" %}
-							</div>
-							<div class="col-xs-12 col-sm-6 top-pad">
-								{% dropzone "catlink-1-2" scope="site" %}
-								{% dropzone "catlink-2-2" scope="site" %}
-								{% dropzone "catlink-3-2" scope="site" %}
-								{% dropzone "catlink-4-2" scope="site" %}
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6">
-						<div class="row">
-							<div class="col-xs-12 col-sm-6">
-								{% dropzone "catlink-1-3" scope="site" %}
-								{% dropzone "catlink-2-3" scope="site" %}
-								{% dropzone "catlink-3-3" scope="site" %}
-								{% dropzone "catlink-4-3" scope="site" %}
-							</div>
-							<div class="col-xs-12 col-sm-6 top-pad">
-								{% dropzone "catlink-1-4" scope="site" %}
-								{% dropzone "catlink-2-4" scope="site" %}
-								{% dropzone "catlink-3-4" scope="site" %}
-								<div class="top-pad">
-									{% dropzone "catlink-4-4" scope="site" %}
-									{% dropzone "catlink-5-4" scope="site" %}
-									{% dropzone "catlink-6-4" scope="site" %}
-								</div>
-							</div>
-						</div>
+					<div class="col-xs-12">
+						{% dropzone "footer-cat-links" scope="site" %}
 					</div>
 				</div>
-			</div>
+			</div>		
+		</div>
+		<div class="row">
+			<div class="col-xs-12 {% if themeSettings.footerEnableMini %}mini-footer-on{% else %}mini-footer-off{% endif %}">
+				<div class="row">
+					<div class="col-xs-12">
+						{% dropzone "mini-footer-cat-links" scope="site" %}
+					</div>
+				</div>
+			</div>			
 		</div>
 	</div>
 </footer>

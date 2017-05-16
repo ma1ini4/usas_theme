@@ -417,6 +417,20 @@ footer {
     a:hover {
         text-decoration: none;
     }
+    .mini-footer-off{
+        display:none;
+    }
+    .mini-footer-on{
+        display:block;
+    }
+    .regular-footer{
+        &.mini-footer-on{
+            display:none;
+        }
+        &.mini-footer-off{
+            display:block;
+        }        
+    }
 
 }
 .mz-pagefooter-copyright {
