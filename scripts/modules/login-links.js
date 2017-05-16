@@ -311,10 +311,12 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
         this.init = function(el){
             self.popoverEl = $('#my-account-content');
             self.bindListeners.call(el, true);
+            $('#my-account').attr('href','#');
         };
         this.bindListeners =  function (on) {
             var onOrOff = on ? "on" : "off";
-            $(this).parent()[onOrOff]('mouseover', '[data-mz-action="my-account"]', self.openPopover);
+            //$(this).parent()[onOrOff]('mouseover', '[data-mz-action="my-account"]', self.openPopover);
+            $(this).parent()[onOrOff]('click', '[data-mz-action="my-account"]', self.openPopover);
             // bind other events
         };
         this.openPopover = function(e){
@@ -322,6 +324,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             e.preventDefault(); 
             $("#my-account").popover({
                 html : true, 
+                trigger: 'click',
                 placement: 'bottom',
                 content: function() {
                   return self.popoverEl.html();
@@ -469,24 +472,25 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             modal.init(this);
         });
         $('#my-account').attr('href','#');
-        $('[data-mz-action="my-account"]').hover(function() {
-            var popover = new MyAccountPopover();
-            popover.init(this);
-            $(this).data('mz.popover', popover);
-        });
         $('[data-mz-action="my-account"]').click(function() {
             var popover = new MyAccountPopover();
             popover.init(this);
             $(this).data('mz.popover', popover);
         });
-        $('body').on('click', function (e) {
-            //only buttons
-            if ($(e.target).data('toggle') !== 'popover' && $(e.target).parents('.popover.in').length === 0) { 
-                $('[data-toggle="popover"]').popover('hide');
-            }
-        }); 
+        /*$('[data-mz-action="my-account"]').hover(function() {
+            var popover = new MyAccountPopover();
+            popover.init(this);
+            $(this).data('mz.popover', popover);
+        });
         $(document).on('mouseleave','#mz-logged-in-notice',function(){
             $('#my-account').popover('hide');
+        });
+        */  
+        $('body').on('touchend click', function (e) {
+            //only buttons
+            if ($(e.target).data('toggle') !== 'popover' && !$(e.target).parents().is('.popover.in')) { 
+                $('[data-toggle="popover"]').popover('hide');
+            }
         });
         $('[data-mz-action="login"]').each(function() {
             var popover = new LoginPopover();
