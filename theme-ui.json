@@ -224,6 +224,11 @@
                     "fieldLabel": "Maximum number of items to show in global Cart",
                     "xtype": "mz-input-number",
                     "name": "globalCartMaxItemCount"
+                }, 
+                {
+                    "fieldLabel": "Hide popover for empty global cart",
+                    "xtype": "mz-input-checkbox",
+                    "name": "globalCarthidepopover"
                 }                                  
             ]
         },               
