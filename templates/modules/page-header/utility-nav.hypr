@@ -79,6 +79,7 @@
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="login">
+                                        <form name="login" onsubmit="return false">
                                         <p class="login-text">Login with an email address and password.</p>
                                         <div class="input-group">
                                             <span class="input-group-addon glyphicon glyphicon-envelope" aria-hidden="true" id="email"></span>
@@ -97,12 +98,13 @@
                                                 <div class="link-button"><a href="#" data-dismiss="modal">{{ labels.cancel }}</a></div>
                                             </div>
                                             <div class="col-xs-10 right-column">                                    
-                                                <button class="btn login-btn submit-btn" type="submit" data-mz-action="doLogin">{{ labels.login }}</button>
-                                                <input type="hidden" class="hidden-return" name="returnUrl" id="returnUrl" value="" />
+                                                <button class="btn login-btn submit-btn" type="submit" data-mz-action="doLogin">{{ labels.login }}</button> 
+                                                <input type="hidden" class="hidden-return" name="returnUrl" id="returnUrl" value="" />  
                                                 <script>document.getElementById('returnUrl').value = window.location.href;</script>
                                             </div>
                                         </div>
                                         <div class="col-xs-12 bottom-text"><p class="login-text"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> {{ labels.secureConnectionMessage }}</p></div>
+                                        </form>
                                     </div>
                                     <!------- Signup start-------->    
                                     <div class="tab-pane " id="newshopper">
