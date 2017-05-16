@@ -180,6 +180,18 @@
         },
         {
             "xtype": "panel",
+            "title": "Footer",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "Enable XS Mini footer",
+                    "xtype": "mz-input-checkbox",
+                    "name": "footerEnableMini"
+                }                              
+            ]
+        },         
+        {
+            "xtype": "panel",
             "title": "Global Cart",
             "collapsed": false,
             "items": [
