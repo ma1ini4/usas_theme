@@ -13,6 +13,7 @@
 
 {% block site-nav %}{% endblock site-nav %}
 {% block secondary-nav %}{% endblock secondary-nav %}
+{% block page-footer %}{% endblock page-footer%}
 
 {% block body-content %}
 

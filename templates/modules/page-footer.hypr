@@ -79,16 +79,5 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-xs-12">
-			    <div class="mz-pagefooter-copyright" id="copyright">
-			        <span class="mz-pagefooter-copyrighttext">
-			            &copy; {% now Y %} 
-			        </span>
-			        {{ siteContext.generalSettings.websiteName }}. {% dropzone "copyright" scope="site" %}
-			    </div>
-			</div>
-		</div>
-
 	</div>
-</footer
+</footer>
