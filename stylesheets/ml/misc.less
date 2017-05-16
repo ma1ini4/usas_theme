@@ -418,6 +418,20 @@ footer {
     a:hover {
         text-decoration: none;
     }
+    .mini-footer-off{
+        display:none;
+    }
+    .mini-footer-on{
+        display:block;
+    }
+    .regular-footer{
+        &.mini-footer-on{
+            display:none;
+        }
+        &.mini-footer-off{
+            display:block;
+        }        
+    }
 
 }
 .mz-pagefooter-copyright {
@@ -462,7 +476,6 @@ footer {
 
         }     
     }
-    .mz-cms-block{text-align: center;}
     .ml-header-global-cart-wrapper, .ml-header-global-cart-wrapper:hover{
         #global-cart{display: none!important;}
     }
@@ -474,17 +487,6 @@ footer {
         }
     } 
     .mz-l-pagecontent{ padding: 25px 8.5px;}
-    
-
-    footer {
-        .email-container {
-            margin-right: 75px;
-        }
-        .social-links,.mz-pagefooter-copyright {
-            text-align: center;
-        }
-        
-    } 
 
 }
 
