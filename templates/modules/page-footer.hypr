@@ -40,10 +40,28 @@
 			</div>
 			<div class="col-xs-12 col-sm-8 regular-footer {% if themeSettings.footerEnableMini %}mini-footer-on{% else %}mini-footer-off{% endif %}">
 				<div class="row">
-					<div class="col-xs-12">
-						{% dropzone "footer-cat-links" scope="site" %}
-					</div>
+					<div class="col-xs-6">
+						<div class="row">
+							<div class="col-xs-12 col-sm-6">
+								{% dropzone "footer-cat-links-col1" scope="site" %}
+							</div>
+							<div class="col-xs-12 col-sm-6 top-pad">
+								{% dropzone "footer-cat-links-col2" scope="site" %}
+							</div>
+						</div>
+					</div>	
+					<div class="col-xs-6">
+						<div class="row">
+							<div class="col-xs-12 col-sm-6">
+								{% dropzone "footer-cat-links-col3" scope="site" %}
+							</div>
+							<div class="col-xs-12 col-sm-6 top-pad">
+								{% dropzone "footer-cat-links-col4" scope="site" %}
+							</div>
+						</div>
+					</div>								
 				</div>
+
 			</div>		
 		</div>
 		<div class="row">
