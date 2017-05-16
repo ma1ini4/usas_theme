@@ -3,6 +3,7 @@
 {% block title-tag-content %}{% firstof pageContext.metaTitle labels.yourAccount %} - {% parent %}{% endblock title-tag-content %}
 
 {% block body-tag-classes %} mz-myaccount {% endblock body-tag-classes %}
+{% block secondary-nav %}{% endblock secondary-nav %}
 
 {% block body-content %}
 

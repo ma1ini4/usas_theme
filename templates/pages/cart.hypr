@@ -11,6 +11,8 @@
 
 {% block body-tag-classes %} mz-cart {% endblock body-tag-classes %}
 
+{% block secondary-nav %}{% endblock secondary-nav %}
+
 {% block body-content %}
 
 {% require_script "pages/cart" %}
