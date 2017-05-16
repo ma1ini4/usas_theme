@@ -56,7 +56,7 @@
 	<div class="row">
 		<div class="col-xs-8">
 			<a href="/cart" class="btn btn-default">Edit Cart</a>
-			{% if themeSettings.globalCartEnableSaveCart %}
+			{% if (themeSettings.globalCartEnableSaveCart && user.isAnonymous)  %}
 				<button data-mz-action="saveCart" class="btn btn-default">Save Cart</button>
 			{% endif %}
 		</div>
