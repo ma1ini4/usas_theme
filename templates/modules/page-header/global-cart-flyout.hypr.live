@@ -4,13 +4,17 @@
 		    {% for items in model.cartItems  %}
 		    	<div class="media">
 					<div class="media-left">
-						<a href="#">
+						<a href="/p/{{items.product.productCode}}">
 						  <img class="media-object" width=64 src="{{ items.product.imageUrl }}" />
 						</a>
 					</div>
 					<div class="media-body">
 						<div class="col-xs-8">
-							<h5 class="media-heading">{{ items.product.name }}</h5>
+							<h5 class="media-heading">
+								<a href="/p/{{items.product.productCode}}">
+									{{ items.product.name }}
+								</a>
+							</h5>
 							{% if items.product.options %}
 								{% for option in items.product.options %}
 								<div><b>{{ option.name }}</b>  <span>{% if option.stringname %}{{ option.stringname }}{% else %}{{ option.value }}{% endif %}</span></div>
