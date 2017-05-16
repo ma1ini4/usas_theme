@@ -206,7 +206,7 @@
                     "name": "globalCartEmptyBasketKickerLink"
                 },
                 {
-                    "fieldLabel": "Enable Cross sells",
+                    "fieldLabel": "Enable Up sells",
                     "xtype": "mz-input-checkbox",
                     "name": "globalCartRelatedProducts"
                 },
