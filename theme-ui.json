@@ -228,7 +228,7 @@
                 {
                     "fieldLabel": "Hide popover for empty global cart",
                     "xtype": "mz-input-checkbox",
-                    "name": "globalCarthidepopover"
+                    "name": "globalCartHidePopover"
                 }                                  
             ]
         },               
