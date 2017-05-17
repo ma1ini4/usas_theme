@@ -244,7 +244,7 @@
                     "fieldLabel": "Filled basket kicker link",
                     "xtype": "mz-input-text",
                     "name": "globalCartFilledBasketKickerLink"
-                }                                 
+                }                              
             ]
         },               
         {
