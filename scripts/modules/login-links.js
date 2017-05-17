@@ -323,13 +323,12 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             //self.popoverEl.popover('show');
             e.preventDefault(); 
             $("#my-account").popover({
-                html : true, 
-                trigger: 'click',
-                placement: 'bottom',
+                html : true,
+                placement : 'bottom',
                 content: function() {
                   return self.popoverEl.html();
                 }                
-            }).popover('show');
+            }); //.popover('show');
         };
     };
         
@@ -477,6 +476,13 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             popover.init(this);
             $(this).data('mz.popover', popover);
         });
+        $("#my-account").popover({
+                html : true,
+                placement : 'bottom',
+                content: function() {
+                  return $('#my-account-content').html();
+                }                
+            });
         /*$('[data-mz-action="my-account"]').hover(function() {
             var popover = new MyAccountPopover();
             popover.init(this);
