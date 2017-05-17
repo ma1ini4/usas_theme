@@ -10,6 +10,7 @@ define([
     var globalCartRelatedProducts = Hypr.getThemeSetting('globalCartRelatedProducts'),
         globalCartRelatedProductsSize = Hypr.getThemeSetting('globalCartRelatedProductsSize'),
         globalCartMaxItemCount = Hypr.getThemeSetting('globalCartMaxItemCount'),
+        globalCarthidepopover = Hypr.getThemeSetting('globalCarthidepopover'),
         coerceBoolean = function(x) {
             return !!x;
         };
@@ -67,6 +68,9 @@ define([
             var me = this;
             Api.get("cart").then(function(resp) {
                 resp.data.cartItems = resp.data.items.slice(0,globalCartMaxItemCount);
+                if(globalCarthidepopover === true && resp.data.cartItems.length === 0){
+                    $(me.el).hide();
+                }
                 me.model.attributes = resp.data;
                 me.render();
                 if (showGlobalCart) {
