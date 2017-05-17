@@ -367,6 +367,7 @@
     "globalCartRelatedProductsSize":5,
     "globalCartMaxItemCount":3,
     "globalCartEnableSaveCart":"true",
+    "globalCartHidePopover": "",
     "footerEnableMini":false,
     "backofficeDateTimeFormat": "m/d/Y H:i:s O",
     "extendedPropertiesEnabled": false,
