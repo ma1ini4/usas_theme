@@ -229,7 +229,22 @@
                     "fieldLabel": "Hide popover for empty global cart",
                     "xtype": "mz-input-checkbox",
                     "name": "globalCartHidePopover"
-                }                                  
+                },
+                {
+                    "fieldLabel": "Enable kicker for filled basket",
+                    "xtype": "mz-input-checkbox",
+                    "name": "globalCartFilledBasket" 
+                },
+                {
+                    "fieldLabel": "Pick an image for filled basket",
+                    "xtype": "mz-input-image",
+                    "name": "globalCartFilledBasketImage" 
+                },
+                {
+                    "fieldLabel": "Filled basket kicker link",
+                    "xtype": "mz-input-text",
+                    "name": "globalCartFilledBasketKickerLink"
+                }                              
             ]
         },               
         {
