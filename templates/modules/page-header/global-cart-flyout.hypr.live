@@ -1,16 +1,20 @@
 <div class="arrow-up"></div>
 {% if model.items.length>0 %}
-	<ul class="media-list">
-		    {% for items in model.reversedItems  %}
+	<ul class="media-list">			
+		    {% for items in model.cartItems  %}
 		    	<div class="media">
 					<div class="media-left">
-						<a href="#">
+						<a href="/p/{{items.product.productCode}}">
 						  <img class="media-object" width=64 src="{{ items.product.imageUrl }}" />
 						</a>
 					</div>
 					<div class="media-body">
 						<div class="col-xs-8">
-							<h5 class="media-heading">{{ items.product.name }}</h5>
+							<h5 class="media-heading">
+								<a href="/p/{{items.product.productCode}}">
+									{{ items.product.name }}
+								</a>
+							</h5>
 							{% if items.product.options %}
 								{% for option in items.product.options %}
 								<div><b>{{ option.name }}</b>  <span>{% if option.stringname %}{{ option.stringname }}{% else %}{{ option.value }}{% endif %}</span></div>
@@ -52,7 +56,7 @@
 	<div class="row">
 		<div class="col-xs-8">
 			<a href="/cart" class="btn btn-default">Edit Cart</a>
-			{% if themeSettings.globalCartEnableSaveCart %}
+			{% if (themeSettings.globalCartEnableSaveCart && user.isAnonymous)  %}
 				<button data-mz-action="saveCart" class="btn btn-default">Save Cart</button>
 			{% endif %}
 		</div>
@@ -71,10 +75,10 @@
 {% else %}
 	<div class="text-center">
 		<div class=>Your shopping basket is empty</div>
-		{% if themeSettings.globalCartEmptyBasketFooter %}
-		  <div>
+		{% if themeSettings.globalCartEmptyBasketFooter %} 
+		  <a {% if themeSettings.globalCartEmptyBasketKickerLink %} href="{{ themeSettings.globalCartEmptyBasketKickerLink }}"{% else %} href="/home" {% endif %}>
 		  	<img src="{% make_url "image" themeSettings.globalCartEmptyBasketFooter.imageUrl with width=370 as_parameters %}"  />
-		  </div>
+		  </a>
 		{% endif %}		
 	</div>
 {% endif %}

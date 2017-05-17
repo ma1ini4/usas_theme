@@ -73,6 +73,8 @@
 	    }	    
 	    .mz-sitenav-item {
 	        float: left;
+		    white-space: nowrap;
+		    display: inline-block;		    
 	        padding: 0;
         	border-bottom: 0;
         	&.mz-sitenav-item-more{
@@ -82,9 +84,10 @@
         		.arrow-up {
         			display:block;
         		}
-        	}
+        	}        	
 	    }
 	    .mz-sitenav-link {
+	    	float: none;
 	        font-size: 13px;
 	        padding: 8px 0;
 	        color: #363636;
@@ -95,7 +98,7 @@
 	        &.is-current {
 	            background-color: inherit;
 	        }
-	    }    	
+	    }      	
 	    .ml-navbar-separator {
 	        display: block;
 	        &:after {
@@ -107,7 +110,8 @@
 	            margin: 8px 5px;
 	        }
 	    }    	
-    }
+    }    
+
 
     //Secondary navigation
     .ml-navbar-secondary {
@@ -127,5 +131,22 @@
     	.email-container {
             margin-right: 75px;
         } 
+	    .regular-footer{
+	        &.mini-footer-off{
+	            display:block;
+	        }
+	        &.mini-footer-on{
+	        	display:block;
+	    	}
+	    }	    
+		.mini-footer-on,.mini-footer-off{
+		    display:none;
+		}
+		.ml-footer-phone-number{
+			display:none;
+		}
     }
+	.mz-pagefooter-copyright {	        
+		float: right;	        
+	}
 }

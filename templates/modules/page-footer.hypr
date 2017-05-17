@@ -9,7 +9,7 @@
 </div>
 <footer>
 	<div class="container">
-		<div class="row">
+		<div class="row ">
 			<div class="col-xs-12 col-sm-4 pull-right">
 				<div>
 					{% dropzone "email-signup-tag-line" scope="site" %}
@@ -37,60 +37,44 @@
 						<a title="YouTube" href="#" class="ml-icon ml-social-icon ml-icon-youtube">&nbsp;</a>
 					</div>
 				</div>
+				<div class="ml-footer-phone-number">
+					{% dropzone "ml-footer-phone-number" scope="site" %}
+				</div>
 			</div>
-			<div class="col-xs-12 col-sm-8">
+			<div class="col-xs-12 col-sm-8 regular-footer {% if themeSettings.footerEnableMini %}mini-footer-on{% else %}mini-footer-off{% endif %}">
 				<div class="row">
 					<div class="col-xs-6">
 						<div class="row">
 							<div class="col-xs-12 col-sm-6">
-								{% dropzone "catlink-1-1" scope="site" %}
-								{% dropzone "catlink-2-1" scope="site" %}
-								{% dropzone "catlink-3-1" scope="site" %}
-								{% dropzone "catlink-4-1" scope="site" %}
+								{% dropzone "footer-cat-links-col1" scope="site" %}
 							</div>
 							<div class="col-xs-12 col-sm-6 top-pad">
-								{% dropzone "catlink-1-2" scope="site" %}
-								{% dropzone "catlink-2-2" scope="site" %}
-								{% dropzone "catlink-3-2" scope="site" %}
-								{% dropzone "catlink-4-2" scope="site" %}
+								{% dropzone "footer-cat-links-col2" scope="site" %}
 							</div>
 						</div>
-					</div>
+					</div>	
 					<div class="col-xs-6">
 						<div class="row">
 							<div class="col-xs-12 col-sm-6">
-								{% dropzone "catlink-1-3" scope="site" %}
-								{% dropzone "catlink-2-3" scope="site" %}
-								{% dropzone "catlink-3-3" scope="site" %}
-								{% dropzone "catlink-4-3" scope="site" %}
+								{% dropzone "footer-cat-links-col3" scope="site" %}
 							</div>
 							<div class="col-xs-12 col-sm-6 top-pad">
-								{% dropzone "catlink-1-4" scope="site" %}
-								{% dropzone "catlink-2-4" scope="site" %}
-								{% dropzone "catlink-3-4" scope="site" %}
-								<div class="top-pad">
-									{% dropzone "catlink-4-4" scope="site" %}
-									{% dropzone "catlink-5-4" scope="site" %}
-									{% dropzone "catlink-6-4" scope="site" %}
-								</div>
+								{% dropzone "footer-cat-links-col4" scope="site" %}
 							</div>
 						</div>
-					</div>
+					</div>								
 				</div>
-			</div>
+
+			</div>		
 		</div>
 		<div class="row">
-			<div class="col-xs-12">
-			    <div class="mz-pagefooter-copyright" id="copyright">
-			        <span class="mz-pagefooter-copyrighttext">
-			            &copy; {% now "Y" %} {{ siteContext.generalSettings.websiteName }}. {{ labels.allRightsReserved }}
-			        </span> 
-			        <span class="mz-pagefooter-poweredby">
-			             {{ labels.poweredBy }}
-			        </span>
-			    </div>
-			</div>
+			<div class="col-xs-12 {% if themeSettings.footerEnableMini %}mini-footer-on{% else %}mini-footer-off{% endif %}">
+				<div class="row">
+					<div class="col-xs-12">
+						{% dropzone "mini-footer-cat-links" scope="site" %}
+					</div>
+				</div>
+			</div>			
 		</div>
-
 	</div>
-</footer
+</footer>

@@ -2,14 +2,19 @@
 
   "dateFormat"       : "F j, Y",
 
-  "logOut"               : "Log Out",
+  "logOut"               : "Logout",
   "logIn"                : "Log In",
   "logIn2": "Sign in to your account",
   "anonOrderNumberMissing": "The order number you provided was not found. Please validate the order number and try again or contact customer service.",
   "anonAuthError": "Sorry, the information you provided did not match our records. Please check the information that you provided and try again or contact the customer service department.",
   "signUp"               : "Sign Up",
+  "signupEmailupdates"   : "Sign me up for Kibo Training Email Updates about new services and special offers!",
+  "recoveryQuestion"     : "Select a recovery question",
+  "recoveryAnswer"       : "Enter Answer",
+  "secureConnectionMessage" : "Your Connection to this website is secure.",
   "signUpLink"           : "Create an Account",
   "forgotPassword"       : "Forgot your password",
+  "liteRegForgotPasswordLabel"       : "Forgot Password?",
   "orderStatus"          : "Order Status",
   "order"                : "Order",
   "verifyWith"           : "Verify With",
@@ -82,6 +87,7 @@
   "ccJcb"                : "JCB",
   "payPal"               : "Paypal Express",
   "password"             : "Password",
+  "reEnterPassword"             : "Re-enter Password",
   "newPassword"          : "New Password",
   "oldPassword"          : "Old Password",
   "passwordChanged"      : "Password successfully changed",
@@ -129,6 +135,7 @@
   "navMore"              : "More...",
   // for blank search
   "blankSearchResult"    : "Please enter a keyword or item number.", 
+  "searchLessCharacters" :"Your keyword or item number must be at least 3 characters long",
   //ends
   "searchResults"        : "Search Results",
   "searchTitle"          : "Search Results for {0}",
@@ -408,7 +415,7 @@
   "width"        : "Width",
   "height"         : "Height",
 
-  "localStores"          : "Local Stores",
+  "localStores"          : "Stores",
   "findAtLocalStore"     : "Find it at a Local Store",
   "locationWait"         : "We're searching for local stores. Your browser may ask for permission to use your location. Click \"Allow\" to sort the search results by distance.",
   "locationWaitProd"     : "We're searching local stores for <strong>{0}</strong>. Your browser may ask for permission to use your location. Click \"Allow\" to sort the search results by distance.",

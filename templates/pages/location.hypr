@@ -1,6 +1,7 @@
 {% extends "page" %}
 
 {% block title-tag-content %}{% firstof pageContext.metaTitle labels.localStores %} - {% parent %}{% endblock title-tag-content %}
+{% block secondary-nav %}{% endblock secondary-nav %}
 
 {% block body-tag-classes %} mz-locations {% endblock body-tag-classes %}
 

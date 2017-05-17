@@ -12,6 +12,8 @@
 {% block body-tag-classes %} mz-checkout {% endblock body-tag-classes %}
 
 {% block site-nav %}{% endblock site-nav %}
+{% block secondary-nav %}{% endblock secondary-nav %}
+{% block page-footer %}{% endblock page-footer%}
 
 {% block body-content %}
 

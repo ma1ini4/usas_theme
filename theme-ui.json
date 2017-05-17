@@ -180,16 +180,33 @@
         },
         {
             "xtype": "panel",
+            "title": "Footer",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "Enable XS Mini footer",
+                    "xtype": "mz-input-checkbox",
+                    "name": "footerEnableMini"
+                }                              
+            ]
+        },         
+        {
+            "xtype": "panel",
             "title": "Global Cart",
             "collapsed": false,
             "items": [
                 {
                     "fieldLabel": "Pick an image for Empty Basket",
                     "xtype": "mz-input-image",
-                    "name": "globalCartEmptyBasketFooter"
+                    "name": "globalCartEmptyBasketFooter" 
                 },
                 {
-                    "fieldLabel": "Enable Cross sells",
+                    "fieldLabel": "Empty basket kicker link",
+                    "xtype": "mz-input-text",
+                    "name": "globalCartEmptyBasketKickerLink"
+                },
+                {
+                    "fieldLabel": "Enable Up sells",
                     "xtype": "mz-input-checkbox",
                     "name": "globalCartRelatedProducts"
                 },
@@ -209,7 +226,7 @@
                     "name": "globalCartMaxItemCount"
                 }                                  
             ]
-        },         
+        },               
         {
             "xtype": "panel",
             "title": "Paging",

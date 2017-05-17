@@ -103,15 +103,19 @@
     $(document).ready(function() {
         var $field = AutocompleteManager.$typeaheadField = $('[data-mz-role="searchquery"]');
         AutocompleteManager.typeaheadInstance = $field.typeahead({
-            minLength: 3
+            minLength: 1
         }, dataSetConfigs).data('ttTypeahead');
         // user hits enter key while menu item is selected;
         $field.on('typeahead:selected', function (e, data, set) {
             if (data.suggestion.productCode) window.location = "/p/" + data.suggestion.productCode;
         });
         $('#searchbox').on('submit', function(e){
-            if($('#search-field').val() === ""){
+            var searchVal = $('#search-field').val().trim();
+            if(searchVal === ""){
                 alert(Hypr.getLabel('blankSearchResult'));
+                e.preventDefault();
+            }else if(searchVal.length < 3){ 
+                alert(Hypr.getLabel('searchLessCharacters'));
                 e.preventDefault();
             }
         });
