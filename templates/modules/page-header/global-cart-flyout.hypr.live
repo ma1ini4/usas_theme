@@ -38,10 +38,10 @@
 	    	<span>{{ model.subtotal|currency }}</span>
 	    </div>
   	    {% if model.orderDiscounts %}
-	  	    {% for order_discount in model.orderDiscounts  %}
+	  	    {% for orderDiscount in model.orderDiscounts  %}
 	  	    <div class="col-xs-12 text-right text-primary">
-	  	    	<b>{{ order_discount.discount.name }}</b>
-		    	<span> - {{ order_discount.impact |currency }}</span>
+	  	    	<b>{{ orderDiscount.discount.name }}</b>
+		    	<span> - {{ orderDiscount.impact |currency }}</span>
 		    </div>
 	  	    {% endfor %}
 	    {% endif %}
