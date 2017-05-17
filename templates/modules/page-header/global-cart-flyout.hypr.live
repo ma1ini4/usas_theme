@@ -37,11 +37,13 @@
 	    	<b>Subtotal: </b>
 	    	<span>{{ model.subtotal|currency }}</span>
 	    </div>
-  	    {% if model.discountTotal %}
-			<div class="col-xs-12 text-right">
-		    	<b>Discount: </b>
-		    	<span>{{ model.discountTotal|currency }}</span>
-		    </div>	
+  	    {% if model.orderDiscounts %}
+	  	    {% for orderDiscount in model.orderDiscounts  %}
+	  	    <div class="col-xs-12 text-right text-primary">
+	  	    	<b>{{ orderDiscount.discount.name }}</b>
+		    	<span> - {{ orderDiscount.impact |currency }}</span>
+		    </div>
+	  	    {% endfor %}
 	    {% endif %}
 	    {% if model.items.length > themeSettings.globalCartMaxItemCount %}
 	    <div class="col-xs-6 text-left ">
