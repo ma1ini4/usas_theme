@@ -196,12 +196,12 @@
             "collapsed": false,
             "items": [
                 {
-                    "fieldLabel": "Pick an image for Empty Basket",
+                    "fieldLabel": "Pick an image for Basket",
                     "xtype": "mz-input-image",
                     "name": "globalCartEmptyBasketFooter" 
                 },
                 {
-                    "fieldLabel": "Empty basket kicker link",
+                    "fieldLabel": "Basket kicker link",
                     "xtype": "mz-input-text",
                     "name": "globalCartEmptyBasketKickerLink"
                 },
@@ -229,22 +229,7 @@
                     "fieldLabel": "Hide popover for empty global cart",
                     "xtype": "mz-input-checkbox",
                     "name": "globalCartHidePopover"
-                },
-                {
-                    "fieldLabel": "Enable kicker for filled basket",
-                    "xtype": "mz-input-checkbox",
-                    "name": "globalCartFilledBasket" 
-                },
-                {
-                    "fieldLabel": "Pick an image for filled basket",
-                    "xtype": "mz-input-image",
-                    "name": "globalCartFilledBasketImage" 
-                },
-                {
-                    "fieldLabel": "Filled basket kicker link",
-                    "xtype": "mz-input-text",
-                    "name": "globalCartFilledBasketKickerLink"
-                }                              
+                }                             
             ]
         },               
         {
