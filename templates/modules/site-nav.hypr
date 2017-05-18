@@ -29,12 +29,7 @@
                                     </li>
                                     {% endif %}
                                   {% endfor %}
-                                </ul>
-                                <div>
-                                  <a href="/mens">
-                                    <img width="300px" src="https://s-media-cache-ak0.pinimg.com/originals/9c/13/e8/9c13e832bf2a436ec50ffac551f10f05.jpg?width=370&amp;_mzcb=_1494467144602">
-                                  </a>
-                                </div> 
+                                </ul>                                
                             {% endif %}
                             
                           </li>
