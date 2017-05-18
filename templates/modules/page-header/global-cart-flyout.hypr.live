@@ -8,10 +8,10 @@
 				<div class="media-body">
 					<div class="col-xs-6">															
 					</div>
-					<div class="col-xs-6">
+					<div class="col-xs-6 price-label">
 						<div class="row">
-							<div class="col-xs-7 price-each-col"><h5 class="bold-text">price each</h5></div>
-							<div class="col-xs-5 price-col"><h5 class="bold-text">price</h5></div>			
+							<div class="col-xs-6 price-each-col"><h5 class="bold-text">price each</h5></div>
+							<div class="col-xs-6 price-col"><h5 class="bold-text">price</h5></div>			
 						</div>
 					</div>
 				</div>
@@ -27,18 +27,19 @@
 						<div class="col-xs-7">
 							<h5 class="media-heading">
 								<a href="/p/{{items.product.productCode}}">
-									{{ items.product.name }}
+									{{ items.product.name }}									
 								</a>
 							</h5>
 							{% if items.product.options %}
 								{% for option in items.product.options %}
 								<div><b>{{ option.name }}</b>  <span>{% if option.stringname %}{{ option.stringname }}{% else %}{{ option.value }}{% endif %}</span></div>
 								{% endfor %}
-							{% endif %}			
+							{% endif %}	
+							<div><b>{{ labels.qty }} </b>  <span>{{ items.quantity }}</span></div>
 						</div>
 						<div class="col-xs-5 price-cols">
 							<div class="row">
-								<div class="col-xs-5">{{ items.quantity }}</div>
+								<div class="col-xs-5">{{ (items.total/items.quantity) |currency }}</div>
 								<div class="col-xs-7 price-amount-col">{{ items.total|currency }}</div>			
 							</div>
 						</div>
