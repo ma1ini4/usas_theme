@@ -78,9 +78,9 @@
 		<div class="related-products"></div>
 	{% endif %}
 	<div class="row text-center" style="padding-top: 15px;">
-		{% if themeSettings.globalCartFilledBasket == true %} 
-		  <a {% if themeSettings.globalCartFilledBasketKickerLink %} href="{{ themeSettings.globalCartFilledBasketKickerLink }}"{% else %} href="/home" {% endif %}>
-		  	<img src="{% make_url "image" themeSettings.globalCartFilledBasketImage.imageUrl with width=370 as_parameters %}"  />
+		{% if themeSettings.globalCartEmptyBasketFooter %} 
+		  <a {% if themeSettings.globalCartEmptyBasketKickerLink %} href="{{ themeSettings.globalCartEmptyBasketKickerLink }}"{% else %} href="/home" {% endif %}>
+		  	<img src="{% make_url "image" themeSettings.globalCartEmptyBasketFooter.imageUrl with width=370 as_parameters %}"  />
 		  </a>
 		{% endif %}		
 	</div>
