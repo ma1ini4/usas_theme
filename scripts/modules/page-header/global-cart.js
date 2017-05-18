@@ -61,7 +61,7 @@ define([
             });
 
         },
-        saveCart:function(){
+        openLiteRegistration:function() {
             $('#liteRegistrationModal').modal('show');
         },
         update: function(showGlobalCart) {
