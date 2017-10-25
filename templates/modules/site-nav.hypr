@@ -20,7 +20,6 @@
                         {% if not sublink.isHidden and not sublink.isEmpty %}
                           <li data-mz-role="sitemenu-item" class="mz-sitenav-item">
                             <a class="mz-sitenav-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{sublink.url}}">{{ sublink.name|safe }}</a>
-                            
                             {% if sublink.items %}
                                 <ul class="mz-sitenav-sub-sub clearfix">
                                   {% for subsublink in sublink.items %}
@@ -30,7 +29,7 @@
                                     </li>
                                     {% endif %}
                                   {% endfor %}
-                                </ul>
+                                </ul>                                
                             {% endif %}
                             
                           </li>
