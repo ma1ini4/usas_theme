@@ -358,6 +358,14 @@
       "template": "forgot-password",
       "title": "Forgot Password",
       "userCreatable": false
+    },
+    {
+      "documentType": "web_page",
+      "entityType": "webpage",
+      "id": "site-map",
+      "template": "site-map",
+      "title": "Site Map",
+      "userCreatable": true        
     }
   ],
   "settings": {
