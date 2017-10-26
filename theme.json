@@ -358,6 +358,14 @@
       "template": "forgot-password",
       "title": "Forgot Password",
       "userCreatable": false
+    },
+    {
+        "documentType": "web_page",
+        "entityType": "webpage",
+        "id": "customer-service",
+        "template": "customer-service",
+        "title": "Customer Service",
+        "userCreatable": true
     }
   ],
   "settings": {
