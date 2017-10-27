@@ -9,7 +9,7 @@
 {% block body-content %}
     {% block breadcrumbs %}{% endblock breadcrumbs %}
 
-    <div class="mz-l-container">
+    <div class="mz-l-container mz-site-map">
         <h1 class="mz-pagetitle">Site Map</h1>
         {% for link in navigation.tree %}
             <div class="row">

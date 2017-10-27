@@ -365,7 +365,15 @@
       "id": "site-map",
       "template": "site-map",
       "title": "Site Map",
-      "userCreatable": true        
+      "userCreatable": true
+    },
+    {
+      "documentType": "web_page",
+      "entityType": "webpage",
+      "id": "customer-service",
+      "template": "customer-service",
+      "title": "Customer Service",
+      "userCreatable": true
     }
   ],
   "settings": {
