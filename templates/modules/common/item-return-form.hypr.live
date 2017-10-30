@@ -30,7 +30,7 @@
         <label>{{ labels.quantityToReturn }}<span class="is-required"> *</span>:</label>
       </div>
       <div class="mz-l-formfieldgroup-cell mz-returnform-quantity">
-        <input type="number" data-mz-value="rma.quantity" min="1" max="{{ model.quantity }}" class="mz-returnform-quantityfield" />
+        <input type="number" data-mz-value="rma.quantity" min="1" max="{{ model.quantity }}" class="mz-returnform-quantityfield" maxlength="{{themeSettings.productQuantityLength}}" />
         <span class="mz-returnform-quantitylabel">{{ labels.of }} {{ model.quantity }}</span>
         <span class="mz-validationmessage" data-mz-validationmessage-for="rma.quantity"></span>
       </div>

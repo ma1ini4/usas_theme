@@ -4,7 +4,7 @@
             <label for="firstname">{{ labels.firstName }}<span class="is-required"> *</span>:</label>
         </div>
         <div class="mz-l-formfieldgroup-cell">
-            <input type="text" name="firstname" data-mz-value="{{ addresscontext }}firstName" value="{{ model.firstName }}" maxlength="200">
+            <input type="text" name="firstname" data-mz-value="{{ addresscontext }}firstName" value="{{ model.firstName }}" maxlength="{{themeSettings.firstNameLength}}">
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}firstName"></span>
         </div>
     </div>
@@ -13,7 +13,7 @@
             <label for="lastname">{{ labels.lastName }}<span class="is-required"> *</span>:</label>
         </div>
         <div class="mz-l-formfieldgroup-cell">
-            <input type="text" name="lastname" data-mz-value="{{ addresscontext }}lastNameOrSurname" value="{{ model.lastNameOrSurname }}" maxlength="200">
+            <input type="text" name="lastname" data-mz-value="{{ addresscontext }}lastNameOrSurname" value="{{ model.lastNameOrSurname }}" maxlength="{{themeSettings.firstNameLength}}">
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}lastNameOrSurname"></span>
         </div>
     </div>
@@ -22,14 +22,14 @@
             <label for="address-line-1">{{ labels.address }}<span class="is-required"> *</span>:</label>
         </div>
         <div class="mz-l-formfieldgroup-cell">
-            <input type="text" name="address-line-1" data-mz-value="{{ addresscontext }}address.address1" value="{{ model.address.address1 }}" maxlength="200">
+            <input type="text" name="address-line-1" data-mz-value="{{ addresscontext }}address.address1" value="{{ model.address.address1 }}" maxlength="{{themeSettings.addressLength}}">
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}address.address1"></span>
         </div>
     </div>
     <div class="mz-l-formfieldgroup-row mz-addressform-address2">
         <div class="mz-l-formfieldgroup-cell"></div>
         <div class="mz-l-formfieldgroup-cell">
-            <input type="text" name="address-line-2" data-mz-value="{{ addresscontext }}address.address2" value="{{ model.address.address2 }}" maxlength="200">
+            <input type="text" name="address-line-2" data-mz-value="{{ addresscontext }}address.address2" value="{{ model.address.address2 }}" maxlength="{{themeSettings.addressLength}}">
             <span class="mz-validationmessage">&nbsp;</span>
         </div>
     </div>
@@ -58,7 +58,7 @@
             <label for="city">{{ labels.city }}<span class="is-required"> *</span>:</label>
         </div>
         <div class="mz-l-formfieldgroup-cell">
-            <input type="text" name="city" data-mz-value="{{ addresscontext }}address.cityOrTown" value="{{ model.address.cityOrTown }}" maxlength="100">
+            <input type="text" name="city" data-mz-value="{{ addresscontext }}address.cityOrTown" value="{{ model.address.cityOrTown }}" maxlength="{{themeSettings.cityNameLength}}">
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}address.cityOrTown"></span>
         </div>
             <div class="mz-addressform-autocompletefields">
@@ -71,7 +71,7 @@
             <label for="stateOrProvince">{{ labels.stateOrProvince }}<span class="is-required"> *</span>:</label>
         </div>
         <div class="mz-l-formfieldgroup-cell">
-            <input type="text" name="stateOrProvince" data-mz-value="{{ addresscontext }}address.stateOrProvince" value="{{ model.address.stateOrProvince }}">
+            <input type="text" name="stateOrProvince" data-mz-value="{{ addresscontext }}address.stateOrProvince" value="{{ model.address.stateOrProvince }}" maxlength="{{themeSettings.stateNameLength}}">
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}address.stateOrProvince"></span>
         </div>
     </div>
@@ -102,7 +102,7 @@
             <label for="postal-code">{{ labels.postalCode }}<span class="is-required"> *</span>:</label>
         </div>
         <div class="mz-l-formfieldgroup-cell">
-            <input type="text" name="postal-code" data-mz-value="{{ addresscontext }}address.postalOrZipCode" value="{{ model.address.postalOrZipCode }}" maxlength="100">
+            <input type="text" name="postal-code" data-mz-value="{{ addresscontext }}address.postalOrZipCode" value="{{ model.address.postalOrZipCode }}" maxlength="{{themeSettings.zipcodeLength}}">
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}address.postalOrZipCode"></span>
         </div>
     </div>
@@ -111,7 +111,7 @@
             <label for="postal-town">{{ labels.postalTown }}</label>
         </div>
         <div class="mz-l-formfieldgroup-cell">
-            <input type="text" name="postal-town" data-mz-value="{{ addresscontext }}address.postalOrZipCode" value="{{ model.address.postalOrZipCode }}">
+            <input type="text" name="postal-town" data-mz-value="{{ addresscontext }}address.postalOrZipCode" value="{{ model.address.postalOrZipCode }}" maxlength="{{themeSettings.zipcodeLength}}">
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}address.postalOrZipCode"></span>
         </div>
     </div>
@@ -120,7 +120,7 @@
             <label for="shippingphone">{{ labels.phone }}<span class="is-required"> *</span>:</label>
         </div>
         <div class="mz-l-formfieldgroup-cell">
-            <input type="text" name="shippingphone" data-mz-value="{{ addresscontext }}phoneNumbers.home" value="{{ model.phoneNumbers.home }}" maxlength="20">
+            <input type="text" name="shippingphone" data-mz-value="{{ addresscontext }}phoneNumbers.home" value="{{ model.phoneNumbers.home }}" maxlength="{{themeSettings.phoneNumberLength}}">
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}phoneNumbers.home"></span>
         </div>
     </div>

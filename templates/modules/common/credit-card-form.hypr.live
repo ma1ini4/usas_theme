@@ -53,7 +53,7 @@
             <label for="mz-payment-credit-card-number">{{ labels.cardNumber }}<span class="is-required"> *</span>:</label>
         </div>
         <div class="mz-l-formfieldgroup-cell">
-            <input type="text" name="credit-card-number" id="mz-payment-credit-card-number" data-mz-value="{{ cardcontext }}cardNumberPartOrMask" value="{{ model.cardNumberPartOrMask }}">
+            <input type="text" name="credit-card-number" id="mz-payment-credit-card-number" data-mz-value="{{ cardcontext }}cardNumberPartOrMask" value="{{ model.cardNumberPartOrMask }}" maxlength="{{themeSettings.creditCardNumberLength}}">
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ cardcontext }}cardNumberPartOrMask"></span>
         </div>
     </div>
@@ -62,7 +62,7 @@
             <label for="mz-payment-credit-card-name">{{ labels.nameOnCard }}<span class="is-required"> *</span>:</label>
         </div>
         <div class="mz-l-formfieldgroup-cell">
-            <input type="text" name="credit-card-name" id="mz-payment-credit-card-name" data-mz-value="{{ cardcontext }}nameOnCard" value="{{ model.nameOnCard }}">
+            <input type="text" name="credit-card-name" id="mz-payment-credit-card-name" data-mz-value="{{ cardcontext }}nameOnCard" value="{{ model.nameOnCard }}" maxlength="{{themeSettings.fullNameLength}}">
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ cardcontext }}nameOnCard"></span>
         </div>
     </div>

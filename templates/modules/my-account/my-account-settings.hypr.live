@@ -2,8 +2,8 @@
 <div class="mz-accountsettings-section mz-accountsettings-name {% if editing %} is-editing {% endif %}">
   <span class="mz-accountsettings-label mz-account-settings-label-name">{{ labels.firstName }} / {{ labels.lastName }}</span>
   {% if editing %}
-  <input class="mz-accountsettings-firstname" type="text" placeholder="{{ labels.firstName }}" data-mz-value="firstName" value="{{ model.firstName }}" />
-  <input class="mz-accountsettings-lastname" type="text" placeholder="{{ labels.lastName }}" data-mz-value="lastName" value="{{ model.lastName }}" />
+  <input class="mz-accountsettings-firstname" type="text" placeholder="{{ labels.firstName }}" data-mz-value="firstName" value="{{ model.firstName }}" maxlength="{{themeSettings.firstNameLength}}"/>
+  <input class="mz-accountsettings-lastname" type="text" placeholder="{{ labels.lastName }}" data-mz-value="lastName" value="{{ model.lastName }}" maxlength="{{themeSettings.lastNameLength}}"/>
   <span class="mz-validationmessage" data-mz-validationmessage-for="firstName"></span>
   <span class="mz-validationmessage" data-mz-validationmessage-for="lastName"></span>
   {% else %}

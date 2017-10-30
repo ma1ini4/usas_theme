@@ -20,7 +20,7 @@
                                 <label for="email">{{ labels.logInInput }}</label>
                             </div>
                             <div class="mz-l-formfieldgroup-cell">
-                                <input name="email" value="{{model.email|default:user.email}}" type="email" data-mz-login-email />
+                                <input name="email" value="{{model.email|default:user.email}}" type="email" data-mz-login-email maxlength="{{themeSettings.emailLength}}"/>
                             </div>
                         </div>
                         <div class="mz-l-formfieldgroup-row">
@@ -28,7 +28,7 @@
                                 <label for="password">{{ labels.password }}</label>
                             </div>
                             <div class="mz-l-formfieldgroup-cell">
-                                <input name="password"  type="password" data-mz-login-password/>
+                                <input name="password"  type="password" data-mz-login-password maxlength="{{themeSettings.passwordMaxLength}}" />
                             </div>
                         </div>
                         <div class="mz-l-formfieldgroup-row">
@@ -66,7 +66,7 @@
                                 <label for="ordernum">{{ labels.orderNumber }}</label>
                             </div>
                             <div class="mz-l-formfieldgroup-cell">
-                                <input name="ordernum" value="" type="text" data-mz-order-number />
+                                <input name="ordernum" value="" type="text" data-mz-order-number maxlength="{{themeSettings.orderNumberLength}}"/>
                             </div>
                         </div>
                         <div class="mz-l-formfieldgroup-row">
@@ -86,7 +86,7 @@
                                 <label for="verification">{{ labels.verification }}</label>
                             </div>
                             <div class="mz-l-formfieldgroup-cell">
-                                <input name="verification" value="" type="text" data-mz-verification />
+                                <input name="verification" value="" type="text" data-mz-verification maxlength="{{themeSettings.orderVerificationCodeLength}}"/>
                             </div>
                         </div>
                         <div class="mz-l-formfieldgroup-row">
