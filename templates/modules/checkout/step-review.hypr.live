@@ -28,7 +28,7 @@
                     <label for="new-account-email"> {{ labels.email }}<span class="is-required"> *</span>: </label>
                       </div>
                       <div class="mz-l-formfieldgroup-cell">
-                        <input type="text" name="new-account-email" data-mz-value="emailAddress" value="{{ model.emailAddress|default(model.billingInfo.billingContact.email) }}">
+                        <input type="text" name="new-account-email" data-mz-value="emailAddress" value="{{ model.emailAddress|default(model.billingInfo.billingContact.email) }}" maxlength="{{themeSettings.emailLength}}">
                         <span class="mz-validationmessage" data-mz-validationmessage-for="emailAddress"></span>
                        </div>
                     </div>
@@ -37,7 +37,7 @@
                     <label for="new-account-password"> {{ labels.password }}<span class="is-required"> *</span>: </label>
                       </div>
                       <div class="mz-l-formfieldgroup-cell">
-                        <input type="password" name="new-account-password" data-mz-value="password" value="{{ model.password }}">
+                        <input type="password" name="new-account-password" data-mz-value="password" value="{{ model.password }}" maxlength="{{themeSettings.passwordMaxLength}}">
                         <span class="mz-validationmessage" data-mz-validationmessage-for="password"></span>
                        </div>
                     </div>
@@ -46,7 +46,7 @@
                     <label for="new-account-password"> {{ labels.confirmPassword }}<span class="is-required"> *</span>: </label>
                       </div>
                       <div class="mz-l-formfieldgroup-cell">
-                        <input type="password" name="new-account-confirm" data-mz-value="confirmPassword" value="{{ model.confirmPassword }}">
+                        <input type="password" name="new-account-confirm" data-mz-value="confirmPassword" value="{{ model.confirmPassword }}" maxlength="{{themeSettings.passwordMaxLength}}">
                         <span class="mz-validationmessage" data-mz-validationmessage-for="confirmPassword"></span>
                        </div>
                     </div>

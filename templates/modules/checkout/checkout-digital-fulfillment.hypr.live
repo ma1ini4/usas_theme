@@ -8,7 +8,7 @@
         </label>
       </div>
       <div class="mz-l-formfieldgroup-cell">
-        <input type="text" id="digital-fulfillment-email" name="digital-fulfillment-email" data-mz-value="email" value="{{ model.email }}" />
+        <input type="text" id="digital-fulfillment-email" name="digital-fulfillment-email" data-mz-value="email" value="{{ model.email }}" maxlength="{{themeSettings.emailLength}}"/>
           <span class="mz-validationmessage" data-mz-validationmessage-for="email"></span>
         </div>
     </div>

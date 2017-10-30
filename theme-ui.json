@@ -292,6 +292,114 @@
                     "allowBlank": false
                 }
             ]
-        } 
+        },
+        {
+            "xtype": "panel",
+            "title": "Form Validations",
+            "collapsed": false,
+            "items": [{
+                    "fieldLabel": "Full Name Length",
+                    "xtype": "mz-input-number",
+                    "name": "fullNameLength"
+                },
+                {
+                    "fieldLabel": "First Name Length",
+                    "xtype": "mz-input-number",
+                    "name": "firstNameLength"
+                },
+                {
+                    "fieldLabel": "Last Name Length",
+                    "xtype": "mz-input-number",
+                    "name": "lastNameLength"
+                },
+                {
+                    "fieldLabel": "Email Length",
+                    "xtype": "mz-input-number",
+                    "name": "emailLength"
+                },
+                {
+                    "fieldLabel": "Password Minimum Length",
+                    "xtype": "mz-input-number",
+                    "name": "passwordMinLength"
+                },
+                {
+                    "fieldLabel": "Password Maximum Length",
+                    "xtype": "mz-input-number",
+                    "name": "passwordMaxLength"
+                },
+                {
+                    "fieldLabel": "Phone number Length",
+                    "xtype": "mz-input-number",
+                    "name": "phoneNumberLength"
+                },
+                {
+                    "fieldLabel": "Address Length",
+                    "xtype": "mz-input-number",
+                    "name": "addressLength"
+                },
+                {
+                    "fieldLabel": "City Name Length",
+                    "xtype": "mz-input-number",
+                    "name": "cityNameLength"
+                },
+                {
+                    "fieldLabel": "State Name Length",
+                    "xtype": "mz-input-number",
+                    "name": "stateNameLength"
+                },
+                {
+                    "fieldLabel": "Zipcode Length",
+                    "xtype": "mz-input-number",
+                    "name": "zipcodeLength"
+                },
+                {
+                    "fieldLabel": "Credit Card Number Length",
+                    "xtype": "mz-input-number",
+                    "name": "creditCardNumberLength"
+                },
+                {
+                    "fieldLabel": "Security Code For Payment Length",
+                    "xtype": "mz-input-number",
+                    "name": "paymentSecurityCodeLength"
+                },
+                {
+                    "fieldLabel": "Gift Card Length",
+                    "xtype": "mz-input-number",
+                    "name": "giftCardLength"
+                },
+                {
+                    "fieldLabel": "Coupon Code Length",
+                    "xtype": "mz-input-number",
+                    "name": "couponCodeLength"
+                },
+                {
+                    "fieldLabel": "Gift Message Length",
+                    "xtype": "mz-input-number",
+                    "name": "checkoutGiftMessageLength"
+                },                
+                {
+                    "fieldLabel": "Checkout Comments Length",
+                    "xtype": "mz-input-number",
+                    "name": "checkoutCommentsLength"
+                },
+                {
+                    "fieldLabel": "Order Number Length",
+                    "xtype": "mz-input-number",
+                    "name": "orderNumberLength"
+                },
+                {
+                    "fieldLabel": "Order Verification Code Length",
+                    "xtype": "mz-input-number",
+                    "name": "orderVerificationCodeLength"
+                },
+                {
+                    "fieldLabel": "Product Quantity Field Length",
+                    "xtype": "mz-input-number",
+                    "name": "productQuantityLength"
+                }
+            ]
+        }
+
+
     ]
 }
