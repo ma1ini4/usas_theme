@@ -162,7 +162,6 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             window.checkoutModel = this.model;
             var number = e.target.value;
             var cardType='';
-
             // visa
             var re = new RegExp("^4");
             if (number.match(re) !== null){
@@ -187,6 +186,7 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             $('.mz-card-type-images').find('span').removeClass('active');
             if(cardType){
                 this.model.set('card.paymentOrCardType',cardType);
+                $("#mz-payment-credit-card-type").val(cardType);
                 $('.mz-card-type-images').find('span[data-mz-card-type-image="'+cardType+'"]').addClass('active');
             }
             else{
