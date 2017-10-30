@@ -572,7 +572,30 @@ footer {
         float: left;
     }
 } 
-.mz-l-pagecontent{ padding: 25px 8.5px;}
+.mz-l-pagecontent{ 
+    padding: 25px 8.5px;
+    //site map 
+    .mz-site-map{
+        color: #383333;
+        font-size: @font-size;
+        a{
+            text-decoration: underline;
+        }
+        h3 a{
+            color: #383333;
+            text-decoration: none;
+            font-size: @font-size + 6;
+        }
+        h4 a{
+            color: #383333;
+            text-decoration: none;
+            font-size: @font-size + 2;
+        }
+        div a{
+            color: #383333;
+        }
+    }
+}
 //mz-utilitynav-list item spacing reduced
 .mz-utilitynav-item{
     padding: 0 10px 0 0!important;
@@ -623,11 +646,8 @@ footer {
             padding-left: 33px;
         }
     }
-
 }
 .mz-payment-credit-card-number-row{
     padding-right: 30px;
 }
 
-    
-    
