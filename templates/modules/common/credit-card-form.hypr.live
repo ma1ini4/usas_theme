@@ -25,7 +25,7 @@
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ cardcontext }}paymentOrCardType"></span>
         </div>
     </div>
-    <div class="mz-l-formfieldgroup-row mz-payment-credit-card-number-row mz-card-type-images">
+    <div class="mz-l-formfieldgroup-row mz-payment-credit-card-number-row mz-card-type-images pull-right">
         <div class="mz-l-formfieldgroup-cell">
             {% if siteContext.checkoutSettings.supportedCards.visa %}
             <span class="mz-credit-card-image-container mz-visa-image-container {% if model.paymentOrCardType == "VISA" %}active{% endif %} " data-mz-card-type-image="VISA" ><img alt="Visa" src="/resources/images/visa.gif"></span>
