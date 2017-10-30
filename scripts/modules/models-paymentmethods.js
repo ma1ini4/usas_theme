@@ -112,7 +112,7 @@
     var CreditCardWithCVV = CreditCard.extend({
         validation: _.extend({}, CreditCard.prototype.validation, {
             cvv: {
-                fn: function(value, attr) {
+                fn: function(value, attr, computed) {
                     var cardType = attr.split('.')[0],
                         card = this.get(cardType),
                         isSavedCard = card.get('isSavedCard'),
@@ -128,6 +128,20 @@
 
                     if (!value) {
                         return Hypr.getLabel('securityCodeMissing') || Hypr.getLabel('genericRequired');
+                    }
+
+                    //check for length
+                    //AMEX 4 chars and others are 3
+                    var type = computed.card.get("paymentOrCardType");
+                    if(type==="AMEX"){
+                        if(value.length !== 4){
+                           return Hypr.getLabel('genericLength','CVV2', 4);
+                        }
+                    }
+                    else{
+                        if(value.length !== 3){
+                           return Hypr.getLabel('genericLength','CVV2', 3);
+                        }
                     }
 
                 }

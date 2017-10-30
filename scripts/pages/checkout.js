@@ -89,6 +89,12 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
         ],
         beginAddContact: function () {
             this.model.set('contactId', 'new');
+        },
+        additionalEvents: {
+            "input [name='shippingphone']": "allowDigit"
+        },
+        allowDigit:function(e){
+            e.target.value= e.target.value.replace(/[^\d]/g,'');
         }
     });
 
@@ -145,12 +151,48 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
             'savedPaymentMethodId'
         ],
         additionalEvents: {
+            "blur #mz-payment-credit-card-number": "changeCardType",
             "change [data-mz-digital-credit-enable]": "enableDigitalCredit",
             "change [data-mz-digital-credit-amount]": "applyDigitalCredit",
             "change [data-mz-digital-add-remainder-to-customer]": "addRemainderToCustomer",
-            "change [name='paymentType']": "resetPaymentData"
+            "change [name='paymentType']": "resetPaymentData",
+            "input  [name='security-code'],[name='credit-card-number'],[name='shippingphone']": "allowDigit"
         },
+        changeCardType:function(e){
+            window.checkoutModel = this.model;
+            var number = e.target.value;
+            var cardType='';
+            // visa
+            var re = new RegExp("^4");
+            if (number.match(re) !== null){
+                cardType = "VISA";
+            }
 
+            // Mastercard 
+            // Updated for Mastercard 2017 BINs expansion
+             if (/^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$/.test(number)) 
+                cardType = "MC";
+
+            // AMEX
+            re = new RegExp("^3[47]");
+            if (number.match(re) !== null)
+                cardType = "AMEX";
+
+            // Discover
+            re = new RegExp("^(6011|622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5]|64[4-9])|65)");
+            if (number.match(re) !== null)
+                cardType = "DISCOVER";
+            
+            $('.mz-card-type-images').find('span').removeClass('active');
+            if(cardType){
+                this.model.set('card.paymentOrCardType',cardType);
+                $("#mz-payment-credit-card-type").val(cardType);
+                $('.mz-card-type-images').find('span[data-mz-card-type-image="'+cardType+'"]').addClass('active');
+            }
+            else{
+                this.model.set('card.paymentOrCardType',null);    
+            }
+        },
         initialize: function () {
             this.listenTo(this.model, 'change:digitalCreditCode', this.onEnterDigitalCreditCode, this);
             this.listenTo(this.model, 'orderPayment', function (order, scope) {
@@ -161,6 +203,9 @@ require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu
                 this.render();
             }, this);
             this.codeEntered = !!this.model.get('digitalCreditCode');
+        },
+        allowDigit:function(e){
+            e.target.value= e.target.value.replace(/[^\d]/g,'');
         },
         resetPaymentData: function (e) {
             if (e.target !== $('[data-mz-saved-credit-card]')[0]) {

@@ -13,10 +13,16 @@
 
         var PhoneNumbers = Backbone.MozuModel.extend({
             validation: {
-                home: {
+                home: [{
                     required: true,
                     msg: Hypr.getLabel("phoneMissing")
-                }
+                },{
+                    pattern: "digits",
+                    msg: Hypr.getLabel("invalidPhone")
+                },{
+                    length: 10,
+                    msg: Hypr.getLabel("invalidPhoneLength")
+                }]
             }
         }),
 
@@ -46,9 +52,16 @@
                     fn: "requiresStateAndZip",
                     msg: Hypr.getLabel("stateProvMissing")
                 },
-                postalOrZipCode: {
+                postalOrZipCode: [{
                     fn: "requiresStateAndZip",
                     msg: Hypr.getLabel("postalCodeMissing")
+                },{
+                    pattern: /(^\d{5}$)|(^\d{5}-\d{4}$)/,
+                    msg: Hypr.getLabel("invalidZipcode")
+                }],
+                addressType: {
+                    required: true,
+                    msg: Hypr.getLabel("addressTypeMissing")
                 }
             },
             requiresStateAndZip: function(value, attr) {
