@@ -48,6 +48,5 @@
 			{% dropzone "cart-advert" scope="page" %}
 		</div>
 	</div>
-
 </div>
 {% endblock body-content %}
