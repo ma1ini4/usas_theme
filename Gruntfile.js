@@ -195,7 +195,6 @@ module.exports = function (grunt) {
     ]);
     grunt.registerTask('default', [
         'build',
-        'mozusync:upload',
-        'mozutheme:check'
+        'mozusync:upload'
     ]);
 };

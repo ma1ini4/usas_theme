@@ -411,12 +411,12 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                     }],
                     attributes: [
                       {
-                         "attributeDefinitionId": "14",
+                         //"attributeDefinitionId": "14",
                          "fullyQualifiedName": "tenant~recovery-question",
                          "values": [recoveryquestion]
                       },
                       {
-                         "attributeDefinitionId": "16",
+                         //"attributeDefinitionId": "16",
                          "fullyQualifiedName": "tenant~recovery-answer",
                          "values": [recoveryanswer]
                       }
