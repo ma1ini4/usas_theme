@@ -34,7 +34,6 @@
     <form id="checkout-form" class="mz-checkoutform mz-l-2column mz-l-2column-right fades-in" method="post" onsubmit="return false;">
 
     {% include "modules/common/message-bar" with model=model.messages %}
-
     <div class="mz-l-column" id="checkout-rightcol">
       <div class="mz-formstep mz-checkoutform-ordersummary" id="order-summary">
         {% include "modules/checkout/checkout-order-summary" %}
@@ -44,13 +43,11 @@
             <div class="mz-checkoutform-couponcode mz-l-formfieldgroup-row" id="coupon-code-field" >
                 {% include "modules/checkout/coupon-code-field" %}
             </div>
-
             {% if themeSettings.showCheckoutCommentsField %}
             <div class="mz-checkoutform-comments mz-l-formfieldgroup-row" id="comments-field" >
                 {% include "modules/checkout/comments-field" %}
             </div>
             {% endif %}
-
         </div>
 
     </div>
@@ -74,7 +71,6 @@
         </div>
 
     </div><!-- left .column -->
-
 
 </form>
 
