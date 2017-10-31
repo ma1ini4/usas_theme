@@ -474,7 +474,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
     };
     $(document).ready(function() {
         $docBody = $(document.body);
-<<<<<<< HEAD
+
         $('[data-mz-action="lite-registration"]').each(function() {
             var modal = new LoginRegistrationModal();
             modal.init(this);
@@ -507,9 +507,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                 $('[data-toggle="popover"]').popover('hide');
             }
         });
-=======
 
->>>>>>> 188e2500f74992d011b123ca2b7da51ca3054785
         $('[data-mz-action="login"]').each(function() {
             var popover = new LoginPopover();
             popover.init(this);
