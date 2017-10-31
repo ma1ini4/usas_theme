@@ -1,40 +1,237 @@
-﻿.mz-locationlist {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-}
-
-.mz-locationlisting {
-    border: 1px solid #999;
-    margin: @gutter/2 0;
-    display: table;
-    width: 80%;
-    .mz-locationlisting-locationdetails {
-        vertical-align: middle;
-        display: table-cell;
-        background: #eee;
-        padding: @gutter/2;
-        width: 160px;
-        h4 {
-            margin: 0 0 @gutter/4;
+﻿.mz-location-parent{
+    .mz-pagetitle{
+        font-size: 24px;
+    }
+    .mz-locationlist {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        max-height: 400px;
+        overflow-y: auto;
+    }
+    .empty-store-container{
+        display: none;
+        &.active{
+            display: block;
+        }
+        .label-nearby-stores{
+            font-size: 14px;
+        }
+        .error-success-message-container{
+            p{    
+                color: red;
+            }
+        }
+    }    
+    .search-view-container{
+        display: none;
+        &.active{
+            display: block;
+        }
+        .label-nearby-stores{
+            font-size: 15px;
+        }
+        .error-success-message-container{
+            font-size: @fontSize - 1px;
+            font-weight: normal;
+            line-height: 25px;
+            color: #333333;
+            margin: 20px 0 18px;
+            border-bottom: 1px solid #e1e1e1;
+            p{
+                margin: 0;
+            }
+        }
+        .empty-search{
+            color: red;
         }
     }
-    .mz-locationlisting-inventory, .mz-locationlisting-distance, .mz-locationlisting-actions {
-        vertical-align: middle;
-        display: table-cell;
-        padding: @gutter/2 @gutter;
-        text-align: right;
+    .store-search-container{
+        border: 1px solid #e1e1e1;
+        &.has-error{
+            border-color: red;
+        }
     }
-    .mz-locationlisting-inventorystatus {
-        font-weight: bold;
-        text-transform: uppercase;
-        color: @availableText;
+    .store-image-container{
+        img{
+            float: right;
+            -moz-box-shadow: 0px 0px 6px #e1e1e1;
+            -webkit-box-shadow: 0px 0px 6px #e1e1e1;
+            box-shadow: 0px 0px 6px #ccc;
+            border-radius: 3px;
+        }
     }
-    &.is-disabled {
-        .opacity(.75);
+    #map{
+        height: 535px;
+        width: 100%;
+        margin: 15px 0;
+        .mz-locationlisting{
+            min-width: 260px;
+        }
+        .mz-locationlisting-name{
+            text-transform: uppercase;
+        }
+        .mz-addresssummary{
+            cursor:text;
+            margin:0;
+        }
+        .button_primary{
+            outline: 0;
+        }
+    }
+    .search-address-form{
+        margin-top: 20px;
+        .search-address-container{
+            .start-address-label{
+                font-size: 14px;
+                margin: 0 0 5px;
+            }
+            input{
+                width: 100%;
+                margin-bottom: 0;
+                outline: 0;                
+            }        
+        }
+        .dir-btn-container{
+            padding: 5px 0;            
+        }
+    }    
+    .mz-locationlisting {
+        margin: 10 0;
+        display: table;
+        width: 100%;
+        cursor: pointer;
+        .mz-locationlisting-locationdetails {
+            vertical-align: middle;
+            display: table-cell;
+            padding: 10;
+            width: 160px;
+            h4 {
+                margin: 0 0 10;
+                font-weight: normal;
+                font-size: 20px;
+                color: #333333;
+                font-family: Verdana, Geneva, Helvetica, sans-serif !important;
+            }
+        }
+        .mz-addresssummary{
+            margin: 10px 0;
+            font-size: 16px;
+            .store-hours-heading{
+                margin: 0;
+            }
+            .store-hours-desc{
+                width: 70px;
+                float: left;
+            }
+        }
+        .social-share-container{
+            font-size: 16px;
+            margin: 10 0;
+            cursor: text;            
+            .social-icons-wrapper {
+                margin: 5px 0 0 0;
+                .fb-like-icon {
+                    line-height: 0.3;
+                }
+                .twitter-share-button {
+                    height: 22px!important;
+                }
+            }
+        }
+        .store-details{
+            border-bottom: 1px solid #e1e1e1;
+            color: #000;
+        }
+        .mz-locationlisting-inventory, .mz-locationlisting-distance, .mz-locationlisting-actions {
+            vertical-align: middle;
+            display: table-cell;
+            padding: 10px;
+            text-align: right;
+        }
         .mz-locationlisting-inventorystatus {
-            color: @unavailableText;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #000;
+        }
+        &.is-disabled {
+            .opacity(.75);
+            .mz-locationlisting-inventorystatus {
+                color: #000;
+            }
+        }
+    }
+    //Store Locator Search bar css
+    .stylish-input-group{
+        .input-group-addon{
+            padding: 0;
+            background: transparent;
+            border: none;
+            z-index: 0;
+        }
+        .form-control{
+            border: none;
+            box-shadow: 0 0 0;
+            z-index: 0;
+            padding: 0 15px;
+            color: #333333;
+        }
+        button{
+            border: 0;
+            background: transparent;
+            font-size: 16px;
+            position: relative;
+            top: 3px;
+            right: 3px;
+            color: #333333;
+        }
+    }
+    //Pagination Styling
+    .pagination-wrapper{
+        margin: 10px 0;
+        height: 10px;
+        #showLessStores,#showMoreStores{
+            color: #333333;
+            text-decoration: underline;
+            font-size: 18px;
+        }
+    }
+    .dir-btn-container{
+        padding: 15px 0;
+        a.btn-success{
+            color: #fff;
+            background: #333333;
+            &:active:focus{
+                background: #000;
+            }
+        }
+    }
+    //store-locator-overlay
+    .store-locator-overlay{
+        display: none;
+        &.active{
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: #333333;
+            opacity: 0.8;
+            z-index: 111;
+            width: 100%;
+            height: 100%;
+            cursor: wait;
+            display: block;
+        }
+        .store-locator-spinner{
+            position: fixed;
+            padding: 15px;
+            margin: 0px;
+            width: 30%;
+            top: 40%;
+            left: 35%;
+            text-align: center;
+            color: #fff;
+            font-size: 60px;
         }
     }
 }
