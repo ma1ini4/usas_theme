@@ -1,5 +1,5 @@
 ﻿{% block credit-card-form %}
-    <div class="mz-l-formfieldgroup-row mz-payment-credit-card-type-row">
+    <!-- <div class="mz-l-formfieldgroup-row mz-payment-credit-card-type-row">
         <div class="mz-l-formfieldgroup-cell">
             <label for="mz-payment-credit-card-type">{{ labels.cardType }}<span class="is-required"> *</span>:</label>
         </div>
@@ -24,7 +24,8 @@
     </select>
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ cardcontext }}paymentOrCardType"></span>
         </div>
-    </div>
+    </div> -->
+    
     <div class="mz-l-formfieldgroup-row mz-payment-credit-card-number-row mz-card-type-images pull-right">
         <div class="mz-l-formfieldgroup-cell">
             {% if siteContext.checkoutSettings.supportedCards.visa %}
