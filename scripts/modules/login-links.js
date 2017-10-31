@@ -1,7 +1,8 @@
 /**
  * Adds a login popover to all login links on a page.
  */
-define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modules/jquery-mozu=jQuery]>jQuery=jQuery]>jQuery', 'modules/api', 'hyprlive', 'underscore', 'vendor/jquery-placeholder/jquery.placeholder'], function ($, api, Hypr, _) {
+
+define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modules/jquery-mozu=jQuery]>jQuery=jQuery]>jQuery', 'modules/api', 'hyprlive', 'underscore', 'hyprlivecontext', 'vendor/jquery-placeholder/jquery.placeholder'], function ($, api, Hypr, _, HyprLiveContext) {
     var current = "";
     var usePopovers = function() {
         return !Modernizr.mq('(max-width: 480px)');
@@ -11,6 +12,13 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
     },
     returnFalse = function () {
         return false;
+    },
+    returnUrl = function() {
+        var returnURL = $('input[name=returnUrl]').val();
+        if(!returnURL) {
+            returnURL = '/';
+        }
+        return returnURL;
     },
     $docBody,
 
@@ -231,7 +239,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                 email: email,
                 billingZipCode: billingZipCode,
                 billingPhoneNumber: billingPhoneNumber
-            }).then(function () { window.location.href = "/my-anonymous-account"; }, _.bind(this.retrieveErrorLabel, this));
+            }).then(function () { window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory||'') +  "/my-anonymous-account"; }, _.bind(this.retrieveErrorLabel, this));
         },
         retrievePassword: function () {
             this.setLoading(true);
@@ -304,7 +312,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                     }
                 }, self.displayApiMessage);
             }
-        }
+        } 
     });
     var MyAccountPopover = function(e){
         var self = this;
@@ -466,6 +474,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
     };
     $(document).ready(function() {
         $docBody = $(document.body);
+<<<<<<< HEAD
         $('[data-mz-action="lite-registration"]').each(function() {
             var modal = new LoginRegistrationModal();
             modal.init(this);
@@ -498,6 +507,9 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                 $('[data-toggle="popover"]').popover('hide');
             }
         });
+=======
+
+>>>>>>> 188e2500f74992d011b123ca2b7da51ca3054785
         $('[data-mz-action="login"]').each(function() {
             var popover = new LoginPopover();
             popover.init(this);
@@ -507,6 +519,23 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             var popover = new SignupPopover();
             popover.init(this);
             $(this).data('mz.popover', popover);
+        });
+        $('[data-mz-action="continueAsGuest"]').on('click', function(e) {
+            e.preventDefault();
+            var returnURL = returnUrl();
+            if(returnURL .indexOf('checkout') === -1) {
+                returnURL = '';
+            }
+
+            //saveUserId=true Will logut the current user while persisting the state of the current shopping cart
+            $.ajax({
+                    method: 'GET',
+                    url: '../../logout?saveUserId=true&returnUrl=' + returnURL,
+                    complete: function(data) {
+                        location.href = require.mozuData('pagecontext').secureHost + '/' + returnURL;
+                    }
+            });
+           
         });
         $('[data-mz-action="launchforgotpassword"]').each(function() {
             var popover = new LoginPopover();

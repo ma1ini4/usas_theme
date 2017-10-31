@@ -1,4 +1,5 @@
 {
+
   "about": {
     "author": "ankur garha",
     "defaultLanguage": "en-US",
@@ -12,6 +13,7 @@
     "baseThemeVersion": {
       "commit": "8bf2cc5e8af8d863516815ae660df0f5dfa7196e",
       "version": "9.4.1"
+
     },
     "baseThemeChannel": "stable"
   },
@@ -359,6 +361,13 @@
       "title": "Forgot Password",
       "userCreatable": false
     },
+    {
+        "entityType": "orderStatus",
+        "id": "orderStatus",
+        "template": "order-status",
+        "title": "Order Status",
+        "userCreatable": false
+    },    
     {
       "documentType": "web_page",
       "entityType": "webpage",
@@ -826,110 +835,7 @@
       ]
     }
   ],
-  "widgets": [
-    {
-      "defaultConfig": {
-        "field1": "Name",
-        "field2": "Age",
-        "employeeRecommendation" : "I suggest..."
-      },
-      "displayName": "Employee Picks",
-      "displayTemplate": "misc/employee-picks",
-      "editViewFields": [
-        {
-          "anchor": "100%",
-          "fieldLabel": "Card background",
-          "name": "cardBackground",
-          "xtype": "mz-input-image"
-        },
-        {
-          "anchor": "100%",
-          "fieldLabel": "Employee Image",
-          "name": "employeeImage",
-          "xtype": "mz-input-image"
-        },        
-        {
-          "anchor": "100%",
-          "fieldLabel": "Field 1",
-          "name": "field1",
-          "xtype": "mz-input-text"
-        },
-        {
-          "anchor": "100%",
-          "fieldLabel": "Field 1 Value",
-          "name": "field1Value",
-          "xtype": "mz-input-text"
-        },        
-        {
-          "anchor": "100%",
-          "fieldLabel": "Field 2",
-          "name": "field2",
-          "xtype": "mz-input-text"
-        },  
-        {
-          "anchor": "100%",
-          "fieldLabel": "Field 2 Value",
-          "name": "field2Value",
-          "xtype": "mz-input-text"
-        },        
-        {
-          "anchor": "100%",
-          "fieldLabel": "Employee Recommendation",
-          "name": "employeeRecommendation",
-          "xtype": "mz-input-textarea"
-        }       
-      ],
-      "icon": "/resources/admin/widgets/30_employee_picks.png",
-      "id": "employee-picks",
-      "validPageTypes": [
-        "*"
-      ]
-    },   
-    {
-      "defaultConfig": {
-      },
-      "displayName": "Best season Picker",
-      "displayTemplate": "misc/best-season-picker.live",
-      "editViewFields": [
-        {
-          "anchor": "100%",
-          "fieldLabel": "Select Season",
-          "name": "seasons",
-          "xtype": "mz-input-selectmulti",
-          "store" : [
-            "Spring",
-            "Summer",
-            "Fall",
-            "Winter"
-
-          ]
-        }      
-      ],
-      "icon": "/resources/admin/widgets/30_employee_picks.png",
-      "id": "best-seasons",
-      "validPageTypes": [
-        "*"
-      ]
-    },    
-    {
-      "defaultConfig": {
-      },
-      "displayName": "Recently Added test",
-      "displayTemplate": "misc/recently-added",
-      "editViewFields": [
-        {
-          "anchor": "100%",
-          "fieldLabel": "Set Price Cap",
-          "name": "price",
-          "xtype": "mz-input-text"
-        }    
-      ],
-      "icon": "/resources/admin/widgets/30_employee_picks.png",
-      "id": "recently-added",
-      "validPageTypes": [
-        "*"
-      ]
-    },  
+  "widgets": [    
     {
       "defaultConfig": {
       },
@@ -1050,6 +956,7 @@
           "xtype": "mz-input-number"
         },
         {
+
           "anchor": "100%",
           "fieldLabel": "Hide Empty Child Nodes",
           "name": "hideEmptyChildNodes",

@@ -1,11 +1,17 @@
 {
-  "name": "myfirsttheme",
+
+  "name": "Accelerato Theme",
   "author": {
     "name": "ankur garha",
     "email": "speedyankur@gmail.com"
   },
-  "description": "This is my first theme",
-  "version": "0.1.0",
+  "description": "The core storefront theme for Mozu.",
+  "version": "9.6.0",
+  "scripts": {
+    "clean": "rm -rf compiled",
+    "ci": "grunt",
+    "prod": "grunt build-production"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/mozu/core-theme.git"
@@ -37,7 +43,8 @@
       "js/affix.js",
       "js/popover.js",
       "js/tooltip.js",
-      "js/scrollspy.js"
+      "js/scrollspy.js",
+      "js/modal.js"
     ]
   },
   "license": "UNLICENSED"

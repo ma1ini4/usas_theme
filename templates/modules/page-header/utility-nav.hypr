@@ -2,7 +2,7 @@
     <ul class="mz-utilitynav-list">
         <!--
         <li class="mz-utilitynav-item">
-            <a href="/user/login" data-mz-action="anon-order" class="mz-utilitynav-link">{{ labels.orderStatus }}</a>
+            <a href="{{siteContext.siteSubdirectory}}/user/order-status?returnUrl={{siteContext.siteSubdirectory}}/myaccount" data-mz-action="anon-order" class="mz-utilitynav-link">{{ labels.orderStatus }}</a>
         </li>
         -->
         <li class="mz-utilitynav-item navbar-collapse-control">
@@ -62,11 +62,13 @@
                         </a>
                     </div>
                 </div>  
+
             </div> 
             
         </li>
         <li class="mz-utilitynav-item">
             <a href="/logout" class="mz-utilitynav-link">{{ labels.logOut }}</a>
+
         </li>
         {%else%}
        
@@ -164,6 +166,7 @@
                         </div>
                     </div>
             </div> 
+
         </li>
         {% endif %}                
         <li class="mz-utilitynav-item">

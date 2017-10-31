@@ -1,7 +1,10 @@
-﻿define(['underscore', 'modules/backbone-mozu', 'hyprlive', "modules/api"], function (_, Backbone, Hypr, api) {
+﻿define(['underscore', 'modules/backbone-mozu', 'hyprlive', "modules/api", "modules/models-product",
+    "hyprlivecontext", 'modules/models-location'
+  ], function (_, Backbone, Hypr, api, ProductModels,
+        HyprLiveContext, LocationModels) {
 
-    var CartItemProduct = Backbone.MozuModel.extend({
-        helpers: ['mainImage'],
+    var CartItemProduct = ProductModels.Product.extend({
+        helpers: ['mainImage','directShipSupported', 'inStorePickupSupported'],
         mainImage: function() {
             var imgs = this.get("productImages"),
                 img = imgs && imgs[0],
@@ -9,14 +12,21 @@
             return img || { ImageUrl: imgurl, imageUrl: imgurl }; // to support case insensitivity
         },
         initialize: function() {
-            var url = "/product/" + this.get("productCode");
+            var url = (HyprLiveContext.locals.siteContext.siteSubdirectory || '')  + "/product/" + this.get("productCode");
             this.set({ Url: url, url: url });
+        },
+        directShipSupported: function(){
+            return (_.indexOf(this.get('fulfillmentTypesSupported'), "DirectShip") !== -1) ? true : false;
+        },
+        inStorePickupSupported: function(){
+            return (_.indexOf(this.get('fulfillmentTypesSupported'), "InStorePickup") !== -1) ? true : false;
         }
     }),
 
     CartItem = Backbone.MozuModel.extend({
         relations: {
             product: CartItemProduct
+
         },
         validation: {
             quantity: {
@@ -28,13 +38,43 @@
         },
         mozuType: 'cartitem',
         handlesMessages: true,
-        helpers: ['priceIsModified'],
+        helpers: ['priceIsModified', 'storeLocation'],
         priceIsModified: function() {
             var price = this.get('unitPrice');
             return price.baseAmount != price.discountedAmount;
         },
         saveQuantity: function() {
-            if (this.hasChanged("quantity")) this.apiUpdateQuantity(this.get("quantity"));
+            var self = this;
+            var oldQuantity = this.previous("quantity");
+            if (this.hasChanged("quantity")) {
+                this.apiUpdateQuantity(this.get("quantity"))
+                    .then(null, function() {
+                        // Quantity update failed, e.g. due to limited quantity or min. quantity not met. Roll back.
+                        self.set("quantity", oldQuantity);
+                        self.trigger("quantityupdatefailed", self, oldQuantity);
+                    });
+            }
+        },
+        storeLocation : function(){
+            var self = this;
+            if(self.get('fulfillmentLocationCode')) {
+                return self.collection.parent.get('storeLocationsCache').getLocationByCode(self.get('fulfillmentLocationCode'));
+            }
+            return;
+        }
+
+    }),
+    StoreLocationsCache = Backbone.Collection.extend({
+        addLocation : function(location){
+            this.add(new LocationModels.Location(location), {merge: true});
+        },
+        getLocations : function(){
+            return this.toJSON();
+        },
+        getLocationByCode : function(code){
+            if(this.get(code)){
+                return this.get(code).toJSON();
+            }
         }
     }),
 
@@ -45,12 +85,22 @@
         relations: {
             items: Backbone.Collection.extend({
                 model: CartItem
-            })
+            }),
+            storeLocationsCache : StoreLocationsCache
         },
-        
         initialize: function() {
+            var self = this;
             this.get("items").on('sync remove', this.fetch, this)
                              .on('loadingchange', this.isLoading, this);
+
+            this.get("items").each(function(item, el) {
+                if(item.get('fulfillmentLocationCode') && item.get('fulfillmentLocationName')) {
+                    self.get('storeLocationsCache').addLocation({
+                        code: item.get('fulfillmentLocationCode'),
+                        name: item.get('fulfillmentLocationName')
+                    });
+                }
+            });
         },
         isEmpty: function() {
             return this.get("items").length < 1;
@@ -109,6 +159,10 @@
 
                 me.isLoading(false);
             });
+        },
+        toJSON: function(options) {
+            var j = Backbone.MozuModel.prototype.toJSON.apply(this, arguments);
+            return j;
         }
     });
 
