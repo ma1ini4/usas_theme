@@ -12,7 +12,7 @@
             <p class="mz-locationsearch-pleasewait hidden">
                 {{ labels.locationWait|safe }}
              </p> 
-             <div class="empty-store-container active">
+             <div class="empty-store-container">
                 <div class="row">
                     <div class="col-md-6 col-sm-6">
                         <p class="label-nearby-stores">{{ labels.locateStore }}</p>
@@ -68,7 +68,7 @@
                             <a id="showMoreStores" class="pull-right" href="#" data-start-index="{{themeSettings.storesPageSize}}">see more</a>
                         </div>
                     </div>
-                    <div class="col-md-9 col-sm-7">
+                    <div class="col-md-9 col-sm-7" id="mz-store-locator-map">
                         <div class="map-container">
                             {%if themeSettings.googleMapAPIKey%}
                                 <div class="clearfix"></div>

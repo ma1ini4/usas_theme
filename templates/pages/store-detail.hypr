@@ -37,7 +37,8 @@
                             <p class="hidden invalid-location">{{ labels.invalidStoreLocation }}</p> 
                             <p id="noNearbyStores" class="hidden">{{ labels.noNearByStores }}</p>
                         </div>
-                        <div class="mz-l-stack-section mz-locationlist fades-in hidden" id="location-list"></div>
+                        <div class="mz-l-stack-section mz-locationlist fades-in hidden" id="location-list">
+                        </div>                   
                     </div>
                     <div class="col-md-9 col-sm-7">
                         <div class="map-container">                                                    
