@@ -407,5 +407,6 @@
     "dealOfTheDay"     : "Angebot des Tages",
     "exclusivePricelist": "Die folgenden Produkte sind nicht zum Kauf zur Verfügung und wurden entfernt.",
     "newPriceList": "Sie sind nun berechtigt, für spezielle Preise.",
-    "openCart": "Warenkorb ansehen"
+    "openCart": "Warenkorb ansehen",
+    "quickView": "Quick view"
 }

@@ -6,7 +6,10 @@
         hyprlivecontext: "empty:",
         underscore: "vendor/underscore/underscore",
         backbone: "vendor/backbone/backbone",
-        bootstrap:"vendor/bootstrap/js/bootstrap.min"
+        bootstrap:"vendor/bootstrap/js/bootstrap.min",
+        bxslider: "vendor/jquery-bxslider/jquery.bxslider.min",
+        blockui: "vendor/jquery.blockUI/jquery.blockUI.min",
+        elevatezoom: "vendor/jquery-elevatezoom/jquery.elevatezoom.min",
     },
     dir: "compiled/scripts/",
     locale: "en-us",
