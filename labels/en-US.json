@@ -1,7 +1,9 @@
 {
+  "toggleToMultiShip": "I want to ship to multiple addresses",
+  "toggleToSingleShip": "Ship to single address",
+
 
   "dateFormat"       : "F j, Y",
-
   "logOut"               : "Logout",
   "logIn"                : "Log In",
   "logIn2": "Sign in to your account",
