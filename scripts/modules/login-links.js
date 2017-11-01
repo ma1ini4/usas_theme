@@ -387,7 +387,11 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             // bind other events
         };
 
-        this.openLiteModal = function(){            
+        this.openLiteModal = function(){
+            if (self.modalEl[0] == $("#liteRegistrationModal")[0]) {
+                $(".second-tab").show();
+                $(".third-tab").hide();
+            }
             self.modalEl.modal('show');
         };
 
