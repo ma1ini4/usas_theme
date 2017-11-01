@@ -69,7 +69,8 @@
 
         {% block stylesheets %}
         <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/storefront.less" %}" title="default" />
-        <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/vendor/bootstrap-3.3.7/css/bootstrap.css" %}" title="default" />        
+        <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/vendor/bootstrap-3.3.7/css/bootstrap.css" %}" title="default" />   
+        <link rel="stylesheet" type="text/css" href="{% make_url "stylesheet" "/stylesheets/vendor/font-awesome/css/font-awesome.min.css" %}" media="all">     
         {% endblock stylesheets %}
         
         {% block head-tag-scripts %}
