@@ -261,6 +261,14 @@
       "userCreatable": true
     },
     {
+      "documentType": "web_page",
+      "entityType": "webpage",
+      "id": "store-detail",
+      "template": "store-detail",
+      "title": "Store Locator Detail",
+      "userCreatable": true
+    },
+    {
       "entityType": "category",
       "id": "category",
       "template": "category",
@@ -486,6 +494,13 @@
       50,
       100
     ],
+    "googleMapAPIKey": "",
+    "googleMapLatitude": 41.652491,
+    "googleMapLongitude": -70.288112,
+    "googleMapZoom": 8,
+    "storesPageSize": 5,
+    "searchStorePlaceHolder": "Enter City, State or ZIP",
+    "googleMapMaxNearbyDistance": 10000000,
     "preselectCountryCode": "US",
     "productImagesContainerWidth": 350,
     "requireCheckoutAgreeToTerms": true,
