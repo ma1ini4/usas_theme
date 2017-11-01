@@ -269,6 +269,15 @@
       "userCreatable": true
     },
     {
+        "id": "print-order",
+        "title": "Print Order",
+        "entityType": "webpage",
+        "documentType": "web_page",
+        "template": "pages/print-order",
+        "customEditor": "back-office@mozu",
+        "userCreatable": true
+    },
+    {
       "entityType": "category",
       "id": "category",
       "template": "category",
@@ -522,6 +531,7 @@
     "showProductDetailShortDesc": true,
     "showProductDetailUPC": true,
     "textColor": "#444444",
+    "companyLogo":"/resources/images/logo-sm.png",
     "usStates": [
       {
         "abbreviation": "AL",
