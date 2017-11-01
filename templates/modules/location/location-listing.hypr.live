@@ -1,4 +1,4 @@
-﻿<div class="mz-locationlisting">
+<div class="mz-locationlisting">
     <div class="mz-locationlisting-locationdetails">
         <h4  data-marker-id="marker_{{ model.code }}" class="mz-locationlisting-name show-store-detail" data-store-id="{{ model.code }}">{{ model.name }}</h4>
         <div class="mz-addresssummary" data-marker-id="marker_{{ model.code }}">

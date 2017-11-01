@@ -62,6 +62,13 @@ define([
 
         },
         openLiteRegistration:function() {
+            $(".second-tab").show();
+            $(".third-tab").hide();
+            $('#liteRegistrationModal').modal('show');
+        },
+        checkoutGuest: function() {
+            $(".second-tab").hide();
+            $(".third-tab").show();
             $('#liteRegistrationModal').modal('show');
         },
         update: function(showGlobalCart) {

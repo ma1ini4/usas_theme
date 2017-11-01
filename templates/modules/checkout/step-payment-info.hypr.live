@@ -1,11 +1,17 @@
 <h3 class="mz-formstep-header mz-checkoutform-header">
     {{ labels.paymentInformation }}
-    <a href="javascript:;" class="mz-formstep-edit" data-mz-action="edit">{{ labels.change }}</a>
+    {%if not model.isExternalCheckoutFlowComplete%}
+        <a href="javascript:;" class="mz-formstep-edit" data-mz-action="edit">{{ labels.change }}</a>
+    {%endif%}
 </h3>
+
 <div class="mz-formstep-body">
     <div class="mz-formstep-summary mz-l-stack">
+        {% if model.nonStoreCreditTotal == 0%}
+            <h4 class="mz-checkout-nopaymentrequired">{{ labels.noPaymentRequired|string_format(model.remainingTotal|currency) }}</h4>
+        {% endif %}
         {% for payment in model.activePayments %}
-        {% if payment.billingInfo.paymentType == "Check" %}
+        {% if payment.billingInfo.paymentType == "Check" and model.nonStoreCreditTotal > 0 %}
         <div class="mz-l-stack-section mz-checkout-payment  mz-checkoutform">
             <div class="mz-l-stack-section mz-checkout-current-payment">{{ labels.checkByMail }}</div>
             <div class="mz-l-stack-section mz-checkout-current-payment mz-checkout-saved-billingaddress">
@@ -16,13 +22,8 @@
             </div>
         </div>
         {% endif %}
-        {% if payment.billingInfo.paymentType == "CreditCard" %}
+        {% if payment.billingInfo.paymentType == "CreditCard" and model.nonStoreCreditTotal > 0  %}
         <div class="mz-l-stack-section mz-checkout-payment  mz-checkoutform">
-            {% if payment.paymentWorkflow === "VisaCheckout" %}
-            <div>
-                <span><img alt="This Payment Using Visa Checkout" src="{{pageContext.visaCheckoutButtonUrl}}?size=154&amp;color=neutral&amp;cardBrands={{ payment.card.paymentOrCardType }}"/></span>
-            </div>
-            {% endif %}
             <div class="mz-l-stack-section mz-checkout-current-payment">
                 <p>{{ model.card.paymentOrCardType }} {{ model.card.cardNumberPartOrMask }}
                 <br/>{{ labels.expires }} {{ model.card.expireMonth }}/{{ model.card.expireYear }}</p>
@@ -34,6 +35,65 @@
                 </div>
             </div>
         </div>
+        {% endif %}
+        {% if payment.billingInfo.paymentType == "PurchaseOrder" and model.nonStoreCreditTotal > 0  %}
+        <div class="mz-l-stack-section mz-checkout-payment  mz-checkoutform">
+            <div class="mz-l-stack-section mz-checkout-current-payment">
+            <!--
+                <div class="mz-l-formfieldgroup-row mz-payment-purchase-order-amount-row">
+                    <div class="mz-l-formfieldgroup-cell">
+                        <span>{{ labels.purchaseOrderAmount }}: </span> <span>{{ payment.amountRequested | currency }}</span>
+                    </div>
+                </div>
+                -->
+                <div class="mz-l-formfieldgroup-row mz-payment-purchase-order-number-row">
+                    <div class="mz-l-formfieldgroup-cell">
+                        <span >{{ labels.purchaseOrderNumber }}: </span><span name="purchase-order-number" id="mz-payment-purchase-order-number">{{ payment.billingInfo.purchaseOrder.purchaseOrderNumber }}</span>
+                    </div>
+                </div>
+                <div class="mz-l-formfieldgroup-row mz-payment-purchase-order-payment-terms-row">
+                    <div class="mz-l-formfieldgroup-cell">
+                        <span>{{ labels.purchaseOrderPaymentTerms }}: </span><span id="mz-payment-purchase-order-payment-terms">{{ payment.billingInfo.purchaseOrder.paymentTerm.description }}</span>
+                    </div>
+                </div>
+                {% for field in payment.billingInfo.purchaseOrder.customFields %}
+                <div class="mz-l-formfieldgroup-row mz-payment-purchase-order-custom-field-row">
+                    <div class="mz-l-formfieldgroup-cell">
+                        <span>{{ field.label }}: </span><span id="mz-payment-purchase-order-custom-field-{{ field.code }}">{{ field.value }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="mz-l-stack-section mz-checkout-current-payment mz-checkout-saved-billingaddress">
+                <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
+                <div class="mz-addresssummary">
+                    {% include "modules/common/address-summary" with model=model.billingContact %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if payment.billingInfo.paymentType|lower == "paypalexpress2"  %}
+            {% if model.nonStoreCreditTotal == 0%}
+                <h4 class="mz-checkout-nopaymentrequired">{{ labels.noPaymentRequired|string_format(model.remainingTotal|currency) }}</h4>
+            {% endif %}
+            {% if model.nonStoreCreditTotal > 0%}
+               {%if model.isExternalCheckoutFlowComplete%}
+                <a class="mz-checkout-payment-change" href="javascript:;" data-mz-action="cancelExternalCheckout">{{ labels.remove }} </a>
+               {% endif %}
+               <div class="mz-l-stack-section">
+                    <div class="mz-l-formfieldgroup-cell">
+                        <img alt="PayPal" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" align="left" width="100px" height="26px" style="margin-right:7px;">
+                    </div>
+
+                   {%if model.billingContact.firstName %}
+                    <div class="mz-addresssummary">
+                        {% include "modules/common/address-summary" with model=model.billingContact %}
+                    </div>
+                   {%endif%}
+
+                </div>
+            {%endif%}
+
         {% endif %}
         {% endfor %}
 
@@ -61,7 +121,6 @@
                 {% else %}
                     <div class="mz-l-stack-section mz-checkout-current-payment mz-checkout-saved-card  mz-checkoutform">
                         {% if model.visaCheckoutFlowComplete %}
-                            <span><img alt="This Payment Using Visa Checkout" src="{{pageContext.visaCheckoutButtonUrl}}?size=154&amp;color=neutral&amp;cardBrands={{ payment.card.paymentOrCardType }}"/></span>
                             <a class="mz-checkout-payment-change" href="javascript:;" data-mz-action="beginEditingCard">{{ labels.removePayment }}</a>
                         {% else %}
                             <a class="mz-checkout-payment-change" href="javascript:;" data-mz-action="beginEditingCard">{{ labels.change }}</a>
