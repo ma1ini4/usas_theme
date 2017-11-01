@@ -61,4 +61,34 @@
             }
         }
     }
+    // Common to both List and Grid View
+        .mz-productlisting-image {
+            position: relative;
+            button.quick-view-btn {
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 30px;
+                background: #c8c8c8;
+                position: absolute;
+                opacity: 0.9;
+                text-transform: uppercase;
+                width: 100%;
+                max-width: 160px;
+                display: none;
+                border: 0;
+                span {
+                    opacity: 1;
+                    font-size: 14px;
+                    text-align: center;
+                    line-height: 30px;
+                    color: #333;
+                }
+            }
+            &:hover {
+                button.quick-view-btn {
+                    display: block;
+                }
+            }
+        }
 }
