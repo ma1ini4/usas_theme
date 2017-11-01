@@ -651,3 +651,84 @@ footer {
     padding-right: 30px;
 }
 
+// Print Order Details
+.mz-printorder {
+    #page-content {
+        padding: 0;
+        >.container {
+            width: 100%;
+            padding: 0;
+            >.row {
+                margin: 0;
+            }
+            .panes,
+            .grid {
+                border-bottom: 1px solid #c8c8c8;
+                padding-bottom: 5px;
+            }
+            table {
+                width: 100%;
+            }
+            #print {
+                padding: 0 30px;
+                .panes {
+                    .billing-address,
+                    .shipping-address,
+                    .order-totals {
+                        display: block;
+                        .mz-l-stack-section{
+                            margin-bottom: 7px;
+                        }
+                    }
+                }
+                .company-logo img {
+                    width: 100%;
+                    max-width: 339px;
+                    margin: 20px 0;
+                }
+                .label {
+                    color: #000;
+                    padding: 0;
+                    letter-spacing: 2px;
+                }
+                .order-essentials {
+                    .order-date,
+                    .customer-id {
+                        display: block;
+                    }
+                    .order-date {
+                        float: none;
+                    }
+                }
+                .mz-payment-myaccount-text {
+                    padding: 10px 0;
+                }
+                dt,dd {
+                    margin-bottom: 12.5px;
+                    min-width: 100px;
+                }
+                .mz-created-date-order{
+                    text-align: left;
+                    margin: 10px 0 10px 0;
+                }
+                .mz-printable-order-details{
+                    .section-payment {
+                        float: left;
+                        width: 100%;
+                    }
+                } 
+                h4.mz-l-stack-sectiontitle{
+                    font-size: 24px;
+                }
+                .mz-ordersummary{
+                    background: #fff;
+                }               
+            }
+        }
+    }
+    //Secondary navigation
+    .ml-navbar-secondary {
+        display:none;
+    }
+}
+
