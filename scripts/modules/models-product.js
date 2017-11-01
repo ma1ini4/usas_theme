@@ -1,4 +1,6 @@
-﻿define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive", "modules/models-price", "modules/api"], function($, _, Backbone, Hypr, PriceModels, api) {
+define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive", "modules/models-price", "modules/api",
+    "hyprlivecontext"], function($, _, Backbone, Hypr, PriceModels, api,
+        HyprLiveContext) {
 
     function zeroPad(str, len) {
         str = str.toString();
@@ -12,7 +14,6 @@
 
 
     var ProductOption = Backbone.MozuModel.extend({
-        idAttribute: "attributeFQN",
         helpers: ['isChecked'],
         initialize: function() {
             var me = this;
@@ -139,7 +140,7 @@
             return j;
         },
         addConfiguration: function(biscuit, options) {
-            var fqn, value, attributeDetail, valueKey, pushConfigObject;
+            var fqn, value, attributeDetail, valueKey, pushConfigObject, optionName;
             if (this.isConfigured()) {
                 if (options && options.unabridged) {
                     biscuit.push(this.toJSON());
@@ -147,11 +148,13 @@
                     fqn = this.get('attributeFQN');
                     value = this.getValueOrShopperEnteredValue();
                     attributeDetail = this.get('attributeDetail');
+                    optionName = attributeDetail.name;
                     valueKey = attributeDetail.valueType === ProductOption.Constants.ValueTypes.ShopperEntered ? "shopperEnteredValue" : "value";
                     if (attributeDetail.dataType === "Number") value = parseFloat(value);
                     pushConfigObject = function(val) {
                         var o = {
-                            attributeFQN: fqn
+                            attributeFQN: fqn,
+                            name: optionName
                         };
                         o[valueKey] = val;
                         biscuit.push(o);
@@ -185,7 +188,7 @@
         mozuType: 'product',
         idAttribute: 'productCode',
         handlesMessages: true,
-        helpers: ['mainImage', 'notDoneConfiguring', 'hasPriceRange', 'supportsInStorePickup'],
+        helpers: ['mainImage', 'notDoneConfiguring', 'hasPriceRange', 'supportsInStorePickup', 'isPurchasable','hasVolumePricing'],
         defaults: {
             purchasableState: {},
             quantity: 1
@@ -247,6 +250,9 @@
         hasPriceRange: function() {
             return this._hasPriceRange;
         },
+        hasVolumePricing: function() {
+            return this._hasVolumePricing;
+        },
         calculateHasPriceRange: function(json) {
             this._hasPriceRange = json && !!json.priceRange;
         },
@@ -254,8 +260,20 @@
             var slug = this.get('content').get('seoFriendlyUrl');
             _.bindAll(this, 'calculateHasPriceRange', 'onOptionChange');
             this.listenTo(this.get("options"), "optionchange", this.onOptionChange);
+            this._hasVolumePricing = false;
+            this._minQty = 1;
+            if (this.get('volumePriceBands') && this.get('volumePriceBands').length > 0) {
+                this._hasVolumePricing = true;
+                this._minQty = _.first(this.get('volumePriceBands')).minQty;
+                if (this._minQty > 1) {
+                    if (this.get('quantity') <= 1) {
+                        this.set('quantity', this._minQty);
+                    }
+                    this.validation.quantity.msg = Hypr.getLabel('enterMinProductQuantity', this._minQty);
+                }
+            }
             this.updateConfiguration = _.debounce(this.updateConfiguration, 300);
-            this.set({ url: slug ? "/" + slug + "/p/" + this.get("productCode") : "/p/" + this.get("productCode") });
+            this.set({ url: (HyprLiveContext.locals.siteContext.siteSubdirectory || '') + (slug ? "/" + slug : "") +  "/p/" + this.get("productCode")});
             this.lastConfiguration = [];
             this.calculateHasPriceRange(conf);
             this.on('sync', this.calculateHasPriceRange);
@@ -266,6 +284,16 @@
         },
         notDoneConfiguring: function() {
             return this.get('productUsage') === Product.Constants.ProductUsage.Configurable && !this.get('variationProductCode');
+        },
+        isPurchasable: function() {
+            var purchaseState = this.get('purchasableState');
+            if (purchaseState.isPurchasable){
+                return true;
+            }
+            if (this._hasVolumePricing && purchaseState.messages && purchaseState.messages.length === 1 && purchaseState.messages[0].validationType === 'MinQtyNotMet') {
+                return true;
+            }
+            return false;
         },
         supportsInStorePickup: function() {
             return _.contains(this.get('fulfillmentTypesSupported'), Product.Constants.FulfillmentTypes.IN_STORE_PICKUP);
@@ -302,19 +330,21 @@
                 if (!me.validate()) {
                     me.apiAddToWishlist({
                         customerAccountId: require.mozuData('user').accountId,
-                        quantity: me.get("quantity")
+                        quantity: me.get("quantity"),
+                        options: me.getConfiguredOptions()
                     }).then(function(item) {
                         me.trigger('addedtowishlist', item);
                     });
                 }
             });
         },
-        addToCartForPickup: function(locationCode, quantity) {
+        addToCartForPickup: function(locationCode, locationName, quantity) {
             var me = this;
             this.whenReady(function() {
                 return me.apiAddToCartForPickup({
                     fulfillmentLocationCode: locationCode,
                     fulfillmentMethod: Product.Constants.FulfillmentMethods.PICKUP,
+                    fulfillmentLocationName: locationName,
                     quantity: quantity || 1
                 }).then(function(item) {
                     me.trigger('addedtocart', item);
@@ -325,11 +355,41 @@
             this.isLoading(true);
             this.updateConfiguration();
         },
+        updateQuantity: function (newQty) {
+            if (this.get('quantity') === newQty) return;
+            this.set('quantity', newQty);
+            if (!this._hasVolumePricing) return;
+            if (newQty < this._minQty) {
+                return this.showBelowQuantityWarning();
+            }
+            this.isLoading(true);
+            this.apiConfigure({ options: this.getConfiguredOptions() }, { useExistingInstances: true });
+        },
+        showBelowQuantityWarning: function () {
+            this.validation.quantity.min = this._minQty;
+            this.validate();
+            this.validation.quantity.min = 1;
+        },
+        handleMixedVolumePricingTransitions: function (data) {
+            if (!data || !data.volumePriceBands || data.volumePriceBands.length === 0) return;
+            if (this._minQty === data.volumePriceBands[0].minQty) return;
+            this._minQty = data.volumePriceBands[0].minQty;
+            this.validation.quantity.msg = Hypr.getLabel('enterMinProductQuantity', this._minQty);
+            if (this.get('quantity') < this._minQty) {
+                this.updateQuantity(this._minQty);
+            }
+        },
         updateConfiguration: function() {
-            var newConfiguration = this.getConfiguredOptions();
+            var me = this,
+              newConfiguration = this.getConfiguredOptions();
             if (JSON.stringify(this.lastConfiguration) !== JSON.stringify(newConfiguration)) {
                 this.lastConfiguration = newConfiguration;
-                this.apiConfigure({ options: newConfiguration }, { useExistingInstances: true });
+                this.apiConfigure({ options: newConfiguration }, { useExistingInstances: true })
+                    .then(function (apiModel) {
+                        if (me._hasVolumePricing) {
+                            me.handleMixedVolumePricingTransitions(apiModel.data);
+                        }
+                     });
             } else {
                 this.isLoading(false);
             }
@@ -384,5 +444,3 @@
     };
 
 });
-
-

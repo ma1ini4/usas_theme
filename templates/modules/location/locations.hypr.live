@@ -4,7 +4,7 @@
     <p class="mz-locationsearch-positionerror is-warning">{{ model.positionError }}</p>
     {% endif %}
     <div class="mz-l-paginatedlist-list">
-      {% include "modules/location/location-list" with model=model.items %}
+      {% include "modules/location/location-list" with model=model.items %}     
     </div>
   {% else %}
    {{ labels.noNearbyLocations }}

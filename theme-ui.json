@@ -48,6 +48,11 @@
                     "xtype": "mz-input-checkbox",
                     "name": "listProductShortDesc",
                     "fieldLabel": "Show product short description in product lists"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "listVolumePricing",
+                    "fieldLabel": "Show volume pricing bands in product lists"
                 }
             ]
         },
@@ -396,6 +401,53 @@
                     "fieldLabel": "Product Quantity Field Length",
                     "xtype": "mz-input-number",
                     "name": "productQuantityLength"
+                }
+            ]
+        },
+         {
+            "xtype": "panel",
+            "title": "Store Locator",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "Google Map API key",
+                    "xtype": "mz-input-text",
+                    "name": "googleMapAPIKey"
+                },
+                {
+                    "fieldLabel": "Google Map Center Latitude",
+                    "xtype": "mz-input-text",
+                    "name": "googleMapLatitude"
+                },
+                {
+                    "fieldLabel": "Google Map Center Longitude",
+                    "xtype": "mz-input-text",
+                    "name": "googleMapLongitude"
+                },
+                {
+                    "fieldLabel": "Google Map Center Zoom",
+                    "xtype": "mz-input-number",
+                    "name": "googleMapZoom"
+                },
+                {
+                    "fieldLabel": "Google Map Pin Icon URL",
+                    "xtype": "mz-input-text",
+                    "name": "googleMapPinIcon"
+                },
+                {
+                    "fieldLabel": "Google Map Max Nearby Distance",
+                    "xtype": "mz-input-text",
+                    "name": "googleMapMaxNearbyDistance"
+                },
+                {
+                    "fieldLabel": "Store Page Size",
+                    "xtype": "mz-input-text",
+                    "name": "storesPageSize"
+                },
+                {
+                    "fieldLabel": "Social Share Link",
+                    "xtype": "mz-input-text",
+                    "name": "socialShareLink"
                 }
             ]
         }

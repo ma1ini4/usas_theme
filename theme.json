@@ -1,4 +1,5 @@
 {
+
   "about": {
     "author": "ankur garha",
     "defaultLanguage": "en-US",
@@ -12,6 +13,7 @@
     "baseThemeVersion": {
       "commit": "8bf2cc5e8af8d863516815ae660df0f5dfa7196e",
       "version": "9.4.1"
+
     },
     "baseThemeChannel": "stable"
   },
@@ -87,6 +89,13 @@
       "properties": {},
       "template": "email/order-shipped",
       "title": "Your Order Has Shipped"
+    },
+    {
+      "id": "checkout.changed",
+      "customEditor": "email-orderconfirmation-v2",
+      "properties": {},
+      "template": "email/order-confirmation-v2",
+      "title": "Order Confirmation V2"
     },
     {
       "id": "order.changed",
@@ -252,6 +261,14 @@
       "userCreatable": true
     },
     {
+      "documentType": "web_page",
+      "entityType": "webpage",
+      "id": "store-detail",
+      "template": "store-detail",
+      "title": "Store Locator Detail",
+      "userCreatable": true
+    },
+    {
       "entityType": "category",
       "id": "category",
       "template": "category",
@@ -318,6 +335,20 @@
       "userCreatable": false
     },
     {
+      "entityType": "checkout",
+      "id": "confirmationv2",
+      "template": "confirmationv2",
+      "title": "ConfirmationV2",
+      "userCreatable": false
+    },
+    {
+        "entityType": "checkout",
+        "id": "checkoutv2",
+        "template": "checkoutv2",
+        "title": "Checkout V2",
+        "userCreatable": false
+    },
+    {    
       "entityType": "customer",
       "id": "my_account",
       "template": "my-account",
@@ -359,6 +390,13 @@
       "title": "Forgot Password",
       "userCreatable": false
     },
+    {
+        "entityType": "orderStatus",
+        "id": "orderStatus",
+        "template": "order-status",
+        "title": "Order Status",
+        "userCreatable": false
+    },    
     {
       "documentType": "web_page",
       "entityType": "webpage",
@@ -456,6 +494,13 @@
       50,
       100
     ],
+    "googleMapAPIKey": "",
+    "googleMapLatitude": 41.652491,
+    "googleMapLongitude": -70.288112,
+    "googleMapZoom": 8,
+    "storesPageSize": 5,
+    "searchStorePlaceHolder": "Enter City, State or ZIP",
+    "googleMapMaxNearbyDistance": 10000000,
     "preselectCountryCode": "US",
     "productImagesContainerWidth": 350,
     "requireCheckoutAgreeToTerms": true,
@@ -826,110 +871,7 @@
       ]
     }
   ],
-  "widgets": [
-    {
-      "defaultConfig": {
-        "field1": "Name",
-        "field2": "Age",
-        "employeeRecommendation" : "I suggest..."
-      },
-      "displayName": "Employee Picks",
-      "displayTemplate": "misc/employee-picks",
-      "editViewFields": [
-        {
-          "anchor": "100%",
-          "fieldLabel": "Card background",
-          "name": "cardBackground",
-          "xtype": "mz-input-image"
-        },
-        {
-          "anchor": "100%",
-          "fieldLabel": "Employee Image",
-          "name": "employeeImage",
-          "xtype": "mz-input-image"
-        },        
-        {
-          "anchor": "100%",
-          "fieldLabel": "Field 1",
-          "name": "field1",
-          "xtype": "mz-input-text"
-        },
-        {
-          "anchor": "100%",
-          "fieldLabel": "Field 1 Value",
-          "name": "field1Value",
-          "xtype": "mz-input-text"
-        },        
-        {
-          "anchor": "100%",
-          "fieldLabel": "Field 2",
-          "name": "field2",
-          "xtype": "mz-input-text"
-        },  
-        {
-          "anchor": "100%",
-          "fieldLabel": "Field 2 Value",
-          "name": "field2Value",
-          "xtype": "mz-input-text"
-        },        
-        {
-          "anchor": "100%",
-          "fieldLabel": "Employee Recommendation",
-          "name": "employeeRecommendation",
-          "xtype": "mz-input-textarea"
-        }       
-      ],
-      "icon": "/resources/admin/widgets/30_employee_picks.png",
-      "id": "employee-picks",
-      "validPageTypes": [
-        "*"
-      ]
-    },   
-    {
-      "defaultConfig": {
-      },
-      "displayName": "Best season Picker",
-      "displayTemplate": "misc/best-season-picker.live",
-      "editViewFields": [
-        {
-          "anchor": "100%",
-          "fieldLabel": "Select Season",
-          "name": "seasons",
-          "xtype": "mz-input-selectmulti",
-          "store" : [
-            "Spring",
-            "Summer",
-            "Fall",
-            "Winter"
-
-          ]
-        }      
-      ],
-      "icon": "/resources/admin/widgets/30_employee_picks.png",
-      "id": "best-seasons",
-      "validPageTypes": [
-        "*"
-      ]
-    },    
-    {
-      "defaultConfig": {
-      },
-      "displayName": "Recently Added test",
-      "displayTemplate": "misc/recently-added",
-      "editViewFields": [
-        {
-          "anchor": "100%",
-          "fieldLabel": "Set Price Cap",
-          "name": "price",
-          "xtype": "mz-input-text"
-        }    
-      ],
-      "icon": "/resources/admin/widgets/30_employee_picks.png",
-      "id": "recently-added",
-      "validPageTypes": [
-        "*"
-      ]
-    },  
+  "widgets": [    
     {
       "defaultConfig": {
       },
@@ -1050,6 +992,7 @@
           "xtype": "mz-input-number"
         },
         {
+
           "anchor": "100%",
           "fieldLabel": "Hide Empty Child Nodes",
           "name": "hideEmptyChildNodes",

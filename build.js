@@ -56,6 +56,10 @@
             exclude: ["modules/common"]
         },
         {
+            name: "pages/multi-ship-checkout",
+            exclude: ["modules/common"]
+        },
+        {
             name: "pages/error",
             exclude: ["modules/common"]
         },
