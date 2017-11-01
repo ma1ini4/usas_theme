@@ -1,11 +1,12 @@
-﻿require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu", "modules/cart-monitor", "modules/models-product", "modules/views-productimages", "modules/jquery-dateinput-localized"], function ($, _, Hypr, Backbone, CartMonitor, ProductModels, ProductImageViews) {
+﻿require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu", "modules/cart-monitor", "modules/models-product", "modules/views-productimages",  "hyprlivecontext"], function ($, _, Hypr, Backbone, CartMonitor, ProductModels, ProductImageViews, HyprLiveContext) {
 
     var ProductView = Backbone.MozuView.extend({
         templateName: 'modules/product/product-detail',
-        autoUpdate: ['quantity'],
         additionalEvents: {
             "change [data-mz-product-option]": "onOptionChange",
-            "blur [data-mz-product-option]": "onOptionChange"
+            "blur [data-mz-product-option]": "onOptionChange",
+            "change [data-mz-value='quantity']": "onQuantityChange",
+            "keyup input[data-mz-value='quantity']": "onQuantityChange"
         },
         render: function () {
             var me = this;
@@ -17,13 +18,20 @@
         onOptionChange: function (e) {
             return this.configure($(e.currentTarget));
         },
+        onQuantityChange: _.debounce(function (e) {
+            var $qField = $(e.currentTarget),
+              newQuantity = parseInt($qField.val(), 10);
+            if (!isNaN(newQuantity)) {
+                this.model.updateQuantity(newQuantity);
+            }
+        },500),
         configure: function ($optionEl) {
             var newValue = $optionEl.val(),
                 oldValue,
                 id = $optionEl.data('mz-product-option'),
                 optionEl = $optionEl[0],
                 isPicked = (optionEl.type !== "checkbox" && optionEl.type !== "radio") || optionEl.checked,
-                option = this.model.get('options').get(id);
+                option = this.model.get('options').findWhere({'attributeFQN':id});
             if (option) {
                 if (option.get('attributeDetail').inputType === "YesNo") {
                     option.set("value", isPicked);
@@ -78,14 +86,14 @@
     });
 
     $(document).ready(function () {
-
         var product = ProductModels.Product.fromCurrent();
 
         product.on('addedtocart', function (cartitem) {
             if (cartitem && cartitem.prop('id')) {
                 //product.isLoading(true);
                 CartMonitor.addToCount(product.get('quantity'));
-                //window.location.href = "/cart";
+
+                //window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + "/cart";
             } else {
                 product.trigger("error", { message: Hypr.getLabel('unexpectedError') });
             }
@@ -95,21 +103,20 @@
             $('#add-to-wishlist').prop('disabled', 'disabled').text(Hypr.getLabel('addedToWishlist'));
         });
 
+        var productImagesView = new ProductImageViews.ProductPageImagesView({
+            el: $('[data-mz-productimages]'),
+            model: product
+        });
+
         var productView = new ProductView({
             el: $('#product-detail'),
             model: product,
             messagesEl: $('[data-mz-message-bar]')
         });
 
-        var productImagesView = new ProductImageViews.ProductPageImagesView({
-            el: $('[data-mz-productimages]'),
-            model: product
-        });
-
         window.productView = productView;
 
         productView.render();
-
 
     });
 

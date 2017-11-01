@@ -1,7 +1,9 @@
 {
+  "toggleToMultiShip": "I want to ship to multiple addresses",
+  "toggleToSingleShip": "Ship to single address",
+
 
   "dateFormat"       : "F j, Y",
-
   "logOut"               : "Logout",
   "logIn"                : "Log In",
   "logIn2": "Sign in to your account",
@@ -70,6 +72,15 @@
   "expires"              : "Expires",
   "securityCode"         : "Security Code (CVV2)",
   "phone"                : "Phone",
+  "purchaseOrder"                         : "Purchase Order",
+  "purchaseOrderAmount"                   : "Amount",
+  "purchaseOrderNumber"                   : "PO Number",
+  "purchaseOrderNumberMissing"            : "Purchase order number required",
+  "purchaseOrderPaymentTerms"             : "Payment Terms",
+  "selectPurchaseOrderPaymentTerm"        : "Select a Payment Term",
+  "purchaseOrderPaymentTermMissing"       : "Payment term required",
+  "purchaseOrderCustomFieldMissing"       : "Purchase order field required, see below",
+  "missing"                               : "missing",  
   "email"                : "Email",
   "emailAddress"         : "Email Address",
   "logInInput"           : "User Name or Email Address",
@@ -152,7 +163,13 @@
   "emptyCart"            : "Empty Cart",
   "proceedToCheckout"    : "Checkout",
   "storePickupAt"        : "In-Store Pickup at <strong>{0}</strong>",
-
+  "inStorePickup"                         : "In-Store Pickup",
+  "unavailableForThisItem"                : "Unavailable for this item.",
+  "shipItems"                             : "Ship Items",
+  "inStoreOnly"                           : "This item is available in-store only.",
+  "changeStore"                           : "Change store",
+  "digitalDeliveryOnly"                   : "This item is available via digital delivery only.",
+  "selectStore"                           : "Select Store",
   "checkout"             : "Checkout",
   "orderSummary"         : "Order Summary",
   "shippingInformation"  : "Ship To",
@@ -443,5 +460,16 @@
   "editAddress": "Edit saved address",
   "exclusivePricelist": "The following items are not available for purchase and have been removed.",
   "newPriceList": "You are now eligible for special pricing.",
-  "openCart": "View Cart"
+  "openCart": "View Cart",
+  "storeDirection":"Get Direction",
+  "volumePriceQuantity"                   : "Quantity",
+  "volumePriceUnitPrice"                  : "Unit Price",
+  "volumePriceSavings"                    : "Savings",
+  "volumePriceMinMaxQty"                  : "{0} - {1}",
+  "volumePriceMinOnlyQty"                 : "{0}+",
+  "mapPrice"                              : "add to cart to see final price",
+  "additionalInformation"                 : "Additional Information",
+  "printWindowPrintButton"                 : "Print",
+  "printWindowCancelButton"               : "Cancel",
+  "returnPrintLabelButton"                : "Print"
 }

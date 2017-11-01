@@ -1,15 +1,38 @@
 # What's New
 
+### March 29, 2017
+The following updates were added to the My Account page to improve the RMA experience for shoppers. - [Pull Request](https://github.com/Mozu/core-theme/pull/45)
+
+* Shoppers can now return multiple items on an order within the same RMA.
+* Order history now displays by product item rather than by order item. For example, if a shopper orders a bundle, each bundle item displays in the order history, rather than the entire bundle showing as one entry.
+* Product items are now grouped by fulfillment status. Unfulfilled items display under a *Shipping Soon* section, while fulfilled items display alongside their corresponding fulfillment unit (for example, a package).
+* Return history now displays child items (for example, product extras under a parent product or bundle items within a bundle).
+
+### January 12, 2017
+* Added a Print dialog window accessible from the My Account page that enables shoppers to print RMA shipping labels - [Pull Request](https://github.com/Mozu/core-theme/pull/41)
+
+### July 7, 2016
+* Added support for purchase order as a payment method - [Pull Request](https://github.com/Mozu/core-theme/pull/37)
+* Added support for volume pricing - [Pull Request](https://github.com/Mozu/core-theme/pull/39)
+
 ### May 5, 2016
 * Create links that open in new windows - [Pull Request](https://github.com/Mozu/core-theme/pull/34)
 
 ### April 29, 2016
 * Price List
    - Added preview of price lists in the staging environment.
-   - See commit ____
+   - Added capability to message customers who are eligible for special pricing.
+   - See the following files in [merge commit ab38b1a2559b5a993347d7ff4300cfab86fc4003](/core-theme/commit/ab38b1a2559b5a993347d7ff4300cfab86fc4003?diff=split)
+     - labels/en-US.json
+     - scripts/modules/theme-utility-bar.js
+     - stylesheets/modules/theme-utility-bar/header.less
+     - templates/modules/common/message-bar.hypr.live
+     - templates/modules/utility-bar/header.hypr
 * Fixed variant pricing
    - Supports explicit list and sale price for configurable product variants, in addition to the current delta pricing, on the Product Details page.
-   - See commit ____
+   - See the following file in [merge commit ab38b1a2559b5a993347d7ff4300cfab86fc4003](/core-theme/commit/ab38b1a2559b5a993347d7ff4300cfab86fc4003?diff=split)
+        - scripts/modules/backbone-mozu-model.js
+
 
 ### January 18, 2016
 
