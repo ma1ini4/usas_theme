@@ -732,3 +732,44 @@ footer {
     }
 }
 
+//Page view toggle container
+.ml-grid-view-toggle-container {
+    position: relative;
+    min-height: 1px;
+    margin-right: 20px;
+    z-index: 1;
+    float: left;
+    .btn{
+        color: #c8c8c8;
+        background: #fff;
+        border-color: #c8c8c8;
+        &:focus,&:active{
+            outline: 0;
+        }
+        &.active,&.active:focus{
+            color: #333;
+            background:#c8c8c8;
+            box-shadow: none;
+            border-color: transparent;
+            outline: 0;
+        }
+    }
+}
+
+.mz-category{
+    .mz-l-paginatedlist{
+        overflow: inherit;
+    }
+    .title-sortby-wrappper{
+        .mz-pagetitle{
+            font-size: 24px;
+            float: left;
+            line-height: 2.5;
+        }
+    }
+    .mz-l-paginatedlist-header{
+        width: 100%;
+        float: left;
+    }
+}
+
