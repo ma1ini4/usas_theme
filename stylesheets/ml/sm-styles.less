@@ -225,3 +225,28 @@
 		}
 	}
 }
+
+ .mz-productlist {
+ 	.grid-view {
+        .mz-productlist-item {
+            &:nth-child(2n) {
+                float: left;
+            }
+            &:nth-child(2n+1) {
+                clear: none;
+            }
+            &:nth-child(3n+1) {
+                clear: left;
+            }
+            .mz-productlisting-info {
+                padding: 0 5px;
+            }
+            .mz-productlisting-imageplaceholder {
+                max-height: 160px;
+                >.mz-productlisting-imageplaceholdertext {
+                    line-height: 160px;
+                }
+            }
+        }
+    }
+ }
