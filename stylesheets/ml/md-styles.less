@@ -61,4 +61,104 @@
             }
         }
     }
+    // Common to both List and Grid View
+        .mz-productlisting-image {
+            position: relative;
+            button.quick-view-btn {
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 30px;
+                background: #c8c8c8;
+                position: absolute;
+                opacity: 0.9;
+                text-transform: uppercase;
+                width: 100%;
+                max-width: 160px;
+                display: none;
+                border: 0;
+                span {
+                    opacity: 1;
+                    font-size: 14px;
+                    text-align: center;
+                    line-height: 30px;
+                    color: #333;
+                }
+            }
+            &:hover {
+                button.quick-view-btn {
+                    display: block;
+                }
+            }
+        }
+    // Product Directory
+    .mz-productlist {
+        // Grid View
+        .grid-view {
+            .mz-productlist-item {
+                .mz-productlisting-info {            
+                    padding: 0 10px;
+                }
+                .mz-productlisting-image {
+                    .mz-productlisting-imageplaceholder, img {
+                        max-height: 265px;
+                        >.mz-productlisting-imageplaceholdertext {
+                            line-height: 265px;
+                        }
+                    }
+                }
+            }
+        }
+        //List View
+        .list-view{
+            .product-image-swatch-wrapper {
+                max-width: 265px;
+                img, 
+                .mz-productlisting-image{
+                    img, 
+                    .mz-productlisting-imageplaceholder {
+                        max-height: 265px;
+                        >.mz-productlisting-imageplaceholdertext {
+                            line-height: 265px;
+                        }
+                    }
+                }
+            }
+            li.mz-productlist-item{
+                min-height: 320px;
+            }
+            .ml-product-info-wrapper,
+            .ml-product-price-wrapper{
+                display: block;
+                float: left;
+            }            
+        }
+        // Common to both List and Grid View
+        .mz-productlisting-image {
+            position: relative;
+            button.quick-view-btn {
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 30px;
+                position: absolute;
+                opacity: 0.9;
+                text-transform: uppercase;
+                width: 100%;
+                display: none;
+                border: 0;
+                span {
+                    opacity: 1;
+                    font-size: 14px;
+                    text-align: center;
+                    line-height: 30px;
+                }
+            }
+            &:hover {
+                button.quick-view-btn {
+                    display: block;
+                }
+            }
+        }
+    }
 }

@@ -1,4 +1,4 @@
-{% if model.content.productImages %}
+{% if model.content.productImages and model.content.productImages.length %}
 <figure class="mz-productimages-main">
   <img itemprop="image" class="mz-productimages-mainimage" data-mz-productimage-main src="{% make_url "image" model.mainImage with max=themeSettings.productImagesContainerWidth as_parameters %}" {% if model.mainImage.altText %} title="{{ model.mainImage.altText }}" alt="{{ model.mainImage.altText }}"{% endif %} />
 </figure>
