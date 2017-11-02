@@ -1,6 +1,6 @@
 {% extends "page" %}
 
-{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  - {% parent %}{% endblock title-tag-content %}
+{% block title-tag-content %}{% firstof pageContext.metaTitle|safe model.name|safe %}  - {% parent %}{% endblock title-tag-content %}
 
 {% block body-tag-classes %} mz-category {% endblock body-tag-classes %}
 
@@ -11,4 +11,10 @@
 <div data-mz-category="{{model.categoryId}}" class="mz-l-container">
     {% include "pages/category-interior" %}
 </div>
+<div class="quickviewSlider">
+{% block quickview-slider %}
+    {% include "modules/product/product-quick-view" %}            
+{% endblock quickview-slider %}
+</div>
+{% require_script "modules/quickview" %}
 {% endblock body-content %}
