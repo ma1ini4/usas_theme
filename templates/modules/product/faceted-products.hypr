@@ -18,7 +18,6 @@
 </script>
 {% endif %}
 
-
 <div class="col-xs-12 col-sm-3">
     {% if model.facets %}
         <div data-mz-facets class="mz-l-sidebar">
@@ -33,7 +32,7 @@
 
 
 <div class="col-xs-12 col-sm-9 pull-right">
-    <div class="mz-l-paginatedlist pull-right{% if model.facets %} col-xs-12 col-sm-8 col-md-9{%else%} col-xs-12{% endif %}">
+    <div class="mz-l-paginatedlist pull-right main-directory-container">
     <div class="title-sort-breadcrumb-wrapper">
         {% block breadcrumbs %}
         {% if themeSettings.showBreadcrumbs %}
@@ -42,7 +41,7 @@
         {% endblock breadcrumbs %}
         <div class="mz-l-paginatedlist-header">
             <div class="title-sortby-wrappper">
-               <span class="mz-pagetitle">{{ pageName|replace("~", ""|safe }}</span>
+               <span class="mz-pagetitle">{{ pageContext.title|safe }}</span>
                 <div data-mz-pagesort class="mz-sortby pull-right">
                     {% include "modules/common/page-sort" %}
                 </div>

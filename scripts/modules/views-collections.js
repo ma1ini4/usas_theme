@@ -10,14 +10,16 @@ define([
     'modules/url-dispatcher',
     'modules/intent-emitter',
     'modules/get-partial-view',
+    'modules/color-swatches',
      'modules/block-ui',
     'modules/category/infinite-scroller'
-], function(Backbone, $ , _, UrlDispatcher, IntentEmitter, getPartialView,blockUiLoader,InfiniteScroller) {
+], function(Backbone, $ , _, UrlDispatcher, IntentEmitter, getPartialView,colorSwatch,blockUiLoader,InfiniteScroller) {
 
     function factory(conf) {
 
         var _$body = conf.$body;
         var _dispatcher = UrlDispatcher;
+        var _isColorClicked = false;
         var ROUTE_NOT_FOUND = 'ROUTE_NOT_FOUND';
 
         function showError(error) {
@@ -159,6 +161,23 @@ define([
             //make selected view icon active
             toggleButtons.removeClass("active");
             _self.addClass("active");
+        }
+
+
+         //Select color Swatch
+        var selectSwatch = IntentEmitter(
+            _$body, [
+                'click #product-list-ul [data-mz-swatch-color]',
+                'click #more-product-list [data-mz-swatch-color]'
+            ],
+            changeColorSwatch
+        );
+
+        //Change color swatch
+        function changeColorSwatch(_e) {
+            _isColorClicked = true;
+            colorSwatch.changeColorSwatch(_e);
+            _isColorClicked = false;
         }
 
         _dispatcher.onChange(function(url) {
