@@ -42,7 +42,7 @@
         <div class="mz-l-paginatedlist-header">
             <div class="title-sortby-wrappper">
                <span class="mz-pagetitle">{{ pageContext.title|safe }}</span>
-                <div data-mz-pagesort class="mz-sortby pull-right">
+                <div data-mz-pagesort class="mz-sortby">
                     {% include "modules/common/page-sort" %}
                 </div>
             </div>
