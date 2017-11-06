@@ -1,4 +1,4 @@
-define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', 'modules/jquery-mozu', 'underscore', 'modules/models-customer', 'modules/views-paging', 'modules/editable-view'], function(Backbone, Api, Hypr, HyprLiveContext, $, _, CustomerModels, PagingViews, EditableView) {
+define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', 'modules/jquery-mozu', 'underscore', 'modules/models-customer', 'modules/views-paging', 'modules/editable-view','modules/block-ui'], function(Backbone, Api, Hypr, HyprLiveContext, $, _, CustomerModels, PagingViews, EditableView,blockUiLoader) {
 
     var AccountSettingsView = EditableView.extend({
         templateName: 'modules/my-account/my-account-settings',
@@ -574,11 +574,26 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
             'editingContact.isShippingContact',
             'editingContact.isPrimaryShippingContact'
         ],
-        renderOnChange: [
+       renderOnChange: [
             'editingContact.address.countryCode',
+            'editingContact.address.candidateValidatedAddresses',
             'editingContact.isBillingContact',
             'editingContact.isShippingContact'
         ],
+        choose: function (e) {
+            var self = this;
+            var idx = parseInt($(e.currentTarget).val(), 10);
+            var addr = self.model.get('editingContact.address');
+            if (idx !== -1) {
+                var valAddr = addr.get('candidateValidatedAddresses')[idx];
+                for (var k in valAddr) {
+                    addr.set(k, valAddr[k]);
+                }
+            }
+            addr.set('candidateValidatedAddresses',null);
+            addr.set('isValidated', true);
+            this.render();
+        },
         beginAddContact: function() {
             this.editing.contact = "new";
             this.render();
@@ -588,12 +603,11 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
             this.model.beginEditContact(id);
             this.render();
         },
-        finishEditContact: function() {
+        finishEditContact: function () {
+            blockUiLoader.globalLoader();
             var self = this,
                 isAddressValidationEnabled = HyprLiveContext.locals.siteContext.generalSettings.isAddressValidationEnabled;
-            var operation = this.doModelAction('saveContact', {
-                forceIsValid: isAddressValidationEnabled
-            }); // hack in advance of doing real validation in the myaccount page, tells the model to add isValidated: true
+            var operation = this.doModelAction('saveContact', { forceIsValid: isAddressValidationEnabled, editingView: self }); // hack in advance of doing real validation in the myaccount page, tells the model to add isValidated: true
             if (operation) {
                 operation.otherwise(function() {
                     self.editing.contact = true;
