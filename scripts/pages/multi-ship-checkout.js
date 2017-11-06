@@ -202,8 +202,8 @@ require(["modules/jquery-mozu",
         var checkoutModel = window.order = new CheckoutModels(checkoutData),
             checkoutViews = {
                 parentView: new ParentView({
-                  el: $checkoutView,
-                  model: checkoutModel
+                    el: $checkoutView,
+                    model: checkoutModel
                 }),
                 steps: {
                     shippingAddress: new ShippingDestinationsView({
@@ -216,7 +216,13 @@ require(["modules/jquery-mozu",
                     }),
                     paymentInfo: new PaymentView({
                         el: $('#step-payment-info'),
-                        model: checkoutModel.get('billingInfo')
+                        model: checkoutModel.get('billingInfo'),
+                        additionalEvents: {
+                            "blur #mz-payment-credit-card-number": "changeCardType"
+                        },
+                        changeCardType:function(e){
+                            alert("hiiii");
+                        }
                     })
                 },
                 orderSummary: new OrderSummaryView({
