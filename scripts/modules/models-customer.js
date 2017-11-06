@@ -1,4 +1,4 @@
-﻿define(['modules/backbone-mozu', 'underscore', 'modules/models-address', 'modules/models-orders', 'modules/models-paymentmethods', 'modules/models-product', 'modules/models-returns', 'hyprlive'], function (Backbone, _, AddressModels, OrderModels, PaymentMethods, ProductModels, ReturnModels, Hypr) {
+﻿define(['modules/backbone-mozu', 'underscore', 'modules/models-address', 'modules/models-orders', 'modules/models-paymentmethods', 'modules/models-product', 'modules/models-returns', 'hyprlive','hyprlivecontext','modules/block-ui'], function (Backbone, _, AddressModels, OrderModels, PaymentMethods, ProductModels, ReturnModels, Hypr,HyprLiveContext,blockUiLoader) {
 
 
     var pageContext = require.mozuData('pagecontext'),
@@ -466,20 +466,61 @@
         saveContact: function (options) {
             var self = this,
                 editingContact = this.get('editingContact'),
-                apiContact;
-            
-            if (options && options.forceIsValid) {
-                editingContact.set('address.isValidated', true);
-            }
-
-            var op = editingContact.save();
-            if (op) return op.then(function (contact) {
-                apiContact = contact;
-                self.endEditContact();
-                return self.getContacts();
-            }).then(function () {
-                return apiContact;
-            });
+                apiContact,
+                isAddressValidationEnabled = HyprLiveContext.locals.siteContext.generalSettings.isAddressValidationEnabled,
+                allowInvalidAddresses = HyprLiveContext.locals.siteContext.generalSettings.allowInvalidAddresses,
+                addr = editingContact.get("address");
+            if (!this.validate("editingContact")) {
+                if(isAddressValidationEnabled && !addr.get('isValidated')){
+                    if(typeof(addr.apiModel.data.address1) === "undefined"){ 
+                        addr.apiModel.data = addr.attributes;
+                    }
+                    if (!addr.get('candidateValidatedAddresses')) {
+                        var methodToUse = allowInvalidAddresses ? 'validateAddressLenient' : 'validateAddress';
+                        addr.apiModel[methodToUse]().then(function (resp) {
+                            if (resp.data && resp.data.addressCandidates && resp.data.addressCandidates.length) {
+                                if (_.find(resp.data.addressCandidates, addr.is, addr)) {
+                                    if(options.editingView)
+                                        options.editingView.editing.contact = false;
+                                    addr.set('isValidated', true);
+                                    var op = editingContact.save();
+                                    if (op) return op.then(function (contact) {
+                                        apiContact = contact;
+                                        self.endEditContact();
+                                        return self.getContacts();
+                                    }).then(function () {
+                                        blockUiLoader.unblockUi();
+                                        return apiContact;
+                                    }); 
+                                }
+                                else{                                
+                                    addr.set('candidateValidatedAddresses', resp.data.addressCandidates); 
+                                    blockUiLoader.unblockUi();                               
+                                }
+                            }
+                        }, function (e) {
+                            console.log('error::', e);
+                            self.trigger('error', {message: Hypr.getLabel('addressValidationError')});
+                            blockUiLoader.unblockUi();
+                        });
+                    }else{
+                        self.trigger('error', {message: Hypr.getLabel('addressValidationError')});
+                        blockUiLoader.unblockUi();
+                        return false;
+                    }
+                } else {
+                    editingContact.set('address.isValidated', true);
+                    var op = editingContact.save();
+                    if (op) return op.then(function(contact) {
+                        apiContact = contact;
+                        self.endEditContact();
+                        return self.getContacts();
+                    }).then(function() {
+                        blockUiLoader.unblockUi();
+                        return apiContact;
+                    });              
+                }
+            } else blockUiLoader.unblockUi();
         },
         deleteContact: function (id) {
             var self = this;

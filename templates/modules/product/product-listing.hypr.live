@@ -1,5 +1,4 @@
-﻿<div class="mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ model.productCode }}">
-    <a class="mz-productlisting-title" href="{% make_url "product" model %}">{{model.content.productName}}</a>    
+﻿<div class="mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ model.productCode }}">   
     <div class="mz-productlisting-image">
         <!--
         <div class="quick-view">
@@ -26,6 +25,9 @@
                 <span class="mz-productlisting-imageplaceholder"><span class="mz-productlisting-imageplaceholdertext">{{ labels.productImagePlaceholder }}</span></span>
             {% endif %}
         </a>
+        <button class="quick-view-btn primary qvButton quickview-btn" type="button" data-toggle="modal" data-target="{{ model.productCode }}">
+                    <span>{{ labels.quickView }}</span>
+        </button>
         {% endblock product-image %}
     </div>
     <div class="mz-productlisting-info">
@@ -41,7 +43,7 @@
 
 
         {% if model.content.productShortDescription and themeSettings.listProductShortDesc %}
-        <p class="mz-productlisting-shortdesc">{{ model.content.productShortDescription|truncatewords(themeSettings.maxProductSummaryWords)|safe }}</p>
+        <p class="mz-productlisting-shortdesc show">{{ model.content.productShortDescription|truncatewords(themeSettings.maxProductSummaryWords)|safe }}</p>
         {% endif %}
         {% block product-code %}
         {% if themeSettings.listProductCode %}

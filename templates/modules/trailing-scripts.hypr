@@ -11,10 +11,24 @@
       jquery: "//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery{% if not debugMode %}.min{% endif %}",
 		  underscore: "vendor/underscore/underscore",
 		  backbone: "vendor/backbone/backbone",
-      bootstrap:"vendor/bootstrap/js/bootstrap.min"
+      bootstrap:"vendor/bootstrap/js/bootstrap.min",
+      bxslider:"vendor/jquery-bxslider/jquery.bxslider.min",
+      blockui:"vendor/jquery.blockUI/jquery.blockUI.min",
+      elevatezoom:"vendor/jquery-elevatezoom/jquery.elevatezoom.min"
       },
       "shim": {
-            "bootstrap": ["jquery"]
+        bootstrap: {
+          deps: ["jquery"]
+        },
+        bxslider: {
+          deps: ["jquery"]
+        },
+        elevatezoom: {
+          deps: ["jquery"]
+        },
+        blockui: {
+          deps: ["jquery"]
+        }
       }      
   });
   {% if debugMode %}
