@@ -574,11 +574,27 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
             'editingContact.isShippingContact',
             'editingContact.isPrimaryShippingContact'
         ],
-        renderOnChange: [
+       renderOnChange: [
             'editingContact.address.countryCode',
+            'editingContact.address.candidateValidatedAddresses',
             'editingContact.isBillingContact',
             'editingContact.isShippingContact'
         ],
+        choose: function (e) {
+            alert();
+            var self = this;
+            var idx = parseInt($(e.currentTarget).val(), 10);
+            var addr = self.model.get('editingContact.address');
+            if (idx !== -1) {
+                var valAddr = addr.get('candidateValidatedAddresses')[idx];
+                for (var k in valAddr) {
+                    addr.set(k, valAddr[k]);
+                }
+            }
+            addr.set('candidateValidatedAddresses',null);
+            addr.set('isValidated', true);
+            this.render();
+        },
         beginAddContact: function() {
             this.editing.contact = "new";
             this.render();
