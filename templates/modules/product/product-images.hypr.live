@@ -1,15 +1,42 @@
-{% if model.content.productImages and model.content.productImages.length %}
-<figure class="mz-productimages-main">
-  <img itemprop="image" class="mz-productimages-mainimage" data-mz-productimage-main src="{% make_url "image" model.mainImage with max=themeSettings.productImagesContainerWidth as_parameters %}" {% if model.mainImage.altText %} title="{{ model.mainImage.altText }}" alt="{{ model.mainImage.altText }}"{% endif %} />
+{% if model.content.productImages %}
+<figure class="mz-productimages-main text-center">
+    {% include "modules/product/product-image" with productImage=model.mainImage productAltText=model.mainImage.altText productMaxWidth=themeSettings.productImagePdpMaxWidth isMainImage="true" as_parameter %}
 </figure>
-<figure class="mz-productimages-thumbs">
-    {% for image in model.content.productImages %}
-    <a class="mz-productimages-thumb" data-mz-productimage-thumb="{{ image.sequence }}" href="{% make_url "image" image %}">
-        <img class="mz-productimages-thumbimage"  src="{% make_url "image" image with max=themeSettings.maxProductImageThumbnailSize as_parameters %}" {% if image.altText %} title="{{ image.altText }}" alt="{{ image.altText }}"{% endif %} />
-    </a>
-    {% endfor %}
-</figure>
-{% else %}
-<span class="mz-productimages-noimage">[{{ labels.noImages}}]</span>
+<div class="row hidden-xs">
+    <div class="col-sm-12">
+        <label class="rollover"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ labels.rolloverToZoom}}</label>  
+    </div>
+</div>
+<div class="clearfix"></div>
+{% if model.content.productImages.length > 1 %}
+<figure class="mz-productimages-thumbs" data-length="{{model.content.productImages.length}}">
+{% if pageContext.isMobile %}
+    <div class="visible-xs">
+        <ul class="mobile-products_list">
+            {% for image in model.content.productImages %}
+                <li{% if forloop.index==1 %} class="active"{% endif %} data-mz-productimage-thumb="{{ image.sequence }}" data-label="{{image.imageLabel}}">
+                    <a class="mz-productimages-thumb" data-slide-index="{{ forloop.index0 }}" href="javascript:void(0);"><span class="hide">{{image.imageLabel}} {% include "modules/product/product-image" with productImage=image productAltText=image.altText productMaxWidth=themeSettings.maxProductImageThumbnailSize productImageClass="mz-productimages-thumbimage" isThumb="true" as_parameter %}</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endif %}
-
+    <div class="hidden-xs">
+        <ul{% if model.content.productImages.length > 4 %} id="productpager-Carousel"{% endif %} class="products_list ">
+        {% for image in model.content.productImages %}
+            <li{% if forloop.index==1 %} class="active"{% endif %} data-mz-productimage-thumb="{{ image.sequence }}" data-label="{{image.imageLabel}}">
+                <a class="mz-productimages-thumb" data-slide-index="{{ forloop.index0 }}" href="javascript:void(0);">
+                    {% include "modules/product/product-image" with productImage=image productAltText=image.altText productMaxWidth=themeSettings.maxProductImageThumbnailSize productImageClass="mz-productimages-thumbimage" isThumb="true" as_parameter %}
+                </a><br>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+</figure>
+{% endif %}
+{% else %}
+    <span class="mz-productlisting-imageplaceholder img-responsive">
+        <span class="mz-productlisting-imageplaceholdertext">{{ labels.productImagePlaceholder }}</span>
+    </span>
+{% endif %}
