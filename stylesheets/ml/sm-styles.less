@@ -241,3 +241,53 @@
 	    }
 	}
 }
+
+ .mz-productlist {
+ 	.grid-view {
+        .mz-productlist-item {
+            &:nth-child(2n+1) {
+                clear: none;
+            }
+            &:nth-child(3n+1) {
+                clear: none;
+            }
+            .mz-productlisting-info {
+                padding: 0 5px;
+            }
+            .mz-productlisting-imageplaceholder {
+                max-height: 160px;
+                >.mz-productlisting-imageplaceholdertext {
+                    line-height: 160px;
+                }
+            }
+        }
+    }
+ }
+
+ .mz-category{
+    .mz-pagenumbers,.pagination{
+    	margin-top: 0px;
+    }
+    .pagination{
+    	a,span{
+    	 color: #000;
+    	}
+    }
+    .is-disabled{
+    	opacity: 0.4;
+    }
+	.title-sortby-wrappper{
+	    .mz-pagetitle{
+	        font-size: 24px;
+	        float: left;
+	        line-height: 2.5;
+	        display: inline-block;
+	        width: auto;
+	    }
+	    .mz-sortby{
+	        line-height: 3.5;
+	        display:inline-block;
+	        float: right;
+	    }
+	}
+ } 

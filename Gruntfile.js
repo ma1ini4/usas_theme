@@ -172,7 +172,7 @@ module.exports = function (grunt) {
       upload: {
         options: {
           'action': 'upload',
-          'noclobber': true
+          'noclobber': false
         },
         src: [
           'admin/**/*',
