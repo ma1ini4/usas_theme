@@ -14,6 +14,7 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
 
 
     var ProductOption = Backbone.MozuModel.extend({
+        idAttribute: "attributeFQN",
         helpers: ['isChecked'],
         initialize: function() {
             var me = this;
