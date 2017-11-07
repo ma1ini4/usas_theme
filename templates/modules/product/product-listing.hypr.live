@@ -1,82 +1,60 @@
-﻿<div class="mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ model.productCode }}">   
-    <div class="mz-productlisting-image">
-        <!--
-        <div class="quick-view">
-            {% with model.content.productImages|first as image %}
-                <img class="mz-productimages-thumbimage"  src="{% make_url "image" image with max=themeSettings.maxProductImageThumbnailSize as_parameters %}" {% if image.altText %}alt="{{ image.altText }}"{% endif %} />
-            {% endwith%}
-            <div><span>Title</span> : 
-                <a href="{% make_url "product" model %}">    
-                    {{model.content.productName}}
-                </a>
-            </div>
-            <div><span>Price</span> : {{model.price.price|currency}}</div>
-            <div><span>Desc</span> : {{ model.content.productShortDescription|truncatewords(themeSettings.maxProductSummaryWords)|safe }}</div>
-            <button id="add-to-cart"  data-mz-action="addToCart" >
-            {{ labels.addToCart }}
-            </button>
-        </div>
-        -->
-        {% block product-image %}
-        <a href="{% make_url "product" model %}">
-            {% if model.mainImage.imageUrl %}
-                <img src="{% make_url "image" model.mainImage with max=themeSettings.listProductThumbSize as_parameter %}" {% if model.mainImage.altText %}alt="{{ model.mainImage.altText }}"{% endif %} />
-            {% else %}
-                <span class="mz-productlisting-imageplaceholder"><span class="mz-productlisting-imageplaceholdertext">{{ labels.productImagePlaceholder }}</span></span>
-            {% endif %}
-        </a>
-        <button class="quick-view-btn primary qvButton quickview-btn" type="button" data-toggle="modal" data-target="{{ model.productCode }}">
+﻿<div class="mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ model.productCode }}">
+    <div class="product-image-swatch-wrapper">
+        <div class="mz-productlisting-image">
+            {% block product-image %}
+            <a href='{% make_url "product" model %}'>
+                {% include "modules/product/product-image" with productImage=model.mainImage productMaxWidth=themeSettings.productImageDirectoryMaxWidth productAltText=model.mainImage.altText as_parameter %}
+            </a>
+            <button class="quick-view-btn primary qvButton quickview-btn" type="button" data-toggle="modal" data-target="{{ model.productCode }}">
                     <span>{{ labels.quickView }}</span>
-        </button>
-        {% endblock product-image %}
+            </button>
+            {% endblock product-image %}
+        </div>
+        <a class="mz-productlisting-title visible-xs" href='{% make_url "product" model %}'>{{model.content.productName|safe}}</a>
+        <!--Color Swatch-->
+        {% for option in model.options %}
+            {% if option.attributeFQN=="tenant~COLOR" and option.values.length!=0 %}
+                <div class="ml-product-swatch">
+                    <div class="row">
+                        <ul>
+                            {% include "modules/facets/facet-color" with allfacets=option.values parent=option isListing="true" as_parameter %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
     </div>
     <div class="mz-productlisting-info">
-    <div>
-    {% for property in model.properties %}
-        
-    {% if property.attributeDetail.name|lower == 'Best Season' %}
-        <div>{{property.attributeDetail.name}} : {{ property.values|first|prop('value')}}</div>
-    {% endif %}    
-    {% endfor %}        
-    </div>
-
-
-
-        {% if model.content.productShortDescription and themeSettings.listProductShortDesc %}
-        <p class="mz-productlisting-shortdesc show">{{ model.content.productShortDescription|truncatewords(themeSettings.maxProductSummaryWords)|safe }}</p>
-        {% endif %}
-        {% block product-code %}
-        {% if themeSettings.listProductCode %}
-        <div class="mz-productlisting-productcode">{{model.productCode}}</div>
-        {% endif %}
-        {% endblock product-code %}
-
-        {% if model.volumePriceRange %}
-        <div class="mz-volume-pricing">
-            <span itemprop="minPrice" class="mz-volume-price-lower">
-                {% include "modules/common/volume-price" with model=model.volumePriceRange.lower %}
-            </span>
-            <span itemprop="maxPrice" class="mz-volume-price-upper">
-                {% include "modules/common/volume-price" with model=model.volumePriceRange.upper %}
-            </span>
+        <div class="ml-product-info-wrapper">
+            <a class="mz-productlisting-title hidden-xs" href='{% make_url "product" model %}'>{{model.content.productName|safe}}</a>
+            {% if model.content.productShortDescription and themeSettings.listProductShortDesc %}
+            <p class="mz-productlisting-shortdesc">{{ model.content.productShortDescription|truncatewords(themeSettings.maxProductSummaryWords)|safe }}</p>
+            {% endif %}
+            {% block product-code %}
+            {% if themeSettings.listProductCode %}
+            <div class="mz-productlisting-productcode">#{{model.productCode}}</div>
+            {% endif %}
+            {% endblock product-code %}
+            {% block product-extrainfo %}
+                {% if dealOfTheDay %}
+                    {% if dealOfTheDay.savings %}
+                        {% if model.price.discount.impact %}
+                            <p class="mz-productlisting-savings">You save: {{ model.price.discount.impact|currency }}</p>
+                        {% endif %}
+                    {% endif %}
+                    {% if dealOfTheDay.expirationDate %}
+                        {% if model.price.discount.discount.expirationDate %}
+                        <p class="mz-productlisting-expirationdate">Expires: {{ model.price.discount.discount.expirationDate|date("F j, Y") }}</p>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endblock product-extrainfo %}
         </div>
-        {% else %}
+        <div class="ml-product-price-wrapper">
             {% include "modules/product/price-stack" %}
-        {% endif %}
-
-        {% block product-extrainfo %}
-        {% if dealOfTheDay %}
-          {% if dealOfTheDay.savings %}
-            {% if model.price.discount.impact %}
-              <p class="mz-productlisting-savings">You save: {{ model.price.discount.impact|currency }}</p>
-            {% endif %}
-          {% endif %}
-          {% if dealOfTheDay.expirationDate %}
-            {% if model.price.discount.discount.expirationDate %}
-              <p class="mz-productlisting-expirationdate">Expires: {{ model.price.discount.discount.expirationDate|date("F j, Y") }}</p>
-            {% endif %}
-          {% endif %}
-        {% endif %}
-        {% endblock product-extrainfo %}
+        </div>
+        <div class="mz-directory-ratings">
+            {% include "modules/product/product-ratings" %}
+        </div>
     </div>
 </div>
