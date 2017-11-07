@@ -1,8 +1,8 @@
 {
   "toggleToMultiShip": "I want to ship to multiple addresses",
   "toggleToSingleShip": "Ship to single address",
-
-
+  "imagePathFormat": "{0}/cms/files/{1}.jpg",
+  "imagePDPPathFormat": "{0}/cms/files/{1}_{2}.jpg",
   "dateFormat"       : "F j, Y",
   "logOut"               : "Logout",
   "logIn"                : "Log In",

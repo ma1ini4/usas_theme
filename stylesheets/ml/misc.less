@@ -1467,3 +1467,26 @@ ul.tabs {
         display: none;
     }
 }
+
+//Color Swatches
+.product-color-swatches{
+    padding: 0 0 0 2px; 
+    margin: 0;
+
+    li{
+        float: left;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        border: 1px solid @colorWhite;
+        margin:0 10px 5px 0;
+        input[type=checkbox]{
+            opacity: 0;
+        }
+        box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
+    } 
+    .active{
+        outline: 2px solid @colorMediumGray;
+    }
+
+}
