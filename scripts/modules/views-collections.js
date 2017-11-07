@@ -1,8 +1,6 @@
 ﻿/**
  * Unidirectional dispatch-driven collection views, for your pleasure.
  */
-
-
 define([
     'backbone',
     'modules/jquery-mozu',
@@ -22,6 +20,12 @@ define([
         var _isColorClicked = false;
         var ROUTE_NOT_FOUND = 'ROUTE_NOT_FOUND';
 
+        var _mainImage = '';
+        // on page load get facet href and append facets
+        var path = getFacet();
+        if (path !== "") {
+            updateFacetFilter(path);
+        }
         function showError(error) {
             // if (error.message === ROUTE_NOT_FOUND) {
             //     window.location.href = url;
@@ -29,20 +33,53 @@ define([
             _$body.find('[data-mz-messages]').text(error.message);
         }
 
-        function intentToUrl(e) {
+         function intentToUrl(e) {
+            if ($(".blockOverlay").length > 0) {
+                return;
+            }
+            //show loading
+            blockUiLoader.globalLoader();
+            var path = getFacet();
             var elm = e.target;
             var url;
+            var del_url;
             if (elm.tagName.toLowerCase() === "select") {
                 elm = elm.options[elm.selectedIndex];
             }
             url = elm.getAttribute('data-mz-url') || elm.getAttribute('href') || '';
             if (url && url[0] != "/") {
+                url = (url.substr(url.length - 3) === '%3a') ? url.substring(0, url.length - 3) : url;
                 var parser = document.createElement('a');
                 parser.href = url;
                 url = window.location.pathname + parser.search;
             }
             return url;
         }
+        //remove facets when clicked on cross
+        $('#page-content').on('click', '.remove-facet', (function(e) {
+            blockUiLoader.globalLoader();
+            var mzFacet = $(this).attr('data-mz-facet');
+            var mzFacetValue = $(this).attr('data-mz-facet-value');
+            var delFacet = mzFacet + ':' + mzFacetValue.replace(/\s/g, '+');
+            var delFacet1 = mzFacet + '%3a' + mzFacetValue.replace(/\s/g, '+');
+            //remove facet from url
+            var path = getFacet();
+            path = decodeURIComponent(path);
+            var url = path.replace(delFacet + ',', '');
+            url = url.replace(delFacet1 + ',', '');
+            url = url.indexOf(delFacet) >= 0 ? path.replace(delFacet, '') : url;
+            url = url.indexOf(delFacet1) >= 0 ? path.replace(delFacet1, '') : url;
+            url = (url === '?facetValueFilter=') ? window.location.pathname : url;
+            url = (url.substr(url.length - 1) === ':') ? url.substring(0, url.length - 1) : url;
+
+            var parser = document.createElement('a');
+            parser.href = url;
+            url = window.location.pathname + parser.search;
+            if (url && _dispatcher.send(url)) {
+                _$body.addClass('mz-loading');
+                e.preventDefault();
+            }
+        }));
 
         var navigationIntents = IntentEmitter(
             _$body,
@@ -73,7 +110,7 @@ define([
         });
 
 
-         //create facets and append them in list
+        //create facets and append them in list
         function updateFacetFilter(path) {
 
             if (path.indexOf("facetValueFilter") > -1) {
@@ -127,7 +164,7 @@ define([
             _$body.html(response.body);
             if (url) _dispatcher.replace(url);
             _$body.removeClass('mz-loading');
-             InfiniteScroller.update();
+            InfiniteScroller.update();
             //add facet filter to list if any
             var path = getFacet();
             updateFacetFilter(path);
@@ -137,6 +174,7 @@ define([
             } else {
                 $("#gridView").trigger("click");
             }
+            blockUiLoader.unblockUi();
         }
 
 
@@ -184,6 +222,103 @@ define([
             getPartialView(url, conf.template).then(updateUi, showError);
         });
 
+        //Show more swatches
+        var showMoreSwatch = IntentEmitter(
+            _$body, [
+                'click .showMoreSwatches'
+            ],
+            showMoreColors
+        );
+
+        //show all colors
+        function showMoreColors(_e) {
+            var _self = $(_e.currentTarget);
+            var currentProduct = _self.parents(".ml-product-swatch");
+            _self.parent("li").hide();
+            currentProduct.find("li.mz-hide-color").removeClass("mz-hide-color");
+        }
+
+        //toggle filters
+        var toggleFilters = IntentEmitter(
+            _$body, [
+                'click [data-mz-filters-collapse]'
+            ],
+            toggleFiltersView
+        );
+
+        //Toggle filters
+        function toggleFiltersView(_e) {
+            var icon = $('#collapseIcon>i');
+            var elmtn = $('#filterOptions');
+            $(elmtn).toggle();
+
+            if ($(icon).hasClass("fa-plus")) {
+                $(icon).removeClass("fa-plus").addClass("fa-minus");
+            } else {
+                $(icon).addClass("fa-plus").removeClass("fa-minus");
+            }
+        }
+
+        //toggle filter
+        var toggleFilter = IntentEmitter(
+            _$body, [
+                'click [data-mz-filter-collapse]'
+            ],
+            toggleFilterView
+        );
+
+        //Toggle filter
+        function toggleFilterView(_e) {
+            var _self = $(_e.currentTarget);
+            var count = _self.attr("data-mz-filter-collapse");
+            var icon = $('#filterIcon' + count);
+            var elmtn = $('#filterList' + count);
+
+            $(".mz-facetingform-facet").removeClass("active");
+            $(elmtn).addClass("active");
+            $(".filter-icon").find("i.fa")
+                .removeClass("fa-minus")
+                .addClass("fa-plus");
+
+            $(icon).find("i.fa")
+                .removeClass("fa-plus")
+                .addClass("fa-minus");
+        }
+
+        //toggle filter
+        var backToTop = IntentEmitter(
+            _$body, [
+                "click .back-to-top"
+            ],
+            backToTopFn
+        );
+
+        function backToTopFn() {
+            $("html, body").animate({ scrollTop: 0 }, 500);
+        }
+
+        //Switch More
+        var switchMore = IntentEmitter(
+            _$body, [
+                "click .show-more"
+            ],
+            switchMoreFn
+        );
+
+        function switchMoreFn(e) {
+            var parentLi = $(e.currentTarget).parent("li.show-more-li");
+            if (parentLi.hasClass("show-less")) {
+                parentLi.find("a").text("More...");
+                parentLi.removeClass("show-less").parent("ul").find("li.mz-hide-text").addClass("hide");
+            } else {
+                parentLi.find("a").text("Less...");
+                parentLi.addClass("show-less").parent("ul").find("li.mz-hide-text").removeClass("hide");
+            }
+        }
+
+        if ($(".view-all.selected").length) {
+            InfiniteScroller.update();
+        }
     }
 
     return {

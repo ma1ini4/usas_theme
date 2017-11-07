@@ -498,11 +498,10 @@
     "maxTopLevelNavItems": 8,
     "maxTopLevelNavLabelLength": 20,
     "pageSizeOptions": [
-      15,
-      25,
-      50,
-      100
+      36,
+      72
     ],
+    "viewAllPageSize": 54,
     "googleMapAPIKey": "",
     "googleMapLatitude": 41.652491,
     "googleMapLongitude": -70.288112,
@@ -532,6 +531,7 @@
     "showProductDetailUPC": true,
     "textColor": "#444444",
     "companyLogo":"/resources/images/logo-sm.png",
+    "facetMoreColorCount": 3,
     "usStates": [
       {
         "abbreviation": "AL",
