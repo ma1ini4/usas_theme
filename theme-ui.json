@@ -450,6 +450,85 @@
                     "name": "socialShareLink"
                 }
             ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Paging",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "Show these page size options",
+                    "xtype": "mz-input-selectmulti",
+                    "name": "pageSizeOptions",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        36,
+                        72
+                    ]
+                },
+                {
+                    "fieldLabel": "Default items per page",
+                    "xtype": "mz-input-dropdown",
+                    "name": "defaultPageSize",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "storeFrom": "pageSizeOptions"
+                },
+                {
+                    "fieldLabel": "Default Sort Order",
+                    "xtype": "mz-input-text",
+                    "name": "defaultSort",
+                    "allowBlank": true,
+                    "allowOnlyWhitespace": true
+                },
+                {
+                    "fieldLabel": "Page size options for order history(myaccount)",
+                    "xtype": "mz-input-selectmulti",
+                    "name": "pageSizeOptionsOrderHistory",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        5,
+                        15
+                    ]
+                },
+                {
+                    "fieldLabel": "Default items per page for order history(myaccount)",
+                    "xtype": "mz-input-dropdown",
+                    "name": "defaultPageSizeOrderHistory",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "storeFrom": "pageSizeOptionsOrderHistory"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "viewAllPageSizeOrderHistory",
+                    "fieldLabel": "View All Page Size for order history(myaccount)"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Category Filters",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-textarea",
+                    "name": "filterConfiguration",
+                    "fieldLabel": "Filter's Configuration of Category Page"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "facetMoreColorCount",
+                    "fieldLabel": "Show see more after number of colors"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "viewAllPageSize",
+                    "fieldLabel": "View All Page Size"
+                }
+            ]
         }
 
 
