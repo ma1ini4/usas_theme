@@ -1,14 +1,12 @@
-﻿
-
-.permalink (@color: white) {
+﻿.permalink (@color: white) {
     color: @color;
     text-decoration: none;
-
-    &:visited, &:focus, &:active {
+    &:visited {
         color: @color;
     }
 
     &:hover, &:focus, &:active {
+		color: @color;
         text-decoration: underline;
     }
 }
@@ -77,6 +75,7 @@
 	-webkit-background-clip: padding-box;
 	background-clip:         padding-box;
 }
+
 .border-radiuses (@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
 	-webkit-border-top-right-radius:    @topright;
 	-webkit-border-bottom-right-radius: @bottomright;
@@ -140,12 +139,14 @@
 	-moz-transition-delay:    @arguments;
 	-ms-transition-delay:     @arguments;
 	-o-transition-delay:      @arguments;
-}.transition-timing-function (...) {
+}
+.transition-timing-function (...) {
     -webkit-transition-timing-function: @arguments;
 	-moz-transition-timing-function:    @arguments;
 	-ms-transition-timing-function:     @arguments;
 	-o-transition-timing-function:      @arguments;
-}.transition-duration (...) {
+}
+.transition-duration (...) {
     -webkit-transition-duration: @arguments;
 	-moz-transition-duration:    @arguments;
 	-ms-transition-duration:     @arguments;
@@ -204,4 +205,80 @@
 	-moz-transform-origin:    @x @y;
 	-ms-transform-origin:     @x @y;
 	-o-transform-origin:      @x @y;
+}
+.fontRegular() {
+	font-family: @fontFamily;
+    font-weight: 300;
+}
+.fontsMedium() {
+	font-family: @fontFamily;
+    font-weight: 500;
+}
+.fontsBold() {
+	font-family: @fontFamily;
+    font-weight: 700;
+}
+.defaultButton() {
+	font-size: @fontSizeLarger;
+    padding: 12px @defaultGutter 13px;
+    line-height: 19px;
+    text-align: center;
+    cursor: pointer;
+    width: auto;
+	text-transform: uppercase;
+	min-width: 80px;
+	color: @colorWhite;
+	border: 0;
+    -webkit-border-radius:0;
+    border-radius: 0;
+	&:hover {
+		color: @colorWhite;
+	}
+	&:visited, &:focus, &:active {
+        color: @colorWhite;
+    }
+}
+.border-radius-plain(@radius: 5px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
+.close-icon(@size: 40px, @color: #000000, @top: 3px){
+	position: absolute;
+    right: 0;
+    top: @top;
+    width: @size;
+    height: @size;
+    cursor: pointer;
+    &:before, &:after {
+		height: @size;
+		position: absolute;
+		left: @size/2;
+		content: ' ';
+		width: 1px;
+		background-color: @color;
+	}
+    &:before {
+     	-webkit-transform: rotate(45deg);
+		-moz-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+     	transform: rotate(45deg);
+    }
+    &:after {
+     	-webkit-transform: rotate(-45deg);
+		-moz-transform: rotate(-45deg);
+		-ms-transform: rotate(-45deg);
+     	transform: rotate(-45deg);
+    }
+}
+.no-image(@width: 80px, @height: 80px) {
+	width: @width;
+	height: @height;
+	line-height: @height;
+	background: @colorLightGray;
+	text-align: center;
+	color: @colorLighterGray;
+	&>.mz-productlisting-imageplaceholdertext {
+		line-height: @height;
+	}
 }
