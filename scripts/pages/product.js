@@ -1,4 +1,4 @@
-﻿require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu", "modules/cart-monitor", "modules/models-product", "modules/views-productimages",  "hyprlivecontext"], function ($, _, Hypr, Backbone, CartMonitor, ProductModels, ProductImageViews, HyprLiveContext) {
+﻿require(["modules/jquery-mozu", "underscore", "hyprlive", "modules/backbone-mozu", "modules/cart-monitor", "modules/models-product", "modules/views-productimages", "hyprlivecontext"], function($, _, Hypr, Backbone, CartMonitor, ProductModels, ProductImageViews, HyprLiveContext) {
 
     var ProductView = Backbone.MozuView.extend({
         templateName: 'modules/product/product-detail',
@@ -8,30 +8,30 @@
             "change [data-mz-value='quantity']": "onQuantityChange",
             "keyup input[data-mz-value='quantity']": "onQuantityChange"
         },
-        render: function () {
+        render: function() {
             var me = this;
             Backbone.MozuView.prototype.render.apply(this);
-            this.$('[data-mz-is-datepicker]').each(function (ix, dp) {
+            this.$('[data-mz-is-datepicker]').each(function(ix, dp) {
                 $(dp).dateinput().css('color', Hypr.getThemeSetting('textColor')).on('change  blur', _.bind(me.onOptionChange, me));
             });
         },
-        onOptionChange: function (e) {
+        onOptionChange: function(e) {
             return this.configure($(e.currentTarget));
         },
-        onQuantityChange: _.debounce(function (e) {
+        onQuantityChange: _.debounce(function(e) {
             var $qField = $(e.currentTarget),
-              newQuantity = parseInt($qField.val(), 10);
+                newQuantity = parseInt($qField.val(), 10);
             if (!isNaN(newQuantity)) {
                 this.model.updateQuantity(newQuantity);
             }
-        },500),
-        configure: function ($optionEl) {
+        }, 500),
+        configure: function($optionEl) {
             var newValue = $optionEl.val(),
                 oldValue,
                 id = $optionEl.data('mz-product-option'),
                 optionEl = $optionEl[0],
                 isPicked = (optionEl.type !== "checkbox" && optionEl.type !== "radio") || optionEl.checked,
-                option = this.model.get('options').findWhere({'attributeFQN':id});
+                option = this.model.get('options').findWhere({ 'attributeFQN': id });
             if (option) {
                 if (option.get('attributeDetail').inputType === "YesNo") {
                     option.set("value", isPicked);
@@ -43,16 +43,16 @@
                 }
             }
         },
-        addToCart: function () {
+        addToCart: function() {
             this.model.addToCart();
         },
-        addToWishlist: function () {
+        addToWishlist: function() {
             this.model.addToWishlist();
         },
-        checkLocalStores: function (e) {
+        checkLocalStores: function(e) {
             var me = this;
             e.preventDefault();
-            this.model.whenReady(function () {
+            this.model.whenReady(function() {
                 var $localStoresForm = $(e.currentTarget).parents('[data-mz-localstoresform]'),
                     $input = $localStoresForm.find('[data-mz-localstoresform-input]');
                 if ($input.length > 0) {
@@ -62,11 +62,12 @@
             });
 
         },
-        initialize: function () {
+        initialize: function() {
             // handle preset selects, etc
             var me = this;
-            this.$('[data-mz-product-option]').each(function () {
-                var $this = $(this), isChecked, wasChecked;
+            this.$('[data-mz-product-option]').each(function() {
+                var $this = $(this),
+                    isChecked, wasChecked;
                 if ($this.val()) {
                     switch ($this.attr('type')) {
                         case "checkbox":
@@ -85,10 +86,10 @@
         }
     });
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         var product = ProductModels.Product.fromCurrent();
 
-        product.on('addedtocart', function (cartitem) {
+        product.on('addedtocart', function(cartitem) {
             if (cartitem && cartitem.prop('id')) {
                 //product.isLoading(true);
                 CartMonitor.addToCount(product.get('quantity'));
@@ -99,7 +100,7 @@
             }
         });
 
-        product.on('addedtowishlist', function (cartitem) {
+        product.on('addedtowishlist', function(cartitem) {
             $('#add-to-wishlist').prop('disabled', 'disabled').text(Hypr.getLabel('addedToWishlist'));
         });
 
