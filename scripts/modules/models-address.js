@@ -9,23 +9,25 @@
             JP: true,
             TW: true
         },
-        defaultStateProv = "n/a",
-        defaultZipCode = "n/a"; 
-            //Zip code can not be empty in order for {order}method/payments to work correctly 
-            
+            defaultStateProv = "n/a";
 
         var PhoneNumbers = Backbone.MozuModel.extend({
             validation: {
-                home: [{
+                home: [
+                {
                     required: true,
                     msg: Hypr.getLabel("phoneMissing")
                 },{
                     pattern: "digits",
                     msg: Hypr.getLabel("invalidPhone")
                 },{
-                    length: 10,
-                    msg: Hypr.getLabel("invalidPhoneLength")
-                }]
+                    minLength: 10,
+                    maxLength: 20,
+                    msg: Hypr.getLabel("invalidPhone")
+                },{
+                    pattern: /^((\+)?[1-9]{1,2})?([-\s\.])?((\(\d{1,4}\))|\d{1,4})(([-\s\.])?[0-9]{1,12}){1,2}$/,
+                    msg: Hypr.getLabel("invalidPhone")
+                }] 
             }
         }),
 
@@ -51,21 +53,21 @@
                     required: true,
                     msg: Hypr.getLabel("countryMissing")
                 },
+                addressType: {
+                    required: true,
+                    msg: Hypr.getLabel("addressTypeMissing")
+                },
                 stateOrProvince: {
                     fn: "requiresStateAndZip",
                     msg: Hypr.getLabel("stateProvMissing")
                 },
                 postalOrZipCode: [{
-                    fn: "requiresStateAndZip",
+                    required: true,
                     msg: Hypr.getLabel("postalCodeMissing")
                 },{
                     pattern: /(^\d{5}$)|(^\d{5}-\d{4}$)/,
                     msg: Hypr.getLabel("invalidZipcode")
-                }],
-                addressType: {
-                    required: true,
-                    msg: Hypr.getLabel("addressTypeMissing")
-                }
+                }]
             },
             requiresStateAndZip: function(value, attr) {
                 if ((this.get('countryCode') in countriesRequiringStateAndZip) && !value) return this.validation[attr.split('.').pop()].msg;
@@ -84,12 +86,6 @@
                 if (options && options.helpers && j.stateOrProvince === defaultStateProv) {
                     delete j.stateOrProvince;
                 }
-                if ((!options || !options.helpers) && !j.postalOrZipCode) { 
-                    j.postalOrZipCode = defaultZipCode; 
-                } 
-                if (options && options.helpers && j.postalOrZipCode === defaultZipCode) { 
-                    delete j.postalOrZipCode; 
-                } 
                 return j;
             },
             is: function(another) {
