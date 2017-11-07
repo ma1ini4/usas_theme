@@ -409,7 +409,7 @@
   "digitalCreditNotYetActive": "This code does not become active until {0}.",
   "digitalCreditExpired": "This code expired on {0}.",
 
-  "clearAllFilters"      : "Clear All Filters",
+  "clearAllFilters"     : "Clear All",
 
   "productImagePlaceholder" : "[no image]",
   "packageWeight"        : "Package Weight",
@@ -474,5 +474,7 @@
   "returnPrintLabelButton"                : "Print",
   "quickView": "Quick view",
   "overview": "Overview",
-  "readAReview": "Read a review"
+  "readAReview": "Read a review",
+  "viewAll": "View All",
+  "RefineBy": "Refine By"
 }
