@@ -1,32 +1,9 @@
 ﻿{% block credit-card-form %}
-    <!-- <div class="mz-l-formfieldgroup-row mz-payment-credit-card-type-row">
-        <div class="mz-l-formfieldgroup-cell">
-            <label for="mz-payment-credit-card-type">{{ labels.cardType }}<span class="is-required"> *</span>:</label>
-        </div>
-        <div class="mz-l-formfieldgroup-cell">
-     <select id="mz-payment-credit-card-type" data-mz-value="{{ cardcontext }}paymentOrCardType" disabled>
-        <option></option>
-        {% if siteContext.checkoutSettings.supportedCards.visa %}
-        <option value="VISA" {% if model.paymentOrCardType == "VISA" %}selected="selected"{% endif %}>{{ labels.ccVisa }}</option>
-        {% endif %}
-        {% if siteContext.checkoutSettings.supportedCards.mc %}
-        <option value="MC" {% if model.paymentOrCardType == "MC" %}selected="selected"{% endif %}>{{ labels.ccMastercard }}</option>
-        {% endif %}
-        {% if siteContext.checkoutSettings.supportedCards.amex %}
-        <option value="AMEX" {% if model.paymentOrCardType == "AMEX" %}selected="selected"{% endif %}>{{ labels.ccAmericanExpress }}</option>
-        {% endif %}
-        {% if siteContext.checkoutSettings.supportedCards.discover %}
-        <option value="DISCOVER" {% if model.paymentOrCardType == "DISCOVER" %}selected="selected"{% endif %}>{{ labels.ccDiscover }}</option>
-        {% endif %}
-		{% if siteContext.checkoutSettings.supportedCards.jcb %}
-        <option value="JCB" {% if model.paymentOrCardType == "JCB" %}selected="selected"{% endif %}>{{ labels.ccJcb }}</option>
-        {% endif %}
-    </select>
-            <span class="mz-validationmessage" data-mz-validationmessage-for="{{ cardcontext }}paymentOrCardType"></span>
-        </div>
-    </div> -->
     
-    <div class="mz-l-formfieldgroup-row mz-payment-credit-card-number-row mz-card-type-images pull-right">
+    <div class="mz-l-formfieldgroup-row mz-payment-credit-card-number-row mz-card-type-images">        
+        <div class="mz-l-formfieldgroup-cell">
+            <label for="mz-payment-credit-card-number"></label>
+        </div>        
         <div class="mz-l-formfieldgroup-cell">
             {% if siteContext.checkoutSettings.supportedCards.visa %}
             <span class="mz-credit-card-image-container mz-visa-image-container {% if model.paymentOrCardType == "VISA" %}active{% endif %} " data-mz-card-type-image="VISA" ><img alt="Visa" src="/resources/images/visa.gif"></span>
