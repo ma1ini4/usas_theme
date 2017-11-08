@@ -424,6 +424,7 @@
     }
   ],
   "settings": {
+    "colorSwatchesChangeAlternate":false,
     "fullNameLength": 80,
     "firstNameLength": 40,
     "middleNameInitialsLength": 1,

@@ -483,6 +483,18 @@
         },
         {
             "xtype": "panel",
+            "title": "Color Swatches",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "colorSwatchesChangeAlternate",
+                    "fieldLabel": "Also change alternate images"
+                }
+            ]
+        },        
+        {
+            "xtype": "panel",
             "title": "Category Filters",
             "collapsed": false,
             "items": [
