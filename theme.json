@@ -445,6 +445,11 @@
     "orderNumberLength": 80,
     "orderVerificationCodeLength": 80,
     "productQuantityLength": 5,
+    "productImagePdpMaxWidth": 350,
+    "productImageDirectoryMaxWidth": 265,
+    "productThumbImageMaxWidth": 84,
+    "productZoomImageMaxWidth": 700,
+    "productCarouselImageWidth": 84,
     "globalCartEmptyBasketFooter":"", 
     "globalCartEmptyBasketKickerLink":"",
     "globalCartRelatedProducts":"true",
@@ -464,6 +469,7 @@
     "bannerImageEnabled": false,
     "bannerImageRepeat": "repeat-x",
     "bodyBackgroundColor": "#FFFFFF",
+    "minimumQuantityForInStockQuantityMessage":5,
     "cmsTextStyles": [
       {
         "className": "mz-style-1",

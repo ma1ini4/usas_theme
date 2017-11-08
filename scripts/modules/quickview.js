@@ -11,10 +11,10 @@ define([
         "bxslider",
         "modules/views-productimages",
         "elevatezoom",
-        // "modules/color-swatches",
+        "modules/color-swatches",
         'modules/common-functions'
     ],
-    function($, _, Hypr, hyprlivecontext, ProductModels, CartMonitor, api, Backbone, blockUiLoader, bxslider, ProductImageViews, elevatezoom, CommonFunctions) {
+    function($, _, Hypr, hyprlivecontext, ProductModels, CartMonitor, api, Backbone, blockUiLoader, bxslider, ProductImageViews, elevatezoom, colorSwatch, CommonFunctions) {
 
         var sitecontext = hyprlivecontext.locals.siteContext;
         var cdn = sitecontext.cdnPrefix;
@@ -96,11 +96,11 @@ define([
                                 isChecked = $this.prop('checked');
                                 wasChecked = !!$this.attr('checked');
                                 if ((isChecked && !wasChecked) || (wasChecked && !isChecked)) {
-                                    me.configure($this);
+                                    //me.configure($this);
                                 }
                                 break;
                             default:
-                                me.configure($this);
+                                //me.configure($this);
                         }
                     }
                 });
@@ -126,7 +126,6 @@ define([
             },
             onMouseEnterChangeImage: function(_e) {
                 this.mainImage = $('#quickViewModal .mz-productimages-mainimage').attr('src');
-
                 var colorCode = $(_e.currentTarget).data('mz-swatch-color'),
                     productCode = $(_e.currentTarget).data("product-code");
                 this.changeImages(colorCode, productCode, 'N');
@@ -138,8 +137,10 @@ define([
                         productCode = _selectedColorDom.data("product-code");
                     if (typeof colorCode != 'undefined') {
                         this.changeImages(colorCode, productCode, 'N');
-                    } else {
+                    } else if(typeof this.mainImage != 'undefined'){
                         $('#quickViewModal .mz-productimages-mainimage').attr('src', this.mainImage);
+                    }else{
+                        $('#quickViewModal .mz-productimages-main').html('<span class="mz-productlisting-imageplaceholder img-responsive"><span class="mz-productlisting-imageplaceholdertext">[no image]</span></span>');
                     }
                 }
             },
@@ -277,9 +278,9 @@ define([
                             img.attr('src', imagepath).data('zoom-image', zoomimagepath);
                             $('#zoom').elevateZoom({ zoomType: "inner", cursor: "crosshair" });
                         } else {
-                            img.attr('src', imagepath);
+                            $("#quickViewModal .mz-productimages-main img").attr('src', imagepath);
                         }
-                    } else {
+                    } else if(typeof _this.mainImage === 'undefined') {
                         $('.zoomContainer').remove();
                         $('.mz-productimages-main').html('<span class="mz-productlisting-imageplaceholder img-responsive"><span class="mz-productlisting-imageplaceholdertext">[no image]</span></span>');
                     }
@@ -309,7 +310,7 @@ define([
                 if (window.quickviewProduct !== null) {
                     if ((!$(e.currentTarget).hasClass("disabled") || ($(e.currentTarget).parents('.product-color-swatches').length > 0 && $(e.currentTarget).hasClass("disabled"))) && !$(e.currentTarget).hasClass('active')) {
                         if ($(e.currentTarget).parents('.product-color-swatches').length > 0) {
-                            //colorSwatch.changeColorSwatch(e);
+                            colorSwatch.changeColorSwatch(e);
                         }
                         blockUiLoader.globalLoader();
                         return this.configureAttribute($(e.currentTarget));
