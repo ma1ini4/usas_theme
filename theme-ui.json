@@ -216,7 +216,7 @@
                     "name": "globalCartRelatedProducts"
                 },
                 {
-                    "fieldLabel": "Maximum number of Cross sells products",
+                    "fieldLabel": "Maximum number of Up sells products",
                     "xtype": "mz-input-number",
                     "name": "globalCartRelatedProductsSize"
                 },
@@ -231,10 +231,20 @@
                     "name": "globalCartMaxItemCount"
                 }, 
                 {
+                    "fieldLabel": "Max width of global Cart item image",
+                    "xtype": "mz-input-number",
+                    "name": "globalCartItemImageMaxWidth"
+                },
+                {
                     "fieldLabel": "Hide popover for empty global cart",
                     "xtype": "mz-input-checkbox",
                     "name": "globalCartHidePopover"
-                }                             
+                },
+                {
+                    "fieldLabel": "Show Subtotal",
+                    "xtype": "mz-input-checkbox",
+                    "name": "globalCartShowSubtotal"
+                }                            
             ]
         },
         {

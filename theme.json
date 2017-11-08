@@ -457,6 +457,8 @@
     "globalCartMaxItemCount":3,
     "globalCartEnableSaveCart":"true",
     "globalCartHidePopover": "",
+    "globalCartShowSubtotal": false,    
+    "globalCartItemImageMaxWidth": 105,    
     "footerEnableMini":false,
     "backofficeDateTimeFormat": "m/d/Y H:i:s O",
     "extendedPropertiesEnabled": false,

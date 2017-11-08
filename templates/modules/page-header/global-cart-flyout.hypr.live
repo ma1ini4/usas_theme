@@ -20,8 +20,24 @@
 		    {% for items in model.cartItems  %}
 		    	<div class="media">
 					<div class="media-left">
-						<a href="/p/{{items.product.productCode}}">
-						  <img class="media-object" width=64 src="{{ items.product.imageUrl }}" />
+						<a href="/p/{{items.product.productCode}}">							
+							{% with items.product|get_product_attribute("tenant~color") as colorAttr %}  
+							  {% if colorAttr %}
+							    {% with colorAttr.value|replace(" ","_") as colorValue %}
+							      {% with "/cms/files/{0}_{1}_v1.jpg"|string_format(items.product.productCode, colorValue) as fileName %}
+							            <img class="media-object" src="https:{% make_url "cdn" fileName with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameter %}" {% if items.product.imageAlternateText %}alt="{{ items.product.imageAlternateText }}"{% endif %} onerror="this.setAttribute('src','{% make_url "image" items.product with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameters %}')" />   
+							      {% endwith %}     
+							    {% endwith %}
+							  {% else %}
+							    {% if items.product.imageUrl %}
+							          <img class="media-object" src="{% make_url "image" items.product with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameters %}" {% if items.product.imageAlternateText %}alt="{{ items.product.imageAlternateText }}"{% endif %} />
+							    {% else %}
+							      <div class="media-object cart-noimage">
+									[{{ labels.noImages }}]
+								</div>
+							    {% endif %}    
+							  {% endif %}  
+							{% endwith %}						  
 						</a>
 					</div>
 					<div class="media-body">
