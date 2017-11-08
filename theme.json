@@ -480,6 +480,7 @@
       }
     ],
     "defaultPageSize": 36,
+    "columnBreaker": "~",
     "productInfinitySize": 54,
     "defaultSort": "createDate asc",
     "enablePartialCaching": true,
