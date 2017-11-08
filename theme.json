@@ -479,7 +479,8 @@
         "tagName": "p"
       }
     ],
-    "defaultPageSize": 15,
+    "defaultPageSize": 36,
+    "productInfinitySize": 54,
     "defaultSort": "createDate asc",
     "enablePartialCaching": true,
     "loadGoogleFonts": [
