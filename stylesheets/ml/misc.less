@@ -1100,6 +1100,7 @@ ul.tabs {
                 .mz-productdetail-qty {
                   font-size: @font-size;
                   font-weight: bold;
+                  max-width: 75px;
                 }
               }
             }
@@ -1119,9 +1120,9 @@ ul.tabs {
                 }
                 .mz-price{
                   display: block;
-                  font-size: 23px;
+                  font-size: 15px;
                   width: 100%;
-                  line-height: 24px;
+                  line-height: 14px;
                   text-align: right;
                   font-weight: bold;
                   &.is-crossedout {
@@ -1132,8 +1133,15 @@ ul.tabs {
                 .mz-pricestack-price-lower {
                   display: inline-block;
                   vertical-align: top;
+                  margin-left: 8px;
                 }
                 .mz-pricestack-price-lower {
+                    &::after {
+                        position: absolute;
+                        top: -1px;
+                        padding-left: 6px;
+                        font-size: 14px;
+                    }
                   margin: 0 10px 0 0;
                 }
                 .mz-pricestack-price-upper {
@@ -1150,6 +1158,9 @@ ul.tabs {
             }
           }
         }
+      }
+      .mz-qty-label,.size-swatches-container{
+        font-size: @fontSize;
       }
       .full-product{
         float: left;
