@@ -543,6 +543,7 @@
     "textColor": "#444444",
     "companyLogo":"/resources/images/logo-sm.png",
     "facetMoreColorCount": 3,
+    "enableQuickView": true,
     "usStates": [
       {
         "abbreviation": "AL",
