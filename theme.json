@@ -503,7 +503,7 @@
     "itemListingThumbSize": 80,
     "listProductCode": true,
     "listProductShortDesc": true,
-    "listProductThumbSize": 160,
+    "listProductThumbSize": 265,
     "maxProductImageThumbnailSize": 50,
     "maxProductSummaryWords": 40,
     "maxTopLevelNavItems": 8,
