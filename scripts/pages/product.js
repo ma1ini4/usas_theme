@@ -23,6 +23,7 @@
     var width_thumb = HyprLiveContext.locals.themeSettings.maxProductImageThumbnailSize;
     var width_pdp = HyprLiveContext.locals.themeSettings.productImagePdpMaxWidth;
     var width_zoom = HyprLiveContext.locals.themeSettings.productZoomImageMaxWidth;
+    var colorSwatchesChangeAlternate = HyprLiveContext.locals.themeSettings.colorSwatchesChangeAlternate;
     var current_zoom_id_added;
     var deviceType = navigator.userAgent.match(/Android|BlackBerry|iPhone|iPod|Opera Mini|IEMobile/i);
 
@@ -286,8 +287,10 @@
         selectSwatch: function(e) {
             this.isColorClicked = true;
             var colorCode = $(e.currentTarget).data('mz-swatch-color');
-            this.changeImages(colorCode, 'Y');
-
+            if(colorSwatchesChangeAlternate)
+                this.changeImages(colorCode, 'Y');
+            else
+                this.changeImages(colorCode, 'N');
         },
         changeImages: function(colorCode, _updateThumbNails) {
             var self = this;

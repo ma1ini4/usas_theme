@@ -424,6 +424,7 @@
     }
   ],
   "settings": {
+    "colorSwatchesChangeAlternate":false,
     "fullNameLength": 80,
     "firstNameLength": 40,
     "middleNameInitialsLength": 1,
@@ -445,6 +446,11 @@
     "orderNumberLength": 80,
     "orderVerificationCodeLength": 80,
     "productQuantityLength": 5,
+    "productImagePdpMaxWidth": 350,
+    "productImageDirectoryMaxWidth": 265,
+    "productThumbImageMaxWidth": 84,
+    "productZoomImageMaxWidth": 700,
+    "productCarouselImageWidth": 84,
     "globalCartEmptyBasketFooter":"", 
     "globalCartEmptyBasketKickerLink":"",
     "globalCartRelatedProducts":"true",
@@ -452,6 +458,8 @@
     "globalCartMaxItemCount":3,
     "globalCartEnableSaveCart":"true",
     "globalCartHidePopover": "",
+    "globalCartShowSubtotal": false,    
+    "globalCartItemImageMaxWidth": 105,    
     "footerEnableMini":false,
     "backofficeDateTimeFormat": "m/d/Y H:i:s O",
     "extendedPropertiesEnabled": false,
@@ -464,6 +472,7 @@
     "bannerImageEnabled": false,
     "bannerImageRepeat": "repeat-x",
     "bodyBackgroundColor": "#FFFFFF",
+    "minimumQuantityForInStockQuantityMessage":5,
     "cmsTextStyles": [
       {
         "className": "mz-style-1",
@@ -479,7 +488,9 @@
         "tagName": "p"
       }
     ],
-    "defaultPageSize": 15,
+    "defaultPageSize": 36,
+    "columnBreaker": "~",
+    "productInfinitySize": 54,
     "defaultSort": "createDate asc",
     "enablePartialCaching": true,
     "loadGoogleFonts": [

@@ -216,7 +216,7 @@
                     "name": "globalCartRelatedProducts"
                 },
                 {
-                    "fieldLabel": "Maximum number of Cross sells products",
+                    "fieldLabel": "Maximum number of Up sells products",
                     "xtype": "mz-input-number",
                     "name": "globalCartRelatedProductsSize"
                 },
@@ -231,47 +231,20 @@
                     "name": "globalCartMaxItemCount"
                 }, 
                 {
+                    "fieldLabel": "Max width of global Cart item image",
+                    "xtype": "mz-input-number",
+                    "name": "globalCartItemImageMaxWidth"
+                },
+                {
                     "fieldLabel": "Hide popover for empty global cart",
                     "xtype": "mz-input-checkbox",
                     "name": "globalCartHidePopover"
-                }                             
-            ]
-        },               
-        {
-            "xtype": "panel",
-            "title": "Paging",
-            "collapsed": false,
-            "items": [
-
-                {
-                    "fieldLabel": "Show these page size options",
-                    "xtype": "mz-input-selectmulti",
-                    "name": "pageSizeOptions",
-                    "allowBlank": false,
-                    "forceSelection": true,
-                    "store": [
-                        15,
-                        25,
-                        50,
-                        100,
-                        500
-                    ]
                 },
                 {
-                    "fieldLabel": "Default items per page",
-                    "xtype": "mz-input-dropdown",
-                    "name": "defaultPageSize",
-                    "allowBlank": false,
-                    "forceSelection": true,
-                    "storeFrom": "pageSizeOptions"
-                },
-                {
-                    "fieldLabel": "Default Sort Order",
-                    "xtype": "mz-input-text",
-                    "name": "defaultSort",
-                    "allowBlank": true      ,
-                    "allowOnlyWhitespace":true           
-                }
+                    "fieldLabel": "Show Subtotal",
+                    "xtype": "mz-input-checkbox",
+                    "name": "globalCartShowSubtotal"
+                }                            
             ]
         },
         {
@@ -508,6 +481,18 @@
                 }
             ]
         },
+        {
+            "xtype": "panel",
+            "title": "Color Swatches",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "colorSwatchesChangeAlternate",
+                    "fieldLabel": "Also change alternate images"
+                }
+            ]
+        },        
         {
             "xtype": "panel",
             "title": "Category Filters",
