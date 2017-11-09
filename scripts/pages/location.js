@@ -17,6 +17,20 @@ require([
             googleMapMaxNearbyDistance: Hypr.getThemeSetting('googleMapMaxNearbyDistance')
         };
 
+        var InfoSummaryView = Backbone.MozuView.extend({
+            templateName: 'modules/location/location-infosummary',
+            initialize: function() {
+                var self = this;
+                self.listenTo(self.model, 'change', self.render);
+            },
+            render: function() {
+                Backbone.MozuView.prototype.render.apply(this);
+                return this;
+            }
+        });
+
+        var Model = Backbone.MozuModel.extend(); 
+
         try {
             defaults.googleMapZoom = parseInt(defaults.googleMapZoom, 10);
         } catch (e) { }
@@ -162,7 +176,7 @@ require([
                     google.maps.event.addListener(marker, 'click', (function (marker, i) {
                         return function () {
                             var dirQueryString = [
-                                "Christmas Tree Shops" +
+                                "Christmas Tree Shops " +
                                 location.address.address1,
                                 location.address.address2,
                                 location.address.address2,
@@ -171,33 +185,15 @@ require([
                                 location.address.postalOrZipCode,
                                 location.address.countryCode
                             ];
-                            dirQueryString = dirQueryString.join(" ");
+                            location.storeSearched = storeSearched;
+                            location.dirQueryString = dirQueryString.join(" ");
                             var saddr = (window.location.pathname.indexOf("store-details") > -1) ? '<p class="start-address-label">Start address:</p> <input type="text" name="saddr">' : '';
+                            location.saddr = saddr;
+                            location.regularHours = false;
 
                             //Info window content DOM
-                            var infoWindowDOM = '<div class="mz-locationlisting">' +
-                                '<div class="mz-locationlisting-details">' +
-                                '<h4 data-store-url="store-details?code=' + location.code + '" class="mz-locationlisting-name" style="text-transform:uppercase;">' + location.description + '</h4>' +
-                                '<div class="mz-addresssummary">' +
-                                '<span>' + (typeof location.firstName == "undefined" ? "" : location.firstName) + (typeof location.lastNameOrSurname == "undefined" ? "" : location.lastNameOrSurname) + '</span>' +
-                                '<span>' + location.address.address1 + '</span>' +
-                                '<span>' + location.address.address2 + '</span>' +
-                                '<span>' + location.address.address3 + '</span>' +
-                                '<span>' + location.address.cityOrTown + ', ' + location.address.stateOrProvince + ' ' + location.address.postalOrZipCode + '</span>' +
-                                '<span>' + location.phone + '</span>' +
-                                '<span><a class="mz-store-hours" data-store-url="store-details?code=' + location.code + '" href="javascript:void(0);"><u>Hours & Info</u></a></span>' +
-                                '</div>' +
-                                '<form class="search-address-form" target="_blank" action="//maps.google.com/maps">' +
-                                '<div class="search-address-container ' + storeSearched + '">' +
-                                saddr +
-                                '</div>' +
-                                '<input type="hidden" name="daddr" value="' + dirQueryString + '">' +
-                                '<div class="dir-btn-container">' +
-                                '<input type="submit" class="btn button_primary btn-block" value="GET DIRECTIONS"></input>' +
-                                '</div>' +
-                                '</form>' +
-                                '</div>' +
-                                '</div>';
+                            var view = new InfoSummaryView({ model: new Model(location) });
+                            var infoWindowDOM = view.render().el;
 
                             //Info window content DOM END
                             map.setCenter(marker.getPosition());
@@ -285,15 +281,18 @@ require([
                         window.location.href = window.location.origin + "/store-details?code=" + $(this).attr("data-store-id");
                     });
                 },
-                loadStoreDetailPage: function (pageSize, lat, lng) {
+                loadStoreDetailPage: function (pageSize, lat, lng) {                    
                     var _self = this;
                     //get and render nearby stores
                     _self.getNearbyShops(pageSize, lat, lng, 0, function () {
                         _self.drawMap(window.lv.model.apiModel.data.items);
+                        document.title =  window.lv.model.apiModel.data.items[0].name + " - " + Hypr.getLabel("storeTitle");                       
                         $(".dir-btn-container").removeClass("hidden");
                         $("#success-shops").text("Store Details");
                         $("#searchTermView").val("");
-                        $(".store-details").after(socialShareWidgetTemplate.render());
+                        $(".store-details").after(socialShareWidgetTemplate.render({
+                            model: [encodeURIComponent(window.location.href)]
+                        }));
                         $(".mz-locationlisting-locationdetails,.show-store-detail,div[data-marker-id]")
                             .off("click");
                         $("#location-list").removeClass("mz-locationlist");

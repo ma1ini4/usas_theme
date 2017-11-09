@@ -481,5 +481,13 @@
   "zipErrorMessage":"Please enter a valid zipcode.",
    "find": "Find",
    "storeLocator": "Store locator",
-   "enterZipCode": "Enter Zipcode"
+   "enterZipCode": "Enter Zipcode",
+   "storeHours":"STORE HOURS",
+    "monday":"Mon",
+    "tuesday":"Tue",
+    "wednesday":"Wed",
+    "thusday":"Thu",
+    "friday":"Fri",
+    "saturday":"Sat",
+    "sunday":"Sun"
 }

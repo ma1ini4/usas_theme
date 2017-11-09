@@ -9,6 +9,15 @@
         width: 100%;
         max-height: 400px;
         overflow-y: auto;
+        &::-webkit-scrollbar {
+            -webkit-appearance: none;
+            width: 7px;
+        }
+        &::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background-color: rgba(0,0,0,.5);
+            -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+        }
     }
     .empty-store-container{
         display: none;
@@ -110,14 +119,14 @@
             h4 {
                 margin: 0 0 10;
                 font-weight: normal;
-                font-size: 20px;
+                font-size: 18px;
                 color: #333333;
                 font-family: Verdana, Geneva, Helvetica, sans-serif !important;
             }
         }
         .mz-addresssummary{
             margin: 10px 0;
-            font-size: 16px;
+            font-size: 13px;
             .store-hours-heading{
                 margin: 0;
             }
@@ -127,7 +136,7 @@
             }
         }
         .social-share-container{
-            font-size: 16px;
+            font-size: 13px;
             margin: 10 0;
             cursor: text;            
             .social-icons-wrapper {
@@ -141,7 +150,7 @@
             }
         }
         .store-details{
-            border-bottom: 1px solid #e1e1e1;
+            border-bottom: 0;
             color: #000;
         }
         .mz-locationlisting-inventory, .mz-locationlisting-distance, .mz-locationlisting-actions {
@@ -194,7 +203,7 @@
         #showLessStores,#showMoreStores{
             color: #333333;
             text-decoration: underline;
-            font-size: 18px;
+            font-size: 12px;
         }
     }
     .dir-btn-container{
