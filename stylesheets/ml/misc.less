@@ -1372,7 +1372,7 @@ ul.tabs {
                     margin:0;
                   }
                   &.active{
-                    outline: 2px solid #e1e1e1;
+                    outline: 2px solid  @colorGray;
                   }
                 }
               }
@@ -1777,7 +1777,12 @@ ul.tabs {
             }
         }
         .mz-pricestack{
-            margin: 5px 0;           
+            margin: 5px 0;
+            .mz-pricestack-price-lower::after {
+                position: absolute;
+                top: 0px;
+                left: 94px;
+            }           
         }        
     }
 }
