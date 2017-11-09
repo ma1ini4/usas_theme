@@ -477,5 +477,19 @@
   "readAReview": "Read a review",
   "viewAll": "View All",
   "RefineBy": "Refine By",
-  "rolloverToZoom": "Rollover To Zoom"
+  "rolloverToZoom": "Rollover To Zoom",
+  "zipErrorMessage":"Please enter a valid zipcode.",
+   "find": "Find",
+   "storeLocator": "Store locator",
+   "enterZipCode": "Enter Zipcode",
+   "storeHours":"STORE HOURS",
+    "monday":"Mon",
+    "tuesday":"Tue",
+    "wednesday":"Wed",
+    "thusday":"Thu",
+    "friday":"Fri",
+    "saturday":"Sat",
+    "sunday":"Sun",
+    "noNearByStores": "Location is not granular enough.",
+    "emptyStoreSearch": "Please enter a valid location."
 }
