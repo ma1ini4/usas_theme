@@ -514,6 +514,23 @@
                     "fieldLabel": "View All Page Size"
                 }
             ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Family Products",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-text",
+                    "name": "familyProductType",
+                    "fieldLabel": "Family Product Type"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "familyProductAttribute",
+                    "fieldLabel": "Family Product Attribute"
+                }
+            ]
         }
 
 

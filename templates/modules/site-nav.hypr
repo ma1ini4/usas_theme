@@ -6,8 +6,6 @@
           data-mz-contextify-val='is-current'>
           {% partial_cache %}
           {% for link in navigation.tree %}
-            
-
             {% if not link.isHidden and not link.isEmpty and forloop.counter0 < themeSettings.maxTopLevelNavItems and link.url != "/home" %}
             <li class="mz-sitenav-item">
               <div class="mz-sitenav-item-inner">
@@ -37,9 +35,11 @@
                   {% endfor %}
                   </ul> 
                   <div>
+                  {% comment %}
                     {% with "id eq {0}"|string_format(link.originalId) as filter %}
                       {% include_entities "modules/category-attributes" listFQN="categoryAttributes@KTrain" filter=filter %}                  
-                    {% endwith %}                    
+                    {% endwith %}
+                  {% endcomment %}                    
                   </div>                 
                 </div>
 

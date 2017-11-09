@@ -9,8 +9,9 @@
     "modules/cart-monitor",
     "modules/models-product",
     "modules/views-productimages",
-    "hyprlivecontext"
-], function($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonitor, ProductModels, ProductImageViews, HyprLiveContext) {
+    "hyprlivecontext",
+    "modules/product/family-products"
+], function($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonitor, ProductModels, ProductImageViews, HyprLiveContext, FamilyModel) {
 
     var sitecontext = HyprLiveContext.locals.siteContext;
     var cdn = sitecontext.cdnPrefix;
@@ -513,5 +514,8 @@
         }        
 
     });
-
+    //Code for Family Page
+    if ($("#mz-family-container").length) {
+        FamilyModel.render();
+    }
 });
