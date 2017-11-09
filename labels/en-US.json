@@ -489,5 +489,7 @@
     "thusday":"Thu",
     "friday":"Fri",
     "saturday":"Sat",
-    "sunday":"Sun"
+    "sunday":"Sun",
+    "noNearByStores": "Location is not granular enough.",
+    "emptyStoreSearch": "Please enter a valid location."
 }
