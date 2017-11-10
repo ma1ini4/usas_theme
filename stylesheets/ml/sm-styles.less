@@ -224,6 +224,60 @@
 			border-bottom: none;
 		}
 	}
+	//Product detail page
+    .mz-product-top-content {
+        .mz-pagetitle{
+            font-size: @fontSizeLarge+14;
+        }
+    }
+    .mz-productdetail-wrap {
+		#product-detail{
+			.mz-l-stack-section{
+				.mz-price {
+					font-size: @fontSize+16;
+					.mz-price-discountname {
+						font-size: @fontSize;
+						color: @secondaryColor;
+						.fontRegular();
+					}
+				}
+			}
+			.email-popup{
+				#mz-drop-zone-email-notification{
+					.mz-cms-content{
+						.mz-instock-request {
+	                        .modal-body {
+	                        	input {
+	                                width: 235px;
+	                            }
+	                        }
+	                    }
+					}
+				}
+			}
+		}
+	    .mz-productdetail-wrap {
+	      #product-detail{
+	        .mz-l-stack-section{
+	          &.mz-productdetail-price {
+	              margin-top: 20px;
+	          }
+	        }
+	      }
+	    }
+        .mz-productdetail-shortdesc{
+            font-size: @fontSizeLarge;
+        }
+    }
+    .prize-mobile-view{
+        display: none;
+    }
+    .swatch-icon {
+        display: none;
+    }
+    .ml-product-swatch {
+        border-bottom: 1px solid @colorLightGray;
+    }
 	//bx slider navigations 
 	.mz-productimages {
 	    .mz-productimages-thumbs {

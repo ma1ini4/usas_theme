@@ -1,0 +1,49 @@
+{% if model %}
+	<div class="col-sm-3">
+	<a href='{% make_url "product" model %}'>
+		{% if model.content.productImages %}
+			{% with model.content.productImages|first as prodImage %}
+				{% include "modules/product/product-image" with productImage=prodImage productMaxWidth="160" as_parameter %}
+			{% endwith %}
+		{% else %}
+	    	{% include "modules/product/product-image" with productImage=model.mainImage productMaxWidth="160" as_parameter %}
+		{% endif %}
+	</a>
+	</div>
+	<div class="col-xs-12 col-sm-4">
+		<h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName|replace("'","&rsquo;")|safe }}</h1>
+		<h4 class="mz-productcodes-productcode p-3" itemprop="sku">{{ labels.item}} # {{ model.productCode }}</h4>
+	</div>
+	<div class="col-xs-12 col-sm-3">
+		<div class="mz-productdetail-options mz-l-stack-section">
+		  {% include "modules/product/product-options" %}
+		</div>
+		{% include "modules/product/product-validation" %}
+		<!-- div to display message in case inventory < minimumQuantityForInStockQuantityMessage and > 0 -->
+		{% if model.inventoryInfo.onlineStockAvailable > 0 and model.inventoryInfo.onlineStockAvailable <= model.minimumQuantityForInStockQuantityMessage %}
+		<div class="col-xs-12 col-sm-12">
+		    <div class="mz-validationmessage out-of-stock-message" data-mz-validationmessage-for="quantity">
+		      *Only {{model.inventoryInfo.onlineStockAvailable}} left in stock.
+		    </div>
+		</div>
+		{% endif %}
+	</div>
+	<div class="col-xs-12 col-sm-2">
+		<div class="clearfix">
+		{% include "modules/product/price-stack" %}
+		</div>
+		<section class="mz-l-stack-section mz-productdetail-conversion row">
+		{%if model.productType!="Family Product"%}
+		    <div class="mz-productdetail-conversion-controls col-xs-4 col-sm-4">
+		      <label class="mz-qty-label text-uppercase" for="mz_pdp_qty">{{ labels.qty }}</label>
+		      <div class="qty-block">
+		        <div class="qty-counter" id="minus" data-mz-qty-minus role="button"><i class="fa fa-minus"  aria-hidden="true"></i></div>
+		        <input id="mz_pdp_qty" class="mz-productdetail-qty text-center" type="text" value="1" readonly onfocus="this.blur()" data-mz-value="quantity" title="Quantity" />
+		        <div class="qty-counter" id="plus" data-mz-qty-plus role="button"><i class="fa fa-plus" aria-hidden="true"></i></div>
+		      </div>
+		      <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
+		    </div>
+		{% endif %}
+		</section>
+	</div>
+{% endif %}
