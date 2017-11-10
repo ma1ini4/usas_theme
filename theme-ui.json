@@ -514,8 +514,18 @@
                     "fieldLabel": "View All Page Size"
                 }
             ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Quick View",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "enableQuickView",
+                    "fieldLabel": "Enable Quick View"
+                }
+            ]
         }
-
-
     ]
 }
