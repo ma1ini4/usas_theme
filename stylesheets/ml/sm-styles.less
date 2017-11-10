@@ -301,7 +301,7 @@
                 clear: none;
             }
             &:nth-child(3n+1) {
-                clear: none;
+                clear: left;
             }
             .mz-productlisting-info {
                 padding: 0 5px;
@@ -323,19 +323,27 @@
 	    .is-disabled{
 	    	opacity: 0.4;
 	    }
-		.title-sortby-wrappper{
-		.mz-pagetitle{
-			font-size: 24px;
-			float: left;
-			line-height: 2.5;
-			display: inline-block;
-			width: auto;
+	    .mz-l-paginatedlist-header{
+	        .title-sortby-wrappper{
+	            .mz-sortby{
+	                line-height: 3.5;
+					display:inline-block;
+					float: right;
+	            }
+	        }
 		}
-		.mz-sortby{
-			line-height: 3.5;
-			display:inline-block;
-			float: right;
+		.title-sortby-wrappper{
+			.mz-pagetitle{
+				font-size: 24px;
+				float: left;
+				line-height: 2.5;
+				display: inline-block;
+				width: auto;
 			}
+			.mz-paging-sorttitle {
+	             font-size: @fontSize + 3px;
+	            .fontsMedium();
+	        }
 		}
 		.mz-pagingcontrols{
 			display: block;
@@ -372,4 +380,62 @@
 	      }
 	    }
 	 }
+	 //Cart Page
+    .mz-checkout,.mz-table-cart,&.mz-confirmation{
+    	.mz-price-total-container{
+	        .mz-carttable-item-price{
+	        	text-align: left;
+	        	display: block; 
+	        	.mz-item-price.is-saleprice,
+	        	.mz-item-price.is-crossedout{
+	        		text-align: left;
+	        	}
+	        	.mz-item-price.is-crossedout{
+	        		float: left;
+	        	}
+	        }
+	    } 
+	    .mz-pagetitle{
+	        border-bottom: none;
+	    }
+	    .is-saleprice,
+	    .mz-item-rowtotal{
+	        text-align: right;
+	        color: @colorGray;
+	        font-size: 16px;
+	    }
+	    .mz-item-discountname{
+	        display: block;
+	    }
+	    .mz-item-discount{
+	        text-align: right;
+	        clear: both;
+	    }
+	    .mz-item-price{
+	        display: block;
+	        font-size: @fontSizeLarger;
+	    }
+	    .is-crossedout{
+	         display: inline-block;
+	         text-align: right;
+	         color: @colorLighterGray;
+	         font-size: @fontSizeLarger;
+	         float: right;
+	    }
+	    .mz-empty-cart-link-container{
+	        button {
+	            width: auto;
+	        }
+    	}
+    	#cart-checkout,
+    	.mz-common-button-padding{
+    		width: auto;
+    	}
+    	.mz-common-button-padding{
+    		padding: 0 0 0 5px;
+    	}
+		.mz-button-bottom-cart{
+	        margin-top: 25px;
+	    }
+    }
 }
