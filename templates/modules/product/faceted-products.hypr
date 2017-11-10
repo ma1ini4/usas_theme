@@ -1,4 +1,5 @@
-﻿{% if not pageContext.query.partial %}
+﻿
+{% if not pageContext.query.partial %}
 <script type="text/json" id="data-mz-preload-facetedproducts">
 {
 	"items" : {% json model.items %},

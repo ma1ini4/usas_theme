@@ -484,7 +484,7 @@ define([
                     var availableColors = [];
                     if (options_pro.models) {
                         for (var i = 0; i < options_pro.models.length; i++) {
-                            if (options_pro.models[i].id == "tenant~COLOR") {
+                            if (options_pro.models[i].id == "tenant~color") {
                                 for (var j = 0; j < options_pro.models[i].legalValues.length; j++) {
                                     var color = options_pro.models[i].legalValues[j].trim().replace(/ /g, '_');
                                     var swatchIconSize =

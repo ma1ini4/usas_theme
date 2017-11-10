@@ -15,7 +15,7 @@
         <a class="mz-productlisting-title visible-xs" href='{% make_url "product" model %}'>{{model.content.productName|safe}}</a>
         <!--Color Swatch-->
         {% for option in model.options %}
-            {% if option.attributeFQN=="tenant~COLOR" and option.values.length!=0 %}
+            {% if option.attributeFQN=="tenant~color" and option.values.length!=0 %}
                 <div class="ml-product-swatch">
                     <div class="row">
                         <ul>

@@ -39,7 +39,7 @@
                     <option {% if not value.isEnabled %} class="is-disabled" {% endif %} {% if value.isSelected %}selected="true"{% endif %} value="{{value.value}}">{{value.stringValue|default(value.value)}}{% if value.deltaPrice and value.deltaPrice > 0 %} ( {{ value.deltaPrice|currency }} {{ labels.more }} ){% endif %}</option>
                     {% endfor %}
                 </select>
-                {% if option.attributeFQN == 'tenant~COLOR' %}
+                {% if option.attributeFQN == 'tenant~color' %}
                     <ul class="product-color-swatches">
                         {% include "modules/facets/facet-color" with allfacets=option.values isPDP="true" as_parameter %}
                     </ul>

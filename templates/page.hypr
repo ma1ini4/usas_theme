@@ -126,7 +126,6 @@
                 </div>
             </div>
             {% block secondary-nav %}
-            {% include "modules/secondary-nav" %}
             {% endblock secondary-nav %}
 
             {% block page-footer %}
