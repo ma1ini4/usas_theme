@@ -234,7 +234,10 @@
         -webkit-transition: visibility 0s ease-out 0s;
         -moz-transition: visibility 0s ease-out 0s;
         -ms-transition: visibility 0s ease-out 0s;
-        -o-transition: visibility 0s ease-out 0s; 
+        -o-transition: visibility 0s ease-out 0s;
+        /*Fix for Scroll bar on navigation*/
+        max-height: 300px;
+        overflow: auto;
     }
     .mz-sitenav-item {
         float: none;
@@ -325,8 +328,8 @@
             .mz-sitenav-link {
                 font-size: 13px;
             }
-            display: table-cell;
-            float: none;
+            width: 100%;
+            
             .mz-sitenav-sub-sub {
                 .mz-sitenav-item {
                     display: block;
@@ -921,10 +924,11 @@ footer {
 .mz-l-paginatedlist{
     .mz-pagingcontrols, .mz-pagenumbers{
         float: right;
+        margin-top: 0;
     }
 } 
 .mz-l-pagecontent{ 
-    padding: 25px 8.5px;
+    padding: 25px 0px;
     //site map 
     .mz-site-map{
         color: #383333;
@@ -1578,7 +1582,7 @@ ul.tabs {
         float: left;
         line-height: 2.5;
         display: block;
-        width: auto;
+        width: 100%;
     }
   }
   .mz-l-paginatedlist-header{
@@ -1588,7 +1592,7 @@ ul.tabs {
             .mz-sortby{
                 line-height: 4.5;
                 display: block;
-                float: right ;
+                float: left ;
             }
         }
   }
@@ -1649,8 +1653,8 @@ ul.tabs {
                     }
                 }
             }
-            &:nth-child(3n+1) {
-                clear: both;
+            &:nth-child(2n+1) {
+                clear: left;
             }
             .mz-productlisting-info {            
                 padding: 0;
@@ -2343,6 +2347,7 @@ ul.tabs {
     font-size: 16px;
 }
 
+
 .mz-table-cart-items{
   .cart-noimage{
     .no-image(104px,100px);
@@ -2360,4 +2365,22 @@ ul.tabs {
 }
 .mz-link-span{
   cursor: pointer;
+}
+.mz-category,
+.mz-searchresults {
+    .mz-l-pagecontent {
+        padding: 25px 0;
+    }
+    .title-sort-breadcrumb-wrapper {
+        .mz-l-paginatedlist-header {
+            border-bottom: 1px solid @colorLightGray;
+        }
+        .mz-paging-sorttitle {
+             font-size: @fontSize - 1px;
+            .fontsMedium();
+        }
+        .mz-pagingcontrols-pagesort-dropdown{
+            font-weight: normal;
+        }
+    }
 }
