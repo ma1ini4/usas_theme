@@ -2016,7 +2016,7 @@ ul.tabs {
             &.mz-productdetail-price {
                 margin-top: 22px;
                 padding-left: 0;
-            }            
+            }
             .mz-productdetail-conversion-buttons {
                 padding: 0;
                 .tell-a-friend{
@@ -2066,7 +2066,7 @@ ul.tabs {
                                 .box-shadow(none);
                                 -webkit-appearance: none;
                             }
-                            button { 
+                            button {
                                 line-height: 17px;
                                 min-width: 0;
                                 margin-top: -4px;
@@ -2129,7 +2129,7 @@ ul.tabs {
         .active{
             a{
                 background: @colorLightGray;
-                border: 1px solid @colorLighterGray; 
+                border: 1px solid @colorLighterGray;
                 color: @colorGray;
                 .fontsBold();
             }
@@ -2156,7 +2156,7 @@ ul.tabs {
     border-bottom: 0;
     ul {
         margin: 0 auto;
-        padding: 0 @defaultGutter;        
+        padding: 0 @defaultGutter;
         display: table;
         li {
             float: left;
@@ -2282,7 +2282,7 @@ ul.tabs {
             width: 25px;
             height: 34px;
             text-align: center;
-            
+
             i{
                 margin-top:13px;
                 font-size: @fontSizeSmall;
@@ -2297,7 +2297,7 @@ ul.tabs {
             width: 34px;
             float: left;
             background: @colorWhite;
-            margin: 0px; 
+            margin: 0px;
             border-radius: 0;
         }
 
@@ -2305,4 +2305,31 @@ ul.tabs {
     .mz-validationmessage{
         font-size: @fontSize;
     }
+}
+.mz-location-parent{
+  #map {
+    .mz-locationlisting{
+      .mz-locationlisting-details {
+        width: 150px;
+        padding: 10px 0 0 10px;
+        h4 {
+          font-size: @fontSizeLarger;
+          color: @colorGray;
+        }
+        .dir-btn-container {
+          input {
+            font-size: @fontSize;
+          }
+        }
+      }
+    }
+  }
+}
+.mz-locations{
+  .dir-btn-container{
+    background-color:buttonface;
+    a{
+      color: #000;
+    }
+  }
 }
