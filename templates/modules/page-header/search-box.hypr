@@ -1,9 +1,11 @@
-
-﻿<form id="searchbox" class="mz-searchbox{% if themeSettings.useSearchAutocomplete %} mz-searchbox-expands{% endif %}" action="{% make_url "search" %}">
-
+<form id="searchbox" class="mz-searchbox" action="{% make_url "search" %}">
     <span class="mz-searchbox-field">
         <input placeholder="{{ labels.search }}" id="search-field" type="search" class="mz-searchbox-input ml-header-search-field form-control" autocomplete="off" name="query" data-mz-role="searchquery" />
-        <button class="mz-searchbox-button" type="submit">{{ labels.search }}</button>
+        <button class="mz-searchbox-button" type="submit">
+            <span class="glyphicon glyphicon-search">
+                <span class="hide">{{ labels.search }}</span>
+            </span>
+        </button>
     </span>
     <!--
 	<select class="mz-searchbox-categories" name="categoryId" 
