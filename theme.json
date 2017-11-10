@@ -505,7 +505,7 @@
     "itemListingThumbSize": 80,
     "listProductCode": true,
     "listProductShortDesc": true,
-    "listProductThumbSize": 160,
+    "listProductThumbSize": 265,
     "maxProductImageThumbnailSize": 50,
     "maxProductSummaryWords": 40,
     "maxTopLevelNavItems": 8,
@@ -545,6 +545,7 @@
     "textColor": "#444444",
     "companyLogo":"/resources/images/logo-sm.png",
     "facetMoreColorCount": 3,
+    "enableQuickView": true,
     "usStates": [
       {
         "abbreviation": "AL",

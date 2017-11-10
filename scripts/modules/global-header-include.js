@@ -14,6 +14,17 @@ define(
                     sessionStorage.setItem('globalHeaderIncludeClosed', true);
                 });
             });
+             $("#btnFindStore").click(function() {
+                var zipcode = $.trim($("#footerZipCodeInput").val());
+                if(!zipcode){
+                    $('#zipcodeHelpBlock').removeClass('hidden');
+                    return false;
+                }else{
+                    $('#zipcodeHelpBlock:not(".hidden")').addClass('hidden');
+                }
+                zipcode = (zipcode.length === 0 ? "Enter+Zip" : zipcode);
+                window.location.href = window.location.origin + "/store-locator?zipcode=" + zipcode;
+            });
         });
     }
 );

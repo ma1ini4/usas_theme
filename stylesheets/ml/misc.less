@@ -1372,7 +1372,7 @@ ul.tabs {
                     margin:0;
                   }
                   &.active{
-                    outline: 2px solid #e1e1e1;
+                    outline: 2px solid  @colorGray;
                   }
                 }
               }
@@ -1596,9 +1596,6 @@ ul.tabs {
         width: 100%;
         float: left;
   }
-  .mz-productlisting-imageplaceholder{
-    width: 200px;
-  }
   .mz-pagingcontrols{
         float: right;
         margin-right: 10px;
@@ -1777,7 +1774,12 @@ ul.tabs {
             }
         }
         .mz-pricestack{
-            margin: 5px 0;           
+            margin: 5px 0;
+            .mz-pricestack-price-lower::after {
+                position: absolute;
+                top: 0px;
+                left: 94px;
+            }           
         }        
     }
 }
@@ -1922,6 +1924,10 @@ ul.tabs {
     a{
         color: #333;
     }
+}
+
+.mz-category.modal-open .zoomContainer{
+    z-index: 1051;
 }
 //Product detail page
 .mz-product-top-content{

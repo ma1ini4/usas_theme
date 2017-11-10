@@ -531,8 +531,23 @@
                     "fieldLabel": "Family Product Attribute"
                 }
             ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Quick View",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "enableQuickView",
+                    "fieldLabel": "Enable Quick View"
+                }
+            ]
+
+
+
+
+
         }
-
-
     ]
 }

@@ -171,7 +171,7 @@
         </li>
         {% endif %}                
         <li class="mz-utilitynav-item">
-            <a href="/templates/location" data-mz-action="stores" data-placement="bottom" class="mz-utilitynav-link">{{ labels.localStores }}</a>
+            <a href="/store-locator" data-mz-action="stores" data-placement="bottom" class="mz-utilitynav-link">{{ labels.localStores }}</a>
             <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>            
         </li>
         <li class="mz-utilitynav-item site-msg">
