@@ -8,7 +8,7 @@
                <span>{{labels.storeDetails}}</span>
         </div>        
         <div class="dir-btn-container hidden">
-            <a target="_blank" class="btn button_primary btn-block" href="https://maps.google.com/maps?daddr=christmas+tree+shop+{{model.address.address1}}+{{model.address.address2}}+{{model.address.address3}}+{{model.address.cityOrTown}}+{{model.address.stateOrProvince}}+{{model.address.postalOrZipCode}}+{{model.address.countryCode}}">
+            <a target="_blank" class="btn button_primary btn-block" href="https://maps.google.com/maps?daddr={{model.address.address1}}+{{model.address.address2}}+{{model.address.address3}}+{{model.address.cityOrTown}}+{{model.address.stateOrProvince}}+{{model.address.postalOrZipCode}}+{{model.address.countryCode}}">
                 {{ labels.storeDirection }}
             </a>
         </div>

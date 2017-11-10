@@ -9,6 +9,21 @@
         width: 100%;
         max-height: 400px;
         overflow-y: auto;
+        font-family: @fontFamily !important;
+        &.store-detail{
+            max-height: 500px;
+            .dir-btn-container{
+                padding: 5px 5px 5px 0;
+            }
+            .store-details{
+                cursor: text;
+                border-bottom: none;
+            }
+            .mz-locationlisting-locationdetails,.show-store-detail,div[data-marker-id]{
+                cursor: text;
+                padding: 0;
+            }
+        }
         &::-webkit-scrollbar {
             -webkit-appearance: none;
             width: 7px;
@@ -17,7 +32,7 @@
             border-radius: 4px;
             background-color: rgba(0,0,0,.5);
             -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
-        }
+        }        
     }
     .empty-store-container{
         display: none;
@@ -25,11 +40,11 @@
             display: block;
         }
         .label-nearby-stores{
-            font-size: 14px;
+            font-size: @fontSize - 1;
         }
         .error-success-message-container{
             p{    
-                color: red;
+                color: @errorText;
             }
         }
     }    
@@ -39,35 +54,35 @@
             display: block;
         }
         .label-nearby-stores{
-            font-size: 15px;
+            font-size: @fontSize - 1;
         }
         .error-success-message-container{
             font-size: @fontSize - 1px;
-            font-weight: normal;
+            .fontsMedium();
             line-height: 25px;
-            color: #333333;
-            margin: 20px 0 18px;
-            border-bottom: 1px solid #e1e1e1;
+            color: @colorGray;
+            margin: 20px 0 12px;
+            border-bottom: 1px solid @colorLighterGray;
             p{
                 margin: 0;
             }
         }
         .empty-search{
-            color: red;
+            color: @errorText;
         }
     }
     .store-search-container{
-        border: 1px solid #e1e1e1;
+        border: 1px solid @colorLightGray;
         &.has-error{
-            border-color: red;
+            border-color: @errorText;
         }
     }
     .store-image-container{
         img{
             float: right;
-            -moz-box-shadow: 0px 0px 6px #e1e1e1;
-            -webkit-box-shadow: 0px 0px 6px #e1e1e1;
-            box-shadow: 0px 0px 6px #ccc;
+            -moz-box-shadow: 0px 0px 6px @colorLighterGray;
+            -webkit-box-shadow: 0px 0px 6px @colorLighterGray;
+            box-shadow: 0px 0px 6px @colorLighterGray;
             border-radius: 3px;
         }
     }
@@ -75,9 +90,6 @@
         height: 535px;
         width: 100%;
         margin: 15px 0;
-        .mz-locationlisting{
-            min-width: 260px;
-        }
         .mz-locationlisting-name{
             text-transform: uppercase;
         }
@@ -93,13 +105,19 @@
         margin-top: 20px;
         .search-address-container{
             .start-address-label{
-                font-size: 14px;
+                font-size: @fontSize - 1;
                 margin: 0 0 5px;
             }
             input{
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
                 width: 100%;
                 margin-bottom: 0;
-                outline: 0;                
+                outline: 0;
+                border: 1px solid @inputBorder;
+                border-radius: 0;
+                box-shadow: none;
             }        
         }
         .dir-btn-container{
@@ -107,26 +125,25 @@
         }
     }    
     .mz-locationlisting {
-        margin: 10 0;
+        margin: 0;
         display: table;
         width: 100%;
         cursor: pointer;
         .mz-locationlisting-locationdetails {
             vertical-align: middle;
             display: table-cell;
-            padding: 10;
+            padding: 15px @gutter/2 0 0;
             width: 160px;
             h4 {
-                margin: 0 0 10;
-                font-weight: normal;
-                font-size: 18px;
-                color: #333333;
-                font-family: Verdana, Geneva, Helvetica, sans-serif !important;
+                margin: 0 0 @gutter/4;
+                .fontsMedium();
+                font-size: @fontSizeLarger + 2px;
+                color: @colorGray;
             }
         }
         .mz-addresssummary{
             margin: 10px 0;
-            font-size: 13px;
+            font-size: @fontSize - 1px;
             .store-hours-heading{
                 margin: 0;
             }
@@ -136,13 +153,17 @@
             }
         }
         .social-share-container{
-            font-size: 13px;
-            margin: 10 0;
+            font-size: @fontSize - 1px;
+            margin: @defaultGutter 0;
             cursor: text;            
             .social-icons-wrapper {
                 margin: 5px 0 0 0;
                 .fb-like-icon {
-                    line-height: 0.3;
+                    .fb-like {
+                        &> span {
+                            height: 27px!important;
+                        }
+                    }
                 }
                 .twitter-share-button {
                     height: 22px!important;
@@ -150,24 +171,25 @@
             }
         }
         .store-details{
-            border-bottom: 0;
-            color: #000;
+            border-bottom: 1px solid @colorLightGray;
+            color: @colorGreen;
+            font-weight: 700;
         }
         .mz-locationlisting-inventory, .mz-locationlisting-distance, .mz-locationlisting-actions {
             vertical-align: middle;
             display: table-cell;
-            padding: 10px;
+            padding: @gutter/2 @gutter;
             text-align: right;
         }
         .mz-locationlisting-inventorystatus {
             font-weight: bold;
             text-transform: uppercase;
-            color: #000;
+            color: @availableText;
         }
         &.is-disabled {
             .opacity(.75);
             .mz-locationlisting-inventorystatus {
-                color: #000;
+                color: @unavailableText;
             }
         }
     }
@@ -184,7 +206,7 @@
             box-shadow: 0 0 0;
             z-index: 0;
             padding: 0 15px;
-            color: #333333;
+            color: @colorGray;
         }
         button{
             border: 0;
@@ -193,7 +215,7 @@
             position: relative;
             top: 3px;
             right: 3px;
-            color: #333333;
+            color: @colorOrange;
         }
     }
     //Pagination Styling
@@ -201,28 +223,20 @@
         margin: 10px 0;
         height: 10px;
         #showLessStores,#showMoreStores{
-            color: #333333;
+            color: @colorGray;
             text-decoration: underline;
-            font-size: 12px;
+            font-size: @fontSize - 2px;
         }
     }
     .dir-btn-container{
         padding: 15px 0;
         a.btn-success{
-            color: #fff;
-            background: #333333;
+            color: @colorWhite;
+            background: @colorGreen;
             &:active:focus{
-                background: #000;
+                background: @colorGreen;
             }
         }
-    }
-    .button_primary:visited,
-    .button_primary:focus,
-    .button_primary:active,
-    .button_primary:hover,
-    .button_primary{
-        background-color: #656868;
-        color: #fff;
     }
     //store-locator-overlay
     .store-locator-overlay{
@@ -231,7 +245,7 @@
             position: fixed;
             top: 0;
             left: 0;
-            background: #333333;
+            background: @colorGray;
             opacity: 0.8;
             z-index: 111;
             width: 100%;
@@ -247,8 +261,30 @@
             top: 40%;
             left: 35%;
             text-align: center;
-            color: #fff;
+            color: @colorWhite;
             font-size: 60px;
+        }
+    }
+}
+.mz-locationlist {
+    .location-item {
+        &:first-child {
+            .mz-locationlisting {
+                .mz-locationlisting-locationdetails {
+                    padding-top: 0
+                }
+            }
+        }
+        &:last-child {
+            .mz-locationlisting {
+                margin-bottom: 0;
+                .mz-locationlisting-locationdetails {
+                    padding-bottom: 0;
+                }
+                .store-details {
+                    border-bottom: 0;
+                }
+            }
         }
     }
 }
