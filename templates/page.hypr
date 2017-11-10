@@ -110,6 +110,7 @@
 
             <div role="main" id="page-content" class="mz-l-pagecontent">
                 <div class="container">
+                <div class="row">
                     {% block breadcrumbs %}
                     {% if themeSettings.showBreadcrumbs %}
                     {% include "modules/breadcrumbs" %}
@@ -123,6 +124,7 @@
                     {% block body-below-content %}
                     {% dropzone "body-bottom" scope="template" %}
                     {% endblock body-below-content %}
+                    </div>
                 </div>
             </div>
             {% block secondary-nav %}
