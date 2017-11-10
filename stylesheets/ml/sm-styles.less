@@ -372,4 +372,62 @@
 	      }
 	    }
 	 }
+	 //Cart Page
+    .mz-checkout,.mz-table-cart,&.mz-confirmation{
+    	.mz-price-total-container{
+	        .mz-carttable-item-price{
+	        	text-align: left;
+	        	display: block; 
+	        	.mz-item-price.is-saleprice,
+	        	.mz-item-price.is-crossedout{
+	        		text-align: left;
+	        	}
+	        	.mz-item-price.is-crossedout{
+	        		float: left;
+	        	}
+	        }
+	    } 
+	    .mz-pagetitle{
+	        border-bottom: none;
+	    }
+	    .is-saleprice,
+	    .mz-item-rowtotal{
+	        text-align: right;
+	        color: @colorGray;
+	        font-size: 16px;
+	    }
+	    .mz-item-discountname{
+	        display: block;
+	    }
+	    .mz-item-discount{
+	        text-align: right;
+	        clear: both;
+	    }
+	    .mz-item-price{
+	        display: block;
+	        font-size: @fontSizeLarger;
+	    }
+	    .is-crossedout{
+	         display: inline-block;
+	         text-align: right;
+	         color: @colorLighterGray;
+	         font-size: @fontSizeLarger;
+	         float: right;
+	    }
+	    .mz-empty-cart-link-container{
+	        button {
+	            width: auto;
+	        }
+    	}
+    	#cart-checkout,
+    	.mz-common-button-padding{
+    		width: auto;
+    	}
+    	.mz-common-button-padding{
+    		padding: 0 0 0 5px;
+    	}
+		.mz-button-bottom-cart{
+	        margin-top: 25px;
+	    }
+    }
 }
