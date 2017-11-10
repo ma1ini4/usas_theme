@@ -424,6 +424,8 @@
     }
   ],
   "settings": {
+    "familyProductType":"Family Products",
+    "familyProductAttribute":"tenant~family-members",
     "colorSwatchesChangeAlternate":false,
     "fullNameLength": 80,
     "firstNameLength": 40,
