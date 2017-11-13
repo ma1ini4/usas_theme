@@ -127,6 +127,8 @@
             "click [data-mz-product-option-attribute]": "onOptionChangeAttribute",
             "change [data-mz-value='quantity']": "onQuantityChange",
             "keyup input[data-mz-value='quantity']": "onQuantityChange",
+            "click [data-mz-qty-minus]": "quantityMinus",
+            "click [data-mz-qty-plus]": "quantityPlus",
             'mouseenter .color-options': 'onMouseEnterChangeImage',
             'mouseleave .color-options': 'onMouseLeaveResetImage'
         },
@@ -136,6 +138,7 @@
             this.$('[data-mz-is-datepicker]').each(function(ix, dp) {
                 $(dp).dateinput().css('color', Hypr.getThemeSetting('textColor')).on('change  blur', _.bind(me.onOptionChange, me));
             });
+            $('#details-accordion').find('.panel-heading a').first().click();
         },
         quantityMinus: function() {
             $('[data-mz-validationmessage-for="quantity"]').text('');

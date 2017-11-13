@@ -34,6 +34,55 @@
                 <div id="product-detail" class="mz-productdetail mz-l-stack">
                     {% include "modules/product/product-detail" %}
                 </div>
+                <div id="details-accordion" role="tablist" aria-multiselectable="true">
+                    {% if model.content.productFullDescription %}
+                      <div class="mz-collaspable-container">
+                      <div class="panel-heading" role="tab" id="headingTwo">
+                          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <h4 class="panel-title">
+                                {{ labels.fullDesc }}
+                            </h4>
+                          </a>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                          <div class="panel-body">
+                            {{ model.content.productFullDescription|safe }} 
+                          </div>
+                        </div>
+                      </div>
+                    {% endif %}
+                    {% if (model|get_product_attribute_value('tenant~details')) %}
+                      <div class="mz-collaspable-container">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <h4 class="panel-title">
+                                {{ labels.stackTrace }}
+                            </h4>
+                          </a>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                          <div class="panel-body">
+                            {{ model|get_product_attribute_value('tenant~details')|safe }}
+                          </div>
+                        </div>
+                      </div>
+                    {% endif %}
+                    {% if (model|get_product_attribute_value('tenant~fit')) %}
+                    <div class="mz-productdetail-measurements mz-l-stack-section mz-collaspable-container">
+                      <div class="panel-heading" role="tab" id="headingthree">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#headingthree" href="#collapsethree" aria-expanded="false" aria-controls="collapsethree">
+                          <h4 class="mz-l-stack-sectiontitle panel-heading">{{ labels.fit }}</h4>
+                        </a>
+                        <div id="collapsethree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingthree"
+                        aria-expanded="false">
+                          <div class="panel-body">
+                          {{ model|get_product_attribute_value('tenant~fit')|safe }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}
+                  </div>
             </div>
         </div>
     </div>
