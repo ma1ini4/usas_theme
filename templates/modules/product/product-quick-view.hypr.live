@@ -57,12 +57,12 @@
                                                             <input id="mz_quickview_qty" class="mz-productdetail-qty text-center" type="text" value="1" readonly="readonly" data-mz-value="quantity" title="Quantity">
                                                             <div class="qty-counter" id="plus" data-mz-qty-plus role="button"><i class="fa fa-plus" aria-hidden="true"></i></div>
                                                         </div>
-                                                        <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
                                                     </div>
                                                     <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section pull-right col-xs-8">
                                                     {% include "modules/product/price-stack" %}
                                                     </div>
                                                 </div>
+                                                <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
                                             </div>
                                             
                                         </div>
