@@ -22,12 +22,14 @@
 <div class="mz-l-container">
     <h1 class="mz-pagetitle">
         {{ labels.checkout }}
-        {% if not user.isAuthenticated %}
-        <span class="mz-pagetitle-note">
-            {{ labels.registeredCustomer }} <a data-mz-action="login" data-placement="left" href="javascript;">{{ labels.logIn }}</a>
-        </span>
-        {% endif %}
     </h1>
+     {% if not user.isAuthenticated %}
+       <a data-toggle="modal" data-mz-action="lite-registration" class="mz-pagetitle-note">
+            <span>
+                {{ labels.registeredCustomer }} {{ labels.logIn }}
+            </span>
+        </a>
+    {% endif %}
 
     <form id="checkout-form" class="mz-checkoutform mz-l-2column mz-l-2column-right fades-in" method="post" onsubmit="return false;">
 

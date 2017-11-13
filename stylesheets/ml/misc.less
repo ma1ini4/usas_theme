@@ -238,9 +238,6 @@
         -moz-transition: visibility 0s ease-out 0s;
         -ms-transition: visibility 0s ease-out 0s;
         -o-transition: visibility 0s ease-out 0s;
-        /*Fix for Scroll bar on navigation*/
-        max-height: 300px;
-        overflow: auto;
     }
     .mz-sitenav-item {
         float: none;
@@ -405,12 +402,26 @@
             top: -9px;
         }   
     }
-    .ml-header-links-wrapper{
-        top: 20px!important;
-        left: auto!important;
-        right: -10px!important;
+    .mz-pagetitle-note{
+        float: left;
+        margin-top: 10px;
+        color: #000;
+        cursor: pointer;
+        text-decoration: none;
+        clear: left;
     }
-
+    #checkout-form{
+        padding-left: 0px;
+    }
+    #page-content{
+        padding:25px @defaultGutter/2 ;
+    }
+    .mz-formstep-header.mz-checkoutform-header{
+        margin-bottom: 10px;
+    }
+    .mz-ordersummary{
+        padding-bottom: 15px;
+    }
 } 
 
 //Cart Page
@@ -701,8 +712,7 @@
 .mz-checkout{
     .mz-l-pagewrapper {
         #global-header-wrapper,
-        .mz-utilitynav-list,
-        .ml-header-links-wrapper{
+        .mz-utilitynav-list,{
             display: none !important;
         }
     }
@@ -1638,6 +1648,10 @@ ul.tabs {
         a,span{
             color: #000;
         }
+    }
+    .mz-breadcrumbs{
+         width: 100%;
+         float: left;   
     }
 }
 // Product Directory
