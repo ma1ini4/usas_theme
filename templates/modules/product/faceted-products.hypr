@@ -23,11 +23,6 @@
 <div class="mz-l-paginatedlist pull-right{% if model.facets %} col-xs-12 col-sm-8 col-md-9{%else%} col-xs-12{% endif %}">
     <div class="mz-l-paginatedlist pull-right main-directory-container">
     <div class="title-sort-breadcrumb-wrapper">
-        {% block breadcrumbs %}
-        {% if themeSettings.showBreadcrumbs %}
-        {% include "modules/breadcrumbs" %}
-        {% endif %}
-        {% endblock breadcrumbs %}
         <div class="mz-l-paginatedlist-header">
             <div class="title-sortby-wrappper">
                <span class="mz-pagetitle">{{ pageContext.title|safe }}</span>

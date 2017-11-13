@@ -1,9 +1,8 @@
 {% for fval in allfacets %}
     {%if isListing=="true" and allfacets.length>themeSettings.facetMoreColorCount and forloop.index==themeSettings.facetMoreColorCount|add(1) %}
-    <li>
+    <li class="mz-morecolor-container">
         <label data-product-code="{{model.productCode}}" class="showMoreSwatches mz-productoptions-optionlabel option-label" data-option="{{ parent.attributeDetail.name }}">
-            <span class="swatch-icon fa fa-plus visible-inline-xs"></span>
-            <span class="swatch-label hidden-xs">See all {{allfacets.length}} {{ parent.attributeDetail.name|lower }}s</span>
+            <span class="swatch-label">See all {{allfacets.length}} {{ parent.attributeDetail.name|lower }}s</span>
         </label>
     </li>
     {% endif %}
