@@ -1,4 +1,4 @@
-﻿<div class="mz-breadcrumbs col-xs-12">
+﻿<div class="mz-breadcrumbs">
   {% for crumb in navigation.breadcrumbs %}
     {% if not crumb.isHidden %}
       {% if not forloop.last %}
