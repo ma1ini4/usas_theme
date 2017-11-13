@@ -3,6 +3,7 @@
 <script src="{{siteContext.cdnPrefix}}/js/require-{% if debugMode %}debug{% else %}min{% endif %}.js"></script>
 <script type="text/javascript">
     require.config({
+      waitSeconds : 120,
       cdnPrefix: "{{ siteContext.cdnPrefix }}",
       cacheKey: "{{ siteContext.hashString }}",
       urlArgs: "theme={{siteContext.themeId}}&cacheKey={{ siteContext.hashString }}",

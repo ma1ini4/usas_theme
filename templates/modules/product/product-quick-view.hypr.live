@@ -51,7 +51,9 @@
                                                     <div class="mz-productdetail-conversion-controls col-xs-4">
                                                         <label class="mz-qty-label text-uppercase" for="mz_quickview_qty">{{ labels.qty }}</label>
                                                         <div class="qty-block">
-                                                         <input class="mz-productdetail-qty" type="number" value="1" min="1" {% if not model.purchasableState.isPurchasable %} disabled="disabled" {% endif %} data-mz-value="quantity" />
+                                                            <div class="qty-counter" id="minus" data-mz-qty-minus role="button"><i class="fa fa-minus"  aria-hidden="true"></i></div>
+                                                            <input id="mz_quickview_qty" class="mz-productdetail-qty text-center" type="text" value="1" readonly="readonly" data-mz-value="quantity" title="Quantity">
+                                                            <div class="qty-counter" id="plus" data-mz-qty-plus role="button"><i class="fa fa-plus" aria-hidden="true"></i></div>
                                                         </div>
                                                         <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
                                                     </div>
