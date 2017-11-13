@@ -12,7 +12,7 @@
         {% endif %}
     </li>
     {% if model.currentPage > 2 and not model.hasNextPage  %}
-        {% for pageNumber in model.middlePageNumbers reversed %} not next {{ pageNumber }}
+        {% for pageNumber in model.middlePageNumbers reversed %}{{ pageNumber }}
             {%if forloop.index == 2%}
                 <li><a class="mz-pagenumbers-number" href="{% make_url "paging" model with page=pageNumber %}" data-mz-action="page" data-mz-page-num="{{ pageNumber }}" >
                     {{ pageNumber }}
