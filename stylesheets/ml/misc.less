@@ -1461,18 +1461,12 @@ ul.tabs {
                   margin-left: 8px;
                 }
                 .mz-pricestack-price-lower {
-                    &::after {
-                        position: absolute;
-                        top: -1px;
-                        padding-left: 52px;
-                        font-size: 14px;
-                    }
-                  margin: 0 10px 0 0;
+                  margin: 0 15px 0 0;
                 }
                 .mz-pricestack-price-upper {
                   &::before {
-                    top: 6px;
-                    left: -18px;
+                        top: 2px;
+                        left: -22px;
                   }
                 }
               }
@@ -1653,6 +1647,12 @@ ul.tabs {
          width: 100%;
          float: left;   
     }
+    .mz-pricestack-price-upper{
+        padding-left: 6px;
+    }
+    .is-disabled{
+        opacity: 0.4;
+    }
 }
 // Product Directory
 .mz-productlist {
@@ -1744,7 +1744,7 @@ ul.tabs {
                     vertical-align: top;
                 }
                 .mz-pricestack-price-lower {
-                    margin: 0 10px 0 0;
+                    margin: 0 15px 0 0;
                 }
                 .mz-pricestack-price-upper {
                     &::before {
@@ -2243,6 +2243,7 @@ ul.tabs {
         vertical-align: top;
     }
     .mz-pricestack-price-upper {
+        margin-left: 20px;
         &::before {
             top: 19px;
             left: -17px;
