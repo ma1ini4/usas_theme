@@ -1,7 +1,7 @@
 <div class="mz-l-container">
     <h1 class="mz-pagetitle">{{ labels.orderConfirmation }} </h1>
-
-	<p>{{ labels.confirmationText }}</p>
+    <div class="clearfix"></div>
+	<p class="text-left">{{ labels.confirmationText }}</p>
 
     <p>{{ labels.yourOrderNumber|string_format(model.orderNumber)|safe }}</p>
 
