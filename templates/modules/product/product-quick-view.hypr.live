@@ -19,7 +19,9 @@
                                 <div class="mz-product-detail-tabs">
                                     <ul class="tabs">
                                         <li class="active" rel="overview-tab">{{ labels.overview }}</li>
+                                        {% if model.content.productShortDescription.length %}
                                         <li rel="description-tab">{{ labels.fullDesc }}</li>
+                                        {% endif %}
                                     </ul>
                                     <div class="tab_container">
                                         <div id="overview-tab" class="tab_content">
