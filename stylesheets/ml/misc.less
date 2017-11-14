@@ -1109,7 +1109,7 @@ ul.tabs {
     padding: 0px 31px 0 21px;
     border: none;
     background-color: #fff;
-    color: #c8c8c8;
+    color: @colorGray;
     text-transform: uppercase;
     font-size: @font-size + 6;
     height: 46px;
@@ -1389,20 +1389,26 @@ ul.tabs {
                     margin:0;
                   }
                   &.active{
-                    outline: 2px solid  @colorGray;
+                    outline: 1px solid  @colorGray;
+                  }
+                  &:hover, &:focus{
+                   outline: 1px solid  @colorGray;
                   }
                 }
               }
               .product-swatches{
                 li{
                   &[disabled]{
-                    a{
-                      background: #fff;
-                      border: 1px solid #c8c8c8;
-                      color: #c8c8c8;
-                      cursor: not-allowed;
+                        a{
+                          background: #fff;
+                          border: 1px solid #c8c8c8;
+                          color: #c8c8c8;
+                          cursor: not-allowed;
+                        }
                     }
-                  }
+                    &:hover, &:focus{
+                       outline: 1px solid  @colorGray;
+                    }
                   a{
                     min-width:100px;
                     text-transform: uppercase;
@@ -1532,7 +1538,7 @@ ul.tabs {
 .mz-close-icon {
   position: absolute;
   right: 0;
-  top: 0;
+  top: 6px;
   width: 40px;
   height: 27px;
   cursor: pointer;
@@ -1545,7 +1551,7 @@ ul.tabs {
     content: ' ';
     height: 14px;
     width: 1.5px;
-    background-color: @colorLightGray;
+    background-color: @colorGray;
   }
   &:before {
     transform: rotate(45deg);
@@ -2129,7 +2135,7 @@ ul.tabs {
         padding: 0;
         li{
             float: left;
-            margin: 0 @gutter - 5 @gutter - 5 0 ;
+            margin: 0 @gutter - 15 @gutter - 15 0 ;
             a{
                 background: @colorWhite;
                 border: 1px solid @colorLightGray;
