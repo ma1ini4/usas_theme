@@ -553,7 +553,7 @@
     "companyLogo":"/resources/images/logo-sm.png",
     "facetMoreColorCount": 3,
     "enableQuickView": true,
-    "categoryEntityName": "categoryAttributes@NG",
+    "categoryEntityName": "categoryAttributes@ng",
     "usStates": [
       {
         "abbreviation": "AL",

@@ -36,7 +36,7 @@
                   </ul> 
                   <div>
                     {% with "id eq {0}"|string_format(link.originalId) as filter %}
-                      {% include_entities "modules/category-attributes" listFQN="categoryAttributes@KTrain" filter=filter %}                  
+                      {% include_entities "modules/category-attributes" listFQN=themeSettings.categoryEntityName filter=filter %}                  
                     {% endwith %}                   
                   </div>                 
                 </div>
