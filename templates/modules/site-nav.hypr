@@ -35,11 +35,9 @@
                   {% endfor %}
                   </ul> 
                   <div>
-                  {% comment %}
                     {% with "id eq {0}"|string_format(link.originalId) as filter %}
                       {% include_entities "modules/category-attributes" listFQN="categoryAttributes@KTrain" filter=filter %}                  
-                    {% endwith %}
-                  {% endcomment %}                    
+                    {% endwith %}                   
                   </div>                 
                 </div>
 
