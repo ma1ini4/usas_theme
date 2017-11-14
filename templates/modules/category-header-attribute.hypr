@@ -1,13 +1,13 @@
 {% if model %}
 	{% with model|first as entityModel %}
 	{% if entityModel.topNavHeader != '' or entityModel.topNavHeader == '~' %}
-	</ul>
-    <ul class="mz-sitenav-sub">
-		<li class="header-li mz-sitenav-item">{% if entityModel.topNavHeader != '~' %}
-			{{ entityModel.topNavHeader }}
+	</div>
+    <div class="sub-level-col col-sm-3">
+		{% if entityModel.topNavHeader != '~' %}
+			<h2>{{ entityModel.topNavHeader }}</h2>
 		{% else %}
-			&nbsp;&nbsp;
-		{% endif %}</li>
+			<h2>&nbsp;&nbsp;</h2>
+		{% endif %}
 	{% endif %}
 	{% endwith %}
 {% endif %}

@@ -30,3 +30,4 @@
         </div>
     </div>
 </header>
+{% require_script "modules/navigation/navigation" %}
