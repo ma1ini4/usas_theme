@@ -432,5 +432,12 @@
     "overview": "Überblick",
     "readAReview": "Lesen Sie eine Rezension",
     "viewAll": "Alle anzeigen",
-    "rolloverToZoom": "Mauszeiger zum Vergrößern"
+    "rolloverToZoom": "Mauszeiger zum Vergrößern",
+    "sortByNewArrivals": "Los recién llegados",
+    "sortByRatingDesc": "Calificación: alta a baja",
+    "sortByOurPicks": "Nuestras elecciones",
+    "sortByBestSelling": "Más vendido",
+    "sortByRatingAsc": "Calificación: baja a alta",
+    "sortByproductNameAsc": "Alfabético: A-Z",
+    "sortByproductNameDesc": "Alfabético: Z-A"
 }
