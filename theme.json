@@ -515,6 +515,9 @@
       72
     ],
     "viewAllPageSize": 54,
+    "viewAllPageSizeOrderHistory": 10,
+    "defaultPageSizeOrderHistory": 5,
+    "filterConfiguration": "[{\"name\": \"Color\",\"enable\": true,\"key\": \"tenant~COLOR\",\"showCount\": false,\"definition\": {\"showMoreCount\": 0,\"type\": \"swatch\"}},{\"name\": \"Size\",\"enable\": true,\"key\": \"tenant~SIZE\",\"showCount\": false,\"definition\": {\"showMoreCount\": 0,\"type\": \"Text\"}},{\"name\": \"Styles\",\"enable\": true,\"key\": \"tenant~STYLES\",\"showCount\": false,\"definition\": {\"showMoreCount\": 0,\"type\": \"Text\"}},{\"name\": \"ProductType\",\"enable\": false,\"key\": \"tenant~PRODUCTTYPE\",\"showCount\": false,\"definition\": {\"showMoreCount\": 3,\"type\": \"text\"}},{\"name\": \"Materials\",\"enable\": true,\"key\": \"tenant~MATERIALS\",\"showCount\": false,\"definition\": {\"showMoreCount\": 0,\"type\": \"Text\"}},{\"name\": \"Ratings\",\"enable\": true,\"key\": \"tenant~RATINGS\",\"showCount\": true,\"definition\": {\"showMoreCount\": 0,\"type\": \"Stars\"},\"values\": [5,4,3,2,1]},{\"name\": \"Price\",\"enable\": true,\"key\": \"price\",\"showCount\": true,\"definition\": {\"showMoreCount\": 0,\"type\": \"PriceBreak\"},\"values\": [{\"lo\": 0,\"hi\": 29.99,\"Format\": \"$HI and under\"},{\"lo\": 30,\"hi\": 49.99,\"Format\": \"$LO - $HI\"},{\"lo\": 50,\"hi\": 99.99,\"Format\": \"$LO - $HI\"},{\"lo\": 100,\"hi\": 199.99,\"Format\": \"$LO - $HI\"},{\"lo\": 200,\"hi\": 999999.99,\"Format\": \"$LO +\"}]}]",
     "googleMapAPIKey": "",
     "googleMapLatitude": 41.652491,
     "googleMapLongitude": -70.288112,

@@ -19,8 +19,8 @@ define([
         var _dispatcher = UrlDispatcher;
         var _isColorClicked = false;
         var ROUTE_NOT_FOUND = 'ROUTE_NOT_FOUND';
-
         var _mainImage = '';
+        var footerPagingClicked=false;
         // on page load get facet href and append facets
         var path = getFacet();
         if (path !== "") {
@@ -137,6 +137,12 @@ define([
                         }
                         var displayValue = facetVal;
                         if (facetKey === 'price') {
+                            if (displayValue.indexOf("* TO")) {
+                                displayValue = displayValue.replace("* TO ", "");
+                                displayValue += " and under";
+                            } else if (displayValue.indexOf("TO *")) {
+                                displayValue = displayValue.replace(" TO *", "+");
+                            }
                             displayValue = displayValue.replace("[", "$").replace("]", "").replace(/to/gi, "-");
                         }
                         available_facets += '<li><i class="fa fa-times-circle remove-facet" data-mz-facet="' + facetKey + '" data-mz-facet-value="' + facetValue[j].split(":")[1] + '" data-mz-purpose="remove" data-mz-action="clearFacet"></i> <u>' + displayValue + '</u></li>';
@@ -149,14 +155,11 @@ define([
                 }
             }
         }
-
         //get facets from the href
         function getFacet() {
             var path = window.location.search;
             return path;
         }
-
-
          function updateUi(response) {
             var url = response.canonicalUrl;
             if (url && url.substr(url.length - 2) === '&&')
@@ -164,6 +167,9 @@ define([
             _$body.html(response.body);
             if (url) _dispatcher.replace(url);
             _$body.removeClass('mz-loading');
+            if(footerPagingClicked){
+                 $("html, body").animate({ scrollTop: 0 }, "1000");
+            }
             InfiniteScroller.update();
             //add facet filter to list if any
             var path = getFacet();
@@ -176,8 +182,6 @@ define([
             }
             blockUiLoader.unblockUi();
         }
-
-
          //Toggle View GRID/LIST
         function toggleProductView(_e) {
             var _self = $(_e.currentTarget);
@@ -200,8 +204,6 @@ define([
             toggleButtons.removeClass("active");
             _self.addClass("active");
         }
-
-
          //Select color Swatch
         var selectSwatch = IntentEmitter(
             _$body, [
@@ -210,18 +212,15 @@ define([
             ],
             changeColorSwatch
         );
-
         //Change color swatch
         function changeColorSwatch(_e) {
             _isColorClicked = true;
             colorSwatch.changeColorSwatch(_e);
             _isColorClicked = false;
         }
-
         _dispatcher.onChange(function(url) {
             getPartialView(url, conf.template).then(updateUi, showError);
         });
-
         //Show more swatches
         var showMoreSwatch = IntentEmitter(
             _$body, [
@@ -229,7 +228,6 @@ define([
             ],
             showMoreColors
         );
-
         //show all colors
         function showMoreColors(_e) {
             var _self = $(_e.currentTarget);
@@ -237,7 +235,6 @@ define([
             _self.parent("li").hide();
             currentProduct.find("li.mz-hide-color").removeClass("mz-hide-color");
         }
-
         //toggle filters
         var toggleFilters = IntentEmitter(
             _$body, [
@@ -245,7 +242,15 @@ define([
             ],
             toggleFiltersView
         );
-
+        var footerPaging=IntentEmitter(
+            _$body, [
+                'click .mz-l-paginatedlist-footer a'
+            ],
+            footerPagingRender
+        );
+        function footerPagingRender(){
+           footerPagingClicked=true;
+        }
         //Toggle filters
         function toggleFiltersView(_e) {
             var icon = $('#collapseIcon>i');
@@ -258,7 +263,6 @@ define([
                 $(icon).addClass("fa-plus").removeClass("fa-minus");
             }
         }
-
         //toggle filter
         var toggleFilter = IntentEmitter(
             _$body, [
@@ -266,7 +270,6 @@ define([
             ],
             toggleFilterView
         );
-
         //Toggle filter
         function toggleFilterView(_e) {
             var _self = $(_e.currentTarget);
@@ -284,7 +287,6 @@ define([
                 .removeClass("fa-plus")
                 .addClass("fa-minus");
         }
-
         //toggle filter
         var backToTop = IntentEmitter(
             _$body, [
@@ -292,11 +294,9 @@ define([
             ],
             backToTopFn
         );
-
         function backToTopFn() {
             $("html, body").animate({ scrollTop: 0 }, 500);
         }
-
         //Switch More
         var switchMore = IntentEmitter(
             _$body, [
@@ -304,7 +304,6 @@ define([
             ],
             switchMoreFn
         );
-
         function switchMoreFn(e) {
             var parentLi = $(e.currentTarget).parent("li.show-more-li");
             if (parentLi.hasClass("show-less")) {
@@ -315,7 +314,6 @@ define([
                 parentLi.addClass("show-less").parent("ul").find("li.mz-hide-text").removeClass("hide");
             }
         }
-
         if ($(".view-all.selected").length) {
             InfiniteScroller.update();
         }
