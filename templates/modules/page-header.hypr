@@ -1,5 +1,4 @@
-﻿﻿{% require_script "modules/navigation/navigation" %} 
-<div id="global-header-wrapper">
+﻿﻿<div id="global-header-wrapper">
     {% block store-branding %}
         {% include "modules/page-header/global-header-include" %}
     {% endblock store-branding %}

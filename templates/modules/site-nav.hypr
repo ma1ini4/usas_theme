@@ -15,6 +15,9 @@
                 <div class="mz-sitenav-sub-container">
                   <ul class="mz-sitenav-sub">
                   {% for sublink in link.items %}
+                        {% with "id eq {0}"|string_format(sublink.originalId) as filter %}
+                            {% include_entities "modules/category-header-attribute" listFQN=themeSettings.categoryEntityName filter=filter %}
+                        {% endwith %}
                         {% if not sublink.isHidden and not sublink.isEmpty %}
                           <li data-mz-role="sitemenu-item" class="mz-sitenav-item">
                             <a class="mz-sitenav-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{sublink.url}}">{{ sublink.name|safe }}</a>
