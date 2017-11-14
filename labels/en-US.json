@@ -499,5 +499,6 @@
     "sortByBestSelling": "Best Selling",
     "sortByRatingAsc": "Rating: Low to High",
     "sortByproductNameAsc": "Alphabetical: A-Z",
-    "sortByproductNameDesc": "Alphabetical: Z-A"
+    "sortByproductNameDesc": "Alphabetical: Z-A",
+    "fullProductDetails": "Full Product Details"
 }
