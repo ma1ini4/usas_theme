@@ -424,6 +424,13 @@
     }
   ],
   "settings": {
+    "pdpMainImageName":"{0}_{1}.jpg",
+    "pdpMainImageMaxWidth":"320",
+    "pdpAltImageName":"{0}_{1}_v{2}.jpg",
+    "pdpAltImageMaxWidth":"90",
+    "pdpSwatchImageName":"{1}.gif",
+    "pdpSwatchImageMaxWidth":"30",
+    "colorSwatchesChangeMain":true,
     "familyProductType":"Family Products",
     "familyProductAttribute":"tenant~family-members",
     "colorSwatchesChangeAlternate":false,

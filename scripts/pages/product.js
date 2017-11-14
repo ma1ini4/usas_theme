@@ -25,6 +25,7 @@
     var width_pdp = HyprLiveContext.locals.themeSettings.productImagePdpMaxWidth;
     var width_zoom = HyprLiveContext.locals.themeSettings.productZoomImageMaxWidth;
     var colorSwatchesChangeAlternate = HyprLiveContext.locals.themeSettings.colorSwatchesChangeAlternate;
+    var colorSwatchesChangeMain = HyprLiveContext.locals.themeSettings.colorSwatchesChangeMain;
     var current_zoom_id_added;
     var deviceType = navigator.userAgent.match(/Android|BlackBerry|iPhone|iPod|Opera Mini|IEMobile/i);
 
@@ -304,7 +305,19 @@
             } else if ($("figure.mz-productimages-thumbs ul.products_list li.active").length > 0) {
                 version = $("figure.mz-productimages-thumbs ul.products_list li.active").data("mz-productimage-thumb");
             }
-            var imagepath = imagefilepath + '/' + this.model.attributes.productCode + '_' + colorCode + '_v' + version + '.jpg?maxWidth=';
+            var pdpMainImageName = HyprLiveContext.locals.themeSettings.pdpMainImageName;
+            if(pdpMainImageName){
+                if(pdpMainImageName.indexOf("{0}") != -1){
+                    pdpMainImageName = pdpMainImageName.replace("{0}", this.model.attributes.productCode);
+                }
+                if(pdpMainImageName.indexOf("{1}") != -1){
+                    pdpMainImageName = pdpMainImageName.replace("{1}", colorCode);
+                }
+                if(pdpMainImageName.indexOf("{2}") != -1){
+                    pdpMainImageName = pdpMainImageName.replace("{2}", version);
+                }
+            }
+            var imagepath = imagefilepath + '/' + pdpMainImageName +'?maxWidth=';
             var mainImage = imagepath + width_pdp;
             var zoomimagepath = imagepath + width_zoom;
             var _this = this;
@@ -347,19 +360,31 @@
             } catch (e) {}
             var slideCount = parseInt($("figure.mz-productimages-thumbs").data("length"), 10);
             var productCode = this.model.attributes.productCode;
+            var pdpAltImageName = HyprLiveContext.locals.themeSettings.pdpAltImageName;
             for (var i = 1; i <= slideCount; i++) {
+                if(pdpAltImageName){
+                    if(pdpAltImageName.indexOf("{0}") != -1){
+                        pdpAltImageName = pdpAltImageName.replace("{0}", this.model.attributes.productCode);
+                    }
+                    if(pdpAltImageName.indexOf("{1}") != -1){
+                        pdpAltImageName = pdpAltImageName.replace("{1}", colorCode);
+                    }
+                    if(pdpAltImageName.indexOf("{2}") != -1){
+                        pdpAltImageName = pdpAltImageName.replace("{2}", i);
+                    }
+                }
                 $(".mz-productimages-thumbs .products_list li:eq(" + (i - 1) + ") .mz-productimages-thumb img")
                     .attr({
-                        "src": imagefilepath + '/' + this.model.attributes.productCode + '_' + colorCode + '_v' + i + '.jpg?maxWidth=' + width_thumb,
-                        "data-orig-src": imagefilepath + '/' + this.model.attributes.productCode + '_' + colorCode + '_v' + i + '.jpg?maxWidth=' + width_pdp,
-                        "data-orig-zoom": imagefilepath + '/' + this.model.attributes.productCode + '_' + colorCode + '_v' + i + '.jpg?maxWidth=' + width_zoom
+                        "src": imagefilepath + '/' + pdpAltImageName +'?maxWidth=' + width_thumb,
+                        "data-orig-src": imagefilepath + '/' + pdpAltImageName +'?maxWidth=' + width_pdp,
+                        "data-orig-zoom": imagefilepath + '/' + pdpAltImageName +'?maxWidth=' + width_zoom
                     });
                 $(".mz-productimages-thumbs .products_list_mobile li:eq(" + (i - 1) + ") img")
                     .attr({
-                        "src": imagefilepath + '/' + this.model.attributes.productCode + '_' + colorCode + '_v' + i + '.jpg?maxWidth=' + width_pdp,
-                        "data-orig-src": imagefilepath + '/' + this.model.attributes.productCode + '_' + colorCode + '_v' + i + '.jpg?maxWidth=' + width_pdp,
-                        "data-orig-zoom": imagefilepath + '/' + this.model.attributes.productCode + '_' + colorCode + '_v' + i + '.jpg?maxWidth=' + width_zoom,
-                        "data-zoom-image": imagefilepath + '/' + this.model.attributes.productCode + '_' + colorCode + '_v' + i + '.jpg?maxWidth=' + width_zoom
+                        "src": imagefilepath + '/' + pdpAltImageName +'?maxWidth=' + width_pdp,
+                        "data-orig-src": imagefilepath + '/' + pdpAltImageName +'?maxWidth=' + width_pdp,
+                        "data-orig-zoom": imagefilepath + '/' + pdpAltImageName +'?maxWidth=' + width_zoom,
+                        "data-zoom-image": imagefilepath + '/' + pdpAltImageName +'?maxWidth=' + width_zoom
                     });
             }
             if (slideCount > 4) {

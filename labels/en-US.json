@@ -2,6 +2,7 @@
   "toggleToMultiShip": "I want to ship to multiple addresses",
   "toggleToSingleShip": "Ship to single address",
   "imagePathFormat": "{0}/cms/files/{1}.jpg",
+  "cdnPath": "{0}/cms/files/",
   "imagePDPPathFormat": "{0}/cms/files/{1}_{2}.jpg",
   "dateFormat"       : "F j, Y",
   "logOut"               : "Logout",
@@ -491,5 +492,6 @@
     "saturday":"Sat",
     "sunday":"Sun",
     "noNearByStores": "Location is not granular enough.",
-    "emptyStoreSearch": "Please enter a valid location."
+    "emptyStoreSearch": "Please enter a valid location.",
+    "fullProductDetails": "Full Product Details"
 }

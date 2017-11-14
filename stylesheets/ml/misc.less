@@ -1109,7 +1109,7 @@ ul.tabs {
     padding: 0px 31px 0 21px;
     border: none;
     background-color: #fff;
-    color: #c8c8c8;
+    color: @colorMediumGray;
     text-transform: uppercase;
     font-size: @font-size + 6;
     height: 46px;
@@ -1117,11 +1117,11 @@ ul.tabs {
     overflow: hidden;
     position: relative;
     &:hover {
-      background-color: #c8c8c8;
+      background-color: @colorLighterGray;
       color: #656868;
     }
     &.active {
-      background-color:#c8c8c8;
+      background-color:@colorLighterGray;
       color: #656868;
       display: block;
       &:after{
@@ -1142,7 +1142,7 @@ ul.tabs {
   }
 }
 .tab_container {
-  border-top: 1px solid #656868;
+  border-top: 1px solid @colorLighterGray;
   clear: both;
   float: left;
   width: 100%;
@@ -1166,16 +1166,16 @@ ul.tabs {
   }
   .tab_content {
     padding: 0px 0 5px 0;
-    border-bottom: 1px solid #656868;
+    border-bottom: 1px solid @colorLighterGray;
   }
 
   .tab_drawer_heading {
     padding: 0px 21px;
     border: none;
     margin: 0;
-    border-bottom: 1px solid #656868;
+    border-bottom: 1px solid @colorLighterGray;
     background-color: #fff;
-    color: #c8c8c8;
+    color: @colorLighterGray;
     text-transform: uppercase;
     font-size: @font-size + 8;
     height: 46px;
@@ -1389,20 +1389,26 @@ ul.tabs {
                     margin:0;
                   }
                   &.active{
-                    outline: 2px solid  @colorGray;
+                    outline: 1px solid  @colorGray;
+                  }
+                  &:hover, &:focus{
+                   outline: 1px solid  @colorGray;
                   }
                 }
               }
               .product-swatches{
                 li{
                   &[disabled]{
-                    a{
-                      background: #fff;
-                      border: 1px solid #c8c8c8;
-                      color: #c8c8c8;
-                      cursor: not-allowed;
+                        a{
+                          background: #fff;
+                          border: 1px solid #c8c8c8;
+                          color: #c8c8c8;
+                          cursor: not-allowed;
+                        }
                     }
-                  }
+                    &:hover, &:focus{
+                       outline: 1px solid  @colorGray;
+                    }
                   a{
                     min-width:100px;
                     text-transform: uppercase;
@@ -1532,7 +1538,7 @@ ul.tabs {
 .mz-close-icon {
   position: absolute;
   right: 0;
-  top: 0;
+  top: 6px;
   width: 40px;
   height: 27px;
   cursor: pointer;
@@ -1545,7 +1551,7 @@ ul.tabs {
     content: ' ';
     height: 14px;
     width: 1.5px;
-    background-color: @colorLightGray;
+    background-color: @colorGray;
   }
   &:before {
     transform: rotate(45deg);
@@ -1780,6 +1786,9 @@ ul.tabs {
                         display: block;
                     }
                 }
+                li:hover,:focus{
+                    outline: 1px solid  @colorMediumGray;
+                }
             }
         }        
         .mz-directory-ratings {
@@ -1865,11 +1874,13 @@ ul.tabs {
             opacity: 0;
         }
         box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
+        &:hover, &:focus{
+           outline: 1px solid  @colorMediumGray;
+        }
     } 
     .active{
-        outline: 2px solid @colorMediumGray;
+        outline: 1px solid @colorMediumGray;
     }
-
 }
 
 //Rollover to zoom
@@ -2126,10 +2137,10 @@ ul.tabs {
 .mz-productoptions-valuecontainer{
     .product-swatches{
         margin: 0;
-        padding: 0;
+        padding: 0 1px;
         li{
             float: left;
-            margin: 0 @gutter - 5 @gutter - 5 0 ;
+            margin: 0 @gutter - 15 @gutter - 15 0 ;
             a{
                 background: @colorWhite;
                 border: 1px solid @colorLightGray;
@@ -2141,6 +2152,9 @@ ul.tabs {
                 text-align: center;
                 font-size: @fontSize - 1;
                 text-transform: uppercase;
+            }
+            &:hover, &:focus{
+               outline: 1px solid  @colorGray;
             }
         }
         .active{

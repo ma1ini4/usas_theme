@@ -539,6 +539,53 @@
         },
         {
             "xtype": "panel",
+            "title": "Product Images",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-text",
+                    "name": "pdpMainImageName",
+                    "fieldLabel": "Main Image Name"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "pdpMainImageMaxWidth",
+                    "fieldLabel": "Main Image Max Width"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "pdpAltImageName",
+                    "fieldLabel": "Alternate Image Name"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "pdpAltImageMaxWidth",
+                    "fieldLabel": "Alternate Image Max Width"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "pdpSwatchImageName",
+                    "fieldLabel": "Swatch Image Name"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "pdpSwatchImageMaxWidth",
+                    "fieldLabel": "Swatch Image Max Width"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "colorSwatchesChangeMain",
+                    "fieldLabel": "Enable Image change on Hover on Swatch"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "colorSwatchesChangeAlternate",
+                    "fieldLabel": "Enable Alternate Image change on Hover on Swatch"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
             "title": "Quick View",
             "collapsed": false,
             "items": [
