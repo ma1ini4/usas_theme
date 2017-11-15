@@ -1,10 +1,9 @@
-﻿﻿<div id="global-header-wrapper">
+﻿<div id="global-header-wrapper">
     {% block store-branding %}
         {% include "modules/page-header/global-header-include" %}
     {% endblock store-branding %}
 </div>
 <header class="mz-pageheader{% if themeSettings.bannerImageEnabled %} mz-pageheader-hasbanner {% endif %}">
-    
     <div class="container">
         <div class="ml-header-content">
             <div class="ml-header-logo-wrapper">

@@ -92,22 +92,16 @@
     {% block open-body-tag %}
     <body class="{% block body-tag-classes %}{% endblock body-tag-classes %}">
     {% endblock open-body-tag %}
-
-
         <div id="page-wrapper" class="mz-l-pagewrapper">
-
             {% block utility-bar %}
                 {% include "modules/utility-bar/header" %}
             {% endblock utility-bar %}
-
             {% block page-header %}
-            {% include "modules/page-header" %}
-            {% endblock page-header %}
-
+				{% include "modules/page-header" %}
+			{% endblock page-header %}
             {% block site-nav %}
-            {% include "modules/site-nav" %}
+				{% include "modules/site-nav" %}
             {% endblock site-nav %}
-
             <div role="main" id="page-content" class="mz-l-pagecontent">
                 <div class="container">
                 <div class="row">

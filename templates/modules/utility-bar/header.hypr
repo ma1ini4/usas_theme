@@ -1,5 +1,4 @@
 {% if pageContext.dataViewMode == 'pending' and pageContext.isEditMode != 'true' %}
-
     {% require_script "modules/theme-utility-bar" %}
     {% dropzone "header" scope="site" %}
     <div class='mz-future-date-header {% if pageContext.cookies.MZ_SHOW_FUTURE_BAR.value == false %} mz-header-hidden {% endif %}'>
@@ -39,7 +38,7 @@
 
     </div>
   
-    <div class='mz-future-bar-indicator {% if pageContext.cookies.MZ_SHOW_FUTURE_BAR.value == true or pageContext.cookies.MZ_SHOW_FUTURE_BAR.value == "" %} hidden {% endif %}''>
+    <div class='mz-future-bar-indicator {% if pageContext.cookies.MZ_SHOW_FUTURE_BAR.value == true or pageContext.cookies.MZ_SHOW_FUTURE_BAR.value == "" %} hidden {% endif %}'>
         
         <span class='mz-indicator-icon'></span>
 
