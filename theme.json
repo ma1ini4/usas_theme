@@ -424,6 +424,7 @@
     }
   ],
   "settings": {
+    "allProductsCategoryId": 0,
     "pdpMainImageName":"{0}_{1}.jpg",
     "pdpMainImageMaxWidth":"320",
     "pdpAltImageName":"{0}_{1}_v{2}.jpg",

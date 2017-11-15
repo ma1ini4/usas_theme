@@ -86,7 +86,12 @@
                     "name": "suggestPriorSearchTerms",
                     "fieldLabel": "Show search terms others used on this site in search suggestions",
                     "enableIf": "useSearchAutocomplete"
-                }
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "allProductsCategoryId",
+                    "fieldLabel": "Enter CategoryId which is having all products"
+                }                
             ]
         },
         {
