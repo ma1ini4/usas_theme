@@ -13,19 +13,30 @@
         }
     } 
 
+    .mz-sitenav-list {
+        position: relative;
+    }
     .mz-sitenav-item {
         display: table-cell;
         // to remove space gap
         font-size: 0.1px;
         z-index: 3;
 
-        .mz-sitenav-item-inner {
+        /*.mz-sitenav-item-inner {
             position: relative;
         }
-        
+        */
         &:hover .mz-sitenav-sub-container {
             visibility: visible;
             .transition-delay(0s);
+            .sub-level-col {
+                float: none;
+                display: table-cell;
+                padding-top: 10px;
+                h2{
+                    font-size: 18px;
+                }
+            }
         }
     }
 

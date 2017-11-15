@@ -109,7 +109,16 @@
 	    .container{
 	        padding:0 15px;
 	    }
-	    .mz-sitenav-sub-container{display: block;}	    
+	    .mz-sitenav-sub-container{
+	    	display: block;
+	    	.sub-level-image, .sub-level-col {
+                width: 175px;
+                min-width: 175px;
+                h2{
+                	font-size: 18px;
+                }
+            }
+	    }
 	    .mz-sitenav-item {
 	        float: left;
 		    white-space: nowrap;
@@ -123,7 +132,10 @@
         		.arrow-up {
         			display:block;
         		}
-        	}        	      	
+        	}
+			.mz-sitenav-item {
+				width: 100%;
+			}
 	    }
 	    .mz-sitenav-link {
 	    	float: none;
