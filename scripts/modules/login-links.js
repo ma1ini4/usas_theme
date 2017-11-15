@@ -382,8 +382,9 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
         this.bindListeners =  function (on) {
             var onOrOff = on ? "on" : "off";
             $(this).parent()[onOrOff]('click', '[data-mz-action="lite-registration"]', self.openLiteModal);
-            $(this).parent()[onOrOff]('click', '[data-mz-action="doLogin"]', self.doLogin);
-            $(this).parent()[onOrOff]('click', '[data-mz-action="doSignup"]', self.doSignup);
+            $(this).parents('.mz-utilitynav')[onOrOff]('click', '[data-mz-action="doLogin"]', self.doLogin);
+            $(this).parents('.mz-utilitynav')[onOrOff]('click', '[data-mz-action="doSignup"]', self.doSignup);
+            
             // bind other events
         };
 
