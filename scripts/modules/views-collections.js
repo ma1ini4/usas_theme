@@ -167,10 +167,11 @@ define([
             _$body.html(response.body);
             if (url) _dispatcher.replace(url);
             _$body.removeClass('mz-loading');
+            InfiniteScroller.update();
             if(footerPagingClicked){
                  $("html, body").animate({ scrollTop: 0 }, "1000");
+                 footerPagingClicked=false;
             }
-            InfiniteScroller.update();
             //add facet filter to list if any
             var path = getFacet();
             updateFacetFilter(path);
