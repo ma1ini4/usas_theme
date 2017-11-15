@@ -10,6 +10,8 @@
         bxslider: "vendor/jquery-bxslider/jquery.bxslider.min",
         blockui: "vendor/jquery.blockUI/jquery.blockUI.min",
         elevatezoom: "vendor/jquery-elevatezoom/jquery.elevatezoom.min",
+        doubletaptogo:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGo.min",
+        doubletaptogoipad:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGoIpad.min"
     },
     dir: "compiled/scripts/",
     locale: "en-us",

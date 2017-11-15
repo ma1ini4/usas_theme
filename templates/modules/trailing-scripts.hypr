@@ -15,7 +15,9 @@
       bootstrap:"vendor/bootstrap/js/bootstrap.min",
       blockui:"vendor/jquery.blockUI/jquery.blockUI.min",
       bxslider:"vendor/jquery-bxslider/jquery.bxslider.min",
-      elevatezoom:"vendor/jquery-elevatezoom/jquery.elevatezoom.min"
+      elevatezoom:"vendor/jquery-elevatezoom/jquery.elevatezoom.min",
+      doubletaptogo:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGo.min",
+      doubletaptogoipad:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGoIpad.min"
       },
       "shim": {
         bootstrap: {
