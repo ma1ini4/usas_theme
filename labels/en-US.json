@@ -493,5 +493,12 @@
     "sunday":"Sun",
     "noNearByStores": "Location is not granular enough.",
     "emptyStoreSearch": "Please enter a valid location.",
+    "sortByNewArrivals": "New Arrivals",
+    "sortByRatingDesc": "Rating: High to Low",
+    "sortByOurPicks": "Our Picks",
+    "sortByBestSelling": "Best Selling",
+    "sortByRatingAsc": "Rating: Low to High",
+    "sortByproductNameAsc": "Alphabetical: A-Z",
+    "sortByproductNameDesc": "Alphabetical: Z-A",
     "fullProductDetails": "Full Product Details"
 }
