@@ -4,7 +4,7 @@
 	</div>
     <div class="sub-level-col col-sm-3">
 		{% if entityModel.topNavHeader != '~' %}
-			<h2>{{ entityModel.topNavHeader }}</h2>
+			<h2>{{ entityModel.topNavHeader|safe}}</h2>
 		{% else %}
 			<h2>&nbsp;&nbsp;</h2>
 		{% endif %}
