@@ -7,7 +7,7 @@ define([
         var leftReference = $(".ml-header-content").offset().left,
             rightReference = leftReference + $(".ml-header-content").outerWidth(),
             colWidth = $(document).width() > 991 ? 235 : 175;
-        $(".sub-dropdown-menu").css({ "left": 0, "right": "auto" }).addClass("calculating-position").removeClass("calculated-position").each(function() {
+        $(".mz-sitenav-sub-container").css({ "left": 0, "right": "auto" }).addClass("calculating-position").removeClass("calculated-position").each(function() {
             var currentElemnt = $(this),
                 leftPosition = -10,
                 rightPosition = 0,
@@ -20,7 +20,7 @@ define([
             }
             currentDropWidth = (colWidth * currentElemnt.find(".sub-level-col").length) + 35 + currentElemnt.find(".sub-level-image").outerWidth()||0;
             if (currentDropWidth < $(".container:eq(0)").outerWidth()) {
-                leftPosition = currentElemnt.parent(".sub-dropdown").offset().left - 20 - leftReference;
+                leftPosition = currentElemnt.parents(".mz-sitenav-item-inner").offset().left - 20 - leftReference;
                 rightPosition = "auto";
                 if (leftPosition + currentDropWidth + leftReference >= rightReference) {
                     leftPosition = "auto";
