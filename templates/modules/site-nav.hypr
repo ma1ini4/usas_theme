@@ -11,27 +11,25 @@
               <div class="mz-sitenav-item-inner">
                 <a class="mz-sitenav-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{link.url}}">{{link.name|truncatechars(themeSettings.maxTopLevelNavLabelLength)|safe}}</a>
                 {% if link.items %}
-                <div class="arrow-up"></div>
+                <!--div class="arrow-up"></div-->
                 <div class="mz-sitenav-sub-container">
                   {% if link.items %}
-                    <div class="sub-dropdown-menu">
-                        <div class="row">
-                            {% with "id eq {0}"|string_format(link.originalId) as filter %}
-                                {% include_entities "modules/category-attributes" listFQN=themeSettings.categoryEntityName filter=filter %}
-                            {% endwith %}
-                            <div class="sub-level-col col-sm-3">
-                            {% for subsublink in link.items %}
-                                {% if not subsublink.isHidden and not subsublink.isEmpty %}
-                                    {% with "id eq {0}"|string_format(subsublink.originalId) as filter %}
-                                        {% include_entities "modules/category-header-attribute" listFQN=themeSettings.categoryEntityName filter=filter %}
-                                    {% endwith %}
-                                    <div class="mz-sitenav-item sub-level-li">
-                                        <a class="mz-sitenav-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{subsublink.url}}">{{ subsublink.name|safe }}</a>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                            </div> 
-                        </div>
+                    <div class="row">
+                        {% with "id eq {0}"|string_format(link.originalId) as filter %}
+                            {% include_entities "modules/category-attributes" listFQN=themeSettings.categoryEntityName filter=filter %}
+                        {% endwith %}
+                        <div class="sub-level-col col-sm-3">
+                        {% for subsublink in link.items %}
+                            {% if not subsublink.isHidden and not subsublink.isEmpty %}
+                                {% with "id eq {0}"|string_format(subsublink.originalId) as filter %}
+                                    {% include_entities "modules/category-header-attribute" listFQN=themeSettings.categoryEntityName filter=filter %}
+                                {% endwith %}
+                                <div class="mz-sitenav-item sub-level-li">
+                                    <a class="mz-sitenav-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{subsublink.url}}">{{ subsublink.name|safe }}</a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        </div> 
                     </div>
                 {% endif %}
                 </div>
