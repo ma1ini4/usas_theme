@@ -45,7 +45,7 @@
           <li class="mz-sitenav-item mz-sitenav-item-more">
               <div class="mz-sitenav-item-inner">
                   <a class="mz-sitenav-link" href="javascript:;">{{ labels.navMore }}</a>
-                  <div class="arrow-up"></div>
+                  <!-- <div class="arrow-up"></div> -->
                   <div class="mz-sitenav-sub-container">
                     <ul class="mz-sitenav-sub">
                         {% for sublink in navigation.tree %}
