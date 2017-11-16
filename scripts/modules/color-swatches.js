@@ -64,13 +64,12 @@
              
                var imagepath = imagefilepath + '/' + productCode + '_' + colorCode + '_v1.jpg';
                 checkImage(imagepath, function(response) {
-                    console.log("HIIIIIIIIIIIIIII",response);
                     if (response) {
                         if (!img.length) {
                             var parentDiv = $(".mz-productlist-list li[data-mz-product='" + productCode + "'] .mz-productlisting-image");
                             parentDiv.find(".mz-productlisting-imageplaceholder").parent("a").addClass("image-holder");
                             parentDiv.find(".mz-productlisting-imageplaceholder").remove();
-                            parentDiv.find(".image-holder").append("<img>");
+                            parentDiv.find(".image-holder").html("<img>");
                             img = $(".mz-productlist-list li[data-mz-product='" + productCode + "'] .image-holder img");
                             img.addClass("img-responsive");
                         }
@@ -80,8 +79,7 @@
                     }else if(response === false){
                         $(".mz-productlist-list li[data-mz-product='" + productCode + "'] .mz-productlisting-image a").html('<span class="mz-productlisting-imageplaceholder img-responsive"><span class="mz-productlisting-imageplaceholdertext">[no image]</span></span>');
                     }
-                });
-                            
+                });            
         }
     };
     return Swatches;
