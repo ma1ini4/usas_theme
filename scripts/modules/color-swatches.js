@@ -48,6 +48,8 @@
             var _selectedColorDom = $(_e.currentTarget).parent().find('li.active'),
                 colorCode = _selectedColorDom.data('mz-swatch-color'),
                 productCode = $(_e.currentTarget).attr("data-product-code");
+                console.log("colorCode",colorCode);
+                console.log("colorCode",_mainImage);
             if (typeof colorCode != 'undefined') {
                 this.setMainImage( _selectedColorDom );
             } else if(typeof _mainImage != 'undefined'){

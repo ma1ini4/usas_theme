@@ -224,7 +224,6 @@ define([
                 colorSwatch.onMouseLeave(_e);
             }
             else{
-                console.log("Mouse click",_e);  
                 _isColorClicked = true;
                 colorSwatch.changeColorSwatch(_e);
                 _isColorClicked = false;
