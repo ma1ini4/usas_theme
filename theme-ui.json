@@ -544,6 +544,11 @@
                     "xtype": "mz-input-text",
                     "name": "familyProductAttribute",
                     "fieldLabel": "Family Product Attribute"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "familyProductImageMaxWidth",
+                    "fieldLabel": "Family Product image max width (px)"
                 }
             ]
         },
