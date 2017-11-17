@@ -209,15 +209,25 @@ define([
         var selectSwatch = IntentEmitter(
             _$body, [
                 'click #product-list-ul [data-mz-swatch-color]',
-                'click #more-product-list [data-mz-swatch-color]'
+                'click #more-product-list [data-mz-swatch-color]',
+                'mouseenter #product-list-ul [data-mz-swatch-color]',
+                'mouseleave #product-list-ul [data-mz-swatch-color]'
             ],
             changeColorSwatch
         );
         //Change color swatch
         function changeColorSwatch(_e) {
-            _isColorClicked = true;
-            colorSwatch.changeColorSwatch(_e);
-            _isColorClicked = false;
+            if(_e.type == 'mouseenter'){
+                colorSwatch.onMouseEnter(_e);
+            }
+            else if(_e.type == 'mouseleave'){
+                colorSwatch.onMouseLeave(_e);
+            }
+            else{
+                _isColorClicked = true;
+                colorSwatch.changeColorSwatch(_e);
+                _isColorClicked = false;
+            }
         }
         _dispatcher.onChange(function(url) {
             getPartialView(url, conf.template).then(updateUi, showError);

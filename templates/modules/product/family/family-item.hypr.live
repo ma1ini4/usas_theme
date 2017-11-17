@@ -32,7 +32,7 @@
 		<div class="clearfix">
 		{% include "modules/product/price-stack" %}
 		</div>
-		<section class="mz-l-stack-section mz-productdetail-conversion row">
+		<!-- <section class="mz-l-stack-section mz-productdetail-conversion row">
 		{%if model.productType!="Family Product"%}
 		    <div class="mz-productdetail-conversion-controls col-xs-4 col-sm-4">
 		      <label class="mz-qty-label text-uppercase" for="mz_pdp_qty">{{ labels.qty }}</label>
@@ -44,6 +44,6 @@
 		      <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
 		    </div>
 		{% endif %}
-		</section>
+		</section> -->
 	</div>
 {% endif %}
