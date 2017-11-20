@@ -1,3 +1,21 @@
-<a class="logo" href="/" title="{{ siteContext.generalSettings.websiteName }}">
-</a>
-
+{% if themeSettings.globalPageHeaderLogoSM or themeSettings.globalPageHeaderLogoXS %}
+	{% if themeSettings.globalPageHeaderLogoSM %}
+		<a class="hidden-xs" href="/" title="{{ siteContext.generalSettings.websiteName }}">
+			<img class="logo customLogo" src="{{ themeSettings.globalPageHeaderLogoSM.imageUrl }}" />
+		</a>
+	{% else %}
+		<a class="logo hidden-xs" href="/" title="{{ siteContext.generalSettings.websiteName }}">
+		</a>
+	{% endif %}
+	{% if themeSettings.globalPageHeaderLogoXS %}
+		<a class="hidden-sm hidden-md hidden-lg" href="/" title="{{ siteContext.generalSettings.websiteName }}">
+			<img class="logo customLogo" src="{{ themeSettings.globalPageHeaderLogoXS.imageUrl }}" />
+		</a>
+	{% else %}
+		<a class="logo hidden-sm hidden-md hidden-lg" href="/" title="{{ siteContext.generalSettings.websiteName }}">
+		</a>
+	{% endif %}
+{% else %}
+	<a class="logo " href="/" title="{{ siteContext.generalSettings.websiteName }}">
+	</a>
+{% endif %}

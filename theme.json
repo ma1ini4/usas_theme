@@ -559,6 +559,8 @@
     "facetMoreColorCount": 3,
     "enableQuickView": true,
     "categoryEntityName": "categoryAttributes@ng",
+    "globalPageHeaderLogoSM":"",
+    "globalPageHeaderLogoXS":"",
     "usStates": [
       {
         "abbreviation": "AL",
