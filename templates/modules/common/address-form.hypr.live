@@ -43,9 +43,9 @@
         </div>
         <div class="mz-l-formfieldgroup-cell">
             <select id="{% block id-prefix %}{% endblock id-prefix %}country" data-mz-value="{{ addresscontext }}address.countryCode">
-                <option></option>
-                {% if countries && countries.length > 0 %}
-                {% for country in countries %}
+                <option value="">{{ labels.select }}</option>
+                {% if themeSettings.customCountries && themeSettings.customCountries.length > 0 %}
+                {% for country in themeSettings.customCountries %}
                     <option {% if model.address.countryCode == country.value %}selected="selected" {% endif %}value="{{ country.value }}">{{ country.key }}</option>
                 {% endfor %}
                 {% else %}
