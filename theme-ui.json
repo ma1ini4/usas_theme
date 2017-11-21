@@ -24,6 +24,16 @@
                     "xtype": "mz-input-text",
                     "name": "categoryEntityName",
                     "fieldLabel": "Category Entity Name"   
+                },
+                {
+                    "xtype": "mz-input-image",
+                    "name": "globalPageHeaderLogoSM",
+                    "fieldLabel": "Logo SM"
+                },
+                {
+                    "xtype": "mz-input-image",
+                    "name": "globalPageHeaderLogoXS",
+                    "fieldLabel": "Logo XS"
                 }
             ]
         },
