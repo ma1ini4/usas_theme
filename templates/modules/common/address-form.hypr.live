@@ -87,8 +87,7 @@
         </div>
         <div class="mz-l-formfieldgroup-cell">
             <select id="{% block id-prefix %}{% endblock id-prefix %}stateOrProvince" data-mz-value="{{ addresscontext }}address.stateOrProvince">
-                <option></option>
-
+               <option value="">{{ labels.select }}</option>
                 {% if states && states.length > 0 %}
                 {% for state in states %}
                     <option {% if model.address.stateOrProvince == state.key %}selected="selected"{% endif %} value="{{ state.key }}">{{ state.value }}</option> 
