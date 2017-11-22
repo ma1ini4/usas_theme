@@ -105,10 +105,6 @@
                 background-image: url('../resources/images/logo-xs.png');
                 background-repeat: no-repeat;
             }
-            .customLogo {
-                width: auto;
-                height: 50px;
-            }
         }
         .ml-header-search-wrapper {
             width: 100%;
@@ -400,12 +396,6 @@
                     margin-top: 1px;                        
                     background-image: url('../resources/images/logo-xs.png');
                     background-size: 99px 25px;                     
-                }
-                .customLogo {
-                    width: auto;
-                    height: 50px;
-                    margin-top: 1px;
-                    background-size: 99px 25px;
                 }
             }
         } 
@@ -723,6 +713,35 @@
     .mz-checkout-item-total-container{
         text-align: right;
     }
+.mz-paymentselector.mz-l-formfieldgroup 
+    .mz-l-formfieldgroup-row,.mz-l-formfieldgroup{
+        width: 100%;
+        .mz-l-formfieldgroup-cell 
+        label{
+            text-align: left;
+        }
+    }
+    .mz-l-formfieldgroup-row,
+    .mz-l-formfieldgroup-cell,
+    .mz-contactselector-contact,
+    .mz-contactselector-summarywrapper{
+        display: block;
+    }
+    .mz-formstep-body{
+        .mz-l-stack
+        .mz-l-stack-section:last-child{
+            margin: 0;
+        }
+    }
+    .mz-create-account-fields{
+        padding-top:15px;
+    }
+    .mz-payment-credit-card-savepayment-row{
+        margin-left: 0;
+    }
+    .mz-checkout-paymenttitle{
+        padding-bottom: 10px;
+    }
 }
 .mz-checkout{
     .mz-l-pagewrapper {
@@ -1029,9 +1048,6 @@ footer {
             padding-left: 33px;
         }
     }
-}
-.mz-payment-credit-card-number-row{
-    padding-right: 30px;
 }
 
 // Print Order Details
