@@ -136,6 +136,7 @@ define([
                             facetVal = facetVal.replace(/\&#38/g, '&amp;');
                         }
                         var displayValue = facetVal;
+
                         if (facetKey === 'price') {
                             if (displayValue.indexOf("* TO")) {
                                 displayValue = displayValue.replace("* TO ", "");
@@ -144,6 +145,9 @@ define([
                                 displayValue = displayValue.replace(" TO *", "+");
                             }
                             displayValue = displayValue.replace("[", "$").replace("]", "").replace(/to/gi, "-");
+                        }
+                        if(facetKey === 'tenant~size'){
+                             displayValue=$('#'+facetVal).attr('data-mz-text-value');
                         }
                         available_facets += '<li><i class="fa fa-times-circle remove-facet" data-mz-facet="' + facetKey + '" data-mz-facet-value="' + facetValue[j].split(":")[1] + '" data-mz-purpose="remove" data-mz-action="clearFacet"></i> <u>' + displayValue + '</u></li>';
                     }
@@ -261,6 +265,21 @@ define([
         );
         function footerPagingRender(){
            footerPagingClicked=true;
+        }
+
+        var clearFacet=IntentEmitter(
+            _$body, [
+                'click .mz-clear-facet-section'
+            ],
+            clearFacetSection
+        );
+
+        function clearFacetSection(_e){
+            var _self = $(_e.currentTarget);
+            var facetVal = _self.attr("data-clear-text");
+            var path = getFacet();
+            path = decodeURIComponent(path);
+            alert('clearME!!! '+ facetVal + path);
         }
         //Toggle filters
         function toggleFiltersView(_e) {
