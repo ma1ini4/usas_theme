@@ -441,5 +441,7 @@
     "sortByproductNameAsc": "Alfabético: A-Z",
     "sortByproductNameDesc": "Alfabético: Z-A",
     "fullProductDetails": "Full Product Details",
-    "select": "Wählen"
+    "select": "Wählen",
+    "shippingTo" : "Items shipping to",
+    "shippingDestinationEditAddress": "Edit Address"
 }

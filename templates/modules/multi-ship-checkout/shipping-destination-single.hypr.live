@@ -2,10 +2,10 @@
 
   {% if model.requiresFulfillmentInfo  %}
 
-    <div class="mz-formstep-fields mz-l-formfieldgroup mz-checkoutform  mz-checkoutform-shipping mz-checkoutform-active">
+    <div class="mz-formstep-fields mz-l-formfieldgroup mz-checkoutform mz-checkoutform-shipping mz-checkoutform-active">
       {% if model.totalQuantity>1 %}
       <p>
-        <button class="mz-button mz-checkout-button-link" data-mz-action="toggleMultiShipMode">{{ labels.toggleToMultiShip }}</button>
+        <button class="mz-button button_primary" data-mz-action="toggleMultiShipMode">{{ labels.toggleToMultiShip }}</button>
       </p>
       {% endif %}
       {% if model.selectableDestinations.length > 1 %}

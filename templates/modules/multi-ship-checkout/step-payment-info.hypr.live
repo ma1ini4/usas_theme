@@ -120,9 +120,9 @@
                 {% else %}
                     <div class="mz-l-stack-section mz-checkout-current-payment mz-checkout-saved-card  mz-checkoutform">
                         {% if model.visaCheckoutFlowComplete %}
-                            <a class="mz-checkout-payment-change" href="javascript:;" data-mz-action="beginEditingCard">{{ labels.removePayment }}</a>
+                            <a class="mz-checkout-payment-change text-uppercase" href="javascript:;" data-mz-action="beginEditingCard">{{ labels.removePayment }}</a>
                         {% else %}
-                            <a class="mz-checkout-payment-change" href="javascript:;" data-mz-action="beginEditingCard">{{ labels.change }}</a>
+                            <a class="mz-checkout-payment-change text-uppercase" href="javascript:;" data-mz-action="beginEditingCard">{{ labels.change }}</a>
                         {% endif %}
                             <p>{{ model.card.paymentOrCardType }} {{ model.card.cardNumberPartOrMask }}
                             <br/>{{ labels.expires }} {{ model.card.expireMonth }}/{{ model.card.expireYear }}</p>
@@ -189,6 +189,6 @@
     </div>
 
     <div class="mz-formstep-next">
-        <button class="mz-button" data-mz-action="next">{{ labels.next }}</button>
+        <button class="mz-button button_primary" data-mz-action="next">{{ labels.next }}</button>
     </div>
 </div><!-- .mz-panel-wrap -->

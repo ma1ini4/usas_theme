@@ -2596,5 +2596,53 @@ ul.tabs {
     }
 }
 
+.mz-shipping-destinations {
+    .clearfix();
+    .mz-shipping-destination-title {
+        h3 {
+            font-size: 18px;
+        }
+    }
+    .mz-shipping-row {
+        display: table-row;
+        .mz-shipping-row-item {
+            display: table-cell;
+            padding-right: @defaultGutter;
+            .mz-shipping-row-item {
+                display: inline-block;
+                padding-right: 0;
+            }
+            label {
+                .fontRegular();
+            }
+            select {
+                border-radius: 0;
+            }
+        }
+    }
+}
+.mz-ordersummary-ms2-checkout {
+    width: 100%;
+    .mz-itemlisting-thumb-img {
+        float: left;
+        margin-right: @defaultGutter;
+    }
+    th {
+        padding: 5px 0;
+        &.mz-ordersummary-header-total {
+            text-align: right;
+        }
+    }
+    .mz-ordersummary-lineitems {
+        .fontRegular();
+        td {
+            padding: 5px 0;
+        }
+        .mz-ordersummary-item-total {
+            text-align: right;
+        }
+    }
+}
+
 
 

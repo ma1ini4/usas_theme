@@ -11,6 +11,6 @@
         {%comment%} {% include "modules/multi-ship-checkout/shipping-methods-single" %}{% endcomment%}
     {% endif %}
     <div class="mz-formstep-next">
-        <button type="button" class="mz-button" data-mz-action="next">{{ labels.next }}</button>
+        <button type="button" class="mz-button button_primary" data-mz-action="next">{{ labels.next }}</button>
     </div>
 </div>
