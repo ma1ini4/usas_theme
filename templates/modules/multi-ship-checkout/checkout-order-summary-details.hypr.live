@@ -1,36 +1,66 @@
 <table class="mz-ordersummary-ms2-checkout">
-  <thead>
-      <tr>
-          <th class="mz-ordersummary-header-product">
-            {% if fulfillmentMethod=="Ship" %}{{ labels.shippingInformation }}{% endif %}
-            {% if fulfillmentMethod=="Digital" %}{{ labels.digitalDelivery }}{% endif %}
-            {% if fulfillmentMethod=="Pickup" %}{{ labels.orderItemsPickup }}{% endif %}
-          </th>
-          <th class="mz-ordersummary-header-qty">{{ labels.qty }}</th>
-          <th class="mz-ordersummary-header-each">{{ labels.each }}</th>
-          <th class="mz-ordersummary-header-total">{{ labels.total }}</th>
-      </tr>
-  </thead>
+    <thead>
+        <tr>
+            <th class="mz-ordersummary-header-product">
+                {% if fulfillmentMethod=="Ship" %}{{ labels.shippingInformation }}{% endif %}
+                {% if fulfillmentMethod=="Digital" %}{{ labels.digitalDelivery }}{% endif %}
+                {% if fulfillmentMethod=="Pickup" %}{{ labels.orderItemsPickup }}{% endif %}
+            </th>
+            <th class="mz-ordersummary-header-qty text-center">{{ labels.qty }}</th>
+            <th class="mz-ordersummary-header-each text-center">{{ labels.each }}</th>
+            <th class="mz-ordersummary-header-total">{{ labels.total }}</th>
+        </tr>
+    </thead>
   <tbody class="mz-ordersummary-lineitems">
     {% for item in items %}
       {% if item.fulfillmentMethod == fulfillmentMethod %}
         <tr class="mz-ordersummary-line mz-ordersummary-line-item {% if item.discountTotal > 0 %}is-discounted{% endif %}">
               <td class="mz-ordersummary-item-product">
-                {{ item.product.name }}
-                {% if item.product.bundledProducts.length %}
-                <dl class="mz-propertylist">
-                  {% for bundledProduct in item.product.bundledProducts %}
-                  <dt>{{ bundledProduct.productCode }}</dt>&nbsp;
-                  <dd>{{ bundledProduct.name }} ({{ bundledProduct.quantity }})</dd>
+                {% include "modules/product/product-image" with productImage=item.product productAltText=item.product.imageAlternateText productMaxWidth="80" productImageClass="mz-itemlisting-thumb-img" as_parameter %}
+                {{ item.product.name }}<br>
+                <span class="mz-carttable-item-code">
+                  {{ labels.item }}# <em>{{ item.product.productCode }}</em>
+                </span>
+                {% if item.product.options and themeSettings.showCartItemOptions %}
+                  <span class="mz-propertylist">
+                  {% for option in item.product.options %}
+                  <span>{% if option.name == "OTHER" %}
+                        OPTION
+                        {% else %}
+                        {{ option.name }}
+                        {% endif %}</span>&nbsp;
+                  <span>
+                    {% if option.stringValue == 'CHR(38)' %}
+                    &amp;
+                    {% else %}
+                      {% if option.stringValue == 'CHR(64)' %}
+                      @
+                      {% else %}
+                        {% if option.stringValue %}
+                            {{ option.stringValue }}
+                        {% else %}
+                            {{ option.value|default(option.shopperEnteredValue) }}
+                        {% endif %}
+                      {% endif %}
+                    {% endif %}
+                  </span><br>
                   {% endfor %}
-                </dl>
+                  </span>
+                {% endif %}
+                {% if item.product.bundledProducts.length %}
+                <span class="mz-propertylist">
+                    {% for bundledProduct in item.product.bundledProducts %}
+                    <dt>{{ bundledProduct.productCode }}</dt>&nbsp;
+                    <dd>{{ bundledProduct.name }} ({{ bundledProduct.quantity }})</dd>
+                    {% endfor %}
+                </span>
                 {% endif %}
               </td>
-              <td>{{ item.quantity }}</td>
-              <td>
+              <td class="text-center">{{ item.quantity }}</td>
+              <td class="text-center">
                   {% include "modules/common/item-price" %}
               </td>
-              <td>{% include "modules/common/item-total" %}
+              <td class="mz-ordersummary-item-total">{% include "modules/common/item-total" %}
               </td>
           </tr>
       {% endif %}
