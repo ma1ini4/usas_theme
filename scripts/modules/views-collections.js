@@ -149,10 +149,8 @@ define([
                         var filterKeyFormat=facetKey.replace('~','-');
         
                         if(filterKeyFormat==='' && facetVal===''){
-                            console.log(filterKeyFormat  +  facetVal);
                             $('#filter-'+filterKeyFormat).find('.mz-clear-facet-section').addClass('hide');
                         }else{
-                            console.log('else' +filterKeyFormat  +  facetVal);
                              $('#filter-'+filterKeyFormat).find('.mz-clear-facet-section').removeClass('hide');
                         }
                         if(facetKey === 'tenant~size'){
