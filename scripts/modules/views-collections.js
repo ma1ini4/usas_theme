@@ -146,6 +146,15 @@ define([
                             }
                             displayValue = displayValue.replace("[", "$").replace("]", "").replace(/to/gi, "-");
                         }
+                        var filterKeyFormat=facetKey.replace('~','-');
+        
+                        if(filterKeyFormat==='' && facetVal===''){
+                            console.log(filterKeyFormat  +  facetVal);
+                            $('#filter-'+filterKeyFormat).find('.mz-clear-facet-section').addClass('hide');
+                        }else{
+                            console.log('else' +filterKeyFormat  +  facetVal);
+                             $('#filter-'+filterKeyFormat).find('.mz-clear-facet-section').removeClass('hide');
+                        }
                         if(facetKey === 'tenant~size'){
                              displayValue=$('#'+facetVal).attr('data-mz-text-value');
                         }
@@ -275,11 +284,24 @@ define([
         );
 
         function clearFacetSection(_e){
+            blockUiLoader.globalLoader();
             var _self = $(_e.currentTarget);
             var facetVal = _self.attr("data-clear-text");
             var path = getFacet();
             path = decodeURIComponent(path);
-            alert('clearME!!! '+ facetVal + path);
+            var url= path.replace(new RegExp(facetVal+'\:(.*?)(,|&)', 'g'), '');
+            if(url[url.length -1]==','){
+                url = url.replace(new RegExp(',$', 'g'), '\&');
+                
+            }
+            var parser = document.createElement('a');
+            parser.href = url;
+            url = window.location.pathname + parser.search;
+            if (url && _dispatcher.send(url)) {
+                _$body.addClass('mz-loading');
+                _e.preventDefault();
+            }
+            //alert('clearME!!! '+ facetVal + path);
         }
         //Toggle filters
         function toggleFiltersView(_e) {
