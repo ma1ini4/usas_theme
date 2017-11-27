@@ -5,12 +5,9 @@ define(['modules/jquery-mozu', 'underscore', "modules/api", "modules/backbone-mo
         var siteID = cdn.substring(cdn.lastIndexOf('-') + 1);
         var imagefilepath = cdn + '/cms/' + siteID + '/files';
 
-        
-
         var pageContext = require.mozuData('pagecontext');
 
         $(document).ready(function() {
-
            
             var productCollection = [];
             

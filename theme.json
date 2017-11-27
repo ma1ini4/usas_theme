@@ -1267,6 +1267,49 @@
       ]
     },
     {
+        "defaultConfig": {
+            "template": "modules/product/recent-product-list-gorsuch",
+            "title": "Recently Viewed Items"
+        },
+        "displayName": "Recently Viewed Items",
+        "displayTemplate": "catalog/recently-viewed-products",
+        "editViewFields": [{
+            "anchor": "100%",
+            "fieldLabel": "Title",
+            "name": "title",
+            "xtype": "mz-input-text"
+        }, {
+            "anchor": "100%",
+            "fieldLabel": "Template",
+            "name": "template",
+            "store": [
+                [
+                    "modules/product/product-list-carousel",
+                    "carousel"
+                ],
+                [
+                    "modules/product/product-list-tiled",
+                    "tiled"
+                ],
+                [
+                    "modules/product/product-list",
+                    "list"
+                ],
+                [
+                    "modules/product/recent-product-list-gorsuch",
+                    "gorsuch carousel"
+                ]
+            ],
+            "xtype": "mz-input-dropdown"
+        }],
+        "icon": "/resources/admin/widgets/26_related_products.png",
+        "id": "recentlyViewedProducts",
+        "validPageTypes": [
+            "product",
+            "cart"
+        ]
+    }, {
+
       "defaultConfig": {
         "body": "<h2>Insert Markup</h2>"
       },
