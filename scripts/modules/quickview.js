@@ -124,26 +124,26 @@ define([
 
                 Backbone.MozuView.prototype.render.apply(this);
             },
-            // onMouseEnterChangeImage: function(_e) {
-            //     this.mainImage = $('#quickViewModal .mz-productimages-mainimage').attr('src');
-            //     var colorCode = $(_e.currentTarget).data('mz-swatch-color'),
-            //         productCode = $(_e.currentTarget).data("product-code");
-            //     this.changeImages(colorCode, productCode, 'N');
-            // },
-            // onMouseLeaveResetImage: function(_e) {
-            //     if (!this.isColorClicked) {
-            //         var _selectedColorDom = $("ul.product-color-swatches").find('li.active'),
-            //             colorCode = _selectedColorDom.data('mz-swatch-color'),
-            //             productCode = _selectedColorDom.data("product-code");
-            //         if (typeof colorCode != 'undefined') {
-            //             this.changeImages(colorCode, productCode, 'N');
-            //         } else if(typeof this.mainImage != 'undefined'){
-            //             $('#quickViewModal .mz-productimages-mainimage').attr('src', this.mainImage);
-            //         }else{
-            //             $('#quickViewModal .mz-productimages-main').html('<span class="mz-productlisting-imageplaceholder img-responsive"><span class="mz-productlisting-imageplaceholdertext">[no image]</span></span>');
-            //         }
-            //     }
-            // },
+            onMouseEnterChangeImage: function(_e) {
+                this.mainImage = $('#quickViewModal .mz-productimages-mainimage').attr('src');
+                var colorCode = $(_e.currentTarget).data('mz-swatch-color'),
+                    productCode = $(_e.currentTarget).data("product-code");
+                this.changeImages(colorCode, productCode, 'N');
+            },
+            onMouseLeaveResetImage: function(_e) {
+                if (!this.isColorClicked) {
+                    var _selectedColorDom = $("ul.product-color-swatches").find('li.active'),
+                        colorCode = _selectedColorDom.data('mz-swatch-color'),
+                        productCode = _selectedColorDom.data("product-code");
+                    if (typeof colorCode != 'undefined') {
+                        this.changeImages(colorCode, productCode, 'N');
+                    } else if(typeof this.mainImage != 'undefined'){
+                        $('#quickViewModal .mz-productimages-mainimage').attr('src', this.mainImage);
+                    }else{
+                        $('#quickViewModal .mz-productimages-main').html('<span class="mz-productlisting-imageplaceholder img-responsive"><span class="mz-productlisting-imageplaceholdertext">[no image]</span></span>');
+                    }
+                }
+            },
             quantityMinus: function() {
                 var _qtyObj = $('[data-mz-validationmessage-for="quantity"]'),
                     _qtyCountObj = $('.mz-productdetail-qty');
@@ -280,7 +280,7 @@ define([
                         } else {
                             $("#quickViewModal .mz-productimages-main img").attr('src', imagepath);
                         }
-                    } else if(typeof _this.mainImage === 'undefined') {
+                    } else if(typeof _this.mainImage === 'undefined' || response === false) {
                         $('.zoomContainer').remove();
                         $('.mz-productimages-main').html('<span class="mz-productlisting-imageplaceholder img-responsive"><span class="mz-productlisting-imageplaceholdertext">[no image]</span></span>');
                     }
