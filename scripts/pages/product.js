@@ -589,9 +589,38 @@
                 hasPriceRange: product.attributes.hasPriceRange,
                 price: product.attributes.price.attributes
             };
-        }        
+        } 
+
+        var productData = product.apiModel.data;        
+        var recentProduct = {
+            code:productData.productCode
+        }; 
+        var existingProducts = $.cookie("recentProducts");
+        var recentProducts = existingProducts ? $.parseJSON(existingProducts) : [];
+        recentProducts = recentProd(recentProducts, recentProduct);
+        $.cookie("recentProducts", JSON.stringify(recentProducts), {path: '/', expires: 21 });
+
 
     });
+
+    function recentProd(json, product) {
+        var found = false;
+        var maxItems = HyprLiveContext.locals.themeSettings.maxRecentlyViewedItems;
+
+        for (var i = 0 ; i < json.length; i++) {
+            if (json[i].code == product.code){
+                found = true;
+                json.splice(i, 1);
+                break;
+            }
+        }
+        json.unshift(product);
+
+        if(json.length == maxItems+2){
+            json.splice(maxItems+1, 1);
+        }
+        return json;
+    }
     //Code for Family Page
     if ($("#mz-family-container").length) {
         FamilyModel.render();
