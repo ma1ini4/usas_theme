@@ -436,6 +436,12 @@
     "familyProductType":"Family Products",
     "familyProductAttribute":"tenant~family-members",
     "colorSwatchesChangeAlternate":false,
+    "customCountries": [
+          {
+              "value": "US",
+              "key": "United States"
+          }
+    ],
     "fullNameLength": 80,
     "firstNameLength": 40,
     "middleNameInitialsLength": 1,
@@ -516,7 +522,7 @@
     "listProductCode": true,
     "listProductShortDesc": true,
     "listProductThumbSize": 265,
-    "maxProductImageThumbnailSize": 50,
+    "maxProductImageThumbnailSize": 90,
     "maxProductSummaryWords": 40,
     "maxTopLevelNavItems": 8,
     "maxTopLevelNavLabelLength": 20,
@@ -560,6 +566,8 @@
     "facetMoreColorCount": 3,
     "enableQuickView": true,
     "categoryEntityName": "categoryAttributes@ng",
+    "globalPageHeaderLogoSM": null,
+    "globalPageHeaderLogoXS": null,
     "usStates": [
       {
         "abbreviation": "AL",

@@ -500,5 +500,8 @@
     "sortByRatingAsc": "Rating: Low to High",
     "sortByproductNameAsc": "Alphabetical: A-Z",
     "sortByproductNameDesc": "Alphabetical: Z-A",
-    "fullProductDetails": "Full Product Details"
+    "fullProductDetails": "Full Product Details",
+    "select": "Select",
+    "shippingTo" : "Items shipping to",
+    "shippingDestinationEditAddress": "Edit Address"
 }

@@ -440,5 +440,8 @@
     "sortByRatingAsc": "Calificación: baja a alta",
     "sortByproductNameAsc": "Alfabético: A-Z",
     "sortByproductNameDesc": "Alfabético: Z-A",
-    "fullProductDetails": "Full Product Details"
+    "fullProductDetails": "Full Product Details",
+    "select": "Wählen",
+    "shippingTo" : "Items shipping to",
+    "shippingDestinationEditAddress": "Edit Address"
 }
