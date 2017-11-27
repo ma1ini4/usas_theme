@@ -2643,6 +2643,27 @@ ul.tabs {
         }
     }
 }
-
-
-
+.mz-l-paginatedlist-footer{
+    .back-to-top{
+        button{
+            &.mz-back-to-top-button{
+                background-color: @colorLightGray;
+                border: none;
+                float: left; 
+                height: 33px;
+                line-height: 20px;
+                letter-spacing: 0.4px;
+                text-transform: uppercase;
+                &:hover{
+                    border: none;
+                }
+                &:focus{
+                    outline: 0;
+                }
+                &:active {
+                    box-shadow: none;
+                }
+            }
+        }
+    }
+}
