@@ -590,6 +590,15 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             loginPage.init(this);
         });
 
+        $(".ml-navbar-secondary .panel-body").each(function() {
+            var headingElemnt = $(this).parent().parent().find("a[aria-controls]");
+            if ($(this).text().trim() === "" && headingElemnt.data("target")) {
+                headingElemnt.find("span").hide();
+                headingElemnt.attr("href", "/c/" + headingElemnt.data("target").replace("#sub-nav-", "").replace("#main-nav-", ""));
+                headingElemnt.removeAttr("aria-expanded aria-controls data-toggle role");
+            }
+        });
+
         $('[data-mz-action="logout"]').each(function(){
             var el = $(this);
 
