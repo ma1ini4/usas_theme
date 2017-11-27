@@ -503,5 +503,6 @@
     "fullProductDetails": "Full Product Details",
     "select": "Select",
     "shippingTo" : "Items shipping to",
-    "shippingDestinationEditAddress": "Edit Address"
+    "shippingDestinationEditAddress": "Edit Address",
+    "backToTop": "Back to Top"
 }
