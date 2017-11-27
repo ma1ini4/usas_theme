@@ -285,8 +285,17 @@
                     "allowBlank": false
                 }
             ]
-        },
-        {
+        },{
+            "xtype": "panel",
+            "title": "Recently Viewed",
+            "collapsed": false,
+            "items": [{
+                    "xtype": "mz-input-number",
+                    "name": "maxRecentlyViewedItems",
+                    "fieldLabel": "Maximum number of Recently Viewed Items supported"
+                }                                                
+            ]
+        },{            
             "xtype": "panel",
             "title": "Form Validations",
             "collapsed": false,
