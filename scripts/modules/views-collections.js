@@ -299,7 +299,6 @@ define([
                 _$body.addClass('mz-loading');
                 _e.preventDefault();
             }
-            //alert('clearME!!! '+ facetVal + path);
         }
         //Toggle filters
         function toggleFiltersView(_e) {
