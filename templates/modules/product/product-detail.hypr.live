@@ -125,3 +125,6 @@
   {% endfor %}
 </div>
 {% endif %}
+{% for familyItem in model.family %}
+  {% include "modules/product/family/family-item" with model=familyItem %}
+{% endfor %}

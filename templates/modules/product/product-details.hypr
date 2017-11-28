@@ -33,6 +33,7 @@
                 {% include "modules/common/message-bar" %}
                 <div id="product-detail" class="mz-productdetail mz-l-stack">
                     {% include "modules/product/product-detail" %}
+                   
                 </div>
                 <div id="details-accordion" role="tablist" aria-multiselectable="true">
                     {% if model.content.productFullDescription %}
@@ -91,9 +92,7 @@
             {% dropzone "social-sharing" scope="template" %}
         </div>
     </div>
-    {% if model.productType==themeSettings.familyProductType %}
-        {% include"modules/product/family/family-list" %}
-    {% endif %}
+
     <div class="clearfix"></div>
     <div class="mz-middle-breakpoint hidden-xs">
         {% dropzone "product-middle-breakpoint" scope="template" %}  

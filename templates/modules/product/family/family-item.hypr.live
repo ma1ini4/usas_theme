@@ -1,3 +1,4 @@
+
 {% if model %}
 	<div class="col-sm-3">
 	<a href='{% make_url "product" model %}'>
