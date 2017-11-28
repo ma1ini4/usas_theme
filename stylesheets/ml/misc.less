@@ -1287,10 +1287,26 @@ ul.tabs {
       }
       .mz-productimages{
         .mz-productimages-main{
-          min-height: 374px;
-          .mz-productimages-mainimage {
-            max-width: 100%;
-          }
+            min-height: 374px;
+            .mz-productimages-mainimage {
+                max-width: 100%;
+            }
+            .mz-productlisting-imageplaceholder {
+                display: block;
+                min-height: 374px;
+                width: 100%;
+                background: #eee;
+                line-height: 374px;
+                text-align: center;
+                color: #aaa;
+                > * {
+                    vertical-align: middle;
+                }
+
+                > .mz-productlisting-imageplaceholdertext {
+                    vertical-align: top;
+                }
+            }
         }
         .mz-productimages-thumbs{
           width: 316px;
