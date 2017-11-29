@@ -634,11 +634,28 @@
                     "fieldLabel": "Enable Quick View"
                 }
             ]
-
-
-
-
-
+        },
+        {
+            "xtype": "panel",
+            "title": "Product Carousel",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-number",
+                    "name": "productCarouselSize",
+                    "fieldLabel": "Number of Product Carousels"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "productInfinitySize",
+                    "fieldLabel": "Number of Product in Infinity Scroll"
+                },
+                {
+                    "xtype": "mz-input-number",
+                    "name": "productCarouselImageWidth",
+                    "fieldLabel": "Product Carousel Image Width (in px)"
+                }
+            ]
         }
     ]
 }

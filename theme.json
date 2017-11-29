@@ -527,6 +527,7 @@
     "maxProductSummaryWords": 40,
     "maxTopLevelNavItems": 8,
     "maxTopLevelNavLabelLength": 20,
+    "productCarouselSize": 8,
     "pageSizeOptions": [
       36,
       72
