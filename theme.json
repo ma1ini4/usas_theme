@@ -570,6 +570,7 @@
     "categoryEntityName": "categoryAttributes@ng",
     "globalPageHeaderLogoSM": null,
     "globalPageHeaderLogoXS": null,
+    "enableProductCarousel": true,
     "usStates": [
       {
         "abbreviation": "AL",
