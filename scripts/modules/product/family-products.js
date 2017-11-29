@@ -205,7 +205,7 @@ define([
 	      	$("#mz-family-container").empty(); 
 	      	for(var i=0; i < familyData.models.length; i++){
 	      		//var x = this.model.checkVariationCode(familyData.models[i]);
-	      		var view = new FamilyItemView({model: x});
+	      		var view = new FamilyItemView({model: familyData.models[i]});
 		        var renderedView = view.render().el;
 		        $("#mz-family-container").append(renderedView);
 	      	}
