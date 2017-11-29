@@ -281,45 +281,48 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
                     me.lastConfiguration = [];
                     me.calculateHasPriceRange(conf);
                     me.on('sync', me.calculateHasPriceRange);  
-                    var variations = me.get('variations');
-                    var variationCodes = me.get('variationCodes');
-                    var variation_pro = [];
-                    var options_arr = [];
-                    me.set('variations', variation_pro);
-                    _.each(variations, function(valued) {
-                        for (var k = 0; k < variationCodes.length; k++) {
-                            if (valued.productCode === variationCodes[k]) {
-                                variation_pro.push(valued);
-                                //variation_pro = _.uniq(variation_pro);
-                                if (me.attributes.options) {
-                                    for (var l = 0; l < valued.options.length; l++) {
-                                        options_arr.push(valued.options[l].valueSequence);
-                                        options_arr = _.uniq(options_arr); 
-                                    }
-                                }
-                            }
-                        }
-                    });
-                    me.set('variations', variation_pro);
-                    //remove options
-                    var byIDVal = JSON.parse(JSON.stringify(me.get('options')._byId));
-                    for(var i=0;i<me.get("options").models.length;i++){
-                        var opt_pro= [];
-                        var option = me.get("options").models[i];
-                        var key = option.get("attributeFQN");
-                        for (var b = 0; b < option.get('values').length; b++) {
-                            for (var c = 0; c < options_arr.length; c++) {
-                                if (option.get('values')[b].attributeValueId === options_arr[c]) {
-                                    opt_pro.push(option.get('values')[b]);     
-                                    break;                       
-                                }
-                            }
-                        } 
-                        me.get('options').get(key).set('values', opt_pro);                       
-                    }
+                    me = me.checkVariationCode(me);
                 });
             },1000);
-
+        },
+        checkVariationCode: function(me){
+            var variations = me.get('variations');
+            var variationCodes = me.get('variationCodes');
+            var variation_pro = [];
+            var options_arr = [];
+            me.set('variations', variation_pro);
+            _.each(variations, function(valued) {
+                for (var k = 0; k < variationCodes.length; k++) {
+                    if (valued.productCode === variationCodes[k]) {
+                        variation_pro.push(valued);
+                        //variation_pro = _.uniq(variation_pro);
+                        if (me.attributes.options) {
+                            for (var l = 0; l < valued.options.length; l++) {
+                                options_arr.push(valued.options[l].valueSequence);
+                                options_arr = _.uniq(options_arr); 
+                            }
+                        }
+                    }
+                }
+            });
+            me.set('variations', variation_pro);
+            //remove options
+            var byIDVal = JSON.parse(JSON.stringify(me.get('options')._byId));
+            for(var i=0;i<me.get("options").models.length;i++){
+                var opt_pro= [];
+                var option = me.get("options").models[i];
+                var key = option.get("attributeFQN");
+                for (var b = 0; b < option.get('values').length; b++) {
+                    for (var c = 0; c < options_arr.length; c++) {
+                        if (option.get('values')[b].attributeValueId === options_arr[c]) {
+                            opt_pro.push(option.get('values')[b]);     
+                            break;                       
+                        }
+                    }
+                } 
+                me.get('options').get(key).set('values', opt_pro);                       
+            }
+            return me;
         },
         mainImage: function() {
             var productImages = this.get('content.productImages');

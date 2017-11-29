@@ -128,7 +128,7 @@ define([
                                 $(".mz-productcodes-productcode").text("Sku # " + window.productView.model.attributes.variationProductCode);
                             }
                             $('.mz-productdetail-price.prize-mobile-view').html($('.mz-l-stack-section.mz-productdetail-conversion .mz-productdetail-price').html());*/
-                            $this.model = checkVariationCode($this.model,familyObject);  
+                            //$this.model = checkVariationCode($this.model,familyObject);  
                             $this.render();
                             blockUiLoader.unblockUi();
                             for(var i=0; i < window.familyProducts.length; i++){
@@ -201,86 +201,19 @@ define([
     function renderFamily() {
         var self = this;
         try {
-            familyObject = require.mozuData('family').stringValue;
-        } catch (e) {}
-
-        if (familyObject !== "") {
-            try {
-                familyObject = JSON.parse(familyObject);
-                var familyProducts = [];
-                for (var i = 0; i < familyObject.length; i++) {
-                    familyProducts.push(familyObject[i].productCode);
-                }
-                var filter = familyProducts.join(" or productCode+eq+");
-                if (filter !== "" && filter !== " or ") {
-                    var serviceurl = '/api/commerce/catalog/storefront/productsearch/search/?startIndex=0&pageSize=20&filter=productCode+eq+' + filter;
-                    api.request('GET', serviceurl).then(function(productslist) {
-                        $("#mz-family-container").empty();
-                        window.familyProducts = [];
-                        for (var p = 0; p < productslist.items.length; p++) {
-                            var pro = checkVariationCode(new ProductModels.Product(productslist.items[p]), familyObject);
-                            var view = new FamilyItemView({model: pro});
-                            var renderedView = view.render().el;
-                            $("#mz-family-container").append(renderedView); 
-                            window.familyProducts.push(pro);
-                        }
-                    });
-                }
-            } catch (e) {
-                if (showError) {
-                    $("#mz-family-container").html("Family JSON is not correct!");
-                } else {
-                    console.log("Family JSON is not correct!");
-                }
-            }
-        }
+	      	var familyData = ProductModels.Product.fromCurrent().get('family'); 
+	      	$("#mz-family-container").empty(); 
+	      	for(var i=0; i < familyData.models.length; i++){
+	      		//var x = this.model.checkVariationCode(familyData.models[i]);
+	      		var view = new FamilyItemView({model: x});
+		        var renderedView = view.render().el;
+		        $("#mz-family-container").append(renderedView);
+	      	}
+	      } catch(e){
+	      	console.log("something wrong happened with family", e);
+	      }
     }
-
-    function checkVariationCode(e, prod_arr) {
-        var options_arr = [];
-        var item_code = e.get('productCode');
-        var variations = e.get('variations');
-
-        var variation_pro = [];
-
-        e.attributes.variations = [];
-        //remove variations
-        _.each(variations, function(valued) {
-            for (var j = 0; j < prod_arr.length; j++) {
-                if (prod_arr[j].productCode === item_code && prod_arr[j].variationCodes) {
-                    for (var k = 0; k < prod_arr[j].variationCodes.length; k++) {
-                        if (valued.productCode === prod_arr[j].variationCodes[k]) {
-                            variation_pro.push(valued);
-                            variation_pro = _.uniq(variation_pro);
-                            if (e.attributes.options) {
-                                for (var l = 0; l < valued.options.length; l++) {
-                                    options_arr.push(valued.options[l].valueSequence);
-                                    options_arr = _.uniq(options_arr); 
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        });
-        e.set('variations', variation_pro);
-        //remove options
-        var byIDVal = JSON.parse(JSON.stringify(e.get('options')._byId));
-        for (var key in byIDVal) {
-            var opt_pro = [];
-            var option = e.get('options').get(key);
-            for (var b = 0; b < option.get('values').length; b++) {
-                for (var c = 0; c < options_arr.length; c++) {
-                    if (option.get('values')[b].attributeValueId === options_arr[c]) {
-                        opt_pro.push(option.get('values')[b]);     
-                        break;                       
-                    }
-                }
-            }
-            e.get('options').get(key).set('values', opt_pro);
-        }
-        return e;
-    }
+    
 
     return {
         render: renderFamily
