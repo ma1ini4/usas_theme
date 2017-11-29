@@ -314,19 +314,19 @@
             } else if ($("figure.mz-productimages-thumbs ul.products_list li.active").length > 0) {
                 version = $("figure.mz-productimages-thumbs ul.products_list li.active").data("mz-productimage-thumb");
             }
-            var pdpMainImageName = HyprLiveContext.locals.themeSettings.pdpMainImageName;
-            if(pdpMainImageName){
-                if(pdpMainImageName.indexOf("{0}") != -1){
-                    pdpMainImageName = pdpMainImageName.replace("{0}", this.model.attributes.productCode);
+            var pdpMainImageNameSwatch = HyprLiveContext.locals.themeSettings.pdpMainImageNameSwatch;
+            if(pdpMainImageNameSwatch){
+                if(pdpMainImageNameSwatch.indexOf("{0}") != -1){
+                    pdpMainImageNameSwatch = pdpMainImageNameSwatch.replace("{0}", this.model.attributes.productCode);
                 }
-                if(pdpMainImageName.indexOf("{1}") != -1){
-                    pdpMainImageName = pdpMainImageName.replace("{1}", colorCode);
+                if(pdpMainImageNameSwatch.indexOf("{1}") != -1){
+                    pdpMainImageNameSwatch = pdpMainImageNameSwatch.replace("{1}", colorCode);
                 }
-                if(pdpMainImageName.indexOf("{2}") != -1){
-                    pdpMainImageName = pdpMainImageName.replace("{2}", version);
+                if(pdpMainImageNameSwatch.indexOf("{2}") != -1){
+                    pdpMainImageNameSwatch = pdpMainImageNameSwatch.replace("{2}", version);
                 }
-            }
-            var imagepath = imagefilepath + '/' + pdpMainImageName +'?maxWidth=';
+            } 
+            var imagepath = imagefilepath + '/' + pdpMainImageNameSwatch +'?maxWidth=';
             var mainImage = imagepath + width_pdp;
             var zoomimagepath = imagepath + width_zoom;
             var _this = this;
@@ -589,12 +589,12 @@
                 hasPriceRange: product.attributes.hasPriceRange,
                 price: product.attributes.price.attributes
             };
-        } 
+        }
 
-        var productData = product.apiModel.data;        
+        var productData = product.apiModel.data;
         var recentProduct = {
             code:productData.productCode
-        }; 
+        };
         var existingProducts = $.cookie("recentProducts");
         var recentProducts = existingProducts ? $.parseJSON(existingProducts) : [];
         recentProducts = recentProd(recentProducts, recentProduct);

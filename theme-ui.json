@@ -578,14 +578,19 @@
             "items": [
                 {
                     "xtype": "mz-input-text",
-                    "name": "pdpMainImageName",
-                    "fieldLabel": "Main Image Name"
+                    "name": "pdpMainImageNameSwatch",
+                    "fieldLabel": "Main Image Name for hover/click on swatche images"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "pdpMainImageNameAlt",
+                    "fieldLabel": "Main Image Name for hover/click on alternate images"
                 },
                 {
                     "xtype": "mz-input-text",
                     "name": "pdpMainImageMaxWidth",
                     "fieldLabel": "Main Image Max Width"
-                },
+                }, 
                 {
                     "xtype": "mz-input-text",
                     "name": "pdpAltImageName",
