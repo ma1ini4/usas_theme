@@ -23,7 +23,7 @@
                                     {% if facetSetting.key =='tenant~COLOR' or facetSetting.key=='tenant~SIZE' or facetSetting.key=='price' %}
                                         <div class="mz-l-sidebaritem" id="facet_{{facetSetting.key|replace("tenant~")}}">
                                         <div id="filter-{{facet.field |lower|replace('~','-')}}" class="faceting-header" data-mz-filter-collapse="{{ forloop.index0 }}">{{ facetSetting.name }} <span id="filterIcon{{ forloop.index0 }}" class="filter-icon pull-right"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                        <button data-clear-text="{{facet.field|lower}}" class="btn-transparent text-uppercase pull-right mz-clear-facet-section hide">{{ labels.clearAllFilters }} <i  class="fa fa-times-circle" aria-hidden="true"></i></button>
+                                        <button data-clear-text="{{facet.field|lower}}" class="btn-transparent text-uppercase pull-right mz-clear-facet-section hide">{{ labels.clear }} <i  class="fa fa-times-circle" aria-hidden="true"></i></button>
                                         </div>
                                         <ul class="mz-facetingform-facet mz-facetingform-facet-hierarchy clearfix {{facetSetting.definition.type|lower}}" id="filterList{{ forloop.index0 }}">
                                             <li class="hide" aria-hidden="true">For Blank</li>
@@ -42,7 +42,7 @@
                                 {% else %}
                                     <div id="filter-{{facet.field |lower|replace('~','-')}}" class="mz-l-sidebaritem" id="facet_{{facetSetting.key|replace("tenant~")}}">
                                     <div class="faceting-header" data-mz-filter-collapse="{{ forloop.index0 }}">{{ facetSetting.name }} <span id="filterIcon{{ forloop.index0 }}" class="filter-icon pull-right"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                     <button data-clear-text="{{facet.field|lower}}" class="btn-transparent text-uppercase pull-right mz-clear-facet-section hide">{{ labels.clearAllFilters }} <i  class="fa fa-times-circle" aria-hidden="true"></i></button>
+                                     <button data-clear-text="{{facet.field|lower}}" class="btn-transparent text-uppercase pull-right mz-clear-facet-section hide">{{ labels.clear }} <i  class="fa fa-times-circle" aria-hidden="true"></i></button>
                                     </div>
                                     <ul class="mz-facetingform-facet mz-facetingform-facet-hierarchy clearfix {{facetSetting.definition.type|lower}}" id="filterList{{ forloop.index0 }}">
                                         <li class="hide" aria-hidden="true">For Blank</li>
@@ -73,7 +73,7 @@
                             {% if facet.values and facet.facetType != "Hierarchy" %}
                                 <div class="mz-l-sidebaritem">
                                     <div id="filter-{{facet.field |lower|replace('~','-')}}" class="faceting-header" data-mz-filter-collapse="{{ forloop.index0 }}">{{ facet.label }} <span id="filterIcon{{ forloop.index0 }}" class="filter-icon pull-right"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                         <button data-clear-text="{{facet.field|lower}}" class="btn-transparent text-uppercase pull-right mz-clear-facet-section hide">{{ labels.clearAllFilters }} <i  class="fa fa-times-circle" aria-hidden="true"></i></button>
+                                         <button data-clear-text="{{facet.field|lower}}" class="btn-transparent text-uppercase pull-right mz-clear-facet-section hide">{{ labels.clear }} <i  class="fa fa-times-circle" aria-hidden="true"></i></button>
                                     </div>
                                     <ul class="mz-facetingform-facet mz-facetingform-facet-hierarchy clearfix" id="filterList{{ forloop.index0 }}">
                                         <li class="hide" aria-hidden="true">For Blank</li>
@@ -94,7 +94,7 @@
                         {% if facet.values and facet.facetType != "Hierarchy" %}
                             <div class="mz-l-sidebaritem">
                                 <div id="filter-{{facet.field |lower|replace('~','-')}}" class="faceting-header" data-mz-filter-collapse="{{ forloop.index0 }}">{{ facet.label }} <span id="filterIcon{{ forloop.index0 }}" class="filter-icon pull-right"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                     <button data-clear-text="{{facet.field|lower}}" class="btn-transparent text-uppercase pull-right mz-clear-facet-section hide">{{ labels.clearAllFilters }} <i  class="fa fa-times-circle" aria-hidden="true"></i></button>
+                                     <button data-clear-text="{{facet.field|lower}}" class="btn-transparent text-uppercase pull-right mz-clear-facet-section hide">{{ labels.clear }} <i  class="fa fa-times-circle" aria-hidden="true"></i></button>
                                 </div>
                                 <ul class="mz-facetingform-facet mz-facetingform-facet-hierarchy clearfix" id="filterList{{ forloop.index0 }}">
                                     <li class="hide" aria-hidden="true">For Blank</li>
