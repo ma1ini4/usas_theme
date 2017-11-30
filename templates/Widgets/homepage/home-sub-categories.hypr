@@ -48,4 +48,4 @@
         </ul>
     </div>
 </div>
-{% require_script "widgets/home-sub-categories" %}
+{% require_script "widgets/homepage/home-sub-categories" %}

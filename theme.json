@@ -569,6 +569,7 @@
     "categoryEntityName": "categoryAttributes@ng",
     "globalPageHeaderLogoSM": null,
     "globalPageHeaderLogoXS": null,
+    "homePageCategoryWidgetAltText": "home_cat_widget_img",
     "usStates": [
       {
         "abbreviation": "AL",
