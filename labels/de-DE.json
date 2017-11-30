@@ -440,9 +440,10 @@
     "sortByRatingAsc": "Calificación: baja a alta",
     "sortByproductNameAsc": "Alfabético: A-Z",
     "sortByproductNameDesc": "Alfabético: Z-A",
-    "fullProductDetails": "Full Product Details",
+    "fullProductDetails": "Vollständige Produktdetails",
     "select": "Wählen",
-    "shippingTo" : "Items shipping to",
-    "shippingDestinationEditAddress": "Edit Address",
-    "backToTop": "Back to Top"
+    "shippingTo" : "Artikel versenden nach",
+    "shippingDestinationEditAddress": "Adresse bearbeiten",
+    "backToTop": "Zurück nach oben",
+    "productOutOfStockError": "Die folgenden Artikel haben eine begrenzte Menge oder sind nicht auf Lager."
 }
