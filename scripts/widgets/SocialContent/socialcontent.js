@@ -1,9 +1,9 @@
 ﻿require.config({
     shim: {
-        'widgets/socialcontent/jquery.bxslider.min': {
+        'widgets/SocialContent/jquery.bxslider.min': {
             deps: ['modules/jquery-mozu']
         },
-        'widgets/socialcontent/remodal.min': {
+        'widgets/SocialContent/remodal.min': {
             deps: ['modules/jquery-mozu']
         }
     }
