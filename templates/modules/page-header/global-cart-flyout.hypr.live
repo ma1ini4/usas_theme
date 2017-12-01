@@ -56,8 +56,10 @@
 						</div>
 						<div class="col-xs-6">
 							<div class="row">
-								<div class="col-xs-5">{{ (items.total/items.quantity) |currency }}</div>
-								<div class="col-xs-7 price-amount-col">{{ items.total|currency }}</div>	
+								<div class="col-xs-5">
+								{% include "modules/common/item-price" with item=items %}
+								</div>
+								<div class="col-xs-7 price-amount-col">{% include "modules/common/item-total" with item=items isGlobalCart="true" %}</div>	
 							</div>
 						</div>
 					</div>
