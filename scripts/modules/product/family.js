@@ -108,11 +108,11 @@ define([
                             oldValue = option.get('value');
                             if (oldValue !== newValue && !(oldValue === undefined && newValue === '')) {
                                 option.set('value', newValue);
-                                this.render();
                             }
                         }
                     }
                     this.model.whenReady(function() { 
+
                         setTimeout(function() {
                             /*var sp_price = "";
                             if (window.productView.model.attributes.inventoryInfo.onlineStockAvailable && typeof window.productView.model.attributes.inventoryInfo.onlineStockAvailable !== "undefined") {
@@ -131,11 +131,11 @@ define([
                             //$this.model = checkVariationCode($this.model,familyObject);  
                             $this.render();
                             blockUiLoader.unblockUi();
-                            for(var i=0; i < window.familyProducts.length; i++){
+                            /*for(var i=0; i < window.familyProducts.length; i++){
                                 if(window.familyProducts[i].get('productCode') === $this.model.get('productCode')){
                                     window.familyProducts[i] = $this.model;
                                 }
-                            }
+                            }*/
                             $this.isColorClicked = false; 
                         }, 1000);
                     });
@@ -215,8 +215,6 @@ define([
     }
     
 
-    return {
-        render: renderFamily
-    };
+    return FamilyItemView;
 
 });

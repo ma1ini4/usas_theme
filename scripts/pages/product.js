@@ -10,9 +10,9 @@
     "modules/models-product",
     "modules/views-productimages",
     "hyprlivecontext",
-    "modules/product/family-products",
+    "modules/product/family",
     "modules/api"
-], function($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonitor, ProductModels, ProductImageViews, HyprLiveContext, FamilyModel, api) {
+], function($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonitor, ProductModels, ProductImageViews, HyprLiveContext, FamilyItemView, api) {
 
     var sitecontext = HyprLiveContext.locals.siteContext;
     var cdn = sitecontext.cdnPrefix;
@@ -141,6 +141,31 @@
                 $(dp).dateinput().css('color', Hypr.getThemeSetting('textColor')).on('change  blur', _.bind(me.onOptionChange, me));
             });
             $('#details-accordion').find('.panel-heading a').first().click();
+
+            if ($("#mz-family-container").length) {
+                try {
+                    var familyData = me.model.get('family'); 
+                    $("#mz-family-container").empty();
+                    var familyItemModelOnready = function(){
+                        var view = new FamilyItemView({model: familyData.models[this.index]});
+                        var renderedView = view.render().el;
+                        $("#mz-family-container").append(renderedView);
+                    };
+                    for(var i=0; i < familyData.models.length; i++){
+                        //var x = this.model.checkVariationCode(familyData.models[i]);
+                        var familyItemModel = familyData.models[i];
+                        if(familyItemModel.get("isReady")){
+                            familyItemModel.off('ready');
+                            familyItemModelOnready.call({index:i});
+                        }
+                        else{
+                            familyItemModel.on('ready',familyItemModelOnready.bind({index:i}));
+                        }
+                    }
+                } catch(e){
+                    console.log("something wrong happened with family", e);
+                }  
+            }            
         },
         quantityMinus: function() {
             $('[data-mz-validationmessage-for="quantity"]').text('');
@@ -244,14 +269,27 @@
             }
         },
         addToCart: function() {
-            if(window.familyProducts){
-                window.selectedFamily = [];
-                for(var i = 0; i< window.familyProducts.length; i++){
+            if(this.model.get('family').length){
+                //window.selectedFamily = [];
+                /*for(var i = 0; i< window.familyProducts.length; i++){
                     if(typeof window.familyProducts[i].get('inventoryInfo').onlineStockAvailable !== "undefined"){
                         window.selectedFamily.push(window.familyProducts[i]);
                     }                   
                 } 
-                addtocart_handler(window.selectedFamily[0]);
+                addtocart_handler(window.selectedFamily[0]);*/
+                /* jshint ignore:start */
+                for(var i=0; i < this.model.get('family').models.length; i++){
+                    var familyItem = this.model.get('family').models[i];
+                    (function(item){
+                        setTimeout(function(){
+                            if(typeof item.get('inventoryInfo').onlineStockAvailable !== "undefined"){
+                                item.addToCart();
+                            }
+                        }, 1000);                          
+                    })(familyItem);
+                  
+                }
+                /* jshint ignore:end */
             }else if (typeof window.productView.model.get('inventoryInfo').onlineStockAvailable === "undefined" || $(".mz-productoptions-optioncontainer").length != $(".mz-productoptions-optioncontainer .active").length) {
                 blockUiLoader.productValidationMessage();
             } else if (window.productView.model.get('inventoryInfo').onlineStockAvailable) {
@@ -599,6 +637,9 @@
         var recentProducts = existingProducts ? $.parseJSON(existingProducts) : [];
         recentProducts = recentProd(recentProducts, recentProduct);
         $.cookie("recentProducts", JSON.stringify(recentProducts), {path: '/', expires: 21 });
+        //Code for Family Page
+
+
 
 
     });
@@ -621,8 +662,5 @@
         }
         return json;
     }
-    //Code for Family Page
-    if ($("#mz-family-container").length) {
-        FamilyModel.render();
-    }
+
 });
