@@ -726,9 +726,7 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
             var families = _.find(data.properties, function(e) {
                 return e.attributeFQN === "tenant~family-members" && e.values;
             });
-            if(families){
-                data.family = JSON.parse(families.values[0].stringValue);
-            }
+             data.family = JSON.parse(families.values[0].stringValue);
             return new this(data, { silent: true, parse: true });
         }        
     }),
