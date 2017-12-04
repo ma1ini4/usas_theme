@@ -92,7 +92,7 @@
         {% endfor %}
 
         {% endblock attributes %}
-
+         <a href="/print-order#{{ model.id }}" target="_blank">Print Order</a>
     {% endblock order-details %}
     </div>
 
