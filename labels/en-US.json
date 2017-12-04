@@ -504,5 +504,8 @@
     "select": "Select",
     "shippingTo" : "Items shipping to",
     "shippingDestinationEditAddress": "Edit Address",
-    "backToTop": "Back to Top"
+    "backToTop": "Back to Top",
+    "viewVideo": "View Video",
+    "ShopNow": "Shop Now",
+    "TrendTitle": "What's Trending Now"
 }

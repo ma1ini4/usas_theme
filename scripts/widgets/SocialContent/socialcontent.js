@@ -9,7 +9,7 @@
     }
 });
 
-define(['modules/jquery-mozu', 'underscore', 'modules/api', 'modules/backbone-mozu', 'hyprlivecontext', 'widgets/socialcontent/socialcontent-feed', 'widgets/socialcontent/socialcontent-helpers', 'widgets/socialcontent/jquery.bxslider.min', 'widgets/socialcontent/remodal.min'],
+define(['modules/jquery-mozu', 'underscore', 'modules/api', 'modules/backbone-mozu', 'hyprlivecontext', 'widgets/SocialContent/socialcontent-feed', 'widgets/SocialContent/socialcontent-helpers', 'widgets/SocialContent/jquery.bxslider.min', 'widgets/SocialContent/remodal.min'],
     function($, _, Api, Backbone, HyprLiveContext, SocialContentFeeds, SocialContentHelpers, bxSlider, remodal) {
         var _currentStartIndex = 0,
             _totalCount = 0,
@@ -104,7 +104,7 @@ define(['modules/jquery-mozu', 'underscore', 'modules/api', 'modules/backbone-mo
 
 
         var SocialContentGridView = Backbone.MozuView.extend({
-            templateName: 'widgets/social/socialcontent-feed-grid',
+            templateName: 'Widgets/social/socialcontent-feed-grid',
             getRenderContext: function() {
                 var context = Backbone.MozuView.prototype.getRenderContext.apply(this, arguments);
 
@@ -129,7 +129,7 @@ define(['modules/jquery-mozu', 'underscore', 'modules/api', 'modules/backbone-mo
         });
 
         var SocialContentCarouselView = Backbone.MozuView.extend({
-            templateName: 'widgets/social/socialcontent-feed-carousel',
+            templateName: 'Widgets/social/socialcontent-feed-carousel',
             getRenderContext: function() {
                 var context = Backbone.MozuView.prototype.getRenderContext.apply(this, arguments);
 
@@ -153,7 +153,7 @@ define(['modules/jquery-mozu', 'underscore', 'modules/api', 'modules/backbone-mo
         });
 
         var SocialContentMobileView = Backbone.MozuView.extend({
-            templateName: 'widgets/social/socialcontent-feed-mobile',
+            templateName: 'Widgets/social/socialcontent-feed-mobile',
             getRenderContext: function() {
                 var context = Backbone.MozuView.prototype.getRenderContext.apply(this, arguments);
 
@@ -166,7 +166,7 @@ define(['modules/jquery-mozu', 'underscore', 'modules/api', 'modules/backbone-mo
         });
 
         var SocialContentWindowView = Backbone.MozuView.extend({
-            templateName: 'widgets/social/socialcontent-model-window',
+            templateName: 'Widgets/social/socialcontent-model-window',
             getRenderContext: function() {
                 var context = Backbone.MozuView.prototype.getRenderContext.apply(this, arguments);
 
