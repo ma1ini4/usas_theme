@@ -527,6 +527,7 @@
     "maxProductSummaryWords": 40,
     "maxTopLevelNavItems": 8,
     "maxTopLevelNavLabelLength": 20,
+    "productCarouselSize": 8,
     "pageSizeOptions": [
       36,
       72
@@ -569,6 +570,7 @@
     "categoryEntityName": "categoryAttributes@ng",
     "globalPageHeaderLogoSM": null,
     "globalPageHeaderLogoXS": null,
+    "enableProductCarousel": true,
     "homePageCategoryWidgetAltText": "home_cat_widget_img",
     "usStates": [
       {
