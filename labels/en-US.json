@@ -504,5 +504,9 @@
     "select": "Select",
     "shippingTo" : "Items shipping to",
     "shippingDestinationEditAddress": "Edit Address",
-    "backToTop": "Back to Top"
+    "backToTop": "Back to Top",
+    "productOutOfStockError": "The following items have limited quantity or are out of stock.",
+    "viewVideo": "View Video",
+    "ShopNow": "Shop Now",
+    "TrendTitle": "What's Trending Now"
 }

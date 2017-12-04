@@ -426,6 +426,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
         };
         this.doSignup = function(){
             var redirectTemplate = 'myaccount';
+            var returnUrl = $('#returnUrl').val();
             var emailupdates = $(this).parents('#newshopper').find('[data-mz-signup-emailupdates]').val();
             var accMarketing = false;
             if(emailupdates === "on")
@@ -461,10 +462,11 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                 //var user = api.createSync('user', payload);
                 (LoginPopover.prototype).newsetLoading(true);
                 return api.action('customer', 'createStorefront', payload).then(function () {
-                    if (redirectTemplate) {
+                    if(returnUrl){
+                        window.location.href = returnUrl;
+                    }else if (redirectTemplate) {
                         window.location.pathname = redirectTemplate;
-                    }
-                    else {
+                    } else {
                         window.location.reload();
                     }
                 }, (LoginPopover.prototype).newdisplayApiMessage);

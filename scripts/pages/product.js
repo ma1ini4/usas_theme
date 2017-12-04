@@ -1,4 +1,4 @@
-﻿require([
+﻿   require([
     "modules/jquery-mozu",
     "underscore",
     "bxslider",
@@ -625,4 +625,8 @@
     if ($("#mz-family-container").length) {
         FamilyModel.render();
     }
+    $('body').on('click', '#mz-close-button', function(e) {
+        e.preventDefault();
+        blockUiLoader.unblockUi();
+    });
 });

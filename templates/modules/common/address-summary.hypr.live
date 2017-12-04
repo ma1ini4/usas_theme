@@ -13,8 +13,12 @@
     <div>{{ model.address.countryCode }}</div>
     {% if model.phone %}<div>{{model.phone}}</div>{% endif %}
     {% if model.phoneNumbers.home %}<div>{{ model.phoneNumbers.home }} (home)</div>{% endif %}
-    {% if model.phoneNumbers.work %}<div>{{ model.phoneNumbers.work }} (work)</div>{% endif %}
-    {% if model.phoneNumbers.mobile !== model.phoneNumbers.home%}<div>{{ model.phoneNumbers.mobile }} (mobile)</div>{% endif %}
+    {% if not (model.phoneNumbers.home == model.phoneNumbers.work) and model.phoneNumbers.work %}
+        <div>{{ model.phoneNumbers.work }} (work)</div>
+    {% endif %}
+    {% if not (model.phoneNumbers.mobile == model.phoneNumbers.home) and model.phoneNumbers.mobile %}
+        <div>{{ model.phoneNumbers.mobile }} (mobile)</div>
+    {% endif %}
    
     {% if model.regularHours %}
         <br>

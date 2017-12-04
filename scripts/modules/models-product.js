@@ -720,6 +720,7 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
             ProductUsage: {
                 Configurable: 'Configurable'
             }
+
         }//,
         // fromCurrent: function () {
         //     var data = require.mozuData(this.prototype.mozuType);
@@ -729,6 +730,7 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
         //     data.family = JSON.parse(families.values[0].stringValue);
         //     return new this(data, { silent: true, parse: true });
         // }        
+
     }),
 
 
