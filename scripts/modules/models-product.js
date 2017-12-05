@@ -1,4 +1,4 @@
-define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive", "modules/models-price", "modules/api", "hyprlivecontext", 'modules/models-family', 'modules/models-product-options'], function($, _, Backbone, Hypr, PriceModels, api, HyprLiveContext, FamilyItem, ProductOption) {
+define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive", "modules/models-price", "modules/api", "hyprlivecontext", 'modules/models-family', 'modules/models-product-options', "modules/models-messages"], function($, _, Backbone, Hypr, PriceModels, api, HyprLiveContext, FamilyItem, ProductOption, MessageModels) {
 
     var ProductContent = Backbone.MozuModel.extend({}),  
 
@@ -16,7 +16,7 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
         },
         validation: {
             quantity: {
-                min: 1,
+                min: 0,
                 msg: Hypr.getLabel('enterProductQuantity')
             }
         },
@@ -31,6 +31,30 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
                 model: FamilyItem
             })
         },
+        initMessages: function() {
+            var me = this;
+            me.messages = new MessageModels.MessagesCollection();
+            me.hasMessages = function() {
+                return me.messages.length > 0;
+            };
+            me.helpers.push('hasMessages');
+            me.on('error', function(err) {
+                if (err.items && err.items.length) {
+                    me.messages.reset(err.items);
+                } else {
+                    me.messages.reset([err]);
+                }
+            });
+            me.on('sync', function(raw) {
+                if (!raw || !raw.messages || raw.messages.length === 0) me.messages.reset();
+            });
+            _.each(this.relations, function(v, key) {
+                var relInstance = me.get(key);
+                if (relInstance && key!=='family') me.listenTo(relInstance, 'error', function(err) {
+                    me.trigger('error', err);
+                });
+            });
+        },        
         getBundledProductProperties: function(opts) {
             var self = this,
                 loud = !opts || !opts.silent;
@@ -82,7 +106,7 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
             _.bindAll(this, 'calculateHasPriceRange', 'onOptionChange');
             this.listenTo(this.get("options"), "optionchange", this.onOptionChange);
             this._hasVolumePricing = false;
-            this._minQty = 1;
+            this._minQty = 0;
             if (this.get('volumePriceBands') && this.get('volumePriceBands').length > 0) {
                 this._hasVolumePricing = true;
                 this._minQty = _.first(this.get('volumePriceBands')).minQty;
@@ -90,7 +114,7 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
                     if (this.get('quantity') <= 1) {
                         this.set('quantity', this._minQty);
                     }
-                    this.validation.quantity.msg = Hypr.getLabel('enterMinProductQuantity', this._minQty);
+                    this.validation.quantity.msg = Hypr.getLabel('enterProductQuantity', this._minQty);
                 }
             }
             this.updateConfiguration = _.debounce(this.updateConfiguration, 300);
@@ -129,6 +153,9 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
 
         addToCart: function () {
             var me = this;
+            if(this.get('family').length){
+                FamilyItem.addToCart();
+            }
             this.whenReady(function () {
                 if (!me.validate()) {
                     var fulfillMethod = me.get('fulfillmentMethod');
@@ -195,7 +222,7 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
             if (!data || !data.volumePriceBands || data.volumePriceBands.length === 0) return;
             if (this._minQty === data.volumePriceBands[0].minQty) return;
             this._minQty = data.volumePriceBands[0].minQty;
-            this.validation.quantity.msg = Hypr.getLabel('enterMinProductQuantity', this._minQty);
+            this.validation.quantity.msg = Hypr.getLabel('enterProductQuantity', this._minQty);
             if (this.get('quantity') < this._minQty) {
                 this.updateQuantity(this._minQty);
             }

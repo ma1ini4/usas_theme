@@ -45,37 +45,14 @@ define([
             return this;
         },
         quantityMinus: function(_e) {
-            var currentEl = $(_e.currentTarget);
-            currentEl.parents('.mz-productdetail-conversion-controls').find('[data-mz-validationmessage-for="quantity"]').text('');            
-            var value = parseInt(currentEl.parents('.qty-block').find('.mz-productdetail-qty').val(), 10);
-            if (value == 1) {
-                 currentEl.parents('.mz-productdetail-conversion-controls').find('[data-mz-validationmessage-for="quantity"]').text("Quantity can't be zero.");
-                return;
-            }
-            value--;
-            currentEl.parents('.qty-block').find('.mz-productdetail-qty').val(value);
-            if (typeof this.model.get('inventoryInfo').onlineStockAvailable !== "undefined") {
-                if (this.model.get('inventoryInfo').onlineStockAvailable >= value)
-                    currentEl.parents('.mz-productdetail-conversion-controls').find('[data-mz-validationmessage-for="quantity"]').text("Can't added to cart");
-                if (this.model.get('inventoryInfo').onlineStockAvailable < value)
-                    currentEl.parents('.mz-productdetail-conversion-controls').find('[data-mz-validationmessage-for="quantity"]').text("*Only " + this.model.get('inventoryInfo').onlineStockAvailable + " left in stock.");
-            }
+            this.model.messages.reset();
+            var qty = this.model.get('quantity');
+            this.model.set('quantity',--qty);
         },
         quantityPlus: function(_e) {
-            var currentEl = $(_e.currentTarget);
-            currentEl.parents('.mz-productdetail-conversion-controls').find('[data-mz-validationmessage-for="quantity"]').text('');
-            var value = parseInt(currentEl.parents('.qty-block').find('.mz-productdetail-qty').val(), 10);
-            if (value == 99) {
-                currentEl.parents('.mz-productdetail-conversion-controls').find('[data-mz-validationmessage-for="quantity"]').text("Quantity can't be greater than 99.");
-                return;
-            }
-            value++;
-            currentEl.parents('.qty-block').find('.mz-productdetail-qty').val(value);
-            if (typeof this.model.get('inventoryInfo').onlineStockAvailable !== "undefined" && this.model.get('inventoryInfo').onlineStockAvailable < value) {
-                //$("#add-to-cart").addClass("button_disabled");
-                currentEl.parents('.mz-productdetail-conversion-controls').find('[data-mz-validationmessage-for="quantity"]').text("Can't added to cart");
-                currentEl.parents('.mz-productdetail-conversion-controls').find('[data-mz-validationmessage-for="quantity"]').text("*Only " + this.model.get('inventoryInfo').onlineStockAvailable + " left in stock.");
-            }
+            this.model.messages.reset();
+            var qty = this.model.get('quantity');
+            this.model.set('quantity',++qty);
         },
         onOptionChangeAttribute: function(e) {
             return this.configureAttribute($(e.currentTarget));
@@ -112,30 +89,9 @@ define([
                         }
                     }
                     this.model.whenReady(function() { 
-
                         setTimeout(function() {
-                            /*var sp_price = "";
-                            if (window.productView.model.attributes.inventoryInfo.onlineStockAvailable && typeof window.productView.model.attributes.inventoryInfo.onlineStockAvailable !== "undefined") {
-                                if (typeof window.productView.model.attributes.price.get('salePrice') != 'undefined')
-                                    sp_price = window.productView.model.attributes.price.get('salePrice');
-                                else
-                                    sp_price = window.productView.model.attributes.price.get('price');
-                                var price = Hypr.engine.render("{{price|currency}}", { locals: { price: sp_price } });
-                                $('.stock-info').show().html("In Stock <span class='stock-price'>" + price + "</span>");
-
-                            }
-                            if (window.productView.model.attributes.variationProductCode && typeof window.productView.model.attributes.variationProductCode !== "undefined") {
-                                $(".mz-productcodes-productcode").text("Sku # " + window.productView.model.attributes.variationProductCode);
-                            }
-                            $('.mz-productdetail-price.prize-mobile-view').html($('.mz-l-stack-section.mz-productdetail-conversion .mz-productdetail-price').html());*/
-                            //$this.model = checkVariationCode($this.model,familyObject);  
                             $this.render();
                             blockUiLoader.unblockUi();
-                            /*for(var i=0; i < window.familyProducts.length; i++){
-                                if(window.familyProducts[i].get('productCode') === $this.model.get('productCode')){
-                                    window.familyProducts[i] = $this.model;
-                                }
-                            }*/
                             $this.isColorClicked = false; 
                         }, 1000);
                     });
@@ -196,23 +152,6 @@ define([
 
     var familyObject = "",
         showError = require.mozuData('pagecontext').isDebugMode || require.mozuData('pagecontext').isAdminMode || require.mozuData('pagecontext').isEditMode;
-
-
-    function renderFamily() {
-        var self = this;
-        try {
-	      	var familyData = ProductModels.Product.fromCurrent().get('family'); 
-	      	$("#mz-family-container").empty(); 
-	      	for(var i=0; i < familyData.models.length; i++){
-	      		//var x = this.model.checkVariationCode(familyData.models[i]);
-	      		var view = new FamilyItemView({model: familyData.models[i]});
-		        var renderedView = view.render().el;
-		        $("#mz-family-container").append(renderedView);
-	      	}
-	      } catch(e){
-	      	console.log("something wrong happened with family", e);
-	      }
-    }
     
 
     return FamilyItemView;

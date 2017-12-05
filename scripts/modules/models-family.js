@@ -6,8 +6,9 @@ define([
 	"modules/models-price", 
 	"modules/api",
     "hyprlivecontext",
-    "modules/models-product-options"], 
-    function($, _, Backbone, Hypr, PriceModels, api, HyprLiveContext, ProductOption) {
+    "modules/models-product-options",
+    "modules/models-messages"], 
+    function($, _, Backbone, Hypr, PriceModels, api, HyprLiveContext, ProductOption, MessageModels) {
     	var ProductContent = Backbone.MozuModel.extend({}), 
 	      	
     	FamilyItem = Backbone.MozuModel.extend({
@@ -17,13 +18,12 @@ define([
 	        helpers: ['mainImage', 'notDoneConfiguring', 'hasPriceRange', 'supportsInStorePickup', 'isPurchasable','hasVolumePricing'],
 	        defaults: {
 	            purchasableState: {},
-	            quantity: 1
+	            quantity: 0
 	        },
 	        dataTypes: {
 	            quantity: Backbone.MozuModel.DataTypes.Int
 	        },
 	        initApiModel: function(conf) {
-	            console.log("overridden init API model");
 	            var me = this;
 	            this.apiModel = api.createSync(this.mozuType, _.extend({}, _.result(this, 'defaults') || {}, conf));
 	            if (!this.apiModel || !this.apiModel.on) return;
@@ -59,9 +59,42 @@ define([
 	                }
 	            });
 	        },
+            /**
+             * A helper method for use in templates. True if there are one or more messages in this model's `messages` cllection.
+             * Added to the list of {@link MozuModel#helpers } if {@link MozuModel#handlesMessages } is set to `true`.
+             * @returns {boolean} True if there are one or more messages in this model's `messages` collection.
+             * @method hasMessages
+             * @memberof MozuModel.prototype
+             */
+
+            initMessages: function() {
+                var me = this;
+                me.messages = new MessageModels.MessagesCollection();
+                me.hasMessages = function() {
+                    return me.messages.length > 0;
+                };
+                me.helpers.push('hasMessages');
+                me.on('error', function(err) {
+                    if (err.items && err.items.length) {
+                        me.messages.reset(err.items);
+                    } else {
+                        me.messages.reset([err]);
+                    }
+                    window.productView.render();
+                });
+                me.on('sync', function(raw) {
+                    if (!raw || !raw.messages || raw.messages.length === 0) me.messages.reset();
+                });
+                _.each(this.relations, function(v, key) {
+                    var relInstance = me.get(key);
+                    if (relInstance) me.listenTo(relInstance, 'error', function(err) {
+                        me.trigger('error', err);
+                    });
+                });
+            },	        
 	        validation: {
 	            quantity: {
-	                min: 1,
+	                min: 0,
 	                msg: Hypr.getLabel('enterProductQuantity')
 	            }
 	        },
@@ -128,7 +161,7 @@ define([
 	                    _.bindAll(me, 'calculateHasPriceRange', 'onOptionChange');
 	                    me.listenTo(me.get("options"), "optionchange", me.onOptionChange);
 	                    me._hasVolumePricing = false;
-	                    me._minQty = 1;
+	                    me._minQty = 0;
 	                    if (me.get('volumePriceBands') && me.get('volumePriceBands').length > 0) {
 	                        me._hasVolumePricing = true;
 	                        me._minQty = _.first(me.get('volumePriceBands')).minQty;
@@ -136,7 +169,7 @@ define([
 	                            if (me.get('quantity') <= 1) {
 	                                me.set('quantity', me._minQty);
 	                            }
-	                            me.validation.quantity.msg = Hypr.getLabel('enterMinProductQuantity', me._minQty);
+	                            me.validation.quantity.msg = Hypr.getLabel('enterProductQuantity', me._minQty);
 	                        }
 	                    }
 	                    me.updateConfiguration = _.debounce(me.updateConfiguration, 300);
@@ -219,21 +252,44 @@ define([
 
 	        addToCart: function () {
 	            var me = this;
+	            me.messages.reset();
+	            var dfd = $.Deferred();
 	            this.whenReady(function () {
 	                if (!me.validate()) {
 	                    var fulfillMethod = me.get('fulfillmentMethod');
 	                    if (!fulfillMethod) {
 	                        fulfillMethod = (me.get('goodsType') === 'Physical') ? FamilyItem.Constants.FulfillmentMethods.SHIP : FamilyItem.Constants.FulfillmentMethods.DIGITAL;
 	                    }
-	                    me.apiAddToCart({
-	                        options: me.getConfiguredOptions(),
-	                        fulfillmentMethod: fulfillMethod,
-	                        quantity: me.get("quantity")
-	                    }).then(function (item) {
-	                        me.trigger('addedtocart', item);
-	                    });
+	                    if(typeof me.get('inventoryInfo').onlineStockAvailable !== 'undefined'){
+	                    	if(me.get('quantity') === 0){
+	                    		//me.validation.quantity.msg = Hypr.getLabel('enterProductQuantity', me._minQty);
+	                    		me.trigger('error', { message : Hypr.getLabel('enterProductQuantity')});
+	                    		dfd.reject(Hypr.getLabel('enterProductQuantity'));
+	                    		return;
+	                    	}
+		                    me.apiAddToCart({
+		                        options: me.getConfiguredOptions(),
+		                        fulfillmentMethod: fulfillMethod,
+		                        quantity: me.get("quantity")
+		                    }).then(function (item) {
+		                    	dfd.resolve(item);
+		                        me.trigger('addedtocart', item);
+		                    },function(e){
+		                    	dfd.reject(e);
+		                    });
+		                }else if(!me.lastConfiguration && me.get('quantity') > 0){
+		                	me.trigger('error', { message : Hypr.getLabel('selectValidOption')});
+		                	dfd.reject(Hypr.getLabel('selectValidOption'));
+		                }else if(me.lastConfiguration && me.get('quantity') === 0){
+		                	me.trigger('error', { message : Hypr.getLabel('enterProductQuantity')});
+		                	dfd.reject(Hypr.getLabel('enterProductQuantity'));
+		                }else{
+		                	me.trigger('error', { message : Hypr.getLabel('selectValidOption')});
+		                	dfd.reject(Hypr.getLabel('selectValidOption'));
+		                }
 	                }
 	            });
+	            return dfd.promise();
 	        },
 	        addToWishlist: function() {
 	            var me = this;
@@ -285,7 +341,7 @@ define([
 	            if (!data || !data.volumePriceBands || data.volumePriceBands.length === 0) return;
 	            if (this._minQty === data.volumePriceBands[0].minQty) return;
 	            this._minQty = data.volumePriceBands[0].minQty;
-	            this.validation.quantity.msg = Hypr.getLabel('enterMinProductQuantity', this._minQty);
+	            this.validation.quantity.msg = Hypr.getLabel('enterProductQuantity', this._minQty);
 	            if (this.get('quantity') < this._minQty) {
 	                this.updateQuantity(this._minQty);
 	            }

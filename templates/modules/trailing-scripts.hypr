@@ -17,7 +17,8 @@
       bxslider:"vendor/jquery-bxslider/jquery.bxslider.min",
       elevatezoom:"vendor/jquery-elevatezoom/jquery.elevatezoom.min",
       doubletaptogo:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGo.min",
-      doubletaptogoipad:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGoIpad.min"
+      doubletaptogoipad:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGoIpad.min",
+      async: "vendor/async/async.min"
       },
       "shim": {
         bootstrap: {
