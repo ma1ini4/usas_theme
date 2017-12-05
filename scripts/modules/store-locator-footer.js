@@ -1,4 +1,4 @@
-require(["modules/jquery-mozu", "hyprlive", "hyprlivecontext", "modules/backbone-mozu"], function($, Hypr, HyprLiveContext, Backbone) {
+require(["modules/jquery-mozu", "hyprlive", "hyprlivecontext", "modules/backbone-mozu","modules/backbone-mozu-model"], function($, Hypr, HyprLiveContext, Backbone,MozuModel) {
 
     var FooterStoreLocator = Backbone.MozuView.extend({
         templateName: 'modules/location/store-locator-footer',
@@ -23,13 +23,12 @@ require(["modules/jquery-mozu", "hyprlive", "hyprlivecontext", "modules/backbone
                 return false;
             }
         }
-       
     });
 
-    
     $(document).ready(function() {
        var footerViewStoreLocator= new FooterStoreLocator({
-            el: $('#footerStoreLocator')
+            el: $('#footerStoreLocator'),
+            model: MozuModel
         });
 
     });
