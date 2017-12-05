@@ -25,6 +25,13 @@ define(
                 zipcode = (zipcode.length === 0 ? "Enter+Zip" : zipcode);
                 window.location.href = window.location.origin + "/store-locator?zipcode=" + zipcode;
             });
+
+             $('#footerZipCodeInput').on('keypress', function(e) {
+                   if(e.which===13){
+                        $("#btnFindStore").trigger('click');
+                        return false;
+                   }
+             });
         });
     }
 );
