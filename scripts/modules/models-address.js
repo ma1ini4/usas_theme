@@ -45,6 +45,9 @@
                     required: true,
                     msg: Hypr.getLabel("streetMissing")
                 },
+                address2: {
+                    fn: "address2Validation"
+                },                
                 cityOrTown: {
                     required: true,
                     msg: Hypr.getLabel("cityMissing")
@@ -69,6 +72,12 @@
                     msg: Hypr.getLabel("invalidZipcode")
                 }]
             },
+            address2Validation: function(){
+                    if(this.get('address1')===this.get('address2')){
+                        this.set('address2',null);
+                    }
+                    return false; 
+            },            
             requiresStateAndZip: function(value, attr) {
                 if ((this.get('countryCode') in countriesRequiringStateAndZip) && !value) return this.validation[attr.split('.').pop()].msg;
             },
