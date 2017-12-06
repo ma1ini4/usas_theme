@@ -286,6 +286,7 @@
                 addtocart_handler(window.selectedFamily[0]);*/
                 /* jshint ignore:start */              
                 var promises = [];
+                var productsAdded = [];
                 for(var i=0; i < this.model.get('family').models.length; i++){
                     promises.push((function(callback){
                         console.log("pushing item : "+this.index);
@@ -301,6 +302,7 @@
                                     window.family[j].model.set('quantity', 0);
                                 }
                             }
+                            productsAdded.push(e);
                             callback(null, e);
                         },function(e){
                             callback(null, e);
@@ -309,7 +311,8 @@
                 }
                 async.series(promises,function(err,results){
                     console.log(err,results);
-                    CartMonitor.update('showGlobalCart');
+                    if(productsAdded.length)
+                        CartMonitor.update('showGlobalCart');
                     blockUiLoader.unblockUi();
                     //this.render();
                 })
