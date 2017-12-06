@@ -5,7 +5,7 @@ require([
     'underscore',
     'modules/api',
     'modules/backbone-mozu',
-    'shim!vendor/jquery/jquery.bxslider.min[jquery=jQuery]>jQuery ',
+    'shim!vendor/jquery-bxslider/jquery.bxslider.min[jquery=jQuery]>jQuery ',
     'shim!vendor/jquery/jquery.fitvids[jquery=jQuery]',
 	'//www.youtube.com/iframe_api'
 ], function ($, _, api, Backbone) {

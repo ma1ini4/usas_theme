@@ -445,5 +445,7 @@
     "shippingTo" : "Artikel versenden nach",
     "shippingDestinationEditAddress": "Adresse bearbeiten",
     "backToTop": "Zurück nach oben",
-    "productOutOfStockError": "Die folgenden Artikel haben eine begrenzte Menge oder sind nicht auf Lager."
+    "productOutOfStockError": "Die folgenden Artikel haben eine begrenzte Menge oder sind nicht auf Lager.",
+    "ShopNow": "Jetzt einkaufen",
+    "BrowsOur": "Durchsuchen Sie unsere"
 }
