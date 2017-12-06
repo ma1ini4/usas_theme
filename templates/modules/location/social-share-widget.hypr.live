@@ -3,7 +3,7 @@
     <span>Please tell your friends about the store on:</span>
     <div class="social-icons-wrapper">
         <span class="google-plus-icon">
-            <g:plusone href='{{ themeSettings.socialShareLink }}' annotation='inline' width='120'></g:plusone>                            
+            <g:plusone href='{{ pageContext.url|urlencode }}' annotation='inline' width='120'></g:plusone>                            
             <script type="text/javascript">
                 (function() {
                     var po = document.createElement('script'); 
@@ -26,11 +26,11 @@
                     fjs.parentNode.insertBefore(js, fjs);
                 }(document, 'script', 'facebook-jssdk'));
             </script>
-            <div class="fb-like" data-href="{{ themeSettings.socialShareLink }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" data-font="verdana">
+            <div class="fb-like"  data-href="https://www.facebook.com/MozuCommerce"  data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" data-font="verdana">
             </div>
         </span>
         <span class="tweet-icon">
-            <a href="https://twitter.com/share?url={{ themeSettings.socialShareLink }}" class="twitter-share-button">Tweet</a> 
+            <a href="https://twitter.com/share?url={{ pageContext.url|urlencode }}" class="twitter-share-button">Tweet</a>  
             <script>
                 !function(d,s,id){
                     var js,fjs=d.getElementsByTagName(s)[0];
