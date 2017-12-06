@@ -541,6 +541,7 @@
     "googleMapLongitude": -70.288112,
     "googleMapZoom": 8,
     "storesPageSize": 5,
+    "googleMapPinIcon": "",
     "searchStorePlaceHolder": "Enter City, State or ZIP",
     "googleMapMaxNearbyDistance": 10000000,
     "preselectCountryCode": "US",
