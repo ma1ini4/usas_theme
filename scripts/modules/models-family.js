@@ -277,15 +277,16 @@ define([
 		                    },function(e){
 		                    	dfd.reject(e);
 		                    });
-		                }else if(!me.lastConfiguration && me.get('quantity') > 0){
+		                }else if(!me.lastConfiguration.length && me.get('quantity') > 0){
 		                	me.trigger('error', { message : Hypr.getLabel('selectValidOption')});
 		                	dfd.reject(Hypr.getLabel('selectValidOption'));
-		                }else if(me.lastConfiguration && me.get('quantity') === 0){
+		                }else if(me.lastConfiguration.length && me.get('quantity') === 0){
 		                	me.trigger('error', { message : Hypr.getLabel('enterProductQuantity')});
 		                	dfd.reject(Hypr.getLabel('enterProductQuantity'));
 		                }else{
-		                	me.trigger('error', { message : Hypr.getLabel('selectValidOption')});
-		                	dfd.reject(Hypr.getLabel('selectValidOption'));
+		                	/*me.trigger('error', { message : Hypr.getLabel('selectValidOption')});
+		                	dfd.reject(Hypr.getLabel('selectValidOption'));*/
+		                	dfd.resolve(me);
 		                }
 	                }
 	            });
