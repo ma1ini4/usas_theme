@@ -1,5 +1,11 @@
+{% if themeSettings.enableProductCarousel%}
+  {% require_script "modules/product/product-carousel" %}
+{% endif %}
 {% require_script "pages/product" %}
-<div itemscope itemtype="http://schema.org/Product" class="mz-l-container">    
+<div itemscope itemtype="http://schema.org/Product" class="mz-l-container">
+    {% if (PageContext.isTablet or PageContext.isDesktop) and themeSettings.enableProductCarousel %}
+    {% include "modules/product/product-top-carousel" %}
+    {% endif %}    
     <div class="row">
         <div class="col-xs-12 col-sm-6">
             <div data-mz-productimages class="mz-productimages mz-product-left-container margin-top-15">

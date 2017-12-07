@@ -527,6 +527,7 @@
     "maxProductSummaryWords": 40,
     "maxTopLevelNavItems": 8,
     "maxTopLevelNavLabelLength": 20,
+    "productCarouselSize": 8,
     "pageSizeOptions": [
       36,
       72
@@ -569,6 +570,8 @@
     "categoryEntityName": "categoryAttributes@ng",
     "globalPageHeaderLogoSM": null,
     "globalPageHeaderLogoXS": null,
+    "enableProductCarousel": true,
+    "homePageCategoryWidgetAltText": "home_cat_widget_img",
     "usStates": [
       {
         "abbreviation": "AL",
@@ -1388,6 +1391,600 @@
       "editView": "taco-dealoftheday-widgeteditor",
       "icon": "/resources/admin/widgets/28_deal_of_the_day.png",
       "id": "deal-of-the-day",
+      "validPageTypes": [
+        "*"
+      ]
+    },
+    {
+      "displayName": "Social Content",
+      "displayTemplate": "social/socialcontent",
+      "customEditor": "socialContentEditor",
+      "icon": "/resources/admin/widgets/widget-icon-socialcontent.png",
+      "id": "socialcontent-widget-2",
+      "validPageTypes": [
+        "*"
+      ]
+    },
+    {
+      "id": "social-icons",
+      "displayName": "Social Icons",
+      "displayTemplate": "social/social-icons",
+      "editViewFields": [
+        {
+          "name": "facebooklinks",
+          "fieldLabel": "Facebook Links",
+          "xtype": "textfield",
+          "allowBlank": true
+        },
+        {
+          "name": "twitterlinks",
+          "fieldLabel": "Twitter Link",
+          "xtype": "textfield",
+          "allowBlank": true
+        },
+        {
+          "name": "instagramlinks",
+          "fieldLabel": "Instagram Links",
+          "xtype": "textfield",
+          "allowBlank": true
+        },
+        {
+          "name": "youtubelinks",
+          "fieldLabel": "Youtube Link",
+          "xtype": "textfield",
+          "allowBlank": true
+        }
+      ],
+      "icon": "/resources/admin/widgets/social.png",
+      "validPageTypes": [
+        "*"
+      ]
+    },
+    {
+      "id": "Image-video-slide_widget",
+      "displayName": "Image-Video-Slider",
+      "displayTemplate": "cms/image-video-slider",
+      "editViewFields": [
+        {
+          "xtype": "fieldcontainer",
+          "anchor": "100%",
+          "fieldlabel": "Select / Upload",
+          "items": [
+            {
+              "name": "images",
+              "fieldLabel": "Select / Upload Images (Image first for first slide & last for last Slide)",
+              "xtype": "taco.imagefield"
+            }
+          ]
+        },
+        {
+          "name": "sliderHeight",
+          "style": "width: 52%",
+          "fieldLabel": "Slider Height",
+          "xtype": "textfield"
+        },
+        {
+          "name": "sliderImageHeight",
+          "style": "width: 52%",
+          "fieldLabel": "Slider Image Height",
+          "xtype": "textfield"
+        },
+        {
+          "name": "sliderDuration",
+          "style": "width: 52%",
+          "fieldLabel": "Slider Duration (In Seconds)",
+          "xtype": "textfield"
+        },
+        {
+          "name": "slide1panel",
+          "xtype": "panel",
+          "style": "background:#ccb;margin:10px; padding:20px",
+          "title": "First Slider",
+          "items": [
+            {
+              "style": "width: 52%",
+              "fieldLabel": "first slider option",
+              "name": "firstslider",
+              "xtype": "mz-input-dropdown",
+              "store": [
+                [
+                  "1",
+                  "Image Slide"
+                ],
+                [
+                  "2",
+                  "Video Slide"
+                ]
+              ]
+            },
+            {
+              "name": "viderourlfirst",
+              "style": "width: 52%",
+              "fieldLabel": "Link for first video",
+              "xtype": "textfield"
+            },
+            {
+              "name": "videroStartTimefirst",
+              "style": "width: 52%",
+              "fieldLabel": "Start duration for first video",
+              "xtype": "textfield"
+            },
+            {
+              "name": "videroEndTimefirst",
+              "style": "width: 52%",
+              "fieldLabel": "End duration for first video",
+              "xtype": "textfield"
+            },
+            {
+              "name": "labelfirst",
+              "style": "width: 52%",
+              "fieldLabel": "Title for first image",
+              "xtype": "textfield"
+            },
+            {
+              "name": "firstSliderImageSizePositionForDesktop",
+              "style": "width: 52%",
+              "fieldLabel": "Slider Image Size and Position For Desktop",
+              "xtype": "textfield"
+            },
+            {
+              "name": "firstSliderImageSizePositionForTablet",
+              "style": "width: 52%",
+              "fieldLabel": "Slider Image Size and Position For Tablet",
+              "xtype": "textfield"
+            },
+            {
+              "name": "firstSliderImageSizePositionForMobile",
+              "style": "width: 52%",
+              "fieldLabel": "Slider Image Size and Position For Mobile",
+              "xtype": "textfield"
+            },
+            {
+              "xtype": "displayfield",
+              "style": "margin-top: 2rem",
+              "value": "<p>Select a Category or enter an URL for Slide 1:</br><span style='font-size:smaller;'>Note: if both configured, the category will take precedent.</span></p>"
+            },
+            {
+              "fieldLabel": "Select link to category on Button click",
+              "name": "firstcategoryUrl",
+              "xtype": "mz-input-category",
+              "displayField": "name",
+              "anchor": "60%",
+              "valueField": "id",
+              "queryMode": "local",
+              "allowMultiple": false,
+              "store": {
+                "type": "Taco.store.Categories"
+              }
+            },
+            {
+              "xtype": "displayfield",
+              "value": "<b>OR</b>"
+            },
+            {
+              "name": "linkfirst",
+              "style": "width: 52%",
+              "fieldLabel": "Enter link to category on Button click",
+              "xtype": "textfield"
+            }
+          ]
+        },
+        {
+          "name": "slide2panel",
+          "xtype": "panel",
+          "style": "background:#ccc;margin:10px; padding:10px",
+          "title": "Second Slider",
+          "items": [
+            {
+              "style": "width: 52%",
+              "fieldLabel": "second slider option",
+              "name": "secondslider",
+              "xtype": "mz-input-dropdown",
+              "store": [
+                [
+                  "1",
+                  "Image Slide"
+                ],
+                [
+                  "2",
+                  "Video Slide"
+                ]
+              ]
+            },
+            {
+              "name": "viderourlsecond",
+              "style": "width: 52%",
+              "fieldLabel": "Link for second video",
+              "xtype": "textfield"
+            },
+            {
+              "name": "videroStartTimesecond",
+              "style": "width: 52%",
+              "fieldLabel": "Start duration for second video",
+              "xtype": "textfield"
+            },
+            {
+              "name": "videroEndTimesecond",
+              "style": "width: 52%",
+              "fieldLabel": "End duration for second video",
+              "xtype": "textfield"
+            },
+            {
+              "name": "labelsecond",
+              "style": "width: 52%",
+              "fieldLabel": "Title for second Image",
+              "xtype": "textfield"
+            },
+            {
+              "name": "secondSliderImageSizePositionForDesktop",
+              "style": "width: 52%",
+              "fieldLabel": "Slider Image Size and Position For Desktop",
+              "xtype": "textfield"
+            },
+            {
+              "name": "secondSliderImageSizePositionForTablet",
+              "style": "width: 52%",
+              "fieldLabel": "Slider Image Size and Position For Tablet",
+              "xtype": "textfield"
+            },
+            {
+              "name": "secondSliderImageSizePositionForMobile",
+              "style": "width: 52%",
+              "fieldLabel": "Slider Image Size and Position For Mobile",
+              "xtype": "textfield"
+            },
+            {
+              "xtype": "displayfield",
+              "style": "margin-top: 2rem",
+              "value": "<p>Select a Category or enter an URL for Slide 2:</br><span style='font-size:smaller;'>Note: if both configured, the category will take precedent.</span></p>"
+            },
+            {
+              "fieldLabel": "Select link to category on Button click",
+              "name": "secondcategoryUrl",
+              "xtype": "mz-input-category",
+              "displayField": "name",
+              "anchor": "60%",
+              "valueField": "id",
+              "queryMode": "local",
+              "allowMultiple": false,
+              "store": {
+                "type": "Taco.store.Categories"
+              }
+            },
+            {
+              "xtype": "displayfield",
+              "value": "<b>OR</b>"
+            },
+            {
+              "name": "linksecond",
+              "style": "width: 52%",
+              "fieldLabel": "Select link to category on Button click",
+              "xtype": "textfield"
+            }
+          ]
+        },
+        {
+          "name": "slide3panel",
+          "xtype": "panel",
+          "style": "background:#ccb;margin:10px; padding:10px",
+          "title": "Third Slider",
+          "items": [
+            {
+              "fieldLabel": "Third slider option",
+              "name": "thirdslider",
+              "xtype": "mz-input-dropdown",
+              "style": "width: 52%",
+              "store": [
+                [
+                  "1",
+                  "Image Slide"
+                ],
+                [
+                  "2",
+                  "Video Slide"
+                ]
+              ]
+            },
+            {
+              "name": "viderourlthird",
+              "style": "width: 52%",
+              "fieldLabel": "Link for third video",
+              "xtype": "textfield"
+            },
+            {
+              "name": "videroStartTimethird",
+              "style": "width: 52%",
+              "fieldLabel": "Start duration for third video",
+              "xtype": "textfield"
+            },
+            {
+              "name": "videroEndTimethird",
+              "style": "width: 52%",
+              "fieldLabel": "End duration for third video",
+              "xtype": "textfield"
+            },
+            {
+              "name": "labelthird",
+              "style": "width: 52%",
+              "fieldLabel": "Title for third Image",
+              "xtype": "textfield"
+            },
+            {
+              "name": "thirdSliderImageSizePositionForDesktop",
+              "style": "width: 52%",
+              "fieldLabel": "Slider Image Size and Position For Desktop",
+              "xtype": "textfield"
+            },
+            {
+              "name": "thirdSliderImageSizePositionForTablet",
+              "style": "width: 52%",
+              "fieldLabel": "Slider Image Size and Position For Tablet",
+              "xtype": "textfield"
+            },
+            {
+              "name": "thirdSliderImageSizePositionForMobile",
+              "style": "width: 52%",
+              "fieldLabel": "Slider Image Size and Position For Mobile",
+              "xtype": "textfield"
+            },
+            {
+              "xtype": "displayfield",
+              "style": "margin-top: 2rem",
+              "value": "<p>Select a Category or enter an URL for Slide 3:</br><span style='font-size:smaller;'>Note: if both configured, the category will take precedent.</span></p>"
+            },
+            {
+              "fieldLabel": "Select link to category on Button click",
+              "name": "thirdcategoryUrl",
+              "xtype": "mz-input-category",
+              "displayField": "name",
+              "anchor": "60%",
+              "valueField": "id",
+              "queryMode": "local",
+              "allowMultiple": false,
+              "store": {
+                "type": "Taco.store.Categories"
+              }
+            },
+            {
+              "xtype": "displayfield",
+              "value": "<b>OR</b>"
+            },
+            {
+              "name": "linkthird",
+              "style": "width: 52%",
+              "fieldLabel": "Select link to category on Button click",
+              "xtype": "textfield"
+            }
+          ]
+        }
+      ],
+      "icon": "/resources/admin/widgets/image_video_slider.png",
+      "validPageTypes": [
+        "*"
+      ]
+    },
+    {
+      "id": "home-page-video-widge",
+      "displayName": "Home Page Video Widget",
+      "displayTemplate": "homepage/home-page-video",
+      "editViewFields": [
+        {
+          "name": "homepagevideotitle",
+          "fieldLabel": "Title",
+          "xtype": "textfield",
+          "width": "60%"
+        },
+        {
+          "name": "homepagevideosubtitle",
+          "fieldLabel": "Sub Title",
+          "xtype": "textfield",
+          "width": "60%"
+        },
+        {
+          "name": "homepageviewvideo",
+          "fieldLabel": "Video Link",
+          "xtype": "textfield",
+          "width": "60%"
+        },
+        {
+          "name": "homepagevideoimageurl",
+          "fieldLabel": "Image",
+          "xtype": "taco.imagefield"
+        }
+      ],
+      "defaultConfig": {
+        "heightResizable": false
+      },
+      "icon": "/resources/admin/widgets/homepage_video.png",
+      "validPageTypes": [
+        "*"
+      ]
+    },
+    {
+      "defaultConfig": {
+        "heightResizable": false
+      },
+      "displayName": "Home Page Sub Category",
+      "displayTemplate": "homepage/home-sub-categories",
+      "editViewFields": [
+        {
+          "fieldLabel": "Categories",
+          "name": "categories",
+          "xtype": "boxselect",
+          "anchor": "100%",
+          "displayField": "name",
+          "valueField": "id",
+          "queryMode": "local",
+          "store": {
+            "type": "Taco.store.Categories"
+          }
+        },
+        {
+          "xtype": "mz-input-color",
+          "name": "stripColor1",
+          "fieldLabel": "Strip Color 1"
+        },
+        {
+          "xtype": "mz-input-color",
+          "name": "stripColor2",
+          "fieldLabel": "Strip Color 2"
+        },
+        {
+          "xtype": "mz-input-color",
+          "name": "stripColor3",
+          "fieldLabel": "Strip Color 3"
+        },
+        {
+          "xtype": "mz-input-color",
+          "name": "stripColor4",
+          "fieldLabel": "Strip Color 4"
+        },
+        {
+          "xtype": "mz-input-color",
+          "name": "stripColor5",
+          "fieldLabel": "Strip Color 5"
+        },
+        {
+          "xtype": "mz-input-color",
+          "name": "stripColor6",
+          "fieldLabel": "Strip Color 6"
+        },
+        {
+          "xtype": "mz-input-color",
+          "name": "stripColor7",
+          "fieldLabel": "Strip Color 7"
+        },
+        {
+          "xtype": "mz-input-color",
+          "name": "stripColor8",
+          "fieldLabel": "Strip Color 8"
+        }
+      ],
+      "icon": "/resources/admin/widgets/subcategory.png",
+      "id": "catNav",
+      "validPageTypes": [
+        "*"
+      ]
+    },
+    {
+      "defaultConfig": {
+        "heightResizable": false
+      },
+      "id": "Whats-Trending-Now_widget",
+      "displayName": "Home Page Whats Trending Now",
+      "displayTemplate": "homepage/home-trend-now",
+      "editViewFields": [
+        {
+          "xtype": "fieldcontainer",
+          "anchor": "100%",
+          "fieldlabel": "Select / Upload",
+          "items": [
+            {
+              "name": "trendingimages1",
+              "fieldLabel": "Select / Upload Images",
+              "xtype": "taco.imagefield"
+            }
+          ]
+        },
+        {
+          "name": "trendName1",
+          "fieldLabel": "Title for the trending image",
+          "xtype": "textfield"
+        },
+        {
+          "name": "trendDesc1",
+          "fieldLabel": "Description for the trending image",
+          "xtype": "textfield",
+          "width": "100%"
+        },
+        {
+          "name": "linkTrend1",
+          "fieldLabel": "Embedded link for Trending Now",
+          "xtype": "textfield"
+        }
+      ],
+      "icon": "/resources/admin/widgets/trending.png",
+      "validPageTypes": [
+        "*"
+      ]
+    },
+    {
+      "id": "home-page-instagram-slider",
+      "displayName": "Home Page Instagram Slider Widget",
+      "displayTemplate": "homepage/home-page-instagram-slider",
+      "editViewFields": [
+        {
+          "name": "profilename",
+          "fieldLabel": "Instagram Profile Name",
+          "xtype": "textfield",
+          "width": "60%"
+        },
+        {
+          "name": "UserId",
+          "fieldLabel": "Instagram User Id",
+          "xtype": "textfield",
+          "width": "60%"
+        },
+        {
+          "name": "accessToken",
+          "fieldLabel": "Instagram Access Token",
+          "xtype": "textfield",
+          "width": "60%"
+        }
+      ],
+      "defaultConfig": {
+        "heightResizable": false
+      },
+      "icon": "/resources/admin/widgets/instragram.png",
+      "validPageTypes": [
+        "*"
+      ]
+    },
+    {
+      "displayName": "Popular Products",
+      "displayTemplate": "catalog/popular-products",
+      "id": "popularProducts",
+      "defaultConfig": {
+        "title": "Popular Products"
+      },
+      "editViewFields": [
+        {
+          "anchor": "100%",
+          "fieldLabel": "Slider Title",
+          "name": "title",
+          "xtype": "mz-input-category"
+        },
+        {
+          "anchor": "100%",
+          "fieldLabel": "Title",
+          "name": "configurableTitle",
+          "xtype": "mz-input-text"
+        }
+      ],
+      "icon": "/resources/admin/widgets/top_selling.png",
+      "validPageTypes": [
+        "*"
+      ]
+    },
+    {
+      "displayName": "New Arrivals",
+      "displayTemplate": "catalog/new-arrivals",
+      "editViewFields": [
+        {
+          "anchor": "100%",
+          "fieldLabel": "Title",
+          "name": "title",
+          "xtype": "mz-input-text"
+        },
+        {
+          "anchor": "100%",
+          "fieldLabel": "Products",
+          "name": "productCodes",
+          "xtype": "mz-input-productmulti"
+        }
+      ],
+      "icon": "/resources/admin/widgets/new_arrival.png",
+      "id": "new_arrivals_product",
       "validPageTypes": [
         "*"
       ]

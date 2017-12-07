@@ -1,4 +1,4 @@
-﻿require([
+﻿   require([
     "modules/jquery-mozu",
     "underscore",
     "bxslider",
@@ -689,5 +689,8 @@
         }
         return json;
     }
-
+    $('body').on('click', '#mz-close-button', function(e) {
+        e.preventDefault();
+        blockUiLoader.unblockUi();
+    });
 });
