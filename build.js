@@ -42,6 +42,7 @@
                 'modules/views-messages',
                 'modules/views-paging',
                 'modules/views-productlists',
+                'vendor/jquery/lazysizes-custom.min'
             ],
             exclude: ['jquery'],
         },

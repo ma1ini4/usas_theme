@@ -1801,6 +1801,29 @@
       ]
     },
     {
+      "displayName": "New Arrivals",
+      "displayTemplate": "catalog/new-arrivals",
+      "editViewFields": [
+        {
+          "anchor": "100%",
+          "fieldLabel": "Title",
+          "name": "title",
+          "xtype": "mz-input-text"
+        },
+        {
+          "anchor": "100%",
+          "fieldLabel": "Products",
+          "name": "productCodes",
+          "xtype": "mz-input-productmulti"
+        }
+      ],
+      "icon": "/resources/admin/widgets/new_arrival.png",
+      "id": "new_arrivals_product",
+      "validPageTypes": [
+        "*"
+      ]
+    },
+    {
       "defaultConfig": {
         "heightResizable": false
       },
