@@ -43,10 +43,7 @@ define([
         render: function() {
             if(this.mainImage){
                 this.model.get('content').get('productImages')[0].imageUrl = this.mainImage;
-                //this.mainImage = "";
             }
-            /*var mainImage = this.model.get('content').get('productImages')[0].imageUrl;
-            this.model.set('mainImage', mainImage);*/
             Backbone.MozuView.prototype.render.apply(this);
             return this;
         },
@@ -104,7 +101,7 @@ define([
                 }
             }
         },
-        /*onMouseEnterChangeImage: function(_e) {
+        onMouseEnterChangeImage: function(_e) {
             if (!deviceType) {            	           	
             	this.mainImage = $(_e.delegateTarget).find('img').attr('src');                
                 var colorCode = $(_e.currentTarget).data('mz-swatch-color');
@@ -122,9 +119,8 @@ define([
                     $('.mz-productimages-main').html('<span class="mz-productlisting-imageplaceholder img-responsive"><span class="mz-productlisting-imageplaceholdertext">[no image]</span></span>');
                 }
             }
-        },*/
+        },
         selectSwatch: function(e) {
-            this.mainImage = $(e.delegateTarget).find('img').attr('src');
             this.isColorClicked = true;
             var colorCode = $(e.currentTarget).data('mz-swatch-color');
             this.changeImages(e,colorCode, 'Y');
@@ -144,7 +140,6 @@ define([
                     	$(_e.delegateTarget).find('img').attr('src', mainImage);
                         if(self.isColorClicked)
                             self.mainImage = imagepath;
-                        //self.model.set('mainImage', mainImage);
                         //$('.mz-productimages-mainimage').attr('src', mainImage);
                 } else if (typeof self.mainImage === 'undefined') {
                     $('.mz-productimages-main').html('<span class="mz-productlisting-imageplaceholder img-responsive"><span class="mz-productlisting-imageplaceholdertext">[no image]</span></span>');
