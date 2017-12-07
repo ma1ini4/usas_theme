@@ -30,7 +30,10 @@
         elevatezoom: {
           deps: ["jquery"]
         },
-        blockui: {
+        doubletaptogo: {
+          deps: ["jquery"]
+        },
+        doubletaptogoipad: {
           deps: ["jquery"]
         }
       }      
