@@ -1,16 +1,15 @@
-
 {% if model %}
 	<div id="family-item-error-{{model.productCode}}">
 		{% include "modules/common/message-bar" with model=model.messages %}
 	</div>
-	<div class="col-sm-3">
+	<div class="col-sm-3"> 
 	<a href='{% make_url "product" model %}'>
-		{% if model.content.productImages %}
-			{% with model.content.productImages|first as prodImage %}
+		{% if model.mainImage %} 
+			{% include "modules/product/product-image" with productImage=model.mainImage productMaxWidth="160" as_parameter %}			
+		{% else %}
+	    	{% with model.content.productImages|first as prodImage %}
 				{% include "modules/product/product-image" with productImage=prodImage productMaxWidth="160" as_parameter %}
 			{% endwith %}
-		{% else %}
-	    	{% include "modules/product/product-image" with productImage=model.mainImage productMaxWidth="160" as_parameter %}
 		{% endif %}
 	</a>
 	</div>

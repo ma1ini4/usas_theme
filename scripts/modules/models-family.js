@@ -223,8 +223,10 @@ define([
 	            return rawJSON;
 	        },
 	        mainImage: function() {
-	            var productImages = this.get('content.productImages');
-	            return productImages && productImages[0];
+	        	var productImages = this.get('mainImage');
+	            //var productImages = this.get('content.productImages');
+	            //return productImages && productImages[0];
+	            return productImages;
 	        },
 	        notDoneConfiguring: function() {
 	            return this.get('productUsage') === FamilyItem.Constants.ProductUsage.Configurable && !this.get('variationProductCode');
@@ -286,7 +288,7 @@ define([
 		                }else{
 		                	/*me.trigger('error', { message : Hypr.getLabel('selectValidOption')});
 		                	dfd.reject(Hypr.getLabel('selectValidOption'));*/
-		                	dfd.resolve(me);
+		                	dfd.reject(Hypr.getLabel('selectValidOption')); 
 		                }
 	                }
 	            });
@@ -353,8 +355,7 @@ define([
 	            if (JSON.stringify(this.lastConfiguration) !== JSON.stringify(newConfiguration)) {
 	                this.lastConfiguration = newConfiguration;
 	                this.apiConfigure({ options: newConfiguration }, { useExistingInstances: true })
-	                    .then(function (apiModel) {
-	                        //me.checkVariationCode();
+	                    .then(function (apiModel) {	                    	
 	                        if (me._hasVolumePricing) {
 	                            me.handleMixedVolumePricingTransitions(apiModel.data);
 	                        }

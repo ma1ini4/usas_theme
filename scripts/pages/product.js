@@ -273,7 +273,8 @@
             }
         },
         addToCart: function() {
-            var me = this;            
+            var me = this;  
+            window.productView.model.messages.reset();          
             if(this.model.get('productType') === Hypr.getThemeSetting('familyProductType')){
                 blockUiLoader.globalLoader();
                 //this.model.addToCart();
@@ -311,6 +312,14 @@
                 }
                 async.series(promises,function(err,results){
                     console.log(err,results);
+                    var resp = results.reduce(
+                        function(flag, value){
+                           return flag && results[0] === value;
+                        },
+                        true
+                    );
+                    if(resp === true)
+                        window.productView.model.trigger('error', { message : Hypr.getLabel('selectValidOption')})
                     if(productsAdded.length)
                         CartMonitor.update('showGlobalCart');
                     blockUiLoader.unblockUi();

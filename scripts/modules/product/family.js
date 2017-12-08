@@ -41,9 +41,9 @@ define([
             self.listenTo(self.model, 'change', self.render);
         },
         render: function() {
-            if(this.mainImage){
+            /*if(this.mainImage){
                 this.model.get('content').get('productImages')[0].imageUrl = this.mainImage;
-            }
+            }*/
             Backbone.MozuView.prototype.render.apply(this);
             return this;
         },
@@ -93,7 +93,6 @@ define([
                     }
                     this.model.whenReady(function() { 
                         setTimeout(function() {
-                            $this.render();
                             blockUiLoader.unblockUi();
                             $this.isColorClicked = false; 
                         }, 1000);
@@ -139,7 +138,8 @@ define([
                 if (response) {
                     	$(_e.delegateTarget).find('img').attr('src', mainImage);
                         if(self.isColorClicked)
-                            self.mainImage = imagepath;
+                            self.model.set('mainImage', imagepath);
+                            //self.mainImage = imagepath;
                         //$('.mz-productimages-mainimage').attr('src', mainImage);
                 } else if (typeof self.mainImage === 'undefined') {
                     $('.mz-productimages-main').html('<span class="mz-productlisting-imageplaceholder img-responsive"><span class="mz-productlisting-imageplaceholdertext">[no image]</span></span>');
