@@ -26,7 +26,7 @@
                     fjs.parentNode.insertBefore(js, fjs);
                 }(document, 'script', 'facebook-jssdk'));
             </script>
-            <div class="fb-like"  data-href="https://www.facebook.com/MozuCommerce"  data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" data-font="verdana">
+            <div class="fb-like"  data-href="{{themeSettings.facebookShareLink}}"  data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" data-font="verdana">
             </div>
         </span>
         <span class="tweet-icon">
