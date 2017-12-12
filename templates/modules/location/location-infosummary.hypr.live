@@ -11,7 +11,8 @@
 				{{model.saddr|safe}}
 				<input type="hidden" name="daddr" value="{{model.dirQueryString}}">
 			</div>
-			<div class="dir-btn-container">
+			<p></p>
+			<div class="dir-btn-container ">
 				<input type="submit" class="btn button_primary btn-block" value="{{labels.storeDirection}}">
 			</div>
 		</form>

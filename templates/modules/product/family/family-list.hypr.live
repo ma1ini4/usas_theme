@@ -1,4 +1,1 @@
-{% with model.properties|findwhere('attributeFQN', themeSettings.familyProductAttribute ) as familyProducts %}
-    {% preload_json familyProducts.values|first "family" %}
-  	<div id="mz-family-container"></div>
-{%  endwith %}
+<div id="mz-family-container"></div>

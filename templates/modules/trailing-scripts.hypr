@@ -19,6 +19,7 @@
       doubletaptogo:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGo.min",
       doubletaptogoipad:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGoIpad.min",
       lazysizes: "vendor/jquery/lazysizes-custom.min"
+      async: "vendor/async/async.min"
       },
       "shim": {
         bootstrap: {
@@ -30,7 +31,10 @@
         elevatezoom: {
           deps: ["jquery"]
         },
-        blockui: {
+        doubletaptogo: {
+          deps: ["jquery"]
+        },
+        doubletaptogoipad: {
           deps: ["jquery"]
         },
         owl: {
