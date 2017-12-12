@@ -455,6 +455,11 @@
                     "fieldLabel": "Social Share Link",
                     "xtype": "mz-input-text",
                     "name": "socialShareLink"
+                },
+                {
+                    "fieldLabel": "Facebook Share Link",
+                    "xtype": "mz-input-text",
+                    "name": "facebookShareLink"
                 }
             ]
         },

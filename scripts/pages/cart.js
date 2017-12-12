@@ -512,7 +512,10 @@ define(['modules/api',
         });
 
         cartModel.on('sync', function() {
-            CartMonitor.update();
+             if (this.isEmpty())
+                window.location.reload();
+            else
+                CartMonitor.update();
         });
 
         window.cartView = cartViews;
