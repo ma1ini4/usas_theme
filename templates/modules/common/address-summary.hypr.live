@@ -12,7 +12,13 @@
     <div>{{ model.address.cityOrTown }} {{ model.address.stateOrProvince }} {{ model.address.postalOrZipCode }}</div>
     <div>{{ model.address.countryCode }}</div>
     {% if model.phone %}<div>{{model.phone}}</div>{% endif %}
-    {% if model.phoneNumbers.home %}<div>{{ model.phoneNumbers.home }} (home)</div>{% endif %}
+    {% if model.phoneNumbers.home %}<div>{{ model.phoneNumbers.home }} 
+        {% if model.address.addressType==='Residential' %}
+            (home)
+        {% else %}
+            (commerical)
+        {% endif %}
+    </div>{% endif %}
     {% if not (model.phoneNumbers.home == model.phoneNumbers.work) and model.phoneNumbers.work %}
         <div>{{ model.phoneNumbers.work }} (work)</div>
     {% endif %}
