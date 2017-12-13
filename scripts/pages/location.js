@@ -176,7 +176,6 @@ require([
                     google.maps.event.addListener(marker, 'click', (function (marker, i) {
                         return function () {
                             var dirQueryString = [
-                                "Christmas Tree Shops " +
                                 location.address.address1,
                                 location.address.address2,
                                 location.address.address2,
@@ -286,7 +285,7 @@ require([
                     //get and render nearby stores
                     _self.getNearbyShops(pageSize, lat, lng, 0, function () {
                         _self.drawMap(window.lv.model.apiModel.data.items);
-                        document.title =  window.lv.model.apiModel.data.items[0].name + " - " + Hypr.getLabel("storeTitle");                       
+                        document.title =  window.lv.model.apiModel.data.items[0].name + " - " + Hypr.getLabel("storeTitle");                  
                         $(".dir-btn-container").removeClass("hidden");
                         $("#success-shops").text("Store Details");
                         $("#searchTermView").val("");

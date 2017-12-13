@@ -18,6 +18,7 @@
       elevatezoom:"vendor/jquery-elevatezoom/jquery.elevatezoom.min",
       doubletaptogo:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGo.min",
       doubletaptogoipad:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGoIpad.min",
+      lazysizes: "vendor/jquery/lazysizes-custom.min",
       async: "vendor/async/async.min"
       },
       "shim": {
@@ -35,6 +36,12 @@
         },
         doubletaptogoipad: {
           deps: ["jquery"]
+        },
+        owl: {
+          deps: ['jquery']
+        },
+        lazysizes:{
+          deps: ['jquery']
         }
       }      
   });
