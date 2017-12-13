@@ -205,21 +205,23 @@ define([
 	                }
 	            });
 	            rawJSON.variations = variation_pro;
-	            //remove options
-	            for(var i=0;i<rawJSON.options.length;i++){
-	                var opt_pro= [];
-	                var option = rawJSON.options[i];
-	                var key = option.attributeFQN;
-	                for (var b = 0; b < option.values.length; b++) {
-	                    for (var c = 0; c < options_arr.length; c++) {
-	                        if (option.values[b].attributeValueId === options_arr[c]) {
-	                            opt_pro.push(option.values[b]);     
-	                            break;                       
-	                        }
-	                    }
-	                } 
-	                rawJSON.options[i].values=opt_pro;
-	            }
+	            if(options_arr.length){
+		            //remove options
+		            for(var i=0;i<rawJSON.options.length;i++){
+		                var opt_pro= [];
+		                var option = rawJSON.options[i];
+		                var key = option.attributeFQN;
+		                for (var b = 0; b < option.values.length; b++) {
+		                    for (var c = 0; c < options_arr.length; c++) {
+		                        if (option.values[b].attributeValueId === options_arr[c]) {
+		                            opt_pro.push(option.values[b]);     
+		                            break;                       
+		                        }
+		                    }
+		                } 
+		                rawJSON.options[i].values=opt_pro;
+		            }
+		        }
 	            return rawJSON;
 	        },
 	        mainImage: function() {
@@ -263,6 +265,10 @@ define([
 	                        fulfillMethod = (me.get('goodsType') === 'Physical') ? FamilyItem.Constants.FulfillmentMethods.SHIP : FamilyItem.Constants.FulfillmentMethods.DIGITAL;
 	                    }
 	                    if(typeof me.get('inventoryInfo').onlineStockAvailable !== 'undefined'){
+	                    	if(!me.get('options').length && me.get('quantity') === 0){
+	                    		dfd.reject('Product without Sku');
+	                    		return;
+	                    	}	
 	                    	if(me.get('quantity') === 0){
 	                    		//me.validation.quantity.msg = Hypr.getLabel('enterProductQuantity', me._minQty);
 	                    		me.trigger('error', { message : Hypr.getLabel('enterProductQuantity')});
