@@ -1,4 +1,6 @@
 {
+  "expiryMonth": "Expiry Month",
+  "expiryYear": "Expiry Year",
   "toggleToMultiShip": "I want to ship to multiple addresses",
   "toggleToSingleShip": "Ship to single address",
   "imagePathFormat": "{0}/cms/files/{1}.jpg",
