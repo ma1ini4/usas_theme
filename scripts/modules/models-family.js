@@ -267,7 +267,7 @@ define([
 	                    if(typeof me.get('inventoryInfo').onlineStockAvailable !== 'undefined'){
 	                    	//products without options
 	                    	if(!me.get('options').length && me.get('quantity') === 0){
-	                    		dfd.reject('Product without Sku');
+	                    		dfd.reject(Hypr.getLabel('productwithoutSku'));
 	                    		return;
 	                    	}
 	                    	//options selected but qty zero

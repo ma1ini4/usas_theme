@@ -512,5 +512,6 @@
     "ShopNow": "Shop Now",
     "TrendTitle": "What's Trending Now",
     "storeTitle": "Mozu Store!",
-    "storeHoursInfo":"Hours & Info"
+    "storeHoursInfo":"Hours & Info",
+    "productwithoutSku" : "Product without Sku"
 }
