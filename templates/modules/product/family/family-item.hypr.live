@@ -36,7 +36,7 @@
 		{% include "modules/product/price-stack" %}
 		</div>
 		 <section class="mz-l-stack-section mz-productdetail-conversion row">
-		{%if model.productType!="Family Product"%}
+		{%if model.productType != themeSettings.familyProductType%}
 		    <div class="mz-productdetail-conversion-controls col-xs-4 col-sm-4">
 		      <label class="mz-qty-label text-uppercase" for="mz_pdp_qty">{{ labels.qty }}</label>
 		      <div class="qty-block">

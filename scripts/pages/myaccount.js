@@ -525,27 +525,74 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
             'editingCard.contactId',
             'editingContact.address.countryCode'
         ],
-        beginEditCard: function(e) {
+        additionalEvents: {
+            "change #mz-payment-credit-card-number": "changeCardType",
+            "input  [name='security-code'],[name='credit-card-number']": "allowDigit"
+        },  
+        allowDigit:function(e){
+            e.target.value= e.target.value.replace(/[^\d]/g,'');
+        },         
+        changeCardType:function(e){
+            window.checkoutModel = this.model;
+            var number = e.target.value;
+            var cardType='';
+
+            // visa
+            var re = new RegExp("^4");
+            if (number.match(re) !== null){
+                cardType = "VISA";
+            }
+
+            // Mastercard 
+            // Updated for Mastercard 2017 BINs expansion
+             if (/^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$/.test(number)) 
+                cardType = "MC";
+
+            // AMEX
+            re = new RegExp("^3[47]");
+            if (number.match(re) !== null)
+                cardType = "AMEX";
+
+            // Discover
+            re = new RegExp("^(6011|622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5]|64[4-9])|65)");
+            if (number.match(re) !== null)
+                cardType = "DISCOVER";
+            
+            $('.mz-card-type-images').find('span').removeClass('active');
+            if(cardType){
+                this.model.set('editingCard.paymentOrCardType',cardType);
+                $('.mz-card-type-images').find('span[data-mz-card-type-image="'+cardType+'"]').addClass('active');
+            }
+            else{
+                this.model.set('editingCard.paymentOrCardType',null);    
+            }
+
+        },             
+        beginEditCard: function (e) {
             var id = this.editing.card = e.currentTarget.getAttribute('data-mz-card');
             this.model.beginEditCard(id);
             this.render();
+            $("input[name='credit-card-number']").focus();
         },
         finishEditCard: function() {
             var self = this;
             var operation = this.doModelAction('saveCard');
             if (operation) {
+                operation.then(function(){
+                    self.model.messages.reset();
+                });
                 operation.otherwise(function() {
                     self.editing.card = true;
                 });
                 this.editing.card = false;
             }
         },
-        cancelEditCard: function() {
+        cancelEditCard: function () {
             this.editing.card = false;
             this.model.endEditCard();
             this.render();
         },
-        beginDeleteCard: function(e) {
+        beginDeleteCard: function (e) {
             var self = this,
                 id = e.currentTarget.getAttribute('data-mz-card'),
                 card = this.model.get('cards').get(id);
@@ -573,9 +620,9 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
             'editingContact.isPrimaryBillingContact',
             'editingContact.isShippingContact',
             'editingContact.isPrimaryShippingContact'
-        ],
-       renderOnChange: [
-            'editingContact.address.countryCode',
+            ],
+        renderOnChange: [    
+            'editingContact.address.countryCode',              
             'editingContact.address.candidateValidatedAddresses',
             'editingContact.isBillingContact',
             'editingContact.isShippingContact'
@@ -593,18 +640,18 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
             addr.set('candidateValidatedAddresses',null);
             addr.set('isValidated', true);
             this.render();
-        },
-        beginAddContact: function() {
+        },        
+        beginAddContact: function () {
             this.editing.contact = "new";
             this.render();
+            $("input[name='firstname']").focus();
         },
-        beginEditContact: function(e) {
+        beginEditContact: function (e) {
             var id = this.editing.contact = e.currentTarget.getAttribute('data-mz-contact');
             this.model.beginEditContact(id);
             this.render();
         },
         finishEditContact: function () {
-            blockUiLoader.globalLoader();
             var self = this,
                 isAddressValidationEnabled = HyprLiveContext.locals.siteContext.generalSettings.isAddressValidationEnabled;
             var operation = this.doModelAction('saveContact', { forceIsValid: isAddressValidationEnabled, editingView: self }); // hack in advance of doing real validation in the myaccount page, tells the model to add isValidated: true
@@ -616,17 +663,15 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
                 this.editing.contact = false;
             }
         },
-        cancelEditContact: function() {
+        cancelEditContact: function () {
             this.editing.contact = false;
             this.model.endEditContact();
             this.render();
         },
-        beginDeleteContact: function(e) {
+        beginDeleteContact: function (e) {
             var self = this,
                 contact = this.model.get('contacts').get(e.currentTarget.getAttribute('data-mz-contact')),
-                associatedCards = this.model.get('cards').where({
-                    contactId: contact.id
-                }),
+                associatedCards = this.model.get('cards').where({ contactId: contact.id }),
                 windowMessage = Hypr.getLabel('confirmDeleteContact', contact.get('address').get('address1')),
                 doDeleteContact = function() {
                     return self.doModelAction('deleteContact', contact.id);
@@ -639,7 +684,7 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
                 go = function() {
                     return self.doModelAction('deleteMultipleCards', _.pluck(associatedCards, 'id')).then(doDeleteContact);
                 };
-
+               
             }
 
             if (window.confirm(windowMessage)) {
