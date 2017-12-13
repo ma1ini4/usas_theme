@@ -265,12 +265,13 @@ define([
 	                        fulfillMethod = (me.get('goodsType') === 'Physical') ? FamilyItem.Constants.FulfillmentMethods.SHIP : FamilyItem.Constants.FulfillmentMethods.DIGITAL;
 	                    }
 	                    if(typeof me.get('inventoryInfo').onlineStockAvailable !== 'undefined'){
+	                    	//products without options
 	                    	if(!me.get('options').length && me.get('quantity') === 0){
 	                    		dfd.reject('Product without Sku');
 	                    		return;
-	                    	}	
+	                    	}
+	                    	//options selected but qty zero
 	                    	if(me.get('quantity') === 0){
-	                    		//me.validation.quantity.msg = Hypr.getLabel('enterProductQuantity', me._minQty);
 	                    		me.trigger('error', { message : Hypr.getLabel('enterProductQuantity')});
 	                    		dfd.reject(Hypr.getLabel('enterProductQuantity'));
 	                    		return;
@@ -286,9 +287,11 @@ define([
 		                    	dfd.reject(e);
 		                    });
 		                }else if(!me.lastConfiguration.length && me.get('quantity') > 0){
+		                	//options not selected but qty > zero
 		                	me.trigger('error', { message : Hypr.getLabel('selectValidOption')});
 		                	dfd.reject(Hypr.getLabel('selectValidOption'));
 		                }else if(me.lastConfiguration.length && me.get('quantity') === 0){
+		                	//options selected but qty 0
 		                	me.trigger('error', { message : Hypr.getLabel('enterProductQuantity')});
 		                	dfd.reject(Hypr.getLabel('enterProductQuantity'));
 		                }else{

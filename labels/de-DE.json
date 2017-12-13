@@ -360,6 +360,7 @@
     "didNotAgreeToTerms"   : "Sie müssen zu den Bedingungen einverstanden",
     "enterProductQuantity"   : "Bitte geben Sie eine Produktmenge über 0",
     "enterMinProductQuantity" : "Bitte geben Sie eine minimale Produktmenge von {0}",
+    "quantityZeroError" : "Quantity can't be zero.",
     "enterReturnReason"   : "Bitte wählen Sie ein Rückgabegrund.",
     "enterReturnQuantity"   : "Bitte geben Sie eine Menge über 1 zurückzukehren.",
     "enterOtherComments"   : "Bitte geben Sie einen Kommentar, die die Gründe für diese Rückkehr.",

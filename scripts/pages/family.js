@@ -47,6 +47,10 @@ define([
         quantityMinus: function(_e) {
             this.model.messages.reset();
             var qty = this.model.get('quantity');
+            if (qty === 0) {
+                this.model.trigger('error', {message: Hypr.getLabel("quantityZeroError")});
+                return;
+            }
             this.model.set('quantity',--qty);
         },
         quantityPlus: function(_e) {
