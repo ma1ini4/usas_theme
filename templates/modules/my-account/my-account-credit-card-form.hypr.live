@@ -65,7 +65,7 @@
         </div>
         <div class="mz-l-formfieldgroup-cell">
             <select class="mz-l-formfieldgroup-halfsize" id="mz-payment-expiration-month" name="expiration-month" data-mz-value="{{ cardcontext }}expireMonth">
-                <option></option>
+                <option>{{ labels.expiryMonth }}*</option>
                 <option {% if model.expireMonth == "01" %}selected="selected"{% endif %} value="01">01 - {{ labels.january }}</option>
                 <option {% if model.expireMonth == "02" %}selected="selected"{% endif %} value="02">02 - {{ labels.february }}</option>
                 <option {% if model.expireMonth == "03" %}selected="selected"{% endif %} value="03">03 - {{ labels.march }}</option>
@@ -80,7 +80,7 @@
                 <option {% if model.expireMonth == "12" %}selected="selected"{% endif %} value="12">12 - {{ labels.december }}</option>
             </select>
             <select class="mz-l-formfieldgroup-halfsize" name="mz-payment-expiration-year" data-mz-value="{{ cardcontext }}expireYear">
-                <option></option>
+                <option>{{ labels.expiryYear }}*</option>
                 <option {% if model.expireYear == "2014" %}selected="selected"{% endif %} value="2014">2014</option>
                 <option {% if model.expireYear == "2015" %}selected="selected"{% endif %} value="2015">2015</option>
                 <option {% if model.expireYear == "2016" %}selected="selected"{% endif %} value="2016">2016</option>

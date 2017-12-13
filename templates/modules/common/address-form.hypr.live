@@ -145,6 +145,7 @@
                 <option value="Commercial" {% if model.address.addressType == "Commercial" %}selected="selected"{% endif %} >{{ labels.commercial }}</option>
             </select>
         </div>
+        <br/>
     </div>
     {% endif %}
 {% endblock address-form %}
