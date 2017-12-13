@@ -1,6 +1,6 @@
 define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive", "modules/models-price", "modules/api", "hyprlivecontext", 'modules/models-family', 'modules/models-product-options', "modules/models-messages"], function($, _, Backbone, Hypr, PriceModels, api, HyprLiveContext, FamilyItem, ProductOption, MessageModels) {
 
-    var ProductContent = Backbone.MozuModel.extend({}),  
+    var ProductContent = Backbone.MozuModel.extend({}),
 
     Product = Backbone.MozuModel.extend({
         mozuType: 'product',
@@ -168,6 +168,10 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
                         quantity: me.get("quantity")
                     }).then(function (item) {
                         me.trigger('addedtocart', item);
+                    }, function(err) {
+                        if(err.message.indexOf("Validation Error: The following items have limited quantity or are out of stock:") !== -1){ 
+                            me.messages.reset({ message: Hypr.getLabel('productOutOfStockError') });
+                        }                        
                     });
                 }
             });
@@ -278,7 +282,7 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
         fromCurrent: function () {
             var data = require.mozuData(this.prototype.mozuType);
             var families = _.find(data.properties, function(e) {
-                return e.attributeFQN === "tenant~family-members" && e.values;
+                return e.attributeFQN === Hypr.getThemeSetting('familyProductAttribute') && e.values;
             });
             if(families)
                 data.family = JSON.parse(families.values[0].stringValue);

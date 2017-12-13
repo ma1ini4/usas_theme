@@ -10,7 +10,7 @@
     "modules/models-product",
     "modules/views-productimages",
     "hyprlivecontext",
-    "modules/product/family",
+    "pages/family",
     "modules/api",
     "async"
 ], function($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonitor, ProductModels, ProductImageViews, HyprLiveContext, FamilyItemView, api, async) {
@@ -128,8 +128,6 @@
             "change [data-mz-product-option]": "onOptionChange",
             "blur [data-mz-product-option]": "onOptionChange",
             "click [data-mz-product-option-attribute]": "onOptionChangeAttribute",
-            "change [data-mz-value='quantity']": "onQuantityChange",
-            "keyup input[data-mz-value='quantity']": "onQuantityChange",
             "click [data-mz-qty-minus]": "quantityMinus",
             "click [data-mz-qty-plus]": "quantityPlus",
             'mouseenter .color-options': 'onMouseEnterChangeImage',
@@ -175,12 +173,14 @@
         },
         quantityMinus: function() {
             $('[data-mz-validationmessage-for="quantity"]').text('');
-            var value = this.model.get('quantity');
+            var value = parseInt($('.mz-productdetail-qty').val(), 10);
+            //var value = this.model.get('quantity');
             if (value == 1) {
                 $('[data-mz-validationmessage-for="quantity"]').text("Quantity can't be zero.");
                 return;
             }
-            this.model.set('quantity',--value);
+            $('.mz-productdetail-qty').val(value);
+            //this.model.set('quantity',--value);
             if (typeof window.productView.model.attributes.inventoryInfo.onlineStockAvailable !== "undefined") {
                 if (window.productView.model.attributes.inventoryInfo.onlineStockAvailable >= value)
                     $("#add-to-cart").removeClass("button_disabled");
@@ -190,12 +190,14 @@
         },
         quantityPlus: function() {
             $('[data-mz-validationmessage-for="quantity"]').text('');
-            var value = this.model.get('quantity');
+            var value = parseInt($('.mz-productdetail-qty').val(), 10);
+            //var value = this.model.get('quantity');
             if (value == 99) {
                 $('[data-mz-validationmessage-for="quantity"]').text("Quantity can't be greater than 99.");
                 return;
             }
-            this.model.set('quantity',++value);
+            $('.mz-productdetail-qty').val(value);
+            //this.model.set('quantity',++value);
             if (typeof window.productView.model.attributes.inventoryInfo.onlineStockAvailable !== "undefined" && window.productView.model.attributes.inventoryInfo.onlineStockAvailable < value) {
                 $("#add-to-cart").addClass("button_disabled");
                 $('[data-mz-validationmessage-for="quantity"]').text("*Only " + window.productView.model.get('inventoryInfo').onlineStockAvailable + " left in stock.");
@@ -277,14 +279,6 @@
             window.productView.model.messages.reset();          
             if(this.model.get('productType') === Hypr.getThemeSetting('familyProductType')){
                 blockUiLoader.globalLoader();
-                //this.model.addToCart();
-                //window.selectedFamily = [];
-                /*for(var i = 0; i< window.familyProducts.length; i++){
-                    if(typeof window.familyProducts[i].get('inventoryInfo').onlineStockAvailable !== "undefined"){
-                        window.selectedFamily.push(window.familyProducts[i]);
-                    }                   
-                } 
-                addtocart_handler(window.selectedFamily[0]);*/
                 /* jshint ignore:start */              
                 var promises = [];
                 var productsAdded = [];
@@ -323,7 +317,6 @@
                     if(productsAdded.length)
                         CartMonitor.update('showGlobalCart');
                     blockUiLoader.unblockUi();
-                    //this.render();
                 })
                 /* jshint ignore:end */
             }else if (typeof window.productView.model.get('inventoryInfo').onlineStockAvailable === "undefined" || $(".mz-productoptions-optioncontainer").length != $(".mz-productoptions-optioncontainer .active").length) {
@@ -505,47 +498,6 @@
             });
         }
     });
-    var doneCount = 0;
-    function nextAdd(){
-        if(doneCount < window.familyProducts.length -1) {
-            doneCount++;
-            addtocart_handler(window.selectedFamily[doneCount]);
-            CartMonitor.update();
-        }
-        else {
-            console.log("All Done");
-            CartMonitor.update();
-        }
-    }  
-
-    function addtocart_handler(fam_product) {
-        var opt = fam_product.get('options').models;
-        var options = [];
-        for(var i = 0; i< opt.length; i++){
-            options.push({
-                "attributeFQN": opt[i].get('attributeFQN'),
-                "name": opt[i].get('attributeDetail').name,
-                "value": opt[i].get('value')
-            });
-        }
-        var pro_body =  {
-              "product": {
-                "productCode": fam_product.get('productCode'),
-                "variationProductCode": fam_product.get('variationProductCode'),
-                "options": options
-              },
-              "quantity": 1,
-              "fulfillmentMethod": "Ship"
-            };
-        var serviceurl = '/api/commerce/carts/current/items';
-        api.request('POST', serviceurl, pro_body).then(function() {
-            console.log("Done");
-            nextAdd();
-        },function(err){
-            console.log(err);
-            nextAdd();
-        });
-    } 
 
     $(document).ready(function() {
         var product = ProductModels.Product.fromCurrent();
@@ -673,11 +625,6 @@
         var recentProducts = existingProducts ? $.parseJSON(existingProducts) : [];
         recentProducts = recentProd(recentProducts, recentProduct);
         $.cookie("recentProducts", JSON.stringify(recentProducts), {path: '/', expires: 21 });
-        //Code for Family Page
-
-
-
-
     });
 
     function recentProd(json, product) {

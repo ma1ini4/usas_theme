@@ -396,6 +396,7 @@
   "chooseShippingMethod" : "Please select a shipping method.",
   "didNotAgreeToTerms"   : "You must agree to the terms and conditions",
   "enterProductQuantity" : "Please enter a product quantity above 0",
+  "quantityZeroError"    : "Quantity can't be zero.",
   "selectValidOption"    : "Select Valid Option(s)",
   "enterReturnReason"    : "Please select a return reason.",
   "enterReturnQuantity"  : "Please enter a quantity above 1 to return.",
@@ -514,5 +515,6 @@
     "ShopNow": "Shop Now",
     "TrendTitle": "What's Trending Now",
     "storeTitle": "Mozu Store!",
-    "storeHoursInfo":"Hours & Info"
+    "storeHoursInfo":"Hours & Info",
+    "productwithoutSku" : "Product without Sku"
 }
