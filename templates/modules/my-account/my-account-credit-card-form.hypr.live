@@ -8,7 +8,6 @@
         <div class="mz-l-formfieldgroup-cell"></div>
         <div class="mz-l-formfieldgroup-cell">
         <input type="checkbox" id="editingcard-is-primary" {% if model.isDefaultPayMethod %}checked="true"{% endif %} data-mz-value="{{ cardcontext }}isDefaultPayMethod" />
-        <label for="editingcard-is-primary" class="mozchk"></label>
         <label for="editingcard-is-primary" class="chkbox_label">{{ labels.primary }}</label>
         </div>
     </div>
