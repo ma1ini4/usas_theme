@@ -445,5 +445,11 @@
     "shippingTo" : "Artikel versenden nach",
     "shippingDestinationEditAddress": "Adresse bearbeiten",
     "backToTop": "Zurück nach oben",
-    "productOutOfStockError": "Die folgenden Artikel haben eine begrenzte Menge oder sind nicht auf Lager."
-}
+    "productOutOfStockError": "Die folgenden Artikel haben eine begrenzte Menge oder sind nicht auf Lager.",
+    "accountSettingsInfo": "Überprüfen und bearbeiten Sie Ihre E-Mail-Adresse, Ihr Passwort, Ihre Passworthinweisinformationen und / oder Ihre Rechnungsadresse",
+    "wishListsInfo": "Erstellen und verwalten Sie Listen der Artikel, die Sie erhalten möchten, und senden Sie sie per E-Mail an Ihre Freunde und Familie",
+    "orderHistoryInfo": "Überprüfen Sie alle Bestellungen, die über dieses Konto bei uns eingehen",
+    "addressBookInfo": "Anzeigen, Bearbeiten oder Löschen von Adressen in Ihrem persönlichen Adressbuch",
+    "logOutInfo": "Melden Sie sich von Ihrem Konto ab",
+    "wishLists" : "Wunschlisten"
+  }
