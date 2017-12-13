@@ -1,7 +1,6 @@
 ﻿{
-
+    "multiShipAddressSummary" : "Shipping to {0} addresses",
     "dateFormat": "j.n.Y",
-
     "logOut"   : "Abmeldung",
     "logIn"   : "Einloggen",
     "logIn2"  : "Melden Sie sich bei Ihrem Konto",

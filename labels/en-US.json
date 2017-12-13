@@ -1,4 +1,5 @@
 {
+  "multiShipAddressSummary" : "Shipping to {0} addresses",
   "expiryMonth": "Expiry Month",
   "expiryYear": "Expiry Year",
   "toggleToMultiShip": "I want to ship to multiple addresses",
