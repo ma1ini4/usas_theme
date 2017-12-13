@@ -1,7 +1,6 @@
 ﻿{
-
+    "multiShipAddressSummary" : "Shipping to {0} addresses",
     "dateFormat": "j.n.Y",
-
     "logOut"   : "Abmeldung",
     "logIn"   : "Einloggen",
     "logIn2"  : "Melden Sie sich bei Ihrem Konto",
@@ -360,6 +359,7 @@
     "didNotAgreeToTerms"   : "Sie müssen zu den Bedingungen einverstanden",
     "enterProductQuantity"   : "Bitte geben Sie eine Produktmenge über 0",
     "enterMinProductQuantity" : "Bitte geben Sie eine minimale Produktmenge von {0}",
+    "quantityZeroError" : "Quantity can't be zero.",
     "enterReturnReason"   : "Bitte wählen Sie ein Rückgabegrund.",
     "enterReturnQuantity"   : "Bitte geben Sie eine Menge über 1 zurückzukehren.",
     "enterOtherComments"   : "Bitte geben Sie einen Kommentar, die die Gründe für diese Rückkehr.",
@@ -445,5 +445,12 @@
     "shippingTo" : "Artikel versenden nach",
     "shippingDestinationEditAddress": "Adresse bearbeiten",
     "backToTop": "Zurück nach oben",
-    "productOutOfStockError": "Die folgenden Artikel haben eine begrenzte Menge oder sind nicht auf Lager."
+    "productOutOfStockError": "Die folgenden Artikel haben eine begrenzte Menge oder sind nicht auf Lager.",
+   "accountSettingsInfo": "Überprüfen und bearbeiten Sie Ihre E-Mail-Adresse, Ihr Passwort, Ihre Passworthinweisinformationen und / oder Ihre Rechnungsadresse",
+    "wishListsInfo": "Erstellen und verwalten Sie Listen der Artikel, die Sie erhalten möchten, und senden Sie sie per E-Mail an Ihre Freunde und Familie",
+    "orderHistoryInfo": "Überprüfen Sie alle Bestellungen, die über dieses Konto bei uns eingehen",
+    "addressBookInfo": "Anzeigen, Bearbeiten oder Löschen von Adressen in Ihrem persönlichen Adressbuch",
+    "logOutInfo": "Melden Sie sich von Ihrem Konto ab",
+    "wishLists" : "Wunschlisten",
+   "productwithoutSku" : "Product without Sku"
 }
