@@ -1,4 +1,7 @@
 {
+  "multiShipAddressSummary" : "Shipping to {0} addresses",
+  "expiryMonth": "Expiry Month",
+  "expiryYear": "Expiry Year",
   "toggleToMultiShip": "I want to ship to multiple addresses",
   "toggleToSingleShip": "Ship to single address",
   "imagePathFormat": "{0}/cms/files/{1}.jpg",
@@ -368,10 +371,10 @@
   "streetMissing"        : "Street address required",
   "cityMissing"          : "City or town required",
   "stateProvMissing"     : "State or province required",
-  "postalCodeMissing"    : "Postal code required",
+  "postalCodeMissing"    : "Please enter valid Zip code",
   "countryMissing"       : "Please make a country selection",
-  "firstNameMissing"     : "First name required",
-  "lastNameMissing"      : "Last name required",
+  "firstNameMissing"     : "Please enter first name",
+  "lastNameMissing"      : "Please enter last name",
   "paymentTypeMissing"   : "Please select a payment type",
   "selectASavedCard"     : "Please select a saved card",
   "cardTypeMissing"      : "Please select your card type",
@@ -393,6 +396,7 @@
   "chooseShippingMethod" : "Please select a shipping method.",
   "didNotAgreeToTerms"   : "You must agree to the terms and conditions",
   "enterProductQuantity" : "Please enter a product quantity above 0",
+  "quantityZeroError"    : "Quantity can't be zero.",
   "selectValidOption"    : "Select Valid Option(s)",
   "enterReturnReason"    : "Please select a return reason.",
   "enterReturnQuantity"  : "Please enter a quantity above 1 to return.",
@@ -512,5 +516,12 @@
     "TrendTitle": "What's Trending Now",
     "BrowsOur": "Browse Our",
     "storeTitle": "Mozu Store!",
-    "storeHoursInfo":"Hours & Info"
+    "storeHoursInfo":"Hours & Info",
+    "accountSettingsInfo": "Review and edit your email address, password, your password hint information and/or your billing address ", 
+    "wishListsInfo": "Create and maintain lists of the items you'd like to receive, then email them to your friends and family",
+    "orderHistoryInfo": "Review all orders placed with us using this account",
+    "addressBookInfo": "View, edit or delete addresses in your personal address book",
+    "logOutInfo": "Sign out of your account",
+    "wishLists" : "Wish Lists",
+    "productwithoutSku" : "Product without Sku"
 }

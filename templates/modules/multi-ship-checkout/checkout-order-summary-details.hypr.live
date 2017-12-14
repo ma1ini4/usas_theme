@@ -2,9 +2,7 @@
     <thead>
         <div class="mz-header-basket-md-sm hidden-xs">
             <div class="mz-ordersummary-header-product col-sm-6 mz-order-content-container">
-                {% if fulfillmentMethod=="Ship" %}{{ labels.shippingInformation }}{% endif %}
-                {% if fulfillmentMethod=="Digital" %}{{ labels.digitalDelivery }}{% endif %}
-                {% if fulfillmentMethod=="Pickup" %}{{ labels.orderItemsPickup }}{% endif %}
+              {{ labels.product }}
             </div>
             <div class="mz-ordersummary-header-each col-sm-3 mz-order-content-container">{{ labels.price }}</div>
             <div class="mz-ordersummary-header-total col-sm-3 text-right mz-order-content-container">{{ labels.total }}</div>

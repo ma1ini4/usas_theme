@@ -471,15 +471,14 @@ define([
                 $('.quickviewSlider .modal-body').html('');
 
                 var qvProductCode = $(e.currentTarget).data("target");
-                var product = new ProductModels.Product({
-                    productCode: qvProductCode
-                });
+                var productJSONData = $(e.currentTarget).data("mz-product-data");
+                var product = new ProductModels.Product(productJSONData);
 
 
 
                 window.quickviewProduct = product;
                 this.currentProductCode = qvProductCode;
-                product.apiGet().then(function(_r) {
+//                product.apiGet().then(function(_r) {
                     var options_pro = product.attributes.options;
                     var availableColors = [];
                     if (options_pro.models) {
@@ -554,7 +553,7 @@ define([
                     }
                     blockUiLoader.unblockUi();
 
-                });
+//                });
             }
         });
 

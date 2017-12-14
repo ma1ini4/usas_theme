@@ -9,15 +9,15 @@ define([
     "hyprlive",
     'modules/models-product'
 ], function($, _, api, Backbone, HyprLiveContext, bxslider, blockUiLoader, Hypr, ProductModels) {
-    var sitecontext = HyprLiveContext.locals.siteContext;
-    var cdn = sitecontext.cdnPrefix;
-    var siteID = cdn.substring(cdn.lastIndexOf('-') + 1);
-    var imagefilepath = cdn + '/cms/' + siteID + '/files';
-    var width_fam = HyprLiveContext.locals.themeSettings.familyProductImageMaxWidth;    
-    var deviceType = navigator.userAgent.match(/Android|BlackBerry|iPhone|iPod|Opera Mini|IEMobile/i);
+    var sitecontext = HyprLiveContext.locals.siteContext,
+    cdn = sitecontext.cdnPrefix,
+    siteID = cdn.substring(cdn.lastIndexOf('-') + 1),
+    imagefilepath = cdn + '/cms/' + siteID + '/files',
+    width_fam = HyprLiveContext.locals.themeSettings.familyProductImageMaxWidth,
+    deviceType = navigator.userAgent.match(/Android|BlackBerry|iPhone|iPod|Opera Mini|IEMobile/i),
    
     //using GET request CheckImage function checks whether an image exist or not
-    var checkImage = function(imagepath, callback) {
+    checkImage = function(imagepath, callback) {
         $.get(imagepath).done(function() {
             callback(true); //return true if image exist
         }).error(function() {
@@ -41,15 +41,16 @@ define([
             self.listenTo(self.model, 'change', self.render);
         },
         render: function() {
-            /*if(this.mainImage){
-                this.model.get('content').get('productImages')[0].imageUrl = this.mainImage;
-            }*/
             Backbone.MozuView.prototype.render.apply(this);
             return this;
         },
         quantityMinus: function(_e) {
             this.model.messages.reset();
             var qty = this.model.get('quantity');
+            if (qty === 0) {
+                this.model.trigger('error', {message: Hypr.getLabel("quantityZeroError")});
+                return;
+            }
             this.model.set('quantity',--qty);
         },
         quantityPlus: function(_e) {
@@ -139,23 +140,13 @@ define([
                     	$(_e.delegateTarget).find('img').attr('src', mainImage);
                         if(self.isColorClicked)
                             self.model.set('mainImage', imagepath);
-                            //self.mainImage = imagepath;
-                        //$('.mz-productimages-mainimage').attr('src', mainImage);
                 } else if (typeof self.mainImage === 'undefined') {
                     $('.mz-productimages-main').html('<span class="mz-productlisting-imageplaceholder img-responsive"><span class="mz-productlisting-imageplaceholdertext">[no image]</span></span>');
                 }
                
             });
         }
-        
     });
-
     var Model = Backbone.MozuModel.extend();
-
-    var familyObject = "",
-        showError = require.mozuData('pagecontext').isDebugMode || require.mozuData('pagecontext').isAdminMode || require.mozuData('pagecontext').isEditMode;
-    
-
     return FamilyItemView;
-
 });
