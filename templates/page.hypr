@@ -49,8 +49,20 @@
 
         {% endblock meta-tags %}
 
-        <title>{% block title-tag-content %}{{ siteContext.generalSettings.websiteName }} {% endblock title-tag-content %}</title>
-
+       <title>{% block title-tag-content %}{{ siteContext.generalSettings.websiteName }}{% endblock title-tag-content %}</title>
+        {% if model.content.productName %}
+            <meta property="og:title" content='{% firstof pageContext.metaTitle|replace("'","&rsquo;")|replace('"','&rdquo;')|safe model.content.productName|replace("'","&rsquo;")|replace('"','&rdquo;')|safe %} - {{ siteContext.generalSettings.websiteName }}'>
+        {% else %}
+            {% if location %}
+                {% with location.name as locationName %}
+                    <meta property="og:title" content='{{ locationName|safe }}'>
+                {% endwith %}
+            {% else %}
+                {%if PageContext.metaTitle %}
+                    <meta property="og:title" content='{{ PageContext.metaTitle|replace("'","&rsquo;")|replace('"','&rdquo;')|safe }}'>
+                {%endif%}
+            {%endif%}
+        {% endif %}
         {% if PageContext.FeedUrl  %}
         <link rel="alternate" type="application/rss+xml" title="{{ PageContext.Title }}" href="{{ PageContext.FeedUrl }}" />
         {% endif %}

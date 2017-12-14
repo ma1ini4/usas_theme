@@ -164,10 +164,11 @@
                 var validationObj = this.validate();
 
                 if (validationObj) { 
+                    /*
                     Object.keys(validationObj).forEach(function(key){
                         this.trigger('error', {message: validationObj[key]});
                     }, this);
-
+                    */
                     return false;
                 }
 
@@ -1161,6 +1162,7 @@
 
                 if (this.nonStoreCreditTotal() > 0 && val) {
                     // display errors:
+                    /*
                     var error = {"items":[]};
                     for (var key in val) {
                         if (val.hasOwnProperty(key)) {
@@ -1173,6 +1175,7 @@
                     if (error.items.length > 0) {
                         order.onCheckoutError(error);
                     }
+                    */
                     return false;
                 }
 

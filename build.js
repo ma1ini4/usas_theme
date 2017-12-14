@@ -11,7 +11,8 @@
         blockui: "vendor/jquery.blockUI/jquery.blockUI.min",
         elevatezoom: "vendor/jquery-elevatezoom/jquery.elevatezoom.min",
         doubletaptogo:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGo.min",
-        doubletaptogoipad:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGoIpad.min"
+        doubletaptogoipad:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGoIpad.min",
+        async: "vendor/async/async.min"
     },
     dir: "compiled/scripts/",
     locale: "en-us",
@@ -42,6 +43,7 @@
                 'modules/views-messages',
                 'modules/views-paging',
                 'modules/views-productlists',
+                'vendor/jquery/lazysizes-custom.min'
             ],
             exclude: ['jquery'],
         },
