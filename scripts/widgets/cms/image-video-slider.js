@@ -5,9 +5,11 @@ require([
     'underscore',
     'modules/api',
     'modules/backbone-mozu',
-    'shim!vendor/jquery/jquery.bxslider.min[jquery=jQuery]>jQuery ',
+    'vendor/jquery-bxslider/jquery.bxslider.min',
     'shim!vendor/jquery/jquery.fitvids[jquery=jQuery]',
-	'//www.youtube.com/iframe_api'
+    '//www.youtube.com/iframe_api',
+    'vendor/jquery/owl.carousel.min',
+    'vendor/jquery/lazysizes-custom.min'
 ], function ($, _, api, Backbone) {
     
     var slider = null;
