@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
       {% block modal-header %}
-        <h4 class="modal-title"></h4>
+        <h4 class="modal-title">{{labels.addNewContact}}</h4>
       {% endblock modal-header %}
       </div>
       <div class="modal-body">

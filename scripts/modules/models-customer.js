@@ -459,9 +459,14 @@
                 this.get('editingContact').set(toEdit.toJSON({ helpers: true, ensureCopy: true }), { silent: true });
         },
         endEditContact: function() {
-            var editingContact = this.get('editingContact');
+            var editingContact = this.get('editingContact'),
+            addressType = editingContact.get("address").get('addressType'),
+            countryCode = editingContact.get("address").get('countryCode');
             editingContact.clear();
             editingContact.set('accountId', this.get('id'));
+            editingContact.get("address").set('addressType',addressType);
+            editingContact.get("address").set('countryCode', countryCode);
+            editingContact.get("address").set('candidateValidatedAddresses', null);
         },
         saveContact: function (options) {
             var self = this,
