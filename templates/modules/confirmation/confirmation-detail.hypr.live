@@ -1,4 +1,7 @@
 <div class="mz-l-container">
+    <div class="printLogo">
+        <img src="../../resources/images/logo-sm.png" width="313" height="52" />
+    </div>
     <h1 class="mz-pagetitle">{{ labels.orderConfirmation }} </h1>
     <div class="col-sm-12 mz-reset-padding-left">
     	<p class="col-md-5 col-sm-12 mz-reset-padding-left">{{ labels.confirmationText }}</p>

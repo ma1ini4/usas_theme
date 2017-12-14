@@ -618,11 +618,6 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             }
 
         });
-
-        //print the content of confirmation page
-        $("#mz-print-content-confirmation").on("click", function () {
-            window.print();
-        });
     });
 
 });
