@@ -455,6 +455,11 @@
                     "fieldLabel": "Social Share Link",
                     "xtype": "mz-input-text",
                     "name": "socialShareLink"
+                },
+                {
+                    "fieldLabel": "Facebook Share Link",
+                    "xtype": "mz-input-text",
+                    "name": "facebookShareLink"
                 }
             ]
         },
@@ -659,6 +664,28 @@
                     "xtype": "mz-input-number",
                     "name": "productCarouselImageWidth",
                     "fieldLabel": "Product Carousel Image Width (in px)"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "User Account",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-textarea",
+                    "name": "returnsInfo",
+                    "fieldLabel": "Returns Description"
+                },
+                {
+                    "xtype": "mz-input-textarea",
+                    "name": "paymentsMethodInfo",
+                    "fieldLabel": "Payment Methods Description"
+                },
+                {
+                    "xtype": "mz-input-textarea",
+                    "name": "giftCardsInfo",
+                    "fieldLabel": " Gift Card Description"
                 }
             ]
         }

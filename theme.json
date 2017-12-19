@@ -541,6 +541,8 @@
     "googleMapLongitude": -70.288112,
     "googleMapZoom": 8,
     "storesPageSize": 5,
+    "facebookShareLink":"https://www.facebook.com/MozuCommerce",
+    "googleMapPinIcon": "",
     "searchStorePlaceHolder": "Enter City, State or ZIP",
     "googleMapMaxNearbyDistance": 10000000,
     "preselectCountryCode": "US",
@@ -813,7 +815,10 @@
     "useDebugScripts": false,
     "useSearchAutocomplete": true,
     "allowCustomerInitiatedReturns": true,
-    "visaCheckoutSdkUrl": "https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js"
+    "visaCheckoutSdkUrl": "https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js",
+    "returnsInfo": "Return Item",
+    "paymentsMethodInfo": "Payment Methods",
+    "giftCardsInfo": "Gift Card"
   },
   "layoutWidgets": [
     {
@@ -1796,6 +1801,29 @@
         "heightResizable": false
       },
       "icon": "/resources/admin/widgets/homepage_video.png",
+      "validPageTypes": [
+        "*"
+      ]
+    },
+    {
+      "displayName": "New Arrivals",
+      "displayTemplate": "catalog/new-arrivals",
+      "editViewFields": [
+        {
+          "anchor": "100%",
+          "fieldLabel": "Title",
+          "name": "title",
+          "xtype": "mz-input-text"
+        },
+        {
+          "anchor": "100%",
+          "fieldLabel": "Products",
+          "name": "productCodes",
+          "xtype": "mz-input-productmulti"
+        }
+      ],
+      "icon": "/resources/admin/widgets/new_arrival.png",
+      "id": "new_arrivals_product",
       "validPageTypes": [
         "*"
       ]

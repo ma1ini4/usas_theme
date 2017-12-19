@@ -98,7 +98,10 @@
             {% dropzone "social-sharing" scope="template" %}
         </div>
     </div>
-
+    
+{% if model.productType === themeSettings.familyProductType %}
+  {% include "modules/product/family/family-list" %}
+{% endif %}
     <div class="clearfix"></div>
     <div class="mz-middle-breakpoint hidden-xs">
         {% dropzone "product-middle-breakpoint" scope="template" %}  

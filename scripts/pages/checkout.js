@@ -279,6 +279,10 @@ require(["modules/jquery-mozu",
             this.model.set('usingSavedCard', e.currentTarget.hasAttribute('data-mz-saved-credit-card'));
             this.model.set('paymentType', newType);
         },
+        edit: function () {
+            this.model.edit();
+            this.beginEditingCard();
+        },         
         beginEditingCard: function() {
             var me = this;
             if (!this.model.isExternalCheckoutFlowComplete()) {

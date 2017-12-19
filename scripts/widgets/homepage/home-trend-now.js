@@ -2,7 +2,8 @@ require([
     'modules/jquery-mozu',
     'underscore',
     "modules/backbone-mozu",
-    "shim!vendor/jquery/owl.carousel.min"
+    "shim!vendor/jquery/owl.carousel.min",
+    'vendor/jquery/lazysizes-custom.min'
 ], function ($, _, Backbone) {
     
     var owlSlider = null;

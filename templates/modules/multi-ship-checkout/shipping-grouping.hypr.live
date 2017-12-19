@@ -35,7 +35,6 @@
                     {% else %}
                         {% if model.groupingShippingMethods.length %}
                             <select id="mz-shipping-method-selector" name="shippingMethodSelector" class="mz-shipping-method-selector-dd" data-mz-shipping-method data-mz-grouping-id="{{ model.id }}">
-                            <option class="mz-shipping-method-selector-option" value=""></option>
                                 {% for method in model.groupingShippingMethods %}
                                     <option class="mz-shipping-method-selector-option" value="{{ method.shippingMethodCode }}" {% if method.shippingMethodCode == model.shippingMethodCode %} selected="selected" {% endif %}>{{ method.shippingMethodName }} - {{ method.price|currency }}</option>
                                 {% endfor %}
