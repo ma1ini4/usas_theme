@@ -21,7 +21,9 @@
     .footer-icons,
     .mz-checkout-qty-label-mobile,
     .mz-print-hide,
-    footer{
+    footer, nav, .mz-pagefooter-copyright, 
+    .ml-header-search-wrapper, .ml-header-links-wrapper,
+    .ml-header-global-cart-wrapper, header{
       display: none !important;
     }
     a[href]:after {
@@ -100,5 +102,8 @@
           width: 100%;
           max-width: 339px;
           margin: 20px 0;
-      }       
+    }
+    body.mz-confirmation .printLogo{
+      display: block;
+    }       
  }

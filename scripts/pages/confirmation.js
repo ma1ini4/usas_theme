@@ -17,6 +17,12 @@ define(['modules/api',
 
           var ConfirmationView = Backbone.MozuView.extend({
             templateName: 'modules/confirmation/confirmation-detail',
+            events: {
+              'click [data-mz-print-order]' : 'printOrder'
+            },
+            printOrder: function(){
+              window.print();
+            },
             render: function() {
               Backbone.MozuView.prototype.render.apply(this);
             }
