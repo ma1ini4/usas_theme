@@ -86,7 +86,6 @@ define(["modules/jquery-mozu",
                 var self = this;
                 var $target = $(e.currentTarget);
                 var customerContactId = $target.find(":selected").data("mzCustomercontactid");
-                $(e.currentTarget).trigger('blur');
                 if ($target.val() === "" && !customerContactId) {
                     return false;
                 }

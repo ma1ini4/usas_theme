@@ -13,7 +13,7 @@
             <span>{{ labels.suggestionNum|string_format(forloop.index) }}</span>
           </div>
           <div class="mz-l-formfieldgroup-cell">
-            <input checked data-mz-action="choose" name="candidateValidatedAddresses" type="radio" value="{{forloop.index0}}" />
+            <input data-mz-action="choose" name="candidateValidatedAddresses" type="radio" value="{{forloop.index0}}" {% if not siteContext.generalSettings.allowInvalidAddresses && forloop.first %} checked="checked"{% endif %} />
           </div>
           <div class="mz-l-formfieldgroup-cell">
             {{addr.address1}}<br />
