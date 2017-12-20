@@ -179,6 +179,7 @@
                 $('[data-mz-validationmessage-for="quantity"]').text("Quantity can't be zero.");
                 return;
             }
+            --value;
             $('.mz-productdetail-qty').val(value);
             //this.model.set('quantity',--value);
             if (typeof window.productView.model.attributes.inventoryInfo.onlineStockAvailable !== "undefined") {
@@ -196,6 +197,7 @@
                 $('[data-mz-validationmessage-for="quantity"]').text("Quantity can't be greater than 99.");
                 return;
             }
+            ++value;
             $('.mz-productdetail-qty').val(value);
             //this.model.set('quantity',++value);
             if (typeof window.productView.model.attributes.inventoryInfo.onlineStockAvailable !== "undefined" && window.productView.model.attributes.inventoryInfo.onlineStockAvailable < value) {
