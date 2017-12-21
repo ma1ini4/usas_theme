@@ -234,7 +234,7 @@
                         });                        
                     }
                     return $.ajax({
-                        url: '/api/platform/entitylists/requestCatalog%40Gorsuch/entities/?responseFields=',
+                        url: '/api/platform/entitylists/requestCatalog%40ng/entities/?responseFields=',
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify(payload),
@@ -258,7 +258,7 @@
                     }).then(function(response) {
                         payload.customerId = response.id;
                         $.ajax({
-                            url: '/api/platform/entitylists/requestCatalog%40Gorsuch/entities/?responseFields=',
+                            url: '/api/platform/entitylists/requestCatalog%40ng/entities/?responseFields=',
                             dataType: "json",
                             contentType: "application/json; charset=utf-8",
                             data: JSON.stringify(payload),
