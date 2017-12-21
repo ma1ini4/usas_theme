@@ -93,7 +93,6 @@
                     <option {% if model.address.stateOrProvince == state.key %}selected="selected"{% endif %} value="{{ state.key }}">{{ state.value }}</option>
                 {% endfor %}
                 {% else %}
-                   <option>TEST</option>
                     {% if themeSettings.customStates && themeSettings.customStates.length > 0 %}
                         {% for state in themeSettings.customStates %}
                             <option {% if model.address.stateOrProvince == state.key %}selected="selected"{% endif %} value="{{ state.key }}">{{ state.value }}</option>
