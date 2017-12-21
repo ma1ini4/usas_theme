@@ -1,4 +1,4 @@
-﻿define(['modules/backbone-mozu', 'underscore', 'modules/models-address', 'modules/models-orders', 'modules/models-paymentmethods', 'modules/models-product', 'modules/models-returns', 'hyprlive','hyprlivecontext','modules/block-ui'], function (Backbone, _, AddressModels, OrderModels, PaymentMethods, ProductModels, ReturnModels, Hypr,HyprLiveContext,blockUiLoader) {
+﻿define(['modules/backbone-mozu', 'underscore', 'modules/models-address', 'modules/models-orders', 'modules/models-paymentmethods', 'modules/models-product', 'modules/models-returns', 'hyprlive','hyprlivecontext','modules/block-ui','modules/backbone-mozu'], function (Backbone, _, AddressModels, OrderModels, PaymentMethods, ProductModels, ReturnModels, Hypr,HyprLiveContext,blockUiLoader,$) {
 
 
     var pageContext = require.mozuData('pagecontext'),
@@ -181,7 +181,102 @@
             if (types) this.setTypeHelpers(null, types);
             this.on(contactTypeListeners);
             this.on('change:types', this.setTypeHelpers, this);
-        }
+        },
+        requestCatalog: function (options) {
+            var self = this,
+                editingContact = this,
+                apiContact;
+            
+            if (options && options.forceIsValid) {
+                editingContact.set('address.isValidated', true);
+            }
+            var result = this.validate();
+
+            if (!this.validate()) {
+                var apiData = require.mozuData('apicontext');
+                var payload = {
+                    phone1: this.get('phoneNumbers.office') || '',
+                    phone2: this.get('phoneNumbers.home') || '',
+                    email: this.get('email') || '',
+                    dateCreated: (new Date()),
+                    firstName: this.get('firstName') || '',
+                    middleName: this.get('middleNameInitials') || '',
+                    lastName: this.get('lastNameOrSurname') || '',
+                    address1: this.get('address.address1') || '',
+                    address2: this.get('address.address2') || '',
+                    city: this.get('address.cityOrTown') || '',
+                    zipCode: this.get('address.postalOrZipCode') || '',
+                    state: this.get('address.stateOrProvince') || '',
+                    country: this.get('address.countryCode') || '',
+                    exportedDate: ''
+                };
+                var isMarketingEnabled = this.get('marketingEnabled') ? true : false;
+                var user = require.mozuData('user');
+                if (!user.isAnonymous) {
+                    payload.customerId = user.accountId;
+                    if(isMarketingEnabled){
+                        $.ajax({
+                            url: '/api/commerce/customer/accounts/'+user.accountId,
+                            headers: apiData.headers,
+                            method: 'GET',
+                            success: function(data) {
+                                if(!data.acceptsMarketing){
+                                    data.acceptsMarketing=true;
+                                    $.ajax({
+                                        url: '/api/commerce/customer/accounts/'+user.accountId,
+                                        headers: apiData.headers,
+                                        method: 'PUT',
+                                        data:data
+                                    }); 
+
+                                }
+                            }
+                        });                        
+                    }
+                    return $.ajax({
+                        url: '/api/platform/entitylists/requestCatalog%40Gorsuch/entities/?responseFields=',
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(payload),
+                        method: 'POST',
+                        headers: apiData.headers
+                    });
+                } else {
+                    //create a new guest user and assign its guest ID
+                    var dfd = $.$.Deferred();
+                    $.ajax({
+                        url: '/api/commerce/customer/accounts',
+                        data: {
+                            firstName: payload.firstName,
+                            lastName: payload.lastName,
+                            acceptsMarketing: isMarketingEnabled,
+                            emailAddress: payload.email,
+                            isAnonymous: true
+                        },
+                        headers: apiData.headers,
+                        method: 'POST'
+                    }).then(function(response) {
+                        payload.customerId = response.id;
+                        $.ajax({
+                            url: '/api/platform/entitylists/requestCatalog%40Gorsuch/entities/?responseFields=',
+                            dataType: "json",
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify(payload),
+                            method: 'POST',
+                            headers: apiData.headers,
+                            success:function(data){
+                                dfd.resolve(data);
+                            }
+                        });
+                    }, function(error) {
+                        //console.log("Show API error", error);
+                    });
+                    // Return the Promise so caller can't change the Deferred
+                    return dfd.promise();     
+
+                }
+            }
+        } 
     }),
 
     WishlistItem = Backbone.MozuModel.extend({

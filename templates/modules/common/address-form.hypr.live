@@ -86,18 +86,24 @@
             <label for="stateprov">{{ labels.state }}<span class="is-required"> *</span>:</label>
         </div>
         <div class="mz-l-formfieldgroup-cell">
-            <select id="{% block id-prefix %}{% endblock id-prefix %}stateOrProvince" data-mz-value="{{ addresscontext }}address.stateOrProvince">
-               <option value="">{{ labels.select }}</option>
+             <select class="select" data-mz-value="{{ addresscontext }}address.stateOrProvince">
+                <option value="" selected>{{labels.state}}*</option>
                 {% if states && states.length > 0 %}
                 {% for state in states %}
-                    <option {% if model.address.stateOrProvince == state.key %}selected="selected"{% endif %} value="{{ state.key }}">{{ state.value }}</option> 
-                {% endfor %}
-                {% else %}
-                {% for state in pageContext.billingStates %}
                     <option {% if model.address.stateOrProvince == state.key %}selected="selected"{% endif %} value="{{ state.key }}">{{ state.value }}</option>
                 {% endfor %}
+                {% else %}
+                   <option>TEST</option>
+                    {% if themeSettings.customStates && themeSettings.customStates.length > 0 %}
+                        {% for state in themeSettings.customStates %}
+                            <option {% if model.address.stateOrProvince == state.key %}selected="selected"{% endif %} value="{{ state.key }}">{{ state.value }}</option>
+                        {% endfor %}                    
+                    {% else %}
+                        {% for state in pageContext.billingStates %}
+                            <option {% if model.address.stateOrProvince == state.key %}selected="selected"{% endif %} value="{{ state.key }}">{{ state.value }}</option>
+                        {% endfor %}
+                    {% endif %}
                 {% endif %}
-
             </select>
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}address.stateOrProvince"></span>
         </div>

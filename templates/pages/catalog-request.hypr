@@ -23,7 +23,7 @@
         </div>
         <div id="catalog-address-form-messages"></div>
         <div class="row" id="form-viewport">
-            <div class="col-xs-12 col-sm-7">
+            <div class="col-xs-12 col-sm-5">
                 <div id="catalog-address-form-container" class="mz-l-formfieldgroup">
                     
                 </div>
