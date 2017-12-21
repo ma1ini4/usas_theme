@@ -86,11 +86,9 @@ define(["modules/jquery-mozu",
                 var self = this;
                 var $target = $(e.currentTarget);
                 var customerContactId = $target.find(":selected").data("mzCustomercontactid");
-
                 if ($target.val() === "" && !customerContactId) {
                     return false;
                 }
-
                 self.model.updateOrderItemDestination($target.val(), customerContactId);
                 self.render();
             },
