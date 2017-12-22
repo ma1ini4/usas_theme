@@ -35,7 +35,7 @@ define([
 	                me.isLoading(false);
 	                if (rawJSON) {
 	                    me._isSyncing = true;
-	                    var updaterawJSON = me.checkVariationCode(rawJSON);
+	                    var updaterawJSON = (rawJSON.options && rawJSON.options.length) ? me.checkVariationCode(rawJSON) : rawJSON;
 	                    me.set(updaterawJSON);
 	                    me._isSyncing = false;
 	                }
@@ -45,7 +45,21 @@ define([
 	                me.isLoading(false);
 	            });
 	            this.apiModel.on('error', function(err) {
+	                var my = me;
 	                me.isLoading(false);
+	                //Get items which are out of stock
+	                if(err.message.indexOf("Item not found: "+me.id+" product code "+me.id+" is out of stock") !== -1){
+	                	var serviceurl = '/api/commerce/catalog/storefront/products/' + me.get('productCode')+'?&allowInactive=true&supressOutOfStock404=true';
+	                	api.request('GET', serviceurl).then(function(newProduct) {
+	                		my.set(newProduct);
+	                		my.trigger('ready');
+	                    	my.set("isReady",true);
+	                    	my.set('quantityNull', 0);
+	                    	my.messages.reset([Hypr.getLabel('productOutOfStock')]);
+	                    	return;
+	                	});     
+	                	return;
+	                }	                	
 	                me.trigger('error', err);
 	            });
 	            this.on('change', function() {
@@ -105,44 +119,7 @@ define([
 	            options: Backbone.Collection.extend({
 	                model: ProductOption
 	            })
-	        },
-	        getBundledProductProperties: function(opts) {
-	            var self = this,
-	                loud = !opts || !opts.silent;
-	            if (loud) {
-	                this.isLoading(true);
-	                this.trigger('request');
-	            }
-
-	            var bundledProducts = this.get('bundledProducts'),
-	                numReqs = bundledProducts.length,
-	                deferred = api.defer();
-	            _.each(bundledProducts, function(bp) {
-	                var op = api.get('product', bp.productCode);
-	                op.ensure(function() {
-	                    if (--numReqs === 0) {
-	                        _.defer(function() {
-	                            self.set('bundledProducts', bundledProducts);
-	                            if (loud) {
-	                                this.trigger('sync', bundledProducts);
-	                                this.isLoading(false);
-	                            }
-	                            deferred.resolve(bundledProducts);
-	                        });
-	                    }
-	                });
-	                op.then(function(p) {
-	                    _.each(p.prop('properties'), function(prop) {
-	                        if (!prop.values || prop.values.length === 0 || prop.values[0].value === '' || prop.values[0].stringValue === '') {
-	                            prop.isEmpty = true;
-	                        }
-	                    });
-	                    _.extend(bp, p.data);
-	                });
-	            });
-
-	            return deferred.promise;
-	        },
+	        },	        
 	        hasPriceRange: function() {
 	            return this._hasPriceRange;
 	        },
@@ -177,48 +154,88 @@ define([
 	                    me.lastConfiguration = [];
 	                    me.calculateHasPriceRange(conf);
 	                    me.on('sync', me.calculateHasPriceRange);
+	                    me.set('itemCode', Hypr.getLabel('item')+'# '+me.get('productCode'));
+	                    if(typeof me.get('inventoryInfo').onlineStockAvailable !== 'undefined' && me.get('inventoryInfo').onlineStockAvailable === 0){
+	                    	me.set('quantityNull', 0);
+	                    } 
 	                    me.trigger('ready');
 	                    me.set("isReady",true);
 	                });
-	            },1000);
+	            },400);
 	        },
 	        checkVariationCode: function(rawJSON){
-	            var me = this;
+	            var me = this; console.log(me.id);
 	            var variations = rawJSON.variations || me.get("variations");
 	            var variationCodes = me.get('variationCodes');
+	            var outOfStockBehavior = rawJSON.inventoryInfo.outOfStockBehavior;
+	            //remove variations with inventory zero if outOfStockBehavior === "HideProduct"
+	            if(outOfStockBehavior === "HideProduct"){
+	            	variations.reduce(function (hideProduct, variation) {
+					  	if (variation.inventoryInfo.onlineStockAvailable === 0) {
+					    	return hideProduct.concat(variation);
+					  	} else {
+					    	return hideProduct;
+					  	}
+					}, []);
+	            }
 	            var variation_pro = [];
 	            var options_arr = [];
 	            rawJSON.variations = variation_pro;
-	            //me.set('variations', variation_pro);
-	            _.each(variations, function(valued) {
+	            var count = 0;
+	            for(var j=0; j < variations.length; j++){
 	                for (var k = 0; k < variationCodes.length; k++) {
-	                    if (valued.productCode === variationCodes[k]) {
-	                        variation_pro.push(valued);
-	                        //variation_pro = _.uniq(variation_pro);
+	                    if (variations[j].productCode === variationCodes[k]) {
+	                        variation_pro.push(variations[j]);
 	                        if (rawJSON.options) {
-	                            for (var l = 0; l < valued.options.length; l++) {
-	                                options_arr.push(valued.options[l].valueSequence);
-	                                options_arr = _.uniq(options_arr); 
+	                        	//get options matching to variationCodes with inventory
+	                            for (var x=0; x < variations[j].options.length; x++) {
+	                            	var checkDuplication = 0;
+	                            	for(var o=0; o < options_arr.length; o++){
+	                            		if(options_arr[o].option === variations[j].options[x].valueSequence)
+	                            			checkDuplication = 1;
+	                            	}
+	                            	//Don't let items to duplicate
+	                            	if(checkDuplication === 0){
+		                            	options_arr[count] = {};
+		                            	options_arr[count].option = variations[j].options[x].valueSequence;
+		                            	options_arr[count].onlineStockAvailable = variations[j].inventoryInfo.onlineStockAvailable;
+		                            	++count;
+		                                options_arr = _.uniq(options_arr); 
+		                            }
 	                            }
 	                        }
 	                    }
 	                }
-	            });
+	        	}
 	            rawJSON.variations = variation_pro;
+	            //remove unwanted options
 	            if(options_arr.length){
-		            //remove options
 		            for(var i=0;i<rawJSON.options.length;i++){
 		                var opt_pro= [];
 		                var option = rawJSON.options[i];
 		                var key = option.attributeFQN;
 		                for (var b = 0; b < option.values.length; b++) {
 		                    for (var c = 0; c < options_arr.length; c++) {
-		                        if (option.values[b].attributeValueId === options_arr[c]) {
+		                        if (option.values[b].attributeValueId === options_arr[c].option) {
+		                        	if(outOfStockBehavior === "DisplayMessage" && options_arr[c].onlineStockAvailable === 0){
+		                        		option.values[b].isEnabled = false;
+		                        	}
 		                            opt_pro.push(option.values[b]);     
 		                            break;                       
 		                        }
 		                    }
 		                } 
+		                if(outOfStockBehavior !== "AllowBackOrder"){
+			                var checkEnable = false;
+							for(var p = 0; p < opt_pro.length; p++) {
+							    if (opt_pro[p].isEnabled === true) {
+							        checkEnable = true;
+							        break;
+							    }
+							}
+			                if(checkEnable === false)
+			                	rawJSON.quantityNull = 0;
+			            }
 		                rawJSON.options[i].values=opt_pro;
 		            }
 		        }
@@ -264,10 +281,15 @@ define([
 	                    if (!fulfillMethod) {
 	                        fulfillMethod = (me.get('goodsType') === 'Physical') ? FamilyItem.Constants.FulfillmentMethods.SHIP : FamilyItem.Constants.FulfillmentMethods.DIGITAL;
 	                    }
-	                    if(typeof me.get('inventoryInfo').onlineStockAvailable !== 'undefined'){
+	                    //reject products to proceed which are out of stock(under 'DisplayMessage' and 'HideMessage') and allow to proceed which are under 'AllowBackOrder'
+	                    if(me.get('quantityNull') === 0){
+	                    	dfd.reject(Hypr.getLabel('selectValidOption')); 
+	                    	return;
+	                    }else if(typeof me.get('inventoryInfo').onlineStockAvailable !== 'undefined'){
 	                    	//products without options
 	                    	if(!me.get('options').length && me.get('quantity') === 0){
-	                    		dfd.reject(Hypr.getLabel('productwithoutSku'));
+	                    		//dfd.reject(Hypr.getLabel('productwithoutSku'));
+	                    		dfd.reject(Hypr.getLabel('selectValidOption'));
 	                    		return;
 	                    	}
 	                    	//options selected but qty zero
@@ -283,20 +305,25 @@ define([
 		                    }).then(function (item) {
 		                    	dfd.resolve(item);
 		                        me.trigger('addedtocart', item);
-		                    },function(e){
-		                    	dfd.reject(e);
+		                    },function(err){
+		                    	if(err.message.indexOf("The following items have limited quantity or are out of stock:") !== -1){ 
+									me.trigger('error', { message : Hypr.getLabel('productOutOfStockError')});
+		                        } 
+		                    	dfd.reject(err);
 		                    });
-		                }else if(!me.lastConfiguration.length && me.get('quantity') > 0){
+		                }else if(me.lastConfiguration && !me.lastConfiguration.length && me.get('quantity') > 0){
 		                	//options not selected but qty > zero
 		                	me.trigger('error', { message : Hypr.getLabel('selectValidOption')});
 		                	dfd.reject(Hypr.getLabel('selectValidOption'));
-		                }else if(me.lastConfiguration.length && me.get('quantity') === 0){
+		                }else if(me.lastConfiguration && me.lastConfiguration.length && typeof me.get('inventoryInfo').onlineStockAvailable === 'undefined' && me.get('quantity') > 0){
+		                	//if all options are not selected and qty > 0
+		                	me.trigger('error', { message : Hypr.getLabel('selectValidOption')});
+		                	dfd.reject(Hypr.getLabel('selectValidOption'));
+		                }else if(me.lastConfiguration && me.lastConfiguration.length && me.get('quantity') === 0){
 		                	//options selected but qty 0
 		                	me.trigger('error', { message : Hypr.getLabel('enterProductQuantity')});
 		                	dfd.reject(Hypr.getLabel('enterProductQuantity'));
 		                }else{
-		                	/*me.trigger('error', { message : Hypr.getLabel('selectValidOption')});
-		                	dfd.reject(Hypr.getLabel('selectValidOption'));*/
 		                	dfd.reject(Hypr.getLabel('selectValidOption')); 
 		                }
 	                }
@@ -364,10 +391,52 @@ define([
 	            if (JSON.stringify(this.lastConfiguration) !== JSON.stringify(newConfiguration)) {
 	                this.lastConfiguration = newConfiguration;
 	                this.apiConfigure({ options: newConfiguration }, { useExistingInstances: true })
-	                    .then(function (apiModel) {	                    	
+	                    .then(function (apiModel) {	   	                    	
+	                    	var html = "";
+	                    	var price = "";
+	                    	if(!me.get('addedtocart')){
+	                    		//set item code Item# 412167
+	                    		if(me.get('variationProductCode')){
+	                    			me.set('itemCode', Hypr.getLabel('sku')+'# '+me.get('variationProductCode'));
+	                    		}
+	                    		//To show In Stock price
+	                    		// If price is not a range
+		                    	if(typeof me.get('price').get('priceType') != 'undefined'){
+		                    		var sp_price = "";
+			                    	if(typeof me.get('price').get('salePrice') != 'undefined')
+		                				sp_price = me.get('price').get('salePrice');
+		            				else
+		                				sp_price = me.get('price').get('price');
+		            				price = Hypr.engine.render("{{price|currency}}",{ locals: { price: sp_price }}); 
+		            			}else{
+		            				//If price is in a range
+		            				var lower_sp_price = "";
+		            				var upper_sp_price = "";
+		            				//get lower salePrice/price
+		            				if(typeof me.get('priceRange').get('lower').get('salePrice') != 'undefined')
+		            					lower_sp_price = me.get('priceRange').get('lower').get('salePrice');
+		            				else 
+		            					lower_sp_price = me.get('priceRange').get('lower').get('price');
+		            				//get upper salePrice/price
+		            				if(typeof me.get('priceRange').get('upper').get('salePrice') != 'undefined')
+		            					upper_sp_price = me.get('priceRange').get('upper').get('salePrice');
+		            				else 
+		            					upper_sp_price = me.get('priceRange').get('upper').get('price');
+		            				lower_sp_price = Hypr.engine.render("{{price|currency}}",{ locals: { price: lower_sp_price }});
+		            				upper_sp_price = Hypr.engine.render("{{price|currency}}",{ locals: { price: upper_sp_price }});
+		            				price = lower_sp_price + ' - '+ upper_sp_price;
+		            			}
+	            				var stockMsglabel = Hypr.getLabel('upcInStock');  
+	            				html += stockMsglabel + ' ' + price;    
+	            				me.set('stockInfo', html);      
+            				}else{
+            					//Replace VariationProductCode code with productCode
+            					me.set('itemCode', Hypr.getLabel('item')+'# '+me.get('productCode'));
+            				}
+            				me.unset('addedtocart');
 	                        if (me._hasVolumePricing) {
 	                            me.handleMixedVolumePricingTransitions(apiModel.data);
-	                        }
+	                        }	                        
 	                     });
 	            } else {
 	                this.isLoading(false);
@@ -390,6 +459,43 @@ define([
 	                if (j.bundledProducts && j.bundledProducts.length === 0) delete j.bundledProducts;
 	            }
 	            return j;
+	        },
+	        getBundledProductProperties: function(opts) {
+	            var self = this,
+	                loud = !opts || !opts.silent;
+	            if (loud) {
+	                this.isLoading(true);
+	                this.trigger('request');
+	            }
+
+	            var bundledProducts = this.get('bundledProducts'),
+	                numReqs = bundledProducts.length,
+	                deferred = api.defer();
+	            _.each(bundledProducts, function(bp) {
+	                var op = api.get('product', bp.productCode);
+	                op.ensure(function() {
+	                    if (--numReqs === 0) {
+	                        _.defer(function() {
+	                            self.set('bundledProducts', bundledProducts);
+	                            if (loud) {
+	                                this.trigger('sync', bundledProducts);
+	                                this.isLoading(false);
+	                            }
+	                            deferred.resolve(bundledProducts);
+	                        });
+	                    }
+	                });
+	                op.then(function(p) {
+	                    _.each(p.prop('properties'), function(prop) {
+	                        if (!prop.values || prop.values.length === 0 || prop.values[0].value === '' || prop.values[0].stringValue === '') {
+	                            prop.isEmpty = true;
+	                        }
+	                    });
+	                    _.extend(bp, p.data);
+	                });
+	            });
+
+	            return deferred.promise;
 	        }
 	    }, {
 	        Constants: {

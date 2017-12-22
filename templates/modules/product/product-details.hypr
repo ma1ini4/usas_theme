@@ -36,7 +36,9 @@
             </div>
             <div class="clearfix"></div>
             <div class="mz-productdetail-wrap">
-                {% include "modules/common/message-bar" %}
+                {% if model.productType != themeSettings.familyProductType %}
+                    {% include "modules/common/message-bar" %}
+                {% endif %}
                 <div id="product-detail" class="mz-productdetail mz-l-stack">
                     {% include "modules/product/product-detail" %}
                    
@@ -99,8 +101,19 @@
         </div>
     </div>
     
-{% if model.productType === themeSettings.familyProductType %}
-  {% include "modules/product/family/family-list" %}
+{% if model.productType == themeSettings.familyProductType %}
+    {% include "modules/common/message-bar" %}
+    </hr>
+    {% include "modules/product/family/family-list" %}
+    <div class="product-detail family-details">
+        <div class="mz-productdetail-conversion-buttons col-xs-12">
+            <div class="col-xs-12 add-to-cart-container">
+                <button class="mz-productdetail-addtocart font-large button_primary pull-right{% if not model.purchasableState.isPurchasable %} button_disabled{% endif %}" data-mz-action="addToCart" >
+              {{ labels.addToCart }}
+                </button>
+            </div>
+        </div>
+    </div>
 {% endif %}
     <div class="clearfix"></div>
     <div class="mz-middle-breakpoint hidden-xs">
