@@ -1,7 +1,11 @@
 <div class="mz-productdetail-shortdesc mz-l-stack-section">
   <span itemscope="description" itemprop="description">{{ model.content.productShortDescription|safe }}</span>
 </div>
-<div class="stock-info"></div>
+{% if model.stockInfo %}
+<div class="stock-info">{{ labels.upcInStock }}
+  <span class="stock-price">{{ model.stockInfo }}</span>
+</div>
+{% endif %}
 <div class="col-xs-12 mz-reset-padding-left">
     <div class="col-xs-12 email-popup">
       {% dropzone "email-notification" scope="template" %}

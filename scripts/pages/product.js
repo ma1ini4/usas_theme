@@ -248,16 +248,6 @@
                     }
                     this.model.whenReady(function() {
                         setTimeout(function() {
-                            var sp_price = "";
-                            if (window.productView.model.get('inventoryInfo').onlineStockAvailable && typeof window.productView.model.get('inventoryInfo').onlineStockAvailable !== "undefined") {
-                                if (typeof window.productView.model.get('price').get('salePrice') != 'undefined')
-                                    sp_price = window.productView.model.get('price').get('salePrice');
-                                else
-                                    sp_price = window.productView.model.get('price').get('price');
-                                var price = Hypr.engine.render("{{price|currency}}", { locals: { price: sp_price } });
-                                $('.stock-info').show().html("In Stock <span class='stock-price'>" + price + "</span>");
-
-                            }
                             if (window.productView.model.get('variationProductCode') && typeof window.productView.model.get('variationProductCode') !== "undefined") {
                                 $(".mz-productcodes-productcode").text("Sku # " + window.productView.model.get('variationProductCode'));
                             }
@@ -524,32 +514,13 @@
                 CartMonitor.addToCount(product.get('quantity'));
                 //window.location.href = "/cart";
                 $('.mz-productdetail-qty').val(1);
-                $("ul.product-color-swatches li").removeClass('active');
-                $("ul.product-swatches li").removeClass('active');
-                $('.mz-productoptions-option option:selected').removeAttr('selected');
-                updateImages(productInitialImages);
-                //check which option was selected before clicking 'Add to cart' and update option labels to default text('Select A Color/Size').
-                var optArr = [];
-                _.each(product.attributes.options.models, function(e) {
-                    _.each(e.get('values'), function(valued) {
-                        _.each(valued, function(value, key) {
-                            if (key === 'isSelected' && value === true) {
-                                var atfqn = e.get('attributeFQN');
-                                if (e.get('attributeDetail').name === "OTHER") {
-                                    $('[data-mz-product-option="' + atfqn + '"]').parents('.mz-productoptions-optioncontainer').find('.mz-productoptions-optionlabel').addClass('text-uppercase').text("Select a Option");
-                                } else {
-                                    $('[data-mz-product-option="' + atfqn + '"]').parents('.mz-productoptions-optioncontainer').find('.mz-productoptions-optionlabel').addClass('text-uppercase').text("Select a " + e.get('attributeDetail').name);
-                                }
-                                valued.isSelected = false;
-                            }
-                        });
-                    });
-                    e.attributes = _.omit(e.attributes, 'value');
-                    optArr.push(e);
-                });
-                product.get('options').models = optArr;
-                $('.mz-productoptions li').removeClass('disabled').attr('disabled', false);
-                $('.stock-info').html('');
+                if(product.get('options')){
+                    var optionModels = product.get('options').models;
+                    for(var k = 0; k< product.get('options').models.length; k++){
+                        optionModels[k].set('value', null);
+                    }
+                }
+                product.unset('stockInfo'); 
                 var priceDiscountTemplate = Hypr.getTemplate("modules/product/price-stack");
                 $('.mz-productdetail-price').html(priceDiscountTemplate.render({
                     model: priceModel
