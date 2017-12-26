@@ -17,7 +17,7 @@
                 <h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName|replace("'","&rsquo;")|safe }}</h1>
                 <div class="row">
                     <div class="col-xs-5">
-                        <h4 class="mz-productcodes-productcode p-3" itemprop="sku">{{ model.itemCode }}</h4>
+                        <h4 class="mz-productcodes-productcode p-3" itemprop="sku">{{ labels.item}} # {{ model.productCode }}</h4>
                     </div>
                     <div class="col-xs-7">
                         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section pull-right text-right prize-mobile-view">
