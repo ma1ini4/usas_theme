@@ -199,6 +199,7 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
                     fulfillmentLocationName: locationName,
                     quantity: quantity || 1
                 }).then(function(item) {
+                    me.set('addedtocart', true);
                     me.trigger('addedtocart', item);
                 });
             });
@@ -238,6 +239,35 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
                 this.lastConfiguration = newConfiguration;
                 this.apiConfigure({ options: newConfiguration }, { useExistingInstances: true })
                     .then(function (apiModel) {
+                        //To show In Stock price
+                        // If price is not a range
+                        var price = "";
+                        if(typeof me.get('price').get('priceType') != 'undefined'){
+                            var sp_price = "";
+                            if(typeof me.get('price').get('salePrice') != 'undefined')
+                                sp_price = me.get('price').get('salePrice');
+                            else
+                                sp_price = me.get('price').get('price');
+                            price = Hypr.engine.render("{{price|currency}}",{ locals: { price: sp_price }}); 
+                        }else{
+                            //If price is in a range
+                            var lower_sp_price = "";
+                            var upper_sp_price = "";
+                            //get lower salePrice/price
+                            if(typeof me.get('priceRange').get('lower').get('salePrice') != 'undefined')
+                                lower_sp_price = me.get('priceRange').get('lower').get('salePrice');
+                            else 
+                                lower_sp_price = me.get('priceRange').get('lower').get('price');
+                            //get upper salePrice/price
+                            if(typeof me.get('priceRange').get('upper').get('salePrice') != 'undefined')
+                                upper_sp_price = me.get('priceRange').get('upper').get('salePrice');
+                            else 
+                                upper_sp_price = me.get('priceRange').get('upper').get('price');
+                            lower_sp_price = Hypr.engine.render("{{price|currency}}",{ locals: { price: lower_sp_price }});
+                            upper_sp_price = Hypr.engine.render("{{price|currency}}",{ locals: { price: upper_sp_price }});
+                            price = lower_sp_price + ' - '+ upper_sp_price;
+                        } 
+                        me.set('stockInfo', price);                        
                         if (me._hasVolumePricing) {
                             me.handleMixedVolumePricingTransitions(apiModel.data);
                         }

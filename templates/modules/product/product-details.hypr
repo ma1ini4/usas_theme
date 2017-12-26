@@ -39,7 +39,7 @@
                 {% if model.productType != themeSettings.familyProductType %}
                     {% include "modules/common/message-bar" %}
                 {% endif %}
-                <div id="product-detail" class="mz-productdetail mz-l-stack">
+                <div id="product-detail" class="product-detail mz-productdetail mz-l-stack">
                     {% include "modules/product/product-detail" %}
                    
                 </div>
