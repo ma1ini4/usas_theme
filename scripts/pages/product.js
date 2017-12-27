@@ -162,20 +162,23 @@
                         var renderedView = view.render().el;
                         $("#mz-family-container").append(renderedView);
                     };
-                    for(var i=0; i < familyData.models.length; i++){
-                        //var x = this.model.checkVariationCode(familyData.models[i]);
-                        var familyItemModel = familyData.models[i];
-                        if(familyItemModel.get("isReady")){
-                            familyItemModel.off('ready');
-                            familyItemModelOnready.call({index:i});
-                        }
-                        else{
-                            familyItemModel.on('ready',familyItemModelOnready.bind({index:i}));
-                            if(i === (familyData.models.length - 1)){
-                                blockUiLoader.unblockUi();
+                    if(familyData.models.length){
+                        for(var i=0; i < familyData.models.length; i++){
+                            //var x = this.model.checkVariationCode(familyData.models[i]);
+                            var familyItemModel = familyData.models[i];
+                            if(familyItemModel.get("isReady")){
+                                familyItemModel.off('ready');
+                                familyItemModelOnready.call({index:i});
+                            }
+                            else{
+                                familyItemModel.on('ready',familyItemModelOnready.bind({index:i}));
+                                if(i === (familyData.models.length - 1)){
+                                    blockUiLoader.unblockUi();
+                                }
                             }
                         }
-                    }
+                    }else
+                        blockUiLoader.unblockUi();
                 } catch(e){
                     console.log("something wrong happened with family", e);
                 }  
@@ -349,7 +352,7 @@
             }else if (typeof me.model.get('inventoryInfo').onlineStockAvailable === "undefined" || $(".mz-productoptions-optioncontainer").length != $(".mz-productoptions-optioncontainer .active").length) {
                 blockUiLoader.productValidationMessage();
             } else if (me.model.get('inventoryInfo').onlineStockAvailable) {
-                if (me.model.get('inventoryInfo').onlineStockAvailable < $('.mz-productdetail-qty').val()) {
+                if (me.model.get('inventoryInfo').onlineStockAvailable < me.model.get('quantity')) {
                     $('[data-mz-validationmessage-for="quantity"]').text("*Only " + me.model.get('inventoryInfo').onlineStockAvailable + " left in stock.");
                     return false;
                 }

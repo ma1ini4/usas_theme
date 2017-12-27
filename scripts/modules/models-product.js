@@ -160,7 +160,6 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
                     fulfillmentLocationName: locationName,
                     quantity: quantity || 1
                 }).then(function(item) {
-                    me.set('addedtocart', true);
                     me.trigger('addedtocart', item);
                 });
             });
