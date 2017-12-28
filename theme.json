@@ -17,7 +17,10 @@
     },
     "baseThemeChannel": "stable"
   },
-  "editors": [
+  "editors": [{
+        "id": "rti-rec-editor",
+        "path": "rti-rec-editor.js"
+    },
     {
       "id": "layout",
       "path": "layout.js"
@@ -935,8 +938,22 @@
       ]
     }
   ],
-  "widgets": [    
-    {
+  "widgets": [{
+        "displayName": "RTI Recommended Products",
+        "displayTemplate": "RTI/rti-rec-template",
+        "customEditor": "rti-rec-editor",
+        "icon": "/resources/admin/widgets/rti-recommend.png",
+        "id": "rti-rec-display",
+        "validPageTypes": [
+            "*"
+        ]
+    }, {
+        "displayName": "RTI Observation Tag",
+        "displayTemplate": "RTI/rti-observation.hypr",
+        "icon": "/resources/admin/widgets/rti-observation.png",
+        "id": "rti-observation-tag",
+        "validPageTypes": ["*"]
+    }, {
       "defaultConfig": {
       },
       "displayName": "Product carousel",
