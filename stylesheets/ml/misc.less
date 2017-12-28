@@ -2180,7 +2180,6 @@ ul.tabs {
             .fontsBold();
             text-align: left;
             color: @colorGreen;
-            display: none;
             .stock-price{
                 .fontRegular();
             }
@@ -2665,6 +2664,9 @@ ul.tabs {
         .mz-shipping-row-item {
             display: table-cell;
             padding-right: @defaultGutter/2;
+            white-space: nowrap;
+            overflow: hidden;
+            vertical-align: middle;
             .mz-shipping-row-item {
                 display: inline-block;
                 padding-right: 0;
@@ -2784,6 +2786,7 @@ ul.tabs {
 #mz-shipping-destination-address:disabled{
     opacity: 0.5;
 }
+
 .mz-catalog-request{
     .input,.select{
         width: 220px !important;
@@ -2813,3 +2816,114 @@ ul.tabs {
         padding-bottom: 18px;
     }
 }    
+
+#mz-family-container{
+    .mz-familylist-item {
+        margin-bottom: @defaultGutter;
+        .item-desc{
+            .mz-pagetitle{
+                font-size: 18px;                    
+                line-height: 20px;
+                .fontsBold();
+            }
+            .mz-productcodes-productcode{
+                font-size: @fontSizeSmall;
+                line-height: 20px;
+            }
+            .mz-productdetail-shortdesc{
+                font-size: 18px;
+                line-height: 28px;
+                .fontRegular();
+                text-align: justify;
+            }
+        }
+        .item-options{
+            margin-top: 25px;
+            .stock-message{
+                color: @colorGreen;
+                font-size: @fontSize;
+                line-height: 19px;
+                margin-bottom: 10px;
+            }
+            .itemOutOfStock{
+                color: @colorGreen;
+                margin-bottom: 5px; 
+            }
+            .mz-productoptions{
+                .mz-productoptions-optioncontainer{
+                    margin-bottom: @defaultGutter;
+                    .mz-productoptions-optionlabel{
+                        font-size: @fontSizeSmall;
+                        margin-bottom: 5px;
+                    }
+                    .product-color-swatches{
+                        li{
+                            width: 26px;
+                            height: 26px;
+                            &.disabled{
+                                opacity: 0.4;
+                            }
+                        }
+                    }
+                    .product-swatches{
+                        li{
+                            min-width: 100px;
+                            height: 39px;
+                        }
+                    }
+                }
+            }
+        }
+        .item-price-qty{
+            margin-top: 22px;
+            .item-price{
+                font-size: 22px;
+                /* line-height: 14px; */
+                .fontsBold();
+                margin-bottom: 17px;
+                .mz-pricestack{
+                    display: table;
+                    width: 100%;
+                    .mz-pricestack-price-lower{
+                        display: table-cell;
+                    }   
+                    .mz-pricestack-price-upper{
+                        display: table-cell;
+                        padding-left: 7px;
+                    } 
+                    .is-crossedout{
+                        color: @colorLighterGray;
+                    }
+                    .is-not-ranged {
+                        display: none;
+                    }
+                    .not-range {
+                        .mz-price {
+                            display: inline;
+                            float: none;
+                        }
+                        .is-ranged {
+                            display: none;
+                        }
+                        .is-not-ranged {
+                            margin-right: 10px;
+                        }
+                    }
+                }
+            }
+            .item-qty{
+                .qty-block{
+                    min-width: 83px;
+                    .qty-counter{
+                        width: 24px;
+                        height: 33px;
+                    }
+                    input{
+                        width: 33px;
+                        height: 33px;
+                    }
+                }
+            }
+        }
+    }
+}
