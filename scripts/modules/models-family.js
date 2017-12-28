@@ -164,7 +164,7 @@ define([
 	            },400);
 	        },
 	        checkVariationCode: function(rawJSON){
-	            var me = this; console.log(me.id);
+	            var me = this;
 	            var variations = rawJSON.variations || me.get("variations");
 	            var variationCodes = me.get('variationCodes');
 	            var outOfStockBehavior = rawJSON.inventoryInfo.outOfStockBehavior;

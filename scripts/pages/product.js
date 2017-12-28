@@ -126,7 +126,8 @@
         templateName: 'modules/product/product-detail',
         autoUpdate: ['quantity'],
         renderOnChange: [
-            'quantity'
+            'quantity',
+            'stockInfo'
         ],
         additionalEvents: {
             "change [data-mz-product-option]": "onOptionChange",
@@ -161,20 +162,23 @@
                         var renderedView = view.render().el;
                         $("#mz-family-container").append(renderedView);
                     };
-                    for(var i=0; i < familyData.models.length; i++){
-                        //var x = this.model.checkVariationCode(familyData.models[i]);
-                        var familyItemModel = familyData.models[i];
-                        if(familyItemModel.get("isReady")){
-                            familyItemModel.off('ready');
-                            familyItemModelOnready.call({index:i});
-                        }
-                        else{
-                            familyItemModel.on('ready',familyItemModelOnready.bind({index:i}));
-                            if(i === (familyData.models.length - 1)){
-                                blockUiLoader.unblockUi();
+                    if(familyData.models.length){
+                        for(var i=0; i < familyData.models.length; i++){
+                            //var x = this.model.checkVariationCode(familyData.models[i]);
+                            var familyItemModel = familyData.models[i];
+                            if(familyItemModel.get("isReady")){
+                                familyItemModel.off('ready');
+                                familyItemModelOnready.call({index:i});
+                            }
+                            else{
+                                familyItemModel.on('ready',familyItemModelOnready.bind({index:i}));
+                                if(i === (familyData.models.length - 1)){
+                                    blockUiLoader.unblockUi();
+                                }
                             }
                         }
-                    }
+                    }else
+                        blockUiLoader.unblockUi();
                 } catch(e){
                     console.log("something wrong happened with family", e);
                 }  
@@ -294,7 +298,7 @@
         },
         addToCart: function() {
             var me = this;  
-            window.productView.model.messages.reset();          
+            me.model.messages.reset();          
             if(this.model.get('productType') === Hypr.getThemeSetting('familyProductType')){
                 blockUiLoader.globalLoader();
                 /* jshint ignore:start */              
@@ -340,11 +344,16 @@
                     blockUiLoader.unblockUi();
                 })
                 /* jshint ignore:end */
-            }else if (typeof window.productView.model.get('inventoryInfo').onlineStockAvailable === "undefined" || $(".mz-productoptions-optioncontainer").length != $(".mz-productoptions-optioncontainer .active").length) {
+            }else if(typeof me.model.get('inventoryInfo').onlineStockAvailable !== 'undefined' && me.model.get('inventoryInfo').outOfStockBehavior === "AllowBackOrder"){
+                me.model.addToCart();
+            }else if (typeof me.model.get('inventoryInfo').onlineStockAvailable !== "undefined" && me.model.get('inventoryInfo').onlineStockAvailable === 0 && me.model.get('inventoryInfo').outOfStockBehavior === "DisplayMessage") {
                 blockUiLoader.productValidationMessage();
-            } else if (window.productView.model.get('inventoryInfo').onlineStockAvailable) {
-                if (window.productView.model.get('inventoryInfo').onlineStockAvailable < $('.mz-productdetail-qty').val()) {
-                    $('[data-mz-validationmessage-for="quantity"]').text("*Only " + window.productView.model.get('inventoryInfo').onlineStockAvailable + " left in stock.");
+                $('#SelectValidOption').children('span').html(Hypr.getLabel('productOutOfStock'));
+            }else if (typeof me.model.get('inventoryInfo').onlineStockAvailable === "undefined" || $(".mz-productoptions-optioncontainer").length != $(".mz-productoptions-optioncontainer .active").length) {
+                blockUiLoader.productValidationMessage();
+            } else if (me.model.get('inventoryInfo').onlineStockAvailable) {
+                if (me.model.get('inventoryInfo').onlineStockAvailable < me.model.get('quantity')) {
+                    $('[data-mz-validationmessage-for="quantity"]').text("*Only " + me.model.get('inventoryInfo').onlineStockAvailable + " left in stock.");
                     return false;
                 }
                 this.model.addToCart();
@@ -526,8 +535,7 @@
             if (cartitem && cartitem.prop('id')) {
                 //product.isLoading(true);
                 CartMonitor.addToCount(product.get('quantity'));
-                //window.location.href = "/cart";
-                $('.mz-productdetail-qty').val(1);
+                product.set('quantity', 1);
                 if(product.get('options')){
                     var optionModels = product.get('options').models;
                     for(var k = 0; k< product.get('options').models.length; k++){
