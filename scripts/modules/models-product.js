@@ -230,7 +230,7 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
                                 price = lower_sp_price + ' - '+ upper_sp_price;
                             } 
                             me.set('stockInfo', price);
-                        }                      
+                        }
                         if (me._hasVolumePricing) {
                             me.handleMixedVolumePricingTransitions(apiModel.data);
                         }
@@ -317,9 +317,8 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
             if(families)
                 data.family = JSON.parse(families.values[0].stringValue);
             return new this(data, { silent: true, parse: true });
-        }        
+        }
     }),
-
 
     ProductCollection = Backbone.MozuModel.extend({
         relations: {

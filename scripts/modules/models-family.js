@@ -59,7 +59,10 @@ define([
 	                    	return;
 	                	});     
 	                	return;
-	                }	                	
+	                }
+	                if(err.message.indexOf("Item not found: "+me.id+" product code "+me.id+" not found") !== -1){
+	                	return;
+	                }                	
 	                me.trigger('error', err);
 	            });
 	            this.on('change', function() {
