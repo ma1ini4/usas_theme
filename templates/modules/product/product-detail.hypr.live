@@ -11,7 +11,7 @@
       {% dropzone "email-notification" scope="template" %}
     </div>
 </div>
-{% if model.options and model.options.length > 0 and model.productType !== themeSettings.familyProductType %}
+{% if model.options and model.options.length > 0 and model.productType != themeSettings.familyProductType %}
 <div class="mz-productdetail-options mz-l-stack-section">
   {% include "modules/product/product-options" %}
 </div>
@@ -26,7 +26,7 @@
 </div>
 {% endif %}
 <section class="mz-l-stack-section mz-productdetail-conversion row">
-  {% if model.productType !== themeSettings.familyProductType %}
+  {% if model.productType != themeSettings.familyProductType %}
     <div class="mz-productdetail-conversion-controls col-xs-4 col-sm-4">
       <label class="mz-qty-label text-uppercase" for="mz_pdp_qty">{{ labels.qty }}</label>
       <div class="qty-block">
