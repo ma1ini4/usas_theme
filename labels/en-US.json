@@ -514,7 +514,6 @@
     "productOutOfStock": "* This item is out of stock.",
     "itemOutOfStock": "This item is no longer in stock.",
     "productOutOfStockError": "The following items have limited quantity or are out of stock.",
-    "productwithoutSku" : "Product without Sku",
     "sku": "Sku",
     "viewVideo": "View Video",
     "ShopNow": "Shop Now",
