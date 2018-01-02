@@ -17,7 +17,6 @@ require(["modules/jquery-mozu", "hyprlive", "modules/backbone-mozu", "modules/ap
                     "url": document.getElementById('company-url').value
                 };
                 resp.cmp = cmpdet;
-                console.log("resp", resp);
                 self.model.set(resp);
                 window.view.render();
             });
