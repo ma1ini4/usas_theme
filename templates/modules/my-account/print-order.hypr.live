@@ -3,7 +3,7 @@
 </div>
 <table class="mz-printable-order mz-printable-order-details mz-l-stack" width="100%">
 <tbody><tr><td colspan="4">
-<div class="order-number"><p>{{ labels.yourOrderNumber|string_format(model.orderNumber)|safe }} <i id="mz-print-content-confirmation" class="mz-reset-padding-left fa fa-print pull-right text-right print-order-details-icon" title="print"  aria-hidden="true" data-mz-print-order></i></p></div>
+<div class="order-number"><p>{{ labels.yourOrderNumber|string_format(model.orderNumber)|safe }} <i id="mz-print-content-confirmation" class="mz-reset-padding-left fa fa-print pull-right text-right print-order-details-icon" title="print"  aria-hidden="true" data-mz-action="printOrder"></i></p></div>
 <p>{{ labels.yourOrderStatus|string_format(model.status)|safe }}</p>
 <div class="order-date"><span>{{labels.customerId}}</span><span>{{ model.customerAccountId }}</span></div>
 <div class="mz-created-date-order"><span>Date: </span><span>{{ model.submittedDate|date("m/d/Y H:i:s") }}</span></div>
