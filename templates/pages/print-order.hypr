@@ -12,7 +12,7 @@
 <input type="hidden" id="companyaddr" value="{{ model.properties.companyAddress }}" /> 
 <input type="hidden" id="company-url" value="{{ model.properties.websiteUrl|safe }}" />
 <div id="print" class="print-order-details">
- 	{% include "modules/my-account/print-order" with model=model.printData %}
+ 	
 </div>
  {% block page-footer %}{% endblock page-footer %}
 <style>
