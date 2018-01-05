@@ -1,4 +1,4 @@
-﻿   require([
+﻿require([
     "modules/jquery-mozu",
     "underscore",
     "bxslider",
@@ -151,7 +151,7 @@
                     blockUiLoader.globalLoader();
                     $('.family-details .mz-productdetail-shortdesc, .family-details .stock-info, .family-details .mz-reset-padding-left, .family-details #SelectValidOption').remove();
                     var familyData = me.model.get('family'); 
-                    $("#mz-family-container").empty();
+                    $("#mz-family-container .family-members").empty();
                     var familyItemModelOnready = function(){
                         var productCode = familyData.models[this.index].get('productCode');
                         var view = new FamilyItemView({
@@ -160,7 +160,10 @@
                         });
                         window.family.push(view);
                         var renderedView = view.render().el;
-                        $("#mz-family-container").append(renderedView);
+                        $("#mz-family-container").find("#"+productCode).append(renderedView);
+                        //if all family members are out of stock, disable add to cart button.
+                        if(window.outOfStockFamily)
+                            $("[data-mz-action='addToCart']").addClass('button_disabled').attr("disabled", "disabled");
                     };
                     if(familyData.models.length){
                         for(var i=0; i < familyData.models.length; i++){
@@ -178,6 +181,7 @@
                             }
                         }
                     }else{
+                        $(".family-details [data-mz-action='addToCart']").hide();
                         $("[data-mz-action='addToCart']").addClass('button_disabled').attr("disabled", "disabled");
                         blockUiLoader.unblockUi();
                     }  
@@ -300,7 +304,8 @@
         },
         addToCart: function() {
             var me = this;  
-            me.model.messages.reset();          
+            me.model.messages.reset(); 
+            //If Family Products            
             if(this.model.get('productType') === Hypr.getThemeSetting('familyProductType')){
                 blockUiLoader.globalLoader();
                 /* jshint ignore:start */              
@@ -332,7 +337,7 @@
                     }).bind({index:i}))
                 }
                 async.series(promises,function(err,results){
-                    console.log(err,results);
+                    //console.log(err,results);
                     var resp = results.reduce(
                         function(flag, value){
                            return flag && results[0] === value;
@@ -502,9 +507,16 @@
         initialize: function() {
             // handle preset selects, etc
             var me = this;
+            //create div for family members
+            if(this.model.get('family').models.length){
+                for(var i=0; i < this.model.get('family').models.length; i++){
+                    var html="";
+                    html+='<div id="'+this.model.get('family').models[i].get('productCode')+'" class="family-members"></div>';
+                    $("#mz-family-container").append(html);
+                }
+            }
             me.isColorClicked = false;
             me.mainImage = '';
-
             if (deviceType && me.model.get('content').get('productImages').length > 1)
                 $('#zoom_1').elevateZoom({ zoomType: "inner", cursor: "crosshair", responsive: true });
             else
@@ -531,6 +543,9 @@
     });
 
     $(document).ready(function() {
+        if ($('.mz-product-detail-tabs ul.tabs li').length === 0)
+            $('.mz-product-detail-tabs').remove();
+        
         var product = ProductModels.Product.fromCurrent();
 
         product.on('addedtocart', function(cartitem) {

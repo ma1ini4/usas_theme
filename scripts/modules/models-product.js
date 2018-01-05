@@ -1,6 +1,8 @@
 define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive", "modules/models-price", "modules/api", "hyprlivecontext", 'modules/models-family', 'modules/models-product-options', "modules/models-messages"], function($, _, Backbone, Hypr, PriceModels, api, HyprLiveContext, FamilyItem, ProductOption, MessageModels) {
 
-    var ProductContent = Backbone.MozuModel.extend({}),
+    var familyArray = [],
+    checkInventory = false,
+    ProductContent = Backbone.MozuModel.extend({}),
 
     Product = Backbone.MozuModel.extend({
         mozuType: 'product',
@@ -66,8 +68,9 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
         },
         initialize: function(conf) {
             var slug = this.get('content').get('seoFriendlyUrl');
-            _.bindAll(this, 'calculateHasPriceRange', 'onOptionChange');
+            _.bindAll(this, 'calculateHasPriceRange', 'onOptionChange', 'getFamilyMembers');
             this.listenTo(this.get("options"), "optionchange", this.onOptionChange);
+            this.get("family").bind( 'familyReady', this.getFamilyMembers);
             this._hasVolumePricing = false;
             this._minQty = 0;
             if (this.get('volumePriceBands') && this.get('volumePriceBands').length > 0) {
@@ -85,6 +88,32 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
             this.lastConfiguration = [];
             this.calculateHasPriceRange(conf);
             this.on('sync', this.calculateHasPriceRange);
+        },
+        getFamilyMembers: function(e){
+            //console.log(e);
+            var checkInArray = false;            
+            if(familyArray.length){
+                for(var i=0; i< familyArray.length; i++){
+                    //check if present in array
+                    if(familyArray[i].productCode === e.get('productCode')){
+                        checkInArray = true;
+                    }
+                    //check if out of stock
+                    if(familyArray[i].inventoryInfo.onlineStockAvailable !== 0)
+                        checkInventory = true;
+                }
+                //push in array if not present in array
+                if(!checkInArray)
+                    familyArray.push(e.attributes);
+            }else
+                familyArray.push(e.attributes);
+            //if all elements added in familyArray, check for inventory status
+            if(window.productView.model.attributes.family.models.length === familyArray.length){
+                if(!checkInventory){
+                    window.outOfStockFamily = true;
+                }
+            }
+            return;
         },
         mainImage: function() {
             var productImages = this.get('content.productImages');

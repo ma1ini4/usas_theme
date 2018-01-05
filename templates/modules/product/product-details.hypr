@@ -108,7 +108,7 @@
     </hr>
     {% include "modules/product/family/family-list" %}
     <div class="product-detail family-details">
-        <div class="mz-productdetail-conversion-buttons col-xs-12">
+        <div class="mz-productdetail-conversion-buttons col-xs-12"  style="display:none;">
             <div class="col-xs-12 add-to-cart-container">
                 <button class="mz-productdetail-addtocart font-large button_primary pull-right{% if not model.purchasableState.isPurchasable %} button_disabled{% endif %}" data-mz-action="addToCart" >
               {{ labels.addToCart }}
