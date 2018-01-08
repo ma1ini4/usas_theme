@@ -513,7 +513,7 @@
     "upcInStock":"In Stock",
     "productOutOfStock": "* This item is out of stock.",
     "itemOutOfStock": "This item is no longer in stock.",
-    "productOutOfStockError": "The following items have limited quantity or are out of stock.",
+    "productOutOfStockError": "This item has limited quantity or out of stock.",
     "sku": "Sku",
     "viewVideo": "View Video",
     "ShopNow": "Shop Now",

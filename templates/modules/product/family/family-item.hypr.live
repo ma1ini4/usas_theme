@@ -51,9 +51,15 @@
 		 <section class="mz-l-stack-section mz-productdetail-conversion row item-qty">		
 		    <div class="mz-productdetail-conversion-controls col-xs-4 col-sm-4">
 		      <div class="qty-block">
-		        <div class="qty-counter" id="minus" data-mz-qty-minus role="button"><i class="fa fa-minus"  aria-hidden="true"></i></div>
+		        <!-- <div class="qty-counter" id="minus" data-mz-qty-minus role="button"><i class="fa fa-minus"  aria-hidden="true"></i></div> -->
+		        <button aria-label="Minus Quantity" class="qty-counter" type="button" data-mz-qty-minus>
+	        		<i class="fa fa-minus" aria-hidden="true"></i>
+	        	</button>
 		        <input class="mz-productdetail-qty text-center" type="text" value="{{model.quantity}}" readonly onfocus="this.blur()" data-mz-value="quantity" title="Quantity" />
-		        <div class="qty-counter" id="plus" data-mz-qty-plus role="button"><i class="fa fa-plus" aria-hidden="true"></i></div>
+	        	<button aria-label="Add Quantity" class="qty-counter" type="button" data-mz-qty-plus>
+	        		<i class="fa fa-plus" aria-hidden="true"></i>
+	        	</button>
+		        <!-- <div class="qty-counter" id="plus" data-mz-qty-plus role="button"><i class="fa fa-plus" aria-hidden="true"></i></div> -->
 		      </div>
 		      <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
 		    </div>		

@@ -2823,6 +2823,12 @@ ul.tabs {
 #mz-family-container{
     .mz-familylist-item {
         margin-bottom: @defaultGutter;
+        border-bottom: 1px solid @colorLightGray;
+        .mz-messagebar{
+            li{
+                white-space: normal;
+            }
+        }
         .item-desc{
             .mz-pagetitle{
                 font-size: 18px;                    
@@ -2832,6 +2838,7 @@ ul.tabs {
             .mz-productcodes-productcode{
                 font-size: @fontSizeSmall;
                 line-height: 20px;
+                color: @colorMediumGray;
             }
             .mz-productdetail-shortdesc{
                 font-size: 18px;
@@ -2858,11 +2865,12 @@ ul.tabs {
                     .mz-productoptions-optionlabel{
                         font-size: @fontSizeSmall;
                         margin-bottom: 5px;
+                        text-align: left;
+                        line-height: 11px;
+                        color: @colorDarkGray;
                     }
                     .product-color-swatches{
                         li{
-                            width: 26px;
-                            height: 26px;
                             &.disabled{
                                 opacity: 0.4;
                             }
@@ -2902,7 +2910,7 @@ ul.tabs {
                     }
                     .not-range {
                         .mz-price {
-                            display: inline;
+                            display: block;
                             float: none;
                         }
                         .is-ranged {
@@ -2913,18 +2921,37 @@ ul.tabs {
                         }
                     }
                 }
+                .mz-price-discountname {
+                    font-size: @fontSize;
+                    color: @secondaryColor;
+                    .fontRegular();
+                }
             }
             .item-qty{
                 .qty-block{
                     min-width: 83px;
+                    height: 35px;
                     .qty-counter{
+                        touch-action: manipulation;
+                        padding: 0;
+                        text-align: center;
                         width: 24px;
                         height: 33px;
+                        i{
+                            margin-top: 7px;
+                        }
                     }
                     input{
                         width: 33px;
                         height: 33px;
                     }
+                }
+            }
+        }
+        .item-image{
+            a {
+                img {
+                    max-width: 100%;
                 }
             }
         }
