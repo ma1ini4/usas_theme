@@ -1319,10 +1319,6 @@
             "name": "template",
             "store": [
                 [
-                    "modules/product/product-list-carousel",
-                    "carousel"
-                ],
-                [
                     "modules/product/product-list-tiled",
                     "tiled"
                 ],
@@ -1332,7 +1328,7 @@
                 ],
                 [
                     "modules/product/recent-product-list-gorsuch",
-                    "gorsuch carousel"
+                    "carousel"
                 ]
             ],
             "xtype": "mz-input-dropdown"
