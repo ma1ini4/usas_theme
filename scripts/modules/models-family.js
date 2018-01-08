@@ -65,6 +65,13 @@ define([
 	                	return;
 	                }
 	                if(err.message.indexOf("Item not found: "+me.id+" product code "+me.id+" not found") !== -1){
+	                	--window.familyLength;
+	                	if(window.familyLength === window.familyArray.length){
+	                		if(!window.checkInventory){
+			                    window.outOfStockFamily = true;
+			                    $("[data-mz-action='addToCart']").addClass('button_disabled').attr("disabled", "disabled");
+			                }
+	                	}
 	                	return;
 	                }
 	                me.trigger('error', err);

@@ -145,6 +145,8 @@
                 $(dp).dateinput().css('color', Hypr.getThemeSetting('textColor')).on('change  blur', _.bind(me.onOptionChangeAttribute, me));
             });
             $('#details-accordion').find('.panel-heading a').first().click();
+            $(".family-details [data-mz-action='addToCart']").addClass('hide');
+            $(".mz-productdetail-conversion-buttons").removeClass('hide');
 
             if (this.model.get('productType') === Hypr.getThemeSetting('familyProductType')) {
                 try {
@@ -153,17 +155,26 @@
                     var familyData = me.model.get('family'); 
                     $("#mz-family-container .family-members").empty();
                     var familyItemModelOnready = function(){
-                        var productCode = familyData.models[this.index].get('productCode');
-                        var view = new FamilyItemView({
-                            model: familyData.models[this.index],
-                            messagesEl : $('#family-item-error-'+productCode+" [data-mz-message-bar]")
-                        });
-                        window.family.push(view);
-                        var renderedView = view.render().el;
-                        $("#mz-family-container").find("#"+productCode).append(renderedView);
-                        //if all family members are out of stock, disable add to cart button.
-                        if(window.outOfStockFamily)
-                            $("[data-mz-action='addToCart']").addClass('button_disabled').attr("disabled", "disabled");
+                        var product = familyData.models[this.index];
+                        if(typeof product.get('inventoryInfo').onlineStockAvailable !== 'undefined' && product.get('inventoryInfo').onlineStockAvailable === 0 && product.get('inventoryInfo').outOfStockBehavior === "HideProduct"){
+                            $(".family-details [data-mz-action='addToCart']").addClass('hide');
+                            //if all family members are out of stock, disable add to cart button.
+                            if(window.outOfStockFamily)
+                                $("[data-mz-action='addToCart']").addClass('button_disabled').attr("disabled", "disabled");
+                        }else{
+                            var productCode = product.get('productCode');
+                            var view = new FamilyItemView({
+                                model: product,
+                                messagesEl : $('#family-item-error-'+productCode+" [data-mz-message-bar]")
+                            });
+                            window.family.push(view);
+                            var renderedView = view.render().el;
+                            $("#mz-family-container").find("#"+productCode).append(renderedView);
+                            $(".family-details [data-mz-action='addToCart']").removeClass('hide');
+                            //if all family members are out of stock, disable add to cart button.
+                            if(window.outOfStockFamily)
+                                $("[data-mz-action='addToCart']").addClass('button_disabled').attr("disabled", "disabled");
+                        }
                     };
                     if(familyData.models.length){
                         for(var i=0; i < familyData.models.length; i++){
@@ -181,7 +192,7 @@
                             }
                         }
                     }else{
-                        $(".family-details [data-mz-action='addToCart']").hide();
+                        $(".family-details [data-mz-action='addToCart']").addClass('hide');
                         $("[data-mz-action='addToCart']").addClass('button_disabled').attr("disabled", "disabled");
                         blockUiLoader.unblockUi();
                     }  
@@ -336,6 +347,7 @@
                         });
                     }).bind({index:i}))
                 }
+                var errors = {"items": []};
                 async.series(promises,function(err,results){
                     //console.log(err,results);
                     var resp = results.reduce(
@@ -346,6 +358,33 @@
                     );
                     if(resp === true)
                         window.productView.model.trigger('error', { message : Hypr.getLabel('selectValidOption')})
+                    if(results){
+                        var failureNames = [];
+                        var successNames = [];
+                        for(var i=0; i < results.length; i++){
+                            if(results[i].errorCode){
+                                var errorMessage = results[i].message.split(':');
+                                failureNames.push(errorMessage[2]);
+                            } else if(typeof results[i].attributes !== 'undefined'){
+                                successNames.push(results[i].get('content').get('productName'));
+                            }
+                        }
+                        if(failureNames.length){
+                            errors.items.push({
+                                "name": "error",
+                                "message": Hypr.getLabel('productOutOfStockError') + ":" + failureNames.join(', ')
+                            });
+                            if(successNames.length){
+                                errors.items.push({
+                                    "name": 'success',
+                                    "message": Hypr.getLabel('successfullyAddedItems') + ": " + successNames.join(', '),
+                                    "messageType": "success"
+                                });
+                            }
+
+                            me.model.trigger("error", errors);
+                        }
+                    }
                     if(productsAdded.length)
                         CartMonitor.update('showGlobalCart');
                     blockUiLoader.unblockUi();
@@ -611,6 +650,7 @@
         });
 
         window.productView = productView;
+        window.familyLength = window.productView.model.attributes.family.models.length;
 
         productView.render();
 

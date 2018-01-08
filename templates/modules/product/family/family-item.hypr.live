@@ -47,7 +47,7 @@
 		<div class="clearfix item-price">			
 			{% include "modules/product/price-stack" %}
 		</div>
-		{% if model.productType !== themeSettings.familyProductType and model.quantityNull !== 0 and model.inventoryInfo.outOfStockBehavior !== "HideProduct" %}
+		{% if model.productType != themeSettings.familyProductType and model.quantityNull !== 0 %}
 		 <section class="mz-l-stack-section mz-productdetail-conversion row item-qty">		
 		    <div class="mz-productdetail-conversion-controls col-xs-4 col-sm-4">
 		      <div class="qty-block">

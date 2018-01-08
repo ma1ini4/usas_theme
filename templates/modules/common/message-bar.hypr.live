@@ -32,6 +32,11 @@
                             <li class="mz-message-item" >{{ labels|prop(msg.messageType) }}</li>
                         </ul>
                  {% endif %}
+                 {% if msg.messageType == "success" %}
+                        <ul class="is-showing mz-success">
+                            <li class="mz-message-item" >{{ labels|prop(msg.messageType) }}</li>
+                        </ul>
+                 {% endif %}
             {% else %}
                 <ul class="is-showing mz-errors">
                     <li class="mz-message-item" >{{ msg.message }}</li>
