@@ -197,6 +197,9 @@ define([
                                     $('[data-mz-validationmessage-for="quantity"]').text("");
                                     blockUiLoader.unblockUi();
                                     slider.closeQuickviewSlider();
+                                    $('html,body').animate({
+                                        scrollTop: $('header').offset().top
+                                    }, 1000);
                                 }, function(err) {
                                     blockUiLoader.unblockUi();
                                     $('.stock-info').text('');
