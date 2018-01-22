@@ -593,7 +593,7 @@
                 CartMonitor.addToCount(product.get('quantity'));
                 $('html,body').animate({
                     scrollTop: $('header').offset().top
-                }, 1000);
+                }, 1000); 
                 product.set('quantity', 1);
                 if(product.get('options')){
                     var optionModels = product.get('options').models;

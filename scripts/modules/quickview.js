@@ -199,7 +199,7 @@ define([
                                     slider.closeQuickviewSlider();
                                     $('html,body').animate({
                                         scrollTop: $('header').offset().top
-                                    }, 1000);
+                                    }, 1000); 
                                 }, function(err) {
                                     blockUiLoader.unblockUi();
                                     $('.stock-info').text('');
