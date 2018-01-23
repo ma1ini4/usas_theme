@@ -2,11 +2,33 @@
   {% block item-listing-prefix %}
   {% endblock item-listing-prefix %}
   {% block item-listing-image %}
-  {% if model.product.imageUrl %}
-  <div class="mz-itemlisting-thumb">
-    <img class="mz-itemlisting-thumb-img" src="{% make_url "image" model.product with max=80 as_parameters %}" {% if model.product.imageAlternateText %}alt="{{ model.product.imageAlternateText }}"{% endif %} />
-  </div>
-  {% endif %}
+  {% with model.product|get_product_attribute("tenant~color") as colorAttr %}  
+    {% if colorAttr %}
+      {% with colorAttr.value|replace(" ","_") as colorValue %}
+        {% with "/cms/files/{0}_{1}.jpg"|string_format(model.product.productCode, colorValue) as fileName %}
+          <div class="mz-itemlisting-thumb">
+            <a href="{{ model.product.url }}{% if model.product.variationProductCode %}?vpc={{model.product.variationProductCode}}{% endif %}">
+              <img class="mz-itemlisting-thumb-img" src="https:{% make_url "cdn" fileName with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameter %}" {% if model.product.imageAlternateText %}alt="{{ model.product.imageAlternateText }}"{% endif %} onerror="this.setAttribute('src','{% if model.product.imageUrl %}{% make_url 'image' model.product with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameters %}{% else %}https:{% make_url 'cdn' '/cms/files/No_image_available.png' with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameter %}{% endif %}')" />
+            </a>
+          </div>      
+        {% endwith %}     
+      {% endwith %}
+    {% else %}
+      {% if model.product.imageUrl %}
+        <div class="mz-itemlisting-thumb">
+          <a href="{{ model.product.url }}{% if model.product.variationProductCode %}?vpc={{model.product.variationProductCode}}{% endif %}">
+            <img class="mz-itemlisting-thumb-img" src="{% make_url "image" model.product with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameters %}" {% if model.product.imageAlternateText %}alt="{{ model.product.imageAlternateText }}"{% endif %} />
+          </a>
+        </div>
+      {% else %}
+        <a href="{{ model.product.url }}{% if model.product.variationProductCode %}?vpc={{model.product.variationProductCode}}{% endif %}">
+          <span class="mz-product-image-placeholder pull-left">
+            <span class="mz-productlisting-imageplaceholdertext">{{ labels.productImagePlaceholder }}</span>
+          </span>
+        </a>
+      {% endif %}    
+    {% endif %}  
+  {% endwith %}
   {% endblock item-listing-image %}
   {% block item-listing-details %}
   <div class="mz-itemlisting-details">
