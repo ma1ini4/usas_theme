@@ -315,7 +315,7 @@
         },
         addToCart: function() {
             var me = this;  
-            me.model.messages.reset(); 
+            me.model.messages.reset();
             //If Family Products            
             if(this.model.get('productType') === Hypr.getThemeSetting('familyProductType')){
                 blockUiLoader.globalLoader();
@@ -591,6 +591,9 @@
             if (cartitem && cartitem.prop('id')) {
                 //product.isLoading(true);
                 CartMonitor.addToCount(product.get('quantity'));
+                $('html,body').animate({
+                    scrollTop: $('header').offset().top
+                }, 1000); 
                 product.set('quantity', 1);
                 if(product.get('options')){
                     var optionModels = product.get('options').models;
