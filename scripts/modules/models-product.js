@@ -98,12 +98,20 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
                     //check if out of stock
                     if(typeof e.get('inventoryInfo').onlineStockAvailable !== 'undefined' && e.get('inventoryInfo').onlineStockAvailable !== 0)
                         window.checkInventory = true;
+                    else if(typeof e.get('inventoryInfo').onlineStockAvailable === 'undefined'){
+                        if(this.checkVariationInventory(e))
+                            window.checkInventory = true;
+                    }
                 }
             }else{
                 window.familyArray.push(e.get('productCode'));
                 //check if out of stock
                 if(typeof e.get('inventoryInfo').onlineStockAvailable !== 'undefined' && e.get('inventoryInfo').onlineStockAvailable !== 0)
                     window.checkInventory = true;
+                else if(typeof e.get('inventoryInfo').onlineStockAvailable === 'undefined'){
+                    if(this.checkVariationInventory(e))
+                        window.checkInventory = true;
+                }
             }
             //if all elements added in familyArray, check for inventory status
             if(window.familyLength === window.familyArray.length){

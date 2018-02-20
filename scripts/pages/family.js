@@ -41,6 +41,12 @@ define([
             self.listenTo(self.model, 'change', self.render);
         },
         render: function() {
+            var id = Hypr.getThemeSetting('oneSizeAttributeName'),
+                oneSizeOption = this.model.get('options').get(id);
+            if(oneSizeOption){
+                var onlyEnabledOneSizeOption = _.find(oneSizeOption.get('values'), function(value){ return value.isEnabled; });
+                oneSizeOption.set('value', onlyEnabledOneSizeOption.value);
+            }
             Backbone.MozuView.prototype.render.apply(this);
             return this;
         },

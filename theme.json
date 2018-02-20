@@ -435,6 +435,8 @@
     }
   ],
   "settings": {
+    "oneSizeAttributeName": "tenant~ONESIZE",
+    "oneSizeProductType": "Single Variant",
     "maxRecentlyViewedItems": 5,
     "allProductsCategoryId": 0,
     "pdpMainImageNameSwatch":"{0}_{1}_v{2}.jpg", 
