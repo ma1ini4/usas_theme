@@ -39,7 +39,7 @@
       <button class="mz-button mz-shipping-destination-add-address-link mz-checkout-button-link" data-mz-action="handleSplitOrderItem" {% if model.isLoading %} disabled {% endif %}> + {{ labels.shippingDestinationAddAddress }} </button>
   </div>
    {% endif %}
-
+  <span class="mz-validationmessage" data-mz-validationmessage-for="destinationId"></span>
 </div>
 
 {% endif %}

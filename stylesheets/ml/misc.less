@@ -2663,10 +2663,11 @@ ul.tabs {
         }
     }
     .mz-shipping-row {
-        display: table-row;
+        display: block;
         .mz-shipping-row-item {
-            display: table-cell;
-            padding-right: @defaultGutter/2;
+            display: inline-block;
+            padding-right: 0;
+            min-width: 50px;
             white-space: nowrap;
             overflow: hidden;
             vertical-align: middle;
@@ -2676,9 +2677,11 @@ ul.tabs {
             }
             label {
                 .fontRegular();
+                margin-bottom: 5px;
             }
             select {
                 border-radius: 0;
+                margin-bottom: 0;
             }
         }
     }
