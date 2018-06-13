@@ -107,7 +107,7 @@
   "oldPassword"          : "Old Password",
   "passwordChanged"      : "Password successfully changed",
   "confirmPassword"      : "Confirm Password",
-  "billingContact"       : "Billing Contact",
+  "billingContact"       : "Email Id",
   "shippingContact"      : "Shipping Contact",
   "firstName"            : "First Name",
   "lastName"             : "Last Name",
