@@ -145,6 +145,17 @@
                     }
 
                 }
+            },
+            savedPaymentMethodId: {
+                fn: function(value, attr, computed) {
+                    var cardType = attr.split('.')[0],
+                        card = this.get(cardType),
+                        isSavedCard = card.get('isSavedCard');
+
+                    if(!computed.savedPaymentMethodId && isSavedCard){
+                         return Hypr.getLabel('selectASavedCard') || Hypr.getLabel('genericRequired');
+                    }
+                }            
             }
         })
     });

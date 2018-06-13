@@ -642,6 +642,8 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
             this.render();
         },        
         beginAddContact: function () {
+            this.editing.contact = false;
+            this.model.endEditContact();
             this.editing.contact = "new";
             this.render();
             $("input[name='firstname']").focus();

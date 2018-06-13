@@ -50,6 +50,7 @@
                         <option value="{{ card.id }}" {% if model.savedPaymentMethodId == card.id %} selected="selected" {% endif %}>{{ card.cardType }} {{ card.cardNumberPartOrMask }} {{ labels.expires }} {{ card.expireMonth }}/{{ card.expireYear }}</option>
                         {% endfor %}
                     </select>
+                    <span class="mz-validationmessage" data-mz-validationmessage-for="savedPaymentMethodId"></span>
                 {% if model.paymentType == "CreditCard" and model.usingSavedCard %}
                     {% if not themeSettings.isCvvSuppressed %}
                     <div class="mz-paymentselector-reenter-cvv">

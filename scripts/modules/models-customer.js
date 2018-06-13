@@ -599,14 +599,40 @@
                                 }
                             }
                         }, function (e) {
-                            console.log('error::', e);
-                            self.trigger('error', {message: Hypr.getLabel('addressValidationError')});
+                            if(allowInvalidAddresses){
+                                if(options.editingView)
+                                    options.editingView.editing.contact = false;
+                                editingContact.set('address.isValidated', true);
+                                var op = editingContact.save();
+                                if (op) return op.then(function(contact) {
+                                    apiContact = contact;
+                                    self.endEditContact();
+                                    return self.getContacts();
+                                }).then(function() {
+                                    blockUiLoader.unblockUi();
+                                    return apiContact;
+                                });
+                            }else{
+                                self.trigger('error', {message: Hypr.getLabel('addressValidationError')});
+                            }
                             blockUiLoader.unblockUi();
                         });
                     }else{
-                        self.trigger('error', {message: Hypr.getLabel('addressValidationError')});
+                        /*self.trigger('error', {message: Hypr.getLabel('addressValidationError')});
                         blockUiLoader.unblockUi();
-                        return false;
+                        return false;*/
+                        if(options.editingView)
+                            options.editingView.editing.contact = false;
+                        editingContact.set('address.isValidated', true);
+                        var opsData = editingContact.save();
+                        if (opsData) return opsData.then(function(contact) {
+                            apiContact = contact;
+                            self.endEditContact();
+                            return self.getContacts();
+                        }).then(function() {
+                            blockUiLoader.unblockUi();
+                            return apiContact;
+                        });
                     }
                 } else {
                     editingContact.set('address.isValidated', true);
