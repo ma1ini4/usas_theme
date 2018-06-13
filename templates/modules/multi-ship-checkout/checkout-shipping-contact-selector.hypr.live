@@ -1,7 +1,6 @@
 {% extends "modules/common/contact-selector" %}
 {% block contact-selector %}
     <div class="mz-l-formfieldgroup-cell">
-    sadasdasdsadasdas
         <select id="mz--contactselector-savedcontact" data-mz-single-fulfillment-contact class="mz-contactselector" data-mz-value="{{ contactcontext }}contactId" name="contactId" {% if isLoading %} disabled {% endif %}>
         <option value="" disabled selected hidden>{{labels.selectSavedAddress}}</option>
             {% for destination in model %}
