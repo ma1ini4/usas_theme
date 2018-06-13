@@ -305,7 +305,9 @@ define([
 	                    	return;
 	                    }else if(typeof me.get('inventoryInfo').onlineStockAvailable !== 'undefined'){
 	                    	//products without options
-	                    	if(!me.get('options').length && me.get('quantity') === 0){
+	                    	var id = Hypr.getThemeSetting('oneSizeAttributeName'),
+                				oneSizeOption = me.get('options').get(id);
+	                    	if(oneSizeOption && me.get('quantity') === 0){
 	                    		//dfd.reject(Hypr.getLabel('productwithoutSku'));
 	                    		dfd.reject(Hypr.getLabel('selectValidOption'));
 	                    		return;
@@ -313,7 +315,7 @@ define([
 	                    	//options selected but qty zero
 	                    	if(me.get('quantity') === 0){
 	                    		me.trigger('error', { message : Hypr.getLabel('enterProductQuantity')});
-	                    		dfd.reject(Hypr.getLabel('enterProductQuantity'));
+	                    		dfd.reject(Hypr.getLabel('enterQuantity', me.get('productCode')));
 	                    		return;
 	                    	}
 		                    me.apiAddToCart({
@@ -321,7 +323,7 @@ define([
 		                        fulfillmentMethod: fulfillMethod,
 		                        quantity: me.get("quantity")
 		                    }).then(function (item) {
-		                    	dfd.resolve(item);
+		                    	dfd.resolve(me);
 		                        me.trigger('addedtocart', item);
 		                    },function(err){
 		                    	if(err.message.indexOf("The following items have limited quantity or are out of stock:") !== -1){ 
@@ -332,15 +334,15 @@ define([
 		                }else if(me.lastConfiguration && !me.lastConfiguration.length && me.get('quantity') > 0){
 		                	//options not selected but qty > zero
 		                	me.trigger('error', { message : Hypr.getLabel('selectValidOption')});
-		                	dfd.reject(Hypr.getLabel('selectValidOption'));
+		                	dfd.reject(Hypr.getLabel('selectValidOptionProduct', me.get('productCode')));
 		                }else if(me.lastConfiguration && me.lastConfiguration.length && typeof me.get('inventoryInfo').onlineStockAvailable === 'undefined' && me.get('quantity') > 0){
 		                	//if all options are not selected and qty > 0
 		                	me.trigger('error', { message : Hypr.getLabel('selectValidOption')});
-		                	dfd.reject(Hypr.getLabel('selectValidOption'));
+		                	dfd.reject(Hypr.getLabel('selectValidOptionProduct', me.get('productCode')));
 		                }else if(me.lastConfiguration && me.lastConfiguration.length && me.get('quantity') === 0){
 		                	//options selected but qty 0
 		                	me.trigger('error', { message : Hypr.getLabel('enterProductQuantity')});
-		                	dfd.reject(Hypr.getLabel('enterProductQuantity'));
+		                	dfd.reject(Hypr.getLabel('enterQuantity', me.get('productCode')));
 		                }else{
 		                	dfd.reject(Hypr.getLabel('selectValidOption')); 
 		                }

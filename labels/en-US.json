@@ -396,8 +396,10 @@
   "chooseShippingMethod" : "Please select a shipping method.",
   "didNotAgreeToTerms"   : "You must agree to the terms and conditions",
   "enterProductQuantity" : "Please enter a product quantity above 0",
+  "enterQuantity": "Please enter quantity of {0} above 0",
   "quantityZeroError"    : "Quantity can't be zero.",
   "selectValidOption"    : "Select Valid Option(s)",
+  "selectValidOptionProduct": "Select Valid Option(s) for {0}",
   "enterReturnReason"    : "Please select a return reason.",
   "enterReturnQuantity"  : "Please enter a quantity above 1 to return.",
   "enterOtherComments"   : "Please enter a comment explaining the reason for this return.",
@@ -536,5 +538,6 @@
     "cellPhone":"Cell Phone Number",
     "emailLogin": "Email*",
     "middleName": "Middle Name Initials",
-    "successfullyAddedItems": "The following item(s) have successfully added to your cart"
+    "successfullyAddedItems": "The following item(s) have successfully added to your cart",
+    "productaddToCartError": "The following item(s) are not added to cart"
 }
