@@ -536,5 +536,6 @@
     "cellPhone":"Cell Phone Number",
     "emailLogin": "Email*",
     "middleName": "Middle Name Initials",
-    "successfullyAddedItems": "The following item(s) have successfully added to your cart"
+    "successfullyAddedItems": "The following item(s) have successfully added to your cart",
+    "billingAddressRequired": "Billing Address is required"
 }

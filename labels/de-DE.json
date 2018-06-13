@@ -453,5 +453,6 @@
     "logOutInfo": "Melden Sie sich von Ihrem Konto ab",
     "wishLists": "Wunschlisten",
     "productwithoutSku": "Product without Sku",
-    "successfullyAddedItems": "Die folgenden Artikel wurden erfolgreich in Ihren Warenkorb gelegt"
+    "successfullyAddedItems": "Die folgenden Artikel wurden erfolgreich in Ihren Warenkorb gelegt",
+    "billingAddressRequired": "Rechnungsadresse ist erforderlichrderlich"
 }
