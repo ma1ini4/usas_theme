@@ -238,6 +238,49 @@
         color: @colorWhite;
     }
 }
+
+.formCommonSettings() {
+	outline: none;	
+    padding: 6px 7px 4px;
+	font-size: @fontSize;
+	line-height:normal;
+    border: 1px solid @rgbInputborderClr;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-bottom: @defaultGutter/5;
+    .border-radius(0px);
+    .box-shadow-x4(0px,0,5px,@rgbaInputAcctPage);
+    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        color: @colorGray;
+    }
+    &::-moz-placeholder { /* Firefox 19+ */
+        color: @colorGray;
+    }
+    &:-ms-input-placeholder { /* IE 10+ */
+        color: @colorGray;
+    }
+    &:-moz-placeholder { /* Firefox 18- */
+        color: @colorGray;
+    }
+    &:focus { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: @colorGray;
+        .box-shadow-x4(0px,0,5px,@colorGray);
+        border: 1px solid @colorGray;
+        outline: none;
+    }
+    &.is-invalid{
+    	border: 1px solid @red;
+    	background-color: @colorWhite;
+    }
+}
+.formInput() {
+	.formCommonSettings();
+	width: 240px;
+    height: 34px;
+}
+.formFieldStyle() {
+	.formCommonSettings();
+}
 .border-radius-plain(@radius: 5px) {
   -webkit-border-radius: @radius;
   -moz-border-radius: @radius;

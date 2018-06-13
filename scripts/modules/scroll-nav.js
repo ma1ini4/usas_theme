@@ -14,7 +14,7 @@
                 }).affix({
                     offset: {
                         top: $this.offset().top - gutterWidth,
-                        bottom: 0
+                        bottom: $('.ml-global-footer').outerHeight(true)+ $('footer').outerHeight(true)+$('.mz-pagefooter-copyright').outerHeight(true)
                     }
                 });
                 $(window).on('resize', refreshFn);

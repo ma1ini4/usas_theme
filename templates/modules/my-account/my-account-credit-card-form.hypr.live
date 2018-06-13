@@ -5,7 +5,7 @@
     <div class="mz-l-formfieldgroup mz-creditcardform">
     {% parent %}
     <div class="mz-l-formfieldgroup-row mz-payment-credit-card-defaultflag-row">
-        <div class="mz-l-formfieldgroup-cell"></div>
+        <!--<div class="mz-l-formfieldgroup-cell"></div>-->
         <div class="mz-l-formfieldgroup-cell">
         <input type="checkbox" id="editingcard-is-primary" {% if model.isDefaultPayMethod %}checked="true"{% endif %} data-mz-value="{{ cardcontext }}isDefaultPayMethod" />
         <label for="editingcard-is-primary" class="chkbox_label">{{ labels.primary }}</label>
@@ -33,8 +33,8 @@
     {% endif %}
     </div>
     <div class="mz-creditcard-actions">
-        <button class="button button-primary mz-creditcard-save" data-mz-action="finishEditCard">{{ labels.save }}</button>
-        <button class="button button_secondary mz-creditcard-cancel" data-mz-action="cancelEditCard">{{ labels.cancel }}</button>
+        <button class="mz-button button button-primary mz-creditcard-save" data-mz-action="finishEditCard">{{ labels.save }}</button>
+        <button class="mz-button button button_secondary mz-creditcard-cancel" data-mz-action="cancelEditCard">{{ labels.cancel }}</button>
     </div>
     </li>
 {% endblock credit-card-form %}
