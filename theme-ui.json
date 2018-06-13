@@ -688,6 +688,23 @@
                     "fieldLabel": " Gift Card Description"
                 }
             ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Product Attributes",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-text",
+                    "name": "oneSizeAttributeName",
+                    "fieldLabel": "One Size Attribute Name"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "oneSizeProductType",
+                    "fieldLabel": "One Size Product Type"
+                }
+            ]
         }
     ]
 }
