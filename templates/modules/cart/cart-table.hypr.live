@@ -1,5 +1,5 @@
 <div class="col-md-6 pull-right col-sm-6 col-xs-12 col-xs-12 text-right hidden-xs mz-button-checkout-cart-top">
-          <button  id="cart-checkout-btn" class="font-large button_primary" data-mz-action="proceedToCheckout">
+          <button  id="cart-checkout-btn" class="mz-button font-large button_primary" data-mz-action="proceedToCheckout">
           {{ labels.proceedToCheckout }}
         </button>
 </div>
@@ -172,7 +172,7 @@
        {% if not model.isEmpty %}<span class="mz-empty-cart-link-container"><button class="font-large button_promotional" href="javascript:;" data-mz-action="empty">{{ labels.emptyCart }}</button></span>{% endif %}
        {% endif %} 
       <div class="mz-common-button-padding pull-right">
-        <button id="cart-checkout" class="font-large button_primary"  {% if model.isEmpty %} disabled="disabled" {% endif %} data-mz-action="proceedToCheckout">{{ labels.proceedToCheckout }}</button>
+        <button id="cart-checkout" class="mz-button font-large button_primary"  {% if model.isEmpty %} disabled="disabled" {% endif %} data-mz-action="proceedToCheckout">{{ labels.proceedToCheckout }}</button>
       </div>
       </div>
 
