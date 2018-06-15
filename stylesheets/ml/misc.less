@@ -7,11 +7,19 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+.nopaddingleft{
+    padding-left: 0;
+}
+.nopaddingright{
+    padding-right: 0;
+}
+.mz-padding-xs{
+    padding:0px;
+}
 
 .mz-cms-content {
     padding: 0 !important;
 }
-
 .form-control {
     border-radius: 3px;
 }
@@ -2957,4 +2965,14 @@ ul.tabs {
             }
         }
     }
+}
+
+/**  CART PAGE  **/
+.mz-table-cart-items{
+    .mz-row-carttable-item{
+        padding: 0px;
+    }
+    & ~ .mz-cart-total-main-container{
+        padding-left: 0px;
+    } 
 }
