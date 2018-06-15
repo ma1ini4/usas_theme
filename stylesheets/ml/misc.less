@@ -572,10 +572,7 @@
         &:hover{
             background-color: @colorLightGray;
         }
-    }
-    #coupon-code{
-        height: 44px;
-    }
+    }    
     .mz-empty-cart-link-container{
         button {
             width: 100%;
@@ -687,7 +684,7 @@
     .mz-checkout-digitalcredit
     .mz-l-formfieldgroup-cell{
         input[type="text"] {
-            width: 200px;
+            width: 240px;
         }
     } 
     .mz-ordersummary{
@@ -831,21 +828,22 @@
 footer {
     padding: 10px 0;
     .email-container {
-        margin-right: 75px;
+        margin-right: 83px;
+    }
+    #footerStoreLocator {
+        input {
+            border-radius: 4px;
+        }
+        #btnFindStore {
+            margin-left: 3px;
+        }
     }
     .top-pad {
         padding-top: 10px;
     }
-    .ml-footer-email-signup-button {
-        background: #ffce06;
-        border: 0;        
-        border-radius: 0;
-        text-align: center;
-        font-size: 12px;
-        color: #383333;
-        text-transform: uppercase;
-        height: 34px;
+    .ml-footer-email-signup-button {        
         float: right;
+        text-transform: uppercase;
     }
     .ml-footer-phone-number{margin: 12px 0;}
     .social-links {
@@ -944,7 +942,7 @@ footer {
             .login-btn{ 
                 height: 28px;
                 line-height: 28px;
-                font-size: @font-size;
+                font-size: @fontSize;
                 border: 0;
                 cursor: pointer;           
                 background: @yelloBtnColor;
@@ -956,6 +954,9 @@ footer {
                 text-decoration: @no-decoration;
                 width: 100%;
                 border-radius: 0px;
+            }
+            .submit-btn {
+                width: 100%;
             }
             .tab-pane{
                 .login-tab-btn{ background: @grayBtnColor; margin-right: 20px; border:1px solid red;}
@@ -2720,30 +2721,6 @@ ul.tabs {
         }
         .mz-ordersummary-item-total {
             text-align: right;
-        }
-    }
-}
-.mz-l-paginatedlist-footer{
-    .back-to-top{
-        button{
-            &.mz-back-to-top-button{
-                background-color: @colorLightGray;
-                border: none;
-                float: left; 
-                height: 33px;
-                line-height: 20px;
-                letter-spacing: 0.4px;
-                text-transform: uppercase;
-                &:hover{
-                    border: none;
-                }
-                &:focus{
-                    outline: 0;
-                }
-                &:active {
-                    box-shadow: none;
-                }
-            }
         }
     }
 }

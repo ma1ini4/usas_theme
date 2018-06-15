@@ -55,7 +55,7 @@
                 <div class="mz-l-formfieldgroup-row">
                     <div class="mz-l-formfieldgroup-cell"></div>
                     <div class="mz-l-formfieldgroup-cell">
-                        <button class="mz-button mz-button-large mz-sign-up-page-button" data-mz-action="signuppage-submit">{{ labels.signUp }}</button>
+                        <button class="mz-button primary-btn mz-sign-up-page-button" data-mz-action="signuppage-submit">{{ labels.signUp }}</button>
                     </div>
                 </div>
                 <div class="mz-l-formfieldgroup-row">

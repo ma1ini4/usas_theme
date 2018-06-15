@@ -325,3 +325,23 @@
 		line-height: @height;
 	}
 }
+.button-prop() {
+	height: auto;
+	min-width: 80px;
+	color: @colorGray;
+	line-height: normal;
+	text-align: center;
+	box-sizing: border-box;
+	padding: 8px 12px;
+	font-size: @fontSize;
+	text-decoration: none;
+	font-weight: normal;
+}
+.button-focus() {
+	&:focus{
+        box-shadow: none;
+        outline: thin dotted;
+        color: @colorGray;
+        text-decoration: none;
+    }
+}

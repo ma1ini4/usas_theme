@@ -75,7 +75,7 @@
                                     <a href="{% make_url "product" model %}" class="link-green">{{ labels.fullProductDetails }}</a>
                                 </div>
                                 <div class="add-to-cart-container">
-                                    <button id="add-to-cart" class="mz-productdetail-addtocart mz-button btnAddToCart button_primary pull-right {% if not model.purchasableState.isPurchasable %}button_disabled{% endif %}" data-mz-action="addToCart" >{{ labels.addToCart }}
+                                    <button id="add-to-cart" class="mz-productdetail-addtocart mz-button primary-btn btnAddToCart pull-right {% if not model.purchasableState.isPurchasable %}button_disabled{% endif %}" data-mz-action="addToCart" >{{ labels.addToCart }}
                                 </button>
                             </div>
                             </div>
