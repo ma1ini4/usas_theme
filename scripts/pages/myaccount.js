@@ -526,7 +526,7 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
             'editingContact.address.countryCode'
         ],
         additionalEvents: {
-            "change #mz-payment-credit-card-number": "changeCardType",
+            "blur #mz-payment-credit-card-number": "changeCardType",
             "input  [name='security-code'],[name='credit-card-number']": "allowDigit"
         },  
         allowDigit:function(e){

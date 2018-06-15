@@ -1925,6 +1925,18 @@ ul.tabs {
     .mz-accountsettings-acceptsmarketing{
         clear: none;
     }
+    input[type="text"], input[type="email"], input[type="password"], input[type="tel"], select {
+        .formInput();               
+        display: inline-block;
+        margin-bottom: @defaultGutter/5;                
+    }
+    select {
+        padding: 6px 4px 4px;
+    }
+    input[type="radio"]{
+        float: left;
+        margin-right: @defaultGutter/5;
+    }
 }
 .btn-transparent {
     border: none;
