@@ -428,6 +428,14 @@
     {
       "documentType": "web_page",
       "entityType": "webpage",
+      "id": "email-signup",
+      "template": "email-signup",
+      "title": "Email Signup",
+      "userCreatable": true
+    },
+    {
+      "documentType": "web_page",
+      "entityType": "webpage",
       "id": "customer-service",
       "template": "customer-service",
       "title": "Customer Service",
@@ -546,6 +554,7 @@
       36,
       72
     ],
+    "productInfoTabs": "",
     "viewAllPageSize": 54,
     "viewAllPageSizeOrderHistory": 10,
     "defaultPageSizeOrderHistory": 5,

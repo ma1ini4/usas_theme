@@ -1,0 +1,54 @@
+<div class="panel-group" id="details-accordion" role="tablist" aria-multiselectable="true">
+  {% if model.content.productFullDescription %}
+    <div class="mz-collaspable-container product-detail-collapsable-div panel">
+        <div id="headingDesc" class="panel-heading" role="tab">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#details-accordion" href="#collapseDesc" aria-expanded="true" aria-controls="collapseDesc">
+              <i class="more-less glyphicon glyphicon-plus"></i>
+                {{ labels.fullDesc }}
+            </a>
+          </h4>
+        </div>
+      <div id="collapseDesc" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingDesc">
+        <div class="panel-body">
+          {{ model.content.productFullDescription|safe }}
+        </div>
+    </div>
+  </div>
+  {% endif %}
+  {% if productTabs %}
+    {% for productTab in productTabs %}
+      {% if model|get_product_attribute_value(productTab.key) %}
+        <div class="mz-collaspable-container product-detail-collapsable-div panel">
+            <div id="headingCare" class="panel-heading" role="tab">
+                  <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" data-parent="#details-accordion" href='#{{ productTab.key|replace("tenant~") }}' aria-expanded="true" aria-controls='{{ productTab.key|replace("tenant~") }}'>
+                        <i class="more-less glyphicon glyphicon-plus"></i>
+                            {{ productTab.label }}
+                      </a>
+                  </h4>
+              </div>
+              <div id='{{ productTab.key|replace("tenant~") }}' class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingCare">
+                  <div class="panel-body">
+                    {% if model|get_product_attribute_value(productTab.key)|split('.html')|length > 1 %}
+                      {% with model|get_product_attribute_value(productTab.key) as key %}
+                          {% for siteId in siteContext.cdnPrefix|split('-') %}
+                            {% if siteId|split('cdn')|length == 1 and siteId|split('mozu')|length == 1 %}
+                                <iframe width="100%" height="225px" src="{{siteContext.cdnPrefix}}/cms/{{siteId}}/files/{{key}}"></iframe>
+                            {% endif %}
+                          {% endfor %}
+                      {% endwith %}
+                    {% else %}
+                      {% if model|get_product_attribute_value(productTab.key)|split('youtube')|length > 1 %}
+                        <iframe width="100%" height="225px" src="{{ model|get_product_attribute_value(productTab.key) }}"></iframe>
+                      {% else %}
+                        {{ model|get_product_attribute_value(productTab.key)|safe }}
+                      {% endif %}
+                    {% endif %}
+                  </div>
+              </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+</div>

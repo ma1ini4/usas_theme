@@ -22,7 +22,9 @@ define([
                 savedPaymentMethodId: {
                     fn: "validateSavedPaymentMethodId"
                 },
-
+                "contactId": {
+                    fn: "validateBillingAddress"
+                },
                 'billingContact.email': {
                     pattern: 'email',
                     msg: Hypr.getLabel('emailMissing')
@@ -37,6 +39,15 @@ define([
                 card: PaymentMethods.CreditCardWithCVV,
                 check: PaymentMethods.Check,
                 purchaseOrder: PaymentMethods.PurchaseOrder
+            },
+            validateBillingAddress: function () {
+                console.log('here...');
+                var isValid = this.selectedBillingDestination();
+                console.log(isValid);
+                if (!isValid && $('[data-mz-value="contactId"]:visible').length){
+                    console.log();
+                    return Hypr.getLabel('billingAddressRequired');
+                }
             },
             validatePaymentType: function(value, attr) {
                 var order = this.getOrder();
