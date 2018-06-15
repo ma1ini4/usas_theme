@@ -64,7 +64,7 @@ function($, Hypr, HyprLiveContext, _, api,Backbone, ProductModels) {
 
 
       var source = window.location.href;
-      if (source.startsWith("http://")){
+      if (source.indexOf("http://") === 0) {
         source = "https://" + source.slice(7);
       }
       var sourceQuery = "&source="+source;
@@ -93,12 +93,15 @@ function($, Hypr, HyprLiveContext, _, api,Backbone, ProductModels) {
         pageDependentSection +=  "&productId="+bnProductId; // jshint ignore:line
       } else if (getRTIOptions().pageType=="Cart"){
         var cart = require.mozuData('cart');
-        if (!cart.isEmpty){
+        if (cart && !cart.isEmpty){
           for(var i=0; i<cart.items.length; i++){
             var productId = cart.items[i].product.productCode;
             var productQuery = "&productId="+productId;
             pageDependentSection += productQuery;
           }
+        }
+        else {
+          $('.cartRelated.recommended-product-container').not("#global-cart-rti .cartRelated.recommended-product-container").hide();
         }
       }
 

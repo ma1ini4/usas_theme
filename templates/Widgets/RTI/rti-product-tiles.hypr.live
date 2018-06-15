@@ -1,3 +1,5 @@
+<div class="clearfix{% if model.config.displayType == "carousel" or model.config.format == "carousel" %} carousel-display{% else %} grid-display{% endif %}" data-config="{% json_attribute model.config %}">
+{% if model.config.displayType == "carousel" or model.config.format == "carousel" %}
 <div class="{% if pageContext.isMobile %}hidden{% endif %}">
     <div class="previous {% if model.items.length == 0 %}hidden{% endif %}">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" width="19.5px" height="54.3px" viewBox="0 0 23 58" version="1.1">
@@ -30,19 +32,20 @@
         </svg>
     </div>
 </div>
+{% endif %}
 {% if model.items %}
     <div class="related-title {% if model.items.length == 0 %}hidden{% endif %}">
         <span id="title" class="pull-left title"></span>
     </div>
     <div class="related-prod-owl-carousel">
         {% for prod in model.items %}
-            <div class="row mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ prod.productCode }}">
+            <div class="mz-productlisting {% block module-classes %}{% endblock module-classes %}" data-mz-product="{{ prod.productCode }}">
                 {% if prod.price.salePrice > 0 and prod.price.price > prod.price.salePrice %}
                     <span class="sale-tag-icon">Sale</span>
                 {% endif %}
                 <div class="prod-content mz-productlisting-image-right">
                     {% block product-image %}
-                        <div class="row product-listing-row-content">
+                        <div class="product-listing-row-content">
                             {% if not user.isAnonymous %}
                                 {% if siteContext.generalSettings.isWishlistCreationEnabled %}
                                     {% if prod.purchasableState.isPurchasable and prod.options.length < 1 %}
@@ -90,7 +93,7 @@
                                 {% endif %}
                             {% endif %}
                             <div class="mz-subcategory-image-div">
-                                <a href="{{prod.url}}">
+                                <a href="{{prod.url}}" data-baynote-slot="{{prod.slot}}"  data-baynote-widget="{{prod.widgetId}}" data-baynote-pid="{{prod.productCode}}" data-baynote-href="{{prod.href}}">
                                     {% if prod.mainImage.imageUrl %}
                                     {% comment %}
                                     <img class="mz-subcategory-image active lazyload" data-main-image-src="{{prod.mainImage.imageUrl}}"
@@ -119,7 +122,7 @@
                                 </a>
                             </div>
                             <div class="mz-productlisting-info">
-                                <div class="productTitle"><a class="mz-productlisting-title" href="{{prod.url}}">{{prod.content.productName|safe}}</a></div>
+                                <div class="productTitle"><a class="mz-productlisting-title" href="{{prod.url}}"  data-baynote-slot="{{prod.slot}}"  data-baynote-widget="{{prod.widgetId}}" data-baynote-pid="{{prod.productCode}}" data-baynote-href="{{prod.href}}" >{{prod.content.productName|safe}}</a></div>
                                 <div class="priceSection">
                                     {% for property in prod.properties %}
                                         {% if property.attributeFQN == "tenant~rating" %}
@@ -366,3 +369,4 @@
         {% endfor %}
     </div>
 {% endif %}
+</div>
