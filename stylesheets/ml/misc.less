@@ -7,11 +7,19 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+.nopaddingleft{
+    padding-left: 0;
+}
+.nopaddingright{
+    padding-right: 0;
+}
+.mz-padding-xs{
+    padding:0px;
+}
 
 .mz-cms-content {
     padding: 0 !important;
 }
-
 .form-control {
     border-radius: 3px;
 }
@@ -572,10 +580,7 @@
         &:hover{
             background-color: @colorLightGray;
         }
-    }
-    #coupon-code{
-        height: 44px;
-    }
+    }    
     .mz-empty-cart-link-container{
         button {
             width: 100%;
@@ -687,7 +692,7 @@
     .mz-checkout-digitalcredit
     .mz-l-formfieldgroup-cell{
         input[type="text"] {
-            width: 200px;
+            width: 240px;
         }
     } 
     .mz-ordersummary{
@@ -831,21 +836,22 @@
 footer {
     padding: 10px 0;
     .email-container {
-        margin-right: 75px;
+        margin-right: 83px;
+    }
+    #footerStoreLocator {
+        input {
+            border-radius: 4px;
+        }
+        #btnFindStore {
+            margin-left: 3px;
+        }
     }
     .top-pad {
         padding-top: 10px;
     }
-    .ml-footer-email-signup-button {
-        background: #ffce06;
-        border: 0;        
-        border-radius: 0;
-        text-align: center;
-        font-size: 12px;
-        color: #383333;
-        text-transform: uppercase;
-        height: 34px;
+    .ml-footer-email-signup-button {        
         float: right;
+        text-transform: uppercase;
     }
     .ml-footer-phone-number{margin: 12px 0;}
     .social-links {
@@ -944,7 +950,7 @@ footer {
             .login-btn{ 
                 height: 28px;
                 line-height: 28px;
-                font-size: @font-size;
+                font-size: @fontSize;
                 border: 0;
                 cursor: pointer;           
                 background: @yelloBtnColor;
@@ -956,6 +962,9 @@ footer {
                 text-decoration: @no-decoration;
                 width: 100%;
                 border-radius: 0px;
+            }
+            .submit-btn {
+                width: 100%;
             }
             .tab-pane{
                 .login-tab-btn{ background: @grayBtnColor; margin-right: 20px; border:1px solid red;}
@@ -1796,6 +1805,7 @@ ul.tabs {
             .mz-productlisting-image{
                 width: 100%;
                 float: none;
+                text-align: center;
                 img, 
                 .mz-productlisting-imageplaceholder {
                     margin: 0 auto;
@@ -1924,6 +1934,18 @@ ul.tabs {
     .mz-accountsettings
     .mz-accountsettings-acceptsmarketing{
         clear: none;
+    }
+    input[type="text"], input[type="email"], input[type="password"], input[type="tel"], select {
+        .formInput();               
+        display: inline-block;
+        margin-bottom: @defaultGutter/5;                
+    }
+    select {
+        padding: 6px 4px 4px;
+    }
+    input[type="radio"]{
+        float: left;
+        margin-right: @defaultGutter/5;
     }
 }
 .btn-transparent {
@@ -2710,30 +2732,6 @@ ul.tabs {
         }
     }
 }
-.mz-l-paginatedlist-footer{
-    .back-to-top{
-        button{
-            &.mz-back-to-top-button{
-                background-color: @colorLightGray;
-                border: none;
-                float: left; 
-                height: 33px;
-                line-height: 20px;
-                letter-spacing: 0.4px;
-                text-transform: uppercase;
-                &:hover{
-                    border: none;
-                }
-                &:focus{
-                    outline: 0;
-                }
-                &:active {
-                    box-shadow: none;
-                }
-            }
-        }
-    }
-}
 
 .mz-carousel-arrow-customize{
     .bx-controls-direction{
@@ -2967,4 +2965,14 @@ ul.tabs {
             }
         }
     }
+}
+
+/**  CART PAGE  **/
+.mz-table-cart-items{
+    .mz-row-carttable-item{
+        padding: 0px;
+    }
+    & ~ .mz-cart-total-main-container{
+        padding-left: 0px;
+    } 
 }

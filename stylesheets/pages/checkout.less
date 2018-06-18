@@ -28,7 +28,7 @@
 }
 
 .mz-checkoutform {
-    padding-left: @gutter/2;
+    padding: 10px;
     box-sizing: border-box;
     label {
       cursor: default;
@@ -52,7 +52,7 @@
 }
 
 .mz-checkoutform-shipping {
-  padding-top: @gutter/4;
+  padding-top: @gutter - 10;
     display: block;
 }
 
@@ -110,6 +110,7 @@
     padding: 0 0 @gutter/8;
     font-size: @fontSizeLarger;
     border-bottom: none;
+    font-weight: bold;
 }
 
 .mz-shipping-method-address{
@@ -184,12 +185,11 @@
         }
         label{
             text-align: left;
-            font-size: 16px;
+            font-size: @fontSize;
         }
-        input[type="text"]{
+        input[type="text"], input{
             width: 240px;
             border: 1px solid @inputBorder;
-            margin-bottom: 0px;
         }
         .text-input, select{
             width: 240px;
@@ -213,7 +213,7 @@
             display: block;
             label{
                 text-align: left;
-                font-size: 16px;
+                font-size: @fontSize;
                 line-height: 18px;
                 &.mz-inline{
                     display: inline-block;
@@ -226,7 +226,6 @@
             input[type="text"]{
                 width: 240px;
                 border: 1px solid @inputBorder;
-                margin-bottom: 0;
             }
             .text-input, #mz-payment-credit-card-type{
                 width: 240px;
@@ -235,10 +234,10 @@
             .mz-l-formfieldgroup-halfsize{
                 width: 114px;
                 background-color: @colorWhite;
-                margin-bottom: 0px;
             }
             select {
                 background-color: @colorWhite;
+                margin-bottom: 3px;
             }
         }
     }

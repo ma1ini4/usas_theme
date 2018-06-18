@@ -5,7 +5,7 @@
   </div>
   <div class="mz-l-formfieldgroup-cell">
     <input type="text" id="digital-credit-code" name="digital-credit-code" value="{{ model.digitalCreditCode }}" data-mz-value="digitalCreditCode" maxlength="{{themeSettings.creditCardNumberLength}}"/>
-    <button class="mz-button" data-mz-action="getDigitalCredit" {% if not model.digitalCreditCode  %} disabled="disabled" {% endif %}>{{ labels.apply }}</button>
+    <button class="mz-button primary-btn" data-mz-action="getDigitalCredit" {% if not model.digitalCreditCode  %} disabled="disabled" {% endif %}>{{ labels.apply }}</button>
   </div>
   
 {% if model.activeStoreCredits %}

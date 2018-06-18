@@ -85,20 +85,18 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
-                height: 30px;
-                background: #c8c8c8;
                 position: absolute;
                 opacity: 0.9;
                 text-transform: uppercase;
                 width: 100%;
                 display: none;
-                border: 0;
+                border:0;
                 span {
                     opacity: 1;
-                    font-size: 14px;
+                    font-size: @fontSize;
                     text-align: center;
-                    line-height: 30px;
-                    color: #333;
+                    line-height: normal;
+                    color: @colorGray;
                 }
             }
             &:hover {
@@ -165,9 +163,10 @@
                 border: 0;
                 span {
                     opacity: 1;
-                    font-size: 14px;
+                    font-size: @fontSize;
                     text-align: center;
-                    line-height: 30px;
+                    line-height: normal;
+                    color: @colorGray;
                 }
             }
             &:hover {

@@ -61,7 +61,7 @@
     <div class="product-detail family-details">
         <div class="mz-productdetail-conversion-buttons col-xs-12 hide">
             <div class="col-xs-12 add-to-cart-container">
-                <button class="mz-productdetail-addtocart font-large button_primary pull-right{% if not model.purchasableState.isPurchasable %} button_disabled{% endif %}" data-mz-action="addToCart" >
+                <button class="mz-button mz-productdetail-addtocart font-large button_primary pull-right{% if not model.purchasableState.isPurchasable %} button_disabled{% endif %}" data-mz-action="addToCart" >
               {{ labels.addToCart }}
                 </button>
             </div>

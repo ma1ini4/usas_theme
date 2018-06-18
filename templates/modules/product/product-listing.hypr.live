@@ -6,7 +6,7 @@
                 {% include "modules/product/product-image" with productImage=model.mainImage productMaxWidth=themeSettings.productImageDirectoryMaxWidth productAltText=model.mainImage.altText as_parameter %}
             </a>
             {% if themeSettings.enableQuickView and model.productType != themeSettings.familyProductType %}
-                <button class="quick-view-btn primary qvButton quickview-btn" type="button" data-mz-product-data="{% json_attribute model %}" data-toggle="modal" data-target="{{ model.productCode }}">
+                <button class="primary-btn quick-view-btn primary qvButton quickview-btn" type="button" data-mz-product-data="{% json_attribute model %}" data-toggle="modal" data-target="{{ model.productCode }}">
                         <span>{{ labels.quickView }}</span>
                 </button>
             {% endif %}

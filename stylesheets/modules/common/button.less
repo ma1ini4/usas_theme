@@ -49,3 +49,47 @@
     animation: loadingthrob 1s linear 0s alternate infinite;
     -webkit-animation: loadingthrob 1s linear 0s alternate infinite;
 }
+
+.primary-btn {
+    background-color: @gray-lighter;
+    .border-radius(4px);
+    text-transform: capitalize;
+    border: 1px solid @inputBorder;    
+    font-weight: normal;
+    .button-prop(); 
+    &:hover{
+        background-color: @btnGrayDarkHover;
+        color: @colorGray;
+        text-decoration: none;
+    }
+    .button-focus();
+}
+.secondary-btn {
+    border: 0;
+    cursor: pointer;
+    background: @secondaryBtnColor;
+    border: 1px solid @secondaryBtnColor;    
+    border-radius: 0px;    
+    .button-prop(); 
+    .button-focus();
+}
+
+.tertiary-btn {
+    cursor: pointer;
+    background: @white;
+    border: 1px solid @inputBorder;
+    border-radius: 0px;
+    .button-prop();
+    &:hover{
+        background-color: @btnGrayDarkHover;
+    }
+    .button-focus();
+}
+.gray-btn {
+    background-color: @btnGrayDarkHover;    
+    text-transform: capitalize;
+    font-weight: 700;
+    .button-prop(); 
+    .button-focus();
+
+}
