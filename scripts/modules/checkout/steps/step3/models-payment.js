@@ -41,9 +41,7 @@ define([
                 purchaseOrder: PaymentMethods.PurchaseOrder
             },
             validateBillingAddress: function () {
-                console.log('here...');
                 var isValid = this.selectedBillingDestination();
-                console.log(isValid);
                 if (!isValid && $('[data-mz-value="contactId"]:visible').length)
                     return Hypr.getLabel('billingAddressRequired');
             },

@@ -55,15 +55,6 @@ function ($, _, Hypr, Backbone, api, HyprLiveContext, CheckoutStep, ShippingDest
                                 return destinationErrors.push({ "destinationId": Hypr.getLabel('genericRequired') });
                             }
                         });
-                        var errorMsgDOM = document.getElementsByClassName("shipping-contact-id")[0];
-                        if (typeof errorMsgDOM !== "undefined") {
-                            if (!isValid) {
-                                errorMsgDOM.innerHTML = Hypr.getLabel('genericRequired');
-                                destinationErrors.push({ "destinationId": Hypr.getLabel('genericRequired') });
-                            } else {
-                                errorMsgDOM.innerHTML = "";
-                            }
-                        }
                         return (destinationErrors.length) ? destinationErrors : false;
                     }
                     self.parent.get('items').forEach(function (item, idx) {
@@ -406,6 +397,18 @@ function ($, _, Hypr, Backbone, api, HyprLiveContext, CheckoutStep, ShippingDest
                     if (!this.isMultiShipMode() && this.getCheckout().get('destinations').nonGiftCardDestinations().length < 2) {
                         this.singleShippingAddressValid();
                         return false;
+                    }
+                     if (!this.get("isMultiShipMode")) {
+                        var isValid = this.selectedDestination();
+                        var errorMsgDOM = document.getElementsByClassName("shipping-contact-id")[0];
+                        if (typeof errorMsgDOM !== "undefined") {
+                            if (!isValid) {
+                               this.parent.get('destinations').singleShippingDestination().set('shippingError',true);
+                            }else{
+                               this.parent.get('destinations').singleShippingDestination().set('shippingError',false);
+                            }
+                            this.trigger('render');
+                        }
                     }
                     /*Object.keys(validationObj.ShippingDestinations).forEach(function(key) {
                         Object.keys(validationObj.ShippingDestinations[key]).forEach(function(keyLevel2) {
