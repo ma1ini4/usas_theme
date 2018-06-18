@@ -398,7 +398,7 @@ function ($, _, Hypr, Backbone, api, HyprLiveContext, CheckoutStep, ShippingDest
                         this.singleShippingAddressValid();
                         return false;
                     }
-                     if (!this.get("isMultiShipMode")) {
+                    if (!this.get("isMultiShipMode")) {
                         var isValid = this.selectedDestination();
                         var errorMsgDOM = document.getElementsByClassName("shipping-contact-id")[0];
                         if (typeof errorMsgDOM !== "undefined") {

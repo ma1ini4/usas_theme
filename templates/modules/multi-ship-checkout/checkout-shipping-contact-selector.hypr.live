@@ -9,7 +9,12 @@
                 {% endif %}
             {% endfor %}
         </select>
-        <span class="mz-validationmessage shipping-contact-id" data-mz-validationmessage-for="shippingContactId"></span>   
+        <span class="mz-validationmessage shipping-contact-id" data-mz-validationmessage-for="shippingContactId"></span>
+        {% with model|findwhere('shippingError', "true") as shippingErrorMessage %}
+         {% if shippingErrorMessage %}
+            <span class="mz-validationmessage">{{labels.genericRequired}}</span>
+            {% endif %}
+         {% endwith %} 
         <div> 
             <a href="javascript:;" data-mz-action="handleNewContact">{{labels.addAddress}}</a>
         </div>
