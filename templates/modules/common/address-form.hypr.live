@@ -46,10 +46,10 @@
         </div>
     </div>
     <div class="mz-l-formfieldgroup-row mz-addressform-address2">
-        <div class="mz-l-formfieldgroup-cell mz-hide-column-catalog"></div>
+        <!--<div class="mz-l-formfieldgroup-cell mz-hide-column-catalog"></div>-->
         <div class="mz-l-formfieldgroup-cell mz-custom-padding-address">
             <input type="text" class="input" name="address-line-2" data-mz-value="{{ addresscontext }}address.address2" value="{{ model.address.address2 }}" maxlength="{{themeSettings.addressLength}}" placeholder="{{ labels.address }} Line 2">
-            <span class="mz-validationmessage">&nbsp;</span>
+            <span class="mz-validationmessage"></span>
         </div>
     </div>
     <div class="mz-l-formfieldgroup-row mz-addressform-country">

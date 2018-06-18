@@ -6,9 +6,9 @@
     .mz-l-formfieldgroup-cell {
         display: table-cell;
         padding-right: @gutter/2;
-        padding-bottom: @gutter/2;
+        padding-bottom: 8px;
         label {
-            text-align: right;
+            text-align: left;
             display: block;
             min-width: 100px;
             @media (max-width: 600px) {
@@ -32,7 +32,7 @@
     input[type="tel"],
     input[type="email"],
     select {
-        width: 100%;
+        width: 240px;
         box-sizing: border-box;
         &.is-invalid {
             background-color: @errorBackground;

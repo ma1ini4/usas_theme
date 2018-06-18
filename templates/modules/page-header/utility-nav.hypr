@@ -106,7 +106,7 @@
     </ul>
 
         <!-- Modal -->
-        <div class="modal fade" id="liteRegistrationModal" >
+        <div class="modal fade" id="liteRegistrationModal">
                 <div class="modal-dialog login-modal" role="document">
                     <div class="modal-content">                  
                         <div class="modal-body">
@@ -137,7 +137,7 @@
                                                 <div class="link-button"><a href="#" data-dismiss="modal">{{ labels.cancel }}</a></div>
                                             </div>
                                             <div class="col-xs-10 right-column">                                    
-                                                <button class="btn login-btn submit-btn" type="submit" data-mz-action="doLogin">{{ labels.login }}</button> 
+                                                <button class="submit-btn secondary-btn" type="submit" data-mz-action="doLogin">{{ labels.login }}</button> 
                                                 <input type="hidden" class="hidden-return" name="returnUrl" id="returnUrl" value="" />  
                                                 <script>document.getElementById('returnUrl').value = window.location.href;</script>
                                             </div>
@@ -181,7 +181,7 @@
                                                 <div class="link-button"><a href="#" data-dismiss="modal">{{ labels.cancel }}</a></div>
                                             </div>
                                             <div class="col-xs-10 right-column">                                    
-                                                <button class="btn login-btn" type="submit" data-mz-action="doSignup">{{ labels.register }}</button>
+                                                <button class="submit-btn secondary-btn" type="submit" data-mz-action="doSignup">{{ labels.register }}</button>
                                             </div>
                                         </div>
                                         <div class="col-xs-12 bottom-text"><p class="login-text"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> {{ labels.secureConnectionMessage }}</p></div>

@@ -18,7 +18,7 @@
 				<div>
 					<form class="form">
 					  <div class="form-group">
-					  	<button type="submit" class="ml-footer-email-signup-button">submit</button>
+					  	<button type="submit" class="secondary-btn ml-footer-email-signup-button">submit</button>
 					  	<div class="email-container">
 					    	<input type="email" class="form-control" id="exampleInputEmail3" placeholder="Your Email Address" maxlength="{{themeSettings.emailLength}}">
 					    </div>

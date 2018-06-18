@@ -46,7 +46,7 @@
                         <div class="mz-l-formfieldgroup-row">
                             <div class="mz-l-formfieldgroup-cell"></div>
                             <div class="mz-l-formfieldgroup-cell">
-                                <button class="mz-button mz-button-large mz-login-button" data-mz-action="loginpage-submit">{{ labels.logIn }}</button>
+                                <button class="mz-button primary-btn mz-login-button" data-mz-action="loginpage-submit">{{ labels.logIn }}</button>
                                 <div class="mz-l-formfieldgroup-cell">
                                     <section data-mz-role="popover-message" class="mz-popover-message"></section>
                                 </div>
@@ -92,7 +92,7 @@
                         <div class="mz-l-formfieldgroup-row">
                             <div class="mz-l-formfieldgroup-cell"></div>
                             <div class="mz-l-formfieldgroup-cell">
-                                <button class="mz-button mz-button-large mz-login-button" data-mz-action="anonymousorder-submit">{{ labels.submit }}</button>
+                                <button class="mz-button primary-btn mz-login-button" data-mz-action="anonymousorder-submit">{{ labels.submit }}</button>
                                 <div class="mz-l-formfieldgroup-cell">
                                     <section data-mz-role="popover-message" class="mz-popover-message"></section>
                                 </div>

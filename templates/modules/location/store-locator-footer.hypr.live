@@ -3,7 +3,7 @@
     <div class="input-group">                       
         <input type="text" id="footerZipCodeInput" class="form-control" maxlength="50" placeholder="{{ labels.enterZipCode }}" data-mz-footer-storelocator>
         <span class="input-group-btn">
-            <button id="btnFindStore" class="btn btn-default button_promotional text-uppercase" type="button" data-mz-find-store>{{ labels.find }}
+            <button id="btnFindStore" class="tertiary-btn text-uppercase" type="button" data-mz-find-store>{{ labels.find }}
             </button> 
         </span>
     </div>

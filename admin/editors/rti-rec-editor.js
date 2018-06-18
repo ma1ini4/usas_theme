@@ -12,9 +12,23 @@ Ext.widget({
       url: "/admin/app/entities/read?list=rtiSettings%40mzint&entityType=mzdb",
       method: 'get',
       success: function (res) {
-        var response = JSON.parse(res.responseText);
-        var customerCode = response.items[0].item.customerCode;
-        var customerId = response.items[0].item.customerId;
+        var response = JSON.parse(res.responseText),
+            siteIdIndex = 0;
+        if (response.items.length > 0) {
+            try {
+              var sbCookie = Ext.util.Cookies.get("SBCONTEXT").split('&');
+              var site = sbCookie[0].split('=')[1];
+              for(var i=0;i<response.items.length;i++) {
+                if (response.items[i].id === site) {
+                  siteIdIndex = i;
+                  break;
+                }
+              }
+            }
+            catch(e){}
+        }
+        var customerCode = response.items[siteIdIndex].item.customerCode;
+        var customerId = response.items[siteIdIndex].item.customerId;
         var widgetNameReqUrl = '//' + customerId + '-' + customerCode + '.baynote.net/merch/1/' + customerId + '_' + customerCode + '/production/pageTypes';
         me.getComboboxOptions(widgetNameReqUrl, 'page-type');
         var customerCodeInput = me.down('#customerCode');
@@ -68,7 +82,8 @@ Ext.widget({
                 store: {
                   fields: ['name', 'value'],
                   data: [
-                    {'name':'Carousel', 'value':'carousel'}
+                    {'name':'Carousel', 'value':'carousel'},
+                    {'name':'Grid', 'value':'grid'},
                   ]
                 },
                 displayField: 'name',
@@ -241,5 +256,3 @@ Ext.widget({
       request.send(null);
     }
     });
-
-

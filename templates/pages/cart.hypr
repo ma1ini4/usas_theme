@@ -22,7 +22,9 @@
 	{% include "modules/cart/cart-location-select" %}
 </div>
 <div class="mz-l-container">
-	<h1 class="mz-pagetitle">{{ labels.cart }}</h1>
+	<div class="mz-cart-heading">
+		<h1 class="mz-pagetitle">{{ labels.cart }}</h1>
+	</div>
 	<!-- Check if model is not empty and form product table if not-->
 	{% if not model.isEmpty %}  
 			<form method="post" action="{{ siteContext.secureHost }}{{siteContext.siteSubdirectory}}/cart/checkout" id="cartform">

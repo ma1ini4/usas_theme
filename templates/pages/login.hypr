@@ -12,7 +12,7 @@
                 <h1 class="mz-pagetitle">{{ labels.loginNoAccount }}</h1>
                  <div class="mz-l-formfieldgroup-row">
                     <div class="mz-l-formfieldgroup-cell">
-                        <button class="mz-button mz-button-large mz-login-button" data-mz-action="signup">
+                        <button class="mz-button primary-btn mz-login-button" data-mz-action="signup">
                             {{ labels.signUpLink }}
                         </button>
                         <div class="mz-l-formfieldgroup-cell">
@@ -63,7 +63,7 @@
                         <div class="mz-l-formfieldgroup-row">
                             <div class="mz-l-formfieldgroup-cell"></div>
                             <div class="mz-l-formfieldgroup-cell">
-                                <button class="mz-button mz-button-large mz-login-button button_primary button_width pull-left" data-mz-action="loginpage-submit">{{ labels.logIn }}</button>
+                                <button class="mz-button primary-btn mz-login-button pull-left" data-mz-action="loginpage-submit">{{ labels.logIn }}</button>
                             </div>
                         </div>
                     </div>
