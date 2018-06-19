@@ -45,9 +45,19 @@ function ($, _, Hypr, Backbone, api, HyprLiveContext, CheckoutStep, ShippingDest
         },
         multiShipValidation : {
             ShippingDestinations :{
-                fn: function(value, attr){
-                    var destinationErrors = [];
-                    this.parent.get('items').forEach(function(item, idx){
+              fn: function (value, attr) {
+                    var destinationErrors = [],self = this;
+                    if (!self.get("isMultiShipMode")) {
+                        var isValid = self.selectedDestination();
+                        //console.log("asdsa");
+                        self.parent.get('items').forEach(function (item, idx) {
+                            if (typeof item.attributes.destinationId == "undefined") {
+                                return destinationErrors.push({ "destinationId": Hypr.getLabel('genericRequired') });
+                            }
+                        });
+                        return (destinationErrors.length) ? destinationErrors : false;
+                    }
+                    self.parent.get('items').forEach(function (item, idx) {
                         var itemValid = item.validate();
                         if (itemValid && item.get('fulfillmentMethod') === "Ship") {
                             destinationErrors.push(itemValid);
@@ -260,13 +270,13 @@ function ($, _, Hypr, Backbone, api, HyprLiveContext, CheckoutStep, ShippingDest
             var validationObj = this.validate();
 
             if (validationObj) {
-                if (validationObj) {
+               /* if (validationObj) {
                     Object.keys(validationObj.singleShippingAddess).forEach(function(key) {
                         this.trigger('error', {
                             message: validationObj.singleShippingAddess[key]
                         });
                     }, this);
-                }
+                }*/
                 return false;
             }
             return true;
@@ -379,25 +389,34 @@ function ($, _, Hypr, Backbone, api, HyprLiveContext, CheckoutStep, ShippingDest
         validateModel: function() {
                 this.validation = this.multiShipValidation;
                 var validationObj = this.validate();
-
                 if(this.requiresDigitalFulfillmentContact()){
                      var digitalValid = this.digitalGiftCardValid();
                      if(!digitalValid) { return false; }
                 }
-
                 if (this.requiresFulfillmentInfo() && validationObj) {
                     if (!this.isMultiShipMode() && this.getCheckout().get('destinations').nonGiftCardDestinations().length < 2) {
                         this.singleShippingAddressValid();
                         return false;
                     }
-
-                    Object.keys(validationObj.ShippingDestinations).forEach(function(key) {
+                    if (!this.get("isMultiShipMode")) {
+                        var isValid = this.selectedDestination();
+                        var errorMsgDOM = document.getElementsByClassName("shipping-contact-id")[0];
+                        if (typeof errorMsgDOM !== "undefined") {
+                            if (!isValid) {
+                               this.parent.get('destinations').singleShippingDestination().set('shippingError',true);
+                            }else{
+                               this.parent.get('destinations').singleShippingDestination().set('shippingError',false);
+                            }
+                            this.trigger('render');
+                        }
+                    }
+                    /*Object.keys(validationObj.ShippingDestinations).forEach(function(key) {
                         Object.keys(validationObj.ShippingDestinations[key]).forEach(function(keyLevel2) {
                             this.trigger('error', {
                                 message: validationObj.ShippingDestinations[key][keyLevel2]
                             });
                         }, this);
-                    }, this);
+                    }, this);*/
                     return false;
                 }
                 return true;

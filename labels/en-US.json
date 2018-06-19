@@ -539,5 +539,6 @@
     "emailLogin": "Email*",
     "middleName": "Middle Name Initials",
     "successfullyAddedItems": "The following item(s) have successfully added to your cart",
+    "billingAddressRequired": "Billing Address is required",
     "productaddToCartError": "The following item(s) are not added to cart"
 }

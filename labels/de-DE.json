@@ -455,6 +455,7 @@
     "wishLists": "Wunschlisten",
     "productwithoutSku": "Product without Sku",
     "successfullyAddedItems": "Die folgenden Artikel wurden erfolgreich in Ihren Warenkorb gelegt",
+    "billingAddressRequired": "Rechnungsadresse ist erforderlichrderlich",
     "selectValidOption": "Wählen Sie gültige Option (en)",
     "selectValidOptionProduct": "Wählen Sie gültige Option (en) für {0}",
     "productaddToCartError": "Die folgenden Artikel werden nicht zum Warenkorb hinzugefügt"
