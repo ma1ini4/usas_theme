@@ -73,6 +73,11 @@
                     "xtype": "mz-input-checkbox",
                     "name": "listVolumePricing",
                     "fieldLabel": "Show volume pricing bands in product lists"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "productInfoTabs",
+                    "fieldLabel": "Product Info Tabs"
                 }
             ]
         },

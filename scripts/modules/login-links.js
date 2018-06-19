@@ -2,7 +2,7 @@
  * Adds a login popover to all login links on a page.
  */
 
-define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modules/jquery-mozu=jQuery]>jQuery=jQuery]>jQuery', 'modules/api', 'hyprlive', 'underscore', 'hyprlivecontext', 'vendor/jquery-placeholder/jquery.placeholder'], function ($, api, Hypr, _, HyprLiveContext) {
+define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modules/jquery-mozu=jQuery]>jQuery=jQuery]>jQuery', 'modules/api', 'hyprlive', 'underscore', 'hyprlivecontext', 'vendor/jquery-placeholder/jquery.placeholder','modules/backbone-mozu'], function ($, api, Hypr, _, HyprLiveContext,backbone) {
     var current = "";
     var usePopovers = function() {
         return !Modernizr.mq('(max-width: 480px)');
@@ -333,6 +333,50 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             }
         }
     });
+    var EmailSignupPopover = function() {
+        DismissablePopover.apply(this, arguments);
+        this.signup = _.debounce(this.signup, 150);
+    };
+    EmailSignupPopover.prototype = new DismissablePopover();
+    $.extend(EmailSignupPopover.prototype, LoginPopover.prototype, {
+        boundMethods: ['handleEnterKey', 'dismisser', 'displayMessage', 'displayApiMessage', 'createPopover', 'signup', 'onPopoverShow'],
+        template: Hypr.getTemplate('modules/common/signup-popover').render(),
+        bindListeners: function(on) {
+            var onOrOff = on ? "on" : "off";
+            this.$parent[onOrOff]('click', '[data-mz-action="signup"]', this.signup);
+            this.$parent[onOrOff]('keypress', 'input', this.handleEnterKey);
+        },
+        handleEnterKey: function(e) {
+            if (e.which === 13) { this.signup(); }
+        },
+        validate: function(email, firstname, lastname) {
+            if (!email) return this.displayMessage(Hypr.getLabel('emailMissing')), false;
+            if (!(backbone.Validation.patterns.email.test(email))) return this.displayMessage(Hypr.getLabel('emailwrongpattern')), false;
+            return true;
+        },
+        signup: function() {
+            var self = this,
+                email = this.$parent.find('[data-mz-signup-emailaddress]').val(),
+                firstName = this.$parent.find('[data-mz-signup-firstname]').val(),
+                lastName = this.$parent.find('[data-mz-signup-lastname]').val();
+            var pageType = HyprLiveContext.locals.themeSettings.pageType;
+            if (this.validate(email, firstName, lastName)) {
+                var serviceurl = '/events/emailsignup?emailAddress=' +email+ '&firstName='+firstName + '&lastName='+lastName+'&isMarketingEnabled=true';
+                var apiData = require.mozuData('apicontext');
+                $.ajax({
+                    url: serviceurl,
+                    headers: apiData.headers,
+                    method: 'GET',
+                    success: function(res) {
+                        if(res){
+                            $('.mz-signupform').hide();
+                            $('.register-success-panel').show();
+                        }
+                    }
+                });
+            }
+        }
+    });
     var MyAccountPopover = function(e){
         var self = this;
         this.init = function(el){
@@ -543,6 +587,12 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             var popover = new SignupPopover();
             popover.init(this);
             $(this).data('mz.popover', popover);
+        });
+        $('[data-mz-action=emailSignuppage-submit]').each(function(e) {
+            var loginPage = new EmailSignupPopover();
+            loginPage.formSelector = 'form[name="mz-emailSignupform"]';
+            loginPage.pageType = 'signup';
+            loginPage.init(this);
         });
         $('[data-mz-action="continueAsGuest"]').on('click', function(e) {
             e.preventDefault();
