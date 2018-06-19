@@ -428,6 +428,14 @@
     {
       "documentType": "web_page",
       "entityType": "webpage",
+      "id": "email-signup",
+      "template": "email-signup",
+      "title": "Email Signup",
+      "userCreatable": true
+    },
+    {
+      "documentType": "web_page",
+      "entityType": "webpage",
       "id": "customer-service",
       "template": "customer-service",
       "title": "Customer Service",
@@ -546,6 +554,7 @@
       36,
       72
     ],
+    "productInfoTabs": "",
     "viewAllPageSize": 54,
     "viewAllPageSizeOrderHistory": 10,
     "defaultPageSizeOrderHistory": 5,
@@ -973,7 +982,24 @@
       "validPageTypes": [
         "*"
       ]
-    },             
+    },
+    {
+        "displayName": "Bronto Conversion Tracking",
+        "displayTemplate": "bronto/bronto",
+        "icon": "/resources/admin/widgets/bronto_logo_thin.png",
+        "id": "socialcontent-widget",
+         "editViewFields": [
+              {
+                "anchor": "100%",
+                "fieldLabel": "Tag Manager Script",
+                "name": "tagManagerScript",
+                "xtype": "textareafield"
+              }
+            ],
+        "validPageTypes": [
+            "*"
+        ]
+    },
     {
       "defaultConfig": {
         "template": "modules/product/product-list"
