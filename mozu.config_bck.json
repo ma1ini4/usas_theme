@@ -1,0 +1,9 @@
+{
+  "baseUrl": "https://home.mozu.com",
+  "developerAccountId": 6578,
+  "developerAccount": {
+    "emailAddress": "naminder.singh@trantorinc.com",
+    "password":"spark@2226"
+  },
+  "workingApplicationKey": "CTS1.Base.1.0.0.Release"
+}
