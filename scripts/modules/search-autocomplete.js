@@ -15,6 +15,7 @@
         },
         termsUrl = getApiUrl('terms'),
         productsUrl = getApiUrl('pages'),
+        categoriesUrl = getApiUrl('categories'),
         ajaxConfig = {
             headers: api.getRequestHeaders()
         },
@@ -57,6 +58,19 @@
                     rateLimitWait: 400,
                     ajax: ajaxConfig
                 }
+            }),
+            categories: new Bloodhound({
+                datumTokenizer: function(datum) {
+                    return datum.suggestion.categories.split(nonWordRe);
+                },
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: categoriesUrl,
+                    wildcard: eqs,
+                    filter: makeSuggestionGroupFilter("Categories"),
+                    rateLimitWait: 100,
+                    ajax: ajaxConfig
+                }
             })
         }
     };
@@ -75,6 +89,16 @@
                 suggestion: makeTemplateFn('modules/search/autocomplete-page-result')
             },
             source: AutocompleteManager.datasets.pages.ttAdapter()
+        },
+        {
+            name: 'categories',
+            displayKey: function(datum) {
+                return datum.suggestion.categoryCode;
+            },
+            templates: {
+                suggestion: makeTemplateFn('modules/search/autocomplete-page-result')
+            },
+            source: AutocompleteManager.datasets.categories.ttAdapter()
         }
     ];
 
@@ -114,10 +138,10 @@
         $('#searchbox').on('submit', function(e){
             var searchVal = $('#search-field').val().trim();
             if(searchVal === ""){
-                alert(Hypr.getLabel('blankSearchResult'));
+                window.alert(Hypr.getLabel('blankSearchResult'));
                 e.preventDefault();
             }else if(searchVal.length < 3){ 
-                alert(Hypr.getLabel('searchLessCharacters'));
+                window.alert(Hypr.getLabel('searchLessCharacters'));
                 e.preventDefault();
             }
         });
