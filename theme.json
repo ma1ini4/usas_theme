@@ -982,7 +982,47 @@
       "validPageTypes": [
         "*"
       ]
-    },
+    }, {
+            "defaultConfig": {
+                "isInfinite": true,
+                "totalCount": "10"
+            },
+            "displayName": "Category Carousel",
+            "displayTemplate": "misc/category-carousel",
+            "editViewFields": [{
+                "anchor": "100%",
+                "fieldLabel": "Title",
+                "name": "title",
+                "xtype": "mz-input-text"
+            }, {
+                "anchor": "100%",
+                "fieldLabel": "Select Category",
+                "name": "category",
+                "xtype": "mz-input-category"
+            }, {
+                "fieldLabel": "Include Child Categories",
+                "name": "isChildCategory",
+                "xtype": "mz-input-checkbox"
+            }, {
+                "fieldLabel": "Enable Continuous Loop",
+                "name": "isInfinite",
+                "xtype": "mz-input-checkbox"
+            }, {
+                "fieldLabel": "Enable Autoplay",
+                "name": "isAutoplay",
+                "xtype": "mz-input-checkbox"
+            }, {
+                "anchor": "100%",
+                "fieldLabel": "Number of Products",
+                "name": "totalCount",
+                "xtype": "mz-input-number"
+            }],
+            "icon": "/resources/admin/widgets/city-carousel-icon.png",
+            "id": "category-carousel-widget",
+            "validPageTypes": [
+                "*"
+            ]
+        },
     {
         "displayName": "Bronto Conversion Tracking",
         "displayTemplate": "bronto/bronto",

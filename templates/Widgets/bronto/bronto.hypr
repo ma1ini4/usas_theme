@@ -40,7 +40,7 @@
 }
 {% endcomment %}
 
-
+  <div class="btr_cart" cartphase="SHOPPING" currency="USD" subtotal="0" discountamount="0" taxamount="0" grandtotal="0" id="shadowDiv1" data-bronto-carttarget="emailAddress"><div class="cart_lineItems"></div></div>
 <div data-bronto-loadjs="{{Model.config.tagManagerScript}}">
   {%if pageContext.isEditMode %}Bronto Conversion Tracking Script {% endif %}
 </div>

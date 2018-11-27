@@ -102,6 +102,37 @@ function (HyprLiveContext, _, $, Backbone, api,CartModels) {
     },
     updateCartPhase: function(cartPhase){
       window.brontoCart.cartPhase = cartPhase;
+     try {
+          if(!window.brontoCart.emailAddress){
+            if(window.checkoutViews && window.checkoutViews.parentView && window.checkoutViews.parentView.model){
+              if(window.checkoutViews.parentView.model.attributes && window.checkoutViews.parentView.model.attributes.destinations){
+                if(window.checkoutViews.parentView.model.attributes.destinations.models && window.checkoutViews.parentView.model.attributes.destinations.models.length > 0){
+                    if(window.checkoutViews.parentView.model.attributes.destinations.models[0].attributes){
+                      if(window.checkoutViews.parentView.model.attributes.destinations.models[0].attributes.destinationContact){
+                        if(window.checkoutViews.parentView.model.attributes.destinations.models[0].attributes.destinationContact.get('email')){
+                          window.brontoCart.emailAddress = window.checkoutViews.parentView.model.attributes.destinations.models[0].attributes.destinationContact.get('email');
+                        }
+                      }                      
+                    }
+                 }
+              }else if(window.checkoutViews.parentView.model.attributes.billingInfo){
+                if(window.checkoutViews.parentView.model.attributes.billingInfo.attributes){
+                  if(window.checkoutViews.parentView.model.attributes.billingInfo.attributes.billingContact){
+                    if(window.checkoutViews.parentView.model.attributes.billingInfo.attributes.billingContact.attributes){
+                      if(window.checkoutViews.parentView.model.attributes.billingInfo.attributes.billingContact.attributes.email){
+                        window.brontoCart.emailAddress = window.checkoutViews.parentView.model.attributes.billingInfo.attributes.billingContact.attributes.email;
+                      }
+                    }
+                  }
+                }
+              }
+            }        
+          }
+      }
+      catch(err) {
+        window.console.log(err);
+      }     
+
     },
     getOrderOrCart: function(){
       var deferred = $.Deferred();
@@ -206,81 +237,86 @@ function (HyprLiveContext, _, $, Backbone, api,CartModels) {
       return str;
     },
     _mapToBrontoCart: function(order, user){
-      var self = this;
-        if(order instanceof Backbone.Model)
-            order = order.toJSON();
+    var self = this;
+    if(order instanceof Backbone.Model)
+        order = order.toJSON();
 
-        var pageContext = this._getPageContext();
+    var pageContext = this._getPageContext();
+    var pageType = pageContext.pageType;
 
-        var brCart = {
-          "cartPhase": this._getCartPhase(),
-          "currency": order.currencyCode,
-          "subtotal": order.subtotal,
-          "discountAmount": order.discountTotal,
-          "taxAmount": order.taxTotal,
-          "grandTotal": order.total,
-          "orderId": order.id,
-          //"emailAddress": "example@example.com",  //omit line if value not available
+    var brCart = {
+      "cartPhase": this._getCartPhase(),
+      "currency": order.currencyCode,
+      "subtotal": order.subtotal||order.subTotal,
+      "discountAmount": order.discountTotal,
+      "taxAmount": order.taxTotal,
+      "grandTotal": order.total,
+      "orderId": order.id,
+      //"emailAddress": "example@example.com",  //omit line if value not available
 
-          "lineItems": []
-        };
+      "lineItems": []
+    };
 
-        if (order && (order.id || order.originalCartId))
-            brCart.cartUrl =  this._getPageContext().secureHost + "/cart/recover/"+(this.isCart ? order.id : order.originalCartId);
-
-        if (order.orderNumber)
-          brCart.orderId = order.orderNumber;
-
-        if(user && user.email && user.email.length)
-          brCart.emailAddress = user.email;
-
-        if (order && order.emailAddress && order.emailAddress.length)
-          brCart.emailAddress = order.emailAddress;
-
-         var deferred = $.Deferred();
-        if(order.items && order.items.length){
-          var categories = _.map(_.map(order.items, function(item) { return item.product.categories; }), function(categories) { return _.last(categories); });
-
-          var ids = [];
-          if (categories)
-              ids = self._getCategoryIds(categories, ids);
-
-
-         self._getCategories(ids).then(function(categories){
-          _.forEach(order.items, function(lineItem){
-              var lineItemProduct = lineItem.product;
-              var item = {
-                "sku": lineItemProduct.productCode,
-                "name": lineItemProduct.name,
-                "unitPrice": lineItemProduct.price.price,
-                "quantity": lineItem.quantity,
-                "totalPrice": lineItem.total,
-                "productUrl": window.location.origin + (lineItemProduct.url ? lineItemProduct.url : '/p/' + lineItemProduct.productCode)
-              };
-
-              if (lineItemProduct.imageUrl)
-                item.imageUrl = lineItemProduct.imageUrl;
-
-              if (lineItemProduct.description)
-                item.description = lineItemProduct.description;
-
-              if (categories)
-                item.category = self._getCategoryMap(categories.items, _.last(lineItemProduct.categories),"");
-
-              if (lineItemProduct.price.salePrice)
-                item.salePrice = lineItemProduct.price.salePrice;
-
-              brCart.lineItems.push(item);
-            });
-            deferred.resolve(brCart);
-          });
-        } else
-          deferred.resolve(brCart);
-
-         return deferred.promise();
-       // return brCart;
+    if(pageType == "checkoutv2" || pageType == "confirmationv2"){
+        brCart.discountAmount = order.orderLevelHandlingDiscountTotal + order.orderLevelProductDiscountTotal + order.orderLevelShippingDiscountTotal + order.itemLevelHandlingDiscountTotal + order.itemLevelProductDiscountTotal + order.itemLevelShippingDiscountTotal;
+        brCart.taxAmount = order.handlingTaxTotal + order.itemTaxTotal + order.shippingTaxTotal;
     }
- };
+    if (order && (order.id || order.originalCartId))
+        brCart.cartUrl =  this._getPageContext().secureHost + "/cart/recover/"+(this.isCart ? order.id : order.originalCartId);
+
+    if (order.orderNumber)
+      brCart.orderId = order.orderNumber;
+
+    if(user && user.email && user.email.length)
+      brCart.emailAddress = user.email;
+
+    if (order && order.emailAddress && order.emailAddress.length)
+      brCart.emailAddress = order.emailAddress;
+
+     var deferred = $.Deferred();
+    if(order.items && order.items.length){
+      var categories = _.map(_.map(order.items, function(item) { return item.product.categories; }), function(categories) { return _.last(categories); });
+
+      var ids = [];
+      if (categories)
+          ids = self._getCategoryIds(categories, ids);
+
+
+     self._getCategories(ids).then(function(categories){
+      _.forEach(order.items, function(lineItem){
+          var lineItemProduct = lineItem.product;
+          var item = {
+            "sku": lineItemProduct.productCode,
+            "name": lineItemProduct.name,
+            "unitPrice": lineItemProduct.price.price,
+            "quantity": lineItem.quantity,
+            "totalPrice": lineItem.total,
+            "productUrl": window.location.origin + (lineItemProduct.url ? lineItemProduct.url : '/p/' + lineItemProduct.productCode)
+          };
+
+          if (lineItemProduct.imageUrl)
+            item.imageUrl = lineItemProduct.imageUrl;
+
+          if (lineItemProduct.description)
+            item.description = lineItemProduct.description;
+
+          if (categories)
+            item.category = self._getCategoryMap(categories.items, _.last(lineItemProduct.categories),"");
+
+          if (lineItemProduct.price.salePrice)
+            item.salePrice = lineItemProduct.price.salePrice;
+
+          brCart.lineItems.push(item);
+        });
+        deferred.resolve(brCart);
+      });
+    } else
+      deferred.resolve(brCart);
+
+     return deferred.promise();
+    // return brCart;
+    }
+    };
 
 
    $(document).ready(function() {
