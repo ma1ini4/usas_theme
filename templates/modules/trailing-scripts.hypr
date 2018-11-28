@@ -9,9 +9,9 @@
       urlArgs: "theme={{siteContext.themeId}}&cacheKey={{ siteContext.hashString }}",
       baseUrl: "{{ siteContext.cdnPrefix }}{% if not debugMode %}/compiled{% endif %}/scripts",
       paths: {
-      jquery: "//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery{% if not debugMode %}.min{% endif %}",
-		  underscore: "vendor/underscore/underscore",
-		  backbone: "vendor/backbone/backbone",
+      jquery: "vendor/jquery/jquery",
+      underscore: "vendor/underscore/underscore",
+      backbone: "vendor/backbone/backbone",
       bootstrap:"vendor/bootstrap/js/bootstrap.min",
       blockui:"vendor/jquery.blockUI/jquery.blockUI.min",
       bxslider:"vendor/jquery-bxslider/jquery.bxslider.min",
@@ -19,7 +19,8 @@
       doubletaptogo:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGo.min",
       doubletaptogoipad:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGoIpad.min",
       lazysizes: "vendor/jquery/lazysizes-custom.min",
-      async: "vendor/async/async.min"
+      async: "vendor/async/async.min",
+      slick: "vendor/slick/slick.min"
       },
       "shim": {
         bootstrap: {
@@ -42,7 +43,10 @@
         },
         lazysizes:{
           deps: ['jquery']
-        }
+        },
+	slick: {
+          deps: ['jquery']
+	}
       }      
   });
   {% if debugMode %}
