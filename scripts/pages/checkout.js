@@ -112,12 +112,35 @@ require(["modules/jquery-mozu",
     var ShippingInfoView = CheckoutStepView.extend({
         templateName: 'modules/checkout/step-shipping-method',
         renderOnChange: [
-            'availableShippingMethods'
+            'availableShippingMethods',
+            'shippingMethodCode'
         ],
+        initStepView: function() {
+            console.log("initi step view");
+            var me  = this;
+            var isShippingAddressValid = me.model.get("fulfillmentContact").isValid();
+            if(isShippingAddressValid)
+            {
+                var order = me.model.getOrder();
+                /*if(this.model.get('availableShippingMethods').length){
+                    var availableMethod = this.model.get('availableShippingMethods'),
+                    lowestValue = _.min(availableMethod, function(ob) { return ob.price; });
+                    this.model.set("shippingMethodCode", lowestValue.shippingMethodCode);
+                }*/
+                me.model.unset("shippingMethodCode");
+                order.apiModel.update({ fulfillmentInfo: me.model.toJSON() })
+                .then(function (o) {
+                    console.log("unset the shipping method");
+                });                        
+
+            }
+            this.model.initStep();
+        },        
         additionalEvents: {
             "change [data-mz-shipping-method]": "updateShippingMethod"
         },
         updateShippingMethod: function (e) {
+            window.checkoutViews.parentView.model.get("fulfillmentInfo").set('prevoiusSelectedMethod', this.$('[data-mz-shipping-method]:checked').val());
             this.model.updateShippingMethod(this.$('[data-mz-shipping-method]:checked').val());
         }
     });
@@ -473,7 +496,24 @@ require(["modules/jquery-mozu",
             this.model.addCoupon().ensure(function() {
                 self.$el.removeClass('is-loading');
                 self.model.unset('couponCode');
-                self.render();
+                window.checkoutViews.couponCode.render();
+            }).then(function(res){
+                if(res && res.status == "error"){
+                    window.checkoutViews.couponCode.model.trigger('error', {
+                        message: Hypr.getLabel('promoCodeError', res.code)
+                    });
+                }else{
+                    window.checkoutViews.parentView.model.get("fulfillmentInfo").unset("shippingMethodCode");                
+                    window.checkoutViews.parentView.model.apiModel.update({ fulfillmentInfo: window.checkoutViews.parentView.model.get("fulfillmentInfo").toJSON() })
+                    .then(function (o) {
+                        console.log("unset the shipping method");
+                        window.checkoutViews.parentView.model.apiModel.getShippingMethodsFromContact().then(function(res){
+                            console.log(res);
+                            window.checkoutViews.parentView.model.get("fulfillmentInfo").unset("shippingMethodCode");
+                            window.checkoutViews.steps.shippingInfo.model.refreshShippingMethods(res);
+                        });
+                    });
+                }
             });
         },
         handleEnterKey: function () {
@@ -620,6 +660,8 @@ require(["modules/jquery-mozu",
             };
 
         window.checkoutViews = checkoutViews;
+
+        checkoutViews.orderSummary.render();
 
         checkoutModel.on('complete', function() {
             CartMonitor.setCount(0);

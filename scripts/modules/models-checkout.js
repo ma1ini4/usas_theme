@@ -184,6 +184,11 @@
                     order.syncApiModel();
                     me.isLoading(true);
                     order.apiModel.getShippingMethodsFromContact().then(function (methods) {
+                        parent.unset("shippingMethodCode");
+                        order.apiModel.update({ fulfillmentInfo: parent.toJSON() })
+                        .then(function (o) {
+                            console.log("unset the shipping method");
+                        });                        
                         return parent.refreshShippingMethods(methods);
                     }).ensure(function () {
                         addr.set('candidateValidatedAddresses', null);
@@ -246,7 +251,7 @@
                     // method to the info object itself.
                     // This can only be called after the order is loaded
                     // because the order data will impact the shipping costs.
-                    me.updateShippingMethod(me.get('shippingMethodCode'), true);
+                    //me.updateShippingMethod(me.get('shippingMethodCode'), true);
                 });
             },
             relations: {
@@ -287,6 +292,9 @@
                 return this.stepStatus('complete');
             },
             updateShippingMethod: function (code, resetMessage) {
+                if(!code){
+                    code = window.checkoutViews.parentView.model.get("fulfillmentInfo").get('prevoiusSelectedMethod');
+                }
                 var available = this.get('availableShippingMethods'),
                     newMethod = _.findWhere(available, { shippingMethodCode: code }),
                     lowestValue = _.min(available, function(ob) { return ob.price; }); // Returns Infinity if no items in collection.
@@ -1797,6 +1805,11 @@
                     billingContact.set("address", null);
                 }
 
+                    if(!this.get('fulfillmentInfo').get('shippingMethodCode')){
+                        this.trigger('error',{message: Hypr.getLabel('chooseShippingMethod')});
+                        return false;
+                    }
+                    if (this.isSubmitting) return;
 
                 if (this.isSubmitting) return;
 
@@ -1857,6 +1870,7 @@
                 process.push(/*this.finalPaymentReconcile, */this.apiCheckout);
                 
                 api.steps(process).then(this.onCheckoutSuccess, this.onCheckoutError);
+                window.checkoutViews.parentView.model.get("fulfillmentInfo").unset('prevoiusSelectedMethod');
 
             },
             update: function() {
