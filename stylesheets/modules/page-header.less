@@ -1,12 +1,12 @@
-﻿@headerHeight: 154px;
+﻿@headerHeight: 145px;
 @headerBaseline: 66px;
 @searchBoxHeight: 28px;
 @utilityNavHeight: @headerBaseline - (@gutter / 2) - @searchBoxHeight;
 
 .mz-pageheader {
     position: relative;
-    height: 154px;
-    background: #e5e6e7;
+    height: @headerHeight;
+    background: @grayBackground;
     &.mz-pageheader-hasbanner {
         background: #eee url('{{themeSettings.bannerImage}}') {{ themeSettings.bannerImageRepeat }};
     }
@@ -30,24 +30,22 @@
 
     }
 
-    @media only screen {
-        @media (max-width: 768px) {
-            height: auto;
-            .mz-storebranding, .mz-searchbox, .mz-utilitynav {
-                position: relative;
-                margin-bottom: 10px;
-                clear: both;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-            }
+    @media @mobile {
+        height: auto;
+        .mz-storebranding, .mz-searchbox, .mz-utilitynav {
+            position: relative;
+            margin-bottom: 10px;
+            clear: both;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
 
-            .mz-searchbox-expands .mz-searchbox-input {
+        .mz-searchbox-expands .mz-searchbox-input {
+            width: auto;
+            &:focus {
                 width: auto;
-                &:focus {
-                    width: auto;
-                }
             }
         }
     }

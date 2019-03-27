@@ -29,6 +29,15 @@
 .text-shadow (@string: 0 1px 3px rgba(0, 0, 0, 0.25)) {
 	text-shadow: @string;
 }
+
+.clearfixsmall() {
+    &:after {
+        content: '';
+        display: block;
+        clear: both;
+	}
+}
+
 .box-shadow (@string) {
 	-webkit-box-shadow: @string;
 	-moz-box-shadow:    @string;
@@ -92,9 +101,9 @@
 	border-bottom-left-radius:          @bottomleft;
 	border-top-left-radius:             @topleft;
 
-	-moz-background-clip:    padding; 
-	-webkit-background-clip: padding-box; 
-	background-clip:         padding-box; 
+	-moz-background-clip:    padding;
+	-webkit-background-clip: padding-box;
+	background-clip:         padding-box;
 }
 
 .opacity (@opacity: 0.5) {
@@ -118,7 +127,7 @@
 	background: -o-radial-gradient(center, ellipse cover,  @startColor 0%,rgba(255,255,255,0) 50%,rgba(255,255,255,0) 100%);
 	background: -ms-radial-gradient(center, ellipse cover,  @startColor 0%,rgba(255,255,255,0) 50%,rgba(255,255,255,0) 100%);
 	background: radial-gradient(ellipse at center,  @startColor 0%,rgba(255,255,255,0) 50%,rgba(255,255,255,0) 100%);
-	
+
 }
 
 .animation (@name, @duration: 300ms, @delay: 0, @ease: ease, @direction: normal, @iteration-count: 1, @fill-mode: none, @play-state: running) {
@@ -129,10 +138,10 @@
 }
 
 .transition (@transition) {
-	-webkit-transition: @transition;  
+	-webkit-transition: @transition;
 	-moz-transition:    @transition;
-	-ms-transition:     @transition; 
-	-o-transition:      @transition;  
+	-ms-transition:     @transition;
+	-o-transition:      @transition;
 }
 .transition-delay (...) {
     -webkit-transition-delay: @arguments;
@@ -240,7 +249,7 @@
 }
 
 .formCommonSettings() {
-	outline: none;	
+	outline: none;
     padding: 6px 7px 4px;
 	font-size: @fontSize;
 	line-height:normal;
@@ -325,23 +334,185 @@
 		line-height: @height;
 	}
 }
-.button-prop() {
-	height: auto;
-	min-width: 80px;
-	color: @colorGray;
-	line-height: normal;
-	text-align: center;
-	box-sizing: border-box;
-	padding: 8px 12px;
-	font-size: @fontSize;
-	text-decoration: none;
+/* meida query mixins START */
+
+// Breakpoints
+// ------------------------- Source: http://blog.scur.pl/2012/06/variable-media-queries-less-css/
+@highdensity:         ~"only screen and (-webkit-min-device-pixel-ratio: 1.5)",
+                      ~"only screen and (min--moz-device-pixel-ratio: 1.5)",
+                      ~"only screen and (-o-min-device-pixel-ratio: 3/2)",
+			                ~"only screen and (min-device-pixel-ratio: 1.5)";
+
+@mobile:              ~"only screen and (max-width: 767px)";
+
+@mobile-sm-bootstrap: ~"only screen and (max-width : 480px)";
+
+@tablet:              ~"only screen and (max-width: 1024px)";
+
+@tablet-only:         ~"only screen and (min-width: 768px) and (max-width: 1024px)";
+
+@desktop-bootstrap:   ~"only screen and (max-width: 992px)";
+
+@desktop:             ~"only screen and (max-width: 1199px)";
+
+@desktop-only:        ~"only screen and (min-width: 1025px) and (max-width: 1199px)";
+
+@desktop-xl:          ~"only screen and (min-width: 1200px)";
+
+/*  TEMPLATE HOW TO USE
+
+section {
+	margin: 3%;
+
+	@media @mobile {
+		display: block;
+		margin-top: 4em;
+		width: 85%;
+	}
+
+	@media @tablet {
+		width: 37%;
+	}
+
+	@media @desktop, @desktop-xl {
+		width: 40%;
+	}
+}
+END TEMPLATE HOW TO USE */
+
+/* END meida query mixins */
+
+/*-------------------------------------------------------------------*/
+
+/* ICONS mixin - fontawesome START */
+
+
+/*
+HOW TO USE - UPDATED
+
+Use mixin .icon(before/aftrer, 105, solid/regular/brand, 11px);
+
+1) before/after - before or after position - :before or :after;
+
+2) 105 (second attribute) - icon number from fontawesome icons list https://fontawesome.com/icons
+example:
+
+#main {
+	...
+	.icon(before, 105, regular); Put the icon number from fontawesome icons list https://fontawesome.com/icons
+	Without first letter - Use just a number (Use 105 instead of f105).
+	...
+}
+
+Icon (>) will be added to main block on before position;
+
+IMPORTANT
+
+If you have cion number with letters like this: f1ea - Use just number without 'f' letter and use as string '1ea';
+example:
+
+#main {
+	.icon(before, '1ea', solid, 16px);
+	...
+}
+
+3) solid/regular/brand - We have three icons style types:
+Use solid for filled icons.
+Use regular for lined icons.
+Use brand for brand icons (NOTE brand icon can NOT be regular or solid).
+
+4) Icon Size uses Font size - font-size: inherit; by default; You can cahnge on what you need like just 16px, 10em or 10%
+*/
+
+.icon-prop {
+	font: normal normal normal 14px/1 'Font Awesome 5 Free';
+	display: inline-block;
+	speak: none;
+	font-size: inherit;
+	font-style: normal;
 	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	text-rendering: auto;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+/* Icon style solid, regular or brand icon */
+.icon-style(@style) when (@style = solid) {
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 900;
+}
+.icon-style(@style) when (@style = regular) {
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 400;
+}
+.icon-style(@style) when (@style = brand) {
+	font-family: 'Font Awesome 5 Brands';
+	font-weight: 400;
+}
+
+.icon (@position, @icon, @icon-style: solid, @icon-size: inherit) when (@position = before) {
+	&:before {
+		.icon-prop();
+		.icon-style(@icon-style);
+
+		content: '\f@{icon}';
+		font-size: @icon-size;
+	}
+}
+.icon (@position, @icon, @icon-style, @icon-size: inherit) when (@position = after) {
+	&:after {
+		.icon-prop();
+		.icon-style(@icon-style);
+
+		content: '\f@{icon}';
+		font-size: @icon-size;
+	}
+}
+
+/* END ICONS mixin - fontawesome */
+
+/* Buttons mixins properties START */
+.button-prop() {
+	cursor: pointer;
+	// color: white;
+	box-sizing: border-box;
+	text-transform: uppercase;
+	height: auto;
+	text-decoration: none;
+  font-size: 16px;
+	font-weight: normal;
+	line-height: 1em;
+	// background: @secondaryColor;
+	display: inline-flex;
+	align-items: center;
+	border: 0;
+
+	.transition(all 0.3s);
+
+	// .icon(after, 105, solid);
+
+	// &:after {
+	// 	font-size: 20px;
+	// 	margin-left: 6px;
+  //       margin-top: -1px;
+	// }
+
+	&:hover {
+        background: @secondaryButtonCollor;
+        // color: @primaryColor;
+	}
+
 }
 .button-focus() {
 	&:focus{
-        box-shadow: none;
         outline: thin dotted;
-        color: @colorGray;
-        text-decoration: none;
+        // color: @colorGray;
+        box-shadow: none;
+		    text-decoration: none;
     }
 }
+/* END Buttons mixins properties */
