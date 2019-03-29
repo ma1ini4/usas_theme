@@ -10,7 +10,11 @@
     &.mz-pageheader-hasbanner {
         background: #eee url('{{themeSettings.bannerImage}}') {{ themeSettings.bannerImageRepeat }};
     }
-    padding: @gutter/2 @gutter 0;
+    // padding: @gutter/2 @gutter 0;
+
+      @media @mobile {
+        height: auto;
+      }
 
     .mz-storebranding {
         position: absolute;
@@ -31,7 +35,6 @@
     }
 
     @media @mobile {
-        height: auto;
         .mz-storebranding, .mz-searchbox, .mz-utilitynav {
             position: relative;
             margin-bottom: 10px;

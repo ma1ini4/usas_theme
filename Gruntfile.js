@@ -172,7 +172,8 @@ module.exports = function (grunt) {
       upload: {
         options: {
           'action': 'upload',
-          'noclobber': true
+          'noclobber': true,
+          'ignoreChecksum': true
         },
         src: [
           'admin/**/*',

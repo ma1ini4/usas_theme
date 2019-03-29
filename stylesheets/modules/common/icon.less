@@ -10,3 +10,99 @@
 	width: 16px;
 	height: 16px;
 }
+
+@font-face {
+  font-family: 'usas-icons';
+  src:  url('../resources/fonts/usas-icons.eot?ecb4cv');
+  src:  url('../resources/fonts/usas-icons.eot?ecb4cv#iefix') format('embedded-opentype'),
+    url('../resources/fonts/usas-icons.ttf?ecb4cv') format('truetype'),
+    url('../resources/fonts/usas-icons.woff?ecb4cv') format('woff'),
+    url('../resources/fonts/usas-icons.svg?ecb4cv#usas-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.usas-icon-prop {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'usas-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.header-nav-icon {
+	position: relative;
+	padding-right: 5px;
+	font-size: 21px;
+	color: @secondaryColor;
+}
+
+.usas-icon (@icon) {
+	&:before {
+		content: @icon;
+	}
+	.usas-icon-prop();
+}
+
+@icon-arrow-left: "\e900";
+@icon-arrow-right: "\e901";
+@icon-burger-menu: "\e902";
+@icon-cart: "\e903";
+@icon-chevron-left: "\e904";
+@icon-chevron-right: "\e905";
+@icon-circle-check-path1: "\e906";
+@icon-circle-check-path2: "\e907";
+@icon-close-circle-path1: "\e908";
+@icon-close-circle-path2: "\e909";
+@icon-close-circle-path3: "\e90a";
+@icon-close-square: "\e90b";
+@icon-delivery: "\e90c";
+@icon-profile: "\e90d";
+@icon-services: "\e90e";
+
+
+	.usas-icon-profile {
+		.usas-icon(@icon-profile);
+		.header-nav-icon;
+	}
+	.usas-icon-services {
+		.usas-icon(@icon-services);
+		.header-nav-icon;
+	}
+	.usas-icon-delivery {
+		.usas-icon(@icon-delivery);
+		.header-nav-icon;
+	}
+	.usas-icon-cart {
+		.usas-icon(@icon-cart);
+		.header-nav-icon;
+		margin-right: 12px;
+
+		@media @mobile {
+			font-size: 30px;
+
+			.ml-header-global-cart-count {
+				width: 17px !important;
+				height: 17px !important;
+			}
+		}
+	}
+	.usas-icon-burger-menu {
+		.usas-icon(@icon-burger-menu);
+		font-size: 40px;
+		color: @primaryColor;
+		vertical-align: middle;
+	}
+	.usas-icon-close-square {
+		.usas-icon(@icon-close-square);
+		font-size: 17px;
+		color: white;
+		vertical-align: top;
+	}
