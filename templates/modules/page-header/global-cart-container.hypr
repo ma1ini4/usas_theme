@@ -1,11 +1,11 @@
 <a class="mz-utilitynav-link mz-utilitynav-link-cart" href="{% make_url "cart" %}">
-	<div class="ml-icon ml-icon-global-cart">
+	<div class="usas-icon-cart">
 		<span class="ml-header-global-cart-count"><b><span class="mz-cartmonitor" data-mz-role="cartcount">0</span></b></span>
 	</div>
-	<div class="ml-header-global-cart-text">
+	<span class="ml-header-global-cart-price" data-mz-role="cartamount"></span>
+	<!-- <div class="ml-header-global-cart-text">
 		<span class="ml-header-global-cart-label">{{ labels.viewCart }} </span>
-		<span class="ml-header-global-cart-price" data-mz-role="cartamount"></span>
-	</div>	
+	</div>	 -->
 </a>
 
 <div id="global-cart">

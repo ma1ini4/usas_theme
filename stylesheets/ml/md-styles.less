@@ -1,83 +1,104 @@
+@media @desktop-bootstrap {
+  .mz-pageheader {
+    height: 125px;
+  }
+  .ml-header-logo-wrapper {
+    width: 25%;
+  }
+  .ml-header-right-container {
+    width: 70%;
+
+    .mz-utilitynav-item{
+      margin: 0;
+      font-size: 14px;
+
+      .usas-icon {
+        margin-right: 6px;
+      }
+    }
+  }
+
+}
 @media (min-width: 992px) {
     //Start
     //Header
-    .mz-pageheader {
-        height: 91px;
-        .ml-header-content {
-            height: 91px;
-            .ml-header-logo-wrapper {
-                position: absolute;
-                top: 23px;
-                right: auto;
-                bottom: auto;
-                left: 0;
-                .logo {
-                    width: 313px;
-                    height: 52px;
-                    background-image: url('../resources/images/logo-sm.png');
-                    background-repeat: no-repeat;
-                }
-            }
-            .ml-header-search-wrapper {
-                width: 345px;
-                position: absolute;
-                top: 38px;
-                right: auto;
-                bottom: auto;
-                left: 35%;
-            }
-            .ml-header-links-wrapper {
-                position: absolute;
-                top: 10px;
-                right: -19px;
-                bottom: auto;
-                left: auto;                
-            }
-            .ml-header-global-cart-wrapper {
-                position: absolute;
-                top: auto;
-                right: 2px;
-                bottom: 15px;
-                left: auto;
-                background: inherit;
-                border: 0;
-                padding: 2px 0 5px 5px;
-	            .ml-header-global-cart-label {
-                    display: inline-block;
-                    font-weight: bold;
-                    padding-bottom: 5px;                    
-	            }                
-            }
-        }
-    }
+    // .mz-pageheader {
+    //     height: 91px;
+    //     .ml-header-content {
+    //         height: 91px;
+    //         .ml-header-logo-wrapper {
+    //             position: absolute;
+    //             top: 23px;
+    //             right: auto;
+    //             bottom: auto;
+    //             left: 0;
+    //             .logo {
+    //                 width: 313px;
+    //                 height: 52px;
+    //                 background-image: url('../resources/images/logo-sm.png');
+    //                 background-repeat: no-repeat;
+    //             }
+    //         }
+    //         .ml-header-search-wrapper {
+    //             width: 345px;
+    //             position: absolute;
+    //             top: 38px;
+    //             right: auto;
+    //             bottom: auto;
+    //             left: 35%;
+    //         }
+    //         .ml-header-links-wrapper {
+    //             position: absolute;
+    //             top: 10px;
+    //             right: -19px;
+    //             bottom: auto;
+    //             left: auto;
+    //         }
+    //         .ml-header-global-cart-wrapper {
+    //             position: absolute;
+    //             top: auto;
+    //             right: 2px;
+    //             bottom: 15px;
+    //             left: auto;
+    //             background: inherit;
+    //             border: 0;
+    //             padding: 2px 0 5px 5px;
+	  //           .ml-header-global-cart-label {
+    //                 display: inline-block;
+    //                 font-weight: bold;
+    //                 padding-bottom: 5px;
+	  //           }
+    //         }
+    //     }
+    // }
     //Navigation
-    .mz-sitenav {
-        display: block;
-        .mz-sitenav-link {
-            font-size: 14px;
-        }
-        .ml-navbar-separator {
-            &:after {
-                margin: 8px 15px;
-            }
-        }
-        .mz-sitenav-sub-container{
-            .sub-level-image, .sub-level-col {
-                width: 230px;
-                min-width: 225px;
-                img {
-                    max-width: 100%;
-                }
-                h2{
-                    font-size: 18px;
-                    padding-top: 0px;
-                }
-                a{
-                    font-weight: normal;
-                }
-            }
-        }
-    }
+    // .mz-sitenav {
+    //     display: block;
+    //     .mz-sitenav-link {
+    //         font-size: 14px;
+    //     }
+    //     .ml-navbar-separator {
+    //         &:after {
+    //             margin: 8px 15px;
+    //         }
+    //     }
+    //     .mz-sitenav-sub-container{
+    //         .sub-level-image, .sub-level-col {
+    //             width: 230px;
+    //             min-width: 225px;
+    //             img {
+    //                 max-width: 100%;
+    //             }
+    //             h2{
+    //                 font-size: 18px;
+    //                 padding-top: 0px;
+    //             }
+    //             a{
+    //                 font-weight: normal;
+    //             }
+    //         }
+    //     }
+    // }
     // Common to both List and Grid View
         .mz-productlisting-image {
             position: relative;
@@ -110,7 +131,7 @@
         // Grid View
         .grid-view {
             .mz-productlist-item {
-                .mz-productlisting-info {            
+                .mz-productlisting-info {
                     padding: 0 10px;
                 }
                 .mz-productlisting-image {
@@ -127,9 +148,9 @@
         .list-view{
             .product-image-swatch-wrapper {
                 max-width: 265px;
-                img, 
+                img,
                 .mz-productlisting-image{
-                    img, 
+                    img,
                     .mz-productlisting-imageplaceholder {
                         max-height: 265px;
                         >.mz-productlisting-imageplaceholdertext {
@@ -145,7 +166,7 @@
             .ml-product-price-wrapper{
                 display: block;
                 float: left;
-            }            
+            }
         }
         // Common to both List and Grid View
         .mz-productlisting-image {
