@@ -142,32 +142,22 @@
             {% include "modules/page-footer" %}
             {% endblock page-footer %}
 
-            <div class="mz-pagefooter-copyright redBG">
-              {% block copyright-footer %}
-
-              <div class="container">
-                <div class="row">
-                  <div class="col-sm-8 col-xs-12">
-                    <div id="copyright">
-                      <span class="mz-pagefooter-copyrighttext">
-                        &copy; {% now Y %}
-                        {{ siteContext.generalSettings.websiteName }}. All rights reserved. Product prices apply to US orders only.
-                      </span>
+            {% block copyright-footer %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="mz-pagefooter-copyright" id="copyright">
+                                <span class="mz-pagefooter-copyrighttext">
+                                    &copy; {% now Y %}
+                                </span>
+                                {{ siteContext.generalSettings.websiteName }}. {% dropzone "copyright" scope="site" %}
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-4 col-xs-12">
-                  <div id="copyright">
-                    <div class="mz-pagefooter-copyright-links">
-                      <a href="#">Site map</a> |
-                      <a href="#">Privacy and security</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {% endblock copyright-footer%}
-            </div>
+            {% endblock copyright-footer%}
 
-          </div>
+        </div>
 
         {% block trailing-scripts %}
         {% include "modules/trailing-scripts" %}
