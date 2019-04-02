@@ -6,8 +6,9 @@ define([
     function calculatingSubPosition() {
         var leftReference = $(".ml-header-content").offset().left,
             rightReference = leftReference + $(".ml-header-content").outerWidth(),
-            colWidth = $(document).width() > 991 ? 235 : 175;
-        $(".mz-sitenav-sub-container").css({ "left": 0, "right": "auto" }).addClass("calculating-position").removeClass("calculated-position").each(function() {
+            colWidth = $(document).width() > 991 ? 235 : 175,
+            navHeight = $('.mz-sitenav-list').height();
+        $(".mz-sitenav-sub-container").css({ "top": navHeight, "right": "auto" }).addClass("calculating-position").removeClass("calculated-position").each(function() {
             var currentElemnt = $(this),
                 leftPosition = -10,
                 rightPosition = 0,
