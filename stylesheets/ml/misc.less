@@ -432,43 +432,43 @@
 }
 
 //Secondary navigation
-.ml-navbar-secondary {
-    .container {
-        padding: 0;
-        .panel + .panel {
-            margin-top: 0;
-        }
-    }
-    .panel {
-        border-radius: 0 !important;
-        .panel-heading{
-            padding :0;
-        }
-    }
-    .panel-title {
-        a {
-            padding: 10px 15px;
-            display: block;
-            text-decoration: none;
-            &[aria-expanded=true] {
-                color: #fff;
-                background: #373433;
-            }
-        }
-        .collapsed {
-            .glyphicon-test:before {
-                content: "\002b";
-            }
-        }
-        .glyphicon-test:before {
-            content: "\2212";
-        }
-    }
-
-    @media only screen and (min-width: 768px) {
-      display: none!important;
-    }
-}
+// .ml-navbar-secondary {
+//     .container {
+//         padding: 0;
+//         .panel + .panel {
+//             margin-top: 0;
+//         }
+//     }
+//     .panel {
+//         border-radius: 0 !important;
+//         .panel-heading{
+//             padding :0;
+//         }
+//     }
+//     .panel-title {
+//         a {
+//             padding: 10px 15px;
+//             display: block;
+//             text-decoration: none;
+//             &[aria-expanded=true] {
+//                 color: #fff;
+//                 background: #373433;
+//             }
+//         }
+//         .collapsed {
+//             .glyphicon-test:before {
+//                 content: "\002b";
+//             }
+//         }
+//         .glyphicon-test:before {
+//             content: "\2212";
+//         }
+//     }
+//
+//     @media only screen and (min-width: 768px) {
+//       display: none!important;
+//     }
+// }
 .mz-checkout {
     .ml-header-search-wrapper, .mz-utilitynav-item, .ml-header-global-cart-wrapper, #global-header-wrapper{
         display: none!important;
@@ -2600,7 +2600,7 @@ ul.tabs {
 
 
 //Secondary navigation
-.ml-navbar-secondary {
+#ml-nav.ml-navbar-secondary {
     .container {
         padding: 0;
         .panel + .panel {
@@ -2609,46 +2609,87 @@ ul.tabs {
     }
     .panel-group{
         margin-bottom: 0px;
+        border-bottom: 1px solid @primaryColor;
+    
         .panel {
             .border-radius-plain(0px);
             border: none;
             box-shadow: none;
-            .panel-heading{
-                padding :0;
+            .panel-heading {
+                padding: 0;
                 background: @colorWhite;
-                border-top:1px solid @colorLightGray;
-                .border-radius-plain(0px);
-            }
-            .panel-group{
-                border-bottom:1px solid @colorLightGray;
-            }
+                border-top: 1px solid @primaryColor;
+                // .border-radius-plain(0px);
 
-        }
-    }
-    .panel-title {
-        a {
-            padding: 10px @defaultGutter;
-            display: block;
-            text-decoration: none;
 
-            &[aria-expanded=true] {
-                color: @colorWhite;
-                background: #373433;
-                .glyphicon{
-                    color: @colorWhite;
+                .panel-title {
+
+                  a {
+                      padding: 10px @defaultGutter;
+                      font-size: 20px;
+                      display: block;
+                      text-decoration: none;
+                  }
+
+                  .collapsed {
+                      .glyphicon-test {
+                          // content: "\002b";
+                          .icon(before, '152', solid, 20px);
+                          color: @primaryColor
+                      }
+
+                  }
+                  .glyphicon-test {
+                    // content: "\2212";
+                    .icon(before, '150', solid, 20px);
+                     color: @primaryColor
+                  }
+
+                  &-sub {
+                    margin: 0;
+
+                    a {
+                      margin: 0;
+                      padding: 8px 40px;
+                      font-size: 20px;
+
+                      display: block;
+                      text-decoration: none;
+                    }
+
+                  }
+
+                }
+
+                .panel-title-sub-nolink {
+                  margin: 0;
+                  padding: 8px 40px;
+                  font-size: 20px;
+                  font-weight: @bold;
+                  text-transform: @uppercase;
                 }
             }
-        }
-        .collapsed {
-            .glyphicon-test:before {
-                content: "\002b";
+            .panel-group{
+                border-bottom: 1px solid @ghostWhite;
             }
-        }
-        .glyphicon-test:before {
-            content: "\2212";
+
         }
     }
+
     .panel-collapse{
+      .panel-body {
+        padding: 0;
+
+        .panel-container {
+          .panel-heading {
+            border-top: 1px solid @ghostWhite;
+          }
+
+          &:not(:last-child) {
+            margin-bottom: 30px;
+          }
+        }
+      }
 
         .mz-sitenav-item{
             &+.mz-sitenav-item{

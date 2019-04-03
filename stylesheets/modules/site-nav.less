@@ -51,6 +51,10 @@
 
 
         &:hover .mz-sitenav-sub-container {
+            .row {
+              display: flex;
+            }
+            
             visibility: visible;
             .transition-delay(0s);
             .sub-level-col {
@@ -58,8 +62,25 @@
                 // display: table-cell;
                 // padding-top: 10px;
 
+                .sub-level-heading {
+                  display: block;
+                  text-align: left;
+                  color: @headingColor;
+                  font-weight: @bold;
+                  font-size: 14px;
+                  text-transform: @uppercase;
+
+                  &:not(:first-child) {
+                    margin-top: 25px;
+                  }
+                }
+
                 .sub-level-li {
                   padding: 0;
+
+                  a {
+                    text-transform: none;
+                  }
 
                 }
 
