@@ -2624,15 +2624,17 @@ ul.tabs {
                 padding: 0;
                 background: @colorWhite;
                 border-top: 1px solid @primaryColor;
-                // .border-radius-plain(0px);
-
+                border-radius: 0px;
 
                 .panel-title {
 
                   a {
+                      display: flex;
+                      width: 100%;
+                      justify-content: space-between;
+                      align-items: center;
                       padding: 10px @defaultGutter;
                       font-size: 20px;
-                      display: block;
                       text-decoration: none;
                   }
 
@@ -2640,14 +2642,16 @@ ul.tabs {
                       .glyphicon-test {
                           // content: "\002b";
                           .icon(before, '152', solid, 27px);
-                          color: @primaryColor
+                          color: @primaryColor;
+                          top: 0;
                       }
 
                   }
                   .glyphicon-test {
                     // content: "\2212";
                     .icon(before, '150', solid, 27px);
-                     color: @primaryColor
+                     color: @primaryColor;
+                     top: 0;
                   }
 
                   &-sub {
