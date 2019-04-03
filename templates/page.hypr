@@ -110,11 +110,14 @@
                 {% include "modules/utility-bar/header" %}
             {% endblock utility-bar %}
             {% block page-header %}
-				{% include "modules/page-header" %}
-			   {% endblock page-header %}
+				      {% include "modules/page-header" %}
+			      {% endblock page-header %}
             {% block site-nav %}
-				{% include "modules/site-nav" %}
+				        {% include "modules/site-nav" %}
             {% endblock site-nav %}
+          {% block secondary-nav %}
+            {% include "modules/secondary-nav" %}
+          {% endblock secondary-nav %}
             <div role="main" id="page-content" class="mz-l-pagecontent">
                 <div class="container">
                 <div class="row">
@@ -134,9 +137,6 @@
                     </div>
                 </div>
             </div>
-            {% block secondary-nav %}
-             {% include "modules/secondary-nav" %}
-            {% endblock secondary-nav %}
 
             {% block page-footer %}
             {% include "modules/page-footer" %}
