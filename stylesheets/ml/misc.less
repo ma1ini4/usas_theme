@@ -2607,10 +2607,15 @@ ul.tabs {
             margin-top: 0;
         }
     }
+
+    .panel-body {
+      border: none;
+    }
+
     .panel-group{
         margin-bottom: 0px;
         border-bottom: 1px solid @primaryColor;
-    
+
         .panel {
             .border-radius-plain(0px);
             border: none;
@@ -2634,14 +2639,14 @@ ul.tabs {
                   .collapsed {
                       .glyphicon-test {
                           // content: "\002b";
-                          .icon(before, '152', solid, 20px);
+                          .icon(before, '152', solid, 27px);
                           color: @primaryColor
                       }
 
                   }
                   .glyphicon-test {
                     // content: "\2212";
-                    .icon(before, '150', solid, 20px);
+                    .icon(before, '150', solid, 27px);
                      color: @primaryColor
                   }
 
@@ -2682,6 +2687,7 @@ ul.tabs {
 
         .panel-container {
           .panel-heading {
+            margin: 0 7px;
             border-top: 1px solid @ghostWhite;
           }
 
