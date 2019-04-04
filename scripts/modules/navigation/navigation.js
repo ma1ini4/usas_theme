@@ -41,9 +41,11 @@ define([
         searchContainer.css({'border-top': '1px solid #CC2036', 'background-color': '#fff'});
         cartIcon.css({'margin-right': '14px'});
       } else if (burgerMenuLink.hasClass('collapsed')){
-        navContainer.css({'border-left': 'none', 'border-top': 'none', 'background-color': 'transparent'});
-        searchContainer.css({'border-top': 'none', 'background-color': 'transparent'});
-        cartIcon.css({'margin-right': '15px'});
+        setTimeout(function () {
+          navContainer.css({'border-left': 'none', 'border-top': 'none', 'background-color': 'transparent'});
+          searchContainer.css({'border-top': 'none', 'background-color': 'transparent'});
+          cartIcon.css({'margin-right': '15px'});          
+        }, 150);
       }
     }
     function removeMobileNavStyles() {
@@ -67,7 +69,7 @@ define([
           // outlineMobileNavOnCollapse();
           setTimeout(function () {
             outlineMobileNavOnCollapse();
-          }, 100);
+          }, 50);
         });
     });
     $(window).resize(function() {
