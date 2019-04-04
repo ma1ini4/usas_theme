@@ -51,6 +51,7 @@
 	.usas-icon-prop();
 }
 
+@icon-close-large: "\e90f";
 @icon-arrow-left: "\e900";
 @icon-arrow-right: "\e901";
 @icon-burger-menu: "\e902";
@@ -98,6 +99,13 @@
 	}
 	.usas-icon-burger-menu {
 		.usas-icon(@icon-burger-menu);
+		font-size: 40px;
+		color: @primaryColor;
+		vertical-align: middle;
+	}
+	.usas-icon-close-menu {
+		.usas-icon(@icon-close-large);
+		display: none;
 		font-size: 40px;
 		color: @primaryColor;
 		vertical-align: middle;
