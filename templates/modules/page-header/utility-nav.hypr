@@ -7,7 +7,7 @@
         -->
         <li class="mz-utilitynav-item navbar-collapse-control">
             <a data-target="#ml-nav"  data-toggle="collapse" class="mz-utilitynav-link collapsed">
-                {% dropzone "products-collapsible-label" scope="site" %}
+                <!-- {% dropzone "products-collapsible-label" scope="site" %} -->
                 <span class="usas-icon-burger-menu" aria-hidden="true"></span>
             </a>
         </li>

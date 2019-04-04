@@ -52,6 +52,7 @@ define([
           searchContainer = $('.ml-header-search-wrapper');
       if ($(window).width() >= 767) {
         burgerMenuLink.addClass('collapsed').attr('aria-expanded', 'false');
+        $('#ml-nav').removeClass('collapse in').addClass('collapse').attr('aria-expanded', 'false');
         navContainer.css({'border-left': 'none', 'border-top': 'none', 'background-color': 'transparent'});
         searchContainer.css({'border-top': 'none', 'background-color': 'transparent'});
       }
