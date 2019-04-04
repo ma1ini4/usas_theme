@@ -51,7 +51,6 @@ define([
           $(closeIcon).hide();
         }, 150);
       }
-      console.log(burgerMenuLink, burgerIcon, closeIcon);
     }
     function removeMobileNavStyles() {
       var burgerMenuLink = $('.mz-utilitynav .mz-utilitynav-link'),
