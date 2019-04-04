@@ -10,7 +10,7 @@
 
 		.ml-header-content {
 			padding: 0 0 60px 0;
-			align-content:flex-end;
+			align-content: center;
 
 			.ml-header-logo-wrapper {
 				width: 75%;
@@ -29,38 +29,43 @@
 
 				.ml-header-search-wrapper {
 					position: absolute;
-					bottom: 0;
+					bottom: -0.9px;
 					right: 0;
 					width: 100%;
-					padding: 0 15px;
+					padding: 12px 15px 0 15px;
 				}
 
 				.ml-header-user-welcome {
 					display: block;
 					color: @secondaryColor;
 					font-size: 14px;
-					margin: 10px 20px 0 0;
-					padding: 5px 0 0 0;
+					margin: 5px 20px 0 0;
+					padding: 0 0 0 15px;
 					white-space: nowrap;
 				}
 
 				.ml-header-links-wrapper {
 					display: flex;
 					align-items:flex-end !important;
-					padding-bottom: 10px;
 
 
 					.mz-utilitynav {
-						margin: 0 !important;
+						margin: 0 0 -5px 0!important;
 						order: 2;
+						padding: 10px 0 20px 15px;
 
 						.mz-utilitynav-item {
 							padding: 0 15px 0 0 !important;
+							font-size: 7px;
 						}
 					}
 
 					.mz-utilitynav-item:not(.navbar-collapse-control)  {
 						display: none;
+					}
+
+					.ml-header-global-cart-wrapper {
+						padding-bottom: 15px;
 					}
 
 					.mz-utilitynav-link-cart {

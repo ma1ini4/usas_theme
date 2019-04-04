@@ -31,15 +31,47 @@ define([
             currentElemnt.css({ "left": leftPosition, "right": rightPosition });
         }).removeClass("calculating-position").addClass("calculated-position");
     }
+    function outlineMobileNavOnCollapse() {
+      var burgerMenuLink = $('.mz-utilitynav .mz-utilitynav-link'),
+          navContainer = $('.mz-utilitynav'),
+          searchContainer = $('.ml-header-search-wrapper'),
+          cartIcon = $('.usas-icon-cart');
+      if (!burgerMenuLink.hasClass('collapsed')) {
+        navContainer.css({'border-left': '1px solid #CC2036', 'border-top': '1px solid #CC2036', 'background-color': '#fff'});
+        searchContainer.css({'border-top': '1px solid #CC2036', 'background-color': '#fff'});
+        cartIcon.css({'margin-right': '14px'});
+      } else if (burgerMenuLink.hasClass('collapsed')){
+        navContainer.css({'border-left': 'none', 'border-top': 'none', 'background-color': 'transparent'});
+        searchContainer.css({'border-top': 'none', 'background-color': 'transparent'});
+        cartIcon.css({'margin-right': '15px'});
+      }
+    }
+    function removeMobileNavStyles() {
+      var burgerMenuLink = $('.mz-utilitynav .mz-utilitynav-link'),
+          navContainer = $('.mz-utilitynav'),
+          searchContainer = $('.ml-header-search-wrapper');
+      if ($(window).width() >= 767) {
+        burgerMenuLink.addClass('collapsed').attr('aria-expanded', 'false');
+        navContainer.css({'border-left': 'none', 'border-top': 'none', 'background-color': 'transparent'});
+        searchContainer.css({'border-top': 'none', 'background-color': 'transparent'});
+      }
+    }
     $(document).ready(function() {
         try {
             $('.sub-nav-section li:has(.sub-dropdown-menu)').doubletaptogo();
         } catch (e0) {
             //console.log('Error in loading: ' + e0);
         }
+        $('.mz-utilitynav .mz-utilitynav-link').click(function() {
+          // outlineMobileNavOnCollapse();
+          setTimeout(function () {
+            outlineMobileNavOnCollapse();
+          }, 100);
+        });
     });
     $(window).resize(function() {
         calculatingSubPosition();
+        removeMobileNavStyles();
     });
     $('.sub-level-col.col-sm-3').each(function(index, el) {
         var html = $(el).html().trim();
