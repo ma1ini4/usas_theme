@@ -55,12 +55,16 @@ define([
     function removeMobileNavStyles() {
       var burgerMenuLink = $('.mz-utilitynav .mz-utilitynav-link'),
           navContainer = $('.mz-utilitynav'),
-          searchContainer = $('.ml-header-search-wrapper');
+          searchContainer = $('.ml-header-search-wrapper'),
+          burgerIcon = burgerMenuLink[0].children[0],
+          closeIcon = burgerMenuLink[0].children[1];
       if ($(window).width() >= 767) {
         burgerMenuLink.addClass('collapsed').attr('aria-expanded', 'false');
         $('#ml-nav').removeClass('collapse in').addClass('collapse').attr('aria-expanded', 'false');
         navContainer.css({'border-left': 'none', 'border-top': 'none', 'background-color': 'transparent'});
         searchContainer.css({'border-top': 'none', 'background-color': 'transparent'});
+        $(burgerIcon).show();
+        $(closeIcon).hide();
       }
     }
     $(document).ready(function() {
