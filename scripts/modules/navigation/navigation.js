@@ -39,14 +39,14 @@ define([
           closeIcon = burgerMenuLink[0].children[1],
           cartIcon = $('.usas-icon-cart');
       if (!burgerMenuLink.hasClass('collapsed')) {
-        navContainer.css({'border-left': '1px solid #CC2036', 'border-top': '1px solid #CC2036', 'background-color': '#fff'});
-        searchContainer.css({'border-top': '1px solid #CC2036', 'background-color': '#fff'});
+        navContainer.toggleClass('expanded');
+        searchContainer.toggleClass('expanded');
         $(burgerIcon).hide();
         $(closeIcon).show();
       } else if (burgerMenuLink.hasClass('collapsed')){
         setTimeout(function () {
-          navContainer.css({'border-left': 'none', 'border-top': 'none', 'background-color': 'transparent'});
-          searchContainer.css({'border-top': 'none', 'background-color': 'transparent'});
+          navContainer.toggleClass('expanded');
+          searchContainer.toggleClass('expanded');
           $(burgerIcon).show();
           $(closeIcon).hide();
         }, 150);

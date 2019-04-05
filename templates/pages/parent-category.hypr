@@ -10,9 +10,9 @@
 {% require_script "pages/category" %}
 
 <div data-mz-category="{{model.categoryId}}" class="mz-l-container">
-    <h1 class="mz-pagetitle parent-heading">{{ model.name|replace(themeSettings.columnBreaker,"")|replace("_"," ")|safe }}</h1>
-    <div class="row">
+    <div class="row flex">
         <div data-mz-facets class="mz-l-sidebar col-xs-12 col-sm-3 new-hierarchy">
+          <h1 class="mz-pagetitle parent-heading">{{ model.name|replace(themeSettings.columnBreaker,"")|replace("_"," ")|safe }}</h1>
             {% for link in navigation.tree %}
             {% if not link.isHidden and not link.isEmpty and link.nodeType != "page" %}
             {% if model.categoryId==link.originalId or model.categoryId==link.categoryCode %}
@@ -34,10 +34,13 @@
             {%endif%}
             {% endfor %}
         </div>
-        <div class=" col-xs-12 col-sm-9">
+        <div class="col-xs-12 col-sm-9 content-container">
+            {% block breadcrumbs %}
+                {% include "modules/breadcrumbs" %}
+            {% endblock breadcrumbs %}
             {% dropzone "parent-category-page-top" scope="page" %}
+            {% dropzone "parent-category-page-bottom" scope="page" %}
         </div>
     </div>
-    {% dropzone "parent-category-page-bottom" scope="page" %}
 </div>
 {% endblock body-content %}
