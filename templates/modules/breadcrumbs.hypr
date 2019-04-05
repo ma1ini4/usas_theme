@@ -5,7 +5,7 @@
    {% endif %}
   {% for crumb in navigation.breadcrumbs %}
     {% if not crumb.isHidden %}
-    <span class="mz-breadcrumb-separator">/</span>
+    <span class="mz-breadcrumb-separator">></span>
       {% if not forloop.last %}
         <a href="{{crumb.url}}" class="mz-breadcrumb-link{% if forloop.first %} is-first{% endif %}">{{crumb.name|safe}}</a>
       {% else %}

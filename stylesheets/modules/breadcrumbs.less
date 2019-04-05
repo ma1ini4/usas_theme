@@ -1,14 +1,16 @@
 ﻿.mz-breadcrumbs {
+  margin: 25px 0;
+
     .mz-breadcrumb-link {
-        .permalink(#666);
+        .permalink(@headingColor);
     }
     .mz-breadcrumb-current {
         font-weight: bold;
-        color: @textColor;
+        color: @headingColor;
     }
     .mz-breadcrumb-separator {
         display: inline-block;
-        font-size: @fontSizeSmall;
+        font-size: 14px;
         margin: 0 2px;
     }
 }
