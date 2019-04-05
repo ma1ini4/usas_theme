@@ -119,8 +119,8 @@
             {% include "modules/secondary-nav" %}
           {% endblock secondary-nav %}
             <div role="main" id="page-content" class="mz-l-pagecontent">
-                <div class="container margin-auto">
-                <div class="row margin-auto">
+                <div class="container">
+                <div class="row">
                    <!--  {% block breadcrumbs %}
                     {% if themeSettings.showBreadcrumbs %}
                     {% include "modules/breadcrumbs" %}
