@@ -1738,19 +1738,27 @@ ul.tabs {
         display: none;
         .btn-group {
             .btn {
-                color: #000;
-                border: 1px solid #ccc;
-                height: 33px;
-                font-size: 13px;
-                line-height: 14px;
-                padding: 8px 10px;
+                display: flex;
+                align-items: center;
+                height: 41px;
+                padding: 10px 15px;
+                border: 2px solid @lightBorder;
+                color: @headingColor;
+                font-size: 14px;
+                line-height: 15px;
                 letter-spacing: 1px;
+
+                &:nth-child(2) {
+                  border-right: none;
+                  border-left: none;
+                } 
+
                 &.selected {
-                    background-color: #e1e1e1;
+                    background-color: @ghostWhite;
                     cursor: default;
                 }
                 &:hover{
-                    color: #333;
+                    color: @headingColor;
                     background-color: #eee;
                 }
                 &:focus{
@@ -1762,10 +1770,37 @@ ul.tabs {
             }
         }
     }
-    .pagination{
-        margin: 0;
-        a,span{
-            color: #000;
+    .pagination {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      li span {
+        display: flex;
+        align-items: center;
+        height: 41px;
+        padding: 10px 15px;
+        border: 2px solid @lightBorder;
+        color: @headingColor;
+        font-size: 14px;
+        line-height: 15px;
+        letter-spacing: 1px;
+
+        i {
+          display: flex;
+          align-items: center;
+          height: 100%;
+          margin-top: 2px;
+        }
+
+        &.is-current {
+          font-weight: @regular;
+        }
+      }
+
+        a, span{
+            color: @headingColor;
         }
     }
     .mz-pricestack-price-upper{
