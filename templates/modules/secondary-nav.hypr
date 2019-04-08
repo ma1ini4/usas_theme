@@ -66,6 +66,11 @@
                       </div>
                       {% endif %}
                       {% endfor %}
+                      <div class="panel">
+                        <div class="panel-heading">
+                          <h4 class="panel-title-sub-nolink"></h4>
+                        </div>
+                      </div>
 
                       </div>
 
@@ -107,6 +112,11 @@
                       </div>
                       {% endif %}
                       {% endfor %} -->
+                        <div class="panel">
+                          <div class="panel-heading">
+                            <h4 class="panel-title-sub-nolink"></h4>
+                          </div>
+                        </div>
 
                       </div>
 
@@ -116,7 +126,11 @@
                             <h4 class="panel-title-sub-nolink">Accessories</h4>
                           </div>
                         </div>
-
+                        <div class="panel">
+                          <div class="panel-heading">
+                            <h4 class="panel-title-sub-nolink"></h4>
+                          </div>
+                        </div>
                       </div>
 
                       <div class="panel-container">
@@ -125,7 +139,11 @@
                             <h4 class="panel-title-sub-nolink">Specials</h4>
                           </div>
                         </div>
-
+                        <div class="panel">
+                          <div class="panel-heading">
+                            <h4 class="panel-title-sub-nolink"></h4>
+                          </div>
+                        </div>
                       </div>
 
                     </div>
