@@ -55,8 +55,5 @@
         <div class="ml-product-price-wrapper">
             {% include "modules/product/price-stack" %}
         </div>
-        <div class="mz-directory-ratings">
-            {% include "modules/product/product-ratings" %}
-        </div>
     </div>
 </div>
