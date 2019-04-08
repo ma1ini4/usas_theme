@@ -53,9 +53,9 @@
 
 		<div class="mz-l-paginatedlist pull-right{% if model.facets %} col-xs-12 {%else%} col-xs-12{% endif %}">
 			<div class="mz-l-paginatedlist-header">
-				<div data-mz-pageview class="mz-pageview">
+				<!-- <div data-mz-pageview class="mz-pageview">
 					{% include "modules/common/page-view" %}
-				</div>
+				</div> -->
 				<div data-mz-pagenumbers class="mz-pagenumbers">
 					{% include "modules/common/page-numbers" %}
 				</div>
@@ -67,9 +67,9 @@
 				{% include "modules/product/product-list-tiled" %}
 			</div>
 			<div class="mz-l-paginatedlist-footer">
-				<div class="back-to-top">
+				<!-- <div class="back-to-top">
 					<button class="tertiary-btn">{{ labels.backToTop }}</button>
-				</div>
+				</div> -->
 				<div data-mz-pagenumbers class="mz-pagenumbers">
 					{% include "modules/common/page-numbers" %}
 				</div>
