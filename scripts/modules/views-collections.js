@@ -147,7 +147,7 @@ define([
                             displayValue = displayValue.replace("[", "$").replace("]", "").replace(/to/gi, "-");
                         }
                         var filterKeyFormat=facetKey.replace('~','-');
-        
+
                         if(filterKeyFormat==='' && facetVal===''){
                             $('#filter-'+filterKeyFormat).find('.mz-clear-facet-section').addClass('hide');
                         }else{
@@ -156,7 +156,7 @@ define([
                         if(facetKey === 'tenant~size'){
                              displayValue=$('#'+facetVal).attr('data-mz-text-value');
                         }
-                        available_facets += '<li><i class="fa fa-times-circle remove-facet" data-mz-facet="' + facetKey + '" data-mz-facet-value="' + facetValue[j].split(":")[1] + '" data-mz-purpose="remove" data-mz-action="clearFacet"></i> <u>' + displayValue + '</u></li>';
+                        available_facets += '<li><i class="usas-icon-active-facet" data-mz-facet="' + facetKey + '" data-mz-facet-value="' + facetValue[j].split(":")[1] + '" data-mz-purpose="remove" data-mz-action="clearFacet"></i>' + displayValue + '</li>';
                     }
                     if (available_facets !== '') {
                         var filterOptionList = $("#filterOptionList");
@@ -290,7 +290,7 @@ define([
             var url= path.replace(new RegExp(facetVal+'\:(.*?)(,|&)', 'g'), '');
             if(url[url.length -1]==','){
                 url = url.replace(new RegExp(',$', 'g'), '\&');
-                
+
             }
             var parser = document.createElement('a');
             parser.href = url;
