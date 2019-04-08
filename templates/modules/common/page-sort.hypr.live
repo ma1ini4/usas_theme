@@ -10,5 +10,6 @@
         <option data-mz-url="{% make_url "sorting" model with sortBy='productName asc' %}&startIndex=0" data-value="productName asc" class="dp-sort-item" {% if model.currentSort == 'productName asc' %} selected {% endif %}>{{ labels.sortByproductNameAsc }}</option>
         <option data-mz-url="{% make_url "sorting" model with sortBy='productName desc' %}&startIndex=0" data-value="productName desc" class="dp-sort-item" {% if model.currentSort == 'productName desc' %} selected {% endif %}>{{ labels.sortByproductNameDesc }}</option>
     </select>
+    <i class="usas-icon-dropdown"></i>
   </span>
 </label>
