@@ -2020,6 +2020,11 @@ ul.tabs {
     span {
       margin-right: 3px;
     }
+
+    @media @mobile {
+      margin-right: auto;
+      margin-left: 40px;
+    }
   }
 }
 
@@ -2066,6 +2071,11 @@ ul.tabs {
       i {
         font-size: 16px;
       }
+
+      @media @mobile {
+        margin-right: 0;
+        margin-left: auto;
+      }
     }
     .filter-collapse{
         font-size: 18px;
@@ -2077,6 +2087,7 @@ ul.tabs {
 #filterOptions{
     display: none;
     .filter-icon, .mz-facetingform-facet.active{
+        order: 3;
         display: block;
     }
     .mz-facetingform-facet{
