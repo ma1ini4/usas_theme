@@ -1,8 +1,8 @@
-<div class="col-md-6 pull-right col-sm-6 col-xs-12 col-xs-12 text-right hidden-xs mz-button-checkout-cart-top">
+<!-- <div class="col-md-6 pull-right col-sm-6 col-xs-12 col-xs-12 text-right hidden-xs mz-button-checkout-cart-top">
           <button  id="cart-checkout-btn" class="mz-button font-large button_primary" data-mz-action="proceedToCheckout">
           {{ labels.proceedToCheckout }}
         </button>
-</div>
+</div> -->
 <div class="clearfix"></div>
 <div class="mz-header-basket-md-sm hidden-xs">
     <div class="col-xs-12 col-md-5 col-sm-5">{{ labels.item }}</div>
@@ -17,15 +17,15 @@
     {% for item in model.items %}
     <div class="col-xs-12 mz-row-carttable-item">
       <div class="mz-carttable-item">
-        <div class="mz-carttable-item-product col-xs-12 col-sm-5 nopaddingleft"> 
-         {% with item.product|get_product_attribute("tenant~color") as colorAttr %}  
+        <div class="mz-carttable-item-product col-xs-12 col-sm-5 nopaddingleft">
+         {% with item.product|get_product_attribute("tenant~color") as colorAttr %}
               {% if colorAttr %}
                 {% with colorAttr.value|replace(" ","_") as colorValue %}
                   {% with "/cms/files/{0}_{1}_v1.jpg"|string_format(item.product.productCode, colorValue, themeSettings.globalCartItemImageMaxWidth) as fileName %}
                       <a href="{{ item.product.url }}">
                         <img class="mz-carttable-item-image" src="https:{% make_url "cdn" fileName with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameter %} " {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}"{% endif %} onerror="this.setAttribute('src','{% if item.product.imageUrl %}{% make_url 'image' item.product with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameters %}{% else %}https:{% make_url 'cdn' '/cms/files/No_image_available.png' with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameter %}{% endif %}')" />
-                      </a> 
-                  {% endwith %}     
+                      </a>
+                  {% endwith %}
                 {% endwith %}
               {% else %}
                 {% if item.product.imageUrl %}
@@ -38,8 +38,8 @@
                       [{{ labels.noImages }}]
                     </div>
                   </a>
-                {% endif %}    
-              {% endif %}  
+                {% endif %}
+              {% endif %}
             {% endwith %}
 
           <div class="mz-carttable-item-info-wrap">
@@ -92,7 +92,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xs-5 col-sm-3 cart-item-qty hidden-xs">  
+        <div class="col-xs-5 col-sm-3 cart-item-qty hidden-xs">
           <div class="mz-carttable-item-qty mz-cart-qty-box">
             <input class="mz-carttable-qty-field text-center" type="number" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" value="{{ item.quantity }}" min="1"/>
           </div>
@@ -136,7 +136,7 @@
       {% comment %}<strong>{{model.subtotal |currency }}</strong>{% endcomment %}
       <strong>{{model.discountedSubtotal |currency }}</strong>
     </div>
-    </div>    
+    </div>
   </div>
   {% for discount in model.orderDiscounts %}
     {% if not discount.excluded %}
@@ -153,7 +153,7 @@
   {% endfor %}
 
 
-  <div class="mz-carttable-total-row row"> 
+  <div class="mz-carttable-total-row row">
     <div class="mz-carttable-total-wrap col-xs-12 mz-padding-xs">
     <div class="col-xs-7 col-sm-9 text-right"> {{ labels.orderTotal }}:</div>
     <div id="mz-carttable-total" class="mz-carttable-total col-xs-5 col-sm-3 pull-right">
@@ -168,11 +168,11 @@
       <div class="mz-carttable-checkout-couponcode col-sm-4 col-xs-12" id="coupon-code-field" >
         {% include "modules/common/coupon-code-field" %}
       </div>
-      {% endif %}  
+      {% endif %}
       <div class="col-xs-12 col-sm-8 pull-right mz-button-bottom-cart">
       {% if  themeSettings.showemptyBasket %}
        {% if not model.isEmpty %}<span class="mz-empty-cart-link-container"><button class="font-large button_promotional" href="javascript:;" data-mz-action="empty">{{ labels.emptyCart }}</button></span>{% endif %}
-       {% endif %} 
+       {% endif %}
       <div class="mz-common-button-padding pull-right">
                 <button id="cart-checkout" class="mz-button font-large button_primary"  {% if model.isEmpty %} disabled="disabled" {% endif %} data-mz-action="proceedToCheckout">{{ labels.proceedToCheckout }}</button>
       </div>
@@ -182,7 +182,7 @@
       <div>
         <p>or checkout with</p>
         <img alt="Visa Checkout" class="v-button" role="button"
-          src="{{pageContext.visaCheckoutButtonUrl}}"/>       
+          src="{{pageContext.visaCheckoutButtonUrl}}"/>
       </div>
       {% endif %}
     </div>
