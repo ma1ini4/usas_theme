@@ -393,11 +393,24 @@ END TEMPLATE HOW TO USE */
 
 .flex {
   display: flex;
+  width: 100%;
+  height: 100%;
+
+  @media @mobile {
+    flex-direction: column;
+
+    .mz-l-sidebar.facet-sidebar {
+      display: block!important;
+    }
+  }
 }
 
 .flex-column {
   display: flex;
   flex-direction: column;
+}
+.bottom-border {
+  border-bottom: 1px solid @ghostWhite;
 }
 
 @media @mobile {

@@ -13,18 +13,6 @@
             {% endblock product-image %}
         </div>
         <a class="mz-productlisting-title visible-xs" href='{% make_url "product" model %}'>{{model.content.productName|safe}}</a>
-        <!--Color Swatch-->
-        {% for option in model.options %}
-            {% if option.attributeFQN=="tenant~color" and option.values.length!=0 %}
-                <div class="ml-product-swatch">
-                    <div class="row">
-                        <ul>
-                            {% include "modules/facets/facet-color" with allfacets=option.values parent=option isListing="true" as_parameter %}
-                        </ul>
-                    </div>
-                </div>
-            {% endif %}
-        {% endfor %}
     </div>
     <div class="mz-productlisting-info">
         <div class="ml-product-info-wrapper">
@@ -55,5 +43,15 @@
         <div class="ml-product-price-wrapper">
             {% include "modules/product/price-stack" %}
         </div>
+        <!--Color Swatch-->
+        {% for option in model.options %}
+        {% if option.attributeFQN=="tenant~volume-color-style" and option.values.length!=0 %}
+        <div class="ml-product-swatch">
+          <ul>
+            {% include "modules/facets/facet-color" with allfacets=option.values parent=option isListing="true" as_parameter %}
+          </ul>
+        </div>
+        {% endif %}
+        {% endfor %}
     </div>
 </div>
