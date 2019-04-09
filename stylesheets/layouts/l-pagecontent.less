@@ -66,6 +66,10 @@
       display: block;
       width: 100%;
       padding-top: 26%;
+
+      @media @mobile {
+        padding-top: 40%;
+      }
   }
 
   .top-banner-overlay {
@@ -119,7 +123,7 @@
       background-position: right 60%;
 
       @media @mobile-sm-bootstrap {
-        padding-top: 35%;
+        padding-top: 40%;
       }
   }
 
@@ -166,6 +170,10 @@
       &:last-child {
         font-size: 10px;
         font-weight: @regular;
+      }
+
+      @media @mobile {
+        width: 75%
       }
     }
   }

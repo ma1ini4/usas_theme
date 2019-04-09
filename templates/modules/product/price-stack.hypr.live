@@ -8,9 +8,9 @@
             {% include "modules/common/price" with model=model.priceRange.upper %}
         </span>
     {% else %}
-        {% include "modules/product/price-discount" with model=model.price %}
         <span class="not-range">
         {% include "modules/common/price" with model=model.price %}
         </span>
+        {% include "modules/product/price-discount" with model=model.price %}
     {% endif %}
 </div>
