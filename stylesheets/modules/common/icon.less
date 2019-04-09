@@ -51,6 +51,7 @@
 	.usas-icon-prop();
 }
 
+@icon-dropdown: "\e907";
 @icon-close-large: "\e90f";
 @icon-arrow-left: "\e900";
 @icon-arrow-right: "\e901";
@@ -58,11 +59,8 @@
 @icon-cart: "\e903";
 @icon-chevron-left: "\e904";
 @icon-chevron-right: "\e905";
-@icon-circle-check-path1: "\e906";
-@icon-circle-check-path2: "\e907";
-@icon-close-circle-path1: "\e908";
-@icon-close-circle-path2: "\e909";
-@icon-close-circle-path3: "\e90a";
+@icon-circle-check: "\e906";
+@icon-close-circle: "\e908";
 @icon-close-square: "\e90b";
 @icon-delivery: "\e90c";
 @icon-profile: "\e90d";
@@ -115,4 +113,23 @@
 		font-size: 17px;
 		color: white;
 		vertical-align: top;
+	}
+	.usas-icon-active-facet {
+		.usas-icon(@icon-circle-check);
+		color: @iconGreen;
+	}
+
+	.usas-icon-close-facet {
+		.usas-icon(@icon-close-circle);
+		color: @iconRed;
+	}
+
+	.usas-icon-dropdown {
+		.usas-icon(@icon-dropdown);
+	}
+	.usas-icon-arrow-left {
+		.usas-icon(@icon-arrow-left);
+	}
+	.usas-icon-arrow-right {
+		.usas-icon(@icon-arrow-right);
 	}

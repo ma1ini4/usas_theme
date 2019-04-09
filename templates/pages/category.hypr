@@ -13,7 +13,7 @@
 </div>
 <div class="quickviewSlider">
 {% block quickview-slider %}
-    {% include "modules/product/product-quick-view" %}            
+    {% include "modules/product/product-quick-view" %}
 {% endblock quickview-slider %}
 </div>
 {% require_script "modules/quickview" %}

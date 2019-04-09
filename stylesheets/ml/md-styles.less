@@ -48,33 +48,6 @@
             }
         }
     }
-    // Common to both List and Grid View
-        .mz-productlisting-image {
-            position: relative;
-            button.quick-view-btn {
-                left: 0;
-                right: 0;
-                bottom: 0;
-                position: absolute;
-                opacity: 0.9;
-                text-transform: uppercase;
-                width: 100%;
-                display: none;
-                border:0;
-                span {
-                    opacity: 1;
-                    font-size: @fontSize;
-                    text-align: center;
-                    line-height: normal;
-                    color: @colorGray;
-                }
-            }
-            &:hover {
-                button.quick-view-btn {
-                    display: block;
-                }
-            }
-        }
     // Product Directory
     .mz-productlist {
         // Grid View
@@ -83,14 +56,14 @@
                 .mz-productlisting-info {
                     padding: 0 10px;
                 }
-                .mz-productlisting-image {
-                    .mz-productlisting-imageplaceholder, img {
-                        max-height: 265px;
-                        >.mz-productlisting-imageplaceholdertext {
-                            line-height: 265px;
-                        }
-                    }
-                }
+                // .mz-productlisting-image {
+                //     .mz-productlisting-imageplaceholder, img {
+                //         max-height: 265px;
+                //         >.mz-productlisting-imageplaceholdertext {
+                //             line-height: 265px;
+                //         }
+                //     }
+                // }
             }
         }
         //List View
@@ -99,13 +72,13 @@
                 max-width: 265px;
                 img,
                 .mz-productlisting-image{
-                    img,
-                    .mz-productlisting-imageplaceholder {
-                        max-height: 265px;
-                        >.mz-productlisting-imageplaceholdertext {
-                            line-height: 265px;
-                        }
-                    }
+                    // img,
+                    // .mz-productlisting-imageplaceholder {
+                    //     max-height: 265px;
+                    //     >.mz-productlisting-imageplaceholdertext {
+                    //         line-height: 265px;
+                    //     }
+                    // }
                 }
             }
             li.mz-productlist-item{
@@ -117,34 +90,34 @@
                 float: left;
             }
         }
-        // Common to both List and Grid View
-        .mz-productlisting-image {
-            position: relative;
-            button.quick-view-btn {
-                left: 0;
-                right: 0;
-                bottom: 0;
-                height: 30px;
-                position: absolute;
-                opacity: 0.9;
-                text-transform: uppercase;
-                width: 100%;
-                display: none;
-                border: 0;
-                span {
-                    opacity: 1;
-                    font-size: @fontSize;
-                    text-align: center;
-                    line-height: normal;
-                    color: @colorGray;
-                }
-            }
-            &:hover {
-                button.quick-view-btn {
-                    display: block;
-                }
-            }
-        }
+        // // Common to both List and Grid View
+        // .mz-productlisting-image {
+        //     position: relative;
+        //     button.quick-view-btn {
+        //         left: 0;
+        //         right: 0;
+        //         bottom: 0;
+        //         height: 30px;
+        //         position: absolute;
+        //         opacity: 0.9;
+        //         text-transform: uppercase;
+        //         width: 100%;
+        //         display: none;
+        //         border: 0;
+        //         span {
+        //             opacity: 1;
+        //             font-size: @fontSize;
+        //             text-align: center;
+        //             line-height: normal;
+        //             color: @colorGray;
+        //         }
+        //     }
+        //     &:hover {
+        //         button.quick-view-btn {
+        //             display: block;
+        //         }
+        //     }
+        // }
     }
     .mz-productdetail{
         .mz-price{
@@ -175,18 +148,18 @@
         }
     }
     //Category Page
-     .ml-product-swatch {
-        .mz-morecolor-container{
-            clear: none;
-        }
-        ul{
-            padding: 0 10px;
-            li {
-                margin-right: 8px;
-                margin-bottom: 8px;
-            }
-        }
-     }
+     // .ml-product-swatch {
+     //    .mz-morecolor-container{
+     //        clear: none;
+     //    }
+     //    ul{
+     //        padding: 0 10px;
+     //        li {
+     //            margin-right: 8px;
+     //            margin-bottom: 8px;
+     //        }
+     //    }
+     // }
      .mz-category{
      }
      .mz-l-carousel {

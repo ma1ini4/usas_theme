@@ -321,13 +321,13 @@
     .swatch-icon {
         display: none;
     }
-    .ml-product-swatch {
-        border-bottom: 1px solid @colorLightGray;
-         ul {
-       		 margin: 0 auto;
-        	padding: 0 @defaultGutter;
-    	}
-    }
+    // .ml-product-swatch {
+    //     border-bottom: 1px solid @colorLightGray;
+    //      ul {
+    //    		 margin: 0 auto;
+    //     	padding: 0 @defaultGutter;
+    // 	}
+    // }
 	//bx slider navigations
 	.mz-productimages {
 	    .mz-productimages-thumbs {
@@ -356,12 +356,12 @@
             .mz-productlisting-info {
                 padding: 0 5px;
             }
-            .mz-productlisting-imageplaceholder {
-                max-height: 160px;
-                >.mz-productlisting-imageplaceholdertext {
-                    line-height: 160px;
-                }
-            }
+            // .mz-productlisting-imageplaceholder {
+            //     // max-height: 160px;
+            //     >.mz-productlisting-imageplaceholdertext {
+            //         // line-height: 160px;
+            //     }
+            // }
         }
     }
  }
@@ -376,20 +376,20 @@
 	    .mz-l-paginatedlist-header{
 	        .title-sortby-wrappper{
 	            .mz-sortby{
-	                line-height: 3.5;
+	                // line-height: 3.5;
 					display:inline-block;
 					float: right;
 	            }
 	        }
 		}
 		.title-sortby-wrappper{
-			.mz-pagetitle{
-				font-size: 24px;
-				float: left;
-				line-height: 2.5;
-				display: inline-block;
-				width: auto;
-			}
+			// .mz-pagetitle{
+			// 	font-size: 24px;
+			// 	float: left;
+			// 	line-height: 2.5;
+			// 	display: inline-block;
+			// 	width: auto;
+			// }
 			.mz-paging-sorttitle {
 	             font-size: @fontSize + 3px;
 	            .fontsMedium();
@@ -402,9 +402,10 @@
  	#collapseIcon,{
  		display: none;
  	}
-    #filterOptions{
+  #filterOptions{
     	display: block;
 	    .filter-icon, .mz-facetingform-facet.active{
+					order: 3;
 	        display: block;
 	    }
 	    .mz-facetingform-facet{
@@ -413,6 +414,7 @@
 	}
 	#filterOptions{
 		.filter-icon{
+			order: 3;
 			display: none;
 		}
  	}
