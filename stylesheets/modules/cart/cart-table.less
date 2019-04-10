@@ -24,6 +24,38 @@
             margin: 0;
             width: 40%;
         }
+
+        .mz-qty-xs-align {
+            float: left;
+            clear: left;
+            .mz-carttable-qty-field {
+                float: left;
+                margin-top: 2px;
+                margin-bottom: 2px;
+            }
+            .btn-link {
+                position: absolute;
+                top: 0;
+                right: 0;
+                color: @headingColor;
+                font-size: 20px;
+            }
+
+            .mz-carttable-item-total {
+              display: flex;
+              align-self: center;
+              height: 100%;
+
+              .mz-item-rowtotal {
+                margin: auto 15px;
+              }
+            }
+
+            @media @mobile {
+              display: flex!important;
+
+            }
+        }
     }
 
     .mz-carttable-item-title {
@@ -99,6 +131,7 @@
 
         .mz-carttable-sub-total strong {
           color: @headingColor;
+          font-weight: @regular;
         }
         strong {
           color: @primaryColor;

@@ -83,7 +83,8 @@
             {% endif %}
              <div class="mz-carttable-item-qty mz-cart-qty-box visible-xs mz-qty-xs-align">
               <input class="mz-carttable-qty-field" type="number" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" value="{{ item.quantity }}" min="1"/>
-              <a href="javascript:;" data-mz-action="removeItem" data-mz-cart-item="{{ item.id }}" class="btn-link" title="{{ labels.remove }}">{{ labels.remove }}</a>
+              <a href="javascript:;" data-mz-action="removeItem" data-mz-cart-item="{{ item.id }}" class="btn-link" title="{{ labels.remove }}"><i class="fas fa-times"></i></a>
+                <div class="mz-carttable-item-total ">{% include "modules/common/item-total" %}</div>
             </div>
           </div>
         </div>
@@ -99,7 +100,7 @@
             <div class="mz-carttable-item-price col-xs-12 col-sm-6 mz-reset-padding">
               <span class="label-price visible-xs pull-left">{{ labels.price }}: </span>{% include "modules/common/item-price"  %}
             </div>
-            <div class="mz-carttable-item-total col-xs-12 col-sm-6 mz-reset-padding nopaddingright">
+            <div class="mz-carttable-item-total col-xs-12 col-sm-6 mz-reset-padding nopaddingright hidden-xs">
               {% include "modules/common/item-total" %}<span class="label-total visible-xs pull-left">{{ labels.total }}: </span>
             </div>
         </div>
