@@ -541,12 +541,6 @@
     .mz-auxiliary-text{
         float: left;
     }
-    .mz-carttable-total-row{
-        margin-bottom: 5px;
-        padding-bottom: 5px;
-        font-size: 16px;
-        color :@colorGray;
-    }
     .signin-btn{
         width: 100%;
         border-radius: 0px;
@@ -560,17 +554,11 @@
     }
     .mz-price-total-container{
         float: right;
+        margin: 25px 0;
         padding-left: 12px;
     }
     .mz-pagetitle{
         border-bottom: none;
-    }
-    .is-saleprice,
-    .mz-item-rowtotal{
-        text-align: right;
-        color: @colorGray;
-        font-size: 16px;
-        .fontsMedium();
     }
     .mz-item-discountname{
         display: block;
@@ -588,15 +576,6 @@
         &.is-crossedout {
             font-size: 16px;
         }
-    }
-    .is-crossedout{
-        width: 100%;
-        display: inline-block;
-        text-align: right;
-        color: @colorLighterGray;
-        font-size: @fontSizeSmall;
-        .fontsMedium();
-        float: right;
     }
     .btn-default:disabled,{
         &:hover{
@@ -621,10 +600,17 @@
     .mz-carttable-shipping-row{
         margin-bottom: @defaultGutter;
     }
-    .mz-header-basket-md-sm{
+    .mz-header-basket-md-sm {
         .fontsBold();
+
+        margin-top: 15px;
         font-size: 16px;
-        text-transform: uppercase;
+        text-transform: none;
+
+        div {
+          margin-bottom: 5px;
+          color: @headingColor;
+        }
     }
     .mz-carttable-item-price{
         display: none;
@@ -632,12 +618,16 @@
     .mz-cart-total-main-container{
         padding-top: 10px;
     }
-    .mz-carttable-item {
+    .mz-row-carttable-item {
+      border-top: 1px solid @lightBorder;
+
+      .mz-carttable-item {
         width: 100%;
         float: left;
+      }
+      &:last-child {
         border-bottom: 1px solid @lightBorder;
-        border-top: 1px solid @lightBorder;
-
+      }
     }
     .mz-qty-xs-align{
         float: left;
@@ -687,9 +677,6 @@
         font-size: @fontSize;
         //color: @secondaryColor;
         .fontRegular();
-    }
-    .mz-carttable-item-code{
-        color: @colorLighterGray;
     }
     .mz-shipping-info-confirmation{
         clear: none;
@@ -802,7 +789,7 @@
             color: @colorGray;
         }
         .mz-propertylist{
-            font-weight: 400;
+            font-weight: @bold;
         }
         .mz-item-price.is-crossedout,
         .mz-item-price.is-saleprice{
@@ -811,9 +798,6 @@
     }
     .mz-confirmation-price-summary{
         padding-right: 0px;
-    }
-    .mz-carttable-item-code{
-        font-size: 12px;
     }
     .mz-paymentselector-reenter-cvv{
         margin-top: 10px;

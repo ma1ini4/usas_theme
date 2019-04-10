@@ -2,7 +2,7 @@
 
     .mz-carttable-item-image {
         float: left;
-        margin: 0 @gutter/4 @gutter/4 0;
+        margin: 0 15px 0 0;
     }
 
     .mz-carttable-header-price, .mz-carttable-header-fulfillment, .mz-carttable-header-total,
@@ -30,11 +30,17 @@
         display: block;
         font-size: @fontSizeLarger;
     }
-
-    .mz-carttable-item-code {
+    .mz-carttable-item-code{
+        color: @textColor;
+        font-size: 14px;
+        font-weight: @bold;
         float: left;
         clear: both;
-        font-size: @fontSizeSmall;
+
+        em {
+          margin-left: 10px;
+          font-weight: @regular;
+        }
     }
 
     .mz-carttable-item-pickuplocation {
@@ -46,6 +52,8 @@
 
     .mz-carttable-qty-field {
         width: 75px;
+        border: 1px solid @lightBorder;
+        border-radius: 3px;
     }
 
     .mz-carttable-item-remove {
@@ -53,8 +61,49 @@
         text-align: center;
     }
 
+    .mz-carttable-item-price {
+      display: flex;
+      flex-direction: column;
+
+      .is-saleprice{
+          display: block;
+          color: @primaryColor;
+          font-size: 16px;
+          font-weight: @bold;
+      }
+      .is-crossedout{
+          color: @textColor;
+          display: block;
+      }
+    }
+    .mz-carttable-item-total {
+
+      .mz-item-rowtotal {
+        text-align: right;
+        color: @textColor;
+        font-size: 16px;
+        font-weight: @regular;
+
+        &.is-saleprice {
+          color: @primaryColor;
+
+        }
+      }
+    }
+
     .mz-carttable-total-row {
-        font-size: @fontSizeLarge;
+        margin-bottom: 5px;
+        padding-bottom: 5px;
+        font-size: 21px;
+        color :@headingColor;
+
+        .mz-carttable-sub-total strong {
+          color: @headingColor;
+        }
+        strong {
+          color: @primaryColor;
+
+        }
     }
 
     .mz-carttable-total {
@@ -80,9 +129,9 @@
         float:left;
         text-align:left;
     }
-    
+
     .mz-carttable-checkout-couponcode{
-        float:left; 
+        float:left;
         text-align:left;
     }
 }
