@@ -526,40 +526,30 @@ Use brand for brand icons (NOTE brand icon can NOT be regular or solid).
 
 /* Buttons mixins properties START */
 .button-prop() {
-	cursor: pointer;
-	// color: white;
-	box-sizing: border-box;
-	text-transform: uppercase;
-	height: auto;
-	text-decoration: none;
+  .transition(all 0.3s);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  border: 0;
   font-size: 16px;
 	font-weight: normal;
 	line-height: 1em;
-	// background: @secondaryColor;
-	display: inline-flex;
-	align-items: center;
-	border: 0;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-sizing: border-box;
+  cursor: pointer;
 
-	.transition(all 0.3s);
-
-	// .icon(after, 105, solid);
-
-	// &:after {
-	// 	font-size: 20px;
-	// 	margin-left: 6px;
-  //       margin-top: -1px;
-	// }
 
 	&:hover {
-        background: @secondaryButtonCollor;
-        // color: @primaryColor;
+    background: @secondaryButtonCollor;
 	}
 
 }
 .button-focus() {
 	&:focus{
         outline: thin dotted;
-        // color: @colorGray;
         box-shadow: none;
 		    text-decoration: none;
     }
