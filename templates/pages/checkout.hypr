@@ -9,10 +9,10 @@
 {% endif %}
 {% endblock head-tag-scripts %}
 
-{% block body-tag-classes %} mz-checkout {% endblock body-tag-classes %}
+{% block secondary-nav %}
+  {% include "modules/secondary-nav" %}
+{% endblock secondary-nav %}
 
-{% block site-nav %}{% endblock site-nav %}
-{% block secondary-nav %}{% endblock secondary-nav %}
 {% block page-footer %}{% endblock page-footer%}
 
 {% block body-content %}
@@ -21,17 +21,19 @@
 
 {% preload_json model "checkout" %}
 
-<div class="mz-l-container">
-    <h1 class="mz-pagetitle">
-        {{ labels.checkout }}
-    </h1>
-     {% if not user.isAuthenticated %}
-         <a data-toggle="modal" data-mz-action="lite-registration" class="mz-pagetitle-note">
-            <span>
-                {{ labels.registeredCustomer }} {{ labels.logIn }}
-            </span>
-        </a>
-    {% endif %}
+<div class="mz-l-container mz-checkout flex-column">
+    <div class="mz-checkout-header flex">
+      <h1 class="mz-pagetitle">
+          {{ labels.checkout }}
+      </h1>
+       {% if not user.isAuthenticated %}
+           <a data-toggle="modal" data-mz-action="lite-registration" class="mz-pagetitle-note">
+              <span>
+                  {{ labels.registeredCustomer }} {{ labels.logIn }}
+              </span>
+          </a>
+      {% endif %}
+    </div>
 
     <form id="checkout-form" class="mz-checkoutform mz-l-2column mz-l-2column-right fades-in" method="post" onsubmit="return false;">
 
