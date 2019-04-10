@@ -9,12 +9,12 @@
               <div class="mz-ordersummary-line mz-ordersummary-line-item {% if item.discountTotal > 0 %}is-discounted{% endif %}">
                     <div class="mz-ordersummary-item-product col-sm-6 col-xs-12 mz-order-content-container mz-reset-padding">
                       <div class="pull-left mz-order-summary-image">
-                        {% with item.product|get_product_attribute("tenant~color") as colorAttr %}  
+                        {% with item.product|get_product_attribute("tenant~color") as colorAttr %}
                           {% if colorAttr %}
                             {% with colorAttr.value|replace(" ","_") as colorValue %}
                               {% with "/cms/files/{0}_{1}_v1.jpg"|string_format(item.product.productCode, colorValue) as fileName %}
                                   <img class="mz-carttable-item-image" src="https:{% make_url "cdn" fileName with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameter %}" {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}"{% endif %} onerror="this.setAttribute('src','{% if item.product.imageUrl %}{% make_url 'image' item.product with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameters %}{% else %}https:{% make_url 'cdn' '/cms/files/No_image_available.png' with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameter %}{% endif %}')"/>
-                              {% endwith %}     
+                              {% endwith %}
                             {% endwith %}
                           {% else %}
                             {% if item.product.imageUrl %}
@@ -23,23 +23,24 @@
                                 <span class="mz-carttable-item-image mz-product-image-placeholder pull-left">
                                   <span class="mz-productlisting-imageplaceholdertext">{{ labels.productImagePlaceholder }}</span>
                                 </span>
-                            {% endif %}    
-                          {% endif %}  
-                        {% endwith %}                       
+                            {% endif %}
+                          {% endif %}
+                        {% endwith %}
                       </div>
                       <div class="mz-carttable-item-info-wrap pull-left col-xs-8 mz-reset-padding-right">
                         <div class="mz-carttable-item-title" >{{ item.product.name |safe }}</div>
-                         <div class="mz-carttable-item-code">
-                          {{ labels.item }}# <span>{{ item.product.productCode }}</span>
-                        </div>
+                        <span class="mz-carttable-item-code">
+                          {{ labels.item }}#: <em>{{ item.product.productCode }}</em>
+                        </span>
                         {% if item.product.options and themeSettings.showCartItemOptions %}
                         <div class="mz-propertylist">
                           {% for option in item.product.options %}
-                          <div>{% if option.name == "OTHER" %}
-                    OPTION
-                    {% else %}
-                    {{ option.name }}
-                    {% endif %}:
+                          <div>
+                            {% if option.name == "OTHER" %}
+                              <span class="option-name">OPTION: </span>
+                            {% else %}
+                              <span class="option-name">{{ option.name }}: </span>
+                            {% endif %}
                             <span class="text-capitalize">
                               {% if option.stringValue %}
                                     {% if option.stringValue == 'CHR(38)' %}
@@ -55,17 +56,22 @@
                                     {{ option.shopperEnteredValue }}
                               {% endif %}
                             </span>
-                          </div>          
+                          </div>
                           {% endfor %}
                         </div>
                         {% endif %}
                         <div class="mz-propertylist ">
-                          <div>Qty:&nbsp;<span class="text-capitalize">{{ item.quantity }}</span></div>
+                          <div>
+                            <span class="option-name">
+                              Qty:&nbsp;
+                            </span>
+                            <span class="text-capitalize">{{ item.quantity }}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
                     <div class="clearfix visible-xs mz-print-hide"></div>
-                    <div class="col-sm-3 col-sm-3 col-xs-6  hidden-xs mz-price-each-display mz-price-main-container">
+                    <div class="col-sm-3 col-sm-3 col-xs-6  hidden-xs mz-price-each-display flex-column mz-price-main-container">
                         {% include "modules/common/item-price" %}
                     </div>
                     <div class="col-sm-3 col-xs-6 mz-checkout-item-total-container pull-right">
@@ -93,7 +99,7 @@
           </div>
           {% endif %}
           {% endfor %}
-          
+
           {% if model.dutyTotal > 0 %}
           <div class="mz-ordersummary-tax">
             <div class="mz-checkout-total-row">

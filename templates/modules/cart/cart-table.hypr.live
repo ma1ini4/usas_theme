@@ -43,30 +43,32 @@
               {{ labels.item }}#: <em>{{ item.product.productCode }}</em>
             </span>
             {% if item.product.options and themeSettings.showCartItemOptions %}
-              <dl class="mz-propertylist">
+            <div class="mz-propertylist">
               {% for option in item.product.options %}
-              <dt>{% if option.name == "OTHER" %}
-                    OPTION
-                    {% else %}
-                    {{ option.name }}
-                    {% endif %}</dt>&nbsp;
-              <dd>
-                {% if option.stringValue == 'CHR(38)' %}
-                &amp;
+              <div>
+                {% if option.name == "OTHER" %}
+                  <span class="option-name">OPTION: </span>
                 {% else %}
-                  {% if option.stringValue == 'CHR(64)' %}
-                  @
-                  {% else %}
-                    {% if option.stringValue %}
-                        {{ option.stringValue }}
-                    {% else %}
-                        {{ option.value|default(option.shopperEnteredValue) }}
-                    {% endif %}
-                  {% endif %}
+                  <span class="option-name">{{ option.name }}: </span>
                 {% endif %}
-              </dd>
+                <span class="text-capitalize">
+                  {% if option.stringValue %}
+                        {% if option.stringValue == 'CHR(38)' %}
+                        &amp;
+                        {% else %}
+                          {% if option.stringValue == 'CHR(64)' %}
+                          @
+                          {% else %}
+                            {{ option.stringValue }}
+                          {% endif %}
+                        {% endif %}
+                  {% else %}
+                        {{ option.shopperEnteredValue }}
+                  {% endif %}
+                </span>
+              </div>
               {% endfor %}
-              </dl>
+            </div>
             {% endif %}
             {% if item.product.productUsage == 'Bundle' %}
             <dl class="mz-propertylist">

@@ -70,7 +70,7 @@
         {% endif %}
       </div>
         {% endif %}
-    <div class="mz-formstep-next">
-        <button class="mz-button" data-mz-action="next">{{ labels.next }}</button>
+    <div class="mz-formstep-next pull-right">
+        <button class="primary-btn" data-mz-action="next">{{ labels.next }}</button>
     </div>
     </div>

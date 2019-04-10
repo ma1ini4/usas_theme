@@ -9,8 +9,9 @@
 {% endif %}
 {% endblock head-tag-scripts %}
 
+{% block body-tag-classes %} mz-checkout {% endblock body-tag-classes %}
+
 {% block secondary-nav %}
-  {% include "modules/secondary-nav" %}
 {% endblock secondary-nav %}
 
 {% block page-footer %}{% endblock page-footer%}
@@ -21,7 +22,7 @@
 
 {% preload_json model "checkout" %}
 
-<div class="mz-l-container mz-checkout flex-column">
+<div class="mz-l-container flex-column">
     <div class="mz-checkout-header flex">
       <h1 class="mz-pagetitle">
           {{ labels.checkout }}

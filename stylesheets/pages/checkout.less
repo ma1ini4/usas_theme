@@ -8,6 +8,9 @@
 }
 
 .mz-checkout {
+  .ml-header-links-wrapper, .mz-utilitynav, .mz-sitenav, .ml-header-user-welcome {
+    display: none!important;
+  }
     .site-msg{display: block!important;}
     .mz-pagetitle-note{
         float: left;
@@ -42,9 +45,9 @@
 
 
 .mz-checkoutform-active {
-    background-color: #eeeeee;
+    background-color: transparent;
     width: 100%;
-    margin-bottom: @gutter/2;
+    margin-bottom: 15px;
 }
 
 .mz-checkoutform {
@@ -107,11 +110,15 @@
 // .mz-formstep-header.mz-checkoutform-header{
 //     margin-bottom: 10px;
 // }
-// .mz-ordersummary{
-//     padding-bottom: 15px;
-// }
+.mz-ordersummary {
+  display: flex;
+  flex-direction: column;
+}
 .mz-formstep-header {
     &.mz-checkoutform-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         color: @headingColor;
         padding-left: 10px;
         > a {
@@ -208,16 +215,12 @@
         }
         label{
             text-align: left;
-            font-size: @fontSize;
+            font-size: 14px;
         }
-        input[type="text"], input{
-            width: 240px;
-            border: 1px solid @inputBorder;
-        }
-        .text-input, select{
-            width: 240px;
-            background-color: @colorWhite;
-            .border-radius-plain(0);
+        input[type="text"], input, select, .text-input {
+            width: 100%;
+            border: 1px solid @lightBorder;
+            border-radius: 10px
         }
     }
     .mz-contactselector{
