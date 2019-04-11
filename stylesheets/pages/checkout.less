@@ -26,6 +26,48 @@
     #page-content{
         padding:25px @defaultGutter/2 ;
     }
+    #coupon-code-field {
+      display: flex;
+      align-items: center;
+      margin-top: 15px;
+
+      .mz-l-formfieldgroup-cell {
+        display: flex;
+        align-items: center;
+        border: none;
+
+        &:first-child {
+          width: 30%;
+        }
+
+        &:last-child {
+          width: 70%;
+        }
+
+        input {
+          border: 1px solid @lightBorder;
+          border-radius: 10px;
+          margin: 0;
+        }
+
+        button {
+          height: 35px;
+          margin-left: 15px;
+        }
+      }
+
+      @media @mobile-sm-bootstrap {
+        flex-direction: column;
+
+        .mz-l-formfieldgroup-cell {
+
+          &:first-child, &:last-child {
+            width: 100%;
+
+          }
+      }
+    }
+  }
 }
 
 .mz-checkout-header {
@@ -41,6 +83,8 @@
 .mz-checkoutform-comments-field {
     width: 100%;
     height: 8em;
+    border: 1px solid @lightBorder;
+    border-radius: 4px;
 }
 
 

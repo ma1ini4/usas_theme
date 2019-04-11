@@ -1,4 +1,4 @@
-﻿    <div class="mz-l-formfieldgroup-cell">
+﻿    <div class="mz-l-formfieldgroup-cell mz-formstep-header mz-checkoutform-header">
       <label for="order-comments">{{ labels.comments }}:</label>
     </div>
     <div class="mz-l-formfieldgroup-cell">
