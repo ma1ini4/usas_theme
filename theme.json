@@ -841,30 +841,7 @@
     "visaCheckoutSdkUrl": "https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js",
     "returnsInfo": "Return Item",
     "paymentsMethodInfo": "Payment Methods",
-    "giftCardsInfo": "Gift Card",
-    "productAttrInfoTab1Content":"tenant~info-tab-description",
-
-    "productAttrInfoTab2Content":"tenant~info-tab-specifications",
-    "productAttrInfoTab2ContentExclude":"tenant~brand,tenant~finish",
-    "productAttrInfoTab2ContentEnabled": false,
-
-    "productAttrInfoTab3Content":"tenant~info-tab-features",
-    "productAttrInfoTab3ContentExclude":"tenant~brand,tenant~finish",
-    "productAttrInfoTab3ContentEnabled": false,
-
-    "productAttrInfoTab4Content":"tenant~info-tab-uniquefeatures",
-    "productAttrInfoTab4ContentExclude":"tenant~brand,tenant~finish",
-    "productAttrInfoTab4ContentEnabled": false,
-
-    "productAttrInfoTab5Content":"tenant~info-tab-care",
-    "productAttrInfoTab5ContentExclude":"tenant~brand,tenant~finish",
-    "productAttrInfoTab5ContentEnabled": false,
-
-    "titleInfoTab1":"Description",
-    "titleInfoTab2":"Specifications",
-    "titleInfoTab3":"Features",
-    "titleInfoTab4":"Unique Features",
-    "titleInfoTab5":"Care"
+    "giftCardsInfo": "Gift Card"
   },
   "layoutWidgets": [
     {

@@ -147,30 +147,6 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
                 return biscuit;
             }, []);
         },
-        processInfoTabsContent: function() {
-    		var content = [];
-    		for (var infoTabNumber = 2; infoTabNumber <= 5; infoTabNumber++) {
-    			if (Hypr.getThemeSetting('productAttrInfoTab' + infoTabNumber + 'ContentEnabled')) {
-    				content = this.getExcludedAttributes(infoTabNumber);
-    				if (content.length > 0) {
-    					this.set('infoTab' + infoTabNumber + 'Content', content);
-    				}
-    				content = [];
-    			}
-    		}
-    	},
-    	getExcludedAttributes: function(infoTabNumber) {
-    		var content = [];
-    		_.each(this.get('properties'), function(prop) {
-    			if (!_.contains(Hypr.getThemeSetting('productAttrInfoTab' + infoTabNumber + 'ContentExclude').split(','), prop.attributeFQN)) {
-    				content.push({
-    					name: prop.attributeDetail.description,
-    					value: prop.values[0].stringValue
-    				});
-    			}
-    		});
-    		return content;
-    	},
         addToCart: function () {
             var me = this;
             if(this.get('family').length){
