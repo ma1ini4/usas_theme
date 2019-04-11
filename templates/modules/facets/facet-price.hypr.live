@@ -1,9 +1,19 @@
 {% for priceItem in prices %}
-<li{%if isDirectory=="true" and showMore and showMore > 0 and forloop.counter0 >= showMore %} class="mz-hide-text hide"{% endif %}>
-    <a href="javascript:void(0);" data-mz-facet="Price"
+<li{%if isDirectory=="true" and showMore and showMore > 0 and forloop.counter0 >= showMore %} class="mz-hide-text hide"{% endif %} data-mz-facet-value="{{priceItem.value|replace(" ", "+") }}" data-mz-url="{% make_url "facet" priceItem.value %}">
+    <input type="checkbox" id="{{ priceItem.value|slugify }}"  data-mz-facet="price"
+       data-mz-url="{% make_url "facet" priceItem.value %}" class="mz-facetingform-value" {% if priceItem.isApplied %}checked="checked"{% endif %}
+       data-filter-name="{% if priceItem.rangeQueryValueStart == "*" %}${{priceItem.rangeQueryValueEnd}} and under{% else %}{% if priceItem.rangeQueryValueEnd == "*" %}${{priceItem.rangeQueryValueStart}} +{% else %}${{priceItem.rangeQueryValueStart}} - ${{priceItem.rangeQueryValueEnd}}{% endif %}{% endif %}"
+       data-mz-facet-value="{{priceItem.value|replace(" ", "+") }}">
+
+    <label data-mz-facet="price" for="{{ priceItem.value|slugify }}" id="{{ priceItem.value|slugify }}"
+       data-mz-url="{% make_url "facet" priceItem.value %}" class="mz-facetingform-valuelabel"
+       data-filter-name="{% if priceItem.rangeQueryValueStart == "*" %}${{priceItem.rangeQueryValueEnd}} and under{% else %}{% if priceItem.rangeQueryValueEnd == "*" %}${{priceItem.rangeQueryValueStart}} +{% else %}${{priceItem.rangeQueryValueStart}} - ${{priceItem.rangeQueryValueEnd}}{% endif %}{% endif %}"
+       data-mz-facet-value="{{priceItem.value|replace(" ", "+") }}">{% if priceItem.rangeQueryValueStart == "*" %}${{priceItem.rangeQueryValueEnd}} and under{% else %}{% if priceItem.rangeQueryValueEnd == "*" %}${{priceItem.rangeQueryValueStart}} +{% else %}${{priceItem.rangeQueryValueStart}} - ${{priceItem.rangeQueryValueEnd}}{% endif %}{% endif %}{% if showCount %} ({{priceItem.count}}){% endif %}</label>
+
+    <!-- <a href="javascript:void(0);" data-mz-facet="Price"
        data-mz-url="{% make_url "facet" priceItem.value %}"
        data-filter-name="{% if priceItem.rangeQueryValueStart == "*" %}${{priceItem.rangeQueryValueEnd}} and under{% else %}{% if priceItem.rangeQueryValueEnd == "*" %}${{priceItem.rangeQueryValueStart}} +{% else %}${{priceItem.rangeQueryValueStart}} - ${{priceItem.rangeQueryValueEnd}}{% endif %}{% endif %}"
-       data-mz-facet-value="{{priceItem.value}}">{% if priceItem.rangeQueryValueStart == "*" %}${{priceItem.rangeQueryValueEnd}} and under{% else %}{% if priceItem.rangeQueryValueEnd == "*" %}${{priceItem.rangeQueryValueStart}} +{% else %}${{priceItem.rangeQueryValueStart}} - ${{priceItem.rangeQueryValueEnd}}{% endif %}{% endif %}{% if showCount %} ({{priceItem.count}}){% endif %}</a>
+       data-mz-facet-value="{{priceItem.value}}">{% if priceItem.rangeQueryValueStart == "*" %}${{priceItem.rangeQueryValueEnd}} and under{% else %}{% if priceItem.rangeQueryValueEnd == "*" %}${{priceItem.rangeQueryValueStart}} +{% else %}${{priceItem.rangeQueryValueStart}} - ${{priceItem.rangeQueryValueEnd}}{% endif %}{% endif %}{% if showCount %} ({{priceItem.count}}){% endif %}</a> -->
 </li>
 {% endfor %}
 {% if isDirectory=="true" and showMore and showMore > 0 and prices.length > showMore %}
