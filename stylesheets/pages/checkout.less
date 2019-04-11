@@ -45,8 +45,7 @@
         }
 
         input {
-          border: 1px solid @lightBorder;
-          border-radius: 10px;
+          .checkout-form-field();
           margin: 0;
         }
 
@@ -262,9 +261,7 @@
             font-size: 14px;
         }
         input[type="text"], input, select, .text-input {
-            width: 100%;
-            border: 1px solid @lightBorder;
-            border-radius: 10px
+            .checkout-form-field();
         }
     }
     .mz-contactselector{
@@ -294,28 +291,24 @@
             }
 
             input[type="text"]{
-                width: 240px;
-                border: 1px solid @inputBorder;
+              .checkout-form-field();
             }
             .text-input, #mz-payment-credit-card-type{
-                width: 240px;
-                background-color: @colorWhite;
+                .checkout-form-field();
             }
             .mz-l-formfieldgroup-halfsize{
-                width: 114px;
-                background-color: @colorWhite;
+                .checkout-form-field();
+                width: 150px;
             }
             select {
-                background-color: @colorWhite;
-                margin-bottom: 3px;
+                color: @lightBorder!important;
             }
         }
     }
     .mz-checkout-digitalcredit{
         .mz-l-formfieldgroup-cell{
             input[type="text"]{
-                width: 240px;
-                border: 1px solid @inputBorder;
+                .checkout-form-field();
                 margin-bottom: 0px;
             }
         }

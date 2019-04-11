@@ -8,6 +8,7 @@
         padding-right: @gutter/2;
         padding-bottom: 8px;
         label {
+            color: @headingColor;
             text-align: left;
             display: block;
             min-width: 100px;
@@ -32,7 +33,7 @@
     input[type="tel"],
     input[type="email"],
     select {
-        width: 240px;
+        .checkout-form-field();
         box-sizing: border-box;
         &.is-invalid {
             background-color: @errorBackground;

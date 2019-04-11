@@ -4,10 +4,10 @@
         <a href="javascript:;" class="mz-formstep-edit" data-mz-action="edit">{{ labels.change }}</a>
       {% endif %}
   </h3>
-  
+
 {% if model.requiresFulfillmentInfo || model.requiresDigitalFulfillmentContact %}
-      
-      
+
+
   <div class="mz-formstep-body" mz-shipping-destination-view>
     {% if model.requiresDigitalFulfillmentContact %}
       <div data-mz-gift-card-destination>
@@ -24,8 +24,8 @@
         {% endif %}
       {% endif %}
 
-      <div class="mz-formstep-next">
-        <button class="mz-button button_primary" data-mz-action="next">{{ labels.next }}</button>
+      <div class="mz-formstep-next pull-right">
+        <button class="primary-btn" data-mz-action="next">{{ labels.next }}</button>
       </div>
     </div>
 </div>
@@ -33,4 +33,3 @@
 {% else %}
   {{ labels.noFulfillmentInfoRequired }}
 {% endif %}
-
