@@ -10,7 +10,7 @@
     	{% include "modules/multi-ship-checkout/shipping-methods" %}
         {%comment%} {% include "modules/multi-ship-checkout/shipping-methods-single" %}{% endcomment%}
     {% endif %}
-    <div class="mz-formstep-next">
-        <button type="button" class="mz-button button_primary" data-mz-action="next">{{ labels.next }}</button>
+    <div class="mz-formstep-next pull-right">
+        <button type="button" class="primary-btn" data-mz-action="next">{{ labels.next }}</button>
     </div>
 </div>

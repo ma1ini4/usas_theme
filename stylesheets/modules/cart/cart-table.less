@@ -2,7 +2,7 @@
 
     .mz-carttable-item-image {
         float: left;
-        margin: 0 @gutter/4 @gutter/4 0;
+        margin: 0 15px 0 0;
     }
 
     .mz-carttable-header-price, .mz-carttable-header-fulfillment, .mz-carttable-header-total,
@@ -24,17 +24,43 @@
             margin: 0;
             width: 40%;
         }
+
+        .mz-qty-xs-align {
+            float: left;
+            clear: left;
+            .mz-carttable-qty-field {
+                float: left;
+                margin-top: 2px;
+                margin-bottom: 2px;
+            }
+            .btn-link {
+                position: absolute;
+                top: 0;
+                right: 0;
+                color: @headingColor;
+                font-size: 20px;
+            }
+
+            .mz-carttable-item-total {
+              display: flex;
+              align-self: center;
+              height: 100%;
+
+              .mz-item-rowtotal {
+                margin: auto 15px;
+              }
+            }
+
+            @media @mobile {
+              display: flex!important;
+
+            }
+        }
     }
 
     .mz-carttable-item-title {
         display: block;
         font-size: @fontSizeLarger;
-    }
-
-    .mz-carttable-item-code {
-        float: left;
-        clear: both;
-        font-size: @fontSizeSmall;
     }
 
     .mz-carttable-item-pickuplocation {
@@ -46,6 +72,8 @@
 
     .mz-carttable-qty-field {
         width: 75px;
+        border: 1px solid @lightBorder;
+        border-radius: 3px;
     }
 
     .mz-carttable-item-remove {
@@ -53,8 +81,50 @@
         text-align: center;
     }
 
+    .mz-carttable-item-price {
+      display: flex;
+      flex-direction: column;
+
+      .is-saleprice{
+          display: block;
+          color: @primaryColor;
+          font-size: 16px;
+          font-weight: @bold;
+      }
+      .is-crossedout{
+          color: @textColor;
+          display: block;
+      }
+    }
+    .mz-carttable-item-total {
+
+      .mz-item-rowtotal {
+        text-align: right;
+        color: @textColor;
+        font-size: 16px;
+        font-weight: @regular;
+
+        &.is-saleprice {
+          color: @primaryColor;
+
+        }
+      }
+    }
+
     .mz-carttable-total-row {
-        font-size: @fontSizeLarge;
+        margin-bottom: 5px;
+        padding-bottom: 5px;
+        font-size: 21px;
+        color :@headingColor;
+
+        .mz-carttable-sub-total strong {
+          color: @headingColor;
+          font-weight: @regular;
+        }
+        strong {
+          color: @primaryColor;
+
+        }
     }
 
     .mz-carttable-total {
@@ -80,13 +150,25 @@
         float:left;
         text-align:left;
     }
-    
+
     .mz-carttable-checkout-couponcode{
-        float:left; 
+        float:left;
         text-align:left;
     }
 }
 
+.mz-carttable-item-code{
+    color: @textColor;
+    font-size: 14px;
+    font-weight: @bold;
+    float: left;
+    clear: both;
+
+    em {
+      margin-left: 5px;
+      font-weight: @regular;
+    }
+}
 .mz-carttable-button-active {
     width: 230px;
 }

@@ -11,7 +11,9 @@
 
 {% block body-tag-classes %} mz-cart {% endblock body-tag-classes %}
 
-{% block secondary-nav %}{% endblock secondary-nav %}
+{% block secondary-nav %}
+{% include "modules/secondary-nav" %}
+{% endblock secondary-nav %}
 
 {% block body-content %}
 
@@ -21,12 +23,12 @@
 <div class="modal fade" id="mz-location-selector">
 	{% include "modules/cart/cart-location-select" %}
 </div>
-<div class="mz-l-container">
+<div class="mz-l-container mobile-padding">
 	<div class="mz-cart-heading">
 		<h1 class="mz-pagetitle">{{ labels.cart }}</h1>
 	</div>
 	<!-- Check if model is not empty and form product table if not-->
-	{% if not model.isEmpty %}  
+	{% if not model.isEmpty %}
 			<form method="post" action="{{ siteContext.secureHost }}{{siteContext.siteSubdirectory}}/cart/checkout" id="cartform">
 				{% dropzone "cart-top" scope="template" %}
 				<input type="hidden" name="id" value="{{model.id}}" />
@@ -37,10 +39,12 @@
 			</form>
 	<!-- Show empty cart if model is empty -->
 	{% else %}
-			<div class="cart-div">Your bag is empty - continue shopping!</div>
+			<div class="cart-div">
+				<h3>Your bag is empty - continue shopping!</h3>
+			</div>
 			<div class="cart-div">
 	            <a href="/" class="btn">
-	            	<div class="cart-btn-continue"> Continue Shopping</div>
+	            	<div class="primary-btn"> Continue Shopping</div>
 	            </a>
 	        </div>
 	{% endif %}

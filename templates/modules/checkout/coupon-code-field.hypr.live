@@ -1,7 +1,7 @@
-﻿        <div class="mz-l-formfieldgroup-cell">
+﻿        <div class="mz-l-formfieldgroup-cell mz-formstep-header mz-checkoutform-header">
             <label for="coupon-code">{{ labels.couponCode }}: </label>
         </div>
         <div class="mz-l-formfieldgroup-cell">
             <input type="text" id="coupon-code" name="coupon-code" value="{{ model.couponCode }}" data-mz-value="couponCode" maxlength="{{themeSettings.couponCodeLength}}">
-            <button class="mz-button primary-btn" data-mz-action="addCoupon" {% if not model.couponCode %} disabled="disabled" {% endif %}>{{ labels.apply }}</button>
+            <button class="secondary-btn" data-mz-action="addCoupon" {% if not model.couponCode %} disabled="disabled" {% endif %}>{{ labels.apply }}</button>
         </div>

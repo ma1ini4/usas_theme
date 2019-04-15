@@ -58,8 +58,8 @@
                 {% endif %}
             {% endif %}
 
-            <div class="mz-formstep-next">
-                <button type="button" class="mz-button primary-btn" data-mz-action="submit">{{ labels.placeOrder }}</button>
+            <div class="mz-formstep-next pull-right">
+                <button type="button" class="primary-btn" data-mz-action="submit">{{ labels.placeOrder }}</button>
             </div>
         {% endif %}
     </div>

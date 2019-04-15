@@ -368,7 +368,7 @@
         "title": "Checkout V2",
         "userCreatable": false
     },
-    {    
+    {
       "entityType": "customer",
       "id": "my_account",
       "template": "my-account",
@@ -416,7 +416,7 @@
         "template": "order-status",
         "title": "Order Status",
         "userCreatable": false
-    },    
+    },
     {
       "documentType": "web_page",
       "entityType": "webpage",
@@ -447,7 +447,7 @@
     "oneSizeProductType": "Single Variant",
     "maxRecentlyViewedItems": 5,
     "allProductsCategoryId": 0,
-    "pdpMainImageNameSwatch":"{0}_{1}_v{2}.jpg", 
+    "pdpMainImageNameSwatch":"{0}_{1}_v{2}.jpg",
     "pdpMainImageNameAlt":"{0}_{1}_v{2}.jpg",
     "pdpMainImageMaxWidth":"320",
     "pdpAltImageName":"{0}_{1}_v{2}.jpg",
@@ -492,15 +492,15 @@
     "productThumbImageMaxWidth": 84,
     "productZoomImageMaxWidth": 700,
     "productCarouselImageWidth": 84,
-    "globalCartEmptyBasketFooter":"", 
+    "globalCartEmptyBasketFooter":"",
     "globalCartEmptyBasketKickerLink":"",
     "globalCartRelatedProducts":"true",
     "globalCartRelatedProductsSize":5,
     "globalCartMaxItemCount":3,
     "globalCartEnableSaveCart":"true",
     "globalCartHidePopover": "",
-    "globalCartShowSubtotal": false,    
-    "globalCartItemImageMaxWidth": 105,    
+    "globalCartShowSubtotal": false,
+    "globalCartItemImageMaxWidth": 105,
     "footerEnableMini":false,
     "backofficeDateTimeFormat": "m/d/Y H:i:s O",
     "extendedPropertiesEnabled": false,
@@ -551,8 +551,8 @@
     "maxTopLevelNavLabelLength": 20,
     "productCarouselSize": 8,
     "pageSizeOptions": [
-      36,
-      72
+      12,
+      24
     ],
     "productInfoTabs": "",
     "viewAllPageSize": 54,
@@ -994,11 +994,11 @@
       "displayTemplate": "misc/product-carousel",
       "editViewFields": [
         {
-          
+
           "fieldLabel": "Select Products",
           "name": "products",
           "xtype": "mz-input-productmulti"
-        }    
+        }
       ],
       "icon": "/resources/admin/widgets/city-carousel-icon.png",
       "id": "product-carousel-widget",

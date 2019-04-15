@@ -23,7 +23,7 @@
                 {
                     "xtype": "mz-input-text",
                     "name": "categoryEntityName",
-                    "fieldLabel": "Category Entity Name"   
+                    "fieldLabel": "Category Entity Name"
                 },
                 {
                     "xtype": "mz-input-image",
@@ -106,7 +106,7 @@
                     "xtype": "mz-input-number",
                     "name": "allProductsCategoryId",
                     "fieldLabel": "Enter CategoryId which is having all products"
-                }                
+                }
             ]
         },
         {
@@ -222,9 +222,9 @@
                     "fieldLabel": "Enable XS Mini footer",
                     "xtype": "mz-input-checkbox",
                     "name": "footerEnableMini"
-                }                              
+                }
             ]
-        },         
+        },
         {
             "xtype": "panel",
             "title": "Global Cart",
@@ -233,7 +233,7 @@
                 {
                     "fieldLabel": "Pick an image for Basket",
                     "xtype": "mz-input-image",
-                    "name": "globalCartEmptyBasketFooter" 
+                    "name": "globalCartEmptyBasketFooter"
                 },
                 {
                     "fieldLabel": "Basket kicker link",
@@ -254,12 +254,12 @@
                     "fieldLabel": "Enable Save Cart",
                     "xtype": "mz-input-checkbox",
                     "name": "globalCartEnableSaveCart"
-                },                
+                },
                 {
                     "fieldLabel": "Maximum number of items to show in global Cart",
                     "xtype": "mz-input-number",
                     "name": "globalCartMaxItemCount"
-                }, 
+                },
                 {
                     "fieldLabel": "Max width of global Cart item image",
                     "xtype": "mz-input-number",
@@ -274,7 +274,7 @@
                     "fieldLabel": "Show Subtotal",
                     "xtype": "mz-input-checkbox",
                     "name": "globalCartShowSubtotal"
-                }                            
+                }
             ]
         },
         {
@@ -308,9 +308,9 @@
                     "xtype": "mz-input-number",
                     "name": "maxRecentlyViewedItems",
                     "fieldLabel": "Maximum number of Recently Viewed Items supported"
-                }                                                
+                }
             ]
-        },{            
+        },{
             "xtype": "panel",
             "title": "Form Validations",
             "collapsed": false,
@@ -393,7 +393,7 @@
                     "fieldLabel": "Gift Message Length",
                     "xtype": "mz-input-number",
                     "name": "checkoutGiftMessageLength"
-                },                
+                },
                 {
                     "fieldLabel": "Checkout Comments Length",
                     "xtype": "mz-input-number",
@@ -480,8 +480,8 @@
                     "allowBlank": false,
                     "forceSelection": true,
                     "store": [
-                        36,
-                        72
+                        12,
+                        24
                     ]
                 },
                 {
@@ -536,7 +536,7 @@
                     "fieldLabel": "Also change alternate images"
                 }
             ]
-        },        
+        },
         {
             "xtype": "panel",
             "title": "Category Filters",
@@ -600,7 +600,7 @@
                     "xtype": "mz-input-text",
                     "name": "pdpMainImageMaxWidth",
                     "fieldLabel": "Main Image Max Width"
-                }, 
+                },
                 {
                     "xtype": "mz-input-text",
                     "name": "pdpAltImageName",
