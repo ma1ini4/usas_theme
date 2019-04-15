@@ -3,13 +3,17 @@
 {% block body-tag-classes %}mz-product{% endblock body-tag-classes %}
 {% block body-content %}
 {% preload_json model "product" %}
+{% require_script "pages/info-tabs" %}
 <div class="product-wrapper">
 	{% block breadcrumbs %}
 		{% if themeSettings.showBreadcrumbs %}
 			{% include "modules/breadcrumbs" %}
 	    {% endif %}
-	{% endblock breadcrumbs %}    
+	{% endblock breadcrumbs %}
     <div class="clearfix"></div>
     {% include "modules/product/product-details" %}
+    <div class="info-tabs-details">
+        {% include "modules/product/product-info-tabs" %}
+    </div>
 </div>
 {% endblock body-content %}
