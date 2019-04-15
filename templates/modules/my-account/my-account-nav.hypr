@@ -1,4 +1,4 @@
-﻿<nav class="mz-scrollnav" id="account-nav" data-mz-scrollnav="{{ navtarget }}">
+<nav class="mz-scrollnav" id="account-nav">
     <ul class="mz-scrollnav-list nav">
         <li class="mz-scrollnav-item">
             <a class="mz-scrollnav-link" href="#settings">
@@ -17,26 +17,13 @@
                 {{ labels.orderHistory }}
             </a>
         </li>
-        <li class="mz-scrollnav-item">
-            <a class="mz-scrollnav-link" href="#returnhistory">
-                {{ labels.returns }}
-            </a>
-        </li>
-        <li class="mz-scrollnav-item">
-            <a class="mz-scrollnav-link" href="#paymentmethods">
-                {{ labels.paymentMethods }}
-            </a>
-        </li>
+
         <li class="mz-scrollnav-item">
             <a class="mz-scrollnav-link" href="#addressbook">
                 {{ labels.addressBook }}
             </a>
         </li>
-        <li class="mz-scrollnav-item">
-            <a class="mz-scrollnav-link" href="#{{ labels.digitalCreditsAnchor }}">
-                {{ labels.digitalCredit }}
-            </a>
-        </li>
+
     </ul>
 </nav>
 {% require_script "modules/scroll-nav" %}
