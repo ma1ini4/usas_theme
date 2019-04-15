@@ -585,7 +585,7 @@
     "showMSRP": true,
     "showProductDetailMeasurements": true,
     "showProductDetailMfgPartNumber": true,
-    "showProductDetailProperties": false,
+    "showProductDetailProperties": true,
     "showProductDetailShortDesc": true,
     "showProductDetailUPC": true,
     "textColor": "#444444",
@@ -595,7 +595,7 @@
     "categoryEntityName": "categoryAttributes@ng",
     "globalPageHeaderLogoSM": null,
     "globalPageHeaderLogoXS": null,
-    "enableProductCarousel": true,
+    "enableProductCarousel": false,
     "homePageCategoryWidgetAltText": "home_cat_widget_img",
     "usStates": [
       {
