@@ -3,10 +3,27 @@
     font-size: @fontSizeSmall;
 
     .mz-utilitynav-item {
-        // float: left;
-        // margin: 0;
-        // padding: 0 10px 0 0;
-        // text-align: right;
+        display: flex;
+        align-items: center;
+        float: left;
+        text-align: right;
+        margin: 0 25px 0 0;
+        padding: 0 10px 0 0!important;
+        font-size: 16px;
+        a{
+          color: @secondaryColor;
+          text-decoration: none;
+          text-transform: @uppercase;
+          cursor: pointer;
+
+          &:hover{
+            color: @headingColor;
+            text-decoration: none!important;
+          }
+        }
+        span.separator {
+          color: @secondaryColor;
+        }
 
         &:last-child {
             padding-right: 0;
