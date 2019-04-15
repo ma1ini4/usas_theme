@@ -24,6 +24,12 @@
             </a>
         </li>
 
+        <li class="mz-scrollnav-item">
+            <a class="mz-scrollnav-link" href="/logout">
+                {{ labels.logOut }}
+            </a>
+        </li>
+
     </ul>
 </nav>
 {% require_script "modules/scroll-nav" %}
