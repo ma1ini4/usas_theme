@@ -585,7 +585,7 @@
     "showMSRP": true,
     "showProductDetailMeasurements": true,
     "showProductDetailMfgPartNumber": true,
-    "showProductDetailProperties": true,
+    "showProductDetailProperties": false,
     "showProductDetailShortDesc": true,
     "showProductDetailUPC": true,
     "textColor": "#444444",

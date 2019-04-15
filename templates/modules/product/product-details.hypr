@@ -36,7 +36,7 @@
                 <div id="product-detail" class="product-detail mz-productdetail mz-l-stack">
                     {% include "modules/product/product-detail" %}
                 </div>
-                {% include "modules/product/product-desc-tabs" %}
+                <!-- {% include "modules/product/product-desc-tabs" %} -->
             </div>
         </div>
     </div>

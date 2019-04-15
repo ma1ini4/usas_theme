@@ -2164,7 +2164,7 @@ ul.tabs {
                 }
             }
             .mz-price {
-                font-size: @fontSize+10;
+                font-size: @fontSize+11 !important; 
                 text-align: left;
                 // width: 100%;
                 &.is-saleprice {
@@ -2247,6 +2247,32 @@ ul.tabs {
 }
 .product-wrapper {
     padding: 0;
+    .info-tabs-details {
+        ul {
+            border-bottom: none;
+            li {
+                a {
+                    border-radius: 20px 20px 0 0;
+                    background: #F8F8F9;
+                    color: #22205F;
+                }
+                &.active a{
+
+                }   
+            }
+        }
+        .tab-content {
+            border-top: 1px solid #ddd;
+            border-radius: 0 20px 0 0;
+            .tab-pane div {
+                padding: 25px 20px;
+                border: 1px solid #D0D2D3;
+                border-top: none;
+                border-radius: 0 20px 20px 20px;
+                background: #F8F8F9;
+            }
+        }
+    }
 }
 //Product size options
 .mz-productoptions-valuecontainer{
