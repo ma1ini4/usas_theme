@@ -528,10 +528,10 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         additionalEvents: {
             "blur #mz-payment-credit-card-number": "changeCardType",
             "input  [name='security-code'],[name='credit-card-number']": "allowDigit"
-        },  
+        },
         allowDigit:function(e){
             e.target.value= e.target.value.replace(/[^\d]/g,'');
-        },         
+        },
         changeCardType:function(e){
             window.checkoutModel = this.model;
             var number = e.target.value;
@@ -543,9 +543,9 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
                 cardType = "VISA";
             }
 
-            // Mastercard 
+            // Mastercard
             // Updated for Mastercard 2017 BINs expansion
-             if (/^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$/.test(number)) 
+             if (/^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$/.test(number))
                 cardType = "MC";
 
             // AMEX
@@ -557,17 +557,17 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
             re = new RegExp("^(6011|622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5]|64[4-9])|65)");
             if (number.match(re) !== null)
                 cardType = "DISCOVER";
-            
+
             $('.mz-card-type-images').find('span').removeClass('active');
             if(cardType){
                 this.model.set('editingCard.paymentOrCardType',cardType);
                 $('.mz-card-type-images').find('span[data-mz-card-type-image="'+cardType+'"]').addClass('active');
             }
             else{
-                this.model.set('editingCard.paymentOrCardType',null);    
+                this.model.set('editingCard.paymentOrCardType',null);
             }
 
-        },             
+        },
         beginEditCard: function (e) {
             var id = this.editing.card = e.currentTarget.getAttribute('data-mz-card');
             this.model.beginEditCard(id);
@@ -621,8 +621,8 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
             'editingContact.isShippingContact',
             'editingContact.isPrimaryShippingContact'
             ],
-        renderOnChange: [    
-            'editingContact.address.countryCode',              
+        renderOnChange: [
+            'editingContact.address.countryCode',
             'editingContact.address.candidateValidatedAddresses',
             'editingContact.isBillingContact',
             'editingContact.isShippingContact'
@@ -640,7 +640,7 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
             addr.set('candidateValidatedAddresses',null);
             addr.set('isValidated', true);
             this.render();
-        },        
+        },
         beginAddContact: function () {
             this.editing.contact = false;
             this.model.endEditContact();
@@ -686,7 +686,7 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
                 go = function() {
                     return self.doModelAction('deleteMultipleCards', _.pluck(associatedCards, 'id')).then(doDeleteContact);
                 };
-               
+
             }
 
             if (window.confirm(windowMessage)) {

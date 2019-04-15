@@ -11,17 +11,17 @@
 {% preload_json model "customer" %}
 
 <div class="mz-l-container">
-    <h1 class="mz-pagetitle">
-        {{ labels.yourAccount }}
-    </h1>
     <div class="row flex">
         <div class="mz-l-sidebar col-xs-12 col-sm-4 col-md-3">
             {% include "modules/my-account/my-account-nav" with navtarget="body" %}
         </div>
 
         <div id="account-panels" class="mz-l-stack mz-l-stack-large  col-xs-12 col-sm-8 col-md-9 flex-column bottom-border">
+          {% dropzone "my-account-top" scope="template" %}
+          <h1 class="mz-pagetitle">
+            {{ labels.yourAccount }}
+          </h1>
 
-    		{% dropzone "my-account-top" scope="template" %}
 
             <div class="row">
               <div class="col-sm-6">

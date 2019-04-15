@@ -3,7 +3,7 @@
         margin-top: @gutter/2;
     }
     .mz-accountaddressbook-contact {
-        border-right: 1px solid #eee;
+        border-right: 1px solid @lightBorder;
         margin: 0 @gutter/2 @gutter/2 0;
         width: @addressTileWidth;
         min-height: @addressTileHeight;
@@ -22,15 +22,16 @@
 
     .mz-accountaddressbook-actions {
         float: right;
-        margin: 0 @gutter/2;
+        margin: 8px 0;
+
         a {
-            .permalink(#666);
+            .permalink(@textColor);
             display: inline-block;
-            padding: 0 @gutter/4;
-            border-right: 1px solid #eee;
+            padding: 0 8px 0 0;
+            border-right: 1px solid @lightBorder;
             &:last-child {
                 border-right-width: 0;
-                padding-right: 0;
+                padding: 0 0 0 8px;
             }
         }
     }
