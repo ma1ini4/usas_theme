@@ -3,9 +3,9 @@
 	<div class="media-list">
 			<div class="media heading-row">
 						<div class="row">
-							<div class="col-xs-8 item-name"><h5 class="bold-text">{{ labels.item }}</h5></div>
+							<div class="col-xs-8 global-cart-padding item-name"><h5 class="bold-text">{{ labels.item }}</h5></div>
 							<div class="col-xs-2 global-cart-padding"><h5 class="bold-text">{{ labels.price }}</h5></div>
-							<div class="col-xs-2 global-cart-padding"><h5 class="bold-text">{{ labels.itemTotal }}</h5></div>
+							<div class="col-xs-2 global-cart-padding"><h5 class="bold-text">Total</h5></div>
 						</div>
 					</div>
 
@@ -80,19 +80,19 @@
 	    </div>
 	</div>
 	<div class="row">
-		<div class="col-xs-8">
-			<a href="/cart" class="secondary-btn view-cart-btn">{{ labels.openCart }}</a>
+		<div class="col-xs-6">
+			<a href="/cart" class="secondary-btn">{{ labels.openCart }}</a>
 			{% if (themeSettings.globalCartEnableSaveCart && user.isAnonymous)  %}
 				<button data-mz-action="openLiteRegistration" class="primary-btn">Save Cart</button>
 			{% endif %}
 		</div>
-		<div class="col-xs-4 text-right">
+		<div class="col-xs-6 text-right">
 			{% if not user.isAnonymous %}
   				<form method="post" value="" action="{{ pageContext.secureHost }}/cart/checkout">
-  					<button type="submit" class="primary-btn btn btn-default" >Checkout</button>
+  					<button type="submit" class="primary-btn" >Checkout</button>
   				</form>
  			{% else%}
- 				<button type="submit" class="primary-btn btn btn-default" data-mz-action="checkoutGuest">Checkout</button>
+ 				<button type="submit" class="primary-btn" data-mz-action="checkoutGuest">Checkout</button>
 			{% endif%}
 		</div>
 	</div>
