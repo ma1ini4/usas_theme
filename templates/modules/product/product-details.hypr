@@ -17,7 +17,7 @@
                 <h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName|replace("'","&rsquo;")|safe }}</h1>
                 <div class="row">
                     <div class="col-xs-5">
-                        <h4 class="mz-productcodes-productcode p-3" itemprop="sku">{{ labels.item}} # {{ model.productCode }}</h4>
+                        <h4 class="mz-productcodes-productcode p-3" itemprop="sku">{{ labels.item}} {{ model.productCode }}</h4>
                     </div>
                     {% if model.productType != themeSettings.familyProductType %}
                         <div class="col-xs-7">
@@ -26,14 +26,6 @@
                             </div>
                         </div>
                     {% endif %}
-                </div>
-                <div class="mz-all-review-container">
-                    <span class="mz-reviews-pdp-stars">
-                        {% include "modules/product/product-ratings" %}
-                    </span>
-                    <span class="mz-reviews-pdp-text">
-                        <a href="#">4.9(10) Read a review | Write a review</a>
-                    </span>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -44,7 +36,7 @@
                 <div id="product-detail" class="product-detail mz-productdetail mz-l-stack">
                     {% include "modules/product/product-detail" %}
                 </div>
-                {% include "modules/product/product-desc-tabs" %}
+                <!-- {% include "modules/product/product-desc-tabs" %} -->
             </div>
         </div>
     </div>
