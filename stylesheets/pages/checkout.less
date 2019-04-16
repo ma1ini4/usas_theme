@@ -54,6 +54,17 @@
           margin-left: 15px;
         }
       }
+      @media @tablet-only {
+        flex-direction: column;
+
+        .mz-l-formfieldgroup-cell {
+
+          &:first-child, &:last-child {
+            width: 100%;
+
+          }
+      }
+    }
 
       @media @mobile-sm-bootstrap {
         flex-direction: column;
