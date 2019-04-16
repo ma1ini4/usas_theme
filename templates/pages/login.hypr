@@ -6,7 +6,6 @@
 
 {% block body-content %}
     <div class="mz-l-container flex">
-        {% include "modules/common/message-bar" with model=model.messages %}
         <div class="col-sm-6 mz-login-column">
             <!-- <div class="mz-l-column mz-l-formfieldgroup">
                 <h1 class="mz-pagetitle">{{ labels.loginNoAccount }}</h1>
@@ -56,7 +55,6 @@
                             <button class="mz-button primary-btn mz-login-button" data-mz-action="signup">
                                 {{ labels.signUpLink }}
                             </button>
-                            <section data-mz-role="popover-message" class="mz-popover-message"></section>
                           </div>
                           <div class="mz-l-formfieldgroup-cell">
                               <button class="mz-button primary-btn mz-login-button pull-left" data-mz-action="loginpage-submit">
@@ -65,7 +63,9 @@
                           </div>
                       </div>
                   </div>
+                  <section data-mz-role="popover-message" class="mz-popover-message"></section>
               </form>
+              {% include "modules/common/message-bar" with model=model.messages %}
         </div>
     </div>
 {% endblock body-content %}
