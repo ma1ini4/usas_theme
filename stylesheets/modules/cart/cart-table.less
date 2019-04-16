@@ -30,8 +30,8 @@
             clear: left;
             .mz-carttable-qty-field {
                 float: left;
-                margin-top: 2px;
-                margin-bottom: 2px;
+                max-height: 38px;
+                margin: 2px 10px 2px 0;
             }
             .btn-link {
                 position: absolute;
@@ -47,7 +47,7 @@
               height: 100%;
 
               .mz-item-rowtotal {
-                margin: auto 15px;
+                margin: auto 10px auto 0;
               }
             }
 
@@ -61,18 +61,6 @@
     .mz-carttable-item-title {
         display: block;
         font-size: @fontSizeLarger;
-    }
-    .mz-carttable-item-code{
-        color: @textColor;
-        font-size: 14px;
-        font-weight: @bold;
-        float: left;
-        clear: both;
-
-        em {
-          margin-left: 10px;
-          font-weight: @regular;
-        }
     }
 
     .mz-carttable-item-pickuplocation {
@@ -108,20 +96,6 @@
           display: block;
       }
     }
-    .mz-carttable-item-total {
-
-      .mz-item-rowtotal {
-        text-align: right;
-        color: @textColor;
-        font-size: 16px;
-        font-weight: @regular;
-
-        &.is-saleprice {
-          color: @primaryColor;
-
-        }
-      }
-    }
 
     .mz-carttable-total-row {
         margin-bottom: 5px;
@@ -150,14 +124,6 @@
         vertical-align: middle;
     }
 
-        .mz-item-discount {
-        font-weight: bold;
-
-        .mz-item-discountamt {
-            color: #900;
-        }
-    }
-
     .mz-carttable-checkout-couponcode{
         float:left;
         text-align:left;
@@ -169,6 +135,18 @@
     }
 }
 
+.mz-carttable-item-code{
+    color: @textColor;
+    font-size: 14px;
+    font-weight: @bold;
+    float: left;
+    clear: both;
+
+    em {
+      margin-left: 5px;
+      font-weight: @regular;
+    }
+}
 .mz-carttable-button-active {
     width: 230px;
 }
@@ -218,4 +196,43 @@
     margin-left: 30px;
   }
 
+}
+
+.mz-carttable-item-total {
+
+  .mz-item-rowtotal {
+    text-align: right;
+    color: @textColor;
+    font-size: 16px;
+    font-weight: @regular;
+
+    &.is-saleprice {
+      color: @primaryColor;
+      font-weight: @bold;
+    }
+    &.is-crossedout {
+      padding: 0 0 0 5px;
+
+      @media @mobile {
+        display: none;
+      }
+    }
+  }
+}
+.mz-item-discount {
+font-weight: bold;
+
+  .mz-price-discountname, .mz-item-discountname {
+    font-size: 12px!important;
+    font-style: italic;
+  }
+
+  .mz-item-discountamt {
+      color: @primaryColor;
+      font-size: 14px;
+  }
+
+  @media @mobile {
+    display: none;
+  }
 }
