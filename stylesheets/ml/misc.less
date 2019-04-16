@@ -1392,7 +1392,7 @@ ul.tabs {
             }
             .mz-productdetail-price{
               padding-left: 0;
-              margin-top: 39px;
+              margin-top: 20px;
               .mz-pricestack{
                 text-align: right;
                 &.mz-pricestack-range {
@@ -1410,10 +1410,14 @@ ul.tabs {
                   font-size: 21px;
                   width: 100%;
                   line-height: 14px;
-                  text-align: right;
+                  text-align: center;
                   font-weight: bold;
+                  margin-bottom: 6px;
                   &.is-crossedout {
                     font-weight: normal;
+                  }
+                  &.is-saleprice {
+                    color: #cc2036;
                   }
                 }
                 .mz-pricestack-price-upper,
@@ -1460,6 +1464,7 @@ ul.tabs {
       .add-to-cart-container {
         .mz-productdetail-addtocart {
           width: 321px;
+          display: block;
         }
       }
       .mz-productimages{
