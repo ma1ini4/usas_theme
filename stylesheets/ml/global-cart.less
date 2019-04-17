@@ -54,7 +54,7 @@
         padding: 0 8px 0 0;
         h5 {
           width: 100%;
-          text-align: center;
+          text-align: right;
         }
 
       }
@@ -111,8 +111,15 @@
       font-size: 16px;
 
       .mz-item-discount {
+        float: right;
         position: relative;
         width: 115px;
+        font-weight: @regular;
+
+        .mz-item-discountamt {
+          font-weight: @regular;
+
+        }
       }
     }
     .media-image {
@@ -124,6 +131,37 @@
     .cart-items {
         list-style: none;
         padding: 0;
+    }
+    .total-amount-row {
+      position: relative;
+      margin-top: 15px;
+      margin-bottom: 15px;
+
+      div {
+        font-size: 16px;
+      }
+      .total-amount-row-total {
+        font-weight: @bold;
+
+        }
+      .more-items {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 100;
+
+        a {
+          color: @textColor;
+        }
+
+        span {
+          color: @primaryColor;
+        }
+      }
+
+    }
+    .tertiary-btn {
+      margin: 8px 0;
     }
     .mz-l-carousel{
         height:auto;

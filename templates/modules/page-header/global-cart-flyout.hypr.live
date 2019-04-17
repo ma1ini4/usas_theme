@@ -58,24 +58,24 @@
 	</div>
 	<div class="row total-amount-row">
 	    <div class="col-xs-12 text-right">
-	    	<b>Subtotal: </b>
+	    	Subtotal:
 	    	<span>{{ model.subtotal|currency }}</span>
 	    </div>
   	    {% if model.orderDiscounts %}
 	  	    {% for orderDiscount in model.orderDiscounts  %}
 	  	    <div class="col-xs-12 text-right text-primary">
-	  	    	<b>{{ orderDiscount.discount.name }}</b>
+	  	    	{{ orderDiscount.discount.name }}
 		    	<span> - {{ orderDiscount.impact |currency }}</span>
 		    </div>
 	  	    {% endfor %}
 	    {% endif %}
 	    {% if model.items.length > themeSettings.globalCartMaxItemCount %}
-	    <div class="col-xs-6 text-left ">
-	    	<a href="/cart"> {{model.items.length-themeSettings.globalCartMaxItemCount}} more item(s)... </a>
-	    </div>
-	    {% endif%}
-	    <div class="{% if model.items.length > themeSettings.globalCartMaxItemCount %}col-xs-6{% else %}col-xs-12{% endif %} text-right">
-	    	<b>Total: </b>
+			<div class="col-xs-6 text-left more-items">
+				<a href="/cart"> {{model.items.length-themeSettings.globalCartMaxItemCount}} more item(s)... </a>
+			</div>
+	    {% endif %}
+	    <div class="total-amount-row-total {% if model.items.length > themeSettings.globalCartMaxItemCount %}col-xs-6{% else %}col-xs-12{% endif %} text-right">
+	    	Total:
 	    	<span>{{ model.total|currency }}</span>
 	    </div>
 	</div>
@@ -83,7 +83,7 @@
 		<div class="col-xs-6">
 			<a href="/cart" class="secondary-btn">{{ labels.openCart }}</a>
 			{% if (themeSettings.globalCartEnableSaveCart && user.isAnonymous)  %}
-				<button data-mz-action="openLiteRegistration" class="primary-btn">Save Cart</button>
+				<button data-mz-action="openLiteRegistration" class="tertiary-btn">Save Cart</button>
 			{% endif %}
 		</div>
 		<div class="col-xs-6 text-right">
