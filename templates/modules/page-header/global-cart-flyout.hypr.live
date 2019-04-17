@@ -101,8 +101,7 @@
 		<h5>You may also like</h5>
 		<div class="related-products"></div>
 	{% endif %}
-	{% dropzone "global-cart" scope="site" %}
-	<div class="row text-center" style="padding-top: 15px;">
+	<div class="row text-center>
 		{% if themeSettings.globalCartEmptyBasketFooter %}
 		  <a {% if themeSettings.globalCartEmptyBasketKickerLink %} href="{{ themeSettings.globalCartEmptyBasketKickerLink }}"{% else %} href="/home" {% endif %}>
 		  	<img src="{% make_url "image" themeSettings.globalCartEmptyBasketFooter.imageUrl with width=370 as_parameters %}"  />
@@ -113,7 +112,7 @@
 
 {% else %}
 	<div class="text-center">
-		<div class=>Your shopping basket is empty</div>
+		<div class="cart-div">Your shopping basket is empty</div>
 		{% if themeSettings.globalCartEmptyBasketFooter %}
 		  <a {% if themeSettings.globalCartEmptyBasketKickerLink %} href="{{ themeSettings.globalCartEmptyBasketKickerLink }}"{% else %} href="/home" {% endif %}>
 		  	<img src="{% make_url "image" themeSettings.globalCartEmptyBasketFooter.imageUrl with width=370 as_parameters %}"  />
@@ -121,3 +120,8 @@
 		{% endif %}
 	</div>
 {% endif %}
+<div class="row">
+	<div class="col-xs-12">
+		{% dropzone "global-cart-dropzone" scope="page" %}
+	</div>
+</div>
