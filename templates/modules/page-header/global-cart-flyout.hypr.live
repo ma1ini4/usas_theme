@@ -101,6 +101,7 @@
 		<h5>You may also like</h5>
 		<div class="related-products"></div>
 	{% endif %}
+	{% dropzone "global-cart" scope="site" %}
 	<div class="row text-center" style="padding-top: 15px;">
 		{% if themeSettings.globalCartEmptyBasketFooter %}
 		  <a {% if themeSettings.globalCartEmptyBasketKickerLink %} href="{{ themeSettings.globalCartEmptyBasketKickerLink }}"{% else %} href="/home" {% endif %}>
@@ -108,7 +109,6 @@
 		  </a>
 		{% endif %}
 
-		 {% dropzone "global-cart" scope="site" %}
 	</div>
 
 {% else %}
