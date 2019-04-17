@@ -81,27 +81,27 @@
           <div id="services-content" style="display:none;">
               <div class="services-details">
                   <a href="#">
-                      <h4>{{ labels.accountSettings }}</h4>
+                      <h4>Customer Service</h4>
                   </a>
-                      <p>{{ labels.accountSettingsInfo }}</p>
+                      <p>Service text</p>
               </div>
               <div class="services-details">
                   <a href="#">
-                      <h4>{{ labels.orderHistory }}</h4>
+                      <h4>Technical Support</h4>
                   </a>
-                      <p>{{ labels.orderHistoryInfo }}</p>
+                      <p>Technical Service text</p>
               </div>
               <div class="services-details">
                   <a href="#">
-                      <h4>{{ labels.addressBook }}</h4>
+                      <h4>Pipette Calibration and Service</h4>
                   </a>
-                      <p>{{ labels.addressBookInfo }}</p>
+                      <p>Regular maintenance keeps your pipettes within specification</p>
               </div>
               <div class="services-details">
                   <a href="#">
-                      <h4>{{ labels.logOut }}</h4>
+                      <h4>Custom & OEM Products</h4>
                   </a>
-                      <p>{{ labels.logOutInfo }}</p>
+                      <p>Custom & OEM products text</p>
               </div>
           </div>
         </li>
