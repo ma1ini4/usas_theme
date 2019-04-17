@@ -51,3 +51,39 @@ body.mz-product.desktop-screen .product-backgroundimg {
         }
     }
 }
+.product-paging-control {
+    margin-right: 15px;
+    a {
+        width: 85px;
+        text-align: center;
+        height: 35px;
+        line-height: 32px;
+        border: 1px solid @lightBorder;
+        &.mz-next-button {
+            border-radius: 0 10px 10px 0;
+            span {
+                text-transform: lowercase;
+                padding-right: 5px;
+                color: @headingColor;
+            }
+        }
+        &.mz-previous-button {
+            right: -1px;
+            position: relative;
+            border-radius: 10px 0 0 10px;
+            span {
+                text-transform: lowercase;
+                padding-left: 5px;
+            }
+        }
+        i {
+            font-size: 10px;
+        }
+        &:hover {
+            text-decoration: none;
+            span {
+                text-decoration: underline;
+            }
+        }
+    }
+}

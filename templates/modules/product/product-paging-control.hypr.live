@@ -1,0 +1,8 @@
+<a id="next" href="#" class="mz-next-button pull-right" style="display:none;" data-mz-action="next" >
+  <span class="mz-next-button-span">{{labels.next}}</span>
+  <i class="fa fa-chevron-right"></i>
+</a>
+<a id="previous" href="#" class="mz-previous-button  pull-right" style="display:none;" data-mz-action="previous" >
+  <i class="fa fa-chevron-left"></i>
+  <span class="mz-previous-button-span">{{labels.previous}}</span>
+</a>

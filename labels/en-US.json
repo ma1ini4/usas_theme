@@ -60,6 +60,7 @@
   "del"                  : "Delete",
   "edit"                 : "Edit",
   "next"                 : "Next",
+  "previous"             : "Previous",
   "submit"               : "Submit",
   "actions"              : "Actions",
   "status"               : "Status",
