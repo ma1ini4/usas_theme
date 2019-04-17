@@ -596,6 +596,7 @@
     "globalPageHeaderLogoSM": null,
     "globalPageHeaderLogoXS": null,
     "enableProductCarousel": false,
+    "enableProductPagingControl": true,
     "homePageCategoryWidgetAltText": "home_cat_widget_img",
     "usStates": [
       {

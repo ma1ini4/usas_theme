@@ -7,6 +7,14 @@
     {% include "modules/product/product-top-carousel" %}
     {% endif %}    
     <div class="row">
+    {% if themeSettings.enableProductPagingControl %}
+        {% require_script "pages/product-paging-control" %}
+    {% endif %}
+    {% if themeSettings.enableProductPagingControl %}
+        <div class="product-paging-control">
+            {% include "modules/product/product-paging-control" %}
+        </div>
+    {% endif %}
         <div class="col-xs-12 col-sm-6">
             <div data-mz-productimages class="mz-productimages mz-product-left-container margin-top-15">
                 {% include "modules/product/product-images" %}
