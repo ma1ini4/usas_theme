@@ -46,7 +46,7 @@
       .item-price {
         h5 {
           width: 100%;
-          text-align: right;
+          text-align: center;
         }
       }
 
@@ -88,6 +88,20 @@
             color: inherit;
         }
     }
+    .item-options {
+      font-size: 12px;
+      .item-option-name {
+        margin-right: 5px;
+        font-weight: bold;
+
+        span {
+          font-weight: @regular;
+          text-transform: capitalize;
+        }
+
+      }
+
+    }
     .mz-item-price {
       text-align: center;
     }
@@ -101,8 +115,11 @@
         width: 115px;
       }
     }
-    .media-image img {
-      width: 100%;
+    .media-image {
+      white-space: nowrap;
+        img {
+        width: 100%;
+      }
     }
     .cart-items {
         list-style: none;

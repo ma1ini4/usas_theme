@@ -36,12 +36,14 @@
 									{{ items.product.name }}
 								</a>
 							</h5>
-							{% if items.product.options %}
-								{% for option in items.product.options %}
-								<div><b>{{ option.name }}</b>  <span>{% if option.stringname %}{{ option.stringname }}{% else %}{{ option.value }}{% endif %}</span></div>
-								{% endfor %}
-							{% endif %}
-							<div><b>{{ labels.qty }} </b>  <span>{{ items.quantity }}</span></div>
+							<div class="item-options">
+								{% if items.product.options %}
+									{% for option in items.product.options %}
+									<div class="item-option-name">{{ option.name }}: <span>{% if option.stringname %}{{ option.stringname }}{% else %}{{ option.value }}{% endif %}</span></div>
+									{% endfor %}
+								{% endif %}
+								<div class="item-option-name">{{ labels.qty }}: <span>{{ items.quantity }}</span></div>
+							</div>
 						</div>
 						<div class="col-xs-4">
 							<div class="row">
