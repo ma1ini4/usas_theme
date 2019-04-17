@@ -1,5 +1,5 @@
 #global-cart {
-    display: none;
+    display: block;
     position: absolute;
     -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
@@ -41,36 +41,65 @@
     }
 
     .heading-row {
-      .row {
-        div {
-          display: flex;
-          align-items: center;
-          height: 35px;
+      border-bottom: 1px solid @lightBorder;
 
-          h5 {
-            margin: 0;
-            color: @headingColor;
-            font-size: 16px;
-            font-weight: @bold;
-          }
+      .item-price {
+        h5 {
+          width: 100%;
+          text-align: right;
+        }
+      }
 
-          &:first-child {
-            padding-left: 30px;
-            margin-right: -5px;
-            padding-right: 0;
-          }
+      .item-total {
+        padding: 0 8px 0 0;
+        h5 {
+          width: 100%;
+          text-align: center;
         }
 
       }
+      div {
+        display: flex;
+        align-items: center;
+        height: auto;
+        padding: 0;
+
+        h5 {
+          margin: 0;
+          color: @headingColor;
+          font-size: 16px;
+          font-weight: @bold;
+        }
+
+        &:first-child {
+          padding-left: 15px;
+          padding-right: 0;
+        }
+      }
+    }
+    .media {
+      padding-bottom: 8px;
+      border-bottom: 1px solid @lightBorder;
     }
     .media-heading {
-      // row > div {
-      //   padding: 0;
-      // }
+      font-size: 16px;
         a {
             text-decoration: none;
             color: inherit;
         }
+    }
+    .mz-item-price {
+      text-align: center;
+    }
+    .price-amount-col {
+      padding: 0 8px 0 0;
+      text-align: right;
+      font-size: 16px;
+
+      .mz-item-discount {
+        position: relative;
+        width: 115px;
+      }
     }
     .media-image img {
       width: 100%;
@@ -94,7 +123,7 @@
         display: inline-block;
     }
     .global-cart-padding{
-        padding-left: 0px;
+        padding: 0px;
     }
 }
 .cart-div {

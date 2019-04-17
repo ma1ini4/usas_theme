@@ -2,11 +2,9 @@
 {% if model.items.length>0 %}
 	<div class="media-list">
 			<div class="media heading-row">
-						<div class="row">
-							<div class="col-xs-8 global-cart-padding item-name"><h5 class="bold-text">{{ labels.item }}</h5></div>
-							<div class="col-xs-2 global-cart-padding"><h5 class="bold-text">{{ labels.price }}</h5></div>
-							<div class="col-xs-2 global-cart-padding"><h5 class="bold-text">Total</h5></div>
-						</div>
+							<div class="col-xs-8 item-name"><h5>{{ labels.item }}</h5></div>
+							<div class="col-xs-2 item-price"><h5>{{ labels.price }}</h5></div>
+							<div class="col-xs-2 item-total text-right"><h5>Total</h5></div>
 					</div>
 
 		    {% for items in model.cartItems  %}
@@ -50,7 +48,7 @@
 								<div class="col-xs-6 global-cart-padding"  >
 								{% include "modules/common/item-price" with item=items %}
 								</div>
-								<div class="col-xs-6 price-amount-col">{% include "modules/common/item-total" with item=items isGlobalCart="true" %}</div>
+								<div class="col-xs-6 price-amount-col text-right">{% include "modules/common/item-total" with item=items isGlobalCart="true" %}</div>
 							</div>
 						</div>
 				</div>
