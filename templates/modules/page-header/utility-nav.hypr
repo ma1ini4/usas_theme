@@ -28,52 +28,34 @@
                   <div class="my-account-details">
                       <a href="/myaccount#settings">
                           <h4>{{ labels.accountSettings }}</h4>
-                          <p>{{ labels.accountSettingsInfo }}</p>
                       </a>
+                          <p>{{ labels.accountSettingsInfo }}</p>
                   </div>
                   {% if siteContext.generalSettings.isWishlistCreationEnabled %}
                       <div class="my-account-details">
                           <a href="/myaccount#wishlist">
                               <h4>{{ labels.wishLists }}</h4>
-                              <p>{{ labels.wishListsInfo }}</p>
                           </a>
+                              <p>{{ labels.wishListsInfo }}</p>
                       </div>
                   {% endif %}
                   <div class="my-account-details">
                       <a href="/myaccount#orderhistory">
                           <h4>{{ labels.orderHistory }}</h4>
+                      </a>
                           <p>{{ labels.orderHistoryInfo }}</p>
-                      </a>
-                  </div>
-                  <div class="my-account-details">
-                      <a href="/myaccount#returnhistory">
-                          <h4>{{ labels.returns }}</h4>
-                          <p>{{ themeSettings.returnsInfo }} </p>
-                      </a>
-                  </div>
-                  <div class="my-account-details">
-                      <a href="/myaccount#paymentmethods">
-                          <h4>{{ labels.paymentMethods }}</h4>
-                          <p>{{ themeSettings.paymentsMethodInfo }} </p>
-                      </a>
                   </div>
                   <div class="my-account-details">
                       <a href="/myaccount#addressbook">
                           <h4>{{ labels.addressBook }}</h4>
+                      </a>
                           <p>{{ labels.addressBookInfo }}</p>
-                      </a>
-                  </div>
-                  <div class="my-account-details">
-                      <a href="/myaccount#{{ labels.digitalCreditsAnchor }}">
-                          <h4>{{ labels.digitalCredit }}</h4>
-                          <p>{{ themeSettings.giftCardsInfo }} </p>
-                      </a>
                   </div>
                   <div class="my-account-details">
                       <a href="/logout">
                           <h4>{{ labels.logOut }}</h4>
-                          <p>{{ labels.logOutInfo }}</p>
                       </a>
+                          <p>{{ labels.logOutInfo }}</p>
                   </div>
               </div>
         </li>
