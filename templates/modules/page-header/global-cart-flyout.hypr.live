@@ -107,6 +107,8 @@
 		  	<img src="{% make_url "image" themeSettings.globalCartEmptyBasketFooter.imageUrl with width=370 as_parameters %}"  />
 		  </a>
 		{% endif %}
+
+		 {% dropzone "global-cart" scope="site" %}
 	</div>
 
 {% else %}
