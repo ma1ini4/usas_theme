@@ -392,17 +392,42 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
         };
         this.openPopover = function(e){
             //self.popoverEl.popover('show');
-            e.preventDefault(); 
+            e.preventDefault();
             $("#my-account").popover({
                 html : true,
                 placement : 'bottom',
                 content: function() {
                   return self.popoverEl.html();
-                }                
+                }
             }); //.popover('show');
         };
     };
-        
+    var ServicesPopover = function(e){
+        var self = this;
+        this.init = function(el){
+            self.popoverEl = $('#services-content');
+            self.bindListeners.call(el, true);
+            $('#services-account').attr('href','#');
+        };
+        this.bindListeners =  function (on) {
+            var onOrOff = on ? "on" : "off";
+            //$(this).parent()[onOrOff]('mouseover', '[data-mz-action="my-account"]', self.openPopover);
+            $(this).parent()[onOrOff]('click', '[data-mz-action="services"]', self.openPopover);
+            // bind other events
+        };
+        this.openPopover = function(e){
+            //self.popoverEl.popover('show');
+            e.preventDefault();
+            $("#services").popover({
+                html : true,
+                placement : 'bottom',
+                content: function() {
+                  return self.popoverEl.html();
+                }
+            }); //.popover('show');
+        };
+    };
+
     var LoginRegistrationModal = function(){
         var self = this;
         this.init = function(el){
@@ -428,7 +453,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             $(this).parent()[onOrOff]('click', '[data-mz-action="lite-registration"]', self.openLiteModal);
             $(this).parents('.mz-utilitynav')[onOrOff]('click', '[data-mz-action="doLogin"]', self.doLogin);
             $(this).parents('.mz-utilitynav')[onOrOff]('click', '[data-mz-action="doSignup"]', self.doSignup);
-            
+
             // bind other events
         };
 
@@ -448,24 +473,24 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                 password: $(this).parents('#login').find('[data-mz-login-password]').val()
             };
             current = this;
-            if (self.validateLogin(this, payload) && self.validatePassword(this, payload)) {   
+            if (self.validateLogin(this, payload) && self.validatePassword(this, payload)) {
                 //var user = api.createSync('user', payload);
                 (LoginPopover.prototype).newsetLoading(true);
                 return api.action('customer', 'loginStorefront', {
-                    email: $(this).parents('#login').find('[data-mz-login-email]').val(), 
+                    email: $(this).parents('#login').find('[data-mz-login-email]').val(),
                     password: $(this).parents('#login').find('[data-mz-login-password]').val()
                 }).then(function () {
                     if ( returnUrl ){
                         window.location.href= returnUrl;
                     }else{
                         window.location.reload();
-                    } 
+                    }
                 }, (LoginPopover.prototype).newdisplayApiMessage);
-            } 
+            }
         };
-        this.validateLogin = function (el, payload) { 
+        this.validateLogin = function (el, payload) {
             if (!payload.email) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailMissing')), false;
-            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(payload.email))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailwrongpattern')), false;            
+            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(payload.email))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailwrongpattern')), false;
             return true;
         };
         this.doSignup = function(){
@@ -497,12 +522,12 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                          "fullyQualifiedName": "tenant~recovery-answer",
                          "values": [recoveryanswer]
                       }
-                   ]               
+                   ]
                 },
                 password: $(this).parents('#newshopper').find('[data-mz-signup-password]').val()
             };
-            current = this; 
-            if (self.validateSignup(this, payload) && self.validatePassword(this, payload)) {   
+            current = this;
+            if (self.validateSignup(this, payload) && self.validatePassword(this, payload)) {
                 //var user = api.createSync('user', payload);
                 (LoginPopover.prototype).newsetLoading(true);
                 return api.action('customer', 'createStorefront', payload).then(function () {
@@ -517,8 +542,8 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             }
         };
         this.validatePassword = function(el, payload){
-            if (!payload.password) 
-                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordMissing')), false; 
+            if (!payload.password)
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordMissing')), false;
             if (payload.password.length < 6) {
                 return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
             } else if (payload.password.length > 50) {
@@ -532,9 +557,9 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             }
             return true;
         };
-        this.validateSignup = function (el, payload) { 
+        this.validateSignup = function (el, payload) {
             if (!payload.account.emailAddress) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailMissing')), false;
-            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(payload.account.emailAddress))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailwrongpattern')), false;                       
+            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(payload.account.emailAddress))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailwrongpattern')), false;
             if (payload.password !== $(el).parents('#newshopper').find('[data-mz-signup-confirmpassword]').val()) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordsDoNotMatch')), false;
             if (payload.account.attributes.recoveryquestion === "0") return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('chooseRecoveryQuestion')), false;
             if($('#recoveryQuestionList').val() === "0") return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('chooseRecoveryQuestion')), false;
@@ -560,7 +585,21 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                 placement : 'bottom',
                 content: function() {
                   return $('#my-account-content').html();
-                }                
+                }
+            });
+
+        $('#services').attr('href','#');
+        $('[data-mz-action="services"]').click(function() {
+            var popover = new ServicesPopover();
+            popover.init(this);
+            $(this).data('mz.popover', popover);
+        });
+        $("#services").popover({
+                html : true,
+                placement : 'bottom',
+                content: function() {
+                  return $('#services-content').html();
+                }
             });
         /*$('[data-mz-action="my-account"]').hover(function() {
             var popover = new MyAccountPopover();
@@ -570,10 +609,10 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
         $(document).on('mouseleave','#mz-logged-in-notice',function(){
             $('#my-account').popover('hide');
         });
-        */  
+        */
         $('body').on('touchend click', function (e) {
             //only buttons
-            if ($(e.target).data('toggle') !== 'popover' && !$(e.target).parents().is('.popover.in')) { 
+            if ($(e.target).data('toggle') !== 'popover' && !$(e.target).parents().is('.popover.in')) {
                 $('[data-toggle="popover"]').popover('hide');
             }
         });

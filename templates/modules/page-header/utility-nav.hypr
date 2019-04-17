@@ -77,7 +77,33 @@
         {% endif %}
         <li class="mz-utilitynav-item">
           <span class="usas-icon-services" aria-hidden="true"></span>
-          <a href="/services" data-mz-action="services" data-placement="bottom" class="">Our services</a>
+          <a href="/services" data-mz-action="services" id="services" role="button" data-trigger="click" data-toggle="popover" data-content="" data-placement="bottom" class="">Our services</a>
+          <div id="services-content" style="display:none;">
+              <div class="services-details">
+                  <a href="#">
+                      <h4>{{ labels.accountSettings }}</h4>
+                  </a>
+                      <p>{{ labels.accountSettingsInfo }}</p>
+              </div>
+              <div class="services-details">
+                  <a href="#">
+                      <h4>{{ labels.orderHistory }}</h4>
+                  </a>
+                      <p>{{ labels.orderHistoryInfo }}</p>
+              </div>
+              <div class="services-details">
+                  <a href="#">
+                      <h4>{{ labels.addressBook }}</h4>
+                  </a>
+                      <p>{{ labels.addressBookInfo }}</p>
+              </div>
+              <div class="services-details">
+                  <a href="#">
+                      <h4>{{ labels.logOut }}</h4>
+                  </a>
+                      <p>{{ labels.logOutInfo }}</p>
+              </div>
+          </div>
         </li>
         <li class="mz-utilitynav-item">
           <!--  usas-icon icon-delivery -->
