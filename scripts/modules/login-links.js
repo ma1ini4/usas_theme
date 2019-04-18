@@ -438,12 +438,12 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             api.get('attributedefinition').then(function(attribute) {
                 console.log(attribute.data.items);
                 for(var i=0; i< attribute.data.items.length; i++){
-                    if(attribute.data.items[i].attributeCode === "recovery-question"){
-                        var recVals = attribute.data.items[i].vocabularyValues;
-                        for(var j=0; j<recVals.length; j++){
-                            $('<option/>').text(recVals[j].content.value).attr('value',recVals[j].value).appendTo('#recoveryQuestionList');
-                        }
-                    }
+                    // if(attribute.data.items[i].attributeCode === "recovery-question"){
+                    //     var recVals = attribute.data.items[i].vocabularyValues;
+                    //     for(var j=0; j<recVals.length; j++){
+                    //         $('<option/>').text(recVals[j].content.value).attr('value',recVals[j].value).appendTo('#recoveryQuestionList');
+                    //     }
+                    // }
                 }
             });
         };
@@ -501,8 +501,8 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             if(emailupdates === "on")
                 accMarketing = true;
             var email = $(this).parents('#newshopper').find('[data-mz-signup-emailaddress]').val().trim();
-            var recoveryquestion = $(this).parents('#newshopper').find('[data-mz-signup-recoveryquestion]').val();
-            var recoveryanswer = $(this).parents('#newshopper').find('[data-mz-signup-recoveryanswer]').val().trim();
+            // var recoveryquestion = $(this).parents('#newshopper').find('[data-mz-signup-recoveryquestion]').val();
+            // var recoveryanswer = $(this).parents('#newshopper').find('[data-mz-signup-recoveryanswer]').val().trim();
             var payload = {
                 account: {
                     emailAddress: email,
@@ -510,20 +510,21 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                     acceptsMarketing: accMarketing,
                     contacts: [{
                         email: email
-                    }],
-                    attributes: [
-                      {
-                         //"attributeDefinitionId": "14",
-                         "fullyQualifiedName": "tenant~recovery-question",
-                         "values": [recoveryquestion]
-                      },
-                      {
-                         //"attributeDefinitionId": "16",
-                         "fullyQualifiedName": "tenant~recovery-answer",
-                         "values": [recoveryanswer]
-                      }
-                   ]
-                },
+                    }]
+                  },
+                //     attributes: [
+                //       {
+                //          //"attributeDefinitionId": "14",
+                //          "fullyQualifiedName": "tenant~recovery-question",
+                //          "values": [recoveryquestion]
+                //       },
+                //       {
+                //          //"attributeDefinitionId": "16",
+                //          "fullyQualifiedName": "tenant~recovery-answer",
+                //          "values": [recoveryanswer]
+                //       }
+                //    ]
+                // },
                 password: $(this).parents('#newshopper').find('[data-mz-signup-password]').val()
             };
             current = this;
@@ -561,9 +562,9 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             if (!payload.account.emailAddress) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailMissing')), false;
             if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(payload.account.emailAddress))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailwrongpattern')), false;
             if (payload.password !== $(el).parents('#newshopper').find('[data-mz-signup-confirmpassword]').val()) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordsDoNotMatch')), false;
-            if (payload.account.attributes.recoveryquestion === "0") return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('chooseRecoveryQuestion')), false;
-            if($('#recoveryQuestionList').val() === "0") return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('chooseRecoveryQuestion')), false;
-            if(!$('#recoveryAnswer').val()) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('recoveryAnswerMissing')), false;
+            // if (payload.account.attributes.recoveryquestion === "0") return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('chooseRecoveryQuestion')), false;
+            // if($('#recoveryQuestionList').val() === "0") return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('chooseRecoveryQuestion')), false;
+            // if(!$('#recoveryAnswer').val()) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('recoveryAnswerMissing')), false;
             return true;
         };
     };
