@@ -54,7 +54,7 @@
                     <div class="checkbox">
                         <label><input type="checkbox" data-mz-signup-emailupdates> {{ labels.signupEmailupdates }}</label>
                     </div>
-                    <label data-mz-role="popover-message" class="popover-message"></label>                    
+                    <label data-mz-role="popover-message" class="popover-message"></label>
                     <div class="login-btn-row">
                         <div class="col-xs-6 left-column">
                             <button class="secondary-btn" data-dismiss="modal">{{ labels.cancel }}</button>
