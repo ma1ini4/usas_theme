@@ -621,9 +621,14 @@
         padding: 0;
     }
     .mz-checkout-discount-row-container{
-        span{
-            //color: @secondaryColor;
+
+        span {
+          font-weight: @regular;
+          font-style: italic;
+
+          &:not(:first-child){
             font-weight: 600;
+          }
         }
     }
     .mz-checkout-total-row{
