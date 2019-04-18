@@ -20,16 +20,15 @@
                         <span class="input-group-addon glyphicon glyphicon-lock" id="password"></span>
                         <input type="password" class="form-control"  data-mz-login-password  placeholder="{{ labels.password }}" aria-describedby="basic-addon1" maxlength="{{themeSettings.passwordMaxLength}}">
                     </div>
-                    <div class="input-group">
-                        <label data-mz-role="popover-message" class="popover-message"></label>
-                    </div>
+                    <label data-mz-role="popover-message" class="popover-message"></label>
+                    
                     <div class="link-button"><a href="/user/forgotpassword">{{ labels.liteRegForgotPasswordLabel }}</a></div>
                     <div class="login-btn-row">
-                        <div class="col-xs-2 left-column">
-                            <div class="link-button"><a href="#" data-dismiss="modal">{{ labels.cancel }}</a></div>
+                        <div class="col-xs-6 left-column">
+                            <button class="secondary-btn" data-dismiss="modal">{{ labels.cancel }}</button>
                         </div>
-                        <div class="col-xs-10 right-column">
-                            <button class="submit-btn secondary-btn" type="submit" data-mz-action="doLogin">{{ labels.login }}</button>
+                        <div class="col-xs-6 right-column">
+                            <button class="primary-btn" type="submit" data-mz-action="doLogin">{{ labels.login }}</button>
                             <input type="hidden" class="hidden-return" name="returnUrl" id="returnUrl" value="" />
                             <script>document.getElementById('returnUrl').value = window.location.href;</script>
                         </div>
@@ -69,11 +68,11 @@
                         <label data-mz-role="popover-message" class="popover-message"></label>
                     </div>
                     <div class="login-btn-row">
-                        <div class="col-xs-2 left-column">
-                            <div class="link-button"><a href="#" data-dismiss="modal">{{ labels.cancel }}</a></div>
+                        <div class="col-xs-6 left-column">
+                            <button class="secondary-btn" data-dismiss="modal">{{ labels.cancel }}</button>
                         </div>
-                        <div class="col-xs-10 right-column">
-                            <button class="submit-btn secondary-btn" type="submit" data-mz-action="doSignup">{{ labels.register }}</button>
+                        <div class="col-xs-6 right-column">
+                            <button class="primary-btn" type="submit" data-mz-action="doSignup">{{ labels.register }}</button>
                         </div>
                     </div>
                     <div class="col-xs-12 bottom-text"><p class="login-text"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> {{ labels.secureConnectionMessage }}</p></div>
