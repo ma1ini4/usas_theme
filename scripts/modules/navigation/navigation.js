@@ -95,7 +95,7 @@ define([
 
       } else if (($(window).width() < 1024) && ($(window).width() > 767)) {
         truncEmail();
-        truncLongUsername(myAccount, 60);
+        truncLongUsername(myAccount, 47);
 
       } else if ($(window).width() < 767) {
         var mobileMaxWidth = ($(window).width() - $('.ml-header-logo-wrapper').width() - 100);
