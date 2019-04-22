@@ -61,10 +61,51 @@ define([
       if ($(window).width() >= 767) {
         burgerMenuLink.addClass('collapsed').attr('aria-expanded', 'false');
         $('#ml-nav').removeClass('collapse in').addClass('collapse').attr('aria-expanded', 'false');
-        navContainer.css({'border-left': 'none', 'border-top': 'none', 'background-color': 'transparent'});
-        searchContainer.css({'border-top': 'none', 'background-color': 'transparent'});
+        navContainer.removeClass('expanded');
+        searchContainer.removeClass('expanded');
         $(burgerIcon).show();
         $(closeIcon).hide();
+      }
+    }
+    var username = $('#my-account').text();
+    function truncEmail(){
+      if (username.indexOf('@') !== -1) {
+        var truncToAt = username.split("@")[0].trim();
+        $('#my-account').text(truncToAt);
+        $('#my-account-mobile').text(truncToAt);
+      }
+    }
+    function truncLongUsername(el, blockWidth){
+      var maxBlockWidth = blockWidth - 1;
+
+      setTimeout(function() {
+        if (el.width() >= maxBlockWidth) {
+          el.width(blockWidth).addClass('truncated-username');
+        } else if (el.width() < maxBlockWidth){
+          el.width('auto').removeClass('truncated-username');
+        }
+      }, 500);
+    }
+    function truncateUsername(){
+      var myAccount = $('#my-account'),
+          myAccountMobile = $('#my-account-mobile');
+      if (($(window).width() < 1199) && ($(window).width() > 1024)) {
+        truncEmail();
+        truncLongUsername(myAccount, 100);
+
+      } else if (($(window).width() < 1024) && ($(window).width() > 767)) {
+        truncEmail();
+        truncLongUsername(myAccount, 60);
+
+      } else if ($(window).width() < 767) {
+        var mobileMaxWidth = ($(window).width() - $('.ml-header-logo-wrapper').width() - 100);
+        truncEmail();
+        console.log(mobileMaxWidth, $(myAccountMobile).width());
+        truncLongUsername(myAccountMobile, mobileMaxWidth);
+
+      } else if ($(window).width() > 1199) {
+        $(myAccount).text(username);
+        $(myAccount).width('auto').removeClass('truncated-username');
       }
     }
     $(document).ready(function() {
@@ -79,10 +120,12 @@ define([
             outlineMobileNavOnCollapse();
           }, 50);
         });
+        truncateUsername();
     });
     $(window).resize(function() {
         calculatingSubPosition();
         removeMobileNavStyles();
+        truncateUsername();
     });
     $('.sub-level-col.col-sm-3').each(function(index, el) {
         var html = $(el).html().trim();
