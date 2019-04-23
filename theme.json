@@ -574,7 +574,7 @@
     "suggestPriorSearchTerms": true,
     "searchExpandOnFocus": true,
     "showAddressTypeDropdown": true,
-    "showBreadcrumbs": false,
+    "showBreadcrumbs": true,
     "showCartItemDimensions": true,
     "showCartItemImage": true,
     "showCartItemOptions": true,
