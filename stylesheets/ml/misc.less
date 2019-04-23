@@ -2055,10 +2055,12 @@ ul.tabs {
                     margin: 0 auto;
                     float: initial !important;
                     color: @white;
-                    width: 120px;
+                    width: 180px;
+                    height: 45px;
                     text-transform: uppercase;
                     border-radius: 10px;
                     margin-top: 40px;
+                    font-size: 20px;
                 }
             }
             .mz-price {
@@ -2159,15 +2161,26 @@ ul.tabs {
                 }
             }
         }
+        .tab-title {
+            cursor: pointer;
+        }
         .tab-content {
             border-top: 1px solid #ddd;
             border-radius: 0 20px 0 0;
-            .tab-pane div {
+            .tab-pane > div {
                 padding: 25px 20px;
                 border: 1px solid #D0D2D3;
                 border-top: none;
                 border-radius: 0 20px 20px 20px;
                 background: #F8F8F9;
+            }
+            .prop-list {
+                .prop-name {
+                    font-weight: @semi-bold;
+                }
+                .prop-value {
+
+                }
             }
         }
     }
