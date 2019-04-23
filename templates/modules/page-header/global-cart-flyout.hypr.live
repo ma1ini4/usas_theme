@@ -74,7 +74,7 @@
 				<a href="/cart"> {{model.items.length-themeSettings.globalCartMaxItemCount}} more item(s)... </a>
 			</div>
 	    {% endif %}
-	    <div class="total-amount-row-total {% if model.items.length > themeSettings.globalCartMaxItemCount %}col-xs-6{% else %}col-xs-12{% endif %} text-right">
+	    <div class="total-amount-row-total col-xs-12 text-right">
 	    	Total:
 	    	<span>{{ model.total|currency }}</span>
 	    </div>
