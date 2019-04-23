@@ -1046,8 +1046,105 @@
             "validPageTypes": [
                 "*"
             ]
-        },
-    {
+        },{
+          "defaultConfig": {
+              "isInfinite": true,
+              "totalCount": "10"
+          },
+          "displayName": "Product carousel 4 products",
+          "displayTemplate": "misc/product-carousel-4products",
+          "editViewFields": [
+            {
+              "anchor": "100%",
+              "fieldLabel": "Select Products",
+              "name": "products",
+              "xtype": "mz-input-productmulti"
+            }
+          ],
+          "icon": "/resources/admin/widgets/city-carousel-icon.png",
+          "id": "product-carousel-4-widget",
+          "validPageTypes": [
+            "*"
+          ]
+        },{
+            "id": "home-page-hero-slider",
+            "displayName": "Homepage Hero Slider",
+            "displayTemplate": "misc/homepage-hero-slider",
+            "editViewFields": [
+              {
+                "xtype": "fieldcontainer",
+                "anchor": "100%",
+                "fieldlabel": "Select / Upload",
+                "items": [
+                  {
+                    "name": "imageSource",
+                    "fieldLabel": "Select / Upload Images (Image first for first slide & last for last Slide)",
+                    "xtype": "taco.imagefield"
+                  }
+                ]
+              },
+              {
+                "name": "heroSlideOne",
+                "xtype": "panel",
+                "title": "First Hero Slide",
+                "items": [
+                  {
+                    "style": "width: 52%",
+                    "fieldLabel": "First slide layout",
+                    "name": "firstSlide",
+                    "xtype": "mz-input-dropdown",
+                    "store": [
+                      [
+                        "1",
+                        "Image Right"
+                      ],
+                      [
+                        "2",
+                        "Image Left"
+                      ]
+                    ]
+                  },
+                  {
+                    "xtype": "mz-input-code",
+                    "fieldLabel": "Hero Headline & Copy",
+                    "name": "textAreaSlideOne"
+                  },
+                  {
+                    "xtype": "displayfield",
+                    "style": "margin-top: 2rem",
+                    "value": "<p>Select a Category or enter an URL for Slide 1:</br><span style='font-size:smaller;'>Note: if both configured, the category will take precedent.</span></p>"
+                  },
+                  {
+                    "fieldLabel": "Select link to category on Button click",
+                    "name": "firstcategoryUrl",
+                    "xtype": "mz-input-category",
+                    "displayField": "name",
+                    "anchor": "60%",
+                    "valueField": "id",
+                    "queryMode": "local",
+                    "allowMultiple": false,
+                    "store": {
+                      "type": "Taco.store.Categories"
+                    }
+                  },
+                  {
+                    "xtype": "displayfield",
+                    "value": "<b>OR</b>"
+                  },
+                  {
+                    "name": "linkfirst",
+                    "style": "width: 52%",
+                    "fieldLabel": "Enter link to category on Button click",
+                    "xtype": "textfield"
+                  }
+                ]
+              }
+            ],
+            "icon": "/resources/admin/widgets/city-carousel-icon.png",
+            "validPageTypes": [
+              "*"
+            ]
+          },{
         "displayName": "Bronto Conversion Tracking",
         "displayTemplate": "bronto/bronto",
         "icon": "/resources/admin/widgets/bronto_logo_thin.png",

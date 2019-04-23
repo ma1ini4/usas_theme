@@ -1,0 +1,31 @@
+<div class="hero-carousel-banner">
+    <!-- Swiper -->
+    <div class="swiper-container swiper-container-hero">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide hero-banner_home">
+                <div class="hero-banner-container dark">
+                    <!-- Text is on Left -->
+                        <div class="hero-banner hero-banner-text-content">
+                            {{ model.config.textAreaSlideOne|safe }}
+                            {% if model.config.firstcategoryUrl %}
+                                {% with navigation|find:model.config.firstcategoryUrl as cat %}
+                                    <a class="primary-btn" href="{{ cat.url }}">{{ labels.ShopNow }}</a>
+                                {% endwith %}
+                            {% else %}
+                                    <a class="primary-btn" href="{{ model.config.linkfirst }}">{{ labels.ShopNow }}</a>
+                            {% endif %}
+                            <div class="hero-banner hero-banner-option-icon"></div> <!-- Return to this later -->
+                        </div>
+                    <!-- Image is on Right -->
+                        <div class="hero-banner hero-banner-content-image">
+                            <img class="hero-banner-image" src="{{ model.config.imageSource.0.url }}" />
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="swiper-pagination swiper-pagination_home"></div>
+        <div class="swiper-button-next" id="swiper_meta_name_next"></div>
+        <div class="swiper-button-prev" id="swiper_meta_name_prev"></div>
+</div>
+{% require_script "widgets\homepage-hero-slider" %}

@@ -84,6 +84,7 @@
         <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/storefront.less" %}" title="default" />
         <link rel="stylesheet" type="text/css" href="{% make_url "stylesheet" "/stylesheets/vendor/font-awesome/css/font-awesome.min.css" %}" media="all">
         <link rel="stylesheet" type="text/css" href="{% make_url "stylesheet" "/stylesheets/vendor/usas-icons/css/custom-icons.css" %}" media="all">
+        <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/vendor/swiper/swiper.min.css" %}" title="default"/>
         {% endblock stylesheets %}
 
         {% block head-tag-scripts %}
