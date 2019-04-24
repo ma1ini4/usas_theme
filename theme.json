@@ -1047,10 +1047,7 @@
                 "*"
             ]
         },{
-          "defaultConfig": {
-              "isInfinite": true,
-              "totalCount": "10"
-          },
+          "defaultConfig": {},
           "displayName": "Product carousel 4 products",
           "displayTemplate": "misc/product-carousel-4products",
           "editViewFields": [
