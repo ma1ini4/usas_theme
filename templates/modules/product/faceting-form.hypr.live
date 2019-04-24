@@ -69,7 +69,6 @@
             {% else %}
                 {% for facet in model.facets %}
                     {% if pageContext.pageType=='search' %}
-                        {% if facet.field =='tenant~COLOR' or facet.field=='tenant~SIZE' or facet.field=='price'  %}
                             {% if facet.values and facet.facetType != "Hierarchy" %}
                                 <div class="mz-l-sidebaritem">
                                     <div id="filter-{{facet.field |lower|replace('~','-')}}" class="faceting-header" data-mz-filter-collapse="{{ forloop.index0 }}">{{ facet.label }} <span id="filterIcon{{ forloop.index0 }}" class="filter-icon pull-right"><i class="fa fa-plus" aria-hidden="true"></i></span>
@@ -88,8 +87,9 @@
                                         {% endif %}
                                     </ul>
                                 </div>
+                            {% else %}
+                                {% include "modules/product/hierarchy-facets" with facet=facet facetValues=facet.values %}
                             {% endif %}
-                        {% endif %}
                     {% else %}
                         {% if facet.values and facet.facetType != "Hierarchy" %}
                             <div class="mz-l-sidebaritem">

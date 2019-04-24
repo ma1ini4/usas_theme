@@ -4,20 +4,16 @@
     <ul class="mz-facetingform-facet mz-facetingform-facet-hierarchy">
         {% for fval in facetValues %}
         {% if fval.isDisplayed %}
-        <li>
-            <a href="{% make_url "facet" fval  %}" class="mz-facetingform-link" data-mz-action="drillDown" data-mz-hierarchy-id="{{ fval.value }}" data-mz-facet-value="{{ fval.filterValue }}" data-mz-facet="{{ facet.field }}">{{ fval.label|safe }}</a>
-            {% if themeSettings.showChildCategoriesInFaceting and fval.childrenFacetValues.length > 0 %}
-            <ul class="mz-facetingform-facet mz-facetingform-facet-hierarchy">
-            {% for child in fval.childrenFacetValues %}
-                {% if child.isDisplayed and not child.isEmpty %}
-                <li>
-                    <a href="{% make_url "facet" child %}" class="mz-facetingform-link" data-mz-action="drillDown" data-mz-hierarchy-id="{{ child.value }}" data-mz-facet-value="{{ child.filterValue }}" data-mz-facet="{{ facet.field }}">{{ child.label|safe }}</a>
+            {% if facetValues.length == 1 %}
+                <li class="{%if showMore and showMore > 0 and forloop.counter0 >= showMore %}mz-hide-text hide {% endif %}mz-facetingform-value{% if fval.isApplied %} active{% endif %}" data-mz-facet="{{ facet.field }}" data-filter-name='{{ fval.stringValue|default(fval.value) }}' data-mz-facet-value="tenant~SIZE:{{ fval.value }}" data-mz-url="{% make_url "facet" fval %}">
+                    <label id="{{fval.value}}" data-mz-text-value="{{ fval.stringValue|default(fval.label) }}" class="mz-facetingform-valuelabel">{{ fval.stringValue|default(fval.label) }}{% if showCount %} ({{fval.count}}){% endif %}</label>
                 </li>
-                {% endif %}
-            {% endfor %}
-            </ul>
+            {% else %}
+            <li class="{%if showMore and showMore > 0 and forloop.counter0 >= showMore %}mz-hide-text hide {% endif %}mz-facetingform-value{% if fval.isApplied %} active{% endif %}" data-mz-facet="{{ facet.field }}" data-filter-name='{{ fval.stringValue|default(fval.value) }}' data-mz-facet-value="tenant~SIZE:{{ fval.value }}" data-mz-url="{% make_url "facet" fval %}">
+                <input type="checkbox" id="{{facet.field|slugify }}_{{ fval.value|slugify }}" class="mz-facetingform-value" {% if fval.isApplied %}checked="checked"{% endif %} data-mz-facet="{{ facet.field }}" data-mz-facet-value="tenant~SIZE:{{ fval.value }}" data-filter-name='{{ fval.stringValue|default(fval.value) }}' data-mz-url="{% make_url "facet" fval %}">
+                <label id="{{fval.value}}" data-mz-text-value="{{ fval.stringValue|default(fval.label) }}" class="mz-facetingform-valuelabel" for="{{facet.field|slugify }}_{{ fval.value|slugify }}" data-mz-facet-value="tenant~SIZE:{{ fval.value }}" data-filter-name='{{ fval.stringValue|default(fval.value) }}' data-mz-url="{% make_url "facet" fval %}" >{{ fval.stringValue|default(fval.label) }}{% if showCount %} ({{fval.count}}){% endif %}</label>
+            </li>
             {% endif %}
-        </li>
         {% endif %}
         {% endfor %}
     </ul>
