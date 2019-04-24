@@ -130,6 +130,11 @@
       line-height: 38px;
       font-weight: @thin;
 
+      @media @tablet-only {
+        font-size: 30px;
+        line-height: 34px;
+      }
+
       @media @mobile {
         font-size: 28px;
         line-height: 30px;
@@ -214,6 +219,82 @@
 
       @media @mobile {
         margin-bottom: 15px;
+      }
+    }
+  }
+
+  .featured-container {
+    padding: 55px 30px 10px 30px!important;
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    &-wrapper {
+      position: relative;
+      height: 230px;
+      margin: 16px 0;
+      border: 1px solid #fff;
+      border-radius: 25px;
+
+      background : -webkit-radial-gradient(50% 50%, circle farthest-corner, rgba(255, 255, 255, 1) 0%, rgba(252, 252, 252, 1) 43.13%, rgba(242, 243, 243, 1) 76.46%, rgba(230, 231, 232, 1) 100%);
+      background : -webkit-gradient(radial,50% 50% ,0 , 50% 50%, 213.01 ,color-stop(0,rgba(255, 255, 255, 1) ),color-stop(0.4313,rgba(252, 252, 252, 1) ),color-stop(0.7646,rgba(242, 243, 243, 1) ),color-stop(1,rgba(230, 231, 232, 1) ));
+      background : -o-radial-gradient(50% 50%, circle farthest-corner, rgba(255, 255, 255, 1) 0%, rgba(252, 252, 252, 1) 43.13%, rgba(242, 243, 243, 1) 76.46%, rgba(230, 231, 232, 1) 100%);
+      background : radial-gradient(50% 50%, circle farthest-corner, rgba(255, 255, 255, 1) 0%, rgba(252, 252, 252, 1) 43.13%, rgba(242, 243, 243, 1) 76.46%, rgba(230, 231, 232, 1) 100%);
+
+      &-image {
+        height: 100%;
+        transition: 0.3s ease;
+
+        img {
+          height: 100%;
+          border: 0px solid transparent;
+          border-radius: 25px;
+          transition: 0.3s ease;
+        }
+
+        &.image-right {
+          img {
+            float: right;
+          }
+        }
+        &.image-left {
+          img {
+            float: left;
+          }
+        }
+        &.image-full {
+          img {
+            width: 100%;
+          }
+        }
+      }
+
+      &-info {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100%;
+
+        img {
+          height: 65px;
+
+          &:empty {
+            height: 0;
+          }
+        }
+      }
+
+      &-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        display: none;
       }
     }
   }
