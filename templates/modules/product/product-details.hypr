@@ -20,7 +20,7 @@
                 {% include "modules/product/product-images" %}
             </div>
         </div>
-        <div class="col-xs-12 col-sm-6">
+        <div class="col-xs-12 col-sm-6 mz-product-content-block">
             <div class="mz-product-top-content">
                 <h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName|replace("'","&rsquo;")|safe }}</h1>
                 <div class="row">
@@ -28,7 +28,7 @@
                         <h4 class="mz-productcodes-productcode p-3" itemprop="sku">{{ labels.item}} {{ model.productCode }}</h4>
                     </div>
                     {% if model.productType != themeSettings.familyProductType %}
-                        <div class="col-xs-7">
+                        <div class="col-xs-7 hidden-xs">
                             <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section pull-right text-right prize-mobile-view">
                             {% include "modules/product/price-stack" %}
                             </div>
