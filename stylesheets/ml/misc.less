@@ -2161,8 +2161,11 @@ ul.tabs {
                 }
             }
         }
-        .tab-title {
+        .tab-title:not(.active) {
             cursor: pointer;
+            a {
+                border: 1px solid #ddd;
+            }
         }
         .tab-content {
             border-top: 1px solid #ddd;
