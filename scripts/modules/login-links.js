@@ -668,6 +668,14 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             loginPage.formSelector = 'form[name="mz-loginform"]';
             loginPage.pageType = 'login';
             loginPage.init(this);
+            $(loginPage.formSelector+" input").keypress(function (e) {
+                if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+                    $(".mz-login-button[data-mz-action='loginpage-submit']").click();
+                    return false;
+                } else {
+                    return true;
+                }
+            });
         });
         $('[data-mz-action="anonymousorder-submit"]').each(function () {
             var loginPage = new SignupPopover();
