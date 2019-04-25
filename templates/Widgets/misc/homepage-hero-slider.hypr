@@ -28,4 +28,4 @@
         <div class="swiper-button-next" id="swiper_meta_name_next"></div>
         <div class="swiper-button-prev" id="swiper_meta_name_prev"></div>
 </div>
-{% require_script "widgets\homepage-hero-slider" %}
+{% require_script "widgets/homepage-hero-slider" %}
