@@ -16,4 +16,5 @@
 {% endblock body-content %}
 
 {% block body-below-content %}
+{% require_script "widgets/homepage/featured-products" %}
 {% endblock body-below-content %}
