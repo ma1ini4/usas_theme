@@ -1,5 +1,5 @@
 define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>jQuery', 'swiper'], function($, Swiper) {
-    var swiper = new Swiper('.swiper-container-4', {
+    var swiper = new Swiper('#product-carousel-slider.swiper-container-4', {
         slidesPerView: 4,
         spaceBetween: 40,
         loop: true,

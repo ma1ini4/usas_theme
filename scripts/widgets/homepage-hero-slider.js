@@ -1,5 +1,5 @@
 define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>jQuery','swiper'], function($, Swiper) {
-    var swiper = new Swiper('.swiper-container.swiper-container-hero', {
+    var swiper = new Swiper('#homepage-banner-slider.swiper-container.swiper-container-hero', {
         slidesPerView: 1,
         loop: true,
         spaceBetween: 0,
@@ -18,8 +18,8 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
             }
         },
         navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
+            nextEl: '.swiper-btn-next',
+            prevEl: '.swiper-btn-prev'
         },
         pagination: {
             el: '.swiper-pagination',

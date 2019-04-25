@@ -18,18 +18,17 @@
     .swiper-button-next, .swiper-button-prev,
     .swiper-btn-next, .swiper-btn-prev{
         position: absolute;
-        width: 27px;
-        height: 44px;
-        margin-top: -22px;
+        // width: 27px;
+        // height: 44px;
+        // margin-top: -22px;
         z-index: 10;
         cursor: pointer;
-        background-size: 27px 44px;
-        background-position: center;
-        background-repeat: no-repeat;
+        width: auto;
+        height: auto;
 
-        // .icon(before, @icon-arrow_drop_up);
-        background-image: none;
-        font-size: 10rem;
+        background-image: none!important;
+        font-size: 35px;
+        color: @navBorder;
         &:focus{
             outline: none;
         }
@@ -37,23 +36,29 @@
     }
     .swiper-button-next,
     .swiper-btn-next{
-        -webkit-transform: rotate(90deg);
-        -moz-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-        -o-transform: rotate(90deg);
-        right: 1rem;
-        transform: rotate(90deg);
-        top: 22.2rem;
+      .usas-icon-chevron-left();
+        // -webkit-transform: rotate(90deg);
+        // -moz-transform: rotate(90deg);
+        // -ms-transform: rotate(90deg);
+        // -o-transform: rotate(90deg);
+        // transform: rotate(90deg);
+        // right: 1rem;
+        // top: 22.2rem;
+        right: 5%!important;
+        left: auto!important;
     }
     .swiper-button-prev,
     .swiper-btn-prev{
-        -webkit-transform: rotate(270deg);
-        -moz-transform: rotate(270deg);
-        -ms-transform: rotate(270deg);
-        -o-transform: rotate(270deg);
-        transform: rotate(270deg);
-        left: 1rem;
-        top: 30rem;
+      .usas-icon-chevron-right();
+        // -webkit-transform: rotate(270deg);
+        // -moz-transform: rotate(270deg);
+        // -ms-transform: rotate(270deg);
+        // -o-transform: rotate(270deg);
+        // transform: rotate(270deg);
+        // left: 1rem;
+        // top: 30rem;
+        left: 5%!important;
+        right: auto!important;
     }
 
 .bx-wrapper{
