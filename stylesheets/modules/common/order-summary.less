@@ -98,6 +98,56 @@
      }
 
 }
+
+#confirmation-container {
+  padding: 20px;
+  .mz-pagetitle{
+    margin: 0 0 7.5px;
+    padding: 0 0 3.75px;
+    font-size: 16px;
+    border-bottom: 1px solid @colorLightGray;
+  }
+  .mz-l-stack-item {
+    & > div:not(.mz-addresssummary) {
+      max-width: 300px;
+      background: #e9e9e9;
+      padding: 8px 15px;
+      border-radius: 5px;
+      z-index: 2;
+      position: relative;
+      &:after {
+        content: '';
+        position: absolute;
+        background: #fff;
+        width: 96%;
+        height: 70%;
+        left: 0;
+        top: 0;
+        margin: 2%;
+        z-index: -1;
+      }
+    }
+    .mz-addresssummary {
+      background-color: @colorLightGray;
+      font-weight: normal;
+      text-align: left;
+      width: auto;
+      padding: 5px;
+      border-radius: 5px;
+      max-width: 300px;
+      div, span {
+        background: @white;
+        font-weight: normal;
+        text-align: left;
+        width: auto;
+        padding: 10px;
+        border-bottom: 1px solid @colorLightGray;
+        padding: 0 10px;
+      }
+    }
+  }
+}
+
 .mz-ordersummary-checkout .mz-confirmation-price-summary {
   background-color: #f7f7f7;
   width: 100%;
