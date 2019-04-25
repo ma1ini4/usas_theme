@@ -85,7 +85,7 @@
   <table class="mz-ordersummary-confirmation">
     <tr class="mz-ordersummary-grandtotal">
           <td colspan="4">
-              <span class="mz-ordersummary-totalname">{{ labels.total }}:</span>
+              <span class="mz-ordersummary-totalname">{{ labels.totalFull }}:</span>
               <span class="mz-ordersummary-totalvalue">{{ model.total|currency }}</span>
           </td>
 

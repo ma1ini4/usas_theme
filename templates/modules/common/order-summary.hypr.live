@@ -75,7 +75,7 @@
                         {% include "modules/common/item-price" %}
                     </div>
                     <div class="col-sm-3 col-xs-6 mz-checkout-item-total-container pull-right">
-                        {% include "modules/common/item-total" %}
+                        <span class="visible-xs">{{ labels.totalFull }}</span> {% include "modules/common/item-total" %}
                     </div>
                 </div>
             </div>
@@ -143,7 +143,7 @@
 
           <div class="mz-ordersummary-grandtotal">
                 <div class="mz-checkout-total-row">
-                    <span class="mz-ordersummary-totalname col-sm-6 text-right">{{ labels.total }}:</span>
+                    <span class="mz-ordersummary-totalname col-sm-6 text-right">{{ labels.totalFull }}:</span>
                     <span class="mz-ordersummary-totalvalue col-sm-4">{{ model.total|currency }}</span>
                 </div>
             </div>
