@@ -1,7 +1,7 @@
 define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>jQuery', 'swiper'], function($, Swiper) {
     var swiper = new Swiper('#product-carousel-slider.swiper-container-4', {
-        slidesPerView: 4,
-        spaceBetween: 40,
+        slidesPerView: 6,
+        spaceBetween: 20,
         loop: true,
         navigation: {
           nextEl: '.swiper-button-next',
@@ -11,12 +11,12 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
         preventClicksPropagation: false,
         breakpoints: {
             1024: {
-                slidesPerView: 4,
-                spaceBetween: 40
+                slidesPerView: 6,
+                spaceBetween: 20
               },
               768: {
-                slidesPerView: 3,
-                spaceBetween: 30
+                slidesPerView: 4,
+                spaceBetween: 15
               },
               640: {
                 slidesPerView: 2,

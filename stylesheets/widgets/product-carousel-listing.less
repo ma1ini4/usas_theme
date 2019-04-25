@@ -1,6 +1,18 @@
+#product-carousel-slider {
+  overflow: hidden;
+
+  .mz-productlisting {
+
+    &-image {
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
 .product-carousel-listing {
-    min-height: 40rem;
-    padding: 0 7rem 6rem;
+    padding: 0 10% 60px;
 
     .swiper-container{
         height: 100%;
@@ -18,9 +30,6 @@
     .swiper-button-next, .swiper-button-prev,
     .swiper-btn-next, .swiper-btn-prev{
         position: absolute;
-        // width: 27px;
-        // height: 44px;
-        // margin-top: -22px;
         z-index: 10;
         cursor: pointer;
         width: auto;
@@ -37,26 +46,12 @@
     .swiper-button-next,
     .swiper-btn-next{
       .usas-icon-chevron-left();
-        // -webkit-transform: rotate(90deg);
-        // -moz-transform: rotate(90deg);
-        // -ms-transform: rotate(90deg);
-        // -o-transform: rotate(90deg);
-        // transform: rotate(90deg);
-        // right: 1rem;
-        // top: 22.2rem;
         right: 5%!important;
         left: auto!important;
     }
     .swiper-button-prev,
     .swiper-btn-prev{
       .usas-icon-chevron-right();
-        // -webkit-transform: rotate(270deg);
-        // -moz-transform: rotate(270deg);
-        // -ms-transform: rotate(270deg);
-        // -o-transform: rotate(270deg);
-        // transform: rotate(270deg);
-        // left: 1rem;
-        // top: 30rem;
         left: 5%!important;
         right: auto!important;
     }
