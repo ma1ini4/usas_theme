@@ -248,28 +248,38 @@
 
       &.load-more-btn {
         display: none;
-        flex-direction: column;
-        justify-content: center;
-        align-content: center;
-        flex-direction: column;
-        margin: 0 0 25px 0;
 
-        h3 {
-          margin: 0;
-          cursor: pointer;
-        }
-
-        .usas-icon-chevron-left {
-          position: unset;
-          margin: 0 0 25px 0;
-          color: @navBorder;
-          font-size: 30px;
-          transform: rotate(90deg);
-          cursor: pointer;
-        }
-
-        @media @mobile {
+        .load-more-btn-group {
           display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-content: center;
+          margin: 0 0 25px 0;
+
+          h3 {
+            margin: 0;
+            cursor: pointer;
+
+            &.hidden {
+              display: none;
+            }
+          }
+
+          .usas-icon-chevron-left {
+            position: unset;
+            color: @navBorder;
+            font-size: 30px;
+            transform: rotate(90deg);
+            cursor: pointer;
+
+            &.up {
+              transform: rotate(-90deg);
+            }
+          }
+
+        }
+        @media @mobile {
+          display: block;
         }
       }
 
