@@ -10,9 +10,16 @@
             <ul id="filterOptionList" class="filer-options"></ul>
             {% endif %}
             {% if pageContext.search.facets %}
-            <button class="btn-transparent clear-button mz-facetingform-clearall pull-right" data-mz-action="clearFacets" data-mz-url="{% make_url "facet" "clear"  %}"><span>{{ labels.clearAllFilters }}</span> <i data-mz-action="clearFacets" data-mz-url="{% make_url "facet" "clear"  %}" class="usas-icon-close-facet" aria-hidden="true"></i></button>
+            <button class="btn-transparent clear-button mz-facetingform-clearall pull-right" data-mz-action="clearFacets" data-mz-url="{% make_url "facet" "clear"  %}"><span data-mz-url="{% make_url "facet" "clear" %}">{{ labels.clearAllFilters }}</span> <i data-mz-action="clearFacets" data-mz-url="{% make_url "facet" "clear"  %}" class="usas-icon-close-facet" aria-hidden="true"></i></button>
             {% endif %}
         </div>
+        {% for facet in model.facets %}
+            {% if facet.values and facet.facetType == "Hierarchy" %}
+                    {% if pageContext.pageType == 'search' %}
+                        {% include "modules/product/hierarchy-facets" with facet=facet facetValues=facet.values %}
+                    {% endif %}
+            {% endif %}
+        {% endfor %}
         <div id="filterOptions">
             {% if facetSettings.length > 0 %}
                 {% for facet in model.facets %}
@@ -87,8 +94,6 @@
                                         {% endif %}
                                     </ul>
                                 </div>
-                            {% else %}
-                                {% include "modules/product/hierarchy-facets" with facet=facet facetValues=facet.values %}
                             {% endif %}
                     {% else %}
                         {% if facet.values and facet.facetType != "Hierarchy" %}
