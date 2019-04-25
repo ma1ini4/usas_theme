@@ -229,11 +229,49 @@
     .row {
       display: flex;
       flex-wrap: wrap;
+
+      @media only screen and (min-width: 1700px) {
+        div[class="col-sm-6"] {
+          width: 25%;
+        }
+      }
+      @media @mobile {
+        div[class="col-sm-6"] {
+          width: 100%;
+        }
+      }
     }
 
     &-heading {
       text-align: center;
       text-transform: uppercase;
+
+      &.load-more-btn {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        margin: 0 0 25px 0;
+
+        h3 {
+          margin: 0;
+          cursor: pointer;
+        }
+
+        .usas-icon-chevron-left {
+          position: unset;
+          margin: 0 0 25px 0;
+          color: @navBorder;
+          font-size: 30px;
+          transform: rotate(90deg);
+          cursor: pointer;
+        }
+
+        @media @mobile {
+          display: flex;
+        }
+      }
 
       h3 {
         margin: 0 0 25px 0;
@@ -245,8 +283,9 @@
 
     &-wrapper {
       position: relative;
+      max-width: 650px;
       height: 230px;
-      margin: 16px 0;
+      margin: 16px auto;
       border: 1px solid #fff;
       border-radius: 25px;
 
@@ -291,7 +330,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: baseline;
-        width: 70%;
+        // width: 70%;
         height: 100%;
         padding: 35px;
 
@@ -308,14 +347,14 @@
             height: 0;
 
             & + span {
-              width: 70%;
+              // width: 70%;
               white-space: normal;
             }
           }
         }
 
         span {
-          max-width: 220px;
+          // max-width: 220px;
           color: @headingColor;
           font-size: 32px;
           line-height: 31px;
@@ -333,6 +372,7 @@
         border: 1px solid #fff;
         border-radius: 25px;
         background-color: fade(@overlayColor, 70%);
+        transition: 0.3s ease;
 
         a {
           position: absolute;
@@ -353,7 +393,6 @@
           font-weight: @thin;
           text-transform: uppercase;
           vertical-align: middle;
-          transition: 0.3s ease;
 
           &:hover {
             text-decoration: none;
@@ -370,6 +409,10 @@
       }
       &:hover > .featured-container-wrapper-overlay {
         display: block;
+      }
+
+      @media @mobile-sm-bootstrap {
+        height: 150px;
       }
     }
   }
