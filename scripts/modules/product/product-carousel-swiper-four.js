@@ -11,7 +11,7 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
         preventClicksPropagation: false,
         breakpoints: {
             1024: {
-                slidesPerView: 6,
+                slidesPerView: 5,
                 spaceBetween: 20
               },
               768: {
@@ -20,7 +20,7 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
               },
               640: {
                 slidesPerView: 2,
-                spaceBetween: 20
+                spaceBetween: 10
               },
               320: {
                 slidesPerView: 1,

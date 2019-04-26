@@ -7,19 +7,18 @@
             </a>
             {% endblock product-image %}
         </div>
-        <a class="mz-productlisting-title visible-xs" href='{% make_url "product" model %}'>{{model.content.productName|safe}}</a>
     </div>
     <div class="mz-productlisting-info">
         <div class="ml-product-info-wrapper">
-            <a class="mz-productlisting-title hidden-xs" href='{% make_url "product" model %}'>{{model.content.productName|safe}}</a>
+            <a class="mz-productlisting-title" href='{% make_url "product" model %}'>{{model.content.productName|safe}}</a>
             {% block product-code %}
             {% if themeSettings.listProductCode %}
             <div class="mz-productlisting-productcode">#{{model.productCode}}</div>
             {% endif %}
             {% endblock product-code %}
         </div>
-        <div class="ml-product-price-wrapper">
-            {% include "modules/product/price-stack" %}
-        </div>
+    </div>
+    <div class="ml-product-price-wrapper">
+      {% include "modules/product/price-stack" %}
     </div>
 </div>
