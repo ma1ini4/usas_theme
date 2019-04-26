@@ -46,6 +46,10 @@
     &::before {
       padding-top: 25%;
 
+      @media @desktop-xxl {
+        padding-top: 13px;
+      }
+
       @media @mobile {
         padding-top: 37.5%;
       }
@@ -242,7 +246,7 @@
       display: flex;
       flex-wrap: wrap;
 
-      @media only screen and (min-width: 1700px) {
+      @media @desktop-xxl {
         div[class="col-sm-6"] {
           width: 25%;
         }
@@ -321,6 +325,7 @@
         transition: 0.3s ease;
 
         img {
+          max-width: 100%;
           height: 100%;
           border: 0px solid transparent;
           border-radius: 25px;
@@ -388,13 +393,13 @@
         position: absolute;
         top: 0;
         left: 0;
-        display: none;
+        opacity: 0;
         width: 100%;
         height: 100%;
         border: 1px solid #fff;
         border-radius: 25px;
         background-color: fade(@overlayColor, 70%);
-        transition: 0.3s ease;
+        transition: opacity 0.3s ease;
 
         a {
           position: absolute;
@@ -431,6 +436,7 @@
       }
       &:hover > .featured-container-wrapper-overlay {
         display: block;
+        opacity: 1;
       }
 
       @media @mobile-sm-bootstrap {
