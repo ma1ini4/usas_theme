@@ -90,6 +90,9 @@ body.mz-product.desktop-screen .product-backgroundimg {
 .zoomContainer {
     margin: 16px;
     border-radius: 15px;
+    @media @mobile {
+        display: none;
+    }
 }
 .product-wrapper {
     .product-paging-control {
@@ -102,7 +105,22 @@ body.mz-product.desktop-screen .product-backgroundimg {
     }
     .mz-productimages-thumbs {
         @media @mobile {
-            display: none;
+            margin: 5% 9%;
+            width: 82%;
+            .bx-prev {
+                left: -25px !important;  
+            }
+            .bx-next {
+                right: -25px !important;
+            }
+            img {
+                max-height: 60px !important;
+                margin: 0 auto;
+                border: 1px solid @lightBorder;
+                &.active {
+                    border: 2px solid @yellow;
+                }
+            }
         }
     }
     .mz-product-content-block {

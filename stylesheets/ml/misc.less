@@ -2037,7 +2037,9 @@ ul.tabs {
         padding-left: 0px;
         float: left;
         width: 100%;
-
+        @media @mobile {
+            padding: 0;
+        }
         .mz-l-stack-section{
             clear: none;
             &.mz-productdetail-price {
@@ -2181,9 +2183,20 @@ ul.tabs {
                 .prop-name {
                     font-weight: @semi-bold;
                 }
-                .prop-value {
-
+            }
+        }
+        .panel-group {
+            .prop-list {
+                .prop-name {
+                    font-weight: @semi-bold;
                 }
+            }
+        }
+    }
+    .tabs-mobile {
+        .panel-heading {
+            @media @mobile {
+                border-radius: 0px;
             }
         }
     }
