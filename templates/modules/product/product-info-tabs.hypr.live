@@ -168,10 +168,10 @@
             <div id="collapse2" class="panel-collapse collapse">
               <div class="panel-body">
                   {% if model.infoTab2Content %}
-                       <div class="tab-content-2">
+                       <div class="tab-content-2 prop-list">
                           {% for content in model.infoTab2Content %}
-                              <div class="prop-name">{{content.name}}</div>
-                              <div class="prop-value">{{content.value}}</div>
+                              <div class="prop-name col-xs-6">{{content.name}}</div>
+                              <div class="prop-value col-xs-6">{{content.value}}</div>
                           {% endfor %}
                        </div>
                   {% else %}
@@ -199,10 +199,10 @@
             <div id="collapse3" class="panel-collapse collapse">
               <div class="panel-body">
               {% if model.infoTab3Content %}
-                   <div class="tab-content-2">
+                   <div class="tab-content-2 prop-list">
                       {% for content in model.infoTab3Content %}
-                          <div class="prop-name">{{content.name}}</div>
-                          <div class="prop-value">{{content.value}}</div>
+                          <div class="prop-name col-xs-6">{{content.name}}</div>
+                          <div class="prop-value col-xs-6">{{content.value}}</div>
                       {% endfor %}
                    </div>
               {% else %}
@@ -230,10 +230,10 @@
             <div id="collapse4" class="panel-collapse collapse">
               <div class="panel-body">
               {% if model.infoTab4Content %}
-                   <div class="tab-content-2">
+                   <div class="tab-content-2 prop-list">
                       {% for content in model.infoTab4Content %}
-                          <div class="prop-name">{{content.name}}</div>
-                          <div class="prop-value">{{content.value}}</div>
+                          <div class="prop-name col-xs-6">{{content.name}}</div>
+                          <div class="prop-value col-xs-6">{{content.value}}</div>
                       {% endfor %}
                    </div>
               {% else %}
@@ -261,10 +261,10 @@
             <div id="collapse5" class="panel-collapse collapse">
               <div class="panel-body">
               {% if model.infoTab5Content %}
-                   <div class="tab-content-2">
+                   <div class="tab-content-2 prop-list">
                       {% for content in model.infoTab5Content %}
-                          <div class="prop-name">{{content.name}}</div>
-                          <div class="prop-value">{{content.value}}</div>
+                          <div class="prop-name col-xs-6">{{content.name}}</div>
+                          <div class="prop-value col-xs-6">{{content.value}}</div>
                       {% endfor %}
                    </div>
               {% else %}
