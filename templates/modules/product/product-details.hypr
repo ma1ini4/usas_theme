@@ -19,6 +19,9 @@
             <div data-mz-productimages class="mz-productimages mz-product-left-container margin-top-15">
                 {% include "modules/product/product-images" %}
             </div>
+            <div class="social-sharing center-block col-md-12 col-xs-12 mz-reset-padding-left{% if model.content.productImages.length <=1 %} mz-share-with-container-other{% endif %}">
+                {% dropzone "social-sharing" scope="template" %}
+            </div>
         </div>
         <div class="col-xs-12 col-sm-6 mz-product-content-block">
             <div class="mz-product-top-content">
@@ -46,11 +49,6 @@
                 </div>
                 <!-- {% include "modules/product/product-desc-tabs" %} -->
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="social-sharing col-md-9 col-xs-12 mz-reset-padding-left{% if model.content.productImages.length <=1 %} mz-share-with-container-other{% endif %}">
-            {% dropzone "social-sharing" scope="template" %}
         </div>
     </div>
     
