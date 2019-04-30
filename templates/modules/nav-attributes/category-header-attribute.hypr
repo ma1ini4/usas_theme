@@ -15,7 +15,7 @@
 									<span class="sub-level-heading">{{ entityModel.topNavHeader3|safe}}</span>
 							{% endif %}
 							{% else %}
-								{% if var == "3" %}
+								{% if var == "4" %}
 									{% if entityModel.topNavHeader4 != '' and entityModel.topNavHeader4 != '~' %}
 											<span class="sub-level-heading">{{ entityModel.topNavHeader4|safe}}</span>
 									{% endif %}
