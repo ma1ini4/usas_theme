@@ -15,9 +15,6 @@
                 <div class="mz-sitenav-sub-container">
                   {% if link.items %}
                     <div class="row">
-                        {% with "id eq {0}"|string_format(link.originalId) as filter %}
-                            {% include_entities "modules/category-attributes" listFQN=themeSettings.categoryEntityName filter=filter %}
-                        {% endwith %}
                         <div class="sub-level-col col-sm-3">
                           <span class="sub-level-heading">By type</span>
                         {% for subsublink in link.items %}
@@ -35,9 +32,6 @@
                           <span class="sub-level-heading">By brand</span>
                         <!-- {% for subsublink in link.items %}
                             {% if not subsublink.isHidden and not subsublink.isEmpty %}
-                                {% with "id eq {0}"|string_format(subsublink.originalId) as filter %}
-                                    {% include_entities "modules/category-header-attribute" listFQN=themeSettings.categoryEntityName filter=filter %}
-                                {% endwith %}
                                 <div class="mz-sitenav-item sub-level-li">
                                     <a class="mz-sitenav-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{subsublink.url}}">{{ subsublink.name|safe }}</a>
                                 </div>
@@ -50,7 +44,10 @@
 
                         </div>
                         <div class="sub-level-col col-sm-3">
-                          <img src="//cdn-sb.mozu.com/27025-42379/cms/42379/files/18e0fcd9-e7b1-4825-bb20-2087c29aa0df?maxWidth=350&_mzcb=_1550057504691" alt="">
+                          {% with "id eq {0}"|string_format(link.originalId) as filter %}
+                            {% include_entities "modules/category-attributes" listFQN=themeSettings.categoryEntityName filter=filter %}
+                          <!-- <img src="//cdn-sb.mozu.com/27025-42379/cms/42379/files/18e0fcd9-e7b1-4825-bb20-2087c29aa0df?maxWidth=350&_mzcb=_1550057504691" alt=""> -->
+                          {% endwith %}
                         </div>
                     </div>
                 {% endif %}
