@@ -16,12 +16,11 @@
                   {% if link.items %}
                     <div class="row">
                         <div class="sub-level-col col-sm-3">
-                          <span class="sub-level-heading">By type</span>
+                          {% with "id eq {0}"|string_format(link.originalId) as filter %}
+                            {% include_entities "modules/nav-attributes/category-first-header-attribute" listFQN=themeSettings.categoryEntityName filter=filter %}
+                          {% endwith %}
                         {% for subsublink in link.items %}
                             {% if not subsublink.isHidden and not subsublink.isEmpty %}
-                                {% with "id eq {0}"|string_format(subsublink.originalId) as filter %}
-                                    {% include_entities "modules/category-header-attribute" listFQN=themeSettings.categoryEntityName filter=filter %}
-                                {% endwith %}
                                 <div class="mz-sitenav-item sub-level-li">
                                     <a class="mz-sitenav-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{subsublink.url}}">{{ subsublink.name|safe }}</a>
                                 </div>
@@ -29,7 +28,10 @@
                         {% endfor %}
                         </div>
                         <div class="sub-level-col col-sm-3">
-                          <span class="sub-level-heading">By brand</span>
+                          {% with "id eq {0}"|string_format(link.originalId) as filter %}
+                            {% include_entities "modules/nav-attributes/category-second-header-attribute" listFQN=themeSettings.categoryEntityName filter=filter %}
+                            {% include_entities "modules/nav-attributes/category-second-list-attribute" listFQN=themeSettings.categoryEntityName filter=filter %}
+                          {% endwith %}
                         <!-- {% for subsublink in link.items %}
                             {% if not subsublink.isHidden and not subsublink.isEmpty %}
                                 <div class="mz-sitenav-item sub-level-li">
@@ -38,14 +40,20 @@
                             {% endif %}
                         {% endfor %} -->
                         </div>
-                        <div class="sub-level-col col-sm-3">
-                          <span class="sub-level-heading">Accessories</span>
-                          <span class="sub-level-heading">Specials</span>
+                        <div class="sub-level-col col-sm-3 flex-column">
+                          {% with "id eq {0}"|string_format(link.originalId) as filter %}
+                            {% include_entities "modules/nav-attributes/category-third-header-attribute" listFQN=themeSettings.categoryEntityName filter=filter %}
+                            {% include_entities "modules/nav-attributes/category-third-list-attribute" listFQN=themeSettings.categoryEntityName filter=filter %}
+                          {% endwith %}
+                          {% with "id eq {0}"|string_format(link.originalId) as filter %}
+                            {% include_entities "modules/nav-attributes/category-fourth-header-attribute" listFQN=themeSettings.categoryEntityName filter=filter %}
+                            {% include_entities "modules/nav-attributes/category-fourth-list-attribute" listFQN=themeSettings.categoryEntityName filter=filter %}
+                          {% endwith %}
 
                         </div>
                         <div class="sub-level-col col-sm-3">
                           {% with "id eq {0}"|string_format(link.originalId) as filter %}
-                            {% include_entities "modules/category-attributes" listFQN=themeSettings.categoryEntityName filter=filter %}
+                            {% include_entities "modules/nav-attributes/category-attribute-image" listFQN=themeSettings.categoryEntityName filter=filter %}
                           <!-- <img src="//cdn-sb.mozu.com/27025-42379/cms/42379/files/18e0fcd9-e7b1-4825-bb20-2087c29aa0df?maxWidth=350&_mzcb=_1550057504691" alt=""> -->
                           {% endwith %}
                         </div>
@@ -93,7 +101,7 @@
           </li>
           {% endif %}
           {% endpartial_cache %}
-          {% require_script "modules/contextify" %}
+          {% require_script "modules/nav-attributes/contextify" %}
       </ul>
     </div>
 </nav>
