@@ -96,7 +96,7 @@
           </div>
         </div>
         <div class="col-xs-5 col-sm-3 cart-item-qty hidden-xs">
-          <div class="mz-carttable-item-qty mz-cart-qty-box">
+          <div class="mz-carttable-item-qty mz-cart-qty-box"> 
             <!-- <input class="mz-carttable-qty-field text-center" type="number" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" value="{{ item.quantity }}" min="1"/> -->
             <div class="qty-block">
               <div class="qty-counter" id="minus" data-mz-qty-minus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} role="button"><i class="fa fa-minus"  aria-hidden="true"></i></div>
