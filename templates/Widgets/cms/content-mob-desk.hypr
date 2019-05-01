@@ -1,0 +1,12 @@
+<div class="mz-content-widget-wrap" >
+    <div class="mz-content-widget-inner-wrap" >
+        {% if Model.config.body-desktop and (PageContext.isTablet or PageContext.isDesktop) %}
+            {{Model.config.body-desktop|default_edit:'add content here'|safe}}
+        {% else %}
+          {% if Model.config.body-mobile and PageContext.isMobile %}
+              {{Model.config.body-mobile|default_edit:'add content here'|safe}}
+          {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% require_script "widgets/cms/content-mob-desk" %}
