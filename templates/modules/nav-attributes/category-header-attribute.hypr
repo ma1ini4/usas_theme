@@ -1,0 +1,29 @@
+{% if model %}
+	{% with model|first as entityModel %}
+		{% if var == "1" %}
+			{% if entityModel.topNavHeader != '' and entityModel.topNavHeader != '~' %}
+					<span class="sub-level-heading">{{ entityModel.topNavHeader|safe}}</span>
+			{% endif %}
+			{% else %}
+				{% if var == "2" %}
+					{% if entityModel.topNavHeader2 != '' and entityModel.topNavHeader2 != '~' %}
+							<span class="sub-level-heading">{{ entityModel.topNavHeader2|safe}}</span>
+					{% endif %}
+					{% else %}
+						{% if var == "3" %}
+							{% if entityModel.topNavHeader3 != '' and entityModel.topNavHeader3 != '~' %}
+									<span class="sub-level-heading">{{ entityModel.topNavHeader3|safe}}</span>
+							{% endif %}
+							{% else %}
+								{% if var == "4" %}
+									{% if entityModel.topNavHeader4 != '' and entityModel.topNavHeader4 != '~' %}
+											<span class="sub-level-heading">{{ entityModel.topNavHeader4|safe}}</span>
+									{% endif %}
+								{% else %}
+									<span class="sub-level-heading">&nbsp;&nbsp;</span>
+								{% endif%}
+							{% endif%}
+						{% endif%}
+		{% endif %}
+	{% endwith %}
+{% endif %}

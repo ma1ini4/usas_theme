@@ -2,16 +2,16 @@
 
   #page-content {
 
-    .container {
+   & > .container {
       padding: 0;
       margin: 0;
       width: 100%;
 
-      .mz-cms-row {
-        width: 100%;
-        max-width: 100%;
-        margin: 0 auto;
-      }
+    }
+    .mz-cms-row {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
     }
   }
 
@@ -47,7 +47,7 @@
       padding-top: 25%;
 
       @media @desktop-xxl {
-        padding-top: 13px;
+        padding-top: 13%;
       }
 
       @media @mobile {
@@ -162,7 +162,8 @@
   }
 
   .info-container {
-    padding: 55px 30px 10px 30px!important;
+    padding: 55px 0 10px 0!important;
+    width: auto;
 
     &-box-wrapper {
       position: relative;
@@ -176,6 +177,7 @@
           width: 100%;
           border: 0px solid transparent;
           border-radius: 25px;
+          object-fit: cover;
           transition: 0.3s ease;
         }
       }
@@ -240,20 +242,22 @@
   }
 
   .featured-container {
-    padding: 55px 30px 10px 30px!important;
+    max-width: 1140px;
+    padding: 55px 0 10px 0!important;
 
     .row {
       display: flex;
       flex-wrap: wrap;
 
-      @media @desktop-xxl {
-        div[class="col-sm-6"] {
-          width: 25%;
-        }
-      }
+      // @media @desktop-xxl {
+      //   div[class="col-sm-6"] {
+      //     width: 25%;
+      //   }
+      // }
       @media @mobile {
         div[class="col-sm-6"] {
           width: 100%;
+          margin: 0 25px;
         }
       }
     }
@@ -378,6 +382,14 @@
               white-space: normal;
             }
           }
+
+          @media @tablet-only {
+            height: 50px;
+          }
+
+          @media @mobile {
+            height: 40px;
+          }
         }
 
         span {
@@ -386,6 +398,16 @@
           font-size: 32px;
           line-height: 31px;
           font-weight: @thin;
+
+          @media @tablet-only {
+            font-size: 25px;
+            line-height: 25px;
+          }
+
+          @media @mobile {
+            font-size: 21px;
+            line-height: 20px;
+          }
         }
       }
 
@@ -439,9 +461,19 @@
         opacity: 1;
       }
 
-      @media @mobile-sm-bootstrap {
+      @media @tablet-only {
+        height: 160px;
+      }
+
+      @media @mobile {
         height: 150px;
       }
     }
   }
+}
+
+#mz-drop-zone-home-featured-products {
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
 }
