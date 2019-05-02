@@ -4,7 +4,7 @@
     {% include "modules/product/product-image" with productImage=model.mainImage productAltText=model.mainImage.altText productMaxWidth=themeSettings.productImagePdpMaxWidth isMainImage="true" as_parameter %}
 </figure>
 <div class="row hidden-xs">
-    <div class="col-sm-12">
+    <div class="col-sm-12 rollover-block">
         <label class="rollover"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ labels.rolloverToZoom}}</label>  
     </div>
 </div>
