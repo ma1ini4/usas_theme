@@ -53,6 +53,10 @@
         padding-top: 13%;
       }
 
+      @media @tablet-only {
+        width: 105%;
+      }
+
       @media @mobile {
         padding-top: 37.5%;
       }
@@ -99,6 +103,10 @@
         @media @mobile-sm-bootstrap {
           margin-bottom: 35px;
         }
+        @media @tablet-only {
+          width: 90%;
+          line-height: initial;
+        }
       }
     }
 
@@ -106,6 +114,10 @@
       list-style: disc;
       padding: 0 0 0 12px;
       margin-bottom: 14px;
+
+      @media @tablet {
+        margin-top: 3px;
+      }
 
       @media @mobile {
         display: none;
@@ -122,6 +134,12 @@
       font-weight: @thin;
       line-height: 27px;
       text-transform: none;
+
+      @media @tablet {
+        bottom: 20px;
+        right:~"calc(50% - 140px)";
+        padding: 10px 20px;
+      }
 
       @media @mobile {
         bottom: 8px;
@@ -286,7 +304,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: baseline;
+        align-items: flex-start;
         // width: 70%;
         height: 100%;
         padding: 0 35px;
@@ -294,7 +312,7 @@
         &.text-right {
           right: 0;
           left: auto;
-          align-items: last baseline;
+          align-items: flex-end;
           text-align: right;
         }
 
@@ -335,6 +353,10 @@
             font-size: 21px;
             line-height: 20px;
           }
+        }
+
+        @media @tablet-only {
+        max-width: 38%;
         }
         
         @media @tablet {
@@ -377,6 +399,7 @@
           font-weight: @thin;
           text-transform: uppercase;
           vertical-align: middle;
+          white-space: nowrap;
 
           &:hover {
             text-decoration: none;
@@ -387,6 +410,9 @@
             top: ~"calc(50% - 20px)";
             font-size: 25px;
             line-height: 22px;
+          }
+          @media @mobile {
+            padding: 10px;
           }
         }
 
