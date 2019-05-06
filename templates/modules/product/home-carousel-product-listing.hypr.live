@@ -1,0 +1,24 @@
+﻿<div class="mz-productlisting" data-mz-product="{{ model.productCode }}">
+    <div class="product-image-swatch-wrapper">
+        <div class="mz-productlisting-image">
+            {% block product-image %}
+            <a href='{% make_url "product" model %}'>
+                {% include "modules/product/product-image" with productImage=model.mainImage productMaxWidth=themeSettings.productImageDirectoryMaxWidth productAltText=model.mainImage.altText as_parameter %}
+            </a>
+            {% endblock product-image %}
+        </div>
+    </div>
+    <div class="mz-productlisting-info">
+        <div class="ml-product-info-wrapper">
+            <a class="mz-productlisting-title" href='{% make_url "product" model %}'>{{model.content.productName|safe}}</a>
+            {% block product-code %}
+            {% if themeSettings.listProductCode %}
+            <div class="mz-productlisting-productcode">#{{model.productCode}}</div>
+            {% endif %}
+            {% endblock product-code %}
+        </div>
+    </div>
+    <div class="ml-product-price-wrapper">
+      {% include "modules/product/price-stack" %}
+    </div>
+</div>

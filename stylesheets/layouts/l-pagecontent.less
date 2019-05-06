@@ -8,8 +8,6 @@
 				clear: both;
 
 				.mz-l-sidebar {
-					padding-left: 4.5%;
-					background-color: @ghostWhite;
 
 					h1 {
 						margin-top: 25px;
@@ -173,6 +171,10 @@
       &:last-child {
         font-size: 10px;
         font-weight: @regular;
+
+        @media @mobile {
+          display: none;
+        }
       }
 
       @media @mobile {

@@ -1,0 +1,16 @@
+<div id="homepage-banner" class="hero-carousel-banner">
+    <!-- Swiper -->
+    <div id="homepage-banner-slider" class="swiper-container swiper-container-hero">
+        <div class="swiper-wrapper">
+          {% for img in model.config.imageSource %}
+            <div class="swiper-slide hero-banner_home">
+              <img class="hero-banner-image" src="{{ img.url }}" />
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+        <div class="swiper-pagination swiper-pagination_home"></div>
+        <div class="swiper-btn-next" id="swiper_meta_name_next"></div>
+        <div class="swiper-btn-prev" id="swiper_meta_name_prev"></div>
+</div>
+{% require_script "widgets/homepage-hero-slider" %}

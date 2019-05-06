@@ -339,6 +339,12 @@
 		line-height: @height;
 	}
 }
+
+// Global mixins
+.sidebar-style() {
+  padding-left: 4.5%;
+  background-color: @ghostWhite;
+}
 /* meida query mixins START */
 
 // Breakpoints
@@ -363,6 +369,9 @@
 @desktop-only:        ~"only screen and (min-width: 1025px) and (max-width: 1199px)";
 
 @desktop-xl:          ~"only screen and (min-width: 1200px)";
+
+@desktop-xxl:          ~"only screen and (min-width: 1700px)";
+
 
 /*  TEMPLATE HOW TO USE
 

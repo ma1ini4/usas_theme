@@ -15,28 +15,28 @@
     {% endif %}
 
     {% if model.hasFulfilledPackages %}
-        <h2 class="mz-orderlisting-heading">{{labels.shipped}}</h2> 
+        <h4 class="mz-orderlisting-heading">{{ labels.shipped }}</h4>
         <div class="data-mz-order-packages">
             {% include "modules/my-account/order-history-package-group" with model=model packages=model.packages %}
         </div>
     {% endif %}
 
     {% if model.hasFulfilledPickups %}
-        <h2 class="mz-orderlisting-heading">{{labels.orderItemsPickup}}</h2> 
+        <h4 class="mz-orderlisting-heading">{{ labels.storePickup }}</h4>
         <div class="mz-orderlisting-pickup">
             {% include "modules/my-account/order-history-package-group" with model=model packages=model.pickups %}
         </div>
     {% endif %}
 
-    {% if model.hasFulfilledDigital%}
-        <h2 class="mz-orderlisting-heading">{{labels.orderDigitalItems}}</h2> 
+    {% if model.hasFulfilledDigital %}
+        <h4 class="mz-orderlisting-heading">{{ labels.orderDigitalItems }}</h4>
         <div class="mz-orderlisting-pickup">
             {% include "modules/my-account/order-history-package-group" with model=model packages=model.digitalPackages %}
         </div>
     {% endif %}
 
     {% if model.getNonShippedItems.length > 0 %}
-        <h2 class="mz-orderlisting-heading">{{labels.orderItemsNotShipped}}</h2> 
+        <h4 class="mz-orderlisting-heading">{{ labels.orderItemsNotShipped }}</h4>
         <div class="mz-orderlisting-nonShipped">
         {% for item in model.getNonShippedItems %}
             {% if item.Type == "BundleItem" %}

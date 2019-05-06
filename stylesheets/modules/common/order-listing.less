@@ -1,8 +1,10 @@
 ﻿.mz-orderlisting {
     @leftWidth: @orderDetailWidth + @gutter;
     position: relative;
-    border: 1px solid #999;
+    border-bottom: 1px solid @lightBorder;
     min-height: @orderDetailWidth;
+    margin-bottom: 15px;
+
     .mz-orderlisting-detail {
         position: block;
         display: table;
@@ -10,7 +12,14 @@
         box-sizing: border-box;
         height: 100%;
         padding: @gutter/2;
-        background-color: #eee;
+        background-color: @ghostWhite;
+
+        .myaccount-print-order-btn {
+          position: absolute;
+          bottom: 5px;
+          right: 0;
+          color: @headingColor;
+        }
         .mz-orderlisting-details-list {
             margin: 0px;
             padding: 0px;
@@ -62,7 +71,7 @@
         text-align: center;
         padding: @gutter/4;
         margin: 0 -@gutter/2;
-        background: limegreen; 
+        background: limegreen;
     }
     .mz-order-packages {
         & > div.mz-order-package {

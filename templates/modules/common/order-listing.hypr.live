@@ -5,10 +5,10 @@
             <li class="mz-orderlisting-details-item">
                 <dl class="mz-propertylist mz-propertylist-order">
                     {% if model.submittedDate %}
-                        <dt>{{ labels.orderPlaced }}</dt>
+                        <dt>{{ labels.orderDate }}</dt>
                         <dd>{{ model.submittedDate|date("F j, Y") }}</dd>
                     {% else %}
-                        <dt>{{ labels.orderPlaced }}</dt>
+                        <dt>{{ labels.orderDate }}</dt>
                         <dd>{{ model.auditInfo.createDate|date("F j, Y") }}</dd>
                     {% endif %}
                 </dl>
@@ -92,7 +92,7 @@
         {% endfor %}
 
         {% endblock attributes %}
-         <a href="/print-order#{{ model.id }}" target="_blank">Print Order</a>
+         <a class="myaccount-print-order-btn" href="/print-order#{{ model.id }}" target="_blank">Print Order</a>
     {% endblock order-details %}
     </div>
 

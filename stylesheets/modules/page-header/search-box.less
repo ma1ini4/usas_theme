@@ -57,18 +57,26 @@
 
     .tt-dropdown-menu {
         box-sizing: border-box;
-        border: 1px solid @inputBorder;
-        border-width: 1px;
         width: 100%;/*@expandedSearchWidth + 1;*/
+        border: 1px solid @lightBorder;
+        border-width: 1px;
+        padding: 15px;
         background: white;
+
+
+        .tt-dataset-heading {
+          text-transform: uppercase;
+          font-size: 18px;
+          font-weight: @bold;
+        }
     }
 
     .tt-suggestion {
             margin: 0;
-            padding: 0.4em 1em;
-            border-bottom: 1px solid #f4f4f4;
+            padding: 8px 15px;
+            border-bottom: 1px solid @lightBorder;
             &.tt-cursor {
-                background: #f4f4f4;
+                background: @ghostWhite;
             }
         }
 
@@ -78,21 +86,44 @@
         }
     }
 
-    .tt-dataset-pages {
+    .tt-dataset-pages, .tt-dataset-categories {
         .tt-suggestion {
             display: table;
+            width: 100%;
+            vertical-align: middle;
+            a {
+              font-size: 16px;
+              font-weight: @regular;
+            }
         }
         .mz-itemlisting {
             display: table-row;
+            width: 100%;
         }
         .mz-itemlisting-thumb, .mz-itemlisting-details {
             float: none;
             display: table-cell;
-            padding: 0.5em;
-            vertical-align: top;
+            vertical-align: middle;
+        }
+        .mz-itemlisting-details {
+          padding-left: 15px;
+          a {
+            font-size: 16px;
+            font-weight: @regular;
+          }
         }
     }
+    .tt-dataset-categories {
+      .tt-suggestion {
 
+        &:last-child {
+          border: none;
+        }
+      }
+      .mz-itemlisting-details {
+        padding-top: 10px;
+      }
+    }
 
 
 }

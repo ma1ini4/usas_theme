@@ -39,6 +39,18 @@
         },
         {
             "xtype": "panel",
+            "title": "PDP",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "enableProductPagingControl",
+                    "fieldLabel": "Enable Product Paging Control"
+                }   
+            ]
+        },
+        {
+            "xtype": "panel",
             "title": "Extended Properties",
             "collapsed": false,
             "items": [
@@ -708,6 +720,134 @@
                     "xtype": "mz-input-text",
                     "name": "oneSizeProductType",
                     "fieldLabel": "One Size Product Type"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Info Tabs",
+            "collapsed": false,
+            "collapsible": true,
+            "items": [
+                {
+                    "xtype": "panel",
+                    "title": "Tab 1",
+                    "collapsed": false,
+                    "items": [{
+                    "xtype": "mz-input-text",
+                    "name": "titleInfoTab1",
+                    "fieldLabel": "Title Info Tab 1"
+                    },
+                    {
+                        "xtype": "mz-input-text",
+                        "name": "productAttrInfoTab1Content",
+                        "fieldLabel": "Produc Attribute Info Tab 1 Content"
+                    }
+                    ]
+                },
+                {
+                    "xtype": "panel",
+                    "title": "Tab 2",
+                    "collapsed": false,
+                    "items": [{
+                    "xtype": "mz-input-text",
+                    "name": "titleInfoTab2",
+                    "fieldLabel": "Title Info Tab 2"
+                    },
+                    {
+                        "xtype": "mz-input-text",
+                        "name": "productAttrInfoTab2Content",
+                        "fieldLabel": "Produc Attribute Info Tab 2 Content"
+                    },
+                    {
+                        "xtype": "mz-input-text",
+                        "name": "productAttrInfoTab2ContentExclude",
+                        "fieldLabel": "Input for attributes exclusion (comma separated)"
+                    },
+                    {
+                        "xtype": "mz-input-checkbox",
+                        "name": "productAttrInfoTab2ContentEnabled",
+                        "fieldLabel": "Display all attributes EXCEPT those indicated above"
+                    }
+                    ]
+                },
+                {
+                    "xtype": "panel",
+                    "title": "Tab 3",
+                    "collapsed": false,
+                    "items": [{
+                    "xtype": "mz-input-text",
+                    "name": "titleInfoTab3",
+                    "fieldLabel": "Title Info Tab 3"
+                    },
+                    {
+                        "xtype": "mz-input-text",
+                        "name": "productAttrInfoTab3Content",
+                        "fieldLabel": "Produc Attribute Info Tab 3 Content"
+                    },
+                    {
+                        "xtype": "mz-input-text",
+                        "name": "productAttrInfoTab3ContentExclude",
+                        "fieldLabel": "Input for attributes exclusion (comma separated)"
+                    },
+                    {
+                        "xtype": "mz-input-checkbox",
+                        "name": "productAttrInfoTab3ContentEnabled",
+                        "fieldLabel": "Display all attributes EXCEPT those indicated above"
+                    }
+                    ]
+                },
+                {
+                    "xtype": "panel",
+                    "title": "Tab 4",
+                    "collapsed": false,
+                    "items": [{
+                    "xtype": "mz-input-text",
+                    "name": "titleInfoTab4",
+                    "fieldLabel": "Title Info Tab 4"
+                    },
+                    {
+                        "xtype": "mz-input-text",
+                        "name": "productAttrInfoTab4Content",
+                        "fieldLabel": "Produc Attribute Info Tab 4 Content"
+                    },
+                    {
+                        "xtype": "mz-input-text",
+                        "name": "productAttrInfoTab4ContentExclude",
+                        "fieldLabel": "Input for attributes exclusion (comma separated)"
+                    },
+                    {
+                        "xtype": "mz-input-checkbox",
+                        "name": "productAttrInfoTab4ContentEnabled",
+                        "fieldLabel": "Display all attributes EXCEPT those indicated above"
+                    }
+                    ]
+                },
+                {
+                    "xtype": "panel",
+                    "title": "Tab 5",
+                    "collapsed": false,
+                    "items": [{
+                    "xtype": "mz-input-text",
+                    "name": "titleInfoTab5",
+                    "fieldLabel": "Title Info Tab 5"
+                    },
+                    {
+                        "xtype": "mz-input-text",
+                        "name": "productAttrInfoTab5Content",
+                        "fieldLabel": "Produc Attribute Info Tab 5 Content"
+                    },
+                    {
+                        "xtype": "mz-input-text",
+                        "name": "productAttrInfoTab5ContentExclude",
+                        "fieldLabel": "Input for attributes exclusion (comma separated)"
+                    },
+                    {
+                        "xtype": "mz-input-checkbox",
+                        "name": "productAttrInfoTab5ContentEnabled",
+                        "fieldLabel": "Display all attributes EXCEPT those indicated above"
+                    }
+                    ]
                 }
             ]
         }

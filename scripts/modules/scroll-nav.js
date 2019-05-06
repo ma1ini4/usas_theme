@@ -14,7 +14,7 @@
                 }).affix({
                     offset: {
                         top: $this.offset().top - gutterWidth,
-                        bottom: $('.ml-global-footer').outerHeight(true)+ $('footer').outerHeight(true)+$('.mz-pagefooter-copyright').outerHeight(true)
+                        bottom: $('.mz-pagefooter.ml-global-footer.blueBG').outerHeight(true) + $('.mz-pagefooter.ml-global-footer').outerHeight(true) + $('.mz-pagefooter').outerHeight(true) + $('footer').outerHeight(true) + $('.mz-pagefooter-copyright').outerHeight(true)
                     }
                 });
                 $(window).on('resize', refreshFn);
