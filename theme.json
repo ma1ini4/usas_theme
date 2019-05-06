@@ -222,51 +222,21 @@
         {
             "documentType": "web_page",
             "entityType": "webpage",
-<<<<<<< HEAD
-<<<<<<< HEAD
             "id": "blank-page-with-breadcrumbs",
             "template": "blank-page-with-breadcrumbs",
             "title": "Blank Page with Breadcrumbs",
-=======
-            "id": "blank-splash-page",
-            "template": "blank-splash-page",
-            "title": "Blank Splash Page",
->>>>>>> develop
-=======
-            "id": "blank-page-with-breadcrumbs",
-            "template": "blank-page-with-breadcrumbs",
-            "title": "Blank Page with Breadcrumbs",
->>>>>>> 23648a19d4b11985da4c283647a44c86001f1e35
             "userCreatable": true
         },
         {
             "documentType": "web_page",
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 23648a19d4b11985da4c283647a44c86001f1e35
             "entityType": "webpage",
             "id": "blank-splash-page",
             "template": "blank-splash-page",
             "title": "Blank Splash Page",
-<<<<<<< HEAD
-=======
-            "editor": "landing-page",
-            "entityType": "webpage",
-            "id": "landing",
-            "template": "blank-page",
-            "title": "Landing Page",
->>>>>>> develop
-=======
->>>>>>> 23648a19d4b11985da4c283647a44c86001f1e35
             "userCreatable": true
         },
         {
             "documentType": "web_page",
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 23648a19d4b11985da4c283647a44c86001f1e35
             "editor": "landing-page",
             "entityType": "webpage",
             "id": "landing",
@@ -276,11 +246,6 @@
         },
         {
             "documentType": "web_page",
-<<<<<<< HEAD
-=======
->>>>>>> develop
-=======
->>>>>>> 23648a19d4b11985da4c283647a44c86001f1e35
             "entityType": "webpage",
             "id": "home",
             "template": "home",
@@ -742,63 +707,6 @@
             {
                 "abbreviation": "MS",
                 "name": "Mississippi"
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 23648a19d4b11985da4c283647a44c86001f1e35
-            },
-            {
-                "abbreviation": "MO",
-                "name": "Missouri"
-            },
-            {
-                "abbreviation": "MT",
-                "name": "Montana"
-            },
-            {
-                "abbreviation": "NE",
-                "name": "Nebraska"
-            },
-            {
-                "abbreviation": "NV",
-                "name": "Nevada"
-            },
-            {
-                "abbreviation": "NH",
-                "name": "New Hampshire"
-            },
-            {
-                "abbreviation": "NJ",
-                "name": "New Jersey"
-            },
-            {
-                "abbreviation": "NM",
-                "name": "New Mexico"
-            },
-            {
-                "abbreviation": "NY",
-                "name": "New York"
-            },
-            {
-                "abbreviation": "NC",
-                "name": "North Carolina"
-            },
-            {
-                "abbreviation": "ND",
-                "name": "North Dakota"
-            },
-            {
-                "abbreviation": "MP",
-                "name": "Northern Mariana Islands"
-            },
-<<<<<<< HEAD
-            {
-=======
-=======
-            { ===
-                ===
-                =
->>>>>>> 23648a19d4b11985da4c283647a44c86001f1e35
             },
             {
                 "abbreviation": "MO",
@@ -845,10 +753,6 @@
                 "name": "Northern Mariana Islands"
             },
             {
-<<<<<<< HEAD
->>>>>>> develop
-=======
->>>>>>> 23648a19d4b11985da4c283647a44c86001f1e35
                 "abbreviation": "OH",
                 "name": "Ohio"
             },
@@ -2116,93 +2020,7 @@
             "validPageTypes": [
                 "*"
             ]
-<<<<<<< HEAD
         },
-<<<<<<< HEAD
-        {
-=======
-        }, {
->>>>>>> 23648a19d4b11985da4c283647a44c86001f1e35
-            "displayName": "New Arrivals",
-            "displayTemplate": "catalog/new-arrivals",
-            "editViewFields": [{
-                    "anchor": "100%",
-                    "fieldLabel": "Title",
-                    "name": "title",
-                    "xtype": "mz-input-text"
-                },
-                {
-                    "anchor": "100%",
-                    "fieldLabel": "Products",
-                    "name": "productCodes",
-                    "xtype": "mz-input-productmulti"
-                }
-            ],
-            "icon": "/resources/admin/widgets/new_arrival.png",
-            "id": "new_arrivals_product",
-            ===
-            ===
-            = {
-                "displayName": "New Arrivals",
-                "displayTemplate": "catalog/new-arrivals",
-                "editViewFields": [{
-                        "anchor": "100%",
-                        "fieldLabel": "Title",
-                        "name": "title",
-                        "xtype": "mz-input-text"
-                    },
-                    {
-                        "anchor": "100%",
-                        "fieldLabel": "Products",
-                        "name": "productCodes",
-                        "xtype": "mz-input-productmulti"
-                    }
-<<<<<<< HEAD
-                },
-                {
-                    "xtype": "mz-input-color",
-                    "name": "stripColor1",
-                    "fieldLabel": "Strip Color 1"
-                },
-                {
-                    "xtype": "mz-input-color",
-                    "name": "stripColor2",
-                    "fieldLabel": "Strip Color 2"
-                },
-                {
-                    "xtype": "mz-input-color",
-                    "name": "stripColor3",
-                    "fieldLabel": "Strip Color 3"
-                },
-                {
-                    "xtype": "mz-input-color",
-                    "name": "stripColor4",
-                    "fieldLabel": "Strip Color 4"
-                },
-                {
-                    "xtype": "mz-input-color",
-                    "name": "stripColor5",
-                    "fieldLabel": "Strip Color 5"
-                },
-                {
-                    "xtype": "mz-input-color",
-                    "name": "stripColor6",
-                    "fieldLabel": "Strip Color 6"
-                },
-                {
-                    "xtype": "mz-input-color",
-                    "name": "stripColor7",
-                    "fieldLabel": "Strip Color 7"
-                },
-                {
-                    "xtype": "mz-input-color",
-                    "name": "stripColor8",
-                    "fieldLabel": "Strip Color 8"
-                }
-            ],
-            "icon": "/resources/admin/widgets/subcategory.png",
-            "id": "catNav",
-=======
         {
             "displayName": "New Arrivals",
             "displayTemplate": "catalog/new-arrivals",
@@ -2221,7 +2039,6 @@
             ],
             "icon": "/resources/admin/widgets/new_arrival.png",
             "id": "new_arrivals_product",
->>>>>>> develop
             "validPageTypes": [
                 "*"
             ]
@@ -2230,39 +2047,6 @@
             "defaultConfig": {
                 "heightResizable": false
             },
-<<<<<<< HEAD
-            "id": "Whats-Trending-Now_widget",
-            "displayName": "Home Page Whats Trending Now",
-            "displayTemplate": "homepage/home-trend-now",
-            "editViewFields": [{
-                    "xtype": "fieldcontainer",
-                    "anchor": "100%",
-                    "fieldlabel": "Select / Upload",
-                    "items": [{
-                        "name": "trendingimages1",
-                        "fieldLabel": "Select / Upload Images",
-                        "xtype": "taco.imagefield"
-                    }]
-                },
-                {
-                    "name": "trendName1",
-                    "fieldLabel": "Title for the trending image",
-                    "xtype": "textfield"
-                },
-                {
-                    "name": "trendDesc1",
-                    "fieldLabel": "Description for the trending image",
-                    "xtype": "textfield",
-                    "width": "100%"
-                },
-                {
-                    "name": "linkTrend1",
-                    "fieldLabel": "Embedded link for Trending Now",
-                    "xtype": "textfield"
-                }
-            ],
-            "icon": "/resources/admin/widgets/trending.png",
-=======
             "displayName": "Home Page Sub Category",
             "displayTemplate": "homepage/home-sub-categories",
             "editViewFields": [{
@@ -2320,95 +2104,38 @@
             ],
             "icon": "/resources/admin/widgets/subcategory.png",
             "id": "catNav",
->>>>>>> develop
             "validPageTypes": [
                 "*"
             ]
         },
         {
-<<<<<<< HEAD
-=======
             "defaultConfig": {
                 "heightResizable": false
-=======
-                ],
-                "icon": "/resources/admin/widgets/new_arrival.png",
-                "id": "new_arrivals_product",
-                "validPageTypes": [
-                    "*"
-                ]
             },
-            {
-                "defaultConfig": {
-                    "heightResizable": false
+            "id": "Whats-Trending-Now_widget",
+            "displayName": "Home Page Whats Trending Now",
+            "displayTemplate": "homepage/home-trend-now",
+            "editViewFields": [{
+                    "xtype": "fieldcontainer",
+                    "anchor": "100%",
+                    "fieldlabel": "Select / Upload",
+                    "items": [{
+                        "name": "trendingimages1",
+                        "fieldLabel": "Select / Upload Images",
+                        "xtype": "taco.imagefield"
+                    }]
                 },
-                "displayName": "Home Page Sub Category",
-                "displayTemplate": "homepage/home-sub-categories",
-                "editViewFields": [{
-                        "fieldLabel": "Categories",
-                        "name": "categories",
-                        "xtype": "boxselect",
-                        "anchor": "100%",
-                        "displayField": "name",
-                        "valueField": "id",
-                        "queryMode": "local",
-                        "store": {
-                            "type": "Taco.store.Categories"
-                        }
-                    },
-                    {
-                        "xtype": "mz-input-color",
-                        "name": "stripColor1",
-                        "fieldLabel": "Strip Color 1"
-                    },
-                    {
-                        "xtype": "mz-input-color",
-                        "name": "stripColor2",
-                        "fieldLabel": "Strip Color 2"
-                    },
-                    {
-                        "xtype": "mz-input-color",
-                        "name": "stripColor3",
-                        "fieldLabel": "Strip Color 3"
-                    },
-                    {
-                        "xtype": "mz-input-color",
-                        "name": "stripColor4",
-                        "fieldLabel": "Strip Color 4"
-                    },
-                    {
-                        "xtype": "mz-input-color",
-                        "name": "stripColor5",
-                        "fieldLabel": "Strip Color 5"
-                    },
-                    {
-                        "xtype": "mz-input-color",
-                        "name": "stripColor6",
-                        "fieldLabel": "Strip Color 6"
-                    },
-                    {
-                        "xtype": "mz-input-color",
-                        "name": "stripColor7",
-                        "fieldLabel": "Strip Color 7"
-                    },
-                    {
-                        "xtype": "mz-input-color",
-                        "name": "stripColor8",
-                        "fieldLabel": "Strip Color 8"
-                    }
-                ],
-                "icon": "/resources/admin/widgets/subcategory.png",
-                "id": "catNav",
-                "validPageTypes": [
-                    "*"
-                ]
->>>>>>> 23648a19d4b11985da4c283647a44c86001f1e35
-            },
-            {
-                "defaultConfig": {
-                    "heightResizable": false
+                {
+                    "name": "trendName1",
+                    "fieldLabel": "Title for the trending image",
+                    "xtype": "textfield"
                 },
-<<<<<<< HEAD
+                {
+                    "name": "trendDesc1",
+                    "fieldLabel": "Description for the trending image",
+                    "xtype": "textfield",
+                    "width": "100%"
+                },
                 {
                     "name": "linkTrend1",
                     "fieldLabel": "Embedded link for Trending Now",
@@ -2421,7 +2148,6 @@
             ]
         },
         {
->>>>>>> develop
             "id": "home-page-instagram-slider",
             "displayName": "Home Page Instagram Slider Widget",
             "displayTemplate": "homepage/home-page-instagram-slider",
@@ -2430,219 +2156,74 @@
                     "fieldLabel": "Instagram Profile Name",
                     "xtype": "textfield",
                     "width": "60%"
-=======
-                "displayName": "Home Page Sub Category",
-                "displayTemplate": "homepage/home-sub-categories",
-                "editViewFields": [{
-                        "fieldLabel": "Categories",
-                        "name": "categories",
-                        "xtype": "boxselect",
-                        "anchor": "100%",
-                        "displayField": "name",
-                        "valueField": "id",
-                        "queryMode": "local",
-                        "store": {
-                            "type": "Taco.store.Categories"
-                        }
-                    },
-                    {
-                        "xtype": "mz-input-color",
-                        "name": "stripColor1",
-                        "fieldLabel": "Strip Color 1"
-                    },
-                    {
-                        "xtype": "mz-input-color",
-                        "name": "stripColor2",
-                        "fieldLabel": "Strip Color 2"
-                    },
-                    {
-                        "xtype": "mz-input-color",
-                        "name": "stripColor3",
-                        "fieldLabel": "Strip Color 3"
-                    },
-                    {
-                        "xtype": "mz-input-color",
-                        "name": "stripColor4",
-                        "fieldLabel": "Strip Color 4"
-                    },
-                    {
-                        "xtype": "mz-input-color",
-                        "name": "stripColor5",
-                        "fieldLabel": "Strip Color 5"
-                    },
-                    {
-                        "xtype": "mz-input-color",
-                        "name": "stripColor6",
-                        "fieldLabel": "Strip Color 6"
-                    },
-                    {
-                        "xtype": "mz-input-color",
-                        "name": "stripColor7",
-                        "fieldLabel": "Strip Color 7"
-                    },
-                    {
-                        "xtype": "mz-input-color",
-                        "name": "stripColor8",
-                        "fieldLabel": "Strip Color 8"
-                    }
-                ],
-                "icon": "/resources/admin/widgets/subcategory.png",
-                "id": "catNav",
-                ===
-                ===
-                =
-                "id": "Whats-Trending-Now_widget",
-                "displayName": "Home Page Whats Trending Now",
-                "displayTemplate": "homepage/home-trend-now",
-                "editViewFields": [{
-                        "xtype": "fieldcontainer",
-                        "anchor": "100%",
-                        "fieldlabel": "Select / Upload",
-                        "items": [{
-                            "name": "trendingimages1",
-                            "fieldLabel": "Select / Upload Images",
-                            "xtype": "taco.imagefield"
-                        }]
-                    },
-                    {
-                        "name": "trendName1",
-                        "fieldLabel": "Title for the trending image",
-                        "xtype": "textfield"
-                    },
-                    {
-                        "name": "trendDesc1",
-                        "fieldLabel": "Description for the trending image",
-                        "xtype": "textfield",
-                        "width": "100%"
-                    },
-                    {
-                        "name": "linkTrend1",
-                        "fieldLabel": "Embedded link for Trending Now",
-                        "xtype": "textfield"
-                    }
-                ],
-                "icon": "/resources/admin/widgets/trending.png",
-                "validPageTypes": [
-                    "*"
-                ]
-            },
-            {
-                "defaultConfig": {
-                    "heightResizable": false
->>>>>>> 23648a19d4b11985da4c283647a44c86001f1e35
                 },
-                "id": "Whats-Trending-Now_widget",
-                "displayName": "Home Page Whats Trending Now",
-                "displayTemplate": "homepage/home-trend-now",
-                "editViewFields": [{
-                        "xtype": "fieldcontainer",
-                        "anchor": "100%",
-                        "fieldlabel": "Select / Upload",
-                        "items": [{
-                            "name": "trendingimages1",
-                            "fieldLabel": "Select / Upload Images",
-                            "xtype": "taco.imagefield"
-                        }]
-                    },
-                    {
-                        "name": "trendName1",
-                        "fieldLabel": "Title for the trending image",
-                        "xtype": "textfield"
-                    },
-                    {
-                        "name": "trendDesc1",
-                        "fieldLabel": "Description for the trending image",
-                        "xtype": "textfield",
-                        "width": "100%"
-                    },
-                    {
-                        "name": "linkTrend1",
-                        "fieldLabel": "Embedded link for Trending Now",
-                        "xtype": "textfield"
-                    }
-                ],
-                "icon": "/resources/admin/widgets/trending.png",
-                "validPageTypes": [
-                    "*"
-                ]
-            },
-            {
-                "id": "home-page-instagram-slider",
-                "displayName": "Home Page Instagram Slider Widget",
-                "displayTemplate": "homepage/home-page-instagram-slider",
-                "editViewFields": [{
-                        "name": "profilename",
-                        "fieldLabel": "Instagram Profile Name",
-                        "xtype": "textfield",
-                        "width": "60%"
-                    },
-                    {
-                        "name": "UserId",
-                        "fieldLabel": "Instagram User Id",
-                        "xtype": "textfield",
-                        "width": "60%"
-                    },
-                    {
-                        "name": "accessToken",
-                        "fieldLabel": "Instagram Access Token",
-                        "xtype": "textfield",
-                        "width": "60%"
-                    }
-                ],
-                "defaultConfig": {
-                    "heightResizable": false
+                {
+                    "name": "UserId",
+                    "fieldLabel": "Instagram User Id",
+                    "xtype": "textfield",
+                    "width": "60%"
                 },
-                "icon": "/resources/admin/widgets/instragram.png",
-                "validPageTypes": [
-                    "*"
-                ]
+                {
+                    "name": "accessToken",
+                    "fieldLabel": "Instagram Access Token",
+                    "xtype": "textfield",
+                    "width": "60%"
+                }
+            ],
+            "defaultConfig": {
+                "heightResizable": false
             },
-            {
-                "displayName": "Popular Products",
-                "displayTemplate": "catalog/popular-products",
-                "id": "popularProducts",
-                "defaultConfig": {
-                    "title": "Popular Products"
+            "icon": "/resources/admin/widgets/instragram.png",
+            "validPageTypes": [
+                "*"
+            ]
+        },
+        {
+            "displayName": "Popular Products",
+            "displayTemplate": "catalog/popular-products",
+            "id": "popularProducts",
+            "defaultConfig": {
+                "title": "Popular Products"
+            },
+            "editViewFields": [{
+                    "anchor": "100%",
+                    "fieldLabel": "Slider Title",
+                    "name": "title",
+                    "xtype": "mz-input-category"
                 },
-                "editViewFields": [{
-                        "anchor": "100%",
-                        "fieldLabel": "Slider Title",
-                        "name": "title",
-                        "xtype": "mz-input-category"
-                    },
-                    {
-                        "anchor": "100%",
-                        "fieldLabel": "Title",
-                        "name": "configurableTitle",
-                        "xtype": "mz-input-text"
-                    }
-                ],
-                "icon": "/resources/admin/widgets/top_selling.png",
-                "validPageTypes": [
-                    "*"
-                ]
-            },
-            {
-                "displayName": "New Arrivals",
-                "displayTemplate": "catalog/new-arrivals",
-                "editViewFields": [{
-                        "anchor": "100%",
-                        "fieldLabel": "Title",
-                        "name": "title",
-                        "xtype": "mz-input-text"
-                    },
-                    {
-                        "anchor": "100%",
-                        "fieldLabel": "Products",
-                        "name": "productCodes",
-                        "xtype": "mz-input-productmulti"
-                    }
-                ],
-                "icon": "/resources/admin/widgets/new_arrival.png",
-                "id": "new_arrivals_product",
-                "validPageTypes": [
-                    "*"
-                ]
-            }
-        ]
-    }
+                {
+                    "anchor": "100%",
+                    "fieldLabel": "Title",
+                    "name": "configurableTitle",
+                    "xtype": "mz-input-text"
+                }
+            ],
+            "icon": "/resources/admin/widgets/top_selling.png",
+            "validPageTypes": [
+                "*"
+            ]
+        },
+        {
+            "displayName": "New Arrivals",
+            "displayTemplate": "catalog/new-arrivals",
+            "editViewFields": [{
+                    "anchor": "100%",
+                    "fieldLabel": "Title",
+                    "name": "title",
+                    "xtype": "mz-input-text"
+                },
+                {
+                    "anchor": "100%",
+                    "fieldLabel": "Products",
+                    "name": "productCodes",
+                    "xtype": "mz-input-productmulti"
+                }
+            ],
+            "icon": "/resources/admin/widgets/new_arrival.png",
+            "id": "new_arrivals_product",
+            "validPageTypes": [
+                "*"
+            ]
+        }
+    ]
+}
