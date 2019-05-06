@@ -706,8 +706,7 @@
             },
             {
                 "abbreviation": "MS",
-                "name": "Mississippi" <<
-                    << << < HEAD
+                "name": "Mississippi"
             },
             {
                 "abbreviation": "MO",
@@ -754,7 +753,8 @@
                 "name": "Northern Mariana Islands"
             },
             { ===
-                === =
+                ===
+                =
             },
             {
                 "abbreviation": "MO",
@@ -800,8 +800,8 @@
                 "abbreviation": "MP",
                 "name": "Northern Mariana Islands"
             },
-            { >>>
-                >>> > feature / USAS - 297 _About_Us_page "abbreviation": "OH",
+            {
+                "abbreviation": "OH",
                 "name": "Ohio"
             },
             {
@@ -2068,8 +2068,7 @@
             "validPageTypes": [
                 "*"
             ]
-        }, <<
-        << << < HEAD {
+        }, {
             "displayName": "New Arrivals",
             "displayTemplate": "catalog/new-arrivals",
             "editViewFields": [{
@@ -2088,7 +2087,8 @@
             "icon": "/resources/admin/widgets/new_arrival.png",
             "id": "new_arrivals_product",
             ===
-            === = {
+            ===
+            = {
                 "displayName": "New Arrivals",
                 "displayTemplate": "catalog/new-arrivals",
                 "editViewFields": [{
@@ -2171,8 +2171,7 @@
                 ],
                 "icon": "/resources/admin/widgets/subcategory.png",
                 "id": "catNav",
-                >>>
-                >>> > feature / USAS - 297 _About_Us_page "validPageTypes": [
+                "validPageTypes": [
                     "*"
                 ]
             },
@@ -2180,8 +2179,7 @@
                 "defaultConfig": {
                     "heightResizable": false
                 },
-                <<
-                << << < HEAD "displayName": "Home Page Sub Category",
+                "displayName": "Home Page Sub Category",
                 "displayTemplate": "homepage/home-sub-categories",
                 "editViewFields": [{
                         "fieldLabel": "Categories",
@@ -2239,7 +2237,8 @@
                 "icon": "/resources/admin/widgets/subcategory.png",
                 "id": "catNav",
                 ===
-                === =
+                ===
+                =
                 "id": "Whats-Trending-Now_widget",
                 "displayName": "Home Page Whats Trending Now",
                 "displayTemplate": "homepage/home-trend-now",
@@ -2271,13 +2270,12 @@
                     }
                 ],
                 "icon": "/resources/admin/widgets/trending.png",
-                >>>
-                >>> > feature / USAS - 297 _About_Us_page "validPageTypes": [
+                "validPageTypes": [
                     "*"
                 ]
             },
-            { <<
-                << << < HEAD "defaultConfig": {
+            {
+                "defaultConfig": {
                     "heightResizable": false
                 },
                 "id": "Whats-Trending-Now_widget",
@@ -2315,9 +2313,8 @@
                     "*"
                 ]
             },
-            { ===
-                === = >>>
-                >>> > feature / USAS - 297 _About_Us_page "id": "home-page-instagram-slider",
+            {
+                "id": "home-page-instagram-slider",
                 "displayName": "Home Page Instagram Slider Widget",
                 "displayTemplate": "homepage/home-page-instagram-slider",
                 "editViewFields": [{
