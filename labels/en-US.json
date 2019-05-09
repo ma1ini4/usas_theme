@@ -543,5 +543,13 @@
     "middleName": "Middle Name Initials",
     "successfullyAddedItems": "The following item(s) have successfully added to your cart",
     "billingAddressRequired": "Billing Address is required",
-    "productaddToCartError": "The following item(s) are not added to cart"
+    "productaddToCartError": "The following item(s) are not added to cart",
+    "b2bAccount": "B2B Account",
+    "b2bAccountInfo": "Account Information",
+    "b2bAccountInfoContact": "Contact Information",
+    "b2bAccountWelcome": "Welcome, {0}",
+    "b2bWishlistName": "List Name",
+    "b2bProductPicker": "Product",
+    "b2bWishlist": "List Items",
+    "b2bQuantity": "Qty"
 }

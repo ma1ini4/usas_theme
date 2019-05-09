@@ -107,7 +107,7 @@
           </li>
           {% endif %}
           {% endpartial_cache %}
-          {% require_script "modules/nav-attributes/contextify" %}
+          {% require_script "modules/contextify" %}
       </ul>
     </div>
 </nav>
