@@ -14,6 +14,10 @@ define(['modules/api',
 
     var CartView = Backbone.MozuView.extend({
         templateName: "modules/cart/cart-table",
+        additionalEvents: {
+            "click [data-mz-qty-minus]": "quantityMinus",
+            "click [data-mz-qty-plus]": "quantityPlus"
+        },
         initialize: function () {
 
             this.pickerDialog = this.initializeStorePickerDialog();
@@ -58,6 +62,32 @@ define(['modules/api',
                 Backbone.MozuView.prototype.render.call(this);
             });
         },
+        quantityMinus: _.debounce(function(e) {
+          if(!$("#minus").hasClass('disabled')){
+            var $qField = $(e.currentTarget),
+                id = $qField.data('mz-cart-item'),
+                item = this.model.get("items").get(id),
+                qty = item.get('quantity');
+
+                if (qty === 1) {
+                  return;
+                }
+
+                item.set('quantity', --qty);
+                item.saveQuantity();
+            }
+        }, 400),
+        quantityPlus: _.debounce(function(e) {
+          if(!$("#plus").hasClass('disabled')){
+            var $qField = $(e.currentTarget),
+                id = $qField.data('mz-cart-item'),
+                item = this.model.get("items").get(id),
+                qty = item.get('quantity');
+
+                item.set('quantity', ++qty);
+                item.saveQuantity();
+          }
+        }, 400),
         updateQuantity: _.debounce(function (e) {
             var $qField = $(e.currentTarget),
                 newQuantity = parseInt($qField.val(), 10),

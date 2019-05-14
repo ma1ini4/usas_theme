@@ -20,7 +20,8 @@
       doubletaptogoipad:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGoIpad.min",
       lazysizes: "vendor/jquery/lazysizes-custom.min",
       async: "vendor/async/async.min",
-      slick: "vendor/slick/slick.min"
+      slick: "vendor/slick/slick.min",
+      swiper:"vendor/swiper/swiper.min"
       },
       "shim": {
         bootstrap: {
@@ -47,7 +48,7 @@
 	slick: {
           deps: ['jquery']
 	}
-      }      
+      }
   });
   {% if debugMode %}
   require([{% all_scripts %}]);

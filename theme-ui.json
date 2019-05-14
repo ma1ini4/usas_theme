@@ -39,6 +39,18 @@
         },
         {
             "xtype": "panel",
+            "title": "PDP",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "enableProductPagingControl",
+                    "fieldLabel": "Enable Product Paging Control"
+                }   
+            ]
+        },
+        {
+            "xtype": "panel",
             "title": "Extended Properties",
             "collapsed": false,
             "items": [

@@ -51,7 +51,7 @@
         if (current_zoom_id_added)
             id = $(current_zoom_id_added)[0].attributes.id.value.replace('zoom_', '') - 1;
         slider_mobile = $('#productmobile-Carousel').bxSlider({
-            slideWidth: 300,
+            slideWidth: 100, // old value - 300
             minSlides: 1,
             maxSlides: 1,
             moveSlides: 1,
@@ -64,6 +64,8 @@
                 $('.zoomContainer').remove();
                 current_zoom_id_added.elevateZoom({ zoomType: "inner", cursor: "crosshair" }).addClass('active');
                 var bkimg = $(current_zoom_id_added)[0].attributes['data-zoom-image'].value;
+                // remove in case logic for mobile slider is different
+                $('.mz-productimages-mainimage').attr('src', bkimg);
                 $(".mz-productimages-pager div").removeClass("activepager").eq(newIndex).addClass("activepager");
                 setTimeout(function() {
                     $('div.zoomWindowContainer div').css({ 'background-image': 'url(' + bkimg + ')' });
