@@ -440,7 +440,16 @@
       "template": "customer-service",
       "title": "Customer Service",
       "userCreatable": true
+    },
+    {
+      "documentType": "web_page",
+      "entityType": "webpage",
+      "id": "order-status-detail",
+      "template": "order-status-detail",
+      "title": "Order Status Detail",
+      "userCreatable": true
     }
+
   ],
   "settings": {
     "oneSizeAttributeName": "tenant~ONESIZE",

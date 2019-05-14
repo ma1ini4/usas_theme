@@ -1,0 +1,41 @@
+<div class="order-status" id='order-status'>
+{% if model.resultCode %}
+  {% if model.resultCode === '1' %}
+  <div class="col-sm-12 mz-reset-padding-left mz-order-status-section">
+      <h4 class="mz-l-stack-sectiontitle">{{ labels.orderInformation }}</h4>
+      <div>{{ labels.orderDetailNumber|string_format(model.code)|safe }}</div>
+      <div>{{ labels.orderDetailDate}} <strong>{{model.orderDate|date("F j, Y") }}</strong>.</div>
+      <div>{{ labels.orderDetailStatus|string_format(model.status)|safe }}</div>
+  </div>
+  <div class="mz-order-status-section">
+      <div class="col-sm-6">
+          <!-- <h4 class="mz-l-stack-sectiontitle">{{ labels.billingInformation }}</h4> -->
+          <div class="mz-l-stack-item">
+              <small>{{ labels.orderStatusBillTo }}</small>
+              <div class="mz-addresssummary">{% include "modules/order/order-status-address-summary" %}</div>
+          </div>
+      </div>
+      <div class="col-sm-6">
+          <small>{{ labels.payments }}</small>
+          {% if model.orderTotal === "0"  %}
+              {% with model.orderTotal|currency as total %}
+                  <h4 class="mz-confirmation-nopaymentrequired">{{ labels.noPaymentWasRequired|string_format(total) }}</h4>
+              {% endwith %}
+          {% else %}
+              {% for payment in model.orderPayment %}
+                {% include "modules/order/order-status-payment" with model=payment %}
+              {% endfor %}
+          {% endif %}
+      </div>
+  </div>
+  <div class="mz-l-stack-section mz-order-status-section">
+      {% include "modules/order/order-status-order-summary" %}
+  </div>
+  <div class="col-sm-12 text-right mz-reset-padding mz-order-status-totals-container">
+     {% include "modules/order/order-status-totals" %}
+  </div>
+  {% else %}
+    <div>{{model.exceptionText}}</div>
+  {% endif %}
+{% endif %}
+</div>
