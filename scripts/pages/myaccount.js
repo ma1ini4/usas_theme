@@ -798,4 +798,11 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         _.invoke(window.accountViews, 'render');
 
     });
+
+    return {
+       'OrderHistoryListingView': OrderHistoryListingView,
+       'ReturnPrintLabelView': PrintView,
+       'AddressBookView': AddressBookView
+    };
+    
 });

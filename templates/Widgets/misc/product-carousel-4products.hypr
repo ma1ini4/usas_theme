@@ -1,0 +1,1 @@
+{% include_products "Widgets/misc/product-carousel-swiper-4" with productCodes=model.config.products as_parameter %}

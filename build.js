@@ -13,7 +13,8 @@
         doubletaptogo:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGo.min",
         doubletaptogoipad:"vendor/jquery-doubleTapToGo/jquery.doubleTapToGoIpad.min",
         async: "vendor/async/async.min",
-        slick: "vendor/slick/slick.min"
+        slick: "vendor/slick/slick.min",
+        swiper: "vendor/swiper/swiper.min"
     },
     dir: "compiled/scripts/",
     locale: "en-us",

@@ -157,6 +157,11 @@
             sortBy: function(sortString) {
                 return this.apiGet($.extend(this.lastRequest, { sortBy: sortString }));
             },
+
+            filterBy: function (filterString) {
+                return this.apiGet($.extend(this.lastRequest, { filter: filterString }));
+            },
+            
             initialize: function() {
                 this.lastRequest = this.buildRequest();
             }

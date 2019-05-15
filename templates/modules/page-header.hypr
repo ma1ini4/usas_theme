@@ -19,9 +19,9 @@
               </div>
                 <span class="ml-header-user-welcome">
                   {% if not user.isAnonymous %}
-                  Welcome <a href="/myaccount">{{user.firstName|default(user.email)}}</a>
+                  Welcome <a id="my-account-mobile" href="/myaccount">{{user.firstName|default(user.email)}}</a>
                   {%else%}
-                  <a href="user/login">Login / Register</a>
+                  <a href="/user/login">Login / Register</a>
                   {% endif %}
                 </span>
               <div class="ml-header-links-wrapper">

@@ -7,12 +7,23 @@
     {% include "modules/product/product-top-carousel" %}
     {% endif %}    
     <div class="row">
+    {% if themeSettings.enableProductPagingControl %}
+        {% require_script "pages/product-paging-control" %}
+    {% endif %}
+    {% if themeSettings.enableProductPagingControl %}
+        <div class="product-paging-control">
+            {% include "modules/product/product-paging-control" %}
+        </div>
+    {% endif %}
         <div class="col-xs-12 col-sm-6">
             <div data-mz-productimages class="mz-productimages mz-product-left-container margin-top-15">
                 {% include "modules/product/product-images" %}
             </div>
+            <div class="social-sharing center-block col-md-12 col-xs-12 mz-reset-padding-left{% if model.content.productImages.length <=1 %} mz-share-with-container-other{% endif %}">
+                {% dropzone "social-sharing" scope="template" %}
+            </div>
         </div>
-        <div class="col-xs-12 col-sm-6">
+        <div class="col-xs-12 col-sm-6 mz-product-content-block">
             <div class="mz-product-top-content">
                 <h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName|replace("'","&rsquo;")|safe }}</h1>
                 <div class="row">
@@ -20,7 +31,7 @@
                         <h4 class="mz-productcodes-productcode p-3" itemprop="sku">{{ labels.item}} {{ model.productCode }}</h4>
                     </div>
                     {% if model.productType != themeSettings.familyProductType %}
-                        <div class="col-xs-7">
+                        <div class="col-xs-7 hidden-xs">
                             <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section pull-right text-right prize-mobile-view">
                             {% include "modules/product/price-stack" %}
                             </div>
@@ -38,11 +49,6 @@
                 </div>
                 <!-- {% include "modules/product/product-desc-tabs" %} -->
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="social-sharing col-md-9 col-xs-12 mz-reset-padding-left{% if model.content.productImages.length <=1 %} mz-share-with-container-other{% endif %}">
-            {% dropzone "social-sharing" scope="template" %}
         </div>
     </div>
     

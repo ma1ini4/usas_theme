@@ -5,9 +5,16 @@
 {% block body-tag-classes %} mz-homepage {% endblock body-tag-classes %}
 
 {% block body-content %}
-    {% dropzone "home" scope="template" %}
-    {% dropzone "home2" scope="page" %}
+    {% dropzone "home-top-banner" scope="page" %}
+    {% dropzone "home-slogan" scope="page" %}
+    {% dropzone "home-best-sellers" scope="page" %}
+    {% dropzone "home-mid-banner" scope="page" %}
+    {% dropzone "home-featured-products" scope="page" %}
+    {% dropzone "home-mission" scope="page" %}
+    {% dropzone "home-links-container" scope="page" %}
+
 {% endblock body-content %}
 
 {% block body-below-content %}
+{% require_script "widgets/homepage/featured-products" %}
 {% endblock body-below-content %}

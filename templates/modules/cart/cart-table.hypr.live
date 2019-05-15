@@ -84,15 +84,25 @@
             </span>
             {% endif %}
              <div class="mz-carttable-item-qty mz-cart-qty-box visible-xs mz-qty-xs-align">
-              <input class="mz-carttable-qty-field" type="number" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" value="{{ item.quantity }}" min="1"/>
+              <!-- <input class="mz-carttable-qty-field" type="number" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" value="{{ item.quantity }}" min="1"/> -->
+              <div class="qty-block">
+                <div class="qty-counter" id="minus" data-mz-qty-minus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} role="button"><i class="fa fa-minus"  aria-hidden="true"></i></div>
+                <input id="mz_pdp_qty" class="mz-productdetail-qty text-center" type="text" value="{{ item.quantity }}" readonly onfocus="this.blur()" data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" title="Quantity" min="3" />
+                <div class="qty-counter" id="plus" data-mz-qty-plus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} role="button"><i class="fa fa-plus" aria-hidden="true"></i></div>
+              </div>
               <a href="javascript:;" data-mz-action="removeItem" data-mz-cart-item="{{ item.id }}" class="btn-link" title="{{ labels.remove }}"><i class="fas fa-times"></i></a>
                 <div class="mz-carttable-item-total ">{% include "modules/common/item-total" %}</div>
             </div>
           </div>
         </div>
         <div class="col-xs-5 col-sm-3 cart-item-qty hidden-xs">
-          <div class="mz-carttable-item-qty mz-cart-qty-box">
-            <input class="mz-carttable-qty-field text-center" type="number" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" value="{{ item.quantity }}" min="1"/>
+          <div class="mz-carttable-item-qty mz-cart-qty-box"> 
+            <!-- <input class="mz-carttable-qty-field text-center" type="number" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" value="{{ item.quantity }}" min="1"/> -->
+            <div class="qty-block">
+              <div class="qty-counter" id="minus" data-mz-qty-minus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} role="button"><i class="fa fa-minus"  aria-hidden="true"></i></div>
+              <input id="mz_pdp_qty" class="mz-productdetail-qty text-center" type="text" value="{{ item.quantity }}" readonly onfocus="this.blur()" data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" title="Quantity" min="3" />
+              <div class="qty-counter" id="plus" data-mz-qty-plus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} role="button"><i class="fa fa-plus" aria-hidden="true"></i></div>
+            </div>
           </div>
            <div class="mz-carttable-item-remove">
             <a href="javascript:;" data-mz-action="removeItem" data-mz-cart-item="{{ item.id }}" class="btn-link" title="{{ labels.remove }}">{{ labels.remove }}</a>
@@ -129,23 +139,23 @@
 
   <div class="row mz-carttable-total-row row">
     <div class="col-xs-12 mz-carttable-total-wrap mz-padding-xs">
-    <div class="col-xs-7 col-sm-9 text-right">{{ labels.subtotal }}:</div>
-     <div class="mz-carttable-sub-total col-xs-5 col-sm-3 pull-right">
-      {% comment %}<strong>{{model.subtotal |currency }}</strong>{% endcomment %}
-      <strong>{{model.discountedSubtotal |currency }}</strong>
-    </div>
+      <div class="col-xs-7 col-sm-9 text-right">{{ labels.subtotal }}:</div>
+       <div class="mz-carttable-sub-total col-xs-5 col-sm-3 pull-right">
+        {% comment %}<strong>{{model.subtotal |currency }}</strong>{% endcomment %}
+        {{model.discountedSubtotal |currency }}
+      </div>
     </div>
   </div>
   {% for discount in model.orderDiscounts %}
     {% if not discount.excluded %}
-  <div class="mz-carttable-total-row row mz-discount-row">
-    <div class="col-xs-7 col-sm-9 text-right">
-        {{ discount.discount.name }}
+  <div class="mz-carttable-total-row row">
+    <div class="mz-carttable-total-wrap col-xs-12 mz-padding-xs">
+      <div class="col-xs-7 col-sm-9 text-right"><em>{{ discount.discount.name }}:</em></div>
+      <div class="mz-carttable-total-wrap col-xs-5 col-sm-3 pull-right">
+        <span><em>- {{ discount.impact|currency }}</em></span>
+      </div>
+      <div></div>
     </div>
-    <div class="mz-carttable-total-wrap col-xs-5 col-sm-3 pull-right">
-      <span class="mz-carttable-rowtotal">- {{ discount.impact|currency }}</span>
-    </div>
-    <div></div>
   </div>
     {% endif %}
   {% endfor %}
@@ -153,10 +163,10 @@
 
   <div class="mz-carttable-total-row row">
     <div class="mz-carttable-total-wrap col-xs-12 mz-padding-xs">
-    <div class="col-xs-7 col-sm-9 text-right"> {{ labels.orderTotal }}:</div>
-    <div class="mz-carttable-total col-xs-5 col-sm-3 pull-right">
-      <strong>{{ model.discountedTotal|currency }}</strong>
-    </div>
+      <div class="col-xs-7 col-sm-9 text-right"> {{ labels.orderTotal }}:</div>
+      <div class="mz-carttable-total col-xs-5 col-sm-3 pull-right">
+        <strong>{{ model.discountedTotal|currency }}</strong>
+      </div>
     </div>
     <div></div>
   </div>

@@ -39,6 +39,39 @@
                 {% include "modules/breadcrumbs" %}
             {% endblock breadcrumbs %}
             {% dropzone "parent-category-page-top" scope="page" %}
+              <div class="category-grid">
+                <div class="row flex">
+                  {% with categories|find(model.categoryId) as cat %}
+                    {% for subcat in cat.childrenCategories %}
+                      {% if subcat.isDisplayed %}
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                          <div class="category-grid-subcat">
+                            <div class="category-grid-subcat-image">
+                              {% if subcat.content.categoryImages %}
+                                <img src="{% make_url "image" subcat.content.categoryImages|first with max=600 %}" alt="{{ subcat.content.name }}">
+                              {% else %}
+                                <div class="category-grid-subcat-image-placeholder">
+                                  <span>{{ labels.productImagePlaceholder }}</span>
+                                </div>
+                              {% endif %}
+                              <div class="category-grid-subcat-image-overlay">
+                                <a href="{{ subcat.url }}">
+                                  <span>View products</span>
+                                </a>
+                              </div>
+                            </div>
+                            <div class="category-grid-subcat-title">
+                              <a href="{{ subcat.url }}">
+                                <h3>{{ subcat.content.name }}</h3>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  {% endwith %}
+                </div>
+              </div>
             {% dropzone "parent-category-page-bottom" scope="page" %}
         </div>
     </div>

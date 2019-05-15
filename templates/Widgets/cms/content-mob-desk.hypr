@@ -1,0 +1,15 @@
+<div class="mz-content-widget-wrap">
+    <div class="mz-content-widget-inner-wrap">
+        {% comment %} {% if Model.config.body-desktop and (PageContext.isTablet or PageContext.isDesktop) %} {{Model.config.body-desktop|default_edit:'add content here'|safe}} {% else %} {% if Model.config.body-mobile and PageContext.isMobile %} {{Model.config.body-mobile|default_edit:'add
+        content here'|safe}} {% endif %} {% endif %} {% endcomment %}
+
+        <div class="mz-content-widget-desktop {% if Model.config.body-desktop and PageContext.isMobile %} hidden {% endif %}" id="desktop-content">
+            {{Model.config.body-desktop|default_edit:'add content here'|safe}}
+        </div>
+        <div class="mz-content-widget-mobile {% if Model.config.body-mobile and not PageContext.isMobile %} hidden {% endif %}" id="mobile-content">
+            {{Model.config.body-mobile|default_edit:'add content here'|safe}}
+        </div>
+
+    </div>
+</div>
+{% require_script "widgets/cms/content-mob-desk" %}
