@@ -1,11 +1,30 @@
 {% if model.content.productImages %}
-<figure class="mz-productimages-main text-center {% if model.content.productImages.length > 1 %} {% endif %}"> 
+<figure class="mz-productimages-main text-center {% if model.content.productImages.length > 1 %} {% endif %}">
     <!-- commented `hidden-xs` above so the main image now visible on the xs -->
     {% include "modules/product/product-image" with productImage=model.mainImage productAltText=model.mainImage.altText productMaxWidth=themeSettings.productImagePdpMaxWidth isMainImage="true" as_parameter %}
+    <!-- Dynamic Imaging Release 19.8 --
+     <figure class="mz-productimages-main">
+      <img itemprop="image" class="mz-productimages-mainimage" data-mz-productimage-main src="{% make_url "image" model.mainImage with max=themeSettings.productImagesContainerWidth as_parameters %}" {% if model.mainImage.altText %} title="{{ model.mainImage.altText }}" alt="{{ model.mainImage.altText }}"{% endif %} />
+    </figure>
+    <figure class="mz-productimages-thumbs">
+          {% if model.productImages.length %}
+            {% for image in model.productImages %}
+            <a class="mz-productimages-thumb" data-mz-productimage-thumb="{{ image.sequence }}" href="{% make_url "image" image %}">
+                <img class="mz-productimages-thumbimage"  src="{% make_url "image" image with max=themeSettings.maxProductImageThumbnailSize as_parameters %}" {% if image.altText %} title="{{ image.altText }}" alt="{{ image.altText }}"{% endif %} />
+            </a>
+            {% endfor %}
+          {% else %}
+            {% for image in model.content.productImages %}
+            <a class="mz-productimages-thumb" data-mz-productimage-thumb="{{ image.sequence }}" href="{% make_url "image" image %}">
+                <img class="mz-productimages-thumbimage"  src="{% make_url "image" image with max=themeSettings.maxProductImageThumbnailSize as_parameters %}" {% if image.altText %} title="{{ image.altText }}" alt="{{ image.altText }}"{% endif %} />
+            </a>
+            {% endfor %}
+          {% endif %}
+     end Dynamic Imaging -->
 </figure>
 <div class="row hidden-xs">
     <div class="col-sm-12 rollover-block">
-        <label class="rollover"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ labels.rolloverToZoom}}</label>  
+        <label class="rollover"><i class="fa fa-search-plus" aria-hidden="true"></i> {{ labels.rolloverToZoom}}</label>
     </div>
 </div>
 <div class="clearfix"></div>

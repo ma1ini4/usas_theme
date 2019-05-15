@@ -3,7 +3,7 @@
     "underscore",
     "bxslider",
     "elevatezoom",
-    'modules/block-ui',    
+    'modules/block-ui',
     "hyprlive",
     "modules/backbone-mozu",
     "modules/cart-monitor",
@@ -125,6 +125,7 @@
     }
     window.family = [];
     var ProductView = Backbone.MozuView.extend({
+        requiredBehaviors: [1014],
         templateName: 'modules/product/product-detail',
         autoUpdate: ['quantity'],
         renderOnChange: [
@@ -155,7 +156,7 @@
             $('#details-accordion').find('.panel-heading a').first().click();
             $(".family-details [data-mz-action='addToCart']").addClass('hide');
             $(".mz-productdetail-conversion-buttons").removeClass('hide');
-            
+
             if (this.model.get('productType') === Hypr.getThemeSetting('familyProductType')) {
                 try {
                     blockUiLoader.globalLoader();
@@ -232,7 +233,7 @@
         },
         quantityPlus: function() {
             if(!$("#plus").hasClass('disabled')){
-                this.model.messages.reset(); 
+                this.model.messages.reset();
                 var qty = this.model.get('quantity');
                 this.model.set('quantity',++qty);
                 setTimeout(function(){
@@ -320,9 +321,9 @@
             }
         },
         addToCart: _.debounce(function() {
-            var me = this;  
+            var me = this;
             me.model.messages.reset();
-            //If Family Products            
+            //If Family Products
             if (this.model.get('productType') === Hypr.getThemeSetting('familyProductType')) {
                 blockUiLoader.globalLoader();
                 /* jshint ignore:start */
@@ -487,7 +488,7 @@
                 if(pdpMainImageNameSwatch.indexOf("{2}") != -1){
                     pdpMainImageNameSwatch = pdpMainImageNameSwatch.replace("{2}", version);
                 }
-            } 
+            }
             var imagepath = imagefilepath + '/' + pdpMainImageNameSwatch +'?maxWidth=';
             var mainImage = imagepath + width_pdp;
             var zoomimagepath = imagepath + width_zoom;
@@ -604,16 +605,16 @@
     $(document).ready(function() {
         if ($('.mz-product-detail-tabs ul.tabs li').length === 0)
             $('.mz-product-detail-tabs').remove();
-        
+
         var product = ProductModels.Product.fromCurrent();
 
-        product.on('addedtocart', function(cartitem) {
+        product.on('addedtocart', function (cartitem, stopRedirect) {
             if (cartitem && cartitem.prop('id')) {
                 //product.isLoading(true);
                 CartMonitor.addToCount(product.get('quantity'));
                 $('html,body').animate({
                     scrollTop: $('header').offset().top
-                }, 1000); 
+                }, 1000);
                 product.set('quantity', 1);
                 if(product.get('options')){
                     var optionModels = product.get('options').models;
@@ -621,7 +622,7 @@
                         optionModels[k].set('value', null);
                     }
                 }
-                product.unset('stockInfo'); 
+                product.unset('stockInfo');
                 var priceDiscountTemplate = Hypr.getTemplate("modules/product/price-stack");
                 $('.mz-productdetail-price').html(priceDiscountTemplate.render({
                     model: priceModel
@@ -629,6 +630,9 @@
                 if (product.get('options').length)
                     $("[data-mz-action='addToCart']").addClass('button_disabled');
                 $(".mz-productcodes-productcode").text(Hypr.getLabel('item')+" # " + product.get('productCode'));
+                if(!stopRedirect) {
+                    window.location.href = (HyprLiveContext.locals.pageContext.secureHost || HyprLiveContext.locals.siteContext.siteSubdirectory) + "/cart";
+                }
             } else {
                 product.trigger("error", { message: Hypr.getLabel('unexpectedError') });
             }
@@ -659,7 +663,7 @@
         }
         if ($('#productmobile-Carousel').length) {
             createPager(slider_mobile);
-        }        
+        }
 
         var productImagesView = new ProductImageViews.ProductPageImagesView({
             el: $('[data-mz-productimages]'),

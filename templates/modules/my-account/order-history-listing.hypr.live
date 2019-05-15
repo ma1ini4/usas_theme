@@ -4,7 +4,7 @@
     {% if model.hasFulfilledPackages or model.hasFulfilledPickups %}
         <div class="mz-orderlisting-prompt is-warning" data-mz-message-for="noReturnableItems"></div>
             <div class="mz-orderlisting-header">
-                {% if themeSettings.allowCustomerInitiatedReturns %}
+                {% if themeSettings.allowCustomerInitiatedReturns and not model.limitPlaceReturns %}
                     <div class="mz-orderlisting-return">
                         <span class="mz-itemlisting-action">
                             <button type="submit" class="mz-button" data-mz-order-id="{{ model.id }}" data-mz-action="startOrderReturn" >{{ labels.returnOrReplace }}</button>

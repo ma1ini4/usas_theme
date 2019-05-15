@@ -39,14 +39,29 @@
 					{% if refund.payment.paymentType == "PurchaseOrder" %}
 						{{ labels.purchaseOrder }}
 					{% else %}
-						{% if refund.payment.paymentType == "PaypalExpress" %}
+						{% if refund.payment.paymentType == "PayPalExpress2" %}
 							{{ labels.payPal }}
 						{% else %}
 							{% if refund.payment.paymentType == "StoreCredit" %}
 								{{ labels.storeCredit }} {{ refund.payment.billingInfo.storeCreditCode|default("") }}
+                  {% else %}
+                    {% if refund.payment.paymentType == "GiftCard" %}
+                      {{ labels.giftCard }} {{ refund.payment.billingInfo.card.cardNumberPartOrMask }}
+                    {% endif %}
 							{% endif %}
 						{% endif %}
 					{% endif %}
+				{% endif %}
+				{% if refund.payment.paymentType == "PayWithAmazon" %}
+					{{labels.payWithAmazon}}
+				{% endif %}
+				{% if refund.payment.paymentType|lower == "token"%}
+					{%if refund.payment.billingInfo.token.type|lower == "paywithamazon" %}
+						{{labels.payWithAmazon}}
+					{% endif %}
+          {%if refund.payment.billingInfo.token.type|lower == "applepay" %}
+            {{labels.applePay}}
+          {% endif %}
 				{% endif %}
 			</td>
 			<td>{{ refund.amount|currency }}</td>
