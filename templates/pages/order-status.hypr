@@ -60,17 +60,24 @@
                     <input type="hidden" name="order-returnUrl" value="{{ model.returnUrl }}"/>
                     <div class="mz-l-formfieldgroup">
                         <div class="mz-l-formfieldgroup-row">
+                            <!-- <div class="mz-l-formfieldgroup-cell">
+                                <label for="ordernum"></label>
+                            </div> -->
                             <div class="mz-l-formfieldgroup-cell">
-                                <label for="ordernum">{{ labels.orderNumber }}</label>
-                            </div>
-                            <div class="mz-l-formfieldgroup-cell">
-                                <input name="ordernum" value="" type="text" data-mz-order-number />
+                                <input name="ordernum" placeholder="{{ labels.orderNumber }}" value="" type="text"
+                                    data-mz-order-number />
                             </div>
                         </div>
                         <div class="mz-l-formfieldgroup-row">
                             <div class="mz-l-formfieldgroup-cell">
-                                <label for="verifywith">{{ labels.verifyWith }}</label>
+                                <span >{{ labels.verifyWith }}</s>
                             </div>
+                        </div>
+                        <div class="mz-l-formfieldgroup-row">
+                            {% if themeSettings.zipCodeEnabled or themeSettings.phoneNumberEnabled or themeSettings.billingEmailEnabled %}
+                            <!-- <div class="mz-l-formfieldgroup-cell">
+                                <label for="verifywith">{{ labels.verifyWith }}</label>
+                            </div> -->
                             <div class="mz-l-formfieldgroup-cell">
                                 <select data-mz-verify-with>
                                     {% if themeSettings.zipCodeEnabled %}<option value="zipCode">{{ labels.billingPostalCode }}</option>{% endif %}
@@ -78,22 +85,23 @@
                                     {% if themeSettings.billingEmailEnabled %}<option value="email">{{ labels.billingEmail }}</option>{% endif %}
                                 </select>
                             </div>
+                            {% endif %}
                         </div>
                         <div class="mz-l-formfieldgroup-row">
                             <div class="mz-l-formfieldgroup-cell">
+                                <input name="verification" value="" placeholder="{{ labels.verification }}" type="text" data-mz-verification />
+                            </div>
+                        </div>
+                        <div class="mz-l-formfieldgroup-row">
+                            <div class="mz-l-formfieldgroup-cell">
+                            <!-- <div class="mz-l-formfieldgroup-cell">
                                 <label for="verification">{{ labels.verification }}</label>
-                            </div>
-                            <div class="mz-l-formfieldgroup-cell">
-                                <input name="verification" value="" type="text" data-mz-verification />
-                            </div>
+                            </div> -->
+                            <section data-mz-role="popover-message" class="mz-popover-message"></section>
                         </div>
                         <div class="mz-l-formfieldgroup-row">
-                            <div class="mz-l-formfieldgroup-cell"></div>
                             <div class="mz-l-formfieldgroup-cell">
-                                <button class="mz-button primary-btn mz-login-button" data-mz-action="anonymousorder-submit">{{ labels.submit }}</button>
-                                <div class="mz-l-formfieldgroup-cell">
-                                    <section data-mz-role="popover-message" class="mz-popover-message"></section>
-                                </div>
+                                <button class="mz-button primary-btn mz-login-button" data-mz-action="anonymousorder-submit">{{ labels.submit }}</button>                               
                             </div>
                         </div>
                     </div>

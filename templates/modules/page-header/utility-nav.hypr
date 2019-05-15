@@ -108,7 +108,7 @@
         <li class="mz-utilitynav-item">
           <!--  usas-icon icon-delivery -->
           <span class="usas-icon-delivery" aria-hidden="true"></span>
-          <a href="/order-status" data-mz-action="order-status" data-placement="bottom" class="">Order status</a>
+          <a href="/user/order-status" data-mz-action="order-status" data-placement="bottom" class="">Order status</a>
         </li>
         <li class="mz-utilitynav-item site-msg">
             {% dropzone "site-message" scope="site" %}
