@@ -13,11 +13,10 @@
 <div class="mz-l-container">
     <h1 class="mz-pagetitle">
         {{ labels.b2bAccountWelcome|string_format(model.companyOrOrganization)|safe }}
-    </h1>
-
-        <div class="mz-b2b-pane-switcher">
-             {% include "modules/pane-switcher" %}
-        </div>
+    </h1>    
+            <div class="mz-b2b-pane-switcher">
+                 {% include "modules/pane-switcher" %}
+            </div>
 
 		{% dropzone "my-account-bottom" scope="template" %}
 
