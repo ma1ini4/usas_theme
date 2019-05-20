@@ -19,6 +19,11 @@
         </span>
         <span class="mz-contactselector-summarywrapper">
             {% block enter-new-form %}
+            <span> 
+                <strong>
+                    {{ labels.enterNewAddress }}: 
+                </strong>
+            </span>
             {% include "modules/common/address-form" with model=editingContact %}
             {% endblock enter-new-form %}
         </span>
