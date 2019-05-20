@@ -217,6 +217,7 @@
   "orderNumber"          : "Order Number",
   "orderNo"              : "Order #",
   "orderDate"            : "Order Date",
+  "returnCreated"        : "Return Created",
   "orderWelcome"         : "Hello",
   "storePickupFor"       : "Store Pickup for <strong>{0}</strong>",
   "storeName"            : "Store Name",
@@ -340,6 +341,7 @@
   "returning"            : "Returning",
   "returnDetails"        : "Return Details",
   "returnNumber"         : "RMA #",
+  "returnTypeRequested"  : "Reason of return: {0}",
   "enterStoreCredit"     : "Enter Store Credit Number",
   "storeCreditNumber"    : "Store Credit Number",
 
