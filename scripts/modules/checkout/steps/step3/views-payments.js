@@ -5,8 +5,9 @@ define(["modules/jquery-mozu",
     'hyprlivecontext',
     'modules/preserve-element-through-render',
     'modules/checkout/steps/views-base-checkout-step',
-    'modules/xpress-paypal'],
-    function ($, _, Hypr, Backbone, HyprLiveContext, preserveElements, CheckoutStepView,PayPal) {
+    'modules/xpress-paypal',
+    'modules/applepay'],
+    function ($, _, Hypr, Backbone, HyprLiveContext, preserveElements, CheckoutStepView,PayPal, ApplePay) {
         var visaCheckoutSettings = HyprLiveContext.locals.siteContext.checkoutSettings.visaCheckout;
         var pageContext = require.mozuData('pagecontext');
         var poCustomFields = function() {
@@ -57,7 +58,9 @@ define(["modules/jquery-mozu",
                 'creditAmountToApply',
                 'digitalCreditCode',
                 'purchaseOrder.purchaseOrderNumber',
-                'purchaseOrder.paymentTerm'
+                'purchaseOrder.paymentTerm',
+                'giftCardNumber',
+                'giftCardSecurityCode'
             ].concat(poCustomFields()),
             renderOnChange: [
                 'billingContact.address.countryCode',
@@ -70,6 +73,8 @@ define(["modules/jquery-mozu",
                 "blur [data-mz-value='card.cardNumberPartOrMask']": "changeCardType",
                 "change [data-mz-digital-credit-enable]": "enableDigitalCredit",
                 "change [data-mz-digital-credit-amount]": "applyDigitalCredit",
+                "change [data-mz-gift-card-amount]": "applyGiftCard",
+                "change [data-mz-gift-card-enable]": "enableGiftCard",
                 "change [data-mz-digital-add-remainder-to-customer]": "addRemainderToCustomer",
                 "change [name='paymentType']": "resetPaymentData",
                 "change [data-mz-purchase-order-payment-term]": "updatePurchaseOrderPaymentTerm",
@@ -112,6 +117,8 @@ define(["modules/jquery-mozu",
             },
             initialize: function () {
                 // this.addPOCustomFieldAutoUpdate();
+                this.listenTo(this.model, 'change:giftCardNumber', this.onEnterGiftCardInfo, this);
+                this.listenTo(this.model, 'change:giftCardSecurityCode', this.onEnterGiftCardInfo, this);
                 this.listenTo(this.model, 'change:digitalCreditCode', this.onEnterDigitalCreditCode, this);
                 this.listenTo(this.model, 'orderPayment', function (order, scope) {
                         this.render();
@@ -141,15 +148,27 @@ define(["modules/jquery-mozu",
                 this.model.setPurchaseOrderPaymentTerm(e.target.value);
             },
             render: function() {
-                preserveElements(this, ['.v-button', '.p-button'], function() {
+                preserveElements(this, ['.v-button', '.p-button','#amazonButtonPaymentSection', '.apple-pay-button'], function() {
                     CheckoutStepView.prototype.render.apply(this, arguments);
                 });
+                if ($("#AmazonPayButton").length > 0 && $("#amazonButtonPaymentSection").length > 0)
+                     $("#AmazonPayButton").removeAttr("style").appendTo("#amazonButtonPaymentSection");
+
                 var status = this.model.stepStatus();
                 if (visaCheckoutSettings.isEnabled && !this.visaCheckoutInitialized && this.$('.v-button').length > 0) {
                      window.onVisaCheckoutReady = _.bind(this.initVisaCheckout, this);
                      require([pageContext.visaCheckoutJavaScriptSdkUrl]);
                      this.visaCheckoutInitialized = true;
                 }
+
+                // There is probably a better place to set this than here.
+                // We just need to make sure this gets set before we open the form to add a new card.
+                if (Hypr.getThemeSetting('isCvvSuppressed') && this.model.get('card')) {
+                    this.model.get('card').set('isCvvOptional', true);
+                }
+
+                if (this.$(".apple-pay-button").length > 0)
+                    ApplePay.init();
 
                 if (this.$(".p-button").length > 0)
                     PayPal.loadScript();
@@ -242,6 +261,13 @@ define(["modules/jquery-mozu",
                     self.$el.removeClass('is-loading');
                 });
             },
+            getGatewayGiftCard: function (e) {
+              var self = this;
+              this.$el.addClass('is-loading');
+              this.model.getGatewayGiftCard().ensure(function() {
+                   self.$el.removeClass('is-loading');
+               });
+            },
             stripNonNumericAndParseFloat: function (val) {
                 if (!val) return 0;
                 var result = parseFloat(val.replace(/[^\d\.]/g, ''));
@@ -251,13 +277,37 @@ define(["modules/jquery-mozu",
                 var val = $(e.currentTarget).prop('value'),
                     creditCode = $(e.currentTarget).attr('data-mz-credit-code-target');  //target
                 if (!creditCode) {
-                    //console.log('checkout.applyDigitalCredit could not find target.');
+                    //window.console.log('checkout.applyDigitalCredit could not find target.');
                     return;
                 }
                 var amtToApply = this.stripNonNumericAndParseFloat(val);
 
                 this.model.applyDigitalCredit(creditCode, amtToApply, true);
                 this.render();
+            },
+            applyGiftCard: function(e) {
+                var self = this,
+                    val = $(e.currentTarget).prop('value'),
+                    giftCardId = $(e.currentTarget).attr('data-mz-gift-card-target');
+                if (!giftCardId) {
+                  return;
+                }
+                var amtToApply = this.stripNonNumericAndParseFloat(val);
+                this.$el.addClass('is-loading');
+                return this.model.applyGiftCard(giftCardId, amtToApply, true).then(function(){
+                    self.$el.removeClass('is-loading');
+                    this.render();
+                }, function(error){
+                    self.$el.removeClass('is-loading');
+                });
+            },
+            onEnterGiftCardInfo: function(model) {
+              if (model.get('giftCardNumber') && model.get('giftCardSecurityCode')){
+                this.$el.find('input#gift-card-security-code').siblings('button').prop('disabled', false);
+              } else {
+                this.$el.find('input#gift-card-security-code').siblings('button').prop('disabled', true);
+              }
+
             },
             onEnterDigitalCreditCode: function(model, code) {
                 if (code && !this.codeEntered) {
@@ -285,12 +335,27 @@ define(["modules/jquery-mozu",
                 }
 
             },
+            enableGiftCard: function(e){
+                var isEnabled = $(e.currentTarget).prop('checked') === true,
+                    giftCardId = $(e.currentTarget).attr('data-mz-payment-id'),
+                    targetAmtEl = this.$el.find("input[data-mz-gift-card-target='" + giftCardId + "']"),
+                    me = this;
+
+                if (isEnabled) {
+                  targetAmtEl.prop('disabled', false);
+                  me.model.applyGiftCard(giftCardId, null, true);
+                } else {
+                  targetAmtEl.prop('disabled', true);
+                  me.model.applyGiftCard(giftCardId, 0, false);
+                }
+            },
             addRemainderToCustomer: function (e) {
                 var creditCode = $(e.currentTarget).attr('data-mz-credit-code-to-tie-to-customer'),
                     isEnabled = $(e.currentTarget).prop('checked') === true;
                 this.model.addRemainingCreditToCustomerAccount(creditCode, isEnabled);
             },
             handleEnterKey: function (e) {
+              //TODO: add handling for enter key in giftcard fields
                 var source = $(e.currentTarget).attr('data-mz-value');
                 if (!source) return;
                 switch (source) {
@@ -298,6 +363,20 @@ define(["modules/jquery-mozu",
                         return this.applyDigitalCredit(e);
                     case "digitalCreditCode":
                         return this.getDigitalCredit(e);
+                    case "giftCardNumber":
+                        if (this.model.get('giftCardNumber') && this.model.get('giftCardSecurityCode')){
+                            return this.getGatewayGiftCard(e);
+                        } else {
+                            //TODO: trigger error message
+                        }
+                        break;
+                    case "giftCardSecurityCode":
+                        if (this.model.get('giftCardNumber') && this.model.get('giftCardSecurityCode')){
+                            return this.getGatewayGiftCard(e);
+                        } else {
+                            //TODO: trigger error message
+                        }
+                        break;
                 }
             },
             /* begin visa checkout */
@@ -309,13 +388,13 @@ define(["modules/jquery-mozu",
 
 
                 if (!window.V) {
-                    //console.warn( 'visa checkout has not been initilized properly');
+                    //window.console.warn( 'visa checkout has not been initilized properly');
                     return false;
                 }
                 // on success, attach the encoded payment data to the window
                 // then call the sdk's api method for digital wallets, via models-checkout's helper
                 window.V.on("payment.success", function(payment) {
-                    //console.log({ success: payment });
+                    //window.console.log({ success: payment });
                     me.editing.savedCard = false;
                     me.model.parent.processDigitalWallet('VisaCheckout', payment);
                 });

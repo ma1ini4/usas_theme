@@ -778,7 +778,6 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
             })
         };
 
-
         if (HyprLiveContext.locals.siteContext.generalSettings.isWishlistCreationEnabled) accountViews.wishList = new WishListView({
             el: $wishListEl,
             model: accountModel.get('wishlist'),
@@ -796,5 +795,4 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
        'ReturnPrintLabelView': PrintView,
        'AddressBookView': AddressBookView
     };
-    
 });

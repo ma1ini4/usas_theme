@@ -22,18 +22,20 @@
           {% endif %}
 
           {% for destination in model.selectableDestinations %}
-          <option class="mz-shipping-destination-address-select" value="{{ destination.id }}" data-mz-customerContactId="{{destination.customerContactId}}"" {% if model.destinationId && model.destinationId == destination.id %} selected="selected" {% endif %}>{{ destination.destinationContact.address.address1 }}, {{ destination.destinationContact.address.cityOrTown }} {{ destination.destinationContact.address.stateOrProvince }}</option>
+          <option class="mz-shipping-destination-address-select" value="{{ destination.id }}" data-mz-customerContactId="{{destination.customerContactId}}" {% if model.destinationId && model.destinationId == destination.id %} selected="selected" {% endif %}>{{ destination.destinationContact.address.address1 }}, {{ destination.destinationContact.address.cityOrTown }} {{ destination.destinationContact.address.stateOrProvince }}</option>
           {% endfor %}
         </select></label>
       </div>
     </div>
 
     <div class="mz-shipping-row-item">
+    {% if model.hasRequiredBehavior %}
       <a href="javascript:;" data-mz-action="handleNewContact">{{labels.addAddress}}</a>
-      {% if model.destinationId %} | 
-      <a class="mz-shipping-destination-edit-address-link"  data-mz-action="handleEditContact" data-mz-destination-id="{{ model.destinationId }}">{{ labels.shippingDestinationEditAddress}}</a>
+      {% if model.destinationId %} |
+        <a class="mz-shipping-destination-edit-address-link"  data-mz-action="handleEditContact" data-mz-destination-id="{{ model.destinationId }}">{{ labels.shippingDestinationEditAddress}}</a>
       {% endif %}
-    </div>
+    {% endif %}
+  </div>
  {% if model.quantity >= 2  and model.selectableDestinations.length !== 0%}
     <div class="mz-shipping-row-item">
       <button class="mz-button mz-shipping-destination-add-address-link mz-checkout-button-link" data-mz-action="handleSplitOrderItem" {% if model.isLoading %} disabled {% endif %}> + {{ labels.shippingDestinationAddAddress }} </button>

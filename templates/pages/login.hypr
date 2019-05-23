@@ -45,6 +45,14 @@
                               <input name="password"  type="password" placeholder="{{ labels.password }}" data-mz-login-password maxlength="{{themeSettings.passwordMaxLength}}" />
                           </div>
                       </div>
+                      {% if themeSettings.enableRecaptcha %}
+                      <div class="mz-l-formfieldgroup-row">
+                          <div class="mz-l-formfieldgroup-cell"></div>
+                          <div class="mz-l-formfieldgroup-cell">
+                              <div id="recaptcha-container"></div>
+                          </div>
+                      </div>
+                      {% endif %}
                       <div class="mz-l-formfieldgroup-row">
                           <div class="mz-l-formfieldgroup-cell">
                               <a href="/user/forgotpassword" class="mz-forgot" data-mz-action="launchforgotpassword">{{ labels.forgotPassword }}</a>
@@ -57,15 +65,17 @@
                             </button>
                           </div>
                           <div class="mz-l-formfieldgroup-cell">
-                              <button class="mz-button primary-btn mz-login-button pull-left" data-mz-action="loginpage-submit">
-                                {{ labels.logIn }}
-                              </button>
+                            {% if themeSettings.enableRecaptcha %}
+                            <button class=""mz-button primary-btn mz-login-button pull-left" data-mz-action="recaptcha-submit">{{ labels.logIn }}</button>
+                            {% else %}
+                            <button class="mz-button primary-btn mz-login-button pull-left" data-mz-action="loginpage-submit">{{ labels.logIn }}</button>
+                            {% endif %}
                           </div>
                       </div>
                   </div>
                   <section data-mz-role="popover-message" class="mz-popover-message"></section>
               </form>
               {% include "modules/common/message-bar" with model=model.messages %}
-        </div>
+      </div>
     </div>
 {% endblock body-content %}
