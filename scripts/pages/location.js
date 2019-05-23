@@ -3,45 +3,15 @@ require([
     'hyprlive',
     'modules/backbone-mozu',
     'modules/models-location',
-    'modules/models-product'
+    'modules/models-product',
+    'modules/views-location'
 ],
-    function ($, Hypr, Backbone, LocationModels, ProductModels) {
+    function ($, Hypr, Backbone, LocationModels, ProductModels, LocationViews) {
+        var positionErrorLabel = Hypr.getLabel('positionError');
 
         var defaults = {
-            googleMapAPIKey: Hypr.getThemeSetting('googleMapAPIKey'),
-            googleMapLatitude: Hypr.getThemeSetting('googleMapLatitude'),
-            googleMapLongitude: Hypr.getThemeSetting('googleMapLongitude'),
-            googleMapZoom: Hypr.getThemeSetting('googleMapZoom'),
-            googleMapPinIcon: Hypr.getThemeSetting('googleMapPinIcon'),
-            storesPageSize: Hypr.getThemeSetting('storesPageSize'),
-            googleMapMaxNearbyDistance: Hypr.getThemeSetting('googleMapMaxNearbyDistance')
+            storesPageSize: Hypr.getThemeSetting('storesPageSize')
         };
-
-        var InfoSummaryView = Backbone.MozuView.extend({
-            templateName: 'modules/location/location-infosummary',
-            initialize: function() {
-                var self = this;
-                self.listenTo(self.model, 'change', self.render);
-            },
-            render: function() {
-                Backbone.MozuView.prototype.render.apply(this);
-                return this;
-            }
-        });
-
-        var Model = Backbone.MozuModel.extend(); 
-
-        try {
-            defaults.googleMapZoom = parseInt(defaults.googleMapZoom, 10);
-        } catch (e) { }
-
-        var map,
-            google = window.google || {},
-            infowindow,
-            bounds,
-            marker,
-            currentMarker,
-            socialShareWidgetTemplate = Hypr.getTemplate('modules/location/social-share-widget');
 
         function getQueryStrings() {
             var assoc = {};
@@ -58,281 +28,6 @@ require([
 
             return assoc;
         }
-
-        var positionErrorLabel = Hypr.getLabel('positionError'),
-
-            LocationsView = Backbone.MozuView.extend({
-                templateName: 'modules/location/locations',
-                initialize: function () {
-                    var self = this;
-                    this.populate();
-                },
-                populate: function (location) {
-                    var self = this;
-                    var show = function () {
-                        self.render();
-                        $('.mz-locationsearch-pleasewait').fadeOut();
-                        self.$el.noFlickerFadeIn();
-                        //Get URL Param for auto search
-                        var qs = getQueryStrings();
-                        var isZipcode = qs.zipcode;
-                        var isStoreId = qs.code;
-
-                        if (isZipcode) {
-                            $("#searchTermView").val(isZipcode);
-                            $(".empty-store-container").removeClass("active");
-                            $(".search-view-container").addClass("active");
-                            $(".btn-find-stores").trigger("click");
-                            if (isZipcode === "Enter Zip") {
-                                $("#searchTermView").val("");
-                                $("#searchTermView").attr("placeholder", isZipcode);
-                            }
-                        }
-                        if (isStoreId) {
-                            // console.log(storeId);
-                            var items = window.lv.model.apiModel.data.items,
-                                lat, lng, isValid = false;
-                            for (var i = 0; i < items.length; i++) {
-                                if (isStoreId === items[i].code) {
-                                    lat = items[i].geo.lat;
-                                    lng = items[i].geo.lng;
-                                    isValid = true;
-                                    // $(".empty-store-container").removeClass("active");
-                                    // $(".search-view-container").addClass("active");
-                                    $(".pagination-wrapper").hide();
-                                    break;
-                                    //console.log(items[i], items[i].geo.lat, items[i].geo.lng);
-                                }
-                            }
-                            if (isValid) {
-                                self.loadStoreDetailPage(1, lat, lng);
-                            } else {
-                                $("#searchTermView").val("enter+zip");
-                                $(".btn-find-stores").trigger("click");
-                                $("#searchTermView").val("");
-                            }
-                        }
-                        //hide loading
-                        $(".store-locator-overlay").removeClass("active");
-                    };
-                    if (location) {
-                        this.model.apiGetByLatLong({ location: location }).then(show);
-                    } else {
-                        if (window.location.pathname.indexOf("store-details") > -1) {
-                            this.model.apiGet().then(show);
-                        } else {
-                            this.model.apiGet({ pageSize: defaults.storesPageSize }).then(show);
-                        }
-                    }
-                },
-                getRenderContext: function () {
-                    var c = Backbone.MozuView.prototype.getRenderContext.apply(this, arguments);
-                    c.model.positionError = this.positionError;
-                    return c;
-                },
-                drawMap: function (locations) {
-                    var center;
-
-                    //if no item found draw empty map
-                    if (locations.length === 0) {
-                        center = new google.maps.LatLng(defaults.googleMapLatitude, defaults.googleMapLongitude);
-                    } else {
-                        center = new google.maps.LatLng(locations[0].geo.lat, locations[0].geo.lng);
-                    }
-
-                    //google map api
-                    map = new google.maps.Map(document.getElementById('map'), {
-                        zoom: defaults.googleMapZoom,
-                        center: center,
-                        mapTypeId: google.maps.MapTypeId.ROADMAP
-                    });
-
-                    infowindow = new google.maps.InfoWindow();
-                    bounds = new google.maps.LatLngBounds();
-                    google.maps.event.addListener(map, 'click', function () {
-                        infowindow.close();
-                    });
-
-                    for (var i = 0; i < locations.length; i++) {
-                        this.createMarker(locations[i], i);
-                        this.bindMarkers(locations[i], currentMarker);
-                    }
-                    this.bindShowDetailPage();
-                    //hide loading
-                    $(".store-locator-overlay").removeClass("active");
-                },
-                createMarker: function (location, i) {
-                    marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(location.geo.lat, location.geo.lng),
-                        icon: defaults.googleMapPinIcon ? defaults.googleMapPinIcon : "",
-                        title: location.description,
-                        map: map
-                    });
-                    bounds.extend(marker.position);
-                    //for marker event binding to DOM
-                    currentMarker = marker;
-                    var storeSearched = ($("#success-shops").text().length > 0) ? "hidden" : "";
-
-                    google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                        return function () {
-                            var dirQueryString = [
-                                location.address.address1,
-                                location.address.address2,
-                                location.address.address2,
-                                location.address.cityOrTown,
-                                location.address.stateOrProvince,
-                                location.address.postalOrZipCode,
-                                location.address.countryCode
-                            ];
-                            location.storeSearched = storeSearched;
-                            location.dirQueryString = dirQueryString.join(" ");
-                            var saddr = (window.location.pathname.indexOf("store-details") > -1) ? '<p class="start-address-label">Start address:</p> <input type="text" name="saddr">' : '';
-                            location.saddr = saddr;
-                            location.regularHours = false;
-
-                            //Info window content DOM
-                            var view = new InfoSummaryView({ model: new Model(location) });
-                            var infoWindowDOM = view.render().el;
-
-                            //Info window content DOM END
-                            map.setCenter(marker.getPosition());
-                            infowindow.setContent(infoWindowDOM);
-                            infowindow.open(map, marker);                            
-                        };
-                    })(marker, i));
-
-                    map.fitBounds(bounds);
-                },
-                bindMarkers: function (location, marker) {
-                    var DOM = $("[data-marker-id='marker_" + location.code + "']");
-                    DOM.on("click", function() {
-                        $('html,body').animate({
-                          scrollTop: $('#mz-store-locator-map').offset().top
-                        }, 600);
-                        google.maps.event.trigger(marker, 'click');
-                    });
-                },
-                getGeoCode: function (zipCode, callback) {
-                    var _self = this;
-                    var geocoder = new google.maps.Geocoder();
-                    geocoder.geocode({ 'address': zipCode }, function (results, status) {
-                        if (status == google.maps.GeocoderStatus.OK) {
-                            //console.log(results);
-                            callback(results);
-                            document.getElementById("success-shops").innerHTML = "Stores near " + results[0].formatted_address;
-                            document.getElementsByClassName("invalid-location")[0].classList.add("hidden");
-                            document.getElementById("noNearbyStores").classList.add("hidden");
-                        } else {
-                            //get and render nearby stores
-                            _self.getNearbyShops(defaults.storesPageSize, 30.375321, 69.34511599999996, 0, function () {
-                                _self.drawMap(window.lv.model.apiModel.data.items);
-                                document.getElementById("noNearbyStores").classList.add("hidden");
-                                document.getElementsByClassName("invalid-location")[0].classList.remove("hidden");
-                                document.getElementsByClassName("error-success-message-container")[0].classList.remove("hidden");
-                                document.getElementById("location-list").classList.remove("hidden");
-                            });
-                        }
-                    });
-                },
-                getNearbyShops: function (pageSize, lat, lng, startIndex, callback) {
-                    //show loading
-                    $(".store-locator-overlay").addClass("active");
-                    this.model.apiGet({ pageSize: pageSize, startIndex: startIndex, filter: 'geo near(' + lat + ',' + lng + ',' + defaults.googleMapMaxNearbyDistance + ')' })
-                        .then(function (data) {
-                            if (data.length > 0) {
-                                //draw map if there is any data available                               
-                                if ($(".pagination-wrapper").hasClass("hidden"))
-                                    $(".pagination-wrapper").removeClass("hidden");
-                                if ($("#showLessStores").attr("data-start-index") === "0")
-                                    $("#showLessStores").addClass("hidden");
-                                if ($(".error-success-message-container").hasClass("hidden"))
-                                    $(".error-success-message-container").removeClass("hidden");
-                                if ($("#location-list").hasClass("hidden"))
-                                    $("#location-list").removeClass("hidden");
-                                //hide loading
-                                $(".store-locator-overlay").removeClass("active");
-                                $("#success-shops").show();
-                                if (data.length < pageSize) {
-                                    $(".pagination-wrapper").addClass("hidden");
-                                }
-                            } else {
-                                $(".pagination-wrapper").addClass("hidden");
-                                if ($(".error-success-message-container").hasClass("hidden"))
-                                    $(".error-success-message-container").removeClass("hidden");
-                                if ($("#location-list").hasClass("hidden"))
-                                    $("#location-list").removeClass("hidden");
-                                //hide loading
-                                $(".store-locator-overlay").removeClass("active");
-                                $("#success-shops").hide();
-                                $(".invalid-location").addClass("hidden");
-                                $("#noNearbyStores").removeClass("hidden");
-                            }
-                            callback();
-                        });
-                },
-                bindShowDetailPage: function () {
-                    var _self = this;
-                    $(".show-store-detail").on("click", function () {
-                        $(".pagination-wrapper").hide();
-                        var storeId = $(this).attr("data-store-id"),
-                            items = window.lv.model.apiModel.data.items,
-                            lat, lng, isValid = false;
-                        window.location.href = window.location.origin + "/store-details?code=" + $(this).attr("data-store-id");
-                    });
-                },
-                loadStoreDetailPage: function (pageSize, lat, lng) {                    
-                    var _self = this;
-                    //get and render nearby stores
-                    _self.getNearbyShops(pageSize, lat, lng, 0, function () {
-                        _self.drawMap(window.lv.model.apiModel.data.items);
-                        document.title =  window.lv.model.apiModel.data.items[0].name + " - " + Hypr.getLabel("storeTitle");                  
-                        $(".dir-btn-container").removeClass("hidden");
-                        $("#success-shops").text("Store Details");
-                        $("#searchTermView").val("");
-                        $(".store-details").after(socialShareWidgetTemplate.render({
-                            model: [encodeURIComponent(window.location.href)]
-                        }));
-                        $(".mz-locationlisting-locationdetails,.show-store-detail,div[data-marker-id]")
-                            .off("click");
-                        $("#location-list").removeClass("mz-locationlist");
-                        $(".mz-locationlist").addClass("store-detail");
-                        $(".search-address-container").removeClass("hidden");
-                    });
-                }
-            }),
-
-            LocationsSearchView = LocationsView.extend({
-                templateName: 'modules/location/location-search',
-                populate: function (location) {
-                    var self = this;
-                    this.model.apiGetForProduct({
-                        productCode: this.product.get('variationProductCode') || this.product.get('productCode'),
-                        location: location
-                    }).then(function () {
-                        self.render();
-                        $('.mz-locationsearch-pleasewait').fadeOut();
-                        self.$el.noFlickerFadeIn();
-                    });
-                },
-                addToCartForPickup: function (e) {
-                    var self = this,
-                        $target = $(e.currentTarget),
-                        loc = $target.data('mzLocation');
-                    $target.parent().addClass('is-loading');
-                    this.product.addToCartForPickup(loc);
-                },
-                setProduct: function (product) {
-                    var me = this;
-                    me.product = product;
-                    this.listenTo(me.product, 'addedtocart', function () {
-                        $(window).on('beforeunload', function () {
-                            me.$('.is-loading').removeClass('is-loading');
-                        });
-                        window.location.href = "/cart";
-                    });
-                }
-            });
-
         $(document).ready(function () {
             //DOM used for binding events
             var btnFindStores = $(".btn-find-stores"),
@@ -359,13 +54,11 @@ require([
                 emptyStoreContainer.addClass("active");
             }
 
-
             var $locationSearch = $('#location-list'),
                 product = ProductModels.Product.fromCurrent(),
                 productPresent = !!product.get('productCode'),
-                locationsCollection = new LocationModels.LocationCollection();
-
-            var ViewClass = productPresent ? LocationsSearchView : LocationsView,
+                locationsCollection = new LocationModels.LocationCollection(),
+                ViewClass = productPresent ? LocationViews.LocationsSearchView : LocationViews.LocationsView,
                 view = new ViewClass({
                     model: locationsCollection,
                     el: $locationSearch

@@ -42,7 +42,7 @@ define(['modules/jquery-mozu', 'shim!vendor/bootstrap/js/modal[jquery=jQuery]'],
        var footer = me.options.footer || false;
        //If true, Prepends content in the .modal-footer div.
 
-       var hasXButton = me.options.hasXButton || true;
+       var hasXButton = (typeof me.options.hasXButton !== 'undefined') ? me.options.hasXButton : true;
        //Puts an x button in the top right corner that will close the dialog.
        var hasCloseButton = me.options.hasCloseButton || false;
        //Puts a 'Close' butotn in the bottom right corner that will close the dialog.
@@ -98,10 +98,10 @@ define(['modules/jquery-mozu', 'shim!vendor/bootstrap/js/modal[jquery=jQuery]'],
            theElement.find('.modal-header').prepend($xButton);
          }
 
-         if (!title && !header && !hasXButton){
-           //if title, header, and hasXButton are all unset, we don't want a header at all.
-           theElement.find('.modal-header').hide();
-         }
+        //  if (!title && !header && !hasXButton){
+        //    //if title, header, and hasXButton are all unset, we don't want a header at all.
+        //    theElement.find('.modal-header').hide();
+        //  }
 
          //////////////
          //***BODY***//
@@ -112,10 +112,11 @@ define(['modules/jquery-mozu', 'shim!vendor/bootstrap/js/modal[jquery=jQuery]'],
          }
 
 
-         if (scroll != 'default'){
+         if (scroll === 'auto') {
+          theElement.find('.modal-body').css('overflow', 'auto');
+         } else if (scroll != 'default'){
            theElement.find('.modal-body').css('overflow', 'scroll');
          }
-
          ////////////////
          //***FOOTER***//
          ////////////////
@@ -155,12 +156,10 @@ define(['modules/jquery-mozu', 'shim!vendor/bootstrap/js/modal[jquery=jQuery]'],
 
          show: function(){
            if (me.options.backdrop===null || me.options.backdrop===undefined){
-              theElement.modal();
+             theElement.modal();
            } else {
              theElement.modal({backdrop: me.options.backdrop});
            }
-
-
          },
 
          hide: function(){

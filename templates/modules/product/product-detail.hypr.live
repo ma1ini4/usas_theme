@@ -96,7 +96,7 @@
 {% if themeSettings.showProductDetailMeasurements and model.bundledProducts %}
 <div class="mz-productdetail-measurements mz-l-stack-section">
   <h4 class="mz-l-stack-sectiontitle">{{ labels.measurements }}</h4>
-  
+
   {% for product in model.bundledProducts %}
     {% if product.measurements %}
     <div class="mz-productbundle-measurements-product">

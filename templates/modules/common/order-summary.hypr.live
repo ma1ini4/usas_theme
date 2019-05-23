@@ -141,25 +141,37 @@
             </div>
             {% endif %}
 
-          <div class="mz-ordersummary-grandtotal">
+        <div class="mz-ordersummary-grandtotal">
                 <div class="mz-checkout-total-row">
                     <span class="mz-ordersummary-totalname col-sm-6 col-xs-6 text-right">{{ labels.totalFull }}:</span>
                     <span class="mz-ordersummary-totalvalue col-sm-1 col-xs-4">{{ model.total|currency }}</span>
                 </div>
             </div>
-        {% if model.billingInfo and model.billingInfo.digitalCreditPaymentTotal %}
+        {% if model.billingInfo %}
+          {% if model.billingInfo.digitalCreditPaymentTotal %}
           <div class="mz-ordersummary-digitalcreditpayment">
             <div class="mz-checkout-total-row">
               <span class="mz-ordersummary-totalname col-sm-6 col-xs-6 text-right">{{ labels.digitalCreditTotal }}</span>
               <span class="mz-ordersummary-totalvalue col-sm-1 col-xs-4">{{ labels.digitalCreditSubtractFromOrderPrefix }}{{ model.billingInfo.digitalCreditPaymentTotal|currency }}{{ labels.digitalCreditSubtractFromOrderSuffix }}</span>
             </div>
           </div>
-          <div class="mz-ordersummary-grandtotal">
-                <div class="mz-checkout-total-row">
-                    <span class="mz-ordersummary-totalname col-sm-6 col-xs-6 text-right">{{ labels.remainingBalance }}:</span>
-                    <span class="mz-ordersummary-totalvalue col-sm-1 col-xs-4">{{ model.billingInfo.nonStoreCreditTotal|currency }}</span>
-                </div>
+          {% endif %}
+          {% if model.billingInfo.giftCardPaymentTotal %}
+            <div class="mz-ordersummary-digitalcreditpayment">
+              <div class="mz-checkout-total-row">
+                <span class="mz-ordersummary-totalname col-sm-6 col-xs-6 text-right">{{ labels.giftCardTotal }}</span>
+                <span class="mz-ordersummary-totalvalue col-sm-1 col-xs-4">{{ labels.digitalCreditSubtractFromOrderPrefix }}{{ model.billingInfo.giftCardPaymentTotal|currency }}{{ labels.digitalCreditSubtractFromOrderSuffix }}</span>
+              </div>
             </div>
+          {% endif %}
+          {% if model.billingInfo.digitalCreditPaymentTotal or model.billingInfo.giftCardPaymentTotal %}
+            <div class="mz-ordersummary-grandtotal">
+                  <div class="mz-checkout-total-row">
+                      <span class="mz-ordersummary-totalname col-sm-6 col-xs-6 text-right">{{ labels.remainingBalance }}:</span>
+                      <span class="mz-ordersummary-totalvalue col-sm-1 col-xs-4">{{ model.billingInfo.nonStoreCreditOrGiftCardTotal|currency }}</span>
+                  </div>
+              </div>
+          {% endif %}
        {% endif %}
-        </div>
+      </div>
     </div>
