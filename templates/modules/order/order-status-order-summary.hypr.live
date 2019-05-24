@@ -1,0 +1,7 @@
+<div class="mz-ordersummary-detail col-xs-12 mz-reset-padding">
+    {% for orderShipmentItem in model.orderShipment %}
+      <div class="mz-l-stack-sectiontitle">{{ labels.orderStatusShipment|string_format(forloop.index)|safe }}</div>
+      {% include "modules/order/order-status-order-shipment" with model=orderShipmentItem%}
+    {% endfor %}
+    <div class="clearfix visible-xs"></div>
+</div>

@@ -29,12 +29,14 @@
                 </li>
                 {% endif %}
             {% endfor %}
+            {% comment %}
             <li class="mz-orderlisting-details-item">
                 <dl class="mz-propertylist mz-propertylist-order">
                     <dt>{{ labels.orderStatus }}</dt>
                     <dd>{{ model.status }}</dd>
                 </dl>
             </li>
+            {% endcomment %}
             <li class="mz-orderlisting-details-item">
                 <dl class="mz-propertylist mz-propertylist-order">
                     <dt>{{ labels.total }}</dt>
@@ -60,6 +62,12 @@
                     </dl>
                 </li>
             {% endif %}
+            <li class="mz-orderlisting-details-item">
+                <dl class="mz-propertylist mz-propertylist-order">
+                    <dt>{{ labels.viewOrderStatus }}</dt>
+                    <dd><a class='mz-order-code' data-mz-order-code={{model.orderNumber}}>{{ labels.viewOrderDetails }}</a></dd>
+                </dl>
+            </li>
 
         </ul>
     {% block attributes %}

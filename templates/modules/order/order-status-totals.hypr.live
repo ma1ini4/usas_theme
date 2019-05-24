@@ -1,0 +1,38 @@
+<div class="mz-order-status-totals">
+   <div class="mz-ordersummary-subtotal">
+     <div class="mz-checkout-total-row">
+       <span class="mz-ordersummary-totalname col-sm-4 text-right">{{ labels.subtotal }}:</span>
+       <span class="mz-ordersummary-totalvalue col-sm-4">{{ model.productTotal|divide(100)|floatformat(2)|currency }}</span>
+     </div>
+   </div>
+ {% if model.discountTotal %}
+ <div class="mz-ordersummary-discount">
+   <div class="mz-checkout-total-row mz-checkout-discount-row-container">
+     <span class="mz-ordersummary-discountname col-sm-4 text-right">{{ labels.discount }}:</span>
+     <span class="mz-ordersummary-discountamt col-sm-4">-{{ model.discountTotal|divide(100)|floatformat(2)|currency }}</span>
+   </div>
+ </div>
+ {% endif %}
+ {% if model.shippingTotal %}
+ <div class="mz-ordersummary-shippingtotal">
+     <div class="mz-checkout-total-row">
+       <span class="mz-ordersummary-totalname col-sm-4 text-right">{{ labels.shippingHandling }}:</span>
+       <span class="mz-ordersummary-totalvalue col-sm-4">{{ model.shippingTotal|divide(100)|floatformat(2)|currency}}</span>
+     </div>
+   </div>
+ {% endif %}
+ {% if model.salesTaxTotal %}
+ <div class="mz-ordersummary-tax">
+     <div class="mz-checkout-total-row">
+         <span class="mz-ordersummary-totalname col-sm-4 text-right">{{ labels.tax }}:</span>
+         <span class="mz-ordersummary-totalvalue col-sm-4">{{ model.salesTaxTotal|divide(100)|floatformat(2)|currency }}</span>
+     </div>
+ </div>
+ {% endif %}
+ <div class="mz-ordersummary-grandtotal">
+     <div class="mz-checkout-total-row">
+         <span class="mz-ordersummary-totalname col-sm-4 text-right">{{ labels.total }}:</span>
+         <span class="mz-ordersummary-totalvalue col-sm-4">{{ model.orderTotal|divide(100)|floatformat(2)|currency}}</span>
+     </div>
+ </div>
+</div>
