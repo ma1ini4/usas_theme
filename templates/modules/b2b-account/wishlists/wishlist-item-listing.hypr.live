@@ -7,9 +7,14 @@
 <div class="mz-itemlisting-price">
     {% include "modules/common/item-price" %}
 </div>
-<div class="mz-itemlisting-quantity">{{ labels.qty }}: {{ model.quantity }} - <strong> {{ labels.total }} : </strong> <span class="mz-itemlisting-item-total">
-  {% include "modules/common/item-total" %}
-</span></div>
+<div class="mz-itemlisting-quantity">{{ labels.qty }}: {{ model.quantity }}
+  <div>
+    <strong> {{ labels.total }} : </strong> 
+    <span class="mz-itemlisting-item-total">
+    {% include "modules/common/item-total" %}
+    </span>
+  </div>
+</div>
 {% endblock item-details %}
 
 {% block item-listing-actions %}

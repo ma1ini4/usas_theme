@@ -3,6 +3,7 @@
 
      //A list of items that contain only columns and assocaited column values
 -->
+
 <div class="mz-grid-header">
     <div class="mz-grid-row">
         <div class="mz-grid-cols mz-cols-{{model.columns.length}}">
@@ -49,7 +50,7 @@
                         <span class="mz-grid-column">
                             {% for action in model.rowActions %}
                                 {% if action.isHidden != true %}
-                                    <a href="#" data-mz-action="{{action.action}}">{{action.displayName}}</a>
+                                    <a data-mz-action="{{action.action}}">{{action.displayName}}</a>
                                 {% endif %}
                             {% endfor %}
                         </span>

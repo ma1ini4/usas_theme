@@ -86,9 +86,9 @@
              <div class="mz-carttable-item-qty mz-cart-qty-box visible-xs mz-qty-xs-align">
               <!-- <input class="mz-carttable-qty-field" type="number" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" value="{{ item.quantity }}" min="1"/> -->
               <div class="qty-block">
-                <div class="qty-counter" id="minus" data-mz-qty-minus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} role="button"><i class="fa fa-minus"  aria-hidden="true"></i></div>
-                <input id="mz_pdp_qty" class="mz-productdetail-qty text-center" type="text" value="{{ item.quantity }}" readonly onfocus="this.blur()" data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" title="Quantity" min="3" />
-                <div class="qty-counter" id="plus" data-mz-qty-plus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} role="button"><i class="fa fa-plus" aria-hidden="true"></i></div>
+                <div class="qty-counter" id="minus" data-mz-qty-minus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-index="{{ item.productCode }}" role="button"><i class="fa fa-minus"  aria-hidden="true"></i></div>
+                <input id="mz_pdp_qty" class="mz-productdetail-qty text-center" type="text" value="{{ item.quantity }}" readonly onfocus="this.blur()" data-mz-cart-item="{{ item.id }}" data-mz-index="{{ item.productCode }}"  data-mz-value="quantity" title="Quantity" min="3" />
+                <div class="qty-counter" id="plus" data-mz-qty-plus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-index="{{ item.productCode }}" role="button"><i class="fa fa-plus" aria-hidden="true"></i></div>
               </div>
               <a href="javascript:;" data-mz-action="removeItem" data-mz-cart-item="{{ item.id }}" class="btn-link" title="{{ labels.remove }}"><i class="fas fa-times"></i></a>
                 <div class="mz-carttable-item-total ">{% include "modules/common/item-total" %}</div>
@@ -99,9 +99,9 @@
           <div class="mz-carttable-item-qty mz-cart-qty-box">
             <!-- <input class="mz-carttable-qty-field text-center" type="number" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" value="{{ item.quantity }}" min="1"/> -->
             <div class="qty-block">
-              <div class="qty-counter" id="minus" data-mz-qty-minus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} role="button"><i class="fa fa-minus"  aria-hidden="true"></i></div>
-              <input id="mz_pdp_qty" class="mz-productdetail-qty text-center" type="text" value="{{ item.quantity }}" readonly onfocus="this.blur()" data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" title="Quantity" min="3" />
-              <div class="qty-counter" id="plus" data-mz-qty-plus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} role="button"><i class="fa fa-plus" aria-hidden="true"></i></div>
+              <div class="qty-counter" id="minus" data-mz-qty-minus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-index="{{ item.productCode }}" role="button"><i class="fa fa-minus"  aria-hidden="true"></i></div>
+              <input id="mz_pdp_qty" class="mz-productdetail-qty text-center" type="text" value="{{ item.quantity }}" readonly onfocus="this.blur()" data-mz-cart-item="{{ item.id }}" data-mz-index="{{ item.productCode }}"  data-mz-value="quantity" title="Quantity" min="3" />
+              <div class="qty-counter" id="plus" data-mz-qty-plus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-index="{{ item.productCode }}" role="button"><i class="fa fa-plus" aria-hidden="true"></i></div>
             </div>
           </div>
            <div class="mz-carttable-item-remove">

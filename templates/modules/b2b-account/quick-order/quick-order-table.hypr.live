@@ -7,9 +7,9 @@
 <tr class="mz-carttable-checkout-row">
   <td colspan="5">
     {% if model.items.length %}
-    <button class="mz-button mz-button-small" data-mz-action="clearOrder">Clear Items</button>
-    <button class="mz-button mz-button-small" data-mz-action="saveQuickOrderAsList">Save as List</button>
-    <button class="mz-button mz-button-small" data-mz-action="addAllItemsToCart">Add To Cart</button>
+    <button class="secondary-btn" data-mz-action="clearOrder">Clear Items</button>
+    <button class="secondary-btn" data-mz-action="saveQuickOrderAsList">Save as List</button>
+    <button class="primary-btn" data-mz-action="addAllItemsToCart">Add To Cart</button>
     {% endif %}
   </td>
 </tr>

@@ -8,7 +8,6 @@
 
 {% include "modules/common/message-bar" with model=model.messages %}
 
-{% dump model %}
 <div id="mzUserModal" data-mz-user-modal-content class="mz-user-modal-content">
 </div>
 

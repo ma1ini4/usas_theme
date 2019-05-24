@@ -1,6 +1,5 @@
 {% require_script "modules/b2b-account/users" %}
 <div class="mz-l-stack-section" style="clear:none">
-  {% dump model %}
   <h3 class="mz-l-stack-sectiontitle">Users
     <a data-mz-action="addNewUser">Add User</a>
     {% if model.hasRequiredBehavior %}

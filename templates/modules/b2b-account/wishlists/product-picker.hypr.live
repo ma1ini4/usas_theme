@@ -1,18 +1,17 @@
-<form id="searchbox" class="mz-searchbox{% if themeSettings.useSearchAutocomplete %} mz-searchbox-expands{% endif %}{% if themeSettings.allowFilterByLocationInventory %} mz-searchbox-my-store{% endif %}" action="{% make_url "search" %}">
+<form id="searchbox" class="mz-searchbox" action="{% make_url "search" %}">
+    <input type="hidden" name="categoryId" value="{{themeSettings.allProductsCategoryId}}" />
     <span class="mz-searchbox-field">
-        <input placeholder="{{ labels.search }}" type="search" class="mz-searchbox-input" autocomplete="off" name="query" data-mz-role="searchquery" />
+        <input placeholder="{{ labels.search }}" id="search-field" type="search"
+            class="mz-searchbox-input ml-header-search-field form-control" autocomplete="off" name="query"
+            data-mz-role="searchquery" />
+        <button class="mz-searchbox-button" type="submit">
+            <span class="hide">{{ labels.search }}</span>
+            <!-- <span class="glyphicon glyphicon-search">
+            </span> -->
+        </button>
     </span>
-	<select class="mz-searchbox-categories" name="categoryId"
-            data-mz-contextify='[value="{{ pageContext.categoryId }}"]'
-            data-mz-contextify-attr='selected'
-            data-mz-contextify-val='selected'>
-        <option value="">{{ labels.all }}</option>
-        {% for node in navigation.tree %}
-            {% if node.nodeType == "category" and not node.isEmpty %}
-            <option value="{{node.originalId}}">{{node.name}}</option>
-            {% endif %}
-		{% endfor %}
-	</select>
     {% require_script "modules/contextify" %}
-    {% require_script "modules/search-autocomplete" %}
+    {% if themeSettings.useSearchAutocomplete %}
+        {% require_script "modules/search-autocomplete" %}
+    {% endif %}
 </form>

@@ -1,5 +1,4 @@
-
-<div>
+<div class="flex-column">
     <h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName }}</h1>
 
     <div data-mz-productimages class="mz-productimages mz-l-sidebar">
@@ -8,7 +7,7 @@
 
     <div class="mz-productdetail-wrap">
         {% include "modules/common/message-bar" %}
-        <div id="product-detail" class="mz-productdetail mz-l-stack">
+        <div id="product-detail" class="mz-productdetail mz-l-stack flex-column">
             {% if model.content.productShortDescription and themeSettings.showProductDetailShortDesc %}
             <div class="mz-productdetail-shortdesc mz-l-stack-section">
                 <h4 class="mz-l-stack-sectiontitle">{{ labels.shortDesc }}</h4>
@@ -39,13 +38,13 @@
                 </dl>
 
                 <section class="mz-l-stack-section mz-productdetail-conversion">
+                    <span class="mz-qty-label">{{ labels.qty }}</span>
                     <div class="mz-productdetail-conversion-controls">
-                      <span class="mz-qty-label">{{ labels.qty }}</span>
-                      <input class="mz-productdetail-qty" type="number" {% if model.quantity %} value="{{ model.quantity }}" {% else %} value="1" {% endif %} min="1" data-mz-value="quantity" />
+                      <input type="number" {% if model.quantity %} value="{{ model.quantity }}" {% else %} value="1" {% endif %} min="1" data-mz-value="quantity" />
                       <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
                     </div>
                     <div class="mz-productdetail-conversion-buttons">
-                        <button id="add-to-cart" class="mz-productdetail-addtocart mz-button mz-button-large {% if not model.isPurchasable %}is-disabled{% endif %}"
+                        <button id="add-to-cart" class="primary-btn {% if not model.isPurchasable %}is-disabled{% endif %}"
                             {% if not model.isPurchasable %} disabled="disabled" {% endif %} data-mz-action="completeProductConfiguration">
                             {{ labels.addItem }}
                         </button>

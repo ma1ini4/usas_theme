@@ -1,19 +1,18 @@
 {% extends "modules/cart/cart-table-item" %}
 {% block fullfillment %}
 {% endblock fullfillment %}
-
 {% block price %}
 <td class="mz-carttable-item-price">
   {% if item.salePrice %}
-      <span class="mz-item-price">{{ item.salePrice|currency }}</span>
+  <span class="mz-item-price">{{ item.salePrice|currency }}</span>
   {% else %}
-      <span class="mz-item-price">{{ item.price|currency }}</span>
+  <span class="mz-item-price">{{ item.price|currency }}</span>
   {% endif %}
 </td>
 {% endblock price %}
 {% block quantity %}
 <td class="mz-carttable-item-qty">
-    <input class="mz-carttable-qty-field" type="number" min="1" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-index="{{ index }}" data-mz-value="quantity" value="{{ item.quantity }}" />
+  <input class="mz-carttable-qty-field" type="number" min="1" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-index="{{ index }}" data-mz-value="quantity" value="{{ item.quantity }}" />
 </td>
 {% endblock quantity %}
 {% block removeItem %}
@@ -29,4 +28,5 @@
 </tr>
 {% endfor %}
 {% endif %}
+
 {% endblock %}

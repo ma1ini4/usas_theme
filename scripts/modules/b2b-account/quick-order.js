@@ -1,17 +1,17 @@
 define([
   "modules/jquery-mozu",
   'modules/api',
-  "underscore",
-  "hyprlive",
-  "modules/backbone-mozu",
-  "hyprlivecontext",
-  "modules/models-customer",
-  "modules/models-cart",
-  "modules/models-b2b-account",
-  "modules/product-picker/product-modal-view",
-  "modules/product-picker/product-picker-view",
-  "modules/models-product",
-  "modules/b2b-account/wishlists"
+  'underscore',
+  'hyprlive',
+  'modules/backbone-mozu',
+  'hyprlivecontext',
+  'modules/models-customer',
+  'modules/models-cart',
+  'modules/models-b2b-account',
+  'modules/product-picker/product-modal-view',
+  'modules/product-picker/product-picker-view',
+  'modules/models-product',
+  'modules/b2b-account/wishlists'
 ], function ($, api, _, Hypr, Backbone, HyprLiveContext,
   CustomerModels, CartModels, B2BAccountModels, ProductModalViews,
   ProductPicker, ProductModels, WishlistModels) {
@@ -20,7 +20,9 @@ define([
         templateName: 'modules/b2b-account/quick-order/quick-order',
         autoUpdate: [ 'pickerItemQuantity' ],
         additionalEvents: {
-            "change [data-mz-value='quantity']": "onQuantityChange"
+            "change [data-mz-value='quantity']": "onQuantityChange",
+            "click [data-mz-qty-minus]": "quantityMinus",
+            "click [data-mz-qty-plus]": "quantityPlus"
         },
         initialize: function(){
             Backbone.MozuView.prototype.initialize.apply(this, arguments);
@@ -80,6 +82,38 @@ define([
           var index = $(e.currentTarget).data('mz-index') - 1;
           self.model.removeItemFromOrder(index);
           self.render();
+        },
+        quantityMinus: function(e) {
+          if(!$("#minus").hasClass('disabled')){
+            var $qField = $(e.currentTarget),
+                id = $qField.data('mz-index'),
+                model = this.model,
+                items = model.attributes.items.models,
+                item = search(id, items),
+                qty = item.quantity;
+
+                console.log(id);
+
+                if (qty === 1) {
+                  return;
+                }
+
+                // item.set('quantity', --qty);
+                // item.saveQuantity();
+            }
+        },
+        quantityPlus: function(e) {
+          if(!$("#plus").hasClass('disabled')){
+            var $qField = $(e.currentTarget),
+                id = $qField.data('mz-index'),
+                model = this.model,
+                items = model.attributes.items.models,
+                item = search(id, items),
+                qty = item.quantity;
+
+                // item.set('quantity', ++qty);
+                // item.saveQuantity();
+          }
         },
         onQuantityChange: _.debounce(function (e) {
             var $qField = $(e.currentTarget),
@@ -274,4 +308,12 @@ define([
         'QuickOrderView': QuickOrderView,
         'QuickOrderModel': QuickOrderModel
     };
+
+    function search(index, arr){
+        for (var i=0; i < arr.length; i++) {
+            if (arr[i].attributes.productCode === index) {
+                return arr[i].attributes;
+            }
+        }
+    }
 });

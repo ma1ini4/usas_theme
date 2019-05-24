@@ -195,14 +195,14 @@ define(["modules/mozu-utilities", "modules/jquery-mozu", 'modules/api', "undersc
                 displayName: 'Edit',
                 action: 'editUser',
                 isHidden: function(){
-                    return !this.hasRequiredBehavior();
+                    return this.hasRequiredBehavior();
                 }
             },
             {
                 displayName: 'Delete',
                 action: 'deleteUser',
                 isHidden: function () {
-                    return !this.hasRequiredBehavior();
+                    return this.hasRequiredBehavior();
                 }
             }
         ],

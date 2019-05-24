@@ -1,9 +1,9 @@
 
 <div class="wishlist-edit-form">
     <div class="wishlist-btns">
-        <button class="mz-button mz-button-small" data-mz-action="cancelWishlistEdit">Cancel</button>
+        <button class="secondary-btn" data-mz-action="cancelWishlistEdit">Cancel</button>
     {% if not model.quickOrder %}
-        <button class="mz-button mz-button-small" data-mz-action="saveAndCloseWishlistEdit">Save & Close</button>
+        <button class="primary-btn" data-mz-action="saveAndCloseWishlistEdit">Save & Close</button>
     {% endif %}
     </div>
     {% if not model.quickOrder %}
@@ -23,9 +23,11 @@
         </div>
         <div>
             <span class="productpicker-label">{{labels.b2bQuantity}}</span>
-            <input type="number" name="pickerItemQuantity" id="pickerItemQuantity" data-mz-value="pickerItemQuantity" value="{{ model.pickerItemQuantity }}">
+            <div class="flex">
+                <input type="number" name="pickerItemQuantity" id="pickerItemQuantity" data-mz-value="pickerItemQuantity" value="{{ model.pickerItemQuantity }}">
+                <button class="primary-btn" data-mz-action="addWishlistItem" {% if productNotSelected %} disabled {% endif %}>Add To List</button>                
+            </div>
             <span class="mz-validationmessage" data-mz-validationmessage-for="pickerItemQuantity"></span>
-            <button class="mz-button mz-button" data-mz-action="addWishlistItem" {% if productNotSelected %} disabled {% endif %}>Add To List</button>
         </div>
 
     </div>
