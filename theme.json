@@ -504,6 +504,14 @@
       "title": "Store Locator Detail",
       "userCreatable": true,
       "documentType": "web_page"
+    }, 
+    {
+      "documentType": "web_page",
+      "entityType": "webpage",
+      "id": "order-status-detail",
+      "template": "order-status-detail",
+      "title": "Order Status Detail",
+      "userCreatable": true
     }
   ],
   "settings": {
