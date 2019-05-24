@@ -1,0 +1,28 @@
+{% extends "page" %}
+
+{% block title-tag-content %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-myaccount {% endblock body-tag-classes %}
+
+{% block body-content %}
+  {% require_script "pages/order-status-detail" %}
+  <div class="mz-l-container">
+      <h1 class="mz-pagetitle">
+          {{ labels.yourAccount }}
+      </h1>
+      <div class="mz-l-sidebar mz-myaccount-nav">
+          {% include "modules/my-account/my-account-nav" with navtarget="body" %}
+      </div>
+      <div id="account-panels" class="mz-myaccount-panels mz-l-stack mz-l-stack-large mz-order-status-detail-container">
+        <div id="account-messages">
+            {% include "modules/common/message-bar" with model=model.messages %}
+        </div>
+  		  {% dropzone "my-account-top" scope="template" %}
+        <div id='order-status-detail' class='mz-l-stack-section mz-order-status-detail'>
+            <h1 class="mz-pagetitle">{{ labels.orderDetail }} </h1>
+            <div>{{labels.orderStatusDetailDescription}}</div>
+            {% include "modules/order/order-status-detail" %}
+        </div>
+      </div>
+</div>
+{% endblock body-content %}
