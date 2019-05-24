@@ -31,7 +31,7 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
                 });
                 self._productStepView = addProductStepView;
                 addProductStepView.render();
-            }  
+            }
         }
     });
 
@@ -64,9 +64,9 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
                 return true;
             });
         });
-        return filteredVriations;     
+        return filteredVriations;
     };
-    
+
     var hasOtherOptions = function(variation, options, selectedOptionsMap){
         var newTestVariationList = [];
         _.each(options, function(optionVariations, idx){
@@ -97,18 +97,18 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
             var variationOptionMap = _.map(variationsToMark, function(variation){
                 var option = _.findWhere(variation.options, {attributeFQN: optionName});
                 if(option) return option.value;
-                
+
             });
-            
+
             o.get('values').forEach(function(opt){
                 var hasOption = -1;
-                
+
                 if( o.get('attributeFQN') === optionName) {
                     opt.isEnabled = false;
                     hasOption = variationOptionMap.indexOf(opt.value);
 
                     if(hasOption != -1) {
-                        opt.isEnabled = true; 
+                        opt.isEnabled = true;
                     } else {
                         if(o.get('value') === opt.value && selectedOptionsMap.get('attributeFQN') !== o.get('attributeFQN')) {
                             clearSelectedOption = true;
@@ -118,7 +118,7 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
             });
             if (clearSelectedOption) {
                 o.set('value', "");
-                reRunForSelected = true; 
+                reRunForSelected = true;
             }
         });
         return reRunForSelected;
@@ -190,7 +190,7 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
                         markEnabledConfigOptions.call(this, selectedOptionsMap);
                     }
                 }
-                
+
                 Backbone.MozuView.prototype.render.apply(this);
                 this.$('[data-mz-is-datepicker]').each(function (ix, dp) {
                     $(dp).dateinput().css('color', Hypr.getThemeSetting('textColor')).on('change  blur', _.bind(me.onOptionChange, me));
@@ -229,11 +229,11 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
                 var oldValue = option.get('value');
                 if (oldValue !== value && !(oldValue === undefined && value === '')) {
                     option.set('value', value);
-                    
+
                     if(option.get('attributeDetail').usageType !== 'Extra') {
                         markEnabledConfigOptions.call(this, option);
                     }
-            
+
                     this.oldOptions = this.model.get('options').toJSON();
                     this.postponeRender = true;
                 }
@@ -254,11 +254,11 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
                     oldValue = option.get('value');
                     if (oldValue !== newValue && !(oldValue === undefined && newValue === '')) {
                         option.set('value', newValue);
-                        
+
                         if(option.get('attributeDetail').usageType !== 'Extra') {
                             markEnabledConfigOptions.call(this, option);
                         }
-                
+
                         this.oldOptions = this.model.get('options').toJSON();
                         this.postponeRender = true;
                     }
@@ -363,7 +363,7 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
             window.cartView.cartView.model.set('discountId', self.model.get('discount').get('discountId'));
             window.cartView.cartView.model.apiRejectSuggestedDiscount();
             this.render();
-            
+
         },
         setInit: function (updatingItemId){
             var self = this;
@@ -384,9 +384,9 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
                 });
             } else {
                 this.model.trigger('dialogCancel');
-                window.cartView.cartView.model.fetch().then(function () {
+                /*window.cartView.cartView.model.fetch().then(function () {
                     window.cartView.cartView.render();
-                });
+                });*/
                 this.bootstrapInstance.hide();
             }
         },
