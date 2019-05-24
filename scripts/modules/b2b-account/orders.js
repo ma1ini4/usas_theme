@@ -21,7 +21,10 @@ function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollecti
       }
   });
   var OrdersView = Backbone.MozuView.extend({
-      templateName: "modules/b2b-account/orders/orders",
+      templateName: "modules/b2b-account/orders/orders", 
+      additionalEvents: {
+          'click a.mz-order-code': 'getOrderDetail'
+      },
       render: function(){
           var self = this;
           Backbone.MozuView.prototype.render.apply(this, arguments);
@@ -36,6 +39,12 @@ function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollecti
       initialize: function(){
         Backbone.MozuView.prototype.initialize.apply(this, arguments);
         this.model.set('viewingAllOrders', false);
+      },
+      getOrderDetail: function (event) {
+          var orderCode = $(event.currentTarget).data('mzOrderCode');
+          if (!require.mozuData('pagecontext').isEditMode) {
+              window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory || '') + '/order-status-detail?orderNumber=' + orderCode;
+          }
       },
       initializeOrderView: function(){
         var self = this;
