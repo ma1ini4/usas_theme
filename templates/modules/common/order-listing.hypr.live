@@ -65,7 +65,7 @@
             <li class="mz-orderlisting-details-item">
                 <dl class="mz-propertylist mz-propertylist-order">
                     <dt>{{ labels.viewOrderStatus }}</dt>
-                    <dd><a class='mz-order-code' data-mz-order-code={{model.orderNumber}}>{{ labels.vewOrderDetails }}</a></dd>
+                    <dd><a class='mz-order-code' data-mz-order-code={{model.orderNumber}}>{{ labels.viewOrderDetails }}</a></dd>
                 </dl>
             </li>
 

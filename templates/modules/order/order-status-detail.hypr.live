@@ -1,9 +1,8 @@
 <div class="order-status" id='order-status'>
-{% if model.resultCode %}
-  {% if model.resultCode === '1' %}
+{% if model.orderNumber %}
   <div class="col-sm-12 mz-reset-padding-left mz-order-status-section">
       <h4 class="mz-l-stack-sectiontitle">{{ labels.orderInformation }}</h4>
-      <div>{{ labels.orderDetailNumber|string_format(model.code)|safe }}</div>
+      <div>{{ labels.orderDetailNumber|string_format(model.sapOrderNumber)|safe }}</div>
       <div>{{ labels.orderDetailDate}} <strong>{{model.orderDate|date("F j, Y") }}</strong>.</div>
       <div>{{ labels.orderDetailStatus|string_format(model.status)|safe }}</div>
   </div>
@@ -25,7 +24,7 @@
               {% for payment in model.orderPayment %}
                 {% include "modules/order/order-status-payment" with model=payment %}
               {% endfor %}
-          {% endif %}
+          {% endif %}   
       </div>
   </div>
   <div class="mz-l-stack-section mz-order-status-section">
@@ -34,8 +33,5 @@
   <div class="col-sm-12 text-right mz-reset-padding mz-order-status-totals-container">
      {% include "modules/order/order-status-totals" %}
   </div>
-  {% else %}
-    <div>{{model.exceptionText}}</div>
-  {% endif %}
 {% endif %}
 </div>
