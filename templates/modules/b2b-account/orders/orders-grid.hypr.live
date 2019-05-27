@@ -36,9 +36,9 @@
                     {% endif %}
                     {% endwith %}
                     {% endfor %}
+                    {% endblock attributes %}
             </dl>
         </li>
-        {% endblock attributes %}
          <li class="mz-orderlisting-details-item">
              <dl class="mz-propertylist mz-propertylist-order">
                  {% if model.submittedDate %}
