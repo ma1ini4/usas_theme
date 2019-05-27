@@ -610,5 +610,7 @@
   "wrongCountryForType": "Please select a country supported for this contact type",
   "yourAccount": "Your Account",
   "yourOrderNumber": "Your order number is <strong>{0}</strong>.",
-  "zipErrorMessage": "Please enter a valid zipcode."
+  "zipErrorMessage": "Please enter a valid zipcode.",
+  "viewOrderStatus": "View Order Status",
+  "viewOrderDetails": "View Order Details"
 }
