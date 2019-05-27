@@ -83,6 +83,17 @@ define([
                 _.bindAll(this, "quickviewClose");
 
             },
+            loadAddProductView: function (product) {
+                var self = this;
+
+                var addProductView = new QuickViewView({
+                    el: $(self.find('[mz-product-modal-content]')),
+                    model: product,
+                    messagesEl: $(self.find('[data-mz-message-bar]'))
+                });
+                self._addProductView = addProductView;
+                addProductView.render();
+            },
             zoomInit: function() {
                 var me = this;
                 $('#zoom').elevateZoom({ zoomType: "inner", cursor: "crosshair", responsive: true });
@@ -558,7 +569,7 @@ define([
 
 //                });
             }
-        });
+        });        
 
         $(document).ready(function() {
             var quickViewView = new QuickViewView({
@@ -571,4 +582,7 @@ define([
             });
 
         });
+        return {
+            'ModalView': QuickViewView
+        };
     });

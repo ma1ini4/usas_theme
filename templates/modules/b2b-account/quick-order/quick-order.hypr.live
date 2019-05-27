@@ -18,7 +18,8 @@
       </div>
       <div mz-modal-product-dialog class="mz-product-modal">
           <div id="mzModalDialog" data-backdrop="static" class="modal fade" tabindex="-1" role="dialog">
-              {% include "modules/product-picker/product-modal" %}
+                {% include "modules/product/product-quick-view" %}
+                {% require_script "modules/quickview" %}
           </div>
       </div>
     </div>

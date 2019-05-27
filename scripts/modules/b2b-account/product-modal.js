@@ -1,7 +1,7 @@
 define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore', 'hyprlivecontext', 'modules/views-modal-dialog', 'modules/api', 'modules/models-product', 'modules/views-location', 'modules/models-location', 'modules/models-discount'], function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductModels, LocationViews, LocationModels, Discount) {
 
     var ChooseProductStepView = Backbone.MozuView.extend({
-        templateName: "modules/cart/discount-modal/discount-choose-product",
+        templateName: "modules/product/product-quick-view",
         autoUpdate: [
         ],
         renderOnChange: [
@@ -37,7 +37,7 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
 
 
     var AddProductStepView = Backbone.MozuView.extend({
-        templateName: "modules/b2b-account/wishlists/product-modal",
+        templateName: "modules/product/product-quick-view",
         additionalEvents: {
             "change [data-mz-product-option]": "onOptionChange",
             "blur [data-mz-product-option]": "onOptionChange",
@@ -110,7 +110,7 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
 
 
     var ModalView = ModalDialogView.extend({
-        templateName: "modules/b2b-account/product-modal",
+        templateName: "modules/product/product-quick-view",
         // initialize: function () {
         //     var self = this;
         //     ModalDialogView.prototype.initialize.apply(this, arguments);

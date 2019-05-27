@@ -35,31 +35,35 @@ require([
   }
 
   $(document).ready(function(event){
-    var params = getParams();
-    if(params && params.orderNumber) {
-      blockUiLoader.globalLoader();
-      OrderStatusApi.OrderStatusDetail.getOrderStatusDetail( { orderNumber: params.orderNumber }).then( function( data ){
-       if( data  ){
-           var orderStatusModel = new OrderStatusModels.SapOrderStatus(data);
-           console.log('CcOrderStatus ', orderStatusModel);
-           var sapOrderStatusView = new OrderStatusView({
-              el: $( '#order-status-detail' ),
-              model: orderStatusModel,
-              messagesEl: $('[data-mz-message-bar]')
-           });
+        var params = getParams();
+        if (params && params.orderNumber) {
+          blockUiLoader.globalLoader();
+          OrderStatusApi.OrderStatusDetail.getOrderStatusDetail({
+            orderNumber: params.orderNumber
+          }).then(function (data) {
+            console.log(params.orderNumber);
+            if (data) {
+              var orderStatusModel = new OrderStatusModels.CcOrderStatus(data);
+              console.log('CcOrderStatus ', orderStatusModel);
+              var ccOrderStatusView = new OrderStatusView({
+                el: $('#order-status-detail'),
+                model: orderStatusModel,
+                messagesEl: $('[data-mz-message-bar]')
+              });
 
-           //self.render();
+              //self.render();
 
-           window.orderStatusView = sapOrderStatusView;
+              window.orderStatusView = ccOrderStatusView;
 
-           sapOrderStatusView.render();
-           blockUiLoader.unblockUi();
+              ccOrderStatusView.render();
+              blockUiLoader.unblockUi();
+            }
+          }, function (error) {
+
+            console.log('error ', error);
+            $('[data-mz-message-bar]').html(error.responseJSON.message);
+            blockUiLoader.unblockUi();
+          });
         }
-    },function(error){
-      console.log('error ', error);
-       $('[data-mz-message-bar]').html(error.responseJSON.message);
-      blockUiLoader.unblockUi();
-    });
-  }
   });
 });

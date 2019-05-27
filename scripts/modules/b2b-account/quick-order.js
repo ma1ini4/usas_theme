@@ -11,10 +11,11 @@ define([
   'modules/product-picker/product-modal-view',
   'modules/product-picker/product-picker-view',
   'modules/models-product',
-  'modules/b2b-account/wishlists'
+  'modules/b2b-account/wishlists',
+  'modules/quickview'
 ], function ($, api, _, Hypr, Backbone, HyprLiveContext,
-  CustomerModels, CartModels, B2BAccountModels, ProductModalViews,
-  ProductPicker, ProductModels, WishlistModels) {
+  CustomerModels, CartModels, B2BAccountModels, ProductModalView,
+  ProductPicker, ProductModels, WishlistModels, QuickView) {
 
     var QuickOrderView = Backbone.MozuView.extend({
         templateName: 'modules/b2b-account/quick-order/quick-order',
@@ -30,12 +31,14 @@ define([
         render: function(){
             var self = this;
             Backbone.MozuView.prototype.render.apply(this, arguments);
-            var productModalView = new ProductModalViews.ModalView({
+            var productModalView = new QuickView.ModalView({
                 el: self.$el.find("[mz-modal-product-dialog]"),
                 model: new ProductModels.Product({}),
                 messagesEl: self.$el.find("[mz-modal-product-dialog]").find('[data-mz-message-bar]')
             });
             window.quickOrderModalView = productModalView;
+
+            console.log(productModalView);
 
             var productPickerView = new ProductPicker({
                 el: self.$el.find('[mz-wishlist-product-picker]'),
@@ -62,7 +65,7 @@ define([
                   self.render();
               });
               window.quickOrderModalView.loadAddProductView(product);
-              window.quickOrderModalView.handleDialogOpen();
+            //   window.quickOrderModalView.handleDialogOpen();
               return;
           }
           self.finalizeAddItemToOrder(product);

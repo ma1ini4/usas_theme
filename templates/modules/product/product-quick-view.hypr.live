@@ -1,5 +1,6 @@
 <!-- Modal -->
 <div id="quickViewModal" class="modal fade quickviewElement">
+
     {% include "modules/product/product-validation" %}
     <div class="modal-dialog">
         <div class="modal-content">
@@ -10,6 +11,7 @@
                 <div class="row first">
                     <div class="col-xs-6 col-fixed-1">
                         <div data-mz-productimages class="mz-productimages mz-l-sidebar mz-product-left-container">
+                {% dump model %}
                             {% include "modules/product/product-images" %}
                         </div>
                     </div>
