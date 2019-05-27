@@ -28,27 +28,27 @@
             <a href="/logout" data-mz-action="logout" class="">{{ labels.logOut }}</a>
               <div id="my-account-content" style="display:none;">
                   <div class="my-account-details">
-                      <a href="/myaccount#settings">
+                      <a href="/myaccount#Account Information">
                           <h4>{{ labels.accountSettings }}</h4>
                       </a>
                           <p>{{ labels.accountSettingsInfo }}</p>
                   </div>
-                  {% if siteContext.generalSettings.isWishlistCreationEnabled %}
-                      <div class="my-account-details">
-                          <a href="/myaccount#wishlist">
-                              <h4>{{ labels.wishLists }}</h4>
-                          </a>
-                              <p>{{ labels.wishListsInfo }}</p>
-                      </div>
-                  {% endif %}
                   <div class="my-account-details">
-                      <a href="/myaccount#orderhistory">
-                          <h4>{{ labels.orderHistory }}</h4>
-                      </a>
-                          <p>{{ labels.orderHistoryInfo }}</p>
-                  </div>
+                      <a href="/myaccount#Orders">
+                        <h4>{{ labels.orderHistory }}</h4>
+                    </a>
+                    <p>{{ labels.orderHistoryInfo }}</p>
+                </div>
+                {% if siteContext.generalSettings.isWishlistCreationEnabled %}
+                    <div class="my-account-details">
+                        <a href="/myaccount#Lists">
+                            <h4>{{ labels.wishLists }}</h4>
+                        </a>
+                            <p>{{ labels.wishListsInfo }}</p>
+                    </div>
+                {% endif %}
                   <div class="my-account-details">
-                      <a href="/myaccount#addressbook">
+                      <a href="/myaccount#Shipping Information">
                           <h4>{{ labels.addressBook }}</h4>
                       </a>
                           <p>{{ labels.addressBookInfo }}</p>
@@ -61,10 +61,10 @@
                   </div>
               </div>
         </li>
-        <li class="mz-utilitynav-item">
+        <!-- <li class="mz-utilitynav-item">
             <a href="{{siteContext.siteSubdirectory}}/myaccount#QuickOrder" data-mz-action="quickOrder" data-mz-role="quickOrderLink" data-placement="bottom" class="mz-utilitynav-link"></a>
             {% require_script "modules/quick-order-helper" %}
-        </li>
+        </li> -->
         <!-- <li class="mz-utilitynav-item">
             <a href="/logout" class="mz-utilitynav-link">{{ labels.logOut }}</a>
 
