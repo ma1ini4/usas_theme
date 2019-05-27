@@ -1,4 +1,20 @@
-define(["modules/jquery-mozu", 'modules/api', "underscore", "hyprlive", "modules/backbone-mozu", "hyprlivecontext", 'modules/mozu-grid/mozugrid-view', 'modules/mozu-grid/mozugrid-pagedCollection', "modules/views-paging", 'modules/editable-view', 'modules/models-customer', 'modules/models-orders', 'modules/models-cart', 'modules/models-b2b-account', 'pages/myaccount', 'modules/message-handler'],
+define([
+    "modules/jquery-mozu", 
+    'modules/api', 
+    "underscore", 
+    "hyprlive", 
+    "modules/backbone-mozu", 
+    "hyprlivecontext", 
+    'modules/mozu-grid/mozugrid-view', 
+    'modules/mozu-grid/mozugrid-pagedCollection', 
+    "modules/views-paging", 
+    'modules/editable-view', 
+    'modules/models-customer', 
+    'modules/models-orders', 
+    'modules/models-cart', 
+    'modules/models-b2b-account', 
+    'pages/myaccount', 
+    'modules/message-handler'],
 function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollection, PagingViews, EditableView, CustomerModels, OrderModels, CartModels, B2BAccountModels, OrderViews, MessageHandler) {
   var DEFAULT_ORDER_FILTER = 'Status ne Created and Status ne Validated and Status ne Pending and Status ne Abandoned and Status ne Errored';
   var USER_ORDER_FILTER = DEFAULT_ORDER_FILTER + ' and userId eq '+ require.mozuData('user').userId;

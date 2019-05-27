@@ -2,27 +2,129 @@
 
 {% block title-tag-content %}{% endblock title-tag-content %}
 
-{% block body-tag-classes %} mz-myaccount {% endblock body-tag-classes %}
+{% block body-tag-classes %} mz-myaccount mz-b2baccount{% endblock body-tag-classes %}
 
 {% block body-content %}
-  {% require_script "pages/order-status-detail" %}
-  <div class="mz-l-container">
-      <h1 class="mz-pagetitle">
-          {{ labels.yourAccount }}
-      </h1>
-      <div class="mz-l-sidebar mz-myaccount-nav">
-          {% include "modules/my-account/my-account-nav" with navtarget="body" %}
-      </div>
-      <div id="account-panels" class="mz-myaccount-panels mz-l-stack mz-l-stack-large mz-order-status-detail-container">
-        <div id="account-messages">
-            {% include "modules/common/message-bar" with model=model.messages %}
+
+<div mz-pane-switcher class="mz-pane-switcher flex">
+    {% block pane-switcher-nav %}
+    <div class="mz-l-sidebar col-xs-12 col-sm-4 col-md-3">
+        <div id="mzPaneSwitcherNav" class="mz-pane-switcher-nav mz-myaccount-nav">
+
+            <nav class="mz-scrollnav affix-top" id="account-nav" data-mz-scrollnav="body">
+                <ul class="mz-scrollnav-list nav">
+                    <li class="mz-scrollnav-item">
+                        <a class="mz-scrollnav-link" href="/myaccount#Account Information">
+                            <span class="nav-item" data-mz-action="handlePaneSelect" data-mz-index="1">Account
+                                Information</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <nav class="mz-scrollnav affix-top" id="account-nav" data-mz-scrollnav="body">
+                <ul class="mz-scrollnav-list nav">
+                    <li class="mz-scrollnav-item">
+                        <a class="mz-scrollnav-link" href="/myaccount#Orders">
+                            <span class="nav-item" data-mz-action="handlePaneSelect" data-mz-index="2">Orders</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <nav class="mz-scrollnav affix-top" id="account-nav" data-mz-scrollnav="body">
+                <ul class="mz-scrollnav-list nav">
+                    <li class="mz-scrollnav-item">
+                        <a class="mz-scrollnav-link" href="/myaccount#Returns">
+                            <span class="nav-item" data-mz-action="handlePaneSelect" data-mz-index="4">Returns</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <nav class="mz-scrollnav affix-top" id="account-nav" data-mz-scrollnav="body">
+                <ul class="mz-scrollnav-list nav">
+                    <li class="mz-scrollnav-item">
+                        <a class="mz-scrollnav-link" href="/myaccount#Users">
+                            <span class="nav-item" data-mz-action="handlePaneSelect" data-mz-index="5">Users</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            {% if siteContext.generalSettings.isWishlistCreationEnabled %}
+            <nav class="mz-scrollnav affix-top" id="account-nav" data-mz-scrollnav="body">
+                <ul class="mz-scrollnav-list nav">
+                    <li class="mz-scrollnav-item">
+                        <a class="mz-scrollnav-link" href="/myaccount#Lists">
+                            <span class="nav-item" data-mz-action="handlePaneSelect" data-mz-index="6"
+                                data-mz-force-load="true">Lists</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            {% endif %}
+            <nav class="mz-scrollnav affix-top" id="account-nav" data-mz-scrollnav="body">
+                <ul class="mz-scrollnav-list nav">
+                    <li class="mz-scrollnav-item">
+                        <a class="mz-scrollnav-link" href="/myaccount#Shipping Information">
+                            <span class="nav-item" data-mz-action="handlePaneSelect" data-mz-index="7">Shipping
+                                Information</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <nav class="mz-scrollnav affix-top" id="account-nav" data-mz-scrollnav="body">
+                <ul class="mz-scrollnav-list nav">
+                    <li class="mz-scrollnav-item">
+                        <a class="mz-scrollnav-link" href="/myaccount#Payment Information">
+                            <span class="nav-item" data-mz-action="handlePaneSelect" data-mz-index="8">Payment
+                                Information</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <nav class="mz-scrollnav affix-top" id="account-nav" data-mz-scrollnav="body">
+                <ul class="mz-scrollnav-list nav">
+                    <li class="mz-scrollnav-item">
+                        <a class="mz-scrollnav-link" href="/myaccount#Custom Attributes">
+                            <span class="nav-item" data-mz-action="handlePaneSelect" data-mz-index="9">Custom
+                                Attributes</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <nav class="mz-scrollnav affix-top" id="account-nav" data-mz-scrollnav="body">
+                <ul class="mz-scrollnav-list nav">
+                    <li class="mz-scrollnav-item">
+                        <a class="mz-scrollnav-link" href="/myaccount#Quick Order">
+                            <span class="nav-item" data-mz-action="handlePaneSelect" data-mz-index="10">Quick
+                                Order</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
         </div>
-  		  {% dropzone "my-account-top" scope="template" %}
+    </div>
+    {% endblock %}
+
+    {% block pane-switcher-container %}
+    {% require_script "pages/order-status-detail" %}
+    <div id="account-panels"
+        class="mz-l-stack mz-l-stack-large  col-xs-12 col-sm-8 col-md-9 flex-column bottom-border">
         <div id='order-status-detail' class='mz-l-stack-section mz-order-status-detail'>
-            <h1 class="mz-pagetitle">{{ labels.orderDetail }} </h1>
+            <h3 class="mz-l-stack-sectiontitle">Order details</h3>
             <div>{{labels.orderStatusDetailDescription}}</div>
             {% include "modules/order/order-status-detail" %}
+            
+            <div id="account-messages">
+                {% include "modules/common/message-bar" with model=model.messages %}
+            </div>
         </div>
-      </div>
+    </div>
+    {% endblock %}
 </div>
 {% endblock body-content %}
