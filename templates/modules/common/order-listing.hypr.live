@@ -75,9 +75,9 @@
         {% with model.orderAttributeDefinitions|findwhere('attributeFQN', attribute.fullyQualifiedName) as attDef %}
             {% if attDef %}
                 {% with attribute.values|first as attributeVal %}
-                    <div class="mz-orderlisting-attribute">
-                        <span>{{ attDef.content.value }}</span>
-                        <div>
+                    <dl class="mz-propertylist mz-propertylist-order mz-orderlisting-attribute">
+                        <dt>{{ attDef.content.value }}</dt>
+                        <dd>
                             {% if attDef.dataType === "DateTime" %}
                                 {{ attributeVal|date("F j, Y") }}
                             {% else %}
@@ -92,8 +92,8 @@
                                     {{ attributeVal }}
                                 {% endif %}
                             {% endif %}
-                        </div>
-                    </div>
+                        </dd>
+                    </dl>
                 {% endwith %}
             {% endif %}
         {% endwith %}

@@ -7,7 +7,15 @@
     <div class="mz-b2b-orders">
         <div class="mz-order-grid-container">
             <div class="mz-b2b-order-view">
-                    {% include "modules/b2b-account/orders/orders-grid" %}
+                <ul class="mz-orderlist">
+                    {% for order in model.orderHistory.items %}
+                    <li data-mz-order-id="{{order.id}}" data-mz-order-history-listing>
+                        <div data-order-message-bar class="order-message-bar"></div>
+                        <div class="listing">
+                        {% include "modules/b2b-account/orders/orders-grid" with model=order %}
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
