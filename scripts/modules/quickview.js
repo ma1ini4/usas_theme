@@ -85,14 +85,20 @@ define([
             },
             loadAddProductView: function (product) {
                 var self = this;
-
+                    console.log('QuickViewView this:', self);
+                    console.log('QuickViewView product model:', product);
+                    
                 var addProductView = new QuickViewView({
-                    el: $(self.find('[mz-product-modal-content]')),
+                    el: self.$el.find("[mz-modal-product-dialog]"),
                     model: product,
-                    messagesEl: $(self.find('[data-mz-message-bar]'))
+                    messagesEl: self.$el.find("[mz-modal-product-dialog]").find('[data-mz-message-bar]')
                 });
                 self._addProductView = addProductView;
                 addProductView.render();
+            }, 
+            handleDialogOpen: function () {
+                this.model.trigger('dialogOpen');
+                this.bootstrapInstance.show();
             },
             zoomInit: function() {
                 var me = this;
@@ -134,6 +140,7 @@ define([
                 var me = this;
 
                 Backbone.MozuView.prototype.render.apply(this);
+                console.log('render', this);
             },
             onMouseEnterChangeImage: function(_e) {
                 this.mainImage = $('#quickViewModal .mz-productimages-mainimage').attr('src');
