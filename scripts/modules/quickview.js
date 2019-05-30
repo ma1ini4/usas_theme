@@ -89,9 +89,9 @@ define([
                     console.log('QuickViewView product model:', product);
                     
                 var addProductView = new QuickViewView({
-                    el: self.$el.find("#quickViewModal"),
+                    el: self.$el.find("[mz-modal-product-dialog]"),
                     model: product,
-                    messagesEl: self.$el.find("#quickViewModal").find('[data-mz-message-bar]')
+                    messagesEl: self.$el.find("[mz-modal-product-dialog]").find('[data-mz-message-bar]')
                 });
                 self._addProductView = addProductView;
                 addProductView.render();
@@ -141,6 +141,7 @@ define([
 
                 console.log('render', this);
                 Backbone.MozuView.prototype.render.apply(this);
+                console.log('render', this);
             },
             onMouseEnterChangeImage: function(_e) {
                 this.mainImage = $('#quickViewModal .mz-productimages-mainimage').attr('src');
