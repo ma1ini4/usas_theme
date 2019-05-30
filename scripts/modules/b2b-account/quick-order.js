@@ -61,11 +61,11 @@ define([
               this.stopListening();
               this.listenTo(product, "configurationComplete", function (){
                   self.finalizeAddItemToOrder(product);
-                  window.quickOrderModalView.handleDialogClose();
+                  window.quickOrderModalView.quickviewClose();
                   self.render();
               });
               window.quickOrderModalView.loadAddProductView(product);
-            //   window.quickOrderModalView.handleDialogOpen();
+              window.quickOrderModalView.handleDialogOpen();
               return;
           }
           self.finalizeAddItemToOrder(product);
