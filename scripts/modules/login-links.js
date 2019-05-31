@@ -548,7 +548,7 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
                 password: $(this).parents('#login').find('[data-mz-login-password]').val()
             };
             current = this;
-            if (self.validateLogin(this, payload) && self.validatePassword(this, payload)) {
+            if (self.validateLogin(this, payload) && self.validatePassword(this, payload)) {                
                 //var user = api.createSync('user', payload);
                 (LoginPopover.prototype).newsetLoading(true);
                 return api.action('customer', 'loginStorefront', {
@@ -618,19 +618,23 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
             }
         };
         this.validatePassword = function(el, payload){
+            var passMinLen = Hypr.getThemeSetting('passwordMinLength'),
+                passMaxLen = Hypr.getThemeSetting('passwordMaxLength');
+
             if (!payload.password)
                 return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordMissing')), false;
-            if (payload.password.length < 6) {
-                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
-            } else if (payload.password.length > 50) {
-                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
+            if (payload.password.length < passMinLen) {
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordMinlength', passMinLen)), false;
+            } else if (payload.password.length > passMaxLen) {
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordMaxlength', passMaxLen)), false;
             } else if (payload.password.search(/\d/) == -1) {
-                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordDigit', passMinLen)), false;
             } else if (payload.password.search(/[a-zA-Z]/) == -1) {
-                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
-            } else if (payload.password.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\+\.\,\;\:]/) != -1) {
-                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordLetter', passMinLen)), false;
+            } else if (payload.password.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\-\+\.\,\;\:]/) != -1) {
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordSpecial', passMinLen)), false;
             }
+            console.log('password is valid');
             return true;
         };
         this.validateSignup = function (el, payload) {
