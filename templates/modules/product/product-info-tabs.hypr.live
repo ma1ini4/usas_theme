@@ -15,7 +15,9 @@
 
         <ul class="nav nav-tabs" id="infoTab">
             {% if model.content.productFullDescription %}
-                <li class="tab-title active"><a data-toggle="tab" data-target="#tab1" aria-expanded="true"><i class="fa"></i> {{ titleInfoTab1 }}</a></li>
+                <li class="tab-title active"><a data-toggle="tab" data-target="#tab1" aria-expanded="true"><i class="fa"></i> 
+                    {{ titleInfoTab1 }}                    
+                </a></li>
             {% endif %}
             {% if tab2 or model.infoTab2Content %}
                 <li class="tab-title {% if not model.content.productFullDescription %}active{% endif %}"><a data-toggle="tab" data-target="#tab2" {% if not model.content.productFullDescription %} aria-expanded="true"{% endif %}><i class="fa"></i> {{ titleInfoTab2 }}</a></li>
@@ -36,6 +38,10 @@
             <div id="tab1" class="tab-pane fade active in">
                 <div class="tab-content-1">
                     {{ model.content.productFullDescription|safe }}
+                    <div class="flex tab-content-request-btns">
+                        {% include "modules/product/product-request-sample" %}
+                        {% include "modules/product/product-request-demo" %}
+                    </div>
                 </div>
             </div>
         {% endif %}

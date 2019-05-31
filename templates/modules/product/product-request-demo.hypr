@@ -1,0 +1,7 @@
+{% with model.properties|findwhere("attributeFQN", "tenant~request-demo") as demo %}
+    {% with demo.values|first as demoValue %}
+        {% if demoValue.value %}
+            <div class="secondary-btn">Request a Demo</div>
+        {% endif %}
+    {% endwith %}
+{% endwith %}
