@@ -1,7 +1,0 @@
-{% with model.properties|findwhere("attributeFQN", "tenant~request-sample") as sample %}
-    {% with sample.values|first as sampleValue %}
-        {% if sampleValue.value %}
-            <div class="secondary-btn">Request a Sample</div>
-        {% endif %}
-    {% endwith %}
-{% endwith %}
