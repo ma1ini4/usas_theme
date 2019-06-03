@@ -745,7 +745,7 @@
                     "fieldLabel": "Enable Alternate Image change on Hover on Swatch"
                 }
             ]
-        },
+        }, 
         {
             "xtype": "panel",
             "title": "Quick View",
@@ -949,6 +949,32 @@
                         "fieldLabel": "Display all attributes EXCEPT those indicated above"
                     }
                     ]
+                }
+            ]
+        }, 
+        {
+            "xtype": "panel",
+            "title": "Request Sample/Demo",
+            "collapsed": false,
+            "items": [{
+                    "xtype": "mz-input-text",
+                    "name": "requestSampleEmailEquipment",
+                    "fieldLabel": "Email address to receive requests for Equipment Samples"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "requestDemoEmailEquipment",
+                    "fieldLabel": "Email address to receive requests for Equipment Demo"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "requestSampleEmailSupplies",
+                    "fieldLabel": "Email address to receive requests for Supplies Samples"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "requestDemoEmailSupplies",
+                    "fieldLabel": "Email address to receive requests for Supplies Demo"
                 }
             ]
         },
