@@ -1631,6 +1631,63 @@
     },
     {
       "defaultConfig": {
+        "catalog": "[]"
+      },
+      "displayName": "Email form",
+      "displayTemplate": "sendEmail/sendemail",
+      "editViewFields": [
+        {
+          "name": "subject",
+          "fieldLabel": "Email Subject",
+          "xtype": "mz-input-text"
+        },
+        {
+          "name": "email_from",
+          "fieldLabel": "Email From",
+          "xtype": "mz-input-text"
+        },
+        {
+          "name": "email_cc",
+          "fieldLabel": "Email CC (use coma to separate few)",
+          "xtype": "mz-input-text"
+        },
+        {
+          "fieldLabel": "Duplicate to admin",
+          "name": "sendToAdmin",
+          "xtype": "mz-input-checkbox"
+        },
+        {
+          "name": "form_html",
+          "fieldLabel": "Form HTML",
+          "xtype": "textareafield",
+          "width": "100%"
+        },
+        {
+          "name": "form_email_template",
+          "fieldLabel": "Form Email Template",
+          "xtype": "textareafield",
+          "width": "100%"
+        },
+        {
+          "name": "customClass",
+          "fieldLabel": "Custom Form Class",
+          "xtype": "mz-input-text"
+        },
+        {
+          "name": "customId",
+          "fieldLabel": "Custom Form ID",
+          "xtype": "mz-input-text"
+        }
+
+      ],
+      "icon": "/resources/admin/widgets/03_heading_p.png",
+      "id": "sendemail",
+      "validPageTypes": [
+        "*"
+      ]
+    },
+    {
+      "defaultConfig": {
         "heightResizable": false
       },
       "id": "Whats-Trending-Now_widget",
