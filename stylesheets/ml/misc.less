@@ -2379,16 +2379,23 @@ ul.tabs {
                 }
             }
 
-            .tab-content-request-btns {
+            .tab-content-request {
                 justify-content: center;
                 
-                div:first-child {
+                div:first-of-type {
                     margin-right: 15px;
                 }
                 
                 div {
                     margin-top: 25px;
                 }
+
+                .tab-content-request-text {
+                    font-weight: @bold;
+                }
+            }
+            #mz-drop-zone-send-mail-zone {
+                display: none;
             }
         }
 

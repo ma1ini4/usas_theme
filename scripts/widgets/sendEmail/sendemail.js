@@ -13,6 +13,7 @@ require(["modules/jquery-mozu", "hyprlive"],
 
             // this will look for a `data-custom-attribute` as name and get #id 
             // element values and substitute to the form
+            
             $('#'+formId+' input[data-custom-attribute]').each(function(idx, el) {
                 el.value = $('#'+el.name).val();
             });
@@ -22,14 +23,13 @@ require(["modules/jquery-mozu", "hyprlive"],
 
                 var replacedTemplate = emailTemplate;
                 var formSerialize = $('#'+formId).serialize(),
-                    toEmailAddresses = new Array($('#'+formId+' input[name="email"]').val()),
+                    toEmailAddresses = new Array($('#'+formId+' input[name="form-email"]').val()),
                     formArray = $('#'+formId).serializeArray();
                 
                 // recoursively replace {%value%} with needed values
                 formArray.forEach(function(el, idx) {
                     var field = el.name;
                     var value = el.value;
-                    console.log('value', value);
                     if (value && value !== '') {
                         var regex = new RegExp("{"+field+"}", "gi");
                         replacedTemplate = replacedTemplate.replace(regex, value);
