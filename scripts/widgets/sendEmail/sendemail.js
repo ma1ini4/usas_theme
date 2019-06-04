@@ -21,6 +21,7 @@ require(["modules/jquery-mozu", "hyprlive"],
                 e.preventDefault();
 
                 var replacedTemplate = emailTemplate;
+                var replaceSubject = subjectdata;
                 var formSerialize = $('#'+formId).serialize(),
                     toEmailAddresses = new Array($('#'+formId+' input[name="email"]').val()),
                     formArray = $('#'+formId).serializeArray();
@@ -33,29 +34,30 @@ require(["modules/jquery-mozu", "hyprlive"],
                     if (value && value !== '') {
                         var regex = new RegExp("{"+field+"}", "gi");
                         replacedTemplate = replacedTemplate.replace(regex, value);
+                        replaceSubject = replaceSubject.replace(regex, value);
                     }
                 });
 
                 // form the data body
                 var body = {
                     "bccEmailAddresses": [],
-                    "ccEmailAddresses": [],
+                    "ccEmailAddresses": ccEmailAddresses,
                     "toEmailAddresses": toEmailAddresses,
                     "bodyData": replacedTemplate ? replacedTemplate : emailTemplate,
                     "bodyCharset": "UTF-8",
-                    "subjectdata": subjectdata,
+                    "subjectdata": replaceSubject? replaceSubject : subjectdata,
                     "subjectCharset": "UTF-8",
                     "sourceEmail": sourceEmail,
                     "replyToAddresses": [sourceEmail]
                 };
 
                 $.ajax({
-                    url: 'https://5htr6ylbhi.execute-api.us-east-1.amazonaws.com/development/sendMail', // TODO: transfer to ARC
+                    url: '/email', // TODO: transfer to ARC
                     method: 'POST',
                     headers: {
-                        "Content-Type": "application/json" // welp, that was the game changer in this request
-                    },
-                    data: JSON.stringify(body)
+                        "Content-Type": "application/json", // welp, that was the game changer in this request
+                        "data": JSON.stringify(body)
+                    }
                 })
                 .success(function(response){
                     console.log(response);

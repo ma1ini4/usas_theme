@@ -1,5 +1,5 @@
 <div class="{%if model.config.customClass %} {{model.config.customClass}} {% else %}default_email_form{% endif %}">
-	<form id="{%if model.config.customId %} {{model.config.customId}} {% else %}{{model.definitionId}}{% endif %}">
+	<form id="{%if model.config.customId %}{{model.config.customId}}{% else %}{{model.definitionId}}{% endif %}">
 		{{model.config.form_html|safe}}
 		<input type="submit" name="submit-email-form">
 	</form>
