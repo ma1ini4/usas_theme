@@ -113,6 +113,3 @@
         </div>
     </div>
 </div><!-- #order-confirmation -->
-<style>
-    {% inline_style "print-order.less" %}
-</style>
