@@ -1680,6 +1680,11 @@
           "fieldLabel": "Form Error Message",
           "xtype": "textareafield",
           "width": "100%"
+        },
+        {
+          "name": "customButtonValue",
+          "fieldLabel": "Custom Button Label",
+          "xtype": "mz-input-text"
         }
 
       ],
