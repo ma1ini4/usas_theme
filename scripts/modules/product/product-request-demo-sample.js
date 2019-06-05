@@ -20,7 +20,7 @@ require(["modules/jquery-mozu", "hyprlive"], function ($, Hypr) {
     });
 
     function sendRequest(type){
-        $('input[data-custom-attribute="demo-sample"]').val("sample");
+        $('input[data-custom-attribute="demo-sample"]').val(type);
 
         $('input[name="submit-email-form"]').click();
 
