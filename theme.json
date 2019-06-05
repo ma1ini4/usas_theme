@@ -1648,13 +1648,8 @@
         },
         {
           "name": "email_cc",
-          "fieldLabel": "Email CC (use coma to separate few)",
+          "fieldLabel": "Email CC (use comma to separate few)",
           "xtype": "mz-input-text"
-        },
-        {
-          "fieldLabel": "Duplicate to admin",
-          "name": "sendToAdmin",
-          "xtype": "mz-input-checkbox"
         },
         {
           "name": "form_html",
