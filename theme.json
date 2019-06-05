@@ -1633,7 +1633,7 @@
       "defaultConfig": {
         "catalog": "[]"
       },
-      "displayName": "Email form",
+      "displayName": "Email Form",
       "displayTemplate": "sendEmail/sendemail",
       "editViewFields": [
         {
@@ -1671,6 +1671,23 @@
         {
           "name": "customId",
           "fieldLabel": "Custom Form ID",
+          "xtype": "mz-input-text"
+        },
+        {
+          "name": "form_success_message",
+          "fieldLabel": "Form Success Message",
+          "xtype": "textareafield",
+          "width": "100%"
+        },
+        {
+          "name": "form_error_message",
+          "fieldLabel": "Form Error Message",
+          "xtype": "textareafield",
+          "width": "100%"
+        },
+        {
+          "name": "customButtonValue",
+          "fieldLabel": "Custom Button Label",
           "xtype": "mz-input-text"
         }
 
