@@ -889,6 +889,8 @@
     "pdpMainImageNameSwatch": "{0}_{1}_v{2}.jpg",
     "pdpSwatchImageMaxWidth": "30",
     "pdpSwatchImageName": "{1}.gif",
+    "requestSampleEmail": "vlad.duma@deplabs.com",
+    "requestDemoEmail": "vlad.duma@deplabs.com",
     "phoneNumberEnabled": true,
     "phoneNumberLength": 10,
     "preselectCountryCode": "US",
@@ -1621,6 +1623,80 @@
         }
       ],
       "icon": "/resources/admin/widgets/image_video_slider.png",
+      "validPageTypes": [
+        "*"
+      ]
+    },
+    {
+      "defaultConfig": {
+        "catalog": "[]"
+      },
+      "displayName": "Email Form",
+      "displayTemplate": "sendEmail/sendemail",
+      "editViewFields": [
+        {
+          "name": "subject",
+          "fieldLabel": "Email Subject",
+          "xtype": "mz-input-text"
+        },
+        {
+          "name": "email_from",
+          "fieldLabel": "Email From",
+          "xtype": "mz-input-text"
+        },
+        {
+          "name": "email_cc",
+          "fieldLabel": "Email CC (use comma to separate few)",
+          "xtype": "mz-input-text"
+        },
+        {
+          "name": "hidden_form",
+          "fieldLabel": "Hide form from public part",
+          "xtype": "mz-input-checkbox"
+        },
+        {
+          "name": "form_html",
+          "fieldLabel": "Form HTML",
+          "xtype": "textareafield",
+          "width": "100%"
+        },
+        {
+          "name": "form_email_template",
+          "fieldLabel": "Form Email Template",
+          "xtype": "textareafield",
+          "width": "100%"
+        },
+        {
+          "name": "customClass",
+          "fieldLabel": "Custom Form Class",
+          "xtype": "mz-input-text"
+        },
+        {
+          "name": "customId",
+          "fieldLabel": "Custom Form ID",
+          "xtype": "mz-input-text"
+        },
+        {
+          "name": "form_success_message",
+          "fieldLabel": "Form Success Message",
+          "xtype": "textareafield",
+          "width": "100%"
+        },
+        {
+          "name": "form_error_message",
+          "fieldLabel": "Form Error Message",
+          "xtype": "textareafield",
+          "width": "100%"
+        },
+        {
+          "name": "customButtonValue",
+          "fieldLabel": "Custom Button Label",
+          "xtype": "mz-input-text"
+        }
+
+      ],
+      "icon": "/resources/admin/widgets/03_heading_p.png",
+      "id": "sendemail",
       "validPageTypes": [
         "*"
       ]

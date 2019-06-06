@@ -15,7 +15,9 @@
 
         <ul class="nav nav-tabs" id="infoTab">
             {% if model.content.productFullDescription %}
-                <li class="tab-title active"><a data-toggle="tab" data-target="#tab1" aria-expanded="true"><i class="fa"></i> {{ titleInfoTab1 }}</a></li>
+                <li class="tab-title active"><a data-toggle="tab" data-target="#tab1" aria-expanded="true"><i class="fa"></i> 
+                    {{ titleInfoTab1 }}                    
+                </a></li>
             {% endif %}
             {% if tab2 or model.infoTab2Content %}
                 <li class="tab-title {% if not model.content.productFullDescription %}active{% endif %}"><a data-toggle="tab" data-target="#tab2" {% if not model.content.productFullDescription %} aria-expanded="true"{% endif %}><i class="fa"></i> {{ titleInfoTab2 }}</a></li>
@@ -36,6 +38,32 @@
             <div id="tab1" class="tab-pane fade active in">
                 <div class="tab-content-1">
                     {{ model.content.productFullDescription|safe }}
+                    <div id="demo-sample-container" class="flex tab-content-request">
+                        {% with model.properties|findwhere("attributeFQN", "tenant~request-demo") as demo %}
+                            {% with demo.values|first as demoValue %}
+                                {% if demoValue.value %}
+                                    {% include "modules/common/product-request-demo" %}
+                                {% endif %}
+                            {% endwith %}
+                        {% endwith %}
+                                
+                        {% with model.properties|findwhere("attributeFQN", "tenant~request-sample") as sample %}
+                            {% with sample.values|first as sampleValue %}
+                                {% if sampleValue.value %}
+                                    {% include "modules/common/product-request-sample" %}
+                                {% endif %}
+                            {% endwith %}
+                        {% endwith %}
+                        <input id="form-email" value="{{ themeSettings.requestDemoEmail }}" hidden>
+                        <input id="product-name" value="{{ model.content.productName|slugify }}" hidden>
+                        <input id="product-id" value="{{ model.productCode }}" hidden>
+                        <input id="user-name" value="{{ user.firstName }} {{ user.lastName }}" hidden>
+                        <input id="user-email" value="{{ user.email }}" hidden>
+                    </div>
+                    
+                    <div>
+                        {% dropzone "send-mail-zone" scope="template" %}
+                    </div>
                 </div>
             </div>
         {% endif %}
@@ -296,3 +324,5 @@
 {% endwith %}
 {% endwith %}
 {% endwith %}
+
+{% require_script "modules/product/product-request-demo-sample" %}
