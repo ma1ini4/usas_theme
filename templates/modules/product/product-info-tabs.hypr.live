@@ -62,15 +62,9 @@
                             <input id="user-email" value="{{ user.email }}" hidden>
                         </div>
 
-                    <div class="{% if pageContext.isEditMode != "true" %} hidden {% endif %}">
+                    <div>
                         {% dropzone "send-mail-zone" scope="template" %}
                     </div>
-
-                    <input id="form-email" value="{{ themeSettings.requestDemoEmailEquipment }}" hidden>
-                    <input id="product-name" value="{{ model.content.productName }}" hidden>
-                    <input id="product-id" value="{{ model.productCode }}" hidden>
-                    <input id="user-name" value="{{ user.firstName }} {{ user.lastName }}" hidden>
-                    <input id="user-email" value="{{ user.email }}" hidden>
                 </div>
             </div>
         {% endif %}
