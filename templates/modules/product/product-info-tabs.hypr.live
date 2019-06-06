@@ -54,14 +54,13 @@
                                 {% endif %}
                             {% endwith %}
                         {% endwith %}
-                        {% require_script "modules/product/product-request-demo-sample" %}
-                            <input id="form-email" value="{{ themeSettings.requestDemoEmail }}" hidden>
-                            <input id="product-name" value="{{ model.content.productName }}" hidden>
-                            <input id="product-id" value="{{ model.productCode }}" hidden>
-                            <input id="user-name" value="{{ user.firstName }} {{ user.lastName }}" hidden>
-                            <input id="user-email" value="{{ user.email }}" hidden>
-                        </div>
-
+                        <input id="form-email" value="{{ themeSettings.requestDemoEmail }}" hidden>
+                        <input id="product-name" value="{{ model.content.productName|slugify }}" hidden>
+                        <input id="product-id" value="{{ model.productCode }}" hidden>
+                        <input id="user-name" value="{{ user.firstName }} {{ user.lastName }}" hidden>
+                        <input id="user-email" value="{{ user.email }}" hidden>
+                    </div>
+                    
                     <div>
                         {% dropzone "send-mail-zone" scope="template" %}
                     </div>
@@ -325,3 +324,5 @@
 {% endwith %}
 {% endwith %}
 {% endwith %}
+
+{% require_script "modules/product/product-request-demo-sample" %}
