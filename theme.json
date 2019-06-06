@@ -1648,6 +1648,11 @@
           "xtype": "mz-input-text"
         },
         {
+          "name": "hidden_form",
+          "fieldLabel": "Hide form from public part",
+          "xtype": "mz-input-checkbox"
+        },
+        {
           "name": "form_html",
           "fieldLabel": "Form HTML",
           "xtype": "textareafield",

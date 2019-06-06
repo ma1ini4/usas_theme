@@ -26,13 +26,11 @@ require(["modules/jquery-mozu", "hyprlive"],
                 $('.popup-overlay').fadeOut(200);
             });
 
-            $('input[name="submit-email-form"]').on('click', function(e) {
-                e.preventDefault();
-
+            function sendEmail() {
                 var replacedTemplate = emailTemplate;
                 var replaceSubject = subjectdata;
                 var formSerialize = $('#'+formId).serialize(),
-                    toEmailAddresses = new Array($('#'+formId+' input[name="email"]').val()),
+                    toEmailAddresses = new Array($('#'+formId+' input[name="form-email"]').val()),
                     formArray = $('#'+formId).serializeArray();
                 
                 // recoursively replace {%value%} with needed values
@@ -80,6 +78,11 @@ require(["modules/jquery-mozu", "hyprlive"],
                         $('.popup-overlay').fadeIn(200);
                     }
                 });
+            }
+
+            $(document).on('click', 'input[name="submit-email-form"]', function(e) { 
+                e.preventDefault();
+                sendEmail();
             });
         });
 });
