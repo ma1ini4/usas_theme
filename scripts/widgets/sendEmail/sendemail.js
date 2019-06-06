@@ -27,9 +27,7 @@ require(["modules/jquery-mozu", "hyprlive"],
                 $('.popup-overlay').fadeOut(200);
             });
 
-            $('input[name="submit-email-form"]').on('click', function(e) {
-                e.preventDefault();
-
+            function sendEmail() {
                 var replacedTemplate = emailTemplate;
                 var replaceSubject = subjectdata;
                 var formSerialize = $('#'+formId).serialize(),
@@ -80,6 +78,11 @@ require(["modules/jquery-mozu", "hyprlive"],
                         $('.popup-overlay').fadeIn(200);
                     }
                 });
+            }
+
+            $(document).on('click', 'input[name="submit-email-form"]', function(e) { 
+                e.preventDefault();
+                sendEmail();
             });
         });
 });
