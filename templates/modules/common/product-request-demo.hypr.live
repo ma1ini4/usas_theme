@@ -1,5 +1,5 @@
 {% if not user.isAnonymous %}
     <div class="secondary-btn" id="product-request-demo">Request a Demo</div>
 {% else %}
-    <div class="secondary-btn" data-toggle="modal" data-mz-action="lite-registration">Log In to Request a Demo</div>
+    <div class="secondary-btn" id="product-request-demo-login">Log In to Request a Demo</div>
 {% endif %}

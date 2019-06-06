@@ -20,6 +20,18 @@ require(["modules/jquery-mozu", "hyprlive"], function ($, Hypr) {
             
             sendRequest(requestType, sampleEmail);
         });
+
+        $('#product-request-demo-login').on('click', function (e) {
+            e.preventDefault();
+            
+            $('[data-mz-action="lite-registration"].login-link-text').click();
+        });
+
+        $('#product-request-sample-login').on('click', function (e) {
+            e.preventDefault();
+            
+            $('[data-mz-action="lite-registration"].login-link-text').click();
+        });
     });
 
     function sendRequest(type, email){
