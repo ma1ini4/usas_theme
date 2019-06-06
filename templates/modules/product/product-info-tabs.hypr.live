@@ -55,7 +55,7 @@
                             {% endwith %}
                         {% endwith %}
                         {% require_script "modules/product/product-request-demo-sample" %}
-                            <input id="form-email" value="{{ themeSettings.requestDemoEmailEquipment }}" hidden>
+                            <input id="form-email" value="{{ themeSettings.requestDemoEmail }}" hidden>
                             <input id="product-name" value="{{ model.content.productName }}" hidden>
                             <input id="product-id" value="{{ model.productCode }}" hidden>
                             <input id="user-name" value="{{ user.firstName }} {{ user.lastName }}" hidden>

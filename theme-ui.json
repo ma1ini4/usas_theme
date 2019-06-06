@@ -958,23 +958,13 @@
             "collapsed": false,
             "items": [{
                     "xtype": "mz-input-text",
-                    "name": "requestSampleEmailEquipment",
+                    "name": "requestSampleEmail",
                     "fieldLabel": "Email address to receive requests for Equipment Samples"
                 },
                 {
                     "xtype": "mz-input-text",
-                    "name": "requestDemoEmailEquipment",
+                    "name": "requestDemoEmail",
                     "fieldLabel": "Email address to receive requests for Equipment Demo"
-                },
-                {
-                    "xtype": "mz-input-text",
-                    "name": "requestSampleEmailSupplies",
-                    "fieldLabel": "Email address to receive requests for Supplies Samples"
-                },
-                {
-                    "xtype": "mz-input-text",
-                    "name": "requestDemoEmailSupplies",
-                    "fieldLabel": "Email address to receive requests for Supplies Demo"
                 }
             ]
         },
