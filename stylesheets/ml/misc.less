@@ -2345,7 +2345,7 @@ ul.tabs {
             li {
                 a {
                     border-radius: 20px 20px 0 0;
-                    background: #F8F8F9;
+                    background: #E6E7E8;
                     color: #22205F;
                 }
 
@@ -2358,6 +2358,7 @@ ul.tabs {
 
             a {
                 border: 1px solid #ddd;
+                background-color: #F8F8F9;
             }
         }
 
@@ -2370,10 +2371,20 @@ ul.tabs {
                 border: 1px solid #D0D2D3;
                 border-top: none;
                 border-radius: 0 20px 20px 20px;
-                background: #F8F8F9;
+                background: #E6E7E8;
             }
 
             .prop-list {
+
+                .prop-list-item {
+                    display: flex;
+                    &:nth-child(even) {
+                        background-color: #FFF;
+                    }
+                    @media @tablet {
+                        display: block;
+                    }
+                }
                 .prop-name {
                     font-weight: @semi-bold;
                 }

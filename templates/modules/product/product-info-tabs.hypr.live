@@ -73,8 +73,10 @@
                      <div class="tab-content-2">
                         <div class="col-sm-4 col-md-12 prop-list ">
                             {% for content in model.infoTab2Content %}
+                            <div class="prop-list-item">
                                 <div class="prop-name col-md-3">{{content.name}}</div>
                                 <div class="prop-value col-md-9">{{content.value}}</div>
+                            </div>
                             {% endfor %}
                             </div>
                             <div class="clearfix"></div>
