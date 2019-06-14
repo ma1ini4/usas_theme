@@ -1,9 +1,17 @@
 ﻿<div class="mz-cms-image">
     <div class="mz-content-widget-desktop {% if Model.config.image-desktop and PageContext.isMobile %} hidden {% endif %}" id="desktop-image">
-        <img class="mz-cms-image-maintain" alt="{{Model.config.imageAltText}}" src="{{Model.config.image-desktop}}">
+    	{% if Model.config.image_url %}
+        	<a href="{{Model.config.image_url}}"><img class="mz-cms-image-maintain" alt="{{Model.config.image_alt}}" title="{{Model.config.image_title}}" src="{{Model.config.image-desktop}}"></a>
+        {% else %}
+        	<img class="mz-cms-image-maintain" alt="{{Model.config.image_alt}}" title="{{Model.config.image_title}}" src="{{Model.config.image-desktop}}">
+        {% endif %}
     </div>
     <div class="mz-content-widget-mobile {% if Model.config.image-mobile and not PageContext.isMobile %} hidden {% endif %}" id="mobile-image">
-        <img class="mz-cms-image-maintain" alt="{{Model.config.imageAltText}}" src="{{Model.config.image-mobile}}">
+    	{% if Model.config.image_url %}
+        	<a href="{{Model.config.image_url}}"><img class="mz-cms-image-maintain" alt="{{Model.config.image_alt}}" title="{{Model.config.image_title}}" src="{{Model.config.image-mobile}}"></a>
+        {% else %}
+        	<img class="mz-cms-image-maintain" alt="{{Model.config.image_alt}}" title="{{Model.config.image_title}}" src="{{Model.config.image-mobile}}">
+        {% endif %}
     </div>
 </div>
 {% require_script "widgets/cms/content-mob-desk" %}
