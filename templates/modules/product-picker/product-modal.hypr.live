@@ -1,0 +1,17 @@
+{% extends "modules/common/modal-dialog" %}
+{% block modal-header %} 
+    <h3 class="modal-title">{{labels.productModalHeading}}</h3>
+{% endblock modal-header %}
+ 
+{% block modal-body %}
+
+{% include "modules/common/message-bar" with model=model.messages %}
+
+<div id="mzProductModal" data-mz-product-modal-content class="mz-product-modal-content">
+</div>
+
+{% endblock modal-body %} 
+     
+{% block modal-footer %}
+    
+{% endblock modal-footer %}

@@ -24,7 +24,7 @@
 	</select>
     -->
     {% require_script "modules/contextify" %}
+    {% require_script "modules/search-autocomplete" %}
     {% if themeSettings.useSearchAutocomplete %}
-        {% require_script "modules/search-autocomplete" %}
     {% endif %}
 </form>

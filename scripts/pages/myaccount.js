@@ -199,11 +199,20 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
 
     var OrderHistoryListingView = Backbone.MozuView.extend({
         templateName: "modules/my-account/order-history-listing",
+        additionalEvents: {
+            'click a.mz-order-code' : 'getOrderDetail'
+        },
         initialize: function() {
             this._views = {
                 standardView: this,
                 returnView: null
             };
+        },
+        getOrderDetail: function(event) {
+            var orderCode = $(event.currentTarget).data('mzOrderCode');
+            if (!require.mozuData('pagecontext').isEditMode) {
+                window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory || '') + '/order-status-detail?orderNumber='+orderCode;
+            }
         },
         views: function() {
             return this._views;
@@ -734,7 +743,6 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
                 model: accountModel,
                 messagesEl: $messagesEl
             }),
-
             orderHistory: new OrderHistoryView({
                 el: $orderHistoryEl.find('[data-mz-orderlist]'),
                 model: orderHistory
@@ -778,7 +786,6 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
             })
         };
 
-
         if (HyprLiveContext.locals.siteContext.generalSettings.isWishlistCreationEnabled) accountViews.wishList = new WishListView({
             el: $wishListEl,
             model: accountModel.get('wishlist'),
@@ -790,4 +797,10 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         _.invoke(window.accountViews, 'render');
 
     });
+
+    return {
+       'OrderHistoryListingView': OrderHistoryListingView,
+       'ReturnPrintLabelView': PrintView,
+       'AddressBookView': AddressBookView
+    };
 });

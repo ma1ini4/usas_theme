@@ -4,7 +4,7 @@
 
 {% block head-tag-scripts %}
 {% parent %}
-{% if siteContext.checkoutSettings.visaCheckout.isEnabled and not pageContext.isEditMode %}
+{% if siteContext.checkoutSettings.visaCheckout.isEnabled and not pageContext.isEditMode and not pageContext.isAdminMode %}
 {% include "modules/common/anti-clickjacking-script" %}
 {% endif %}
 {% endblock head-tag-scripts %}
@@ -24,6 +24,9 @@
 	{% include "modules/cart/cart-location-select" %}
 </div>
 <div class="mz-l-container mobile-padding">
+	<div id="mz-discount-threshold-messages">
+		{% include "modules/cart/cart-discount-threshold-messages" with model=model %}
+	</div>
 	<div class="mz-cart-heading">
 		<h1 class="mz-pagetitle">{{ labels.cart }}</h1>
 	</div>
@@ -36,6 +39,13 @@
 		        <div class="mz-table mz-table-cart" id="cart">
 		            {% include "modules/cart/cart-table" %}
 		        </div>
+						{% block modal-dialog %}
+			 			<div mz-modal-discount-dialog class="mz-discount-modal">
+			 				<div id="mzModalDialog" data-backdrop="static" class="modal fade" tabindex="-1" role="dialog">
+			 					{% include "modules/cart/discount-modal/discount-modal" %}
+			 				</div>
+			 			</div>
+			 		{% endblock modal-dialog %}
 			</form>
 	<!-- Show empty cart if model is empty -->
 	{% else %}
@@ -54,6 +64,5 @@
 			{% dropzone "cart-advert" scope="page" %}
 		</div>
 	</div>
-
 </div>
 {% endblock body-content %}

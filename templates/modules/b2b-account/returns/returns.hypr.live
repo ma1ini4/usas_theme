@@ -1,0 +1,13 @@
+{% require_script "modules/b2b-account/returns" %}
+<div class="mz-l-stack-section" style="clear:none">
+  <h3 class="mz-l-stack-sectiontitle">{{ labels.returns }}</h3>
+  <div class="mz-b2b-returns">
+    <div class="mz-return-grid-container">
+      <div class="mz-b2b-returns-view">
+          {% include "modules/b2b-account/returns/returns-grid" %}
+      </div>
+    </div>
+  </div>
+</div> 
+
+{% include "modules/my-account/my-account-print-window" %}

@@ -86,9 +86,9 @@
              <div class="mz-carttable-item-qty mz-cart-qty-box visible-xs mz-qty-xs-align">
               <!-- <input class="mz-carttable-qty-field" type="number" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" value="{{ item.quantity }}" min="1"/> -->
               <div class="qty-block">
-                <div class="qty-counter" id="minus" data-mz-qty-minus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} role="button"><i class="fa fa-minus"  aria-hidden="true"></i></div>
-                <input id="mz_pdp_qty" class="mz-productdetail-qty text-center" type="text" value="{{ item.quantity }}" readonly onfocus="this.blur()" data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" title="Quantity" min="3" />
-                <div class="qty-counter" id="plus" data-mz-qty-plus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} role="button"><i class="fa fa-plus" aria-hidden="true"></i></div>
+                <div class="qty-counter" id="minus" data-mz-qty-minus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-index="{{ item.productCode }}" role="button"><i class="fa fa-minus"  aria-hidden="true"></i></div>
+                <input id="mz_pdp_qty" class="mz-productdetail-qty text-center" type="text" value="{{ item.quantity }}" readonly onfocus="this.blur()" data-mz-cart-item="{{ item.id }}" data-mz-index="{{ item.productCode }}"  data-mz-value="quantity" title="Quantity" min="3" />
+                <div class="qty-counter" id="plus" data-mz-qty-plus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-index="{{ item.productCode }}" role="button"><i class="fa fa-plus" aria-hidden="true"></i></div>
               </div>
               <a href="javascript:;" data-mz-action="removeItem" data-mz-cart-item="{{ item.id }}" class="btn-link" title="{{ labels.remove }}"><i class="fas fa-times"></i></a>
                 <div class="mz-carttable-item-total ">{% include "modules/common/item-total" %}</div>
@@ -96,12 +96,12 @@
           </div>
         </div>
         <div class="col-xs-5 col-sm-3 cart-item-qty hidden-xs">
-          <div class="mz-carttable-item-qty mz-cart-qty-box"> 
+          <div class="mz-carttable-item-qty mz-cart-qty-box">
             <!-- <input class="mz-carttable-qty-field text-center" type="number" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" value="{{ item.quantity }}" min="1"/> -->
             <div class="qty-block">
-              <div class="qty-counter" id="minus" data-mz-qty-minus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} role="button"><i class="fa fa-minus"  aria-hidden="true"></i></div>
-              <input id="mz_pdp_qty" class="mz-productdetail-qty text-center" type="text" value="{{ item.quantity }}" readonly onfocus="this.blur()" data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" title="Quantity" min="3" />
-              <div class="qty-counter" id="plus" data-mz-qty-plus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} role="button"><i class="fa fa-plus" aria-hidden="true"></i></div>
+              <div class="qty-counter" id="minus" data-mz-qty-minus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-index="{{ item.productCode }}" role="button"><i class="fa fa-minus"  aria-hidden="true"></i></div>
+              <input id="mz_pdp_qty" class="mz-productdetail-qty text-center" type="text" value="{{ item.quantity }}" readonly onfocus="this.blur()" data-mz-cart-item="{{ item.id }}" data-mz-index="{{ item.productCode }}"  data-mz-value="quantity" title="Quantity" min="3" />
+              <div class="qty-counter" id="plus" data-mz-qty-plus data-mz-cart-item="{{ item.id }}" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-index="{{ item.productCode }}" role="button"><i class="fa fa-plus" aria-hidden="true"></i></div>
             </div>
           </div>
            <div class="mz-carttable-item-remove">
@@ -148,17 +148,17 @@
   </div>
   {% for discount in model.orderDiscounts %}
     {% if not discount.excluded %}
-  <div class="mz-carttable-total-row row">
-    <div class="mz-carttable-total-wrap col-xs-12 mz-padding-xs">
-      <div class="col-xs-7 col-sm-9 text-right"><em>{{ discount.discount.name }}:</em></div>
-      <div class="mz-carttable-total-wrap col-xs-5 col-sm-3 pull-right">
-        <span><em>- {{ discount.impact|currency }}</em></span>
+    <div class="mz-carttable-total-row row">
+      <div class="mz-carttable-total-wrap col-xs-12 mz-padding-xs">
+        <div class="col-xs-7 col-sm-9 text-right"><em>{{ discount.discount.name }}:</em></div>
+        <div class="mz-carttable-total-wrap col-xs-5 col-sm-3 pull-right">
+          <span><em>- {{ discount.impact|currency }}</em></span>
+        </div>
+        <div></div>
       </div>
-      <div></div>
     </div>
-  </div>
-    {% endif %}
-  {% endfor %}
+      {% endif %}
+    {% endfor %}
 
 
   <div class="mz-carttable-total-row row">
@@ -182,16 +182,39 @@
        {% if not model.isEmpty %}<span class="mz-empty-cart-link-container"><button class="font-large button_promotional" href="javascript:;" data-mz-action="empty">{{ labels.emptyCart }}</button></span>{% endif %}
        {% endif %}
       <div class="mz-common-button-padding pull-right">
-                <button id="cart-checkout" class="mz-button font-large primary-btn"  {% if model.isEmpty %} disabled="disabled" {% endif %} data-mz-action="proceedToCheckout">{{ labels.proceedToCheckout }}</button>
+            {% if model.hasRequiredBehavior %}
+               <button id="cart-checkout" class="mz-button font-large primary-btn"  {% if model.isEmpty %} disabled="disabled" {% endif %} data-mz-action="proceedToCheckout">{{ labels.proceedToCheckout }}</button>
+               {% endif %}
       </div>
-      </div>
-
-      {% if siteContext.checkoutSettings.visaCheckout.isEnabled %}
-      <div>
-        <p>or checkout with</p>
-        <img alt="Visa Checkout" class="v-button" role="button"
-          src="{{pageContext.visaCheckoutButtonUrl}}"/>
-      </div>
+    </div>
+  {% if model.hasRequiredBehavior %}
+      {% if not model.isEmpty and not model.bf_ext_enabled %}
+        {% with siteContext.checkoutSettings.externalPaymentWorkflowSettings|findwhere("isEnabled", true) as externalPaymentWorkflowsEnabled %}
+          {% if externalPaymentWorkflowsEnabled %}
+            <div>
+              <p>{{labels.orWith}}</p>
+              {% for externalPayment in siteContext.checkoutSettings.externalPaymentWorkflowSettings %}
+                  {% if externalPayment.isEnabled %}
+                  <div class="mz-carttable-thirdpartypayment" >
+                    {% if externalPayment.name|lower == "paywithamazon" %}
+                        <div id="AmazonPayButton"></div>
+                    {% endif %}
+                    {% if externalPayment.name == "VisaCheckout" %}
+                      <img alt="Visa Checkout" class="v-button" role="button" src="{{pageContext.visaCheckoutButtonUrl}}"/>
+                    {%endif%}
+                    {% if externalPayment.name == "PayPalExpress2" %}
+                      <img id="btn_xpressPaypal" class="p-button" alt="Check out with PayPal" role="button" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png" width="170px" height="32px" />
+                    {%endif%}
+                    {% if externalPayment.name == "APPLEPAY" %}
+                      <div class="apple-pay-button" role="button" width="200px" style="display: none" id="applePayButton"></div>
+                    {% endif %}
+                  </div>
+                  {%endif%}
+              {%endfor%}
+            </div>
+          {% endif %}
+        {%endwith%}
+      {% endif %}
       {% endif %}
     </div>
     <div>

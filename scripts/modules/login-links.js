@@ -1,8 +1,11 @@
+/* globals grecaptcha */
+
 /**
  * Adds a login popover to all login links on a page.
  */
 
-define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modules/jquery-mozu=jQuery]>jQuery=jQuery]>jQuery', 'modules/api', 'hyprlive', 'underscore', 'hyprlivecontext', 'vendor/jquery-placeholder/jquery.placeholder','modules/backbone-mozu'], function ($, api, Hypr, _, HyprLiveContext,backbone) {
+define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modules/jquery-mozu=jQuery]>jQuery=jQuery]>jQuery', 'modules/api', 'hyprlive', 'underscore', 'hyprlivecontext', 'vendor/jquery-placeholder/jquery.placeholder','modules/backbone-mozu'],
+function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
     var current = "";
     var usePopovers = function() {
         return !Modernizr.mq('(max-width: 480px)');
@@ -126,14 +129,14 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             this.$el = $(el);
             this.loading = false;
             this.setMethodContext();
-            if (!this.pageType){
+            if (!this.pageType) {
                 this.$el.on('click', this.createPopover);
             }
             else {
                this.$el.on('click', _.bind(this.doFormSubmit, this));
             }
         },
-        doFormSubmit: function(e){
+        doFormSubmit: function(e) {
             e.preventDefault();
             this.$parent = this.$el.closest(this.formSelector);
             this[this.pageType]();
@@ -154,16 +157,47 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             this.$parent[onOrOff]('click', '[data-mz-action="forgotpasswordform"]', this.slideRight);
             this.$parent[onOrOff]('click', '[data-mz-action="loginform"]', this.slideLeft);
             this.$parent[onOrOff]('click', '[data-mz-action="submitlogin"]', this.login);
+            this.$parent[onOrOff]('click', '[data-mz-action="recaptchasubmitlogin"]', this.loginRecaptcha.bind(this));
             this.$parent[onOrOff]('click', '[data-mz-action="submitforgotpassword"]', this.retrievePassword);
             this.$parent[onOrOff]('keypress', 'input', this.handleEnterKey);
         },
         onPopoverShow: function () {
+            var me = this;
             DismissablePopover.prototype.onPopoverShow.apply(this, arguments);
             this.panelWidth = this.$parent.find('.mz-l-slidebox-panel').first().outerWidth();
             this.$slideboxOuter = this.$parent.find('.mz-l-slidebox-outer');
 
             if (this.$el.hasClass('mz-forgot')){
                 this.slideRight();
+            }
+
+            var recaptchaType = HyprLiveContext.locals.themeSettings.recaptchaType;
+
+            var recaptchaContainer = recaptchaType === 'Invisible' ? 'recaptcha-container-global' : 'recaptcha-container-popup';
+
+            if (HyprLiveContext.locals.themeSettings.enableRecaptcha) {
+                if (recaptchaType !== 'Invisible' || !window.renderedRecaptcha) {
+                    grecaptcha.render(
+                        recaptchaContainer,
+                        {
+                            size: recaptchaType === 'Invisible' ? 'invisible' : 'compact',
+                            badge: HyprLiveContext.locals.themeSettings.recaptchaBadgePosition,
+                            theme: HyprLiveContext.locals.themeSettings.recaptchaTheme,
+                            sitekey: HyprLiveContext.locals.themeSettings.recaptchaSiteKey,
+                            callback: function(result) {
+                                window.captchaToken = result;
+
+                                if (recaptchaType === 'Invisible') {
+                                    me.login(result);
+                                }
+                            }
+                        }
+                    );
+                }
+            }
+
+            if (recaptchaType === 'Invisible') {
+                window.renderedRecaptcha = true;
             }
         },
         handleEnterKey: function (e) {
@@ -188,8 +222,38 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             if (e) e.preventDefault();
             this.$slideboxOuter.css('left', 0);
         },
-        login: function () {
+        loginRecaptcha: function() {
+            var me = this;
 
+            if (HyprLiveContext.locals.themeSettings.recaptchaType !== 'Invisible') {
+                return me.login();
+            }
+
+            if (window.captchaToken) {
+                return me.login(window.captchaToken);
+            }
+
+            if (!window.renderedRecaptcha) {
+                grecaptcha.render(
+                    'recaptcha-container-global',
+                    {
+                        size: HyprLiveContext.locals.themeSettings.recaptchaType === 'Invisible' ? 'invisible' : HyprLiveContext.locals.themeSettings.recaptchaSize,
+                        badge: HyprLiveContext.locals.themeSettings.recaptchaBadgePosition,
+                        theme: HyprLiveContext.locals.themeSettings.recaptchaTheme,
+                        sitekey: HyprLiveContext.locals.themeSettings.recaptchaSiteKey,
+                        callback: function(result) {
+                            window.captchaToken = result;
+                            me.login(result);
+                        }
+                    }
+                );
+
+                window.renderedRecaptcha = true;
+            }
+
+            grecaptcha.execute();
+        },
+        login: function (token) {
             this.setLoading(true);
 
             //NGCOM-623
@@ -207,11 +271,18 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
               returnUrl = this.$parent.find('input[name=returnUrl]').val();
             }
 
-
-            api.action('customer', 'loginStorefront', {
+            var data = {
                 email: this.$parent.find('[data-mz-login-email]').val(),
                 password: this.$parent.find('[data-mz-login-password]').val()
-            }).then(this.handleLoginComplete.bind(this, returnUrl), this.displayApiMessage);
+            };
+
+            if (token && typeof token === 'string') {
+                data.token = token;
+            } else if (window.captchaToken) {
+                data.token = window.captchaToken;
+            }
+
+            api.action('customer', 'loginStorefront', data).then(this.handleLoginComplete.bind(this, returnUrl), this.displayApiMessage);
 
         },
         anonymousorder: function() {
@@ -298,6 +369,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             if (!payload.account.emailAddress) return this.displayMessage(Hypr.getLabel('emailMissing')), false;
             if (!payload.password) return this.displayMessage(Hypr.getLabel('passwordMissing')), false;
             if (payload.password !== this.$parent.find('[data-mz-signup-confirmpassword]').val()) return this.displayMessage(Hypr.getLabel('passwordsDoNotMatch')), false;
+            if (!payload.agreeToGDPR) return this.displayMessage(Hypr.getLabel('didNotAgreeToGDPR')), false;
             return true;
         },
         signup: function () {
@@ -305,6 +377,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                 email = this.$parent.find('[data-mz-signup-emailaddress]').val(),
                 firstName = this.$parent.find('[data-mz-signup-firstname]').val(),
                 lastName = this.$parent.find('[data-mz-signup-lastname]').val(),
+                agreeToGDPR = this.$parent.find('[data-mz-signup-agreeToGDPR]').prop('checked'),
                 payload = {
                     account: {
                         emailAddress: email,
@@ -317,9 +390,11 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                             lastNameOrSurname: lastName
                         }]
                     },
-                    password: this.$parent.find('[data-mz-signup-password]').val()
+                    password: this.$parent.find('[data-mz-signup-password]').val(),
+                    agreeToGDPR: agreeToGDPR
                 };
             if (this.validate(payload)) {
+                delete payload.agreeToGDPR;
                 //var user = api.createSync('user', payload);
                 this.setLoading(true);
                 return api.action('customer', 'createStorefront', payload).then(function () {
@@ -473,7 +548,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                 password: $(this).parents('#login').find('[data-mz-login-password]').val()
             };
             current = this;
-            if (self.validateLogin(this, payload) && self.validatePassword(this, payload)) {
+            if (self.validateLogin(this, payload) && self.validatePassword(this, payload)) {                
                 //var user = api.createSync('user', payload);
                 (LoginPopover.prototype).newsetLoading(true);
                 return api.action('customer', 'loginStorefront', {
@@ -543,19 +618,23 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             }
         };
         this.validatePassword = function(el, payload){
+            var passMinLen = Hypr.getThemeSetting('passwordMinLength'),
+                passMaxLen = Hypr.getThemeSetting('passwordMaxLength');
+
             if (!payload.password)
                 return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordMissing')), false;
-            if (payload.password.length < 6) {
-                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
-            } else if (payload.password.length > 50) {
-                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
+            if (payload.password.length < passMinLen) {
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordMinlength', passMinLen)), false;
+            } else if (payload.password.length > passMaxLen) {
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordMaxlength', passMaxLen)), false;
             } else if (payload.password.search(/\d/) == -1) {
-                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordDigit', passMinLen)), false;
             } else if (payload.password.search(/[a-zA-Z]/) == -1) {
-                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
-            } else if (payload.password.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\+\.\,\;\:]/) != -1) {
-                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordLetter', passMinLen)), false;
+            } else if (payload.password.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\-\+\.\,\;\:]/) != -1) {
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordSpecial', passMinLen)), false;
             }
+            console.log('password is valid');
             return true;
         };
         this.validateSignup = function (el, payload) {
@@ -697,7 +776,19 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                 headingElemnt.attr("href", "/c/" + headingElemnt.data("target").replace("#sub-nav-", "").replace("#main-nav-", ""));
                 headingElemnt.removeAttr("aria-expanded aria-controls data-toggle role");
             }
-        });
+		});
+
+        // $('[data-mz-action="quickOrder"]').on('click', function(e){
+        //       // The Quick Order link takes us to the my account page and opens
+        //       // the appropriate pane.
+        //       // If we're already on the my account page we ensure the page reloads.
+        //       var isMyAccount = window.location.href.indexOf("myaccount") > 0;
+        //       if (isMyAccount){
+        //           //window.location.reload(false);
+        //           window.location.assign((HyprLiveContext.locals.siteContext.siteSubdirectory || '') + "/myaccount#QuickOrder");
+        //           window.location.reload(false);
+        //       }
+        // });
 
         $('[data-mz-action="logout"]').each(function(){
             var el = $(this);
@@ -716,6 +807,32 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             }
 
         });
-    });
 
-});
+        $('[data-mz-action="recaptcha-submit"]').each(function() {
+            var loginPage = new SignupPopover();
+            loginPage.formSelector = 'form[name="mz-loginform"]';
+            loginPage.pageType = 'loginRecaptcha';
+            loginPage.init(this);
+
+            var recaptchaContainer = HyprLiveContext.locals.themeSettings.recaptchaType === 'Invisible' ? 'recaptcha-container-global' : 'recaptcha-container';
+
+            if (!window.renderedRecaptcha) {
+                grecaptcha.render(
+                    recaptchaContainer,
+                    {
+                        size: HyprLiveContext.locals.themeSettings.recaptchaType === 'Invisible' ? 'invisible' : HyprLiveContext.locals.themeSettings.recaptchaSize,
+                        badge: HyprLiveContext.locals.themeSettings.recaptchaBadgePosition,
+                        theme: HyprLiveContext.locals.themeSettings.recaptchaTheme,
+                        sitekey: HyprLiveContext.locals.themeSettings.recaptchaSiteKey,
+                        callback: function(result) {
+                            window.captchaToken = result;
+                            loginPage.login(result);
+                        }
+                    }
+                );
+            }
+
+            window.renderedRecaptcha = true;
+        });
+      });
+  });

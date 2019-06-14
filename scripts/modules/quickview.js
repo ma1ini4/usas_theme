@@ -83,6 +83,23 @@ define([
                 _.bindAll(this, "quickviewClose");
 
             },
+            loadAddProductView: function (product) {
+                var self = this;
+                    console.log('QuickViewView this:', self);
+                    console.log('QuickViewView product model:', product);
+                    
+                var addProductView = new QuickViewView({
+                    el: self.$el.find("[mz-modal-product-dialog]"),
+                    model: product,
+                    messagesEl: self.$el.find("[mz-modal-product-dialog]").find('[data-mz-message-bar]')
+                });
+                self._addProductView = addProductView;
+                addProductView.render();
+            }, 
+            handleDialogOpen: function () {
+                this.model.trigger('dialogOpen');
+                this.bootstrapInstance.show();
+            },
             zoomInit: function() {
                 var me = this;
                 $('#zoom').elevateZoom({ zoomType: "inner", cursor: "crosshair", responsive: true });
@@ -122,7 +139,9 @@ define([
             render: function() {
                 var me = this;
 
+                console.log('render', this);
                 Backbone.MozuView.prototype.render.apply(this);
+                console.log('render', this);
             },
             onMouseEnterChangeImage: function(_e) {
                 this.mainImage = $('#quickViewModal .mz-productimages-mainimage').attr('src');
@@ -558,7 +577,7 @@ define([
 
 //                });
             }
-        });
+        });        
 
         $(document).ready(function() {
             var quickViewView = new QuickViewView({
@@ -571,4 +590,7 @@ define([
             });
 
         });
+        return {
+            'ModalView': QuickViewView
+        };
     });

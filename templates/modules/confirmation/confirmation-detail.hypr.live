@@ -1,64 +1,67 @@
 <div class="mz-l-container">
     <h1 class="mz-pagetitle">{{ labels.orderConfirmation }} </h1>
     <div class="col-sm-12 mz-reset-padding-left">
-    	<p class="col-md-5 col-sm-12 mz-reset-padding-left">{{ labels.confirmationText }}</p>
+    	<p class="col-md-5 col-sm-12 mz-reset-padding-left confirmation-text">{{ labels.confirmationText }}</p>
         <i id="mz-print-content-confirmation" class="mz-reset-padding-left fa fa-print pull-right text-right" title="print"  aria-hidden="true" data-mz-print-order></i>
     </div> 
 
-    <p>{{ labels.yourOrderNumber|string_format(model.orderNumber)|safe }}</p>
-
-  <div class="mz-l-stack">
-        {% if model.hasDirectShip %}
-        <div class="mz-l-stack-section">
-            <h4 class="mz-l-stack-sectiontitle">{{ labels.shippingInformation }}</h4>
-            <div class="mz-l-stack-item">
-                <small>{{ labels.shipTo }}</small>
-                <div class="mz-addresssummary">{% include "modules/common/address-summary" with model=model.fulfillmentInfo.fulfillmentContact %}</div>
+    <p class="confirmation-text">{{ labels.yourOrderNumber|string_format(model.orderNumber)|safe }}</p>
+    <div class="mz-l-stack">
+        <div class="flex">
+            
+            {% if model.hasDirectShip %}
+            <div class="mz-l-stack-section">
+                <h4 class="mz-l-stack-sectiontitle">{{ labels.shippingInformation }}</h4>
+                <div class="mz-l-stack-item">
+                    <small>{{ labels.shipTo }}</small>
+                    <div class="mz-addresssummary">{% include "modules/common/address-summary" with model=model.fulfillmentInfo.fulfillmentContact %}</div>
+                </div>
+                <div class="mz-l-stack-item">
+                    <small>{{ labels.shippingMethod }}</small>
+                    <div>{{ model.fulfillmentInfo.shippingMethodName }}</div>
+                </div>
             </div>
-            <div class="mz-l-stack-item">
-                <small>{{ labels.shippingMethod }}</small>
-                <div>{{ model.fulfillmentInfo.shippingMethodName }}</div>
-            </div>
-        </div>
-        {% endif %}
-        {% for item in model.items %}
-        {% if item.fulfillmentMethod == "Pickup" %}
-        <div class="mz-l-stack-section">
-            <h4 class="mz-l-stack-sectiontitle">{{ labels.storePickupFor|string_format(item.product.name)|safe }}</h4>
-            {% with model.locationDetails|findwhere("code", item.fulfillmentLocationCode) as location %}
-            <div class="mz-l-stack-item">
-                <small>{{ labels.storeName }}</small>
-                <div>{{ location.name }}</div>
-
-            </div>
-            <div class="mz-l-stack-item">
-              <small>{{ labels.address }}</small>
-              <div>{{ location.address.address1 }}</div>
-              {% if location.address.address2 %}<div> {{ location.address.address2 }}</div>{% endif %}
-              {% if location.address.address3 %}<div> {{ location.address.address3 }}</div>{% endif %}
-              {% if location.address.address4 %}<div> {{ location.address.address4 }}</div>{% endif %}
-              <div> {{ location.address.cityOrTown }}, {{ location.address.stateOrProvince }}</div>
-              <div> {{location.address.postalOrZipCode}} </div>
-            </div>
-            {% endwith %}
-        </div>
-        {% endif %}
-        {% endfor %}
-
-        <div class="mz-l-stack-section">
-            <h4 class="mz-l-stack-sectiontitle">{{ labels.payments }}</h4>
-            {% if model.total == 0 %}
-                {% with model.total|currency as total %}
-                    <h4 class="mz-confirmation-nopaymentrequired">{{ labels.noPaymentWasRequired|string_format(total) }}</h4>
-                {% endwith %}
-            {% else %}
-                {% for payment in model.payments %}
-                {% if payment.status != "Voided" and payment.status != "Declined" %}
-                {% include "modules/checkout/checkout-payment" with model=payment %}
-                {% endif %}
-                {% endfor %}
             {% endif %}
+            {% for item in model.items %}
+            {% if item.fulfillmentMethod == "Pickup" %}
+            <div class="mz-l-stack-section">
+                <h4 class="mz-l-stack-sectiontitle">{{ labels.storePickupFor|string_format(item.product.name)|safe }}</h4>
+                {% with model.locationDetails|findwhere("code", item.fulfillmentLocationCode) as location %}
+                <div class="mz-l-stack-item">
+                    <small>{{ labels.storeName }}</small>
+                    <div>{{ location.name }}</div>
+
+                </div>
+                <div class="mz-l-stack-item">
+                <small>{{ labels.address }}</small>
+                <div>{{ location.address.address1 }}</div>
+                {% if location.address.address2 %}<div> {{ location.address.address2 }}</div>{% endif %}
+                {% if location.address.address3 %}<div> {{ location.address.address3 }}</div>{% endif %}
+                {% if location.address.address4 %}<div> {{ location.address.address4 }}</div>{% endif %}
+                <div> {{ location.address.cityOrTown }}, {{ location.address.stateOrProvince }}</div>
+                <div> {{location.address.postalOrZipCode}} </div>
+                </div>
+                {% endwith %}
+            </div>
+            {% endif %}
+            {% endfor %}
+            
+            <div class="mz-l-stack-section">
+                <h4 class="mz-l-stack-sectiontitle">{{ labels.payments }}</h4>
+                {% if model.total == 0 %}
+                    {% with model.total|currency as total %}
+                        <h4 class="mz-confirmation-nopaymentrequired">{{ labels.noPaymentWasRequired|string_format(total) }}</h4>
+                    {% endwith %}
+                {% else %}
+                    {% for payment in model.payments %}
+                    {% if payment.status != "Voided" and payment.status != "Declined" %}
+                    {% include "modules/checkout/checkout-payment" with model=payment %}
+                    {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
         </div>
+
 
         {% if model.attributes.length > 0 %}
         <div class="mz-l-stack-section">
@@ -74,7 +77,7 @@
                             {{ attributeVal|date("F j, Y") }}
                         {% else %}
                             {% if attributeDef.dataType == "Bool" %}
-                                {% if attributeVal == "True" %}
+                                {% if attributeVal == "True" or attributeVal == "true" %}
                                 Yes
                                 {% else %}
                                 No
@@ -110,6 +113,3 @@
         </div>
     </div>
 </div><!-- #order-confirmation -->
-<style>
-    {% inline_style "print-order.less" %}
-</style>

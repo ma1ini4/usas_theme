@@ -1,0 +1,4 @@
+<div>
+			{{model.paymentType}} : {{orderpayment.paymentNumberMasked}}
+			{{labels.paymentFor}} {{ model.paymentAmount|divide(100)|floatformat(2)|currency }}
+</div>

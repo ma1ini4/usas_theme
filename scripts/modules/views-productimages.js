@@ -22,9 +22,30 @@
         },
         initialize: function() {
             // preload images
+            var self = this;
+            self.model.on("change:productImages", function(model, images){
+                self.clearImageCache();
+                self.initImages(self.model.get('productImages'));
+                self.render();
+                if(images.length) {
+                    self.selectedImageIx = images[0].sequence;
+                    self.updateMainImage();
+                }
+
+            });
+            self.initImages();
+        },
+        initImages: function(images){
             var imageCache = this.imageCache = {},
                 cacheKey = Hypr.engine.options.locals.siteContext.generalSettings.cdnCacheBustKey;
-            _.each(this.model.get('content').get('productImages'), function(img) {
+                images = images || [];
+
+                if(!images.length) {
+                    images = this.model.get('content').get('productImages');
+                }
+
+            _.each(images, function (img) {
+
                 var i = new Image();
                 i.src = img.imageUrl + '?maxWidth=' + Hypr.getThemeSetting('productImagePdpMaxWidth') + '&_mzCb=' + cacheKey;
                 i.zoomsrc = img.imageUrl + '?maxWidth=' + Hypr.getThemeSetting('productZoomImageMaxWidth') + '&_mzCb=' + cacheKey;
@@ -60,6 +81,9 @@
             this.selectedMainImageAltText = $thumb.attr('alt');
             this.updateMainImage();
             return false;
+        },
+        clearImageCache: function(){
+            this.imageCache = {};
         },
         updateMainImage: function() {
             var self = this;

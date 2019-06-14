@@ -1,13 +1,13 @@
 <tr class="mz-carttable-item">
   <td class="mz-carttable-item-product">
-    {% with item.product|get_product_attribute("tenant~color") as colorAttr %}  
+    {% with item.product|get_product_attribute("tenant~color") as colorAttr %}
       {% if colorAttr %}
         {% with colorAttr.value|replace(" ","_") as colorValue %}
           {% with "/cms/files/{0}_{1}_v1.jpg"|string_format(item.product.productCode, colorValue, themeSettings.globalCartItemImageMaxWidth) as fileName %}
               <a href="{{ item.product.url }}">
                 <img class="mz-carttable-item-image" src="https:{% make_url "cdn" fileName with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameter %} " {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}"{% endif %} onerror="this.setAttribute('src','{% make_url "image" item.product with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameters %}')" />
               </a>
-          {% endwith %}     
+          {% endwith %}
         {% endwith %}
       {% else %}
         {% if item.product.imageUrl %}
@@ -20,8 +20,8 @@
               [{{ labels.noImages }}]
             </div>
           </a>
-        {% endif %}    
-      {% endif %}  
+        {% endif %}
+      {% endif %}
     {% endwith %}
     <div class="mz-carttable-item-info-wrap{% if not item.product.imageUrl %} mz-no-image{% endif %}">
       <a class="mz-carttable-item-title" href="{{item.product.url}}">{{ item.product.name }}</a>
@@ -61,6 +61,7 @@
   </td>
 
   <td class="mz-carttable-item-fulfillment">
+    {% block fullfillment %}
     {% if item.fulfillmentMethod != "Digital" %}
     {% include "modules/common/choose-fulfillment-cart" with item as item %}
     {% else %}
@@ -68,17 +69,45 @@
       <p>{{ labels.digitalDeliveryOnly }}</p>
     </div>
     {% endif %}
+    {% endblock fullfillment %}
 </td>
+  {% block price %}
   <td class="mz-carttable-item-price">
     {% include "modules/common/item-price" %}
   </td>
+  {% endblock price %}
+  {% block quantity %}
   <td class="mz-carttable-item-qty">
     <input class="mz-carttable-qty-field" type="number" min="1" {% if model.isLoading %}disabled="disabled"{% endif %} data-mz-cart-item="{{ item.id }}" data-mz-value="quantity" value="{{ item.quantity }}" />
   </td>
+  {% endblock quantity %}
+  {% block itemTotal %}
   <td class="mz-carttable-item-total">
       {% include "modules/common/item-total" %}
   </td>
+  {% endblock itemTotal %}
+  {% block removeItem %}
   <td class="mz-carttable-item-remove">
     <a href="javascript:;" data-mz-action="removeItem" data-mz-cart-item="{{ item.id }}" class="mz-icon mz-icon-close">{{ labels.remove }}</a>
   </td>
+  {% endblock removeItem %}
 </tr>
+
+{% if item.productDiscount and item.discountedTotal < 1  %}
+  <tr class="mz-carttable-item-autoAddActions">
+    <td colspan="6">
+      <div class="mz-carttable-item-autoAddDiscount">
+        <span class="mz-carttable-item-autoAddDiscount-name">{{ item.productDiscount.discount.name }}</span>
+
+          <span class="mz-carttable-item-autoAddDiscount-actions">
+            {% if item.product.productUsage == "Configurable" %}
+              <a href="javascript:;" class="mz-carttable-item-autoAddDiscount-actions" data-mz-action="updateAutoAddItem"  data-mz-cart-item="{{ item.id }}" data-mz-discount-id="{{ item.productDiscount.discount.id }}">Update</a>
+            {% endif %}
+            <a href="javascript:;" class="mz-carttable-item-autoAddDiscount-actions" data-mz-action="removeItem" data-mz-cart-item="{{ item.id }}">Remove</a>
+          </span>
+      </div>
+    </td>
+  </tr>
+{% endif %}
+{% block errormessages %}
+{% endblock %}

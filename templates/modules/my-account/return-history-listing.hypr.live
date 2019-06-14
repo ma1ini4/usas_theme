@@ -19,7 +19,7 @@
                     <dd>{{ model.status }}</dd>
                 </dl>
             </li>
-        
+
 <li class="mz-orderlisting-details-item">
     {% if model.status == "Authorized" %}
         {% with model.packages|findwhere("hasLabel", "true") as packageWithLabel %}
@@ -38,6 +38,6 @@
 {% endblock order-details %}
 {% block order-items %}
     {% for item in model.items %}
-    {% include "modules/my-account/return-history-item-listing" with model=item %}
+        {% include "modules/my-account/return-history-item-listing" with model=item %}
     {% endfor %}
 {% endblock order-items %}

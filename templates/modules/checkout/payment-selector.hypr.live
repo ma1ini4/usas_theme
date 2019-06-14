@@ -1,5 +1,10 @@
 {% with paymentId|default(0) as paymentId %}
 <div class="mz-l-formfieldgroup mz-paymentselector">
+    {% if model.paymentType == "PayWithAmazon" %}
+        <div class="mz-l-formfieldgroup-row mz-l-security-box" >
+            {{ labels.awsPaymentWarning }}
+         </div>
+    {%endif%}
     {% if siteContext.checkoutSettings.purchaseOrder.isEnabled and model.purchaseOrder.isEnabled %}
     <div class="mz-l-formfieldgroup-row mz-paymentselector-option mz-paymentselector-newcreditcard mz-checkoutform {% if model.paymentType == "PurchaseOrder" %}mz-checkoutform-active{% endif %}">
         <div class="mz-l-formfieldgroup-row">
@@ -17,6 +22,7 @@
         {% endif %}
     </div>
     {% endif %}
+
     <div class="mz-l-formfieldgroup-row mz-paymentselector-option mz-paymentselector-newcreditcard mz-checkoutform {% if model.paymentType == "CreditCard" and not model.usingSavedCard %}mz-checkoutform-active{% endif %}">
         <div class="mz-l-formfieldgroup-row">
             <div class="mz-l-formfieldgroup-cell">
@@ -81,8 +87,8 @@
         {% endif %}
     </div>
     {% endif %}
-    
-    {% with siteContext.checkoutSettings.externalPaymentWorkflowSettings|findwhere("isEnabled", true) as externalPaymentWorkflowsEnabled %} 
+
+    {% with siteContext.checkoutSettings.externalPaymentWorkflowSettings|findwhere("isEnabled", true) as externalPaymentWorkflowsEnabled %}
         {% if externalPaymentWorkflowsEnabled %}
             <div class="mz-l-formfieldgroup-row">
                 <div class="mz-paymentselector-label-separator">&ndash; {{ labels.or }} &ndash;</div>
@@ -103,6 +109,13 @@
                             {% if name == "paypalexpress2" %}
                                 <img id="btn_xpressPaypal" class="p-button" alt="Check out with PayPal" role="button" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png" width="170px" height="32px" align="left" style="margin-right:7px; float:right;"/>
                             {%endif%}
+                             {% if name == "paywithamazon" %}
+                                <div class="mz-paymenttype" id="amazonButtonPaymentSection">
+                                </div>
+                             {% endif %}
+                             {% if name == "applepay" %}
+                             <div class="apple-pay-button" role="button" width="200px" style="display: none" id="applePayButton"></div>
+                             {% endif %}
                         </div>
                     </div>
                 {% endwith %}

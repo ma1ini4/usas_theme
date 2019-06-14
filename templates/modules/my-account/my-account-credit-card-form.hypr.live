@@ -33,8 +33,8 @@
     {% endif %}
     </div>
     <div class="mz-creditcard-actions">
-        <button class="mz-button button button-primary mz-creditcard-save" data-mz-action="finishEditCard">{{ labels.save }}</button>
-        <button class="mz-button button button_secondary mz-creditcard-cancel" data-mz-action="cancelEditCard">{{ labels.cancel }}</button>
+        <button class="primary-btn mz-creditcard-save" data-mz-action="finishEditCard">{{ labels.save }}</button>
+        <button class="secondary-btn mz-creditcard-cancel" data-mz-action="cancelEditCard">{{ labels.cancel }}</button>
     </div>
     </li>
 {% endblock credit-card-form %}

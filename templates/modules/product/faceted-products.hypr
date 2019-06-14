@@ -1,8 +1,8 @@
-﻿
+
 {% if not pageContext.query.partial %}
 <script type="text/json" id="data-mz-preload-facetedproducts">
 {
-	"items" : {% json model.items %},
+		"items" : {% json model.items %},
     "facets": {% json model.facets %},
     "currentPage": {{ model.currentPage }},
     "firstIndex": {{ model.firstIndex }},
@@ -50,12 +50,19 @@
 				</div>
 			</div>
 		</div>
-
+		<div class="modal fade" id="mz-my-store-selector">
+		    {% include "modules/my-store/my-store-location-select" %}
+		</div>
 		<div class="mz-l-paginatedlist pull-right{% if model.facets %} col-xs-12 {%else%} col-xs-12{% endif %}">
 			<div class="mz-l-paginatedlist-header">
 				<!-- <div data-mz-pageview class="mz-pageview">
 					{% include "modules/common/page-view" %}
 				</div> -->
+				{% if themeSettings.allowFilterByLocationInventory %}
+            <div data-mz-my-store class="mz-my-store">
+                {% include "modules/common/my-store" %}
+            </div>
+        {% endif %}
 				<div data-mz-pagenumbers class="mz-pagenumbers">
 					{% include "modules/common/page-numbers" %}
 				</div>

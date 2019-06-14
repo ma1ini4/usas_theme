@@ -1,7 +1,7 @@
 define(['underscore', 'modules/backbone-mozu', 'hyprlive', "modules/api", "modules/models-product",
-    "hyprlivecontext", 'modules/models-location'
+    "hyprlivecontext", 'modules/models-location', 'modules/cart/discount-dialog/models-discount-dialog'
   ], function (_, Backbone, Hypr, api, ProductModels,
-        HyprLiveContext, LocationModels) {
+      HyprLiveContext, LocationModels, DiscountDialogModels) {
 
     var CartItemProduct = ProductModels.Product.extend({
         helpers: ['mainImage','directShipSupported', 'inStorePickupSupported'],
@@ -21,12 +21,12 @@ define(['underscore', 'modules/backbone-mozu', 'hyprlive', "modules/api", "modul
         inStorePickupSupported: function(){
             return (_.indexOf(this.get('fulfillmentTypesSupported'), "InStorePickup") !== -1) ? true : false;
         }
+
     }),
 
     CartItem = Backbone.MozuModel.extend({
         relations: {
             product: CartItemProduct
-
         },
         validation: {
             quantity: {
@@ -47,26 +47,30 @@ define(['underscore', 'modules/backbone-mozu', 'hyprlive', "modules/api", "modul
             var self = this;
             var oldQuantity = this.previous("quantity");
             if (this.hasChanged("quantity")) {
-                this.apiUpdateQuantity(this.get("quantity"))
-                    .then(null, function() {
-                        // Quantity update failed, e.g. due to limited quantity or min. quantity not met. Roll back.
-                        self.set("quantity", oldQuantity);
-                        self.trigger("quantityupdatefailed", self, oldQuantity);
-                    });
+                this.apiModel.updateQuantity(this.get("quantity"))
+                    .then(
+                        function() {
+                            //self.collection.parent.checkBOGA();
+                        },
+                        function() {
+                            // Quantity update failed, e.g. due to limited quantity or min. quantity not met. Roll back.
+                            self.set("quantity", oldQuantity);
+                            self.trigger("quantityupdatefailed", self, oldQuantity);
+                        }
+                    );
             }
         },
-        storeLocation : function(){
+        storeLocation: function(){
             var self = this;
             if(self.get('fulfillmentLocationCode')) {
                 return self.collection.parent.get('storeLocationsCache').getLocationByCode(self.get('fulfillmentLocationCode'));
             }
             return;
         }
-
     }),
     StoreLocationsCache = Backbone.Collection.extend({
         addLocation : function(location){
-            this.add(new LocationModels.Location(location), {merge: true});
+          this.add(new LocationModels.Location(location), {merge: true});
         },
         getLocations : function(){
             return this.toJSON();
@@ -81,14 +85,15 @@ define(['underscore', 'modules/backbone-mozu', 'hyprlive', "modules/api", "modul
     Cart = Backbone.MozuModel.extend({
         mozuType: 'cart',
         handlesMessages: true,
-        helpers: ['isEmpty','count'],
+        helpers: ['isEmpty','count','hasRequiredBehavior'],
         relations: {
             items: Backbone.Collection.extend({
                 model: CartItem
             }),
-            storeLocationsCache : StoreLocationsCache
+            storeLocationsCache : StoreLocationsCache,
+            discountModal: DiscountDialogModels
         },
-
+        requiredBehaviors: [ 1008 ],
         initialize: function() {
             var self = this;
             this.get("items").on('sync remove', this.fetch, this)
@@ -102,6 +107,76 @@ define(['underscore', 'modules/backbone-mozu', 'hyprlive', "modules/api", "modul
                     });
                 }
             });
+
+            this.get('discountModal').set('discounts', this.getSuggestedDiscounts());
+        },
+        getSuggestedDiscounts: function(){
+            var self = this;
+
+            var rejectedDiscounts = self.get('rejectedDiscounts') || [];
+            var suggestedDiscounts = self.get('suggestedDiscounts') || [];
+            var filteredDiscounts = [];
+            if (suggestedDiscounts.length) {
+                filteredDiscounts = _.filter(suggestedDiscounts, function(discount){
+                    return !_.findWhere(rejectedDiscounts, {discountId: discount.discountId});
+                });
+            }
+            return filteredDiscounts;
+        },
+        checkBOGA: function(){
+          //Called whenever we would need to add an additional item to the cart
+          //due to a BOGA discount (cart initialization and after application
+          // of a coupon code)
+          var me = this;
+          var suggestedDiscounts = this.get("suggestedDiscounts") || [];
+
+          // First we filter our list down to
+          // just the products we know we want added.
+          var productsToAdd = [];
+          suggestedDiscounts.forEach(function(discountItem){
+            var cartHasDiscountItem = me.get('items').some(function(cartItem){
+              return discountItem.productCode === cartItem.productCode;
+            });
+
+            if (discountItem.autoAdd && !cartHasDiscountItem){
+              productsToAdd.push(discountItem);
+            }
+          });
+
+          // We now have a list of productsToAdd.
+          // We'll define a function to fetch and re render the cart after
+          // each of the product fetches have been completed.
+
+          var renderCartWhenFinished = _.after(productsToAdd.length, function(){
+            me.fetch().then(function(){
+              me.trigger('render');
+            });
+          });
+          // We define a recursive function to assure that each product code
+          // gets added to the cart sequentially.
+          var addProductsToCart = function(productIndex){
+            var totalLength = productsToAdd.length;
+            var currentIndex = productIndex || 0;
+
+            if (productsToAdd[currentIndex]){
+              var productToAdd = productsToAdd[currentIndex];
+              var bogaProduct = new CartItemProduct({productCode: productToAdd.productCode});
+              bogaProduct.fetch().then(function(){
+                bogaProduct.apiAddToCart({autoAddDiscountId: productToAdd.discountId}).then(function(cartItem){
+                  var nextProductIndex = currentIndex + 1;
+                  renderCartWhenFinished();
+                  addProductsToCart(nextProductIndex);
+                });
+              }, function(error){
+                // Something went wrong with fetching one of the products.
+                // We don't want this to halt the whole process.
+                var nextProductIndex = currentIndex + 1;
+                renderCartWhenFinished();
+                addProductsToCart(nextProductIndex);
+              });
+            }
+          };
+          addProductsToCart();
         },
         isEmpty: function() {
             return this.get("items").length < 1;
@@ -163,7 +238,10 @@ define(['underscore', 'modules/backbone-mozu', 'hyprlive', "modules/api", "modul
                     return d.couponCode && d.couponCode.toLowerCase() === lowerCode;
                 }));
                 me.set('tentativeCoupon', couponExists && couponIsNotApplied ? code : undefined);
-
+                if (me.getSuggestedDiscounts().length) {
+                    me.get('discountModal').set('discounts', me.getSuggestedDiscounts());
+                    window.cartView.discountModalView.render();
+                }
                 me.isLoading(false);
             });
         },

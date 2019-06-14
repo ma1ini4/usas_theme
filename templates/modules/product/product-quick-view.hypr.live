@@ -1,5 +1,6 @@
 <!-- Modal -->
 <div id="quickViewModal" class="modal fade quickviewElement">
+
     {% include "modules/product/product-validation" %}
     <div class="modal-dialog">
         <div class="modal-content">
