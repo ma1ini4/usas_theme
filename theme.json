@@ -2003,6 +2003,24 @@
               "name": "image-mobile",
               "fieldLabel": "Select / Upload Image for Mobile",
               "xtype": "mz-input-imageurl"
+            },
+            {
+              "anchor": "100%",
+              "fieldLabel": "Image URL",
+              "name": "image_url",
+              "xtype": "mz-input-text"
+            },
+            {
+              "anchor": "100%",
+              "fieldLabel": "Image Alt",
+              "name": "image_alt",
+              "xtype": "mz-input-text"
+            },
+            {
+              "anchor": "100%",
+              "fieldLabel": "Image Title",
+              "name": "image_title",
+              "xtype": "mz-input-text"
             }
           ]
         }
