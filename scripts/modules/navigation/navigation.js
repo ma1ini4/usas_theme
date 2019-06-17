@@ -107,6 +107,41 @@ define([
         $(myAccount).width('auto').removeClass('truncated-username');
       }
     }
+    function navLinksActions() {
+      var isTablet = ($(window).width() >= 767 && $(window).width() <= 1024) ? true : false;
+
+      if (isTablet) {
+
+        $('.top-layer .mz-sitenav-item-inner > a.mz-sitenav-link').each(function () {
+          var tapped = false;
+
+          $(this).on("touchstart", function (e) {
+            
+            if (!tapped) { 
+              tapped = setTimeout(function () {
+                tapped = null;
+                $(e.target).parents('li.top-layer').trigger('mouseenter');
+              }, 300); 
+            } else { 
+              clearTimeout(tapped);
+              tapped = null;
+              window.open(this.href, '_self');
+            }
+            // e.preventDefault();
+          });
+          
+          $(this).click(function(e){
+            e.preventDefault();
+          });   
+          
+          $(this).dblclick(function (e) {
+            e.preventDefault();
+            window.open(this.href, '_self');
+          });
+          
+        });
+      } 
+    }
     $(document).ready(function() {
         try {
             $('.sub-nav-section li:has(.sub-dropdown-menu)').doubletaptogo();
@@ -120,11 +155,13 @@ define([
           }, 50);
         });
         truncateUsername();
+        navLinksActions();
     });
     $(window).resize(function() {
         calculatingSubPosition();
         removeMobileNavStyles();
         truncateUsername();
+        navLinksActions();
     });
     $('.sub-level-col.col-sm-3').each(function(index, el) {
         var html = $(el).html().trim();
