@@ -2418,6 +2418,24 @@ ul.tabs {
     }
 
     .tabs-mobile {
+        .panel-body {
+            background-color: #e6e7e8;
+
+            .prop-list {
+
+                .prop-list-item {
+                    display: flex;
+
+                    &:nth-child(even) {
+                        background-color: #FFF;
+                    }
+                }
+
+                .prop-name {
+                    font-weight: @semi-bold;
+                }
+            }
+        }
         .panel-heading {
             @media @mobile {
                 border-radius: 0px;

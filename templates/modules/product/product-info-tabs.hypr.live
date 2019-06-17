@@ -98,8 +98,10 @@
                  <div class="tab-content-2">
                     <div class="col-sm-4 col-md-12 prop-list ">
                         {% for content in model.infoTab3Content %}
-                            <div class="prop-name col-md-3">{{content.name}}</div>
-                            <div class="prop-value col-md-9">{{content.value}}</div>
+                            <div class="prop-list-item">
+                                <div class="prop-name col-md-3">{{content.name}}</div>
+                                <div class="prop-value col-md-9">{{content.value}}</div>
+                            </div>
                         {% endfor %}
                         </div>
                         <div class="clearfix"></div>
@@ -121,8 +123,10 @@
                  <div class="tab-content-2">
                     <div class="col-sm-4 col-md-12 prop-list ">
                         {% for content in model.infoTab4Content %}
-                            <div class="prop-name col-md-3">{{content.name}}</div>
-                            <div class="prop-value col-md-9">{{content.value}}</div>
+                            <div class="prop-list-item">
+                                <div class="prop-name col-md-3">{{content.name}}</div>
+                                <div class="prop-value col-md-9">{{content.value}}</div>
+                            </div>
                         {% endfor %}
                         </div>
                         <div class="clearfix"></div>
@@ -144,8 +148,10 @@
                  <div class="tab-content-2">
                     <div class="col-sm-4 col-md-12 prop-list ">
                         {% for content in model.infoTab5Content %}
-                            <div class="prop-name col-md-3">{{content.name}}</div>
-                            <div class="prop-value col-md-9">{{content.value}}</div>
+                            <div class="prop-list-item">
+                                <div class="prop-name col-md-3">{{content.name}}</div>
+                                <div class="prop-value col-md-9">{{content.value}}</div>
+                            </div>
                         {% endfor %}
                         </div>
                         <div class="clearfix"></div>
@@ -200,8 +206,10 @@
                   {% if model.infoTab2Content %}
                        <div class="tab-content-2 prop-list">
                           {% for content in model.infoTab2Content %}
-                              <div class="prop-name col-xs-6">{{content.name}}</div>
-                              <div class="prop-value col-xs-6">{{content.value}}</div>
+                              <div class="prop-list-item">
+                                <div class="prop-name col-xs-6">{{content.name}}</div>
+                                <div class="prop-value col-xs-6">{{content.value}}</div>
+                              </div>
                           {% endfor %}
                        </div>
                   {% else %}
@@ -231,8 +239,10 @@
               {% if model.infoTab3Content %}
                    <div class="tab-content-2 prop-list">
                       {% for content in model.infoTab3Content %}
-                          <div class="prop-name col-xs-6">{{content.name}}</div>
-                          <div class="prop-value col-xs-6">{{content.value}}</div>
+                          <div class="prop-list-item">
+                              <div class="prop-name col-xs-6">{{content.name}}</div>
+                              <div class="prop-value col-xs-6">{{content.value}}</div>
+                          </div>
                       {% endfor %}
                    </div>
               {% else %}
@@ -262,8 +272,10 @@
               {% if model.infoTab4Content %}
                    <div class="tab-content-2 prop-list">
                       {% for content in model.infoTab4Content %}
-                          <div class="prop-name col-xs-6">{{content.name}}</div>
-                          <div class="prop-value col-xs-6">{{content.value}}</div>
+                          <div class="prop-list-item">
+                              <div class="prop-name col-xs-6">{{content.name}}</div>
+                              <div class="prop-value col-xs-6">{{content.value}}</div>
+                          </div>
                       {% endfor %}
                    </div>
               {% else %}
@@ -293,8 +305,10 @@
               {% if model.infoTab5Content %}
                    <div class="tab-content-2 prop-list">
                       {% for content in model.infoTab5Content %}
-                          <div class="prop-name col-xs-6">{{content.name}}</div>
-                          <div class="prop-value col-xs-6">{{content.value}}</div>
+                          <div class="prop-list-item">
+                              <div class="prop-name col-xs-6">{{content.name}}</div>
+                              <div class="prop-value col-xs-6">{{content.value}}</div>
+                          </div>
                       {% endfor %}
                    </div>
               {% else %}
