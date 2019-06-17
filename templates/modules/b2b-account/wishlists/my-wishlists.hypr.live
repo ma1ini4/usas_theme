@@ -2,8 +2,8 @@
 <div class="mz-b2b-wishlists">
     <div class="mz-l-stack-section" style="clear:none">
         <h3 class="mz-l-stack-sectiontitle">
-            Wishlists
-            <a data-mz-action="newWishlist">{{ labels.addList }}</a>
+            Quotes
+            <a data-mz-action="newWishlist">Retrieve Quote</a>
         </h3>
         {% if model.isEditMode %}
             {% include "modules/common/message-bar" with model=model.messages %}
