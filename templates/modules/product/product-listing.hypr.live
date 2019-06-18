@@ -44,6 +44,7 @@
             {% include "modules/product/price-stack" %}
         </div>
         <!--Color Swatch-->
+        {% comment %}
         {% for option in model.options %}
         {% if option.attributeFQN=="tenant~volume-color-style" and option.values.length!=0 %}
         <div class="ml-product-swatch">
@@ -53,5 +54,6 @@
         </div>
         {% endif %}
         {% endfor %}
+        {% endcomment %}
     </div>
 </div>
