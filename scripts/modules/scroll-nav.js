@@ -10,7 +10,9 @@
                     }, 500);
                 $this.on('click', 'a', function (e) {
                     e.preventDefault();
-                    $(this.getAttribute('href')).ScrollTo({ axis: 'y', offsetTop: gutterWidth });
+                    if(!$(e.target).hasClass('logout')) {
+                        $(this.getAttribute('href')).ScrollTo({ axis: 'y', offsetTop: gutterWidth });
+                    }
                 }).affix({
                     offset: {
                         top: $this.offset().top - gutterWidth,
