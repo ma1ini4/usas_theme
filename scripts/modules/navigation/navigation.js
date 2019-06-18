@@ -111,36 +111,24 @@ define([
       var isTablet = ($(window).width() >= 767 && $(window).width() <= 1024) ? true : false;
 
       if (isTablet) {
-        var counter = 0;
-        var open = false;
         
         $('.top-layer .mz-sitenav-item-inner > a.mz-sitenav-link').each(function () {
-          var tapped = false;
+          var opened = false;
+          var counter = 0;
 
           $(this).on("touchstart", function (e) {
+            counter++;           
             
-            if (!tapped) { 
-              console.log(open);
-              open = true;  
-              counter++;
-
-              tapped = setTimeout(function () {
-                tapped = true;
-                $(e.target).parents('li.top-layer').trigger('mouseenter');
-              }, 300); 
-            } else { 
-              clearTimeout(tapped);
-              tapped = false;
+            if (counter % 2 == 0 && opened) {              
               window.open(this.href, '_self');
-            }
 
-            if (open && counter !== 0) {
-              console.log(open, 'cond');
-              // window.open(this.href, '_self');
-            }
-              counter = 0;
-              open = false;
+              console.log(2);
+            } else {
+              opened = true;
+              $(e.target).parents('li.top-layer').trigger('mouseenter');
 
+              console.log(1);                      
+            }       
             // e.preventDefault();
           });
           
