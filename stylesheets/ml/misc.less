@@ -1565,9 +1565,6 @@ ul.tabs {
     }
 
     .mz-l-paginatedlist-header {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
         width: 100%;
         float: left;
 
@@ -1631,6 +1628,10 @@ ul.tabs {
         }
 
         @media @mobile {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
             & > div {
                 margin: 10px 0;
 
