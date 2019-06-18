@@ -111,22 +111,36 @@ define([
       var isTablet = ($(window).width() >= 767 && $(window).width() <= 1024) ? true : false;
 
       if (isTablet) {
-
+        var counter = 0;
+        var open = false;
+        
         $('.top-layer .mz-sitenav-item-inner > a.mz-sitenav-link').each(function () {
           var tapped = false;
 
           $(this).on("touchstart", function (e) {
             
             if (!tapped) { 
+              console.log(open);
+              open = true;  
+              counter++;
+
               tapped = setTimeout(function () {
-                tapped = null;
+                tapped = true;
                 $(e.target).parents('li.top-layer').trigger('mouseenter');
               }, 300); 
             } else { 
               clearTimeout(tapped);
-              tapped = null;
+              tapped = false;
               window.open(this.href, '_self');
             }
+
+            if (open && counter !== 0) {
+              console.log(open, 'cond');
+              // window.open(this.href, '_self');
+            }
+              counter = 0;
+              open = false;
+
             // e.preventDefault();
           });
           
