@@ -328,7 +328,7 @@ define([
                         if ($(e.currentTarget).parents('.product-color-swatches').length > 0) {
                             colorSwatch.changeColorSwatch(e);
                         }
-                        blockUiLoader.globalLoader();
+                        // blockUiLoader.globalLoader();
                         return this.configureAttribute($(e.currentTarget));
                     }
                 }
@@ -438,9 +438,9 @@ define([
                     });
                     product.apiConfigure({
                         options: prodOptions
-                    },
-                    console.log(prodOptions)
-                    ).then(function (e) {
+                    })
+                    .then(function (e) {
+                        console.log(prodOptions);                        
                         
                         $('[data-mz-validationmessage-for="quantity"]').text("");
                         if (isRequiredOptionsSet) {
