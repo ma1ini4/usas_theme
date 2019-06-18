@@ -1554,11 +1554,23 @@ ul.tabs {
             display: block;
             // width: 100%;
         }
+
+        @media @mobile {
+            flex-wrap: wrap;
+
+            span {
+                margin: 10px 0;
+            }
+        }
     }
 
     .mz-l-paginatedlist-header {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
         width: 100%;
         float: left;
+
 
         .title-sortby-wrappper {
             .mz-sortby {
@@ -1614,6 +1626,17 @@ ul.tabs {
                         }
                     }
 
+                }
+            }
+        }
+
+        @media @mobile {
+            & > div {
+                margin: 10px 0;
+
+                &:first-child {
+                    margin-right: auto;
+                    padding-right: 10px;
                 }
             }
         }
