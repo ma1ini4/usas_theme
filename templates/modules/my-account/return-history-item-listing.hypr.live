@@ -1,12 +1,20 @@
 ﻿
-<div class="mz-itemlisting mz-itemlisting-rmaitem mz-l-formfieldgroup-row"">
+<div class="mz-itemlisting mz-itemlisting-rmaitem mz-l-formfieldgroup-row">
 
 <div class="mz-l-formfieldgroup-cell">
 {% block item-listing-image %}
       {% if model.product.imageUrl %}
-      <div class="mz-itemlisting-thumb">
-        <img class="mz-itemlisting-thumb-img" src="{% make_url "image" model.product with max=70 as_parameters %}" {% if model.product.imageAlternateText %}alt="{{ model.product.imageAlternateText }}"{% endif %} />
-      </div>
+        <div class="mz-itemlisting-thumb">
+          <a href="{{ model.product.url }}{% if model.product.variationProductCode %}?vpc={{model.product.variationProductCode}}{% endif %}">
+            <img class="mz-itemlisting-thumb-img" src="{% make_url "image" model.product with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameters %}" {% if model.product.imageAlternateText %}alt="{{ model.product.imageAlternateText }}"{% endif %} />
+          </a>
+        </div>
+      {% else %}
+        <a href="{{ model.product.url }}{% if model.product.variationProductCode %}?vpc={{model.product.variationProductCode}}{% endif %}">
+          <span class="mz-product-image-placeholder pull-left">
+            <span class="mz-productlisting-imageplaceholdertext">{{ labels.productImagePlaceholder }}</span>
+          </span>
+        </a>
       {% endif %}
   {% endblock item-listing-image %}
 
@@ -25,7 +33,7 @@
         {% for option in model.product.options %}{{ option.name }}: {{ option.value }}, {% endfor %}{{ model.product.variationProductCode|default(model.product.productCode) }}{% if model.product.measurements.packageWeight.value %}, {{ model.product.measurements.packageWeight.value }}{{model.measurements.packageWeight.unit }}{% endif %}
       </div>
       <div class="mz-itemlisting-price">
-       {{labels.orderPackagePrice}} : {%if model.product.price.tenantOverridePrice %} {{ model.product.price.tenantOverridePrice|currency }} {% else %} {%if model.product.price.salePrice %} {{ model.product.price.salePrice|currency }} {% else %} {{ model.product.price.price|currency }} {%endif%}{%endif%}
+       {{labels.price}} : {%if model.product.price.tenantOverridePrice %} {{ model.product.price.tenantOverridePrice|currency }} {% else %} {%if model.product.price.salePrice %} {{ model.product.price.salePrice|currency }} {% else %} {{ model.product.price.price|currency }} {%endif%}{%endif%}
       </div>
 
       {% if model.product.bundledProducts.length > 0 %}
@@ -43,10 +51,9 @@
   </div>
 {% endblock item-listing-details %}
 </div>
-
-<div class="mz-l-formfieldgroup-cell">
+<div class="mz-l-formfieldgroup-cell mz-itemlisting-rmaitem-details-block">
     <div class="mz-itemlisting-rmaitem-details">
-        <h3>{{ labels.returnDetails }}</h3>
+        <h6>{{ labels.returnDetails }}</h6>
         <dl class="mz-propertylist">
             {% for r in model.reasons %}
             <dd>{{ r.reason }}</dd>

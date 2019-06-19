@@ -31,6 +31,10 @@
         </a>
     {% endif %}
 
+    <div id="mz-discount-threshold-messages">
+        {% include "modules/checkout/checkout-discount-threshold-messages" with model=model %}
+    </div>
+
     <form id="checkout-form" class="mz-checkoutform mz-l-2column mz-l-2column-right fades-in" method="post" onsubmit="return false;">
 
     {% include "modules/common/message-bar" with model=model.messages %}
@@ -81,7 +85,7 @@
           </div>
         </div>
     {% endblock modal-dialog %}
-
+    <div id="AmazonPayButton" style="display:none;"/>
 
 
 </form>

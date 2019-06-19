@@ -1,0 +1,10 @@
+    <div>{{ model.billFirstName }} {{ model.billMiddleName }}</div>
+    <div>{{ model.billAddress1 }}</div>
+    {% if model.billAddress2 %}
+        <div>{{ model.billAddress2 }}</div>
+    {% endif %}
+    <div>{{ model.billCity }} {{ model.billState }} {{ model.billZip }}</div>
+    <div>{{ model.billCountry }}</div>
+    {% if model.billPhone %}
+        <span>{{ model.billPhone }}</span>
+    {% endif %}

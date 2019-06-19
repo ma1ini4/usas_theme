@@ -21,11 +21,13 @@
           </a>
         </div>
       {% else %}
+      <div class="mz-itemlisting-thumb">
         <a href="{{ model.product.url }}{% if model.product.variationProductCode %}?vpc={{model.product.variationProductCode}}{% endif %}">
           <span class="mz-product-image-placeholder pull-left">
             <span class="mz-productlisting-imageplaceholdertext">{{ labels.productImagePlaceholder }}</span>
           </span>
         </a>
+      </div>
       {% endif %}
     {% endif %}
   {% endwith %}

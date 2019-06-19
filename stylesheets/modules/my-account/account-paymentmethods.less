@@ -5,21 +5,76 @@
         list-style-type: none;
     }
     .mz-paymentmethod {
-        border-right: 1px solid #eee;
+        width: 250px;
         margin: 0 @gutter/2 @gutter/2 0;
+        border-right: 1px solid @lightBorder;
+
         &:last-child {
             border-right-width: 0;
         }
         .clearfix();
+
+        .mz-paymentmethod-actions {
+            float: right;
+            margin: 8px 0;
+
+            a {
+                color: #6d6f70;
+                text-decoration: none;
+                display: inline-block;
+                padding: 0 8px 0 0;
+                border-right: 1px solid #d0d2d3;
+
+                &:last-child {
+                    border-right-width: 0;
+                    padding: 0 0 0 8px;
+                }
+            }
+        }
     }
 
     .mz-accountpaymentmethods-form {
-        width: auto;
+        width: 250px;
         float: left;
         margin: 0 @gutter/2 @gutter/2 0;
 
         .mz-payment-credit-card-defaultflag-row label {
             display: inline;
+        }
+
+        .mz-l-formfieldgroup {
+            .mz-l-formfieldgroup-cell {
+                justify-content: flex-start;
+            }
+
+            input[type="checkbox"] {
+                margin: 0 8px 0;
+            }
+            label.chkbox_label {
+                margin: 0;
+            }
+
+            .mz-creditcard-billingaddresses {
+                flex-direction: column;
+
+                label.mz-contactselector-contact {
+                    width:100%;
+                    min-height: auto;
+                    margin: 0 0 8px;
+                }
+                
+                .mz-contactselector-summarywrapper {
+
+                    .mz-addressform-firstname {
+                        margin-top: 16px;
+                    }
+                }
+                div.mz-contactselector-new {
+                    .mz-contactselector-inputwrapper {
+                        display: none;
+                    }
+                }
+            }
         }
     }
 

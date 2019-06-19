@@ -1,0 +1,10 @@
+diff a/scripts/modules/b2b-account/quick-order.js b/scripts/modules/b2b-account/quick-order.js	(rejected hunks)
+@@ -65,7 +65,7 @@
+                   self.render();
+               });
+               window.quickOrderModalView.loadAddProductView(product);
+-              window.quickOrderModalView.handleDialogOpen();
++            //   window.quickOrderModalView.handleDialogOpen();
+               return;
+           }
+           self.finalizeAddItemToOrder(product);

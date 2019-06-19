@@ -1,0 +1,16 @@
+{% require_script "modules/b2b-account/users" %}
+<div class="mz-l-stack-section" style="clear:none">
+  <h3 class="mz-l-stack-sectiontitle">Users
+    <a data-mz-action="addNewUser">Add User</a>
+    {% if model.hasRequiredBehavior %}
+    {% endif %}
+  </h3>
+  <div class="mz-b2baccount-users">
+  </div>
+
+  <div class="mz-b2baccount-users-modal">
+    <div id="mzModalDialog" data-backdrop="static" class="modal fade" tabindex="-1" role="dialog">
+      {% include "modules/b2b-account/users/users-modal" %}
+    </div>
+  </div>
+</div>

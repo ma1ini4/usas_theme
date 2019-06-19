@@ -12,11 +12,10 @@
     <div>{{ model.address.cityOrTown }} {{ model.address.stateOrProvince }} {{ model.address.postalOrZipCode }}</div>
     <div>{{ model.address.countryCode }}</div>
     {% if model.phoneNumbers.home %}
-        <span>{{ model.phoneNumbers.home }}</span>
+        <div>{{ model.phoneNumbers.home }}</div>
     {% endif %}
    
     {% if model.regularHours %}
-        <br>
         <h5 class="store-hours-heading">{{ labels.storeHours }}</h5>
         {% with model.regularHours.monday.label|replace("~", "-") as groupDay %}
             {% if groupDay != model.regularHours.monday.label %}
@@ -31,13 +30,13 @@
                     <div>
                         <div class="store-hours-desc">{{ labels.monday }} </div> 
                         <div>{{ model.regularHours.monday.label }}</div>
-                    </div>        
+                    </div>
                 {% endif %}
                 {% if model.regularHours.tuesday.label !== ""%}        
                     <div>
                         <div class="store-hours-desc">{{ labels.tuesday }}</div> 
                         <div>{{ model.regularHours.tuesday.label }}</div>
-                    </div>        
+                    </div>
                 {% endif %}
                 {% if model.regularHours.wednesday.label !== ""%}        
                     <div>

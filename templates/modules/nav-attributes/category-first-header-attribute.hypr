@@ -1,0 +1,11 @@
+{% if model %}
+	{% with model|first as entityModel %}
+		{% if entityModel.topNavHeader != '' or entityModel.topNavHeader == '~' %}
+			{% if entityModel.topNavHeader != '~' %}
+				<span class="sub-level-heading">{{ entityModel.topNavHeader|safe}}</span>
+			{% else %}
+				<span class="sub-level-heading">&nbsp;&nbsp;</span>
+			{% endif %}
+		{% endif %}
+	{% endwith %}
+{% endif %}

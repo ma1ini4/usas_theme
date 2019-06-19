@@ -18,8 +18,9 @@
       margin-right: 10px;
 
       .btn-group {
+        display: flex;
         margin-right: 15px;
-        
+
           .btn {
               display: flex;
               align-items: center;
@@ -51,6 +52,10 @@
                   box-shadow: none;
               }
           }
+
+          @media @mobile {
+            margin-right: 0;
+          }
       }
   }
 .pagination {
@@ -59,7 +64,7 @@
     align-items: center;
     justify-content: flex-end;
 
-    li span {
+    li span, li a {
       display: flex;
       align-items: center;
       height: 41px;

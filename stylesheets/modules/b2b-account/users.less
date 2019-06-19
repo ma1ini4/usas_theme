@@ -1,0 +1,39 @@
+.mz-b2baccount-users,
+.mz-b2b-wishlists {
+
+    .mz-grid {
+        border: none;
+
+        .mz-grid-cols {
+            display: flex;
+            align-items: center;
+    
+            span.mz-grid-column {
+                font-size: 14px!important;
+                
+                &:first-child {
+                    width: 60%;
+                    min-width: 250px;
+                }
+                &:not(:first-child) {
+                    text-align: center;
+                }            
+            }
+        }
+        .mz-grid-row {
+            &-actions {
+                display: flex;
+                align-items: center;
+            }
+
+            a:not(:last-child) {
+                padding-right: 5px;
+                border-right: 1px solid @lightBorder;
+            }
+            
+            a {
+                cursor: pointer;
+            }
+        }
+    }    
+}

@@ -39,6 +39,119 @@
         },
         {
             "xtype": "panel",
+            "title": "PDP",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "enableProductPagingControl",
+                    "fieldLabel": "Enable Product Paging Control"
+                }
+            ]
+        },
+        {
+        "xtype": "panel",
+            "title": "Recaptcha",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "enableRecaptcha",
+                    "fieldLabel": "Enable Recaptcha"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "recaptchaSiteKey",
+                    "fieldLabel": "Recaptcha Site Key"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "__recaptchaSecrete",
+                    "fieldLabel": "Recaptcha Secret",
+                    "inputType": "password"
+                },
+                {
+                    "xtype": "mz-input-dropdown",
+                    "name": "recaptchaType",
+                    "fieldLabel": "Recaptcha Type",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        "Invisible",
+                        "I'm not a robot"
+                    ]
+                },
+                {
+                    "xtype": "mz-input-dropdown",
+                    "name": "recaptchaSize",
+                    "fieldLabel": "Recaptcha Size",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        "normal",
+                        "compact"
+                    ]
+                },
+                {
+                    "xtype": "mz-input-dropdown",
+                    "name": "recaptchaTheme",
+                    "fieldLabel": "Recaptcha Theme",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        "light",
+                        "dark"
+                    ]
+                },
+                {
+                    "xtype": "mz-input-dropdown",
+                    "name": "recaptchaBadgePosition",
+                    "fieldLabel": "Recaptcha Badge Position",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        "bottomright",
+                        "bottomleft",
+                        "inline"
+                    ]
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Filters",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "allowFilterByLocationInventory",
+                    "fieldLabel": "Allow Filter by Location Inventory"
+                },
+                                {
+                   "fieldLabel": "Max Number of Locations",
+                    "xtype": "mz-input-dropdown",
+                    "name": "maxFilterLocations",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        50,
+                        100,
+                        150,
+                        200
+                    ]
+                },
+                {
+                    "fieldLabel": "Filter Label Text (limit 30 characters)",
+                    "xtype": "mz-input-text",
+                    "name": "locationInventoryFilterText",
+                    "allowBlank": true,
+                    "allowOnlyWhitespace": true,
+                    "maxValue": 30
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
             "title": "Extended Properties",
             "collapsed": false,
             "items": [
@@ -632,7 +745,7 @@
                     "fieldLabel": "Enable Alternate Image change on Hover on Swatch"
                 }
             ]
-        },
+        }, 
         {
             "xtype": "panel",
             "title": "Quick View",
@@ -836,6 +949,49 @@
                         "fieldLabel": "Display all attributes EXCEPT those indicated above"
                     }
                     ]
+                }
+            ]
+        }, 
+        {
+            "xtype": "panel",
+            "title": "Request Sample/Demo",
+            "collapsed": false,
+            "items": [{
+                    "xtype": "mz-input-text",
+                    "name": "requestSampleEmail",
+                    "fieldLabel": "Email address to receive requests for Equipment Samples"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "requestDemoEmail",
+                    "fieldLabel": "Email address to receive requests for Equipment Demo"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Border Configuration",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "enableborderFree",
+                    "fieldLabel": "Enable Border Free"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "merchantId",
+                    "fieldLabel": "MerchantId"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "borderFreeUsername",
+                    "fieldLabel": "Username for BorderFree"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "borderFreePassword",
+                    "fieldLabel": "Password for BorderFree"
                 }
             ]
         }
