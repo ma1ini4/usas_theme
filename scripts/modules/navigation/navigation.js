@@ -1,7 +1,7 @@
 define([
     'modules/jquery-mozu',
     "doubletaptogo"
-], function($, doubletaptogo) {
+], function($, jQuery, doubletaptogo) {
     //Sub Dropdown Menu
     function calculatingSubPosition() {
         var leftReference = $(".ml-header-content").offset().left,
@@ -107,39 +107,30 @@ define([
         $(myAccount).width('auto').removeClass('truncated-username');
       }
     }
+    function navContainerVisible(el) {
+      return $(el).next('.mz-sitenav-sub-container').css('visibility') === 'visible';
+    }
+    function touchHandler(el) {
+      $(el).bind('touchstart', function (e) {        
+        var isVisible = navContainerVisible(e.target);
+        
+        if (!isVisible) {
+          $(e.target).parents('li.top-layer').trigger('mouseover');          
+        } else {
+          window.open(this.href, '_self');          
+        }
+      });
+    }
     function navLinksActions() {
       var isTablet = ($(window).width() >= 767 && $(window).width() <= 1024) ? true : false;
 
       if (isTablet) {
-
-        $('.top-layer .mz-sitenav-item-inner > a.mz-sitenav-link').each(function () {
-          var tapped = false;
-
-          $(this).on("touchstart", function (e) {
-            
-            if (!tapped) { 
-              tapped = setTimeout(function () {
-                tapped = null;
-                $(e.target).parents('li.top-layer').trigger('mouseenter');
-              }, 300); 
-            } else { 
-              clearTimeout(tapped);
-              tapped = null;
-              window.open(this.href, '_self');
-            }
-            // e.preventDefault();
+        $('.top-layer .mz-sitenav-item-inner > a.mz-sitenav-link').each(function () {            
+          $(this).click(function () {
+            return false;
           });
-          
-          $(this).click(function(e){
-            e.preventDefault();
-          });   
-          
-          $(this).dblclick(function (e) {
-            e.preventDefault();
-            window.open(this.href, '_self');
-          });
-          
-        });
+          touchHandler(this);
+        });   
       } 
     }
     $(document).ready(function() {
