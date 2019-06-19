@@ -2,9 +2,16 @@
 {% if model.orderNumber %}
   <div class="col-sm-12 mz-reset-padding-left mz-order-status-section">
       <h4 class="mz-l-stack-sectiontitle">{{ labels.orderInformation }}</h4>
-      <div>{{ labels.orderDetailNumber|string_format(model.sapOrderNumber)|safe }}</div>
-      <div>{{ labels.orderDetailDate}} <strong>{{model.orderDate|date("F j, Y") }}</strong>.</div>
-      <div>{{ labels.orderDetailStatus|string_format(model.status)|safe }}</div>
+    </div>
+    <div class="mz-order-status-section">
+        <div class="col-sm-6">
+            <div class="mz-order-status-section-subheading">
+                Order Information
+            </div>
+            <div>{{ labels.orderDetailNumber }}: <strong><span> {{ model.orderNumber }}</span></strong> </div>
+            <div>{{ labels.orderDetailDate}}: <span>{{model.orderDate|date("F j, Y") }}</span></div>
+            <div>{{ labels.orderDetailStatus }}: <strong><span> {{ model.status }}</span></strong> </div>
+      </div>
   </div>
   <div class="mz-order-status-section">
       <div class="col-sm-6">
