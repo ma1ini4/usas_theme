@@ -328,7 +328,7 @@ define([
                         if ($(e.currentTarget).parents('.product-color-swatches').length > 0) {
                             colorSwatch.changeColorSwatch(e);
                         }
-                        // blockUiLoader.globalLoader();
+                        blockUiLoader.globalLoader();
                         return this.configureAttribute($(e.currentTarget));
                     }
                 }
@@ -439,9 +439,7 @@ define([
                     product.apiConfigure({
                         options: prodOptions
                     })
-                    .then(function (e) {
-                        console.log(prodOptions);                        
-                        
+                    .then(function (e) {                        
                         $('[data-mz-validationmessage-for="quantity"]').text("");
                         if (isRequiredOptionsSet) {
                             if (window.quickviewProduct.attributes.inventoryInfo.manageStock === true) {
@@ -486,7 +484,6 @@ define([
                         $this.isColorClicked = false;
                         blockUiLoader.unblockUi();
                     });
-                blockUiLoader.unblockUi();
                 }
             },
             buttonClicked: function (e) {
