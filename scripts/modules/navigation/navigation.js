@@ -112,6 +112,9 @@ define([
     }
     function touchHandler(el) {
       $(el).bind('touchstart', function (e) {        
+        $(this).click(function () {
+          return false;
+        });
         var isVisible = navContainerVisible(e.target);
         
         if (!isVisible) {
@@ -126,9 +129,7 @@ define([
 
       if (isTablet) {
         $('.top-layer .mz-sitenav-item-inner > a.mz-sitenav-link').each(function () {            
-          $(this).click(function () {
-            return false;
-          });
+          
           touchHandler(this);
         });   
       } 
