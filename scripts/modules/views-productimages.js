@@ -89,16 +89,20 @@
             var self = this;
             if (!$('#zoom').length) {
                 $('.mz-productimages-main').html('<img class="mz-productimages-mainimage" data-mz-productimage-main="" id="zoom" itemprop="image">');
+            }            
+            try {
+                checkImage(this.selectedMainImageSrc.replace('maxWidth='+width_thumb, 'maxWidth=' + Hypr.getThemeSetting('productImagePdpMaxWidth')), function(response) {
+                    if (response) {
+                        self.$('#zoom')
+                            .prop('src', self.selectedMainImageSrc.replace('maxWidth='+width_thumb, 'maxWidth=' + Hypr.getThemeSetting('productImagePdpMaxWidth')))
+                            .prop('alt', self.selectedMainImageAltText);
+                        $('.zoomContainer').remove();
+                        $('#zoom').removeData('elevateZoom').data('zoom-image', self.selectedMainImageSrc.replace('maxWidth='+width_thumb, 'maxWidth=' + Hypr.getThemeSetting('productZoomImageMaxWidth'))).elevateZoom({ zoomType: "inner", cursor: "crosshair", responsive: true });
+                    }
+                });
+            } catch (e) {
+                console.log("Error ", e);
             }
-            checkImage(this.selectedMainImageSrc.replace('maxWidth='+width_thumb, 'maxWidth=' + Hypr.getThemeSetting('productImagePdpMaxWidth')), function(response) {
-                if (response) {
-                    self.$('#zoom')
-                        .prop('src', self.selectedMainImageSrc.replace('maxWidth='+width_thumb, 'maxWidth=' + Hypr.getThemeSetting('productImagePdpMaxWidth')))
-                        .prop('alt', self.selectedMainImageAltText);
-                    $('.zoomContainer').remove();
-                    $('#zoom').removeData('elevateZoom').data('zoom-image', self.selectedMainImageSrc.replace('maxWidth='+width_thumb, 'maxWidth=' + Hypr.getThemeSetting('productZoomImageMaxWidth'))).elevateZoom({ zoomType: "inner", cursor: "crosshair", responsive: true });
-                 }
-            });
         },
         render: function() {
             //Backbone.MozuView.prototype.render.apply(this, arguments);
