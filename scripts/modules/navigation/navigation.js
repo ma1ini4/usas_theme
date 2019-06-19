@@ -1,7 +1,7 @@
 define([
     'modules/jquery-mozu',
     "doubletaptogo"
-], function($, doubletaptogo) {
+], function($, jQuery, doubletaptogo) {
     //Sub Dropdown Menu
     function calculatingSubPosition() {
         var leftReference = $(".ml-header-content").offset().left,
@@ -107,41 +107,30 @@ define([
         $(myAccount).width('auto').removeClass('truncated-username');
       }
     }
+    function navContainerVisible(el) {
+      return $(el).next('.mz-sitenav-sub-container').css('visibility') === 'visible';
+    }
+    function touchHandler(el) {
+      $(el).bind('touchstart', function (e) {        
+        var isVisible = navContainerVisible(e.target);
+        
+        if (!isVisible) {
+          $(e.target).parents('li.top-layer').trigger('mouseover');          
+        } else {
+          window.open(this.href, '_self');          
+        }
+      });
+    }
     function navLinksActions() {
       var isTablet = ($(window).width() >= 767 && $(window).width() <= 1024) ? true : false;
 
       if (isTablet) {
-        
-        $('.top-layer .mz-sitenav-item-inner > a.mz-sitenav-link').each(function () {
-          var opened = false;
-          var counter = 0;
-
-          $(this).on("touchstart", function (e) {
-            counter++;           
-            
-            if (counter % 2 == 0 && opened) {              
-              window.open(this.href, '_self');
-
-              console.log(2);
-            } else {
-              opened = true;
-              $(e.target).parents('li.top-layer').trigger('mouseenter');
-
-              console.log(1);                      
-            }       
-            // e.preventDefault();
+        $('.top-layer .mz-sitenav-item-inner > a.mz-sitenav-link').each(function () {            
+          $(this).click(function () {
+            return false;
           });
-          
-          $(this).click(function(e){
-            e.preventDefault();
-          });   
-          
-          $(this).dblclick(function (e) {
-            e.preventDefault();
-            window.open(this.href, '_self');
-          });
-          
-        });
+          touchHandler(this);
+        });   
       } 
     }
     $(document).ready(function() {
