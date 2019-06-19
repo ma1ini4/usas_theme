@@ -1,10 +1,10 @@
-<div>{{ model.FirstName }} {{ model.MiddleName }}</div>
+<div>{{ model.firstName }} {{ model.lastNameOrSurname }}</div>
 <div>{{ model.address1 }}</div>
 {% if model.address2 %}
     <div>{{ model.address2 }}</div>
 {% endif %}
 <div>{{ model.cityOrTown }} {{ model.stateOrProvince }} {{ model.postalOrZipCode }}</div>
 <div>{{ model.countryCode }}</div>
-{% if model.Phone %}
-    <span>{{ model.Phone }}</span>
+{% if model.email %}
+    <div>{{ model.email }}</div>
 {% endif %}
