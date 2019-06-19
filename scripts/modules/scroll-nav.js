@@ -9,8 +9,8 @@
                         $nav.scrollspy('refresh');
                     }, 500);
                 $this.on('click', 'a', function (e) {
-                    e.preventDefault();
                     if(!$(e.target).hasClass('logout')) {
+                        e.preventDefault();
                         $(this.getAttribute('href')).ScrollTo({ axis: 'y', offsetTop: gutterWidth });
                     }
                 }).affix({
