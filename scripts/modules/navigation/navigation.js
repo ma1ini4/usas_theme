@@ -1,7 +1,7 @@
 define([
     'modules/jquery-mozu',
     "doubletaptogo"
-], function($, doubletaptogo) {
+], function($, jQuery, doubletaptogo) {
     //Sub Dropdown Menu
     function calculatingSubPosition() {
         var leftReference = $(".ml-header-content").offset().left,
@@ -107,6 +107,33 @@ define([
         $(myAccount).width('auto').removeClass('truncated-username');
       }
     }
+    function navContainerVisible(el) {
+      return $(el).next('.mz-sitenav-sub-container').css('visibility') === 'visible';
+    }
+    function touchHandler(el) {
+      $(el).bind('touchstart', function (e) {        
+        $(this).click(function () {
+          return false;
+        });
+        var isVisible = navContainerVisible(e.target);
+        
+        if (!isVisible) {
+          $(e.target).parents('li.top-layer').trigger('mouseover');          
+        } else {
+          window.open(this.href, '_self');          
+        }
+      });
+    }
+    function navLinksActions() {
+      var isTablet = ($(window).width() >= 767 && $(window).width() <= 1024) ? true : false;
+
+      if (isTablet) {
+        $('.top-layer .mz-sitenav-item-inner > a.mz-sitenav-link').each(function () {            
+          
+          touchHandler(this);
+        });   
+      } 
+    }
     $(document).ready(function() {
         try {
             $('.sub-nav-section li:has(.sub-dropdown-menu)').doubletaptogo();
@@ -120,11 +147,13 @@ define([
           }, 50);
         });
         truncateUsername();
+        navLinksActions();
     });
     $(window).resize(function() {
         calculatingSubPosition();
         removeMobileNavStyles();
         truncateUsername();
+        navLinksActions();
     });
     $('.sub-level-col.col-sm-3').each(function(index, el) {
         var html = $(el).html().trim();

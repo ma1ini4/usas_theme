@@ -1542,6 +1542,9 @@ ul.tabs {
 
     .title-sortby-wrappper {
         display: flex;
+        @media @mobile {
+            flex-wrap: wrap;
+        }
         justify-content: space-between;
         align-items: center;
         margin-top: 15px;
@@ -1554,11 +1557,20 @@ ul.tabs {
             display: block;
             // width: 100%;
         }
+
+        @media @mobile {
+            flex-wrap: wrap;
+
+            span {
+                margin: 10px 15px 10px 0;
+            }
+        }
     }
 
     .mz-l-paginatedlist-header {
         width: 100%;
         float: left;
+
 
         .title-sortby-wrappper {
             .mz-sortby {
@@ -1614,6 +1626,21 @@ ul.tabs {
                         }
                     }
 
+                }
+            }
+        }
+
+        @media @mobile {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+            & > div {
+                margin: 10px 0;
+
+                &:first-child {
+                    margin-right: auto;
+                    padding-right: 10px;
                 }
             }
         }
@@ -2381,7 +2408,7 @@ ul.tabs {
                     &:nth-child(even) {
                         background-color: #FFF;
                     }
-                    @media @tablet {
+                    @media @desktop-bootstrap {
                         display: block;
                     }
                 }
@@ -2418,6 +2445,24 @@ ul.tabs {
     }
 
     .tabs-mobile {
+        .panel-body {
+            background-color: #e6e7e8;
+
+            .prop-list {
+
+                .prop-list-item {
+                    display: flex;
+
+                    &:nth-child(even) {
+                        background-color: #FFF;
+                    }
+                }
+
+                .prop-name {
+                    font-weight: @semi-bold;
+                }
+            }
+        }
         .panel-heading {
             @media @mobile {
                 border-radius: 0px;

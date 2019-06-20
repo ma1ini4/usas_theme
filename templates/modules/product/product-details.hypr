@@ -28,7 +28,7 @@
                 <h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName|replace("'","&rsquo;")|safe }}</h1>
                 <div class="row">
                     <div class="col-xs-5">
-                        <h4 class="mz-productcodes-productcode p-3" itemprop="sku">{{ labels.item}} {{ model.productCode }}</h4>
+                        <h4 class="mz-productcodes-productcode p-3 no-wrap" itemprop="sku">{{ labels.item}} {{ model.productCode }}</h4>
                     </div>
                     {% if model.productType != themeSettings.familyProductType %}
                         <div class="col-xs-7 hidden-xs">
