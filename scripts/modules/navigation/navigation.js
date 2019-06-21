@@ -31,6 +31,11 @@ define([
             currentElemnt.css({ "left": leftPosition, "right": rightPosition });
         }).removeClass("calculating-position").addClass("calculated-position");
     }
+    function enableNavOnLoad(){       
+      $(".mz-sitenav-sub-container").css({
+        "display": "block"
+      });
+    }
     function outlineMobileNavOnCollapse() {
       var burgerMenuLink = $('.mz-utilitynav .mz-utilitynav-link'),
           navContainer = $('.mz-utilitynav'),
@@ -148,6 +153,7 @@ define([
         });
         truncateUsername();
         navLinksActions();
+        $(window).load(enableNavOnLoad());
     });
     $(window).resize(function() {
         calculatingSubPosition();
