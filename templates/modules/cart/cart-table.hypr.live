@@ -40,7 +40,13 @@
           <div class="mz-carttable-item-info-wrap">
             <a class="mz-carttable-item-title" href="{{item.product.url}}">{{ item.product.name|safe }}</a>
             <span class="mz-carttable-item-code">
-              {{ labels.item }}#: <em>{{ item.product.productCode }}</em>
+              {{ labels.item }}#: <em>
+                {% if item.product.variationProductCode and not item.product.variationProductCode.length == 0 %}
+                  {{ item.product.variationProductCode }}
+                {% else %} 
+                  {{ item.product.productCode }}
+                {% endif %}
+              </em>
             </span>
             {% if item.product.options and themeSettings.showCartItemOptions %}
             <div class="mz-propertylist">
