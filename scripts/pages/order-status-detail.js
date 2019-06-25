@@ -43,7 +43,7 @@ require([
           }).then(function (data) {
             console.log(params.orderNumber);
             if (data) {
-              var orderStatusModel = new OrderStatusModels.CcOrderStatus(data);
+              var orderStatusModel = new OrderStatusModels.SapOrderStatus(data);
               console.log('CcOrderStatus ', orderStatusModel);
               var ccOrderStatusView = new OrderStatusView({
                 el: $('#order-status-detail'),
