@@ -3,9 +3,11 @@
 {% endif %}
 {% require_script "pages/product" %}
 <div itemscope itemtype="http://schema.org/Product" class="mz-l-container">
+    {% comment %}
     {% if (PageContext.isTablet or PageContext.isDesktop) and themeSettings.enableProductCarousel %}
-    {% include "modules/product/product-top-carousel" %}
+        {% include "modules/product/product-top-carousel" %}
     {% endif %}    
+    {% endcomment %}
     <div class="row">
     {% if themeSettings.enableProductPagingControl %}
         {% require_script "pages/product-paging-control" %}

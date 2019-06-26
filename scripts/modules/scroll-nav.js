@@ -9,11 +9,13 @@
                         $nav.scrollspy('refresh');
                     }, 500);
                 $this.on('click', 'a', function (e) {
-                    e.preventDefault();
-                    $(this.getAttribute('href')).ScrollTo({ axis: 'y', offsetTop: gutterWidth });
+                    if(!$(e.target).hasClass('logout')) {
+                        e.preventDefault();
+                        $(this.getAttribute('href')).ScrollTo({ axis: 'y', offsetTop: gutterWidth });
+                    }
                 }).affix({
                     offset: {
-                        top: $this.offset().top - gutterWidth,
+                        top: $this.offset().top + 5,
                         bottom: $('.mz-pagefooter.ml-global-footer.blueBG').outerHeight(true) + $('.mz-pagefooter.ml-global-footer').outerHeight(true) + $('.mz-pagefooter').outerHeight(true) + $('footer').outerHeight(true) + $('.mz-pagefooter-copyright').outerHeight(true)
                     }
                 });

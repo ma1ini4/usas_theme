@@ -25,7 +25,7 @@
         </li>
 
         <li class="mz-scrollnav-item">
-            <a class="mz-scrollnav-link" data-mz-action="logout" href="/logout">
+            <a class="mz-scrollnav-link logout" href="/logout">
                 {{ labels.logOut }}
             </a>
         </li>
