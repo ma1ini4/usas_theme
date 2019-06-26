@@ -169,10 +169,16 @@ ul.bxslider {
 }
 .mz-productimages{
     .mz-productimages-thumbs {
+            margin-left: 14px;
+
         .bx-viewport {
-            height: 77px !important;
+            height: 78px !important;
+            margin-left: 5px;
             @media screen and (min-width: 992px) {
                 height: 92px !important;
+            }
+            @media screen and (max-width: 992px) {
+                max-width: 330px !important;
             }
         }
         .bx-wrapper {
@@ -186,6 +192,9 @@ ul.bxslider {
             .bx-next {
                 right: -26px;
                 width: 16px;
+                @media screen and (max-width: 992px) {
+                    right: 0;
+                }
             }
         }
         .mz-productimages-thumb{
