@@ -618,5 +618,11 @@
   "yourOrderNumber": "Your order number is <strong>{0}</strong>.",
   "zipErrorMessage": "Please enter a valid zipcode.",
   "viewOrderStatus": "View Order Status",
-  "viewOrderDetails": "View Order Details"
+  "viewOrderDetails": "View Order Details",
+  "orderInformation": "Order Details",
+  "orderDetailNumber": "Order number",
+  "orderDetailDate": "Order date",
+  "orderDetailStatus": "Order status",
+  "orderStatusTrackings": "Shipment Tracking",
+  "orderStatusShipmentStatus": "Shipment Status"
 }
