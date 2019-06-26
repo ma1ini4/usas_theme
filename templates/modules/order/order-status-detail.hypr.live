@@ -9,7 +9,7 @@
                 Order Information
             </div>
             <div>{{ labels.orderDetailNumber }}: <strong><span> {{ model.orderNumber }}</span></strong> </div>
-            <div>{{ labels.orderDetailDate }}: <span>{{model.orderDate|date("F j, Y") }}</span></div>
+            <div>{{ labels.orderDetailDate }}: <span>{{model.creationDate|date("F j, Y") }}</span></div>
             <div>{{ labels.orderDetailStatus }}: <strong><span> {{ model.status }}</span></strong> </div>
       </div>
   </div>
@@ -47,14 +47,14 @@
         <div class="mz-order-status-section-subheading">
             Shipping method
         </div>
-        {% include "modules/order/order-status-tracking" with model=model.shipments %}
+        {% include "modules/order/order-status-tracking" with model=model.shipment %}
     </div>
   </div>
   <div class="mz-l-stack-section mz-order-status-section">
       {% include "modules/order/order-status-order-summary" %}
   </div>
-  <div class="col-sm-12 text-right mz-reset-padding mz-order-status-totals-container">
+  <!-- <div class="col-sm-12 text-right mz-reset-padding mz-order-status-totals-container">
      {% include "modules/order/order-status-totals" %}
-  </div>
+  </div> -->
 {% endif %}
 </div>

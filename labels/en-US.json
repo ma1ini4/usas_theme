@@ -621,5 +621,7 @@
   "orderInformation": "Order Details",
   "orderDetailNumber": "Order number",
   "orderDetailDate": "Order date",
-  "orderDetailStatus": "Order status"
+  "orderDetailStatus": "Order status",
+  "orderStatusTrackings": "Shipment Tracking",
+  "orderStatusShipmentStatus": "Shipment Status"
 }
