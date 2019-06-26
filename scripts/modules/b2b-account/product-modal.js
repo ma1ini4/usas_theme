@@ -10,6 +10,8 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
             var self = this;
             this.model.getDiscountProducts().then(function (discount) {
                 self.render();
+            }, function(e){
+              console.log('initialize error ',e);
             });
         },
         //Rework for parent modal to be accessable once clicked
@@ -46,6 +48,7 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
         },
         render: function () {
             var me = this;
+            try{
             if (this.oldOptions) {
                 me.model.get('options').map(function (option) {
                     var oldOption = _.find(me.oldOptions, function (old) {
@@ -60,6 +63,9 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
             this.$('[data-mz-is-datepicker]').each(function (ix, dp) {
                 $(dp).dateinput().css('color', Hypr.getThemeSetting('textColor')).on('change  blur', _.bind(me.onOptionChange, me));
             });
+          } catch(err){
+            console.log('render ', err);
+          }
         },
         onOptionChange: function (e) {
             return this.configure($(e.currentTarget));
@@ -96,10 +102,12 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
             try {
                  self.model.addToCart(true).then(function () {
                      this.model.parent.handleDialogCancel();
-                });     
-                
-            } catch (error) {
+                }, function(e){
+                  console.log('add to cart failed ',e);
+                });
 
+            } catch (error) {
+              console.log("addToCart ", error);
             }
             //Yeah lets intro some events on complete discount for a rerender
         },
@@ -123,10 +131,14 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
             this.model.trigger('dialogClose');
             this.bootstrapInstance.hide();
         },
+        handleDialogClose: function(){
+            this.model.trigger('dialogClose');
+            this.bootstrapInstance.hide();
+        },
         setInit: function (updatingItemId) {
             var self = this;
             self.loadAddProductView();
-            self.handleDialogOpen();   
+            self.handleDialogOpen();
         },
         modalContentEl: function () {
             return this.$el.find('[data-mz-discount-modal-content]');
@@ -141,6 +153,7 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
             //chooseProductStepView.render();
         },
         loadAddProductView: function (product) {
+          try {
             var self = this;
             if (!(product instanceof ProductModels.Product)) {
                 if (product.toJSON)
@@ -153,6 +166,9 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
             });
             self._addProductStepView = addProductStepView;
             addProductStepView.render();
+          } catch(err){
+            console.log('loadAddProductView ',err);
+          }
         },
         render: function () {
             //Backbone.MozuView.prototype.render.apply(this, arguments);

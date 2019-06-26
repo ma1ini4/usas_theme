@@ -8,11 +8,9 @@
           </div>
           <div>
               <span class="productpicker-label">{{labels.b2bQuantity}}</span>
-            <div class="flex">
-                <input type="number" name="pickerItemQuantity" id="pickerItemQuantity" data-mz-value="pickerItemQuantity" value="{{ model.pickerItemQuantity }}">
-                <button class="primary-btn" data-mz-action="addItemToOrder" {% if productNotSelected %} disabled {% endif %}>Add To List</button>                
-            </div>
-            <span class="mz-validationmessage" data-mz-validationmessage-for="pickerItemQuantity"></span>
+              <input type="number" name="pickerItemQuantity" id="pickerItemQuantity" data-mz-value="pickerItemQuantity" value="{{ model.pickerItemQuantity }}">
+              <span class="mz-validationmessage" data-mz-validationmessage-for="pickerItemQuantity"></span>
+              <button class="mz-button mz-button" data-mz-action="addItemToOrder" {% if productNotSelected %} disabled {% endif %}>{{ labels.add }}</button>
           </div>
 
       </div>
@@ -23,6 +21,6 @@
       </div>
     </div>
 </div>
-<div class="mz-table mz-table-cart">
-    {% include "modules/cart/cart-table"  with item=item index=forloop.index  %}
-</div>
+<table class="mz-table mz-table-cart">
+  {% include "modules/b2b-account/quick-order/quick-order-table" %}
+</table>
