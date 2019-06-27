@@ -6,15 +6,15 @@ mz-l-formfieldgroup
 
 {% block item-listing-prefix %}
 <div class="mz-l-formfieldgroup-row">
-<div class="mz-l-formfieldgroup-cell">
-<div class="mz-itemlisting-select">
-  <input type="checkbox" data-mz-value="isSelectedForReturn" data-mz-product-code="{{ model.productCode }}" data-mz-item-id="{{ model.getProductDetails.id }}"  value="true" {% if model.isSelectedForReturn %}checked="checked"{% endif %} data-mz-action="startReturnItem"/>
-</div>
-</div>
+  <div class="mz-l-formfieldgroup-cell mz-order-history-return-status-checkbox">
+    <div class="mz-itemlisting-select">
+      <input type="checkbox" data-mz-value="isSelectedForReturn" data-mz-product-code="{{ model.productCode }}" data-mz-item-id="{{ model.getProductDetails.id }}"  value="true" {% if model.isSelectedForReturn %}checked="checked"{% endif %} data-mz-action="startReturnItem"/>
+    </div>
+  </div>
 {% endblock item-listing-prefix %}
 
 {% block item-listing-image %}
-<div class="mz-l-formfieldgroup-cell">
+<div class="mz-l-formfieldgroup-cell mz-order-history-return-status-image">
     <div class="mz-itemlisting-thumb">
   {% if model.product.imageUrl %}
       <img class="mz-itemlisting-thumb-img" src="{% make_url "image" model.product with max=70 as_parameters %}" {% if model.product.imageAlternateText %}alt="{{ model.product.imageAlternateText }}"{% endif %} /> 
@@ -24,7 +24,7 @@ mz-l-formfieldgroup
   </div>
 </div>
   
-  <div class="mz-l-formfieldgroup-cell">
+  <div class="mz-l-formfieldgroup-cell mz-order-history-return-status-details">
 {% endblock item-listing-image %}
 
 {% block item-details %}
@@ -59,9 +59,9 @@ mz-l-formfieldgroup
    <div data-mz-package-item-return-form class="mz-itemlisting-return">
   	{% if model.isSelectedForReturn %}
   	
-  		<p class="mz-itemlisting-prompt is-warning">{{ labels.returnInfo|safe }}</p>
-  		{% include "modules/my-account/package-item-return-form" with model=model %}
+    {% include "modules/my-account/package-item-return-form" with model=model %}
   	
+    <p class="mz-itemlisting-prompt is-warning">{{ labels.returnInfo|safe }}</p>
   	{% endif %}
   </div>
 </div>

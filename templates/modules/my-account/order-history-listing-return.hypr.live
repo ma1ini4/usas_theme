@@ -2,7 +2,7 @@
 {% block order-items %}
 
 <div class="order-history-listing-return">
-<div class="mz-orderlisting-heading mz-order-history-return-status"><h3>{{labels.orderCreateReturn}}</h3></div>
+<div class="mz-orderlisting-heading mz-order-history-return-status"><h4>{{labels.orderCreateReturn}}</h4></div>
     {% if model.hasFulfilledPackages or model.hasFulfilledPickups %}
         {% block order-packages %}
                 <div class="mz-order-returns">
@@ -15,8 +15,8 @@
         {% endblock order-packages %}
     {% endif %}
 <div class="mz-orderlisting-footer">
-    <button class="mz-button" data-mz-action="finishOrderReturn">{{ labels.submit }}</button>
-    <button class="mz-button" data-mz-action="cancelOrderReturn">{{ labels.cancel }}</button>
+    <button class="primary-btn" data-mz-action="finishOrderReturn">{{ labels.submit }}</button>
+    <button class="secondary-btn" data-mz-action="cancelOrderReturn">{{ labels.cancel }}</button>
 </div>
 
 </div>
