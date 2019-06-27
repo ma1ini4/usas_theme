@@ -45,6 +45,7 @@ define([
             productPickerView.render();
         },
         addItemToOrder: function(event){
+          try {
           var self = this;
           var product = self.model.get('selectedProduct');
 
@@ -58,7 +59,7 @@ define([
               this.stopListening();
               this.listenTo(product, "configurationComplete", function (){
                   self.finalizeAddItemToOrder(product);
-                  window.quickOrderModalView.quickviewClose();
+                  window.quickOrderModalView.handleDialogClose();
                   self.render();
               });
               window.quickOrderModalView.loadAddProductView(product);
@@ -67,6 +68,9 @@ define([
           }
           self.finalizeAddItemToOrder(product);
           self.render();
+        } catch(err){
+          console.log('addItemToOrder ', err);
+        }
         },
         finalizeAddItemToOrder: function(product, quantity){
           var self = this;

@@ -1,7 +1,7 @@
 ﻿<div class="mz-productoptions">
     {% for option in model.options %}
     <div class="mz-productoptions-optioncontainer clearfix">
-        {% with option.values|findwhere("isSelected", true) as selectedColor %}      
+        {% with option.values|findwhere("isSelected", true) as selectedColor %}
             {% if selectedColor and selectedColor.value %}
                 <label class="mz-productoptions-optionlabel option-label">
                     <span class="text-uppercase">
@@ -44,7 +44,7 @@
                         {% include "modules/facets/facet-color" with allfacets=option.values isPDP="true" as_parameter %}
                     </ul>
                 {% else %}
-                    <ul class="product-swatches" > 
+                    <ul class="product-swatches" >
                     {% for value in option.values %}
                         <li data-mz-product-option-attribute="{{ option.attributeFQN }}" {% if not value.isEnabled %}  class="disabled" disabled {% endif %} {% if value.isSelected %}class="active" {% endif %} data-value="{{value.value}}"><span class="size-swatches-container">
                             <a href="javascript:void(0);">
@@ -58,7 +58,7 @@
                                     {% endif %}
                                 {% endif %}
                             </a>
-                        </span></li> 
+                        </span></li>
                     {% endfor %}
                     </ul>
                 {% endif %}
@@ -86,7 +86,7 @@
                         {% endif %}
                     {% endfor %}
                 {% endif %}
-            {% endif %}       
+            {% endif %}
         </div>
     </div>
     {% endfor %}
