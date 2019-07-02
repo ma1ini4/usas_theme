@@ -504,7 +504,7 @@
       "title": "Store Locator Detail",
       "userCreatable": true,
       "documentType": "web_page"
-    }, 
+    },
     {
       "documentType": "web_page",
       "entityType": "webpage",
@@ -545,6 +545,7 @@
         "tagName": "p"
       }
     ],
+    "colorAttributeName": "tenant~color-option",
     "colorSwatchesChangeAlternate": false,
     "colorSwatchesChangeMain": true,
     "columnBreaker": "~",
