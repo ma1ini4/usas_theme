@@ -64,12 +64,22 @@
         margin: 0 -@gutter/2
     }
 
+    .mz-itemlisting {
+        min-width: 700px;
+    }
+
     .mz-orderlisting-nonShipped {
         margin-bottom: @gutter/2;
     }
     .mz-order-returns {
         & + .mz-orderlisting-footer {
             text-align: center;
+        }
+
+        .mz-returnform {
+            .mz-l-formfieldgroup-row {
+                align-items: flex-start;
+            }
         }
     }
     .mz-order-history-return-status {
@@ -94,7 +104,7 @@
             & > div {
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+                justify-content: flex-start;
                 padding: 5px;
             }
             .mz-returnform-returntype,
@@ -104,6 +114,13 @@
             textarea {
                 width: auto;
             }
+        }
+
+        .mz-returnform-optionalcomments {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 5px;
         }
 
         .is-warning {

@@ -42,7 +42,7 @@
         <div class="mz-returnform-optionalcomments">
             <label class="mz-returnform-label">{{ labels.optionalComments }}</label>
           <div class="mz-returnform-field">
-            <textarea class="mz-returnform-optionalcommentsfield" data-mz-value="rmaComments"></textarea>
+            <textarea class="mz-returnform-optionalcommentsfield" maxlength="500" data-mz-value="rmaComments"></textarea>
           </div>
         </div>
       </div>
