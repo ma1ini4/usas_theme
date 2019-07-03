@@ -406,6 +406,7 @@
   "productImagePlaceholder": "[no image]",
   "productOutOfStock": "* This item is out of stock.",
   "productOutOfStockError": "This item has limited quantity or out of stock.",
+  "productUnavailable": "This item is unavailable",
   "productaddToCartError": "The following item(s) are not added to cart",
   "productwithoutSku": "Product without Sku",
   "promoCodeError": "Sorry, '{0}' does not appear to be a valid coupon code.",
