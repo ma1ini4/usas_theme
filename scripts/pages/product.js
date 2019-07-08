@@ -412,9 +412,9 @@
                     })
                     /* jshint ignore:end */
             }else if(typeof me.model.get('inventoryInfo').onlineStockAvailable !== 'undefined' && me.model.get('inventoryInfo').outOfStockBehavior === "AllowBackOrder"){
-                me.model.addToCart();
-            } if(!me.model.get('inventoryInfo').manageStock){
-                me.model.addToCart();
+                me.model.addToCart();                
+            }else if(!me.model.get('inventoryInfo').manageStock){
+                me.model.addToCart();                
             }else if (typeof me.model.get('inventoryInfo').onlineStockAvailable !== "undefined" && me.model.get('inventoryInfo').onlineStockAvailable === 0 && me.model.get('inventoryInfo').outOfStockBehavior === "DisplayMessage") {
                 blockUiLoader.productValidationMessage();
                 $('#SelectValidOption').children('span').html(Hypr.getLabel('productOutOfStock'));

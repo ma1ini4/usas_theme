@@ -53,7 +53,7 @@
                       {% if option.stringValue == 'CHR(64)' %}
                       @
                       {% else %}
-                        {{ option.stringValue }}
+                        {{option.stringValue|replace('µ', '<span class="lowercase">µ</span>'|safe)}}
                       {% endif %}
                     {% endif %}
               {% else %}
