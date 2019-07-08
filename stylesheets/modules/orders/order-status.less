@@ -12,6 +12,8 @@
             padding: 7px 0;
             background-color: #f1f1f2;
             font-size: 16px;
+            white-space: nowrap;
+
         }
 
         .col-sm-6:not(:only-child) {
@@ -23,9 +25,13 @@
             }
         }
         .col-sm-6 {
+            min-width: 50%;
             div {
                 padding-left: 5px;
                 padding-right: 5px;
+            }
+            .mz-addresssummary {
+                word-break: break-all;
             }
         }
 
