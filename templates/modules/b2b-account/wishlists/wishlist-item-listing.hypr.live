@@ -4,8 +4,12 @@
 <div class="mz-itemlisting-description">
   {% for option in model.product.options %}
   {{ option.name }}: {{option.stringValue|replace('µ', '<span class="lowercase">µ</span>'|safe)}},
-  {% endfor %}{{ model.product.variationProductCode|default(model.product.productCode) }}{% if model.product.measurements.packageWeight.value %},
-  {{ model.product.measurements.packageWeight.value }}{{model.measurements.packageWeight.unit }}{% endif %}
+  {% endfor %}
+  {{ model.product.variationProductCode|default(model.product.productCode) }}
+  {% if model.product.measurements.packageWeight.value %},
+    {{ model.product.measurements.packageWeight.value }}
+    {{model.measurements.packageWeight.unit }}
+  {% endif %}
 </div>
 <div class="mz-itemlisting-price">
     {% include "modules/common/item-price" %}
