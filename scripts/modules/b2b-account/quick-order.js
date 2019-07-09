@@ -80,6 +80,8 @@ define([
           self.model.unset('selectedProduct');
           $('.mz-b2b-quickorder .mz-searchbox-input.tt-input').val('');
           $('.mz-b2b-quickorder #pickerItemQuantity').val(1);
+          $('body').find('.modal-backdrop').remove();
+          $('body').removeClass('modal-open');
         },
         removeItem: function(e){
           var self = this;

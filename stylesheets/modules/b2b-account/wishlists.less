@@ -36,17 +36,20 @@
     .wishlist-edit-form, .quickorder-form {
         .wishlist-edit-form-section, .quickorder-form-section {
             margin-bottom:15px;
-            & > div {
-                float: left;
-                margin-right: 15px;
+            .flex {
+                align-items: flex-end;
+                & > div {
+                    float: left;
+                    margin-right: 15px;
+            }
 
                 .primary-btn {
-                    height: auto;
+                    height: 40px;
                 }
             }
             input[type="number"] {
                 width: 75px;
-                margin-right: 15px;
+                height: 40px;
                 margin-bottom: 0;
             }
 
@@ -56,6 +59,9 @@
             .mz-button {
                 float: right;
             }
+        }
+        .productPicker {
+            
         }
         .productpicker-label {
             display: block;
@@ -71,6 +77,21 @@
         -ms-transition: none;
         -o-transition: none;
         width: 320px;
+    }
+
+    .mz-carttable-item {
+        .mz-carttable-item-product {
+            display: flex;
+
+            .mz-carttable-item-image {
+                margin-right: 10px;
+            }
+        }
+        [data-mz-action="removeItem"] {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
     }
 }
 .mz-b2b-wishlist-list {
