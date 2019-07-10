@@ -64,6 +64,11 @@ define(["modules/jquery-mozu", 'modules/api', "underscore", "hyprlive", "modules
         },
         finishEditPassword: function() {
             var self = this;
+            var payload = {
+                password: $('#account-password').val()
+            };
+            
+            if (!this.validatePassword($('#password-section [data-mz-validationmessage-for="password"]'), payload)) return false;
             this.doModelAction('changePassword').then(function() {
                 _.delay(function() {
                     self.$('[data-mz-validationmessage-for="passwordChanged"]').show().text(Hypr.getLabel('passwordChanged')).fadeOut(3000);
@@ -72,6 +77,26 @@ define(["modules/jquery-mozu", 'modules/api', "underscore", "hyprlive", "modules
                 self.model.set('editingPassword', true);
             });
             this.model.set('editingPassword', false);
+            
+        },
+        validatePassword: function (el, payload) {
+            var passMinLen = Hypr.getThemeSetting('passwordMinLength'),
+                passMaxLen = Hypr.getThemeSetting('passwordMaxLength');                
+
+            if (!payload.password)
+                return el.show().text(Hypr.getLabel('passwordMissing')).fadeOut(3000), false;
+            if (payload.password.length < passMinLen) {
+                return el.show().text(Hypr.getLabel('passwordMinlength', passMinLen)).fadeOut(3000), false;
+            } else if (payload.password.length > passMaxLen) {
+                return el.show().text(Hypr.getLabel('passwordMaxlength', passMaxLen)).fadeOut(3000), false;
+            } else if (payload.password.search(/\d/) == -1) {
+                return el.show().text(Hypr.getLabel('passwordDigit', passMinLen)).fadeOut(3000), false;
+            } else if (payload.password.search(/[a-zA-Z]/) == -1) {
+                return el.show().text(Hypr.getLabel('passwordLetter', passMinLen)).fadeOut(3000), false;
+            } else if (payload.password.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\-\+\.\,\;\:]/) != -1) {
+                return el.show().text(Hypr.getLabel('passwordSpecial', passMinLen)).fadeOut(3000), false;
+            }
+            return true;
         },
         cancelEditPassword: function() {
             this.model.set('editingPassword', false);
