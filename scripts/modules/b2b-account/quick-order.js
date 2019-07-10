@@ -89,38 +89,6 @@ define([
           self.model.removeItemFromOrder(index);
           self.render();
         },
-        quantityMinus: function(e) {
-          if(!$("#minus").hasClass('disabled')){
-            var $qField = $(e.currentTarget),
-                id = $qField.data('mz-index'),
-                model = this.model,
-                items = model.attributes.items.models,
-                item = search(id, items),
-                qty = item.quantity;
-
-                console.log(id);
-
-                if (qty === 1) {
-                  return;
-                }
-
-                // item.set('quantity', --qty);
-                // item.saveQuantity();
-            }
-        },
-        quantityPlus: function(e) {
-          if(!$("#plus").hasClass('disabled')){
-            var $qField = $(e.currentTarget),
-                id = $qField.data('mz-index'),
-                model = this.model,
-                items = model.attributes.items.models,
-                item = search(id, items),
-                qty = item.quantity;
-
-                // item.set('quantity', ++qty);
-                // item.saveQuantity();
-          }
-        },
         onQuantityChange: _.debounce(function (e) {
             var $qField = $(e.currentTarget),
                 newQuantity = parseInt($qField.val(), 10),

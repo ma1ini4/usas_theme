@@ -45,6 +45,12 @@
 
                 .primary-btn {
                     height: 40px;
+                    margin-top: 15px;
+                }
+
+                @media @mobile {
+                    flex-direction: row;
+                    flex-wrap: wrap;
                 }
             }
             input[type="number"] {
@@ -77,21 +83,71 @@
         -ms-transition: none;
         -o-transition: none;
         width: 320px;
+
+        @media @tablet-only {
+            width: 240px;
+        }
     }
+
+}
+.mz-b2baccount {
 
     .mz-carttable-item {
         .mz-carttable-item-product {
             display: flex;
-
+    
             .mz-carttable-item-image {
                 margin-right: 10px;
             }
         }
-        [data-mz-action="removeItem"] {
-            position: absolute;
-            top: 0;
-            right: 0;
+        .qty-block {
+            display: flex;
+            align-items: center;
+            .mz-qty-label {
+                margin-right: 7px;
+                font-weight: bold;
+            }
+            input{
+                max-width: 60px;
+                margin: 0;
+            }
         }
+        @media @mobile {
+            .btn-link {
+                position: absolute;
+                top: 0;
+                right: 0;
+                color: @headingColor;
+            }
+            .mz-carttable-item-product {
+                display: flex;
+                .mz-carttable-item-info-wrap {
+                    display: flex;
+                    flex-direction: column;
+
+                    .mz-carttable-item-qty {
+                        display: flex !important;
+                        align-items: center;
+                        justify-content: flex-start !important;
+                        margin-top: 15px;
+
+                        .qty-block {
+                            margin-right: 15px;
+                        }
+                        .mz-item-rowtotal {
+                            color: @primaryColor;
+                        }
+                    }
+                }
+            }
+            .mz-price-total-container {
+                display: none;
+            }
+        }
+    }
+
+    .mz-table.mz-table-cart {
+        margin-bottom: 12.5px;
     }
 }
 .mz-b2b-wishlist-list {
