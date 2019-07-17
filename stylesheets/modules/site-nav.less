@@ -55,7 +55,7 @@
               display: flex;
             }
 
-            visibility: visible;
+            // visibility: visible;
             .transition-delay(0s);
             .sub-level-col {
                 float: none;
@@ -114,7 +114,8 @@
         // top: @navHeight - 1;
         position: absolute;
         z-index: 1;
-        visibility: hidden;
+        visibility: visible;
+        display: none;
         .transition(visibility 0s ease-out 0s);
 
         > .mz-sitenav-item {
