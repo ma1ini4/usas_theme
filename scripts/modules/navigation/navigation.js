@@ -153,7 +153,7 @@ define([
         });
         truncateUsername();
         navLinksActions();
-        $(window).load(enableNavOnLoad());
+        // $(window).load(enableNavOnLoad());
 
         $('.mz-sitenav-item').hover(
           function() {
