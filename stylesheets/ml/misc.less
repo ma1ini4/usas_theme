@@ -2497,6 +2497,19 @@ ul.tabs {
                 }
             }
         }
+        li {
+            position: relative;
+            &:before {
+                content: '';
+                position: absolute;
+                width: 12px;
+                height: 12px;
+                left: -16px;
+                top: 5px;
+                background: url(../resources/images/check.png) no-repeat;
+                background-size: contain;
+            }
+        }
         .panel-heading {
             @media @mobile {
                 border-radius: 0px;
