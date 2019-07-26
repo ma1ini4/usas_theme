@@ -29,15 +29,6 @@
     <div class="clear"></div>
     <h3 class="mz-l-stack-sectiontitle">{{ model.name }}</h3>
 
-    <div class="wishlist-btns">
-        <button class="secondary-btn" data-mz-action="cancelWishlistEdit">Cancel</button>
-        <div class="check-all-items">
-            <input type="checkbox" data-mz-value="check-all-quote" id="check-all" checked>
-            <label for="check-all">Select all items</label>
-        </div>
-        <button type="button" class="primary-btn" data-mz-action="addWishlistToCart">ACTIVATE QUOTE FOR CHECKED
-            ITEMS</button>
-    </div>
     <div class="mz-b2b-wishlist-list">
         {% include "modules/b2b-account/wishlists/wishlist-list" %}
     </div>

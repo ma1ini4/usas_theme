@@ -493,7 +493,16 @@ define([
                 checkboxes.each(function() {
                     $(this).prop('checked', true);
                 });
-            } 
+
+                $("[data-mz-value='check-all-quote']").each(function(){
+                    $(this).prop('checked', true);
+                });
+            } else {
+                $("[data-mz-value='check-all-quote']").each(function(){
+                    $(this).prop('checked', false);
+                });
+            }
+            console.log(e);
         },
         itemCheckbox: function(e) {
             $("[data-mz-value='check-all-quote']").prop('checked', false);
