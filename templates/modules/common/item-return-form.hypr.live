@@ -1,7 +1,7 @@
 ﻿<div class="mz-returnform">
   <div class="mz-l-formfieldgroup">
   <div class="mz-l-formfieldgroup-row">
-    <div class="mz-l-formfieldgroup-cell">
+    <div class="mz-l-formfieldgroup-cell mz-order-history-return-status-returnform">
       <div class="mz-returnform-returntype">
           <label class="mz-returnform-label">{{ labels.returnType }}</label>
           <div class="mz-returnform-field">
@@ -31,23 +31,23 @@
         <label class="mz-returnform-label">{{ labels.quantityToReturn }}<span class="is-required"> *</span>:</label>
         <div class="mz-returnform-field">
           <input type="number" data-mz-value="rmaQuantity" min="1" max="{{ model.quantity }}" class="mz-returnform-quantityfield" />
-          <span class="mz-returnform-quantitylabel">{{ labels.of }} {{ model.quantity }}</span>
+          <span class="mz-returnform-quantitylabel">{{ labels.of }} {{ model.quantityReturnable }}</span>
           <span class="mz-validationmessage" data-mz-validationmessage-for="rmaQuantity"></span>
         </div>
       </div>
       {% endblock item-return-quantity %}
       </div>
 
-      <div class="mz-l-formfieldgroup-cell">
       <div class="mz-returnform-comments">
         <div class="mz-returnform-optionalcomments">
             <label class="mz-returnform-label">{{ labels.optionalComments }}</label>
           <div class="mz-returnform-field">
-            <textarea class="mz-returnform-optionalcommentsfield" data-mz-value="rmaComments"></textarea>
+            <textarea class="mz-returnform-optionalcommentsfield" maxlength="500" data-mz-value="rmaComments"></textarea>
           </div>
         </div>
       </div>
-    </div>
+      <!-- <div class="mz-l-formfieldgroup-cell">
+    </div> -->
 
     {% block item-return-actions %}
     <div class="mz-l-formfieldgroup-row mz-returnform-actions">

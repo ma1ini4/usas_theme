@@ -1,8 +1,10 @@
 <div class="mz-item-tracking">
-  <div class="mz-tracking-title">{{labels.orderStatusTrackings}}</div>
-  <div>{{model.itemStatus}}</div>
+  <div>{{model.shipmentDeliveryTime}}</div>
+  <div>{{labels.orderStatusShipmentStatus}}: {{model.deliveryStatus}}</div>
   <div>{{model.itemTrackingCarrierName}}</div>
-  <div>{{model.itemTrackingCode}}</div>
-  <div>{{model.itemTrackingDate|date("F j, Y") }}</div>
-  <div><a href="{{model.itemTrackingCarrierURL}}">{{model.itemTrackingNumber}}</a></div>
+  <div>
+    <p class="mz-tracking-title">{{labels.orderStatusTrackings}}</p>
+    <span>{{model.shippingMethod}} - </span>
+      <span><a href="{{model.itemTrackingCarrierURL}}">{{model.trackingNumber}}</a></span>
+  </div>
 </div>

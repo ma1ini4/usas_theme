@@ -65,3 +65,38 @@
       }
    }
 }
+
+.order-status {
+    .mz-order-status-section {
+        display: flex;
+        width: 100%;
+
+        .mz-l-stack-sectiontitle {
+            width: 100%;
+        }
+
+        .mz-order-status-section-subheading {
+            margin: 10px 0;
+            padding: 7px 0;
+            background-color: #f1f1f2;
+            font-size: 16px;
+        }
+
+        .col-sm-6:not(:only-child) {
+            &:first-child {
+                padding-right: 0;
+            }
+
+            &:last-child {
+                padding-left: 0;
+            }
+        }
+
+        .col-sm-6 {
+            div {
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+    }
+}

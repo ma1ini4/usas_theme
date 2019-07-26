@@ -3,9 +3,11 @@
 {% endif %}
 {% require_script "pages/product" %}
 <div itemscope itemtype="http://schema.org/Product" class="mz-l-container">
+    {% comment %}
     {% if (PageContext.isTablet or PageContext.isDesktop) and themeSettings.enableProductCarousel %}
-    {% include "modules/product/product-top-carousel" %}
+        {% include "modules/product/product-top-carousel" %}
     {% endif %}    
+    {% endcomment %}
     <div class="row">
     {% if themeSettings.enableProductPagingControl %}
         {% require_script "pages/product-paging-control" %}
@@ -25,7 +27,9 @@
         </div>
         <div class="col-xs-12 col-sm-6 mz-product-content-block">
             <div class="mz-product-top-content">
-                <h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName|replace("'","&rsquo;")|safe }}</h1>
+                <h1 class="mz-pagetitle" itemprop="name">
+                    {{ model.content.productName|replace("'","&rsquo;")|safe|replace('µ', '<span class="lowercase">µ</span>'|safe) }}
+                </h1>
                 <div class="row">
                     <div class="col-xs-5">
                         <h4 class="mz-productcodes-productcode p-3 no-wrap" itemprop="sku">{{ labels.item}} {{ model.productCode }}</h4>

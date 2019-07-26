@@ -71,11 +71,11 @@
             <div id="tab2" class="tab-pane tab-dimensions fade {% if not model.content.productFullDescription %} active in{% endif %}">
                 {% if model.infoTab2Content %}
                      <div class="tab-content-2">
-                        <div class="col-sm-4 col-md-12 prop-list ">
+                        <div class="col-sm-12 col-md-12 prop-list ">
                             {% for content in model.infoTab2Content %}
                             <div class="prop-list-item">
-                                <div class="prop-name col-md-3">{{content.name}}</div>
-                                <div class="prop-value col-md-9">{{content.value}}</div>
+                                <div class="prop-name col-sm-3">{{content.name}}</div>
+                                <div class="prop-value col-sm-9">{{content.value}}</div>
                             </div>
                             {% endfor %}
                             </div>
@@ -96,11 +96,11 @@
             <div id="tab3" class="tab-pane fade">
             {% if model.infoTab3Content %}
                  <div class="tab-content-2">
-                    <div class="col-sm-4 col-md-12 prop-list ">
+                    <div class="col-sm-12 col-md-12 prop-list ">
                         {% for content in model.infoTab3Content %}
                             <div class="prop-list-item">
-                                <div class="prop-name col-md-3">{{content.name}}</div>
-                                <div class="prop-value col-md-9">{{content.value}}</div>
+                                <div class="prop-name col-sm-3">{{content.name}}</div>
+                                <div class="prop-value col-sm-9">{{content.value}}</div>
                             </div>
                         {% endfor %}
                         </div>
@@ -121,11 +121,11 @@
             <div id="tab4" class="tab-pane fade">
             {% if model.infoTab4Content %}
                  <div class="tab-content-2">
-                    <div class="col-sm-4 col-md-12 prop-list ">
+                    <div class="col-sm-12 col-md-12 prop-list ">
                         {% for content in model.infoTab4Content %}
                             <div class="prop-list-item">
-                                <div class="prop-name col-md-3">{{content.name}}</div>
-                                <div class="prop-value col-md-9">{{content.value}}</div>
+                                <div class="prop-name col-sm-3">{{content.name}}</div>
+                                <div class="prop-value col-sm-9">{{content.value}}</div>
                             </div>
                         {% endfor %}
                         </div>
@@ -146,11 +146,11 @@
             <div id="tab5" class="tab-pane fade">
             {% if model.infoTab5Content %}
                  <div class="tab-content-2">
-                    <div class="col-sm-4 col-md-12 prop-list ">
+                    <div class="col-sm-12 col-md-12 prop-list ">
                         {% for content in model.infoTab5Content %}
                             <div class="prop-list-item">
-                                <div class="prop-name col-md-3">{{content.name}}</div>
-                                <div class="prop-value col-md-9">{{content.value}}</div>
+                                <div class="prop-name col-sm-3">{{content.name}}</div>
+                                <div class="prop-value col-sm-9">{{content.value}}</div>
                             </div>
                         {% endfor %}
                         </div>

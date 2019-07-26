@@ -8,7 +8,7 @@
           {{ option.shopperEnteredValue }}, 
         {% endif %}
         {% if option.value %} 
-          {{ option.value }}, 
+          {{option.stringValue|replace('µ', '<span class="lowercase">µ</span>'|safe)}},
         {% endif %}
       {% endfor %}
       {{ model.product.variationProductCode|default(model.product.productCode) }}

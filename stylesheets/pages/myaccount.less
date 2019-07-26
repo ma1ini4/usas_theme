@@ -8,6 +8,21 @@
         // width: 200px;
         box-sizing: border-box;
     }
+    .mz-l-sidebar {
+        @media @mobile {
+            display: none;
+        }
+    }
+    .mz-b2b-pane-switcher .mz-l-sidebar {
+        @media @mobile {
+            display: block;
+
+            .mz-pane-switcher-nav {
+                display: flex;
+                flex-wrap: wrap;
+            }
+        }
+    }
 
     .mz-contacttype-isprimary {
         font-size: @fontSizeSmall;
@@ -72,6 +87,11 @@
 
     #mz-printReturnLabelView {
         display: none;
+    }
+    .mz-pagingcontrols .btn-group {
+        @media @mobile {
+            margin-right: 15px;
+        }
     }
 }
 

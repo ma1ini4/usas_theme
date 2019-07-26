@@ -29,7 +29,12 @@ define([
                 }
             }
             currentElemnt.css({ "left": leftPosition, "right": rightPosition });
-        }).removeClass("calculating-position").addClass("calculated-position");
+        }).removeClass("calculating-position").addClass("calculated-position").hide();
+    }
+    function enableNavOnLoad(){       
+      $(".mz-sitenav-sub-container").css({
+        "display": "block"
+      });
     }
     function outlineMobileNavOnCollapse() {
       var burgerMenuLink = $('.mz-utilitynav .mz-utilitynav-link'),
@@ -148,6 +153,20 @@ define([
         });
         truncateUsername();
         navLinksActions();
+        // $(window).load(enableNavOnLoad());
+
+        $('.mz-sitenav-item').hover(
+          function() {
+            var $this = $(this);
+            var $subMenu = $this.find('.mz-sitenav-sub-container');
+            $subMenu.stop(true, true).delay(200).fadeIn(200, 'easeInOutQuad');
+          },
+          function() {
+            var $this = $(this);
+            var $subMenu = $this.find('.mz-sitenav-sub-container');
+            $subMenu.stop(true, false).delay(200).fadeOut(0);
+          }
+        );
     });
     $(window).resize(function() {
         calculatingSubPosition();

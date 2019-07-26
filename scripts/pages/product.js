@@ -412,13 +412,19 @@
                     })
                     /* jshint ignore:end */
             }else if(typeof me.model.get('inventoryInfo').onlineStockAvailable !== 'undefined' && me.model.get('inventoryInfo').outOfStockBehavior === "AllowBackOrder"){
-                me.model.addToCart();
+                me.model.addToCart();                
+            }else if(!me.model.get('inventoryInfo').manageStock){
+                me.model.addToCart();                
             }else if (typeof me.model.get('inventoryInfo').onlineStockAvailable !== "undefined" && me.model.get('inventoryInfo').onlineStockAvailable === 0 && me.model.get('inventoryInfo').outOfStockBehavior === "DisplayMessage") {
                 blockUiLoader.productValidationMessage();
                 $('#SelectValidOption').children('span').html(Hypr.getLabel('productOutOfStock'));
-            }else if (typeof me.model.get('inventoryInfo').onlineStockAvailable === "undefined" || $(".mz-productoptions-optioncontainer").length != $(".mz-productoptions-optioncontainer .active").length) {
+            }else if (typeof me.model.get('inventoryInfo').onlineStockAvailable === "undefined" && me.model.get('inventoryInfo').manageStock ){
                 blockUiLoader.productValidationMessage();
-            } else if (me.model.get('inventoryInfo').onlineStockAvailable) {
+                $('#SelectValidOption').children('span').html(Hypr.getLabel('productUnavailable'));
+            } else if ($(".mz-productoptions-optioncontainer").length != $(".mz-productoptions-optioncontainer .active").length) {
+              blockUiLoader.productValidationMessage();
+            }
+            else if (me.model.get('inventoryInfo').onlineStockAvailable) {
                 if (me.model.get('inventoryInfo').onlineStockAvailable < me.model.get('quantity')) {
                     $('[data-mz-validationmessage-for="quantity"]').css('visibility', "visible").text("*Only " + me.model.get('inventoryInfo').onlineStockAvailable + " left in stock.");
                     return false;

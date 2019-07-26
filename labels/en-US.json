@@ -204,8 +204,9 @@
   "findAtLocalStore": "Find it at a Local Store",
   "firstName": "First Name",
   "firstNameMissing": "Please enter first name",
-  "forgotPassword": "Forgot your password",
+  "forgotPassword": "Forgot your password?",
   "forgotPasswordLink": "forgot password?",
+  "forgotPasswordNote": "If you experience any problems with login or registration, please call 1-800-522-8477 or email us at info@usascientific.com.",
   "freeShipping": "Free Shipping",
   "friday": "Fri",
   "from": "from",
@@ -405,6 +406,7 @@
   "productImagePlaceholder": "[no image]",
   "productOutOfStock": "* This item is out of stock.",
   "productOutOfStockError": "This item has limited quantity or out of stock.",
+  "productUnavailable": "This item is unavailable",
   "productaddToCartError": "The following item(s) are not added to cart",
   "productwithoutSku": "Product without Sku",
   "promoCodeError": "Sorry, '{0}' does not appear to be a valid coupon code.",
@@ -617,5 +619,11 @@
   "yourOrderNumber": "Your order number is <strong>{0}</strong>.",
   "zipErrorMessage": "Please enter a valid zipcode.",
   "viewOrderStatus": "View Order Status",
-  "viewOrderDetails": "View Order Details"
+  "viewOrderDetails": "View Order Details",
+  "orderInformation": "Order Details",
+  "orderDetailNumber": "Order number",
+  "orderDetailDate": "Order date",
+  "orderDetailStatus": "Order status",
+  "orderStatusTrackings": "Shipment Tracking",
+  "orderStatusShipmentStatus": "Shipment Status"
 }

@@ -36,7 +36,14 @@
                       <div class="mz-carttable-item-info-wrap pull-left col-xs-8 mz-reset-padding-right">
                         <div class="mz-carttable-item-title" >{{ item.product.name |safe }}</div>
                          <div class="mz-carttable-item-code">
-                          {{ labels.item }}# <span>{{ item.product.productCode }}</span>
+                          {{ labels.item }}#
+                          <span>
+                            {% if item.product.variationProductCode and not item.product.variationProductCode.length == 0 %}
+                              {{ item.product.variationProductCode }}
+                            {% else %}
+                              {{ item.product.productCode }}
+                            {% endif %}
+                          </span>
                         </div>
                         {% if item.product.options and themeSettings.showCartItemOptions %}
                         <div class="mz-propertylist">
@@ -54,7 +61,7 @@
                                       {% if option.stringValue == 'CHR(64)' %}
                                       @
                                       {% else %}
-                                        {{ option.stringValue }}
+                                        {{option.stringValue|replace('µ', '<span class="lowercase">µ</span>'|safe)}}
                                       {% endif %}
                                     {% endif %}
                               {% else %}

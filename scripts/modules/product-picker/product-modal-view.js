@@ -3,6 +3,7 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
     var ProductLocationView = Backbone.MozuView.extend({
         templateName: "modules/cart/discount-modal/discount-product-location",
         render: function () {
+          try{
             Backbone.MozuView.prototype.render.apply(this, arguments);
             var $locationSearch = $('#location-list'),
                 product = this.model,
@@ -16,6 +17,9 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
 
             if (productPresent) view.setProduct(product);
             window.lv = view;
+          } catch(e){
+            console.log(e);
+          }
         }
 
     });
@@ -26,11 +30,13 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
         additionalEvents: {
             "change [data-mz-product-option]": "onOptionChange",
             "blur [data-mz-product-option]": "onOptionChange",
+            "click [data-mz-product-option-attribute]": "onOptionChangeAttribute",
             "change [data-mz-value='quantity']": "onQuantityChange",
             "keyup input[data-mz-value='quantity']": "onQuantityChange"
         },
         render: function () {
             var me = this;
+            try{
             if (this.oldOptions) {
                 me.model.get('options').map(function (option) {
                     var oldOption = _.find(me.oldOptions, function (old) {
@@ -45,6 +51,9 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
             this.$('[data-mz-is-datepicker]').each(function (ix, dp) {
                 $(dp).dateinput().css('color', Hypr.getThemeSetting('textColor')).on('change  blur', _.bind(me.onOptionChange, me));
             });
+          } catch(e){
+            console.log('addproductview render ', e);
+          }
         },
         onOptionChange: function (e) {
             return this.configure($(e.currentTarget));
@@ -75,6 +84,31 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
                 }
             }
         },
+        onOptionChangeAttribute: function (e) {
+            return this.configureAttribute($(e.currentTarget));
+        },
+        configureAttribute: function ($optionEl) {
+          if (!$optionEl.hasClass("active")) {
+            var $this = this,
+                newValue = $optionEl.data('value'),
+                oldValue,
+                id = $optionEl.data('mz-product-option-attribute'),
+                optionEl = $optionEl[0],
+                isPicked = (optionEl.type !== "checkbox" && optionEl.type !== "radio") || optionEl.checked,
+                option = this.model.get('options').findWhere({ 'attributeFQN': id });
+            if (option) {
+                if (option.get('attributeDetail').inputType === "YesNo") {
+                    option.set("value", isPicked);
+                } else if (isPicked) {
+                    oldValue = option.get('value');
+                    if (oldValue !== newValue && !(oldValue === undefined && newValue === '')) {
+                        option.set('value', newValue);
+                        this.oldOptions = this.model.get('options').toJSON();
+                    }
+                }
+            }
+          }
+        },
         onBackToProductSelection: function (e) {
             var self = this;
             if (self.model._parent) {
@@ -82,10 +116,13 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
             }
         },
         completeProductConfiguration: function (e) {
+          try {
             var self = this;
             e.preventDefault();
             self.model.trigger('configurationComplete', self);
-
+          } catch(err){
+            console.log('completeProductConfiguration ', err);
+          }
             // try {
             //     self.model.addToCart(true).then(function () {
             //         this.model.parent.handleDialogCancel();
@@ -114,6 +151,7 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
         },
         initialize: function () {
             // handle preset selects, etc
+            try{
             var me = this;
             var productModel = this.model;
             var pickerItemQuantity = window.views.currentPane.model.get('pickerItemQuantity');
@@ -152,8 +190,10 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
                   }
               });
             });
-
+          } catch(e){
+          console.log('initialize error ',e);
         }
+      }
     });
 
 
@@ -164,6 +204,7 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
             this.bootstrapInstance.show();
         },
         handleDialogClose: function () {
+          try {
             var self = this;
             if (self.model.messages) {
                 self.model.messages.reset();
@@ -173,6 +214,9 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
               self._addProductView.undelegateEvents();
             }
             self.bootstrapInstance.hide();
+          } catch(e){
+            console.log('handleDialogClose ', e);
+          }
         },
         handleDialogCancel: function () {
             var self = this;
@@ -192,6 +236,7 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
             return this.$el.find('[data-mz-product-modal-content]');
         },
         loadAddProductView: function (product) {
+          try{
             var self = this;
 
             var addProductView = new AddProductView({
@@ -201,10 +246,17 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
             });
             self._addProductView = addProductView;
             addProductView.render();
+          } catch(e){
+            console.log('loadAddProductView ',e);
+          }
         },
         render: function () {
+          try{
             Backbone.MozuView.prototype.render.apply(this, arguments);
             var self = this;
+          } catch(e){
+            console.log('render 1 ',e);
+          }
         }
     });
 

@@ -125,8 +125,20 @@
     .container {
         padding: 0;
     }
-
     .mz-sitenav-sub-container {
+        left: 0px !important;
+        width: 100%;
+        background-color: #fff;
+        border: 1px solid @primaryColor;
+        z-index: 2;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        -webkit-transition: visibility 0s ease-out 0s;
+        -moz-transition: visibility 0s ease-out 0s;
+        -ms-transition: visibility 0s ease-out 0s;
+        -o-transition: visibility 0s ease-out 0s;
+    }
+    .mz-sitenav-sub-container:not(:hover) {
         // top: 69px;
         left: 0px !important;
         width: 100%;
@@ -142,9 +154,14 @@
         -moz-transition: visibility 0s ease-out 0s;
         -ms-transition: visibility 0s ease-out 0s;
         -o-transition: visibility 0s ease-out 0s;
-
+        .mz-sitenav-item {
+            padding: 0;
+        }
         .mz-sitenav-link {
             // padding: 2px 0;
+            text-transform: none;
+            font-weight: normal !important;
+            text-align: left;
         }
 
         a {
@@ -167,14 +184,20 @@
         }
 
         &:hover {
+            .mz-sitenav-sub-container {
+                padding: 15px 10px 20px 25px;
+            }
             .mz-sitenav-link {
                 background-color: inherit;
             }
 
             .mz-sitenav-sub {
                 .mz-sitenav-link {
+                    text-transform: none;
                     height: auto;
                     padding: 0px;
+                    font-weight: normal !important;
+                    text-align: left;
                 }
             }
 
@@ -1530,135 +1553,136 @@ ul.tabs {
     }
 }
 
-.mz-category {
-    .mz-l-paginatedlist {
-        overflow: inherit;
-        position: static;
+.mz-l-paginatedlist-header {
+    width: 100%;
+    float: left;
 
-        #mz-drop-zone-page-top-banner {
-            margin-bottom: 20px;
-        }
-    }
 
     .title-sortby-wrappper {
-        display: flex;
-        @media @mobile {
-            flex-wrap: wrap;
-        }
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 15px;
-        padding: 9px 0;
+        .mz-sortby {
+            // line-height: 4.5;
 
-        .mz-pagetitle {
-            font-size: 16px;
-            float: left;
-            line-height: 15px;
             display: block;
-            // width: 100%;
-        }
+            float: left;
 
-        @media @mobile {
-            flex-wrap: wrap;
+            label {
+                margin: 0;
+                display: flex;
+                align-items: center;
 
-            span {
-                margin: 10px 15px 10px 0;
-            }
-        }
-    }
+                span.mz-paging-sorttitle {
+                    margin-right: 5px;
+                    font-size: 14px;
+                    color: @headingColor;
 
-    .mz-l-paginatedlist-header {
-        width: 100%;
-        float: left;
+                }
 
+                span.sort-by-wrapper {
+                    position: relative;
 
-        .title-sortby-wrappper {
-            .mz-sortby {
-                // line-height: 4.5;
-
-                display: block;
-                float: left;
-
-                label {
-                    margin: 0;
-                    display: flex;
-                    align-items: center;
-
-                    span.mz-paging-sorttitle {
-                        margin-right: 5px;
+                    select {
+                        width: 150px;
+                        height: 20px;
+                        margin: 0;
+                        padding: 0 3px;
+                        border: 1px solid #404041;
+                        border-radius: 4px;
                         font-size: 14px;
-                        color: @headingColor;
+                        color: #404041;
+                        background: -moz-linear-gradient(50% 100% 90deg, rgba(255, 255, 255, 1) 0%, rgba(35, 31, 32, 1) 300%);
+                        background: -webkit-linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(35, 31, 32, 1) 300%);
+                        background: -o-linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(35, 31, 32, 1) 300%);
+                        background: -ms-linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(35, 31, 32, 1) 300%);
+                        background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(35, 31, 32, 1) 300%);
 
-                    }
+                        -webkit-appearance: none;
+                        -moz-appearance: none;
+                        -o-appearance: none;
 
-                    span.sort-by-wrapper {
-                        position: relative;
-
-                        select {
-                            width: 150px;
-                            height: 20px;
-                            margin: 0;
-                            padding: 0 3px;
-                            border: 1px solid #404041;
-                            border-radius: 4px;
-                            font-size: 14px;
-                            color: #404041;
-                            background: -moz-linear-gradient(50% 100% 90deg, rgba(255, 255, 255, 1) 0%, rgba(35, 31, 32, 1) 300%);
-                            background: -webkit-linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(35, 31, 32, 1) 300%);
-                            background: -o-linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(35, 31, 32, 1) 300%);
-                            background: -ms-linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(35, 31, 32, 1) 300%);
-                            background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(35, 31, 32, 1) 300%);
-
-                            -webkit-appearance: none;
-                            -moz-appearance: none;
-                            -o-appearance: none;
-
-                            &+i.usas-icon-dropdown {
-                                position: absolute;
-                                top: 0;
-                                right: 5px;
-                                display: flex;
-                                align-items: center;
-                                height: 100%;
-                                background-color: transparent;
-                                pointer-events: none;
-                            }
+                        &+i.usas-icon-dropdown {
+                            position: absolute;
+                            top: 0;
+                            right: 5px;
+                            display: flex;
+                            align-items: center;
+                            height: 100%;
+                            background-color: transparent;
+                            pointer-events: none;
                         }
                     }
-
                 }
-            }
-        }
 
-        @media @mobile {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-
-            & > div {
-                margin: 10px 0;
-
-                &:first-child {
-                    margin-right: auto;
-                    padding-right: 10px;
-                }
             }
         }
     }
 
-    .main-directory-container {
-        width: 100%;
-        float: left;
-    }
+    @media @mobile {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
 
-    .mz-pricestack-price-upper {
-        padding-left: 0px;
-    }
+        &>div {
+            margin: 10px 0;
 
-    .is-disabled {
-        opacity: 0.4;
+            &:first-child {
+                margin-right: auto;
+                padding-right: 10px;
+            }
+        }
     }
 }
+
+.title-sortby-wrappper {
+    display: flex;
+
+    @media @mobile {
+        flex-wrap: wrap;
+    }
+
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding: 9px 0;
+
+    .mz-pagetitle {
+        font-size: 16px;
+        float: left;
+        line-height: 15px;
+        display: block;
+        // width: 100%;
+    }
+
+    @media @mobile {
+        flex-wrap: wrap;
+
+        span {
+            margin: 10px 15px 10px 0;
+        }
+    }
+}
+
+.mz-l-paginatedlist {
+    overflow: inherit;
+    position: static;
+
+    #mz-drop-zone-page-top-banner {
+        margin-bottom: 20px;
+    }
+}
+
+.main-directory-container {
+    width: 100%;
+    float: left;
+}
+
+.mz-pricestack-price-upper {
+    padding-left: 0px;
+}
+
+.is-disabled {
+    opacity: 0.4;
+}
+
 
 // Product Directory
 .mz-productlist {
@@ -2115,13 +2139,13 @@ ul.tabs {
 
     ul {
         margin: 0;
-        padding: 0 0 5px 0;
+        padding: 0 0 5px 13px;
 
         li {
-            padding-bottom: 5px;
+            padding-bottom: 3px;
 
             a {
-                color: #333;
+                color: inherit;
             }
         }
     }
@@ -2405,11 +2429,8 @@ ul.tabs {
 
                 .prop-list-item {
                     display: flex;
-                    &:nth-child(even) {
+                    &:nth-child(odd) {
                         background-color: #FFF;
-                    }
-                    @media @desktop-bootstrap {
-                        display: block;
                     }
                 }
                 .prop-name {
@@ -2430,6 +2451,19 @@ ul.tabs {
 
                 .tab-content-request-text {
                     font-weight: @bold;
+                }
+            }
+            li {
+                position: relative;
+                &:before {
+                    content: '';
+                    position: absolute;
+                    width: 12px;
+                    height: 12px;
+                    left: -16px;
+                    top: 5px;
+                    background: url(../resources/images/check.png) no-repeat;
+                    background-size: contain;
                 }
             }
             
@@ -2453,7 +2487,7 @@ ul.tabs {
                 .prop-list-item {
                     display: flex;
 
-                    &:nth-child(even) {
+                    &:nth-child(odd) {
                         background-color: #FFF;
                     }
                 }
@@ -2461,6 +2495,19 @@ ul.tabs {
                 .prop-name {
                     font-weight: @semi-bold;
                 }
+            }
+        }
+        li {
+            position: relative;
+            &:before {
+                content: '';
+                position: absolute;
+                width: 12px;
+                height: 12px;
+                left: -16px;
+                top: 5px;
+                background: url(../resources/images/check.png) no-repeat;
+                background-size: contain;
             }
         }
         .panel-heading {
@@ -3134,7 +3181,7 @@ ul.tabs {
 .mz-messagebar {
     .mz-success {
         li {
-            color: @colorGreen;
+            color: inherit;
         }
     }
 }

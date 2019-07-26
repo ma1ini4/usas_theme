@@ -41,7 +41,13 @@
 					{% dropzone "page-bottom-banner" scope="page" %}
 					<div class="mz-l-paginatedlist-header">
 						<div class="title-sortby-wrappper">
-							<span class="mz-pagetitle">{{ pageContext.title|safe }}</span>
+							<span class="mz-pagetitle">
+								{% if pageContext.search.query %}
+									{{ labels.searchResults }}: <span class="mz-searchresults-query">{{ pageContext.search.query }}</span>
+								{% else %}
+									{{ pageContext.title|safe }}
+								{% endif %}
+							</span>
 							<div data-mz-pagesort class="mz-sortby">
 								{% include "modules/common/page-sort" %}
 							</div>

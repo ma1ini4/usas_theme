@@ -39,7 +39,12 @@
 							<div class="item-options">
 								{% if items.product.options %}
 									{% for option in items.product.options %}
-									<div class="item-option-name">{{ option.name }}: <span>{% if option.stringname %}{{ option.stringname }}{% else %}{{ option.value }}{% endif %}</span></div>
+									<div class="item-option-name">{{ option.name }}: <span>
+										{% if option.stringname %}
+											{{ option.stringname }}
+										{% else %}
+											{{option.stringValue|replace('µ', '<span class="lowercase">µ</span>'|safe)}}
+										{% endif %}</span></div>
 									{% endfor %}
 								{% endif %}
 								<div class="item-option-name">{{ labels.qty }}: <span>{{ items.quantity }}</span></div>

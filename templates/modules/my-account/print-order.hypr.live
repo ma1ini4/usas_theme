@@ -1,5 +1,7 @@
 <div class="company-logo text-left">
-    <img data-original="{{ themeSettings.companyLogo }}" src="{{ themeSettings.companyLogo }}" alt="CTS LOGO" />
+    <img data-original="{{ themeSettings.globalPageHeaderLogoXS.imageUrl }}"
+        src="{{ themeSettings.globalPageHeaderLogoSM.imageUrl }}"
+        alt="{{siteContext.generalSettings.websiteName}}" />
 </div>
 <table class="mz-printable-order mz-printable-order-details mz-l-stack" width="100%">
 <tbody><tr><td colspan="4">

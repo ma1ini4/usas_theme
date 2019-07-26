@@ -2,18 +2,18 @@
 <h2 class="mz-l-stack-sectiontitle">{{ labels.quickOrder }}</h2>
     <div class="quickorder-form">
       <div class="quickorder-form-section productPicker">
-          <div>
-              <span class="productpicker-label">{{labels.b2bProductPicker}}</span>
-              <div mz-wishlist-product-picker>{% include "modules/product-picker/product-picker" %}</div>
-          </div>
-          <div>
-              <span class="productpicker-label">{{labels.b2bQuantity}}</span>
-            <div class="flex">
-                <input type="number" name="pickerItemQuantity" id="pickerItemQuantity" data-mz-value="pickerItemQuantity" value="{{ model.pickerItemQuantity }}">
-                <button class="primary-btn" data-mz-action="addItemToOrder" {% if productNotSelected %} disabled {% endif %}>Add To List</button>                
+        <div class="flex">
+            <div>
+                <span class="productpicker-label">{{labels.b2bProductPicker}}</span>
+                <div mz-wishlist-product-picker>{% include "modules/product-picker/product-picker" %}</div>
             </div>
-            <span class="mz-validationmessage" data-mz-validationmessage-for="pickerItemQuantity"></span>
-          </div>
+            <div>
+                <span class="productpicker-label">{{labels.b2bQuantity}}</span>
+                <input type="number" name="pickerItemQuantity" id="pickerItemQuantity" data-mz-value="pickerItemQuantity" value="{{ model.pickerItemQuantity }}">
+            </div>
+            <button class="primary-btn" data-mz-action="addItemToOrder" {% if productNotSelected %} disabled {% endif %}>{{ labels.add }}</button>
+        </div>
+        <span class="mz-validationmessage" data-mz-validationmessage-for="pickerItemQuantity"></span>
 
       </div>
       <div mz-modal-product-dialog class="mz-product-modal">
@@ -23,6 +23,6 @@
       </div>
     </div>
 </div>
-<div class="mz-table mz-table-cart">
-    {% include "modules/cart/cart-table"  with item=item index=forloop.index  %}
-</div>
+<table class="mz-table mz-table-cart">
+  {% include "modules/b2b-account/quick-order/quick-order-table" %}
+</table>
