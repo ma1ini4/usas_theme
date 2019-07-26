@@ -119,10 +119,32 @@ define([
             });
 
         },
-        addToCart: function(){
+        addToCart: function (deselectedItems) {
           this.isLoading(true);
           var self = this;
           var items = this.get('items').toJSON();
+
+          if (deselectedItems.length != 0) {
+
+            if (deselectedItems.length === items.length) {
+                items = [];
+            } else {
+                var newItems = [];
+    
+                deselectedItems.forEach(function(id){
+    
+                    $.grep(items, function(obj){
+                        if (obj.id != id) {                        
+                            newItems.push(obj);
+                        }
+                    });          
+                });
+    
+                items = newItems;
+            }
+
+          }
+
           var cart = CartModels.Cart.fromCurrent();
           var products = [];
           _.each(items, function(item) {
@@ -319,8 +341,13 @@ define([
             });
 
         },
-        addWishlistToCart: function(){
-          this.model.addToCart();
+        addWishlistToCart: function(e){
+            var deselectedItems = [];
+
+            $('[data-mz-value="add-to-cart-quote"]:not(:checked)').each(function () {
+               deselectedItems.push($(this).data('mzItemId'));
+            });
+            this.model.addToCart(deselectedItems);
         },
         saveAndCloseWishlistEdit: function () {
           // Name here is a bit misleading but the effect is the same -
@@ -417,7 +444,10 @@ define([
     var WishlistListView = Backbone.MozuView.extend({
         templateName: 'modules/b2b-account/wishlists/wishlist-list',
         additionalEvents: {
-            "change [data-mz-value='wishlist-quantity']": "onQuantityChange"
+            "change [data-mz-value='wishlist-quantity']": "onQuantityChange",
+            "change [data-mz-value='check-all-quote']": "selectAll",
+            "change [data-mz-value='add-to-cart-quote']": "itemCheckbox"
+
         },
         onQuantityChange: _.debounce(function (e) {
             var $qField = $(e.currentTarget),
@@ -455,6 +485,18 @@ define([
                     self.model.apiGet();
                 });
             }
+        },
+        selectAll: function(e) {
+            var checkboxes = $('[data-mz-value="add-to-cart-quote"]');
+
+            if (e.currentTarget.checked) {
+                checkboxes.each(function() {
+                    $(this).prop('checked', true);
+                });
+            } 
+        },
+        itemCheckbox: function(e) {
+            $("[data-mz-value='check-all-quote']").prop('checked', false);
         }
     });
 
@@ -488,17 +530,17 @@ define([
         defaultSort: 'updateDate desc',
         rowActions: [
             {
-                displayName: 'Edit',
+                displayName: 'View',
                 action: 'editWishlist'
             },
-            {
-                displayName: 'Delete',
-                action: 'deleteWishlist'
-            },
-            {
-                displayName: 'Copy',
-                action: 'copyWishlist'
-            },
+            // {
+            //     displayName: 'Delete',
+            //     action: 'deleteWishlist'
+            // },
+            // {
+            //     displayName: 'Copy',
+            //     action: 'copyWishlist'
+            // },
             {
                 displayName: 'Add to Cart',
                 action: 'addWishlistToCart',
