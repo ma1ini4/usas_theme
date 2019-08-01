@@ -124,7 +124,7 @@ define([
           var self = this;
           var items = this.get('items').toJSON();
 
-          if (deselectedItems.length != 0) {
+          if (deselectedItems.length !== 0) {
 
             if (deselectedItems.length === items.length) {
                 items = [];
