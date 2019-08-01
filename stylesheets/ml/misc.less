@@ -125,8 +125,20 @@
     .container {
         padding: 0;
     }
-
     .mz-sitenav-sub-container {
+        left: 0px !important;
+        width: 100%;
+        background-color: #fff;
+        border: 1px solid @primaryColor;
+        z-index: 2;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        -webkit-transition: visibility 0s ease-out 0s;
+        -moz-transition: visibility 0s ease-out 0s;
+        -ms-transition: visibility 0s ease-out 0s;
+        -o-transition: visibility 0s ease-out 0s;
+    }
+    .mz-sitenav-sub-container:not(:hover) {
         // top: 69px;
         left: 0px !important;
         width: 100%;
@@ -142,9 +154,14 @@
         -moz-transition: visibility 0s ease-out 0s;
         -ms-transition: visibility 0s ease-out 0s;
         -o-transition: visibility 0s ease-out 0s;
-
+        .mz-sitenav-item {
+            padding: 0;
+        }
         .mz-sitenav-link {
             // padding: 2px 0;
+            text-transform: none;
+            font-weight: normal !important;
+            text-align: left;
         }
 
         a {
@@ -167,14 +184,20 @@
         }
 
         &:hover {
+            .mz-sitenav-sub-container {
+                padding: 15px 10px 20px 25px;
+            }
             .mz-sitenav-link {
                 background-color: inherit;
             }
 
             .mz-sitenav-sub {
                 .mz-sitenav-link {
+                    text-transform: none;
                     height: auto;
                     padding: 0px;
+                    font-weight: normal !important;
+                    text-align: left;
                 }
             }
 
@@ -2430,6 +2453,19 @@ ul.tabs {
                     font-weight: @bold;
                 }
             }
+            li {
+                position: relative;
+                &:before {
+                    content: '';
+                    position: absolute;
+                    width: 12px;
+                    height: 12px;
+                    left: -16px;
+                    top: 5px;
+                    background: url(../resources/images/check.png) no-repeat;
+                    background-size: contain;
+                }
+            }
             
         }
 
@@ -2459,6 +2495,19 @@ ul.tabs {
                 .prop-name {
                     font-weight: @semi-bold;
                 }
+            }
+        }
+        li {
+            position: relative;
+            &:before {
+                content: '';
+                position: absolute;
+                width: 12px;
+                height: 12px;
+                left: -16px;
+                top: 5px;
+                background: url(../resources/images/check.png) no-repeat;
+                background-size: contain;
             }
         }
         .panel-heading {

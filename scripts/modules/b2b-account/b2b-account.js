@@ -62,7 +62,7 @@ define([
                 })
             },
             {
-                name: 'Lists',
+                name: 'Quotes',
                 view: new Lists.WishlistsView({
                     model: new Lists.WishlistsModel({})
                 })

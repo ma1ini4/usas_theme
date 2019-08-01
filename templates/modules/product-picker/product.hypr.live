@@ -1,4 +1,5 @@
 <div class="flex-column">
+
     <h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName }}</h1>
 
     <div data-mz-productimages class="mz-productimages mz-l-sidebar">
@@ -28,10 +29,10 @@
                 <dl class="mz-productcodes mz-propertylist mz-pagetitle-note mz-l-stack-section">
                     <dt class="mz-productcodes-productcode-label">{{ labels.productCode }}</dt>
                     <dd class="mz-productcodes-productcode" itemprop="sku">{{ model.variationProductCode|default(model.productCode) }}</dd>
-                    {% if themeSettings.showProductDetailMfgPartNumber and model.mfgPartNumber.length == 1 %}
+                    {% if themeSettings.showProductDetailMfgPartNumber and model.mfgPartNumber.length != 0 %}
                     <dt class="mz-productcodes-mfgpartnumber-label">{{ labels.mfgPartNumber }}</dt>
                     <dd class="mz-productcodes-mfgpartnumber" itemprop="mpn">{{ model.mfgPartNumber|first }}</dd>
-                    {% endif %} {% if themeSettings.showProductDetailUPC and model.upc.length == 1 %}
+                    {% endif %} {% if themeSettings.showProductDetailUPC and model.upc.length != 0 %}
                     <dt class="mz-productcodes-upc-label">{{ labels.upc }}</dt>
                     <dd class="mz-productcodes-upc" itemprop="mpn">{{ model.upc|first }}</dd>
                     {% endif %}
@@ -86,7 +87,8 @@
                     {% endfor %}
                 </dl>
             </div>
-            {% endif %} {% if model.properties and themeSettings.showProductDetailProperties %}
+            {% endif %} 
+            {% if model.properties and themeSettings.showProductDetailProperties %}
             <div class="mz-productdetail-properties mz-l-stack-section">
                 <h4 class="mz-l-stack-sectiontitle">{{ labels.properties }}</h4>
                 <dl class="mz-propertylist mz-propertylist-justified">
@@ -97,7 +99,8 @@
                     {% endfor %} {% endif %} {% endfor %}
                 </dl>
             </div>
-            {% endif %} {% if model.measurements and themeSettings.showProductDetailMeasurements and not model.bundledProducts %}
+            {% endif %} 
+            <!-- {% if model.measurements and themeSettings.showProductDetailMeasurements and not model.bundledProducts %}
             <div class="mz-productdetail-measurements mz-l-stack-section">
                 <h4 class="mz-l-stack-sectiontitle">{{ labels.measurements }}</h4>
                 <dl class="mz-propertylist mz-propertylist-justified">
@@ -126,10 +129,10 @@
                     </dd>
 
                 </dl>
-            </div>
+            </div> -->
 
 
-
+<!-- 
             {% endif %} {% if themeSettings.showProductDetailMeasurements and model.bundledProducts %}
             <div class="mz-productdetail-measurements mz-l-stack-section">
                 <h4 class="mz-l-stack-sectiontitle">{{ labels.measurements }}</h4>
@@ -167,7 +170,7 @@
                 </dl>
                 {% endif %} {% endfor %}
             </div>
-            {% endif %}
+            {% endif %} -->
         </div>
     </div>
 </div>

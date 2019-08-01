@@ -1,8 +1,9 @@
 {% extends "modules/common/modal-dialog" %}
 {% block modal-header %} 
+    <button type="button" class="close" aria-hidden="true" data-mz-action="handleDialogClose">×</button>
     <h3 class="modal-title">{{labels.productModalHeading}}</h3>
 {% endblock modal-header %}
- 
+  
 {% block modal-body %}
 
 {% include "modules/common/message-bar" with model=model.messages %}
@@ -13,5 +14,4 @@
 {% endblock modal-body %} 
      
 {% block modal-footer %}
-    
 {% endblock modal-footer %}

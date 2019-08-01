@@ -25,9 +25,15 @@
 {% endblock item-details %}
 
 {% block item-listing-actions %}
-    <input class="mz-itemlisting-action mz-carttable-qty-field" type="number" min="1" {% if model.isLoading %}disabled="disabled" {% endif %} data-mz-cart-item="{{ item.id }}"
-    data-mz-value="wishlist-quantity" value="{{ item.quantity }}" />
-    <a class="mz-itemlisting-action" href="javascript:;" data-mz-action="beginRemoveItem" data-mz-item-id="{{ model.id }}">{{ labels.removeFromWishlist }}</a>
+<div class="qty-block">
+  <input class="mz-itemlisting-action mz-carttable-qty-field" type="number" min="1" {% if model.isLoading %}disabled="disabled" {% endif %} data-mz-cart-item="{{ item.id }}"
+  data-mz-value="wishlist-quantity" value="{{ item.quantity }}" />
+  <a class="mz-itemlisting-action" href="javascript:;" data-mz-action="beginRemoveItem" data-mz-item-id="{{ model.id }}">Remove item</a>
+</div>
+<div class="add-to-cart-checkbox">
+  <input type="checkbox" id="add-box-{{ model.id }}" data-mz-value="add-to-cart-quote" data-mz-item-id="{{ model.id }}" checked />
+  <label for="add-box-{{ model.id }}">Add to cart</label>
+</div>
 {% endblock item-listing-actions %}
 
 {% block item-listing-extras %}

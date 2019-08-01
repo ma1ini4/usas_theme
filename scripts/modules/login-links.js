@@ -548,7 +548,7 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
                 password: $(this).parents('#login').find('[data-mz-login-password]').val()
             };
             current = this;
-            if (self.validateLogin(this, payload) && self.validatePassword(this, payload)) {                
+            if (self.validateLogin(this, payload)) {                
                 //var user = api.createSync('user', payload);
                 (LoginPopover.prototype).newsetLoading(true);
                 return api.action('customer', 'loginStorefront', {
@@ -634,7 +634,6 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
             } else if (payload.password.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\-\+\.\,\;\:]/) != -1) {
                 return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordSpecial', passMinLen)), false;
             }
-            console.log('password is valid');
             return true;
         };
         this.validateSignup = function (el, payload) {

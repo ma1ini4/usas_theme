@@ -49,13 +49,26 @@
           align-items: center;
         }
 
+        .sub-level-heading {
+          display: block;
+          text-align: left;
+          color: @headingColor;
+          font-weight: @bold;
+          font-size: 14px;
+          text-transform: @uppercase;
+
+          &:not(:first-child) {
+            margin-top: 25px;
+          }
+        }
+
 
         &:hover .mz-sitenav-sub-container {
             .row {
               display: flex;
             }
 
-            visibility: visible;
+            // visibility: visible;
             .transition-delay(0s);
             .sub-level-col {
                 float: none;
@@ -114,7 +127,8 @@
         // top: @navHeight - 1;
         position: absolute;
         z-index: 1;
-        visibility: hidden;
+        visibility: visible;
+        display: none;
         .transition(visibility 0s ease-out 0s);
 
         > .mz-sitenav-item {
