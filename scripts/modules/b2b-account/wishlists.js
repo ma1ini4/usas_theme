@@ -281,6 +281,35 @@ define([
               this._wishlistsGridView.model.filterBy(USER_LISTS_FILTER);
             }
         },
+        viewQuote: function (e) {
+            var quoteId = $('[data-mz-value="quoteId"]').val(),
+                customerId = $('[data-mz-value="customerId"]').val(),
+                url = '/QuotaActions?customerId="' + customerId + '"&quoteId="' + quoteId + '"';
+
+            // $.ajax({
+            //     url: url,
+            //     method: 'GET',
+            //     success: function (res) {
+            //         console.log('success', res);
+            //     },
+            //     error: function(err) {
+            //         console.log('error', err);
+            //     }
+            // });
+
+            $.ajax({
+                url: '/api/platform/entitylists/quoteheaders@usas/entities',
+                method: 'GET',
+                success: function (res) {
+                    console.log('success', res);
+                },
+                error: function (err) {
+                    console.log('error', err);
+                }
+            });
+            
+            // console.log(customerId, quoteId, url);
+        },
         render: function () {
             Backbone.MozuView.prototype.render.apply(this, arguments);
             var self = this;
@@ -326,7 +355,9 @@ define([
         templateName: 'modules/b2b-account/wishlists/edit-wishlist',
         autoUpdate: [
             'name',
-            'pickerItemQuantity'
+            'pickerItemQuantity',
+            'quoteId',
+            'customerId'
         ],
         initialize: function() {
             var self = this;
@@ -422,7 +453,7 @@ define([
         render: function () {
             Backbone.MozuView.prototype.render.apply(this, arguments);
             var self = this;
-            $('#wishlistName').focusout(function () {
+            $('#quoteId').focusout(function () {
                 self.model.saveWishlist();
             });
 

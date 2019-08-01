@@ -3,8 +3,19 @@
     <div class="mz-l-stack-section" style="clear:none">
         <h3 class="mz-l-stack-sectiontitle">
             Quotes
-            <a data-mz-action="newWishlist">Retrieve Quote</a>
+            <!-- <a data-mz-action="newWishlist">Retrieve Quote</a> -->
         </h3>
+        <div class="wishlist-edit-form-section find-quote">
+            <!-- <span class="productpicker-label">{{labels.b2bWishlistName}}</span> -->
+            <div class="flex">
+                <input type="text" name="name" id="quoteId" data-mz-value="quoteId" placeholder="Enter Quote Number" />
+                <input type="text" name="name" id="customerId" data-mz-value="customerId"
+                    value="{{user.accountId }}" class="hidden"/>
+                <button class="primary-btn" data-mz-action="viewQuote">Find quote</button>
+            </div>
+            <span class="find-quote-text">If your sales rep has given you a quote, enter the ID code below to display your quote items.</span>
+            <span class="mz-validationmessage" data-mz-validationmessage-for="quoteId"></span>
+        </div>
         {% if model.isEditMode %}
             {% include "modules/common/message-bar" with model=model.messages %}
             <div class="mz-b2b-wishlists-product-picker">
