@@ -138,11 +138,9 @@ define([
                             newItems.push(obj);
                         }
                     });          
-                });
-    
+                });    
                 items = newItems;
             }
-
           }
 
           var cart = CartModels.Cart.fromCurrent();
@@ -284,31 +282,20 @@ define([
         viewQuote: function (e) {
             var quoteId = $('[data-mz-value="quoteId"]').val(),
                 customerId = $('[data-mz-value="customerId"]').val(),
-                url = '/QuotaActions?customerId="' + customerId + '"&quoteId="' + quoteId + '"';
-
-            // $.ajax({
-            //     url: url,
-            //     method: 'GET',
-            //     success: function (res) {
-            //         console.log('success', res);
-            //     },
-            //     error: function(err) {
-            //         console.log('error', err);
-            //     }
-            // });
-
+                url = '/pricelist/runSchedule?quoteId=' + quoteId + '&customerId=' + customerId;
+                
+            console.log(customerId, quoteId, url);
             $.ajax({
-                url: '/api/platform/entitylists/quoteheaders@usas/entities',
+                url: url,
                 method: 'GET',
                 success: function (res) {
                     console.log('success', res);
                 },
-                error: function (err) {
+                error: function(err) {
                     console.log('error', err);
                 }
             });
             
-            // console.log(customerId, quoteId, url);
         },
         render: function () {
             Backbone.MozuView.prototype.render.apply(this, arguments);
