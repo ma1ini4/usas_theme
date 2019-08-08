@@ -19,5 +19,6 @@
         <button type="button" class="primary-btn" data-mz-action="addWishlistToCart">ACTIVATE QUOTE FOR CHECKED ITEMS</button>
     </div>
 {% else %}
-        {{ labels.accountNoWishlists }}
+    {{ labels.accountNoWishlists }}
+    <button class="secondary-btn" data-mz-action="cancelWishlistEdit">Back</button>
 {% endif %}

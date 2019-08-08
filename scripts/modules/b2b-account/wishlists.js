@@ -284,18 +284,22 @@ define([
                 customerId = $('[data-mz-value="customerId"]').val(),
                 url = '/pricelist/runSchedule?quoteId=' + quoteId + '&customerId=' + customerId;
                 
-            console.log(customerId, quoteId, url);
-            $.ajax({
-                url: url,
-                method: 'GET',
-                success: function (res) {
-                    console.log('success', res);
-                },
-                error: function(err) {
-                    console.log('error', err);
-                }
-            });
+                console.log(customerId, quoteId, url);
+
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    success: function (res) {
+                        console.log('success', res);
+                        
+                        this.model.set('isEditMode');
             
+                        this.render();
+                    },
+                    error: function(err) {
+                        console.log('error', err);
+                    }
+            });
         },
         render: function () {
             Backbone.MozuView.prototype.render.apply(this, arguments);
@@ -560,10 +564,10 @@ define([
                 displayName: 'View',
                 action: 'editWishlist'
             },
-            // {
-            //     displayName: 'Delete',
-            //     action: 'deleteWishlist'
-            // },
+            {
+                displayName: 'Delete',
+                action: 'deleteWishlist'
+            },
             // {
             //     displayName: 'Copy',
             //     action: 'copyWishlist'
