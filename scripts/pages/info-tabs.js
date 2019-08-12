@@ -14,6 +14,32 @@
         }
     });
 
+    function ellipsisInfoTabs(height) {
+
+        $('.tab-content .tab-pane').each(function () {
+            var self = $(this);
+            var isActive = self.hasClass('active') ? true : false;
+
+            if (!isActive) {
+                self.addClass('active');
+            }
+
+            var tabContent = self.children('[class^="tab-content-"]');
+
+            if (tabContent.outerHeight() >= height) {
+
+                tabContent.addClass('truncated');
+                tabContent.append('<i class="fas fa-ellipsis-h"></i>');
+
+            }
+
+            if(!isActive) {
+                self.removeClass('active');
+            }            
+        });
+        $('.truncated').css({height : height});
+    }
+
     $(document).ready(function() {
 
         var productInfoTab = ProductModels.Product.fromCurrent();
@@ -30,6 +56,17 @@
             this.render();
         });
 
+        ellipsisInfoTabs(100);
+
+        $('.info-tabs-details .tabs-desktop i').click(function(){
+            $(this).closest('[class^="tab-content-"]').removeClass('truncated');
+            $(this).closest('[class^="tab-content-"]').addClass('expanded');
+            $(this).closest('[class^="tab-content-"]').animate({
+                height: "100%"
+            }, 300);
+
+            $(this).hide();
+        });
     });
 
 });

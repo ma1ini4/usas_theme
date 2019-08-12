@@ -15,5 +15,15 @@
     <div class="info-tabs-details">
         {% include "modules/product/product-info-tabs" %}
     </div>
+
+    {% with model|get_product_attribute("tenant~product-related") as relatedProds %}
+        {% if relatedProds %}
+            {% with model|get_product_attribute_values("tenant~product-related")|join(",") as relatedProdsValues %}
+                <div class="related-product-container">
+                    {% include_products "widgets/misc/product-carousel-swiper-4" with  productCodes=relatedProdsValues as_parameter %}
+                </div>
+            {% endwith %}
+        {% endif %}
+    {% endwith %}
 </div>
 {% endblock body-content %}
