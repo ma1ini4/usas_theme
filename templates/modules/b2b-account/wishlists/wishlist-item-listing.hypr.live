@@ -32,7 +32,11 @@
 </div>
 <div class="add-to-cart-checkbox">
   <input type="checkbox" id="add-box-{{ model.id }}" data-mz-value="add-to-cart-quote" data-mz-item-id="{{ model.id }}" checked />
-  <label for="add-box-{{ model.id }}">Add to cart</label>
+  <label for="add-box-{{ model.id }}">
+    <span>
+      Add to cart      
+    </span>
+  </label>
 </div>
 {% endblock item-listing-actions %}
 

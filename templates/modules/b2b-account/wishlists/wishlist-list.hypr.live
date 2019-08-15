@@ -5,8 +5,7 @@
             <input type="checkbox" data-mz-value="check-all-quote" id="check-all-top" checked>
             <label for="check-all-top">Select all items</label>
         </div>
-        <button type="button" class="primary-btn" data-mz-action="addWishlistToCart">ACTIVATE QUOTE FOR CHECKED
-            ITEMS</button>
+        <button type="button" class="primary-btn" data-mz-action="addWishlistToCart">Activate selected items</button>
     </div>
     {% for item in model.items %}
     {% include "modules/b2b-account/wishlists/wishlist-item-listing" with model=item %}
@@ -16,7 +15,7 @@
             <input type="checkbox" data-mz-value="check-all-quote" id="check-all-bottom" checked>
             <label for="check-all-bottom">Select all items</label>
         </div>
-        <button type="button" class="primary-btn" data-mz-action="addWishlistToCart">ACTIVATE QUOTE FOR CHECKED ITEMS</button>
+        <button type="button" class="primary-btn" data-mz-action="addWishlistToCart">Activate selected items</button>
     </div>
 {% else %}
     {{ labels.accountNoWishlists }}

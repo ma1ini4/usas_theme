@@ -215,7 +215,7 @@ define([
     var WishlistsMozuGrid = MozuGrid.extend({
       render: function(){
           var self = this;
-          this.populateWithUsers();
+        //   this.populateWithUsers();
           MozuGrid.prototype.render.apply(self, arguments);
       },
       populateWithUsers: function(){
@@ -280,25 +280,60 @@ define([
             }
         },
         viewQuote: function (e) {
+            var self = this;
             var quoteId = $('[data-mz-value="quoteId"]').val(),
                 customerId = $('[data-mz-value="customerId"]').val(),
                 url = '/pricelist/runSchedule?quoteId=' + quoteId + '&customerId=' + customerId;
                 
-                console.log(customerId, quoteId, url);
+            console.log(customerId, quoteId, url);
 
-                $.ajax({
-                    url: url,
-                    method: 'GET',
-                    success: function (res) {
-                        console.log('success', res);
-                        
-                        this.model.set('isEditMode');
             
-                        this.render();
-                    },
-                    error: function(err) {
-                        console.log('error', err);
-                    }
+            self.model.isLoading(true);
+
+            self.model.set('isEditMode', true);
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (res) {
+                    // console.log('success', res);
+                    
+                    setTimeout(function () {
+                        self.render();
+                        self.findQuoteByNumber(customerId, quoteId);
+                    }, 500);            
+                },
+                error: function(err) {
+                    // console.log('error', err);
+                    
+                    setTimeout(function(){
+                        self.model.isLoading(false);
+
+                        self.render();
+                    }, 500);
+                }
+            });
+        },
+        findQuoteByNumber: function (customerId, id) {
+            var self = this;
+            var url = 'api/commerce/wishlists/customers/' + customerId + '/' + id;
+
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (res) {
+                    console.log(res);
+                    self.model.set('isEditMode', true);
+                    self.model.set('wishlist', res);
+                    self.render();
+
+                    // self.render(res, true);
+                    self.model.isLoading(false);
+                },
+                error: function (err) {
+                    console.log('error', err);
+                    self.render();
+                    self.model.isLoading(false);
+                }
             });
         },
         render: function () {
@@ -353,7 +388,12 @@ define([
         initialize: function() {
             var self = this;
             Backbone.MozuView.prototype.initialize.apply(this, arguments);
-            this.originalData = this.model.toJSON() || {};
+            
+            try {
+                this.originalData = this.model.toJSON() || {};
+            } catch(e) {
+                console.log(e);
+            }
         },
         saveWishlist: function () {
             var self = this;
@@ -548,13 +588,18 @@ define([
                         var date = new Date(auditInfo.createDate);
                         return date.toLocaleDateString();
                     }
+                    // console.log(this);
                 }
             },
             {
-                index: 'fullName',
-                displayName: 'Created By',
-                displayTemplate: function(value){
-                    return (value || '');
+                index: 'expirationDate',
+                displayName: 'End Date',
+                displayTemplate: function (expirationDate) {
+                    if (expirationDate) {
+                        var date = new Date(expirationDate);
+                        return date.toLocaleDateString();
+                    }
+                    console.log(expirationDate);
                 }
             }
         ],

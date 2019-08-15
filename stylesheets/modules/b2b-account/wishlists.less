@@ -170,13 +170,93 @@
         .productpicker-label {
             margin-bottom: 7px;
         }
+        .flex {
+            @media @mobile {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+        }
         #quoteId {
-            width: 70%;
-            margin-right: auto;
+            width: 50%;
+            margin-right: 5%;
             margin-bottom: 0;
+            height: 45px;
+
+            @media @mobile-sm-bootstrap {
+                width: 45%;
+                margin-right: 3%;
+            }
         }
         .find-quote-text {
             margin: 7px 0;
+        }
+    }
+    .mz-grid-table {
+        overflow-x: auto;
+    }
+    .mz-grid-body {
+
+        .mz-grid-row{
+            .mz-grid-cols {
+
+                span.mz-grid-column:not(:first-child){
+                    text-align: center;
+                    display: flex;
+                    justify-content: center;
+                }
+
+            }
+            .mz-grid-row-actions {
+                display: flex;
+                align-items: center;
+
+                .mz-grid-column {
+                    display: flex;
+
+                    & > a:last-child {
+                        padding: 0;
+                        padding-left: 5px;
+                        border: none;
+                    }
+    
+                    & > a {
+                        padding: 0 5px;
+                        border-right: 1px solid @lightBorder;
+                        cursor: pointer;
+                    }
+
+                    @media @desktop-bootstrap {
+
+                        a {
+                            padding: 0 7px;
+                        }
+                        
+                        [data-mz-action="editWishlist"] {
+                            span {
+                                display: none;
+                            }
+                            
+                            .icon(before, '06e', solid, 20px);
+                        }
+                        [data-mz-action="deleteWishlist"] {
+                            span {
+                                display: none;
+                            }
+                            
+                            .icon(before, '2ed', solid, 20px);
+                        }
+                        [data-mz-action="addWishlistToCart"] {
+                            span {
+                                display: none;
+                            }
+                            
+                            .icon(before, '217', solid, 20px);
+                        }
+                    }
+                }
+                
+                
+            }
         }
     }
     .mz-itemlisting-details {
@@ -207,8 +287,18 @@
 
             label {
                 margin: 0;
+
+                @media @desktop-bootstrap {
+                    span {
+                        display: none;
+                    }
+                    .icon(before, '217', solid, 20px);
+                }
             }
         }
+    }
+    .mz-b2b-wishlists-product-picker {
+        position: relative;
     }
     .wishlist-btns {
         display: flex;
@@ -217,10 +307,22 @@
         margin-top: 15px;
 
         .primary-btn {
+            height: auto;
             margin: 0;
         }
         .secondary-btn {
             margin-right: auto;
+
+            @media @desktop-bootstrap {
+                position: absolute;
+                top: 0;
+                padding: 0;
+                background: transparent;
+                color: @textColor !important;
+                text-transform: capitalize;
+                text-decoration: underline;
+                font-size: 18px;
+            }
         }
 
         .check-all-items {
