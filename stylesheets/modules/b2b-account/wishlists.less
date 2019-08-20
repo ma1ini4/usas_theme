@@ -90,8 +90,52 @@
     }
 
 }
-.mz-b2baccount {
 
+.mz-b2b-quickorder {
+
+    .mz-product-modal-content {
+        .mz-productimages.mz-l-sidebar {
+            background-color: transparent;
+        }
+    }
+
+    & ~ .mz-header-basket-md-sm {
+        .col-xs-12.col-md-4.col-sm-4.mz-reset-padding.mz-rest-padding-right.nopaddingright {
+            padding: 0;
+            text-align: center;
+        }
+    }
+    & ~ .mz-table-cart-items {
+        .cart-noimage {
+            margin-right: 10px!important;
+        }
+        .cart-item-qty.hidden-xs {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .qty-block {
+                min-width: auto!important;
+            }
+
+            .mz-carttable-item-remove {
+                a.btn-link {
+                    color: @textColor;
+                }
+            }
+        }
+        .mz-price-total-container {
+            // padding: 0;
+            padding-left: 12px;
+            
+            .mz-carttable-item-price {
+                text-align: center;
+            }
+        }
+    }
+}
+
+.mz-b2baccount {
     .mz-carttable-item {
         .mz-carttable-item-product {
             display: flex;

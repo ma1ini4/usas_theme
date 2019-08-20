@@ -62,10 +62,12 @@ define([
                   window.quickOrderModalView.handleDialogClose();
                   self.render();
               });
+
               window.quickOrderModalView.loadAddProductView(product);
               window.quickOrderModalView.handleDialogOpen();
               return;
           }
+
           self.finalizeAddItemToOrder(product);
           self.render();
         } catch(err){
@@ -76,6 +78,8 @@ define([
           var self = this;
           if (product.toJSON)
               product = product.toJSON();
+
+              console.log(product);
           this.model.addItemToOrder(product, product.quantity || self.model.get('pickerItemQuantity'));
           self.model.unset('selectedProduct');
           $('.mz-b2b-quickorder .mz-searchbox-input.tt-input').val('');
@@ -221,7 +225,9 @@ define([
                     option.name = option.attributeDetail.name;
                 });
               }
-              this.get('items').push({
+              var item = this.get('items');
+
+              item.push({
                 product: product,
                 productCode: product.productCode,
                 quantity: quantity,

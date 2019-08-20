@@ -3,9 +3,11 @@
     <div class="qty-block">
         <span class="mz-qty-label visible-xs">{{ labels.qty }}</span>
         <div class="mz-productdetail-conversion-controls">
-            <input type="number" {% if model.quantity %} value="{{ model.quantity }}" {% else %} value="1" {% endif %} min="1"
-                data-mz-value="quantity" />
+            {% with model.items|first as item %}
+            <input type="number" {% if item.quantity %} value="{{ item.quantity }}" {% else %} value="1" {% endif %} min="1"
+                data-mz-value="quantity" data-mz-index={{index}} />
             <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
+            {% endwith %}
         </div>
     </div>
 {% endblock quantity %}
