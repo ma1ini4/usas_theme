@@ -999,6 +999,32 @@
                     "fieldLabel": "Password for BorderFree"
                 }
             ]
+        },
+        {
+            "xtype": "panel",
+            "title": "XI Intercept",
+            "collapsed": false,
+            "items": [{
+                    "xtype": "mz-input-text",
+                    "name": "xiInterceptMerchantguid",
+                    "fieldLabel": "MerchantGuid"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "xiInterceptQAEnvironment",
+                    "fieldLabel": "QA Environment? (It will use QA urls)"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "xiInterceptQAGetAccessURL",
+                    "fieldLabel": "QA Access Token URL"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "xiInterceptGetAccessURL",
+                    "fieldLabel": "Production Access Token URL"
+                }
+            ]
         }
     ]
 }

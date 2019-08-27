@@ -344,8 +344,9 @@ require(["modules/jquery-mozu",
             this.model.edit();
             this.beginEditingCard();
         },
-        beginEditingCard: function() {
+        beginEditingCard: function () {
             var me = this;
+            me.model.getAccessToken();
             if (!this.model.isExternalCheckoutFlowComplete()) {
                 this.editing.savedCard = true;
                 this.render();

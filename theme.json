@@ -952,6 +952,10 @@
     "titleInfoTab3": "Features",
     "titleInfoTab4": "Unique Features",
     "titleInfoTab5": "Care",
+    "xiInterceptMerchantguid": "ec0c580e-74f8-4291-9a6e-8f788b3401d8",
+    "xiInterceptQAEnvironment": true,
+    "xiInterceptQATokenizeURL": "https://qaapp02.xisecurenet.com/diecomm/Ajax",
+    "xiInterceptTokenizeURL": "https://prdapp02.xisecurenet.com/diecomm/Ajax",
     "usStates": [
       {
         "abbreviation": "AL",
