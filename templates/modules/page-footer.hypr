@@ -73,3 +73,6 @@
     </div>
   </div>
 </div>
+{% block global-image-error %}
+{% require_script "modules/global-image-error" %}
+{% endblock global-image-error %}

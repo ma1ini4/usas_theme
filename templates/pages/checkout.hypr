@@ -7,6 +7,7 @@
 {% if siteContext.checkoutSettings.visaCheckout.isEnabled and not pageContext.isEditMode %}
 {% include "modules/common/anti-clickjacking-script" %}
 {% endif %}
+{% require_script "modules/global-image-error" %}
 {% endblock head-tag-scripts %}
 
 {% block body-tag-classes %} mz-checkout {% endblock body-tag-classes %}

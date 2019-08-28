@@ -1,5 +1,5 @@
 {% if productImage %}
-    <img  
+    <img
         {% if productMaxWidth %}
             src="{% make_url "image" productImage with maxWidth=productMaxWidth %}"
         {% else %}
@@ -36,7 +36,7 @@
             data-orig-zoom="{% make_url "image" productImage with maxWidth=themeSettings.productZoomImageMaxWidth %}"
             {% endif %}
         {% endif %}
-         onerror="this.setAttribute('src','{% make_url "image" productImage with maxWidth=productMaxWidth %}')">
+         onerror="handleErrorImage(this,'{% make_url "image" productImage with maxWidth=productMaxWidth %}')">
 {% else %}
     <span class="mz-productlisting-imageplaceholder img-responsive">
         <span class="mz-productlisting-imageplaceholdertext">{{ labels.productImagePlaceholder }}</span>
