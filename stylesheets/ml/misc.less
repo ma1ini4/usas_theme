@@ -2927,6 +2927,14 @@ ul.tabs {
         .panel+.panel {
             margin-top: 0;
         }
+        .panel+.panel>div[id^=sub-nav] {
+            .panel-heading {
+                @media @mobile {
+                    height: auto;
+                    padding: 10px 40px;
+                }
+            }
+        }
 
         #accordion>.panel:first-child>.panel-heading {
             border-top: none;
