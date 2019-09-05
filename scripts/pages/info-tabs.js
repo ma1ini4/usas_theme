@@ -35,13 +35,13 @@
 
             if(!isActive) {
                 self.removeClass('active');
-            }            
+            }
         });
         $('.truncated').css({height : height});
     }
 
     $(document).ready(function() {
-
+      try {
         var productInfoTab = ProductModels.Product.fromCurrent();
         var infoTabsView = new InfoTabsView({
             el: $('.info-tabs-details'),
@@ -67,6 +67,9 @@
 
             $(this).hide();
         });
-    });
-
+    } catch (error){
+      console.log('error loading info tabs', error);
+    }
+    
+  });
 });

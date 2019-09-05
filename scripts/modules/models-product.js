@@ -160,14 +160,16 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
     	},
     	getExcludedAttributes: function(infoTabNumber) {
     		var content = [];
-    		_.each(this.get('properties'), function(prop) {
-    			if (!_.contains(Hypr.getThemeSetting('productAttrInfoTab' + infoTabNumber + 'ContentExclude').split(','), prop.attributeFQN)) {
-    				content.push({
-    					name: prop.attributeDetail.description,
-    					value: prop.values[0].stringValue
-    				});
-    			}
-    		});
+        if ( this.get('properties') ) {
+      		_.each(this.get('properties'), function(prop) {
+      			if (!_.contains(Hypr.getThemeSetting('productAttrInfoTab' + infoTabNumber + 'ContentExclude').split(','), prop.attributeFQN)) {
+      				content.push({
+      					name: prop.attributeDetail.description,
+      					value: prop.values[0].stringValue
+      				});
+      			}
+      		});
+        }
     		return content;
     	},
         addToCart: function (stopRedirect) {
