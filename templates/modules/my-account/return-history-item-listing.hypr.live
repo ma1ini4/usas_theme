@@ -5,12 +5,12 @@
 {% block item-listing-image %}
       {% if model.product.imageUrl %}
         <div class="mz-itemlisting-thumb">
-          <a href="{{ model.product.url }}{% if model.product.variationProductCode %}?vpc={{model.product.variationProductCode}}{% endif %}">
+          <a href="{% make_url "product" model.product.productCode %}">
             <img class="mz-itemlisting-thumb-img" src="{% make_url "image" model.product with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameters %}" {% if model.product.imageAlternateText %}alt="{{ model.product.imageAlternateText }}"{% endif %} />
           </a>
         </div>
       {% else %}
-        <a href="{{ model.product.url }}{% if model.product.variationProductCode %}?vpc={{model.product.variationProductCode}}{% endif %}">
+        <a href="{% make_url "product" model.product.productCode %}">
           <span class="mz-product-image-placeholder pull-left">
             <span class="mz-productlisting-imageplaceholdertext">{{ labels.productImagePlaceholder }}</span>
           </span>
@@ -21,7 +21,7 @@
  {% block item-listing-details %}
   <div class="mz-itemlisting-details">
     {% block item-name %}
-    <a class="mz-itemlisting-title" href="{{ model.product.url }}">
+    <a class="mz-itemlisting-title" href="{% make_url "product" model.product.productCode %}">
       {{ model.product.name }}</a>
     {% endblock item-name %}
 
