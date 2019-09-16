@@ -6,7 +6,9 @@
             src="{% make_url "image" productImage with maxWidth=themeSettings.productCarouselImageWidth %}"
         {% endif %}
         {%if isMainImage=="true" %}
-            class="mz-productimages-mainimage" data-mz-productimage-main id="zoom" itemprop="image"
+            class="mz-productimages-mainimage" data-mz-productimage-main
+                {% if not pageContext.isMobile and not pageContext.isTablet %} id="zoom" {% endif %}
+            itemprop="image"
             {% if productZoomWidth %}
                 data-zoom-image="{% make_url "image" productImage with maxWidth=productZoomWidth %}"
             {% else %}
