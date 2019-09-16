@@ -7,7 +7,7 @@
         {% endif %}
         {%if isMainImage=="true" %}
             class="mz-productimages-mainimage" data-mz-productimage-main
-                {% if not pageContext.isMobile and not pageContext.isTablet %} id="zoom" {% endif %}
+                {% if pageContext.isDesktop %} id="zoom" {% endif %}
             itemprop="image"
             {% if productZoomWidth %}
                 data-zoom-image="{% make_url "image" productImage with maxWidth=productZoomWidth %}"
@@ -33,9 +33,9 @@
                 data-orig-src="{% make_url "image" productImage with maxWidth=themeSettings.productImagePdpMaxWidth %}"
             {% endif %}
             {% if productZoomWidth %}
-            data-orig-zoom="{% make_url "image" productImage with maxWidth=productZoomWidth %}"
+                {% if pageContext.isDesktop %} data-orig-zoom="{% make_url "image" productImage with maxWidth=productZoomWidth %}" {% endif %}
             {% else %}
-            data-orig-zoom="{% make_url "image" productImage with maxWidth=themeSettings.productZoomImageMaxWidth %}"
+                {% if pageContext.isDesktop %} data-orig-zoom="{% make_url "image" productImage with maxWidth=themeSettings.productZoomImageMaxWidth %}" {% endif %}
             {% endif %}
         {% endif %}
          onerror="handleErrorImage(this,'{% make_url "image" productImage with maxWidth=productMaxWidth %}')">
