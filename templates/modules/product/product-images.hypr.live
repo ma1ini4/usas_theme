@@ -16,7 +16,7 @@
                 <ul id="productmobile-Carousel" class="products_list_mobile">
                 {% for image in model.content.productImages %}
                     <li data-label="{{image.imageLabel}}">
-                        <img id="zoom_{{forloop.index}}" prop="image" src="{% make_url "image" image with maxWidth=themeSettings.productImagePdpMaxWidth as_parameters %}" {% if image.altText %} alt="{{ image.altText }}"{% endif %} data-zoom-image="{% make_url "image" image with maxWidth=themeSettings.productZoomImageMaxWidth %}" {% if forloop.index==1 %} class="active"{% endif %} data-mz-productimage-mobile="{{ forloop.index }}"/>
+                        <img id="zoom_{{forloop.index}}" prop="image"  {% if image.altText %} alt="{{ image.altText }}"{% endif %} data-zoom-image="{% make_url "image" image with maxWidth=themeSettings.productZoomImageMaxWidth %}" {% if forloop.index==1 %} class="active"{% endif %} data-mz-productimage-mobile="{{ forloop.index }}"/>
                     </li>
                 {% endfor %}
                 </ul>
