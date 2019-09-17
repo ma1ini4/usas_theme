@@ -32,15 +32,18 @@
                         height: 10px;
                         margin: 0 4px;
                         border-radius: 50%;
-                        background-color: grey;
+                        // background-color: @lightBorder;
                         
                         img {
                             width: 100%;
                             height: 100%;
-                            // margin: 0 7px;
                             border-radius: 50%;
-                            background-color: grey;
-                            // visibility: hidden;
+                            background-color: @lightBorder;
+                            border: 1px solid @lightBorder;
+
+                            &.active {
+                                border: 2px solid @yellow;
+                            }
                         }
                     }
                 }
