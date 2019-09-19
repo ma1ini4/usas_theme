@@ -704,6 +704,11 @@
             "title": "Product Images",
             "collapsed": false,
             "items": [
+              {
+                  "xtype": "mz-input-checkbox",
+                    "name": "pdpMobileZoomEnabled",
+                  "fieldLabel": "Enable Mobile image zoom"
+                },
                 {
                     "xtype": "mz-input-text",
                     "name": "pdpMainImageNameSwatch",
