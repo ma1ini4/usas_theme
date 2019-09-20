@@ -27,11 +27,11 @@
 {% endif %}
 <section class="mz-l-stack-section mz-productdetail-conversion row">
   {% if model.productType != themeSettings.familyProductType %}
-      <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section col-xs-4 col-sm-6 text-left">
+      <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section col-xs-4 col-sm-5 text-left">
         {% include "modules/product/price-stack" %}
       </div>
 
-      <div class="mz-productdetail-conversion-controls col-xs-8 col-sm-6">
+      <div class="mz-productdetail-conversion-controls col-xs-8 col-sm-7">
         <label class="mz-qty-label text-uppercase" for="mz_pdp_qty">{{ labels.qty }}</label>
         <div class="qty-block">
           <div class="qty-counter" id="minus" data-mz-qty-minus role="button"><i class="fa fa-minus"  aria-hidden="true"></i></div>
