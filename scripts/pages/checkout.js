@@ -599,22 +599,22 @@ require(["modules/jquery-mozu",
                 self.model.unset('couponCode');
                 window.checkoutViews.couponCode.render();
             }).then(function(res){
-                if(res && res.status == "error"){
-                    window.checkoutViews.couponCode.model.trigger('error', {
-                        message: Hypr.getLabel('promoCodeError', res.code)
-                    });
-                }else{
-                    window.checkoutViews.parentView.model.get("fulfillmentInfo").unset("shippingMethodCode");
-                    window.checkoutViews.parentView.model.apiModel.update({ fulfillmentInfo: window.checkoutViews.parentView.model.get("fulfillmentInfo").toJSON() })
-                    .then(function (o) {
-                        console.log("unset the shipping method");
-                        window.checkoutViews.parentView.model.apiModel.getShippingMethodsFromContact().then(function(res){
-                            console.log(res);
-                            window.checkoutViews.parentView.model.get("fulfillmentInfo").unset("shippingMethodCode");
-                            window.checkoutViews.steps.shippingInfo.model.refreshShippingMethods(res);
-                        });
-                    });
-                }
+                // if(res && res.status == "error"){
+                //     window.checkoutViews.couponCode.model.trigger('error', {
+                //         message: Hypr.getLabel('promoCodeError', res.code)
+                //     });
+                // }else{
+                //     window.checkoutViews.parentView.model.get("fulfillmentInfo").unset("shippingMethodCode");
+                //     window.checkoutViews.parentView.model.apiModel.update({ fulfillmentInfo: window.checkoutViews.parentView.model.get("fulfillmentInfo").toJSON() })
+                //     .then(function (o) {
+                //         console.log("unset the shipping method");
+                //         window.checkoutViews.parentView.model.apiModel.getShippingMethodsFromContact().then(function(res){
+                //             console.log(res);
+                //             window.checkoutViews.parentView.model.get("fulfillmentInfo").unset("shippingMethodCode");
+                //             window.checkoutViews.steps.shippingInfo.model.refreshShippingMethods(res);
+                //         });
+                //     });
+                // }
             });
         },
         handleEnterKey: function () {
