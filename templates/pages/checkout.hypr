@@ -20,6 +20,7 @@
 {% block body-content %}
 
 {% require_script "pages/checkout" %}
+{% require_script "modules/login-links" %}
 
 {% preload_json model "checkout" %}
 

@@ -6,7 +6,7 @@
     padding: 10px;
     .modal-content {
       position: relative;
-      top: 48px;
+      top: 57px;
       display: inline-block;
       width: 100%;
       border-radius: 0px;
@@ -115,7 +115,7 @@
       }
       .nav-tabs {
         position: absolute;
-        top: -38px;
+        top: -50px;
         width: 100%;
         border-bottom: none;
       }
@@ -133,7 +133,7 @@
       }
       li.second-tab {
         width: 50%;
-        left: -11px;
+        left: -8px;
         .login-btn {
           background-color: @headingColor;
           color: #fff;
@@ -141,6 +141,10 @@
         }
         .arrow {
           right: 51%;
+        }
+
+        @media @mobile {
+          left: 0;
         }
       }
       li.first-tab.active,
@@ -198,7 +202,7 @@
           padding: 0 36px !important;
         }
         .nav-tabs {
-          top: -45px !important;
+          top: -57px !important;
         }
         .arrow {
           top: 34px !important;

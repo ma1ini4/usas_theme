@@ -133,7 +133,4 @@
         </div>
     </div>
     {% endif %}
-    {% block login-modal %}
-    {% include "modules/page-header/login-modal" %}
-    {% endblock login-modal %}
 </nav>

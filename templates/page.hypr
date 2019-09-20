@@ -185,6 +185,8 @@
         {% endblock trailing-scripts %}
 
         {% visitor_tracking_pixel %}
+        {% include "modules/page-header/login-modal" %}
+
     </body>
     {% endblock body-tag %}
 

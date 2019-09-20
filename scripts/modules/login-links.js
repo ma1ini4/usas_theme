@@ -526,8 +526,8 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
         this.bindListeners =  function (on) {
             var onOrOff = on ? "on" : "off";
             $(this).parent()[onOrOff]('click', '[data-mz-action="lite-registration"]', self.openLiteModal);
-            $(this).parents('.mz-utilitynav')[onOrOff]('click', '[data-mz-action="doLogin"]', self.doLogin);
-            $(this).parents('.mz-utilitynav')[onOrOff]('click', '[data-mz-action="doSignup"]', self.doSignup);
+            $(this).parents()[onOrOff]('click', '[data-mz-action="doLogin"]', self.doLogin);
+            $(this).parents()[onOrOff]('click', '[data-mz-action="doSignup"]', self.doSignup);
 
             // bind other events
         };
@@ -537,6 +537,7 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
                 $(".second-tab").show();
                 $(".third-tab").hide();
             }
+            
             self.modalEl.modal('show');
         };
 
@@ -547,6 +548,7 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
                 email: $(this).parents('#login').find('[data-mz-login-email]').val(),
                 password: $(this).parents('#login').find('[data-mz-login-password]').val()
             };
+            console.log('this', this);
             current = this;
             if (self.validateLogin(this, payload)) {                
                 //var user = api.createSync('user', payload);
