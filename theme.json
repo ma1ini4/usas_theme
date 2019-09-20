@@ -888,6 +888,7 @@
     "pdpMainImageMaxWidth": "320",
     "pdpMainImageNameAlt": "{0}_{1}_v{2}.jpg",
     "pdpMainImageNameSwatch": "{0}_{1}_v{2}.jpg",
+    "pdpMobileZoomEnabled": false,
     "pdpSwatchImageMaxWidth": "30",
     "pdpSwatchImageName": "{1}.gif",
     "requestSampleEmail": "vlad.duma@deplabs.com",

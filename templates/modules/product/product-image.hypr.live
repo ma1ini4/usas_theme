@@ -1,14 +1,12 @@
 {% if productImage %}
     <img
         {% if productMaxWidth %}
-            src="{% make_url "image" productImage with maxWidth=productMaxWidth %}"
+            data-width-product="{{productMaxWidth}}" src="{% make_url "image" productImage with maxWidth=productMaxWidth %}"
         {% else %}
-            src="{% make_url "image" productImage with maxWidth=themeSettings.productCarouselImageWidth %}"
+            data-width-carousel="{{themeSettings.productCarouselImageWidth}}" src="{% make_url "image" productImage with maxWidth=themeSettings.productCarouselImageWidth %}"
         {% endif %}
         {%if isMainImage=="true" %}
-            class="mz-productimages-mainimage" data-mz-productimage-main
-                {% if pageContext.isDesktop %} id="zoom" {% endif %}
-            itemprop="image"
+            class="mz-productimages-mainimage" data-mz-productimage-main id="zoom" itemprop="image"
             {% if productZoomWidth %}
                 data-zoom-image="{% make_url "image" productImage with maxWidth=productZoomWidth %}"
             {% else %}
@@ -28,17 +26,18 @@
         {% endif %}
         {% if isThumb %}
             {% if productMaxWidth %}
-            data-orig-src="{% make_url "image" productImage with maxWidth=productMaxWidth as_parameter %}"
+            data-orig-src="{% make_url "image" productImage with maxWidth=productMaxWidth %}"
             {% else %}
                 data-orig-src="{% make_url "image" productImage with maxWidth=themeSettings.productImagePdpMaxWidth %}"
             {% endif %}
             {% if productZoomWidth %}
-                {% if pageContext.isDesktop %} data-orig-zoom="{% make_url "image" productImage with maxWidth=productZoomWidth %}" {% endif %}
+            data-orig-zoom="{% make_url "image" productImage with maxWidth=productZoomWidth %}"
             {% else %}
-                {% if pageContext.isDesktop %} data-orig-zoom="{% make_url "image" productImage with maxWidth=themeSettings.productZoomImageMaxWidth %}" {% endif %}
+            data-orig-zoom="{% make_url "image" productImage with maxWidth=themeSettings.productZoomImageMaxWidth %}"
             {% endif %}
         {% endif %}
-         onerror="handleErrorImage(this,'{% make_url "image" productImage with maxWidth=productMaxWidth %}')">
+         {# onerror="handleErrorImage( this, '{% make_url "image" productImage with maxWidth=productMaxWidth %}' )"#}
+         >
 {% else %}
     <span class="mz-productlisting-imageplaceholder img-responsive">
         <span class="mz-productlisting-imageplaceholdertext">{{ labels.productImagePlaceholder }}</span>
