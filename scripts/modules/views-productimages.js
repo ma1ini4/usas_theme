@@ -113,33 +113,6 @@ define(['modules/jquery-mozu', 'underscore', "modules/backbone-mozu", 'hyprlive'
 
                     $('.zoomContainer').remove();
                     $('#zoom').removeData('elevateZoom').data('zoom-image', self.selectedMainImageSrc.replace('maxWidth='+width_thumb, 'maxWidth=' + Hypr.getThemeSetting('productZoomImageMaxWidth'))).elevateZoom({ zoomType: "inner", cursor: "crosshair", responsive: true });
-                    var enableZoom = ( deviceType || pageContext.isMobile ) ? mobileZoomEnabled : true;
-                    var zoomSelector = '#zoom';
-
-                    /*
-                    if( enableZoom ){
-                        if ( pageContext.isMobile ) {
-                            zoomSelector = '#zoom_1';
-                        }
-                        $.removeData($('img'), 'elevateZoom');
-                        $('.zoomContainer').remove();
-                        $( zoomSelector ).bind( 'touchstart', function(){
-                            $( zoomSelector  ).unbind( 'touchmove' );
-                        });
-
-                        setTimeout( function() {
-                            console.log( 'check image - vp', $( zoomSelector ).elevateZoom );
-                            $( zoomSelector ).elevateZoom(
-                                {
-                                    zoomType: "inner",
-                                    cursor: "crosshair",
-                                    responsive: true
-                                }
-                            );
-                        }, 10);
-                    }
-                    */
-
 
                 }else if(response === false){
                     // ignore image change
@@ -149,9 +122,9 @@ define(['modules/jquery-mozu', 'underscore', "modules/backbone-mozu", 'hyprlive'
         },
         render: function() {
             Backbone.MozuView.prototype.render.apply(this, arguments);
-            //this.updateMainImage();
 
-            initSlider();
+
+           // initSlider();
             initslider_mobile();
 
             //Custom Functions related to slider
@@ -175,8 +148,11 @@ define(['modules/jquery-mozu', 'underscore', "modules/backbone-mozu", 'hyprlive'
                 createPager(slider_mobile);
             }
 
+            $.removeData($('img'), 'elevateZoom');
+            $('.zoomContainer').remove();
+          //  $(".mz-productimages-pager div").removeClass("activepager").eq(0).addClass("activepager");
             //this trigger updateSwatchImage if needed
-            this.model.trigger( 'updateSwatchImage' );
+            /*this.model.trigger( 'updateSwatchImage' );
 
 
 
@@ -208,7 +184,8 @@ define(['modules/jquery-mozu', 'underscore', "modules/backbone-mozu", 'hyprlive'
                         }
                     );
                 }, 10);
-            }
+            }*/
+            this.updateMainImage();
         }
     });
 
@@ -234,8 +211,9 @@ define(['modules/jquery-mozu', 'underscore', "modules/backbone-mozu", 'hyprlive'
 
     function initslider_mobile() {
       var id;
-      if (current_zoom_id_added)
-          id = $(current_zoom_id_added)[0].attributes.id.value.replace('zoom_', '') - 1;
+    //  console.log('current_zoom_id_added',current_zoom_id_added);
+    //  if (current_zoom_id_added) id = $(current_zoom_id_added)[0].attributes.id.value.replace('zoom_', '') - 1;
+    //  console.log('id', id);
       slider_mobile = $('#productmobile-Carousel').bxSlider({
           touchEnabled: false,
           slideWidth: 10, // old value - 300
@@ -244,10 +222,13 @@ define(['modules/jquery-mozu', 'underscore', "modules/backbone-mozu", 'hyprlive'
           moveSlides: 1,
           preloadImages: 'all',
           onSliderLoad: function(currentIndex) {
+             //console.log('onSliderLoad current index', currentIndex);
+              $('ul#productmobile-Carousel li').find('img').removeClass("active");
               $('ul#productmobile-Carousel li').eq(currentIndex).find('img').addClass("active");
               $("#productmobile-Carousel,#productCarousel-pager").css("visibility", "visible");
           },
           onSlideAfter: function($slideElement, oldIndex, newIndex) {
+             //console.log('onSlideAfter');
               $('.zoomContainer').remove();
               current_zoom_id_added.elevateZoom({ zoomType: "inner", cursor: "crosshair" }).addClass('active');
               var bkimg = $(current_zoom_id_added)[0].attributes['data-zoom-image'].value;
@@ -260,6 +241,7 @@ define(['modules/jquery-mozu', 'underscore', "modules/backbone-mozu", 'hyprlive'
 
           },
           onSlideBefore: function(currentSlide, totalSlides, currentSlideHtmlObject) {
+          //  console.log('onSlideBefore');
               var current_zoom_id = '#' + $('#productmobile-Carousel>li').eq(currentSlideHtmlObject).find('img').attr('id');
               $('.zoomContainer').remove();
               $(current_zoom_id).removeData('elevateZoom');

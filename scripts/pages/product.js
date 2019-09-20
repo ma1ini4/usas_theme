@@ -54,8 +54,9 @@
 
     function initslider_mobile() {
           var id;
-          if (current_zoom_id_added)
-              id = $(current_zoom_id_added)[0].attributes.id.value.replace('zoom_', '') - 1;
+        //  console.log('product current_zoom_id_added',current_zoom_id_added);
+          //if (current_zoom_id_added)  id = $(current_zoom_id_added)[0].attributes.id.value.replace('zoom_', '') - 1;
+          //console.log('product id',id);
           slider_mobile = $('#productmobile-Carousel').bxSlider({
               touchEnabled: false,
               slideWidth: 10, // old value - 300
@@ -64,6 +65,7 @@
               moveSlides: 1,
               preloadImages: 'all',
               onSliderLoad: function(currentIndex) {
+                 //console.log('product onSliderLoad current index', currentIndex);
                   $('ul#productmobile-Carousel li').eq(currentIndex).find('img').addClass("active");
                   $("#productmobile-Carousel,#productCarousel-pager").css("visibility", "visible");
               },
