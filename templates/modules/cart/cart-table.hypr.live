@@ -79,9 +79,19 @@
        {% if not model.isEmpty %}<span class="mz-empty-cart-link-container"><button class="font-large button_promotional" href="javascript:;" data-mz-action="empty">{{ labels.emptyCart }}</button></span>{% endif %}
        {% endif %}
       <div class="mz-common-button-padding pull-right">
+
+          {% if not user.isAuthenticated %}
+            <a id="cart-checkout-login" class="mz-button font-large primary-btn">
+              <span>
+                {{ labels.proceedToCheckout }}
+              </span>
+            </a>
+          {% else %}
             {% if model.hasRequiredBehavior %}
-               <button id="cart-checkout" class="mz-button font-large primary-btn"  {% if model.isEmpty %} disabled="disabled" {% endif %} data-mz-action="proceedToCheckout">{{ labels.proceedToCheckout }}</button>
-               {% endif %}
+              <button id="cart-checkout" class="mz-button font-large primary-btn"  {% if model.isEmpty %} disabled="disabled" {% endif %} data-mz-action="proceedToCheckout">{{ labels.proceedToCheckout }}</button>
+            {% endif %}
+          {% endif %}
+
       </div>
     </div>
   {% if model.hasRequiredBehavior %}

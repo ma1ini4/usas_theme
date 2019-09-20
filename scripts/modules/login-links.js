@@ -655,6 +655,9 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
             var modal = new LoginRegistrationModal();
             modal.init(this);
         });
+        $('body').on('click', '#cart-checkout-login', function (e) {
+            $('.login-link-text[data-mz-action="lite-registration"]').trigger('click');
+        });
         $('#my-account').attr('href','#');
         $('[data-mz-action="my-account"]').click(function() {
             var popover = new MyAccountPopover();
