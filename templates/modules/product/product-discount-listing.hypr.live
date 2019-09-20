@@ -14,9 +14,13 @@
     </div>
     <div class="mz-productlisting-info">
         <a class="mz-productlisting-title" data-mz-product-code={{model.productCode}} data-mz-action="onProductSelect">{{model.content.productName}}</a>
-        {% if model.content.productShortDescription and themeSettings.listProductShortDesc %}
-        <p class="mz-productlisting-shortdesc">{{ model.content.productShortDescription|truncatewords(themeSettings.maxProductSummaryWords)|safe }}</p>
-        {% endif %} {% block product-code %} {% if themeSettings.listProductCode %}
+        {% comment %}
+            {% if model.content.productShortDescription and themeSettings.listProductShortDesc %}
+                <p class="mz-productlisting-shortdesc">{{ model.content.productShortDescription|truncatewords(themeSettings.maxProductSummaryWords)|safe }}</p>
+            {% endif %} 
+        {% endcomment %}
+
+        {% block product-code %} {% if themeSettings.listProductCode %}
         <div class="mz-productlisting-productcode">{{model.productCode}}</div>
         {% endif %} {% endblock product-code %} {% if model.volumePriceRange %}
         <div class="mz-volume-pricing">

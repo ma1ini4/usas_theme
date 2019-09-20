@@ -17,9 +17,13 @@
     <div class="mz-productlisting-info">
         <div class="ml-product-info-wrapper">
             <a class="mz-productlisting-title hidden-xs" href='{% make_url "product" model %}'>{{model.content.productName|safe}}</a>
-            {% if model.content.productShortDescription and themeSettings.listProductShortDesc %}
-            <p class="mz-productlisting-shortdesc">{{ model.content.productShortDescription|truncatewords(themeSettings.maxProductSummaryWords)|safe }}</p>
-            {% endif %}
+            {% comment %}
+                {% if model.content.productShortDescription and themeSettings.listProductShortDesc %}
+                <p class="mz-productlisting-shortdesc">
+                    {{ model.content.productShortDescription|truncatewords(themeSettings.maxProductSummaryWords)|safe }}</p>
+                {% endif %}
+            {% endcomment %}
+
             {% block product-code %}
             {% if themeSettings.listProductCode %}
             <div class="mz-productlisting-productcode">#{{model.productCode}}</div>
