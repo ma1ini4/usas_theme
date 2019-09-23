@@ -50,7 +50,22 @@
             }
         }
         @media @tablet-only {
-            margin-top: 15px;
+            &.mobileCarousel {
+
+                margin-top: 15px;
+                margin-left: 0;
+
+                .bx-wrapper {
+
+                    .bx-viewport {
+                        height: 61px !important;
+
+                    }
+                    .bx-next {
+                        right: -17px !important;
+                    }                    
+                }    
+            }
         }
     }
     .mz-productimages-thumb {
