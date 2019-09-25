@@ -1,6 +1,12 @@
 .mz-b2baccount-users,
 .mz-b2b-wishlists {
+    .mz-grid-table {
+        overflow-x: auto;
 
+        .mz-grid-header {
+            min-width: 480px;
+        }
+    }
     .mz-grid {
         border: none;
 
@@ -23,9 +29,36 @@
             }
         }
         .mz-grid-row {
+            min-width: 480px;
             &-actions {
                 display: flex;
                 align-items: center;
+                .mz-grid-column {
+                    display: flex;
+                }
+
+                @media @desktop-bootstrap {
+
+                    a {
+                        padding: 0 7px;
+                    }
+
+                    [data-mz-action="editUser"] {
+                        span {
+                            display: none;
+                        }
+
+                        .icon(before, '06e', solid, 20px);
+                    }
+
+                    [data-mz-action="deleteUser"] {
+                        span {
+                            display: none;
+                        }
+
+                        .icon(before, '2ed', solid, 20px);
+                    }
+                }
             }
 
             a:not(:last-child) {
@@ -36,6 +69,8 @@
             a {
                 cursor: pointer;
             }
+
+            
         }
     }    
 }
