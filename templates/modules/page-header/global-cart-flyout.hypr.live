@@ -52,7 +52,7 @@
 						</div>
 						<div class="col-xs-4">
 							<div class="row">
-								<div class="col-xs-6 global-cart-padding"  >
+								<div class="col-xs-6 global-cart-padding text-center"  >
 								{% include "modules/common/item-price" with item=items %}
 								</div>
 								<div class="col-xs-6 price-amount-col text-right">{% include "modules/common/item-total" with item=items isGlobalCart="true" %}</div>
