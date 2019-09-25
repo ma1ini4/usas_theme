@@ -655,6 +655,19 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
             var modal = new LoginRegistrationModal();
             modal.init(this);
         });
+        $('body').on('keypress', '#liteRegistrationModal input', function (e) {
+            if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
+                e.preventDefault();
+                switch($(e.target).parents('.tab-pane.active').attr('id')) {
+                    case 'login':
+                        $('[data-mz-action="doLogin"]').trigger('click');
+                        break;
+                    case 'newshopper':
+                        $('[data-mz-action="doSignup"]').trigger('click');
+                        break;
+                }
+            }
+        });
         $('body').on('click', '#cart-checkout-login', function (e) {
             $('.login-link-text[data-mz-action="lite-registration"]').trigger('click');
         });
