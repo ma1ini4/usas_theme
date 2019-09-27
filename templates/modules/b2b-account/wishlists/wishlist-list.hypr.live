@@ -18,6 +18,8 @@
         <button type="button" class="primary-btn" data-mz-action="addWishlistToCart">Activate selected items</button>
     </div>
 {% else %}
-    {{ labels.accountNoWishlists }}
+    <div>
+        {{ labels.accountNoQuotes }}
+    </div>
     <button class="secondary-btn" data-mz-action="cancelWishlistEdit">Back</button>
 {% endif %}

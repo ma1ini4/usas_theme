@@ -9,6 +9,7 @@
   "accountNoOrders": "You have not placed any orders.",
   "accountNoReturns": "You have not requested any returns.",
   "accountNoWishlists": "You do not have any wishlist items.",
+  "accountNoQuotes": "We could not find that quote ID code - Please check the code and try again or contact your sales rep for assistance.",
   "accountOptIn": "Please keep me up to date on store news and specials",
   "accountSettings": "Account Settings",
   "accountSettingsInfo": "Review and edit your email address, password, your password hint information and/or your billing address ",

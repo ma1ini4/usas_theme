@@ -295,7 +295,7 @@ define([
                 url: url,
                 method: 'GET',
                 success: function (res) {
-                    // console.log('success', res);
+                    console.log('success', res);
                     
                     setTimeout(function () {
                         self.render();
@@ -303,11 +303,11 @@ define([
                     }, 500);            
                 },
                 error: function(err) {
-                    // console.log('error', err);
+                    console.log('error', err);
                     
                     setTimeout(function(){
                         self.model.isLoading(false);
-
+                        self.findQuoteByNumber(customerId, quoteId);
                         self.render();
                     }, 500);
                 }
@@ -324,15 +324,20 @@ define([
                     console.log(res);
                     self.model.set('isEditMode', true);
                     self.model.set('wishlist', res);
-                    self.render();
+                    self.model.get('wishlist').set('items', res.items).set('name', res.name);
+                    window.views.currentPane.render();
+                    // self.render();
 
                     // self.render(res, true);
                     self.model.isLoading(false);
                 },
                 error: function (err) {
                     console.log('error', err);
+                    self.model.get('wishlist').set('items', []).set('name', id);
+
                     self.render();
                     self.model.isLoading(false);
+                    console.log('model', self.model);
                 }
             });
         },
