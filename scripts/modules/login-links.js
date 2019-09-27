@@ -571,8 +571,6 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
             return true;
         };
         this.doSignup = function(){
-            console.log('doSignup', this);
-
             var redirectTemplate = 'myaccount';
             var returnUrl = $('#returnUrl').val();
             var emailupdates = $(this).parents('#newshopper').find('[data-mz-signup-emailupdates]').val();
