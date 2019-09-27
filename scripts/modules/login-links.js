@@ -521,13 +521,14 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
                     // }
                 }
             });
+            console.log(this, 'modal');
         };
 
         this.bindListeners =  function (on) {
             var onOrOff = on ? "on" : "off";
             $(this).parent()[onOrOff]('click', '[data-mz-action="lite-registration"]', self.openLiteModal);
-            $(this).parents()[onOrOff]('click', '[data-mz-action="doLogin"]', self.doLogin);
-            $(this).parents()[onOrOff]('click', '[data-mz-action="doSignup"]', self.doSignup);
+            $(this).parents('#page-wrapper')[onOrOff]('click', '[data-mz-action="doLogin"]', self.doLogin);
+            $(this).parents('#page-wrapper')[onOrOff]('click', '[data-mz-action="doSignup"]', self.doSignup);
 
             // bind other events
         };
@@ -548,7 +549,6 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
                 email: $(this).parents('#login').find('[data-mz-login-email]').val(),
                 password: $(this).parents('#login').find('[data-mz-login-password]').val()
             };
-            console.log('this', this);
             current = this;
             if (self.validateLogin(this, payload)) {                
                 //var user = api.createSync('user', payload);
@@ -571,6 +571,8 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
             return true;
         };
         this.doSignup = function(){
+            console.log('doSignup', this);
+
             var redirectTemplate = 'myaccount';
             var returnUrl = $('#returnUrl').val();
             var emailupdates = $(this).parents('#newshopper').find('[data-mz-signup-emailupdates]').val();
@@ -578,8 +580,6 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
             if(emailupdates === "on")
                 accMarketing = true;
             var email = $(this).parents('#newshopper').find('[data-mz-signup-emailaddress]').val().trim();
-            // var recoveryquestion = $(this).parents('#newshopper').find('[data-mz-signup-recoveryquestion]').val();
-            // var recoveryanswer = $(this).parents('#newshopper').find('[data-mz-signup-recoveryanswer]').val().trim();
             var payload = {
                 account: {
                     emailAddress: email,
@@ -589,24 +589,11 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
                         email: email
                     }]
                   },
-                //     attributes: [
-                //       {
-                //          //"attributeDefinitionId": "14",
-                //          "fullyQualifiedName": "tenant~recovery-question",
-                //          "values": [recoveryquestion]
-                //       },
-                //       {
-                //          //"attributeDefinitionId": "16",
-                //          "fullyQualifiedName": "tenant~recovery-answer",
-                //          "values": [recoveryanswer]
-                //       }
-                //    ]
-                // },
                 password: $(this).parents('#newshopper').find('[data-mz-signup-password]').val()
             };
             current = this;
             if (self.validateSignup(this, payload) && self.validatePassword(this, payload)) {
-                //var user = api.createSync('user', payload);
+                // var user = api.createSync('user', payload);
                 (LoginPopover.prototype).newsetLoading(true);
                 return api.action('customer', 'createStorefront', payload).then(function () {
                     if(returnUrl){
