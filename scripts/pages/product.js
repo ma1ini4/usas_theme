@@ -759,7 +759,10 @@
         if ($('.mz-product-detail-tabs ul.tabs li').length === 0)
             $('.mz-product-detail-tabs').remove();
 
-        var product = ProductModels.Product.fromCurrent();
+        $('body').on('click', '#add-to-cart', function() {
+            blockUiLoader.globalLoader();
+        });
+            var product = ProductModels.Product.fromCurrent();
 
         product.on('addedtocart', function (cartitem, stopRedirect) {
             if (cartitem && cartitem.prop('id')) {
@@ -790,6 +793,7 @@
             } else {
                 product.trigger("error", { message: Hypr.getLabel('unexpectedError') });
             }
+            blockUiLoader.unblockUi();
         });
 
         product.on('addedtowishlist', function(cartitem) {

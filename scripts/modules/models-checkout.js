@@ -7,9 +7,10 @@
         'modules/models-customer',
         'modules/models-address',
         'modules/models-paymentmethods',
-        'hyprlivecontext'
+        'hyprlivecontext',
+        'modules/block-ui'
     ],
-    function($, _, Hypr, Backbone, api, CustomerModels, AddressModels, PaymentMethods, HyprLiveContext) {
+    function ($, _, Hypr, Backbone, api, CustomerModels, AddressModels, PaymentMethods, HyprLiveContext, blockUiLoader) {
 
         var charsInCardNumberRE = /[\s-]/g;
 
@@ -2044,12 +2045,15 @@
             },
             onCheckoutSuccess: function() {
                 this.isLoading(true);
+                blockUiLoader.globalLoader();
                 this.trigger('complete');
             },
             onCheckoutError: function(error) {
                 var order = this,
                     errorHandled = false;
                 order.isLoading(false);
+                
+                blockUiLoader.unblockUi();
                 if (!error || !error.items || error.items.length === 0) {
                     if (error.message.indexOf('10486') != -1) {
 
@@ -2314,6 +2318,7 @@
             },
 
             submit: function() {
+
                 var order = this,
                     billingInfo = this.get('billingInfo'),
                     billingContact = billingInfo.get('billingContact'),
@@ -2351,8 +2356,10 @@
 
                     if (updateAttrs.length > 0) {
                         process.push(function() {
+                            // blockUiLoader.unblockUi();
                             return order.apiUpdateAttributes(updateAttrs);
                         }, function() {
+                            // blockUiLoader.unblockUi();
                             return order.apiGet();
                         });
                     }
@@ -2389,6 +2396,7 @@
                 }
 
                 this.isLoading(true);
+                blockUiLoader.globalLoader();
 
                 if (isSavingNewCustomer && this.hasRequiredBehavior(1014)) {
                     process.unshift(this.addNewCustomer);
@@ -2428,7 +2436,7 @@
 
                 api.steps(process).then(this.onCheckoutSuccess, this.onCheckoutError);
                 window.checkoutViews.parentView.model.get("fulfillmentInfo").unset('prevoiusSelectedMethod');
-
+                
             },
             update: function() {
                 var j = this.toJSON();
