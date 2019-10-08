@@ -550,13 +550,27 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
                 password: $(this).parents('#login').find('[data-mz-login-password]').val()
             };
             current = this;
-            if (self.validateLogin(this, payload)) {                
+            if (self.validateLogin(this, payload)) {
                 //var user = api.createSync('user', payload);
                 (LoginPopover.prototype).newsetLoading(true);
                 return api.action('customer', 'loginStorefront', {
                     email: $(this).parents('#login').find('[data-mz-login-email]').val(),
                     password: $(this).parents('#login').find('[data-mz-login-password]').val()
                 }).then(function () {
+                  var serviceurl = '/custom/processAccount';
+                  var apiData = require.mozuData('apicontext');
+                   $.ajax({
+                      url: serviceurl,
+                      headers: apiData.headers,
+                      method: 'GET',
+                      //data: { id: me.model.id },
+                      success: function(response) {
+                        console.log('account ready');
+                      },
+                      error: function(jqXHR, exception) {
+                        console.log("error ", jqXHR);
+                      }
+                    });
                     if ( returnUrl ){
                         window.location.href= returnUrl;
                     }else{
