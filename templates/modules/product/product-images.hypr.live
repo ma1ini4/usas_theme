@@ -1,6 +1,6 @@
 {% if model.content.productImages %}
   {% if model.productImages.length %}
-      <figure class="mz-productimages-main text-center {% if model.productImages.length > 1 %} {% endif %}">
+      <figure class="hidden-xs mz-productimages-main text-center {% if model.productImages.length > 1 %} {% endif %}">
          <!-- commented `hidden-xs` above so the main image now visible on the xs -->
           {% include "modules/product/product-image" with productImage=model.mainImage productAltText=model.mainImage.altText productMaxWidth=themeSettings.productImagePdpMaxWidth isMainImage="true" as_parameter %}
       </figure>

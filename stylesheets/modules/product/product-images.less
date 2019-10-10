@@ -110,6 +110,9 @@
         @media (min-width: 320px) and (max-width: 767px) {
             max-height: 290px;
         }
+        @media @mobile {
+            display: none;
+        }
         .mz-productimages-mainimage {
             width: auto;
             height: auto;
@@ -162,5 +165,69 @@
         position: absolute;
         bottom: 1%;
         margin-bottom: 0.4rem;
+    }
+}
+
+@media @mobile {
+    .mobile-carousel {
+
+        #productmobile-Carousel.slick-initialized {
+            width: auto;
+            margin: 0 auto;
+            padding: 0;            
+            overflow: hidden;
+
+            .slick-arrow.fa-angle-left,
+            .slick-arrow.fa-angle-right {
+                width: auto !important;
+                top: 50%;
+                display: none !important;
+            }
+
+            .slick-list {
+                margin: 0;
+                width: 295px;
+                margin: 0 -5px;
+
+                img {
+                    max-height: initial;
+                    width: ~"calc(100% - 4px)!important";
+                    border: 1px solid #9e9e9e;
+                    border-radius: 20px;
+                    // border-right: 3px solid white;
+                }
+
+                .slick-slide {
+                    margin: 0 5px;
+                }
+            }
+
+            .slick-dots {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 13px;
+                padding: 0;
+
+                li {
+                    width: 10px;
+                    height: 10px;
+                    background: #d0d2d3;
+                    display: inline-block;
+                    margin-right: 5px;
+                    margin-left: 5px;
+                    border-radius: 10px;
+                    -webkit-transition: all 0.2s linear;
+
+                    &.slick-active {
+                        border: 1px solid #f8e71c
+                    }
+
+                    button {
+                        display: none;
+                    }
+                }
+            }
+        }
     }
 }
