@@ -824,6 +824,15 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
 
         productView.render();
 
+        var activeOptions = $('.mz-productoptions li.active');
+        
+        if (activeOptions.length > 0) {
+            activeOptions.each(function() {
+                console.log(this);
+                productView.configureAttribute($(this));
+            });
+        }
+
         //IF on page laod Variation code is available then Displays UPC messages
         if (window.productView.model.get('variationProductCode')) {
             var sp_price = "";
