@@ -627,7 +627,7 @@
   "orderDetailStatus": "Order status",
   "orderStatusTrackings": "Shipment Tracking",
   "orderStatusShipmentStatus": "Shipment Status",
-  "b2bActivateQuote" : "Activate selected items",
+  "b2bActivateQuote" : "Add selected items to cart",
   "b2bSelectAllQuotes": "Select all items",
   "b2bCancelQuote": "Cancel",
   "b2bCancelQuoteReturn": "Back",
