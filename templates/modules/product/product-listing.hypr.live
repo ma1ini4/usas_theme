@@ -25,8 +25,8 @@
             {% endcomment %}
 
             {% block product-code %}
-            {% if themeSettings.listProductCode %}
-            <div class="mz-productlisting-productcode">#{{model.productCode}}</div>
+            {% if themeSettings.listProductCode or pageContext.search.query %}
+            <div class="mz-productlisting-productcode" style="display: block;">#{{model.productCode}}</div>
             {% endif %}
             {% endblock product-code %}
             {% block product-extrainfo %}
