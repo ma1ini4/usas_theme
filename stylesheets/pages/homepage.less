@@ -386,6 +386,12 @@
         transition: opacity 0.3s ease;
 
         a {
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+
+        &-link {
           position: absolute;
           top: ~"calc(50% - 25px)";
           left: 0;
@@ -412,7 +418,7 @@
           }
 
           @media @tablet-only {
-            top: ~"calc(50% - 20px)";
+            top: ~"calc(50% - 21px)";
             font-size: 25px;
             line-height: 22px;
           }
