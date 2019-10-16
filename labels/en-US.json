@@ -74,6 +74,7 @@
   "blankSearchResult": "Please enter a keyword or item number.",
   "bogaModalHeading": "Your Free BOGA Item",
   "bulkAddToCartErrors": "<h4>Issues adding the following to cart</h4> {0}",
+  "returnValidationError": "Please, fill all required fields",
   "bulkReorderErrors": "Issue with Reordering {0}",
   "bundleContents": "Bundle Contents",
   "bundleExtraPartOf": "Bought as optional extra for <a href=\"{0}\">{1}</a> bundle",

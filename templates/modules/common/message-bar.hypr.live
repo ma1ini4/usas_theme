@@ -64,10 +64,17 @@
                     </ul>
                 {% endif %}
             {% else %}
-                <ul class="is-showing mz-errors">
-                    <li class="mz-message-item">{{ msg.message }}</li>
-                </ul>
+                {% if msg.message == "Validation Error: Items selected for return should have some quantity specified." %}
+                    <ul class="is-showing mz-errors">
+                        <li class="mz-message-item">{{ labels.returnValidationError }}</li>
+                    </ul>
+                {% else %}
+                    <ul class="is-showing mz-errors">
+                        <li class="mz-message-item">{{ msg.message }}</li>
+                    </ul>
+                {% endif %}
             {% endif %}
+
         {% endfor %}
         <span class="dismiss-message" data-mz-action="dismissMessage">X</span>
     {% endif %}
