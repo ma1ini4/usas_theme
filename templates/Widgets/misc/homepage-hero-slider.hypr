@@ -4,7 +4,21 @@
         <div class="swiper-wrapper">
           {% for img in model.config.imageSource %}
             <div class="swiper-slide hero-banner_home">
-              <img class="hero-banner-image" src="{{ img.url }}" />
+                {% with model.config.slideLinks|split(";;") as linksArray %}
+                  {% with forloop.index as index %}                  
+                    {% for link in linksArray %}
+                      {% if forloop.index == index %}
+                        {% if link %}
+                          <a href="{{link}}">
+                            <img class="hero-banner-image" src="{{ img.url }}" />
+                          </a>
+                        {% else %}
+                          <img class="hero-banner-image" src="{{ img.url }}" />
+                        {% endif %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endwith %}
+                {% endwith %}
             </div>
             {% endfor %}
         </div>

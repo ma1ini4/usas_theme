@@ -2164,62 +2164,11 @@
               "name": "imageSource",
               "fieldLabel": "Select / Upload Images (Image first for first slide & last for last Slide)",
               "xtype": "taco.imagefield"
-            }
-          ]
-        },
-        {
-          "name": "heroSlideOne",
-          "xtype": "panel",
-          "title": "First Hero Slide",
-          "items": [
-            {
-              "style": "width: 52%",
-              "fieldLabel": "First slide layout",
-              "name": "firstSlide",
-              "xtype": "mz-input-dropdown",
-              "store": [
-                [
-                  "1",
-                  "Image Right"
-                ],
-                [
-                  "2",
-                  "Image Left"
-                ]
-              ]
             },
             {
-              "xtype": "mz-input-code",
-              "fieldLabel": "Hero Headline & Copy",
-              "name": "textAreaSlideOne"
-            },
-            {
-              "xtype": "displayfield",
-              "style": "margin-top: 2rem",
-              "value": "<p>Select a Category or enter an URL for Slide 1:</br><span style='font-size:smaller;'>Note: if both configured, the category will take precedent.</span></p>"
-            },
-            {
-              "fieldLabel": "Select link to category on Button click",
-              "name": "firstcategoryUrl",
-              "xtype": "mz-input-category",
-              "displayField": "name",
-              "anchor": "60%",
-              "valueField": "id",
-              "queryMode": "local",
-              "allowMultiple": false,
-              "store": {
-                "type": "Taco.store.Categories"
-              }
-            },
-            {
-              "xtype": "displayfield",
-              "value": "<b>OR</b>"
-            },
-            {
-              "name": "linkfirst",
-              "style": "width: 52%",
-              "fieldLabel": "Enter link to category on Button click",
-              "xtype": "textfield"
+              "name": "slideLinks",
+              "fieldLabel": "Enter links for each slide, separated with double semicolomn ';;'",
+              "xtype": "mz-input-textarea"
             }
           ]
         }
