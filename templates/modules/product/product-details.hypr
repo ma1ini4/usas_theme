@@ -2,7 +2,7 @@
   {% require_script "modules/product/product-carousel" %}
 {% endif %}
 {% require_script "pages/product" %}
-<div itemscope itemtype="http://schema.org/Product" class="mz-l-container">
+<div itemscope itemtype="http://schema.org/Product" class="mz-l-container container">
     {% comment %}
     {% if (PageContext.isTablet or PageContext.isDesktop) and themeSettings.enableProductCarousel %}
         {% include "modules/product/product-top-carousel" %}

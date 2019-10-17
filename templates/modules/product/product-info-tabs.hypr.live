@@ -95,7 +95,7 @@
         {% if tab3 or model.infoTab3Content %}
             <div id="tab3" class="tab-pane fade">
             {% if model.infoTab3Content %}
-                 <div class="tab-content-2">
+                 <div class="tab-content-3">
                     <div class="col-sm-12 col-md-12 prop-list ">
                         {% for content in model.infoTab3Content %}
                             <div class="prop-list-item">
@@ -120,7 +120,7 @@
         {% if tab4 or model.infoTab4Content %}
             <div id="tab4" class="tab-pane fade">
             {% if model.infoTab4Content %}
-                 <div class="tab-content-2">
+                 <div class="tab-content-4">
                     <div class="col-sm-12 col-md-12 prop-list ">
                         {% for content in model.infoTab4Content %}
                             <div class="prop-list-item">
@@ -145,7 +145,7 @@
         {% if tab5 or model.infoTab5Content %}
             <div id="tab5" class="tab-pane fade">
             {% if model.infoTab5Content %}
-                 <div class="tab-content-2">
+                 <div class="tab-content-5">
                     <div class="col-sm-12 col-md-12 prop-list ">
                         {% for content in model.infoTab5Content %}
                             <div class="prop-list-item">

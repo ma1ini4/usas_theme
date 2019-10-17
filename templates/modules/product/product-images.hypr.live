@@ -13,7 +13,6 @@
 
       {% if model.productImages.length > 1 %}
           <figure class="mobileCarousel mz-productimages-thumbs" data-length="{{model.productImages.length}}">
-              {% if pageContext.isMobile %}
               <div class="visible-xs mobile-carousel">
                   <ul id="productmobile-Carousel" class="products_list_mobile">
                   {% for image in model.productImages %}
@@ -28,7 +27,6 @@
                   {% endfor %}
                   </ul>
               </div>
-              {% else %}
               <div class="hidden-xs">
                   <ul{% if model.productImages.length > 4 %} id="productpager-Carousel"{% endif %} class="products_list ">
                   {% for image in model.productImages %}
@@ -40,7 +38,6 @@
                   {% endfor %}
                   </ul>
               </div>
-              {% endif %}
           </figure>
           <figure class="mz-productimages-pager col-xs-12 visible-xs"></figure>
       {% endif %}
@@ -58,7 +55,6 @@
 
       {% if model.content.productImages.length > 1 %}
           <figure class="mobileCarousel mz-productimages-thumbs" data-length="{{model.content.productImages.length}}">
-          {% if pageContext.isMobile %}
               <div class="visible-xs mobile-carousel">
                   <ul id="productmobile-Carousel" class="products_list_mobile">
                   {% for image in model.content.productImages %}
@@ -68,7 +64,6 @@
                   {% endfor %}
                   </ul>
               </div>
-            {% else %}
               <div class="hidden-xs">
                   <ul{% if model.content.productImages.length > 4 %} id="productpager-Carousel"{% endif %} class="products_list ">
                   {% for image in model.content.productImages %}
@@ -80,7 +75,6 @@
                   {% endfor %}
                   </ul>
               </div>
-            {% endif %}
           </figure>
           <figure class="mz-productimages-pager col-xs-12 visible-xs"></figure>
       {% endif %}

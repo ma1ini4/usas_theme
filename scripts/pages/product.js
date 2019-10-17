@@ -31,8 +31,8 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
     var colorSwatchesChangeMain = HyprLiveContext.locals.themeSettings.colorSwatchesChangeMain;
     var current_zoom_id_added;
     var deviceType = navigator.userAgent.match(/Android|BlackBerry|iPhone|iPod|Opera Mini|IEMobile/i);
-    var isMobile = ($(window).width() <= 992) ? true : false;
     var pageContext = require.mozuData('pagecontext');
+    var isMobile;
     var mobileZoomEnabled = HyprLiveContext.locals.themeSettings.pdpMobileZoomEnabled || false;
 
 
@@ -122,6 +122,7 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
             'mouseleave .color-options': 'onMouseLeaveResetImage'
         },
         render: function() {
+            isMobile = ($(window).width() <= 992) ? true : false;
             var me = this;
             var id = Hypr.getThemeSetting('oneSizeAttributeName'),
                 oneSizeOption = this.model.get('options').get(id);
@@ -136,6 +137,7 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
             $('#details-accordion').find('.panel-heading a').first().click();
             $(".family-details [data-mz-action='addToCart']").addClass('hide');
             $(".mz-productdetail-conversion-buttons").removeClass('hide');
+            
 
             if (this.model.get('productType') === Hypr.getThemeSetting('familyProductType')) {
                 try {
@@ -655,6 +657,8 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
         initialize: function() {
             // handle preset selects, etc
             var me = this;
+            isMobile = ($(window).width() <= 992) ? true : false;
+
             //create div for family members
             if(this.model.get('family').models.length){
                 for(var i=0; i < this.model.get('family').models.length; i++){
@@ -667,8 +671,8 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
             me.mainImage = '';
             // enable image zoom?
             var zoomSelector = '#zoom';
-            if ( pageContext.isMobile ) {
-                zoomSelector = '#zoom_1';
+            if ( isMobile ) {
+                zoomSelector = '';
             }
             if ( ( deviceType || pageContext.isMobile ) && me.model.get('content').get('productImages').length > 1 ){
                 if( HyprLiveContext.locals.themeSettings.pdpMobileZoomEnabled ){
@@ -690,6 +694,8 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
                 }
                 else{
                     console.log('disable zoom for mobile');
+                    $('body div.zoomContainer').remove();
+                    $("img").removeData('elevateZoom');
                 }
 
             }
@@ -740,12 +746,32 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
         }
     });
 
+    function destroyZoom() {
+        isMobile = ($(window).width() <= 992) ? true : false;
+        console.log(isMobile);
+        if (isMobile) {
+            setInterval(function() {
+                $('.zoomContainer').addClass('hidden');
+            }, 777);
+        }
+    }
+
+    $(window).resize(function(){
+        destroyZoom();
+    });
+
     $(document).ready(function() {
         if ($('.mz-product-detail-tabs ul.tabs li').length === 0)
             $('.mz-product-detail-tabs').remove();
 
         $('body').on('click', '#add-to-cart', function() {
             blockUiLoader.globalLoader();
+        });
+
+        destroyZoom();
+
+        $('.mz-productimages-thumb').click(function () {
+            destroyZoom();
         });
             var product = ProductModels.Product.fromCurrent();
 
@@ -788,25 +814,25 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
         initSlider();
         initslider_mobile();
         //Custom Functions related to slider
-        function createPager(carousal) {
-            var totalSlides = carousal.getSlideCount();
-            var newPager = $(".mz-productimages-pager");
-            for (var i = 0; i < totalSlides; i++) {
-                if (i === 0) {
-                    newPager.append("<div data-mz-productimage-thumb=" + (i + 1) + " class=\"activepager\"></div>");
-                } else {
-                    newPager.append("<div data-mz-productimage-thumb=" + (i + 1) + " class=\"\"></div>");
-                }
-            }
-            newPager.find('div').on('click touchstart' ,function() {
-                var indx = $(".mz-productimages-pager div").index($(this));
-                slider_mobile.goToSlide(indx);
-                $(".mz-productimages-pager div").removeClass("activepager").eq(indx).addClass("activepager");
-            });
-        }
-        if ($('#productmobile-Carousel').length) {
-            createPager(slider_mobile);
-        }
+        // function createPager(carousal) {
+        //     var totalSlides = carousal.getSlideCount();
+        //     var newPager = $(".mz-productimages-pager");
+        //     for (var i = 0; i < totalSlides; i++) {
+        //         if (i === 0) {
+        //             newPager.append("<div data-mz-productimage-thumb=" + (i + 1) + " class=\"activepager\"></div>");
+        //         } else {
+        //             newPager.append("<div data-mz-productimage-thumb=" + (i + 1) + " class=\"\"></div>");
+        //         }
+        //     }
+        //     newPager.find('div').on('click touchstart' ,function() {
+        //         var indx = $(".mz-productimages-pager div").index($(this));
+        //         slider_mobile.goToSlide(indx);
+        //         $(".mz-productimages-pager div").removeClass("activepager").eq(indx).addClass("activepager");
+        //     });
+        // }
+        // if ($('#productmobile-Carousel').length) {
+        //      createPager(slider_mobile);
+        // }
 
         var productImagesView = new ProductImageViews.ProductPageImagesView({
             el: $('[data-mz-productimages]'),
