@@ -26,7 +26,9 @@
 
             {% block product-code %}
             {% if themeSettings.listProductCode or pageContext.search.query %}
-            <div class="mz-productlisting-productcode" style="display: block;">#{{model.productCode}}</div>
+                {% if model.productType|lower  == 'simple' %}
+                    <div class="mz-productlisting-productcode" style="display: block;">#{{model.productCode}}</div>
+                {% endif %}
             {% endif %}
             {% endblock product-code %}
             {% block product-extrainfo %}
