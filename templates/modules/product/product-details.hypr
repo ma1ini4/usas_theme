@@ -31,9 +31,15 @@
                     {{ model.content.productName|replace("'","&rsquo;")|safe|replace('µ', '<span class="lowercase">µ</span>'|safe) }}
                 </h1>
                 <div class="row">
+                    {% if model.productType != 'simple' %}
+                    <div class="col-xs-5">
+                        <h4 class="mz-productcodes-productcode p-3 no-wrap" itemprop="sku"></h4>
+                    </div>
+                    {% else %}
                     <div class="col-xs-5">
                         <h4 class="mz-productcodes-productcode p-3 no-wrap" itemprop="sku">{{ labels.item}} {{ model.productCode }}</h4>
                     </div>
+                    {% endif %}
                     {% if model.productType != themeSettings.familyProductType %}
                         <div class="col-xs-7 hidden-xs">
                             <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section pull-right text-right prize-mobile-view">
