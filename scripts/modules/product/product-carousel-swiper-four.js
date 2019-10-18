@@ -47,8 +47,8 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
       $('#product-carousel-slider').addClass('no-swiper');
       $('.swiper-button-next, .swiper-button-prev').hide();
     } else {
-      createSlider();
       $('#product-carousel-slider').removeClass('no-swiper');
+      createSlider();
       $('.swiper-button-next, .swiper-button-prev').show();
     }
   }
@@ -68,7 +68,7 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
     } else if (width <= 320) {
       minSlides = 1;
     }
-    
+
     return minSlides;
   }
 });
