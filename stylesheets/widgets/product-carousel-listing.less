@@ -15,6 +15,23 @@
     .swiper-slide {
       height: auto;
     }
+
+  }
+  &.no-swiper {
+    overflow: auto; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .swiper-wrapper {
+      display: flex;
+      justify-content: center;
+
+      .product-item {
+        max-width: 150px;
+        margin: 7px;
+      }
+    }
   }
 
 

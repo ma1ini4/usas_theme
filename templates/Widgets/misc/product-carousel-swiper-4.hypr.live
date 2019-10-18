@@ -1,7 +1,7 @@
 {% if model.items %}
 <div id="product-carousel" class="product-carousel-listing">
 <!-- Swiper -->
-  <div id="product-carousel-slider" class="swiper-container-4">
+  <div id="product-carousel-slider" class="swiper-container-4" data-total-items="{{model.items.length}}">
     <div class="swiper-wrapper">
     {% for prod in model.items %}
       <div class="swiper-slide product-item">
