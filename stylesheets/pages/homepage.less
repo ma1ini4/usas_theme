@@ -189,8 +189,10 @@
     padding: 55px 0 10px 0!important;
 
     .row {
-      display: flex;
-      flex-wrap: wrap;
+      @media @mobile {
+        display: flex;
+        flex-wrap: wrap;
+      }
 
       // @media @desktop-xxl {
       //   div[class="col-sm-6"] {

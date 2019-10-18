@@ -40,7 +40,7 @@
             {% endblock breadcrumbs %}
             {% dropzone "parent-category-page-top" scope="page" %}
               <div class="category-grid">
-                <div class="row flex">
+                <div class="row">
                   {% with categories|find(model.categoryId) as cat %}
                     {% for subcat in cat.childrenCategories %}
                       {% if subcat.isDisplayed %}
