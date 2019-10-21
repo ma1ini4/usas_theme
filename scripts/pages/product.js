@@ -271,7 +271,7 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
                     this.model.whenReady(function() {
                         setTimeout(function() {
                             if (window.productView.model.get('variationProductCode') && typeof window.productView.model.get('variationProductCode') !== "undefined") {
-                                $(".mz-productcodes-productcode").text(Hypr.getLabel('sku')+" #" + window.productView.model.get('variationProductCode'));
+                                $(".mz-productcodes-productcode").text(Hypr.getLabel('item')+" #" + window.productView.model.get('variationProductCode'));
                             }
                             $('.mz-productdetail-price.prize-mobile-view').html($('.mz-l-stack-section.mz-productdetail-conversion .mz-productdetail-price').html());
                             blockUiLoader.unblockUi();
