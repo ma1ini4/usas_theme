@@ -1,0 +1,17 @@
+{% if model.items %}
+<div id="product-replacement" class="product-replacement-listing">
+<!-- Swiper -->
+  <div id="product-replacement-slider" class="swiper-container-4" data-total-items="{{model.items.length}}">
+    <div class="swiper-wrapper">
+    {% for prod in model.items %}
+      <div class="swiper-slide product-item">
+        {% include "modules/product/home-carousel-product-listing" with model=prod %}
+      </div>
+    {% endfor %}
+     </div>
+  </div>
+      <div class="swiper-button-next" id="swiper_meta_name_next"></div>
+      <div class="swiper-button-prev" id="swiper_meta_name_prev"></div>
+  </div>
+  {% endif %}
+  {% require_script "modules/product/product-replacement" %}
