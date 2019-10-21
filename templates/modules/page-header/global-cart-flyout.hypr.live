@@ -12,21 +12,22 @@
 						<div class="media-image col-xs-3">
 							<a href="/p/{{items.product.productCode}}">
 								{% with items.product|get_product_attribute("tenant~color") as colorAttr %}
-								{% if colorAttr %}
-								{% with colorAttr.value|replace(" ","_") as colorValue %}
-								{% with "/cms/files/{0}_{1}_v1.jpg"|string_format(items.product.productCode, colorValue) as fileName %}
-								<img class="media-object" src="https:{% make_url "cdn" fileName with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameter %}" {% if items.product.imageAlternateText %}alt="{{ items.product.imageAlternateText }}"{% endif %} onerror="handleErrorImage(this,'{% if item.product.imageUrl %}{% make_url 'image' item.product with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameters %}{% else %}https:{% make_url 'cdn' '/cms/files/No_image_available.png' with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameter %}{% endif %}')" />
-								{% endwith %}
-								{% endwith %}
-								{% else %}
-								{% if items.product.imageUrl %}
-								<img class="media-object" src="{% make_url "image" items.product with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameters %}" {% if items.product.imageAlternateText %}alt="{{ items.product.imageAlternateText }}"{% endif %} />
-								{% else %}
-								<div class="media-object cart-noimage">
-									[{{ labels.noImages }}]
-								</div>
-								{% endif %}
-								{% endif %}
+									{% if colorAttr %}
+										{% with colorAttr.value|replace(" ","_") as colorValue %}
+											{% with "/cms/files/{0}_{1}_v1.jpg"|string_format(items.product.productCode, colorValue) as fileName %}
+												<img class="media-object" src="https:{% make_url "cdn" fileName with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameter %}" {% if items.product.imageAlternateText %}alt="{{ items.product.imageAlternateText }}"{% endif %} onerror="handleErrorImage(this,'{% if item.product.imageUrl %}{% make_url 'image' item.product with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameters %}{% else %}https:{% make_url 'cdn' '/cms/files/No_image_available.png' with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameter %}{% endif %}')" />
+											{% endwith %}
+										{% endwith %}
+									{% else %}
+										{% if items.product.imageUrl %}
+											<img class="media-object" src="{% make_url "image" items.product with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameters %}" {% if items.product.imageAlternateText %}alt="{{ items.product.imageAlternateText }}"{% endif %} />
+											{% dump items.product %}
+										{% else %}
+										<div class="media-object cart-noimage">
+											[{{ labels.noImages }}]
+										</div>
+										{% endif %}
+									{% endif %}
 								{% endwith %}
 							</a>
 						</div>
@@ -37,6 +38,16 @@
 								</a>
 							</h5>
 							<div class="item-options">
+								<div class="mz-carttable-item-code">
+									{{ labels.item }}#:
+									<em>
+										{% if items.product.variationProductCode and not items.product.variationProductCode.length == 0 %}
+											{{ items.product.variationProductCode }}
+										{% else %}
+											{{ items.product.productCode }}
+										{% endif %}
+									</em>
+								</div>
 								{% if items.product.options %}
 									{% for option in items.product.options %}
 									<div class="item-option-name">{{ option.name }}: <span>
