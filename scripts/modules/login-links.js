@@ -457,12 +457,14 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
         this.init = function(el){
             self.popoverEl = $('#my-account-content');
             self.bindListeners.call(el, true);
-            $('#my-account').attr('href','#');
+            $('#my-account').attr('href', '#');
+            $('#my-account-mobile').attr('href', '#');
         };
         this.bindListeners =  function (on) {
             var onOrOff = on ? "on" : "off";
             //$(this).parent()[onOrOff]('mouseover', '[data-mz-action="my-account"]', self.openPopover);
             $(this).parent()[onOrOff]('click', '[data-mz-action="my-account"]', self.openPopover);
+            $(this).parent()[onOrOff]('click', '[data-mz-action="my-account-mobile"]', self.openPopoverMobile);
             // bind other events
         };
         this.openPopover = function(e){
@@ -473,6 +475,17 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
                 placement : 'bottom',
                 content: function() {
                   return self.popoverEl.html();
+                }
+            }); //.popover('show');
+        };
+        this.openPopoverMobile = function (e) {
+            //self.popoverEl.popover('show');
+            e.preventDefault();
+            $("#my-account-mobile").popover({
+                html: true,
+                placement: 'bottom',
+                content: function () {
+                    return self.popoverEl.html();
                 }
             }); //.popover('show');
         };
@@ -670,19 +683,35 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
         $('body').on('click', '#cart-checkout-login', function (e) {
             $('.login-link-text[data-mz-action="lite-registration"]').trigger('click');
         });
-        $('#my-account').attr('href','#');
+        $('#my-account').attr('href', '#');
+        $('#my-account-mobile').attr('href','#');
+
         $('[data-mz-action="my-account"]').click(function() {
             var popover = new MyAccountPopover();
             popover.init(this);
             $(this).data('mz.popover', popover);
         });
+        $('[data-mz-action="my-account-mobile"]').click(function () {
+            var popover = new MyAccountPopover();
+            popover.init(this);
+            $(this).data('mz.popover', popover);
+        });
+
         $("#my-account").popover({
-                html : true,
-                placement : 'bottom',
-                content: function() {
-                  return $('#my-account-content').html();
-                }
-            });
+            html : true,
+            placement : 'bottom',
+            content: function() {
+                return $('#my-account-content').html();
+            }
+        });
+        $("#my-account-mobile").popover({
+            html: true,
+            placement: 'bottom',
+            content: function () {
+                return $('#my-account-content').html();
+            }
+        });
+
 
         $('#services').attr('href','#');
         $('[data-mz-action="services"]').click(function() {

@@ -19,7 +19,9 @@
               </div>
                 <span class="ml-header-user-welcome">
                   {% if not user.isAnonymous %}
-                  Welcome <a id="my-account-mobile" href="/myaccount">{{user.firstName|default(user.email)}}</a>
+                    Welcome <a href="/myaccount" tabindex="0" data-mz-action="my-account-mobile"
+                        id="my-account-mobile" role="button" data-trigger="click" data-toggle="popover" data-content=""
+                        class="">{{user.firstName|default(user.email)}}</a>                       
                   {%else%}
                   <a href="/user/login">Login / Register</a>
                   {% endif %}
