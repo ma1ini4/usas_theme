@@ -139,7 +139,6 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
     };
     
     function handleSearchResults(item, searchVal) {
-        console.log(item);
         var productData = $(item).find('.primary-btn.quick-view-btn').data('mzProductData');
         var variation;
         if (productData.variations.length !== 0) {
@@ -155,12 +154,16 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
                     path: '/'
                 });
             }
-            window.location.pathname = productData.url;
+            window.location = productData.url;
             console.log(productData.url);
             return true;
         } else {
             return false;
         }
+    }
+    function handleNoResults(searchVal) {
+        $('#search-field').val(searchVal.replace('-', ''));
+        $('#searchbox').submit();
     }
 
     $(document).ready(function () {
@@ -180,6 +183,7 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
         });
    		$('#searchbox').on('submit', function(e){
             var searchVal = $('#search-field').val().trim();
+            
             if(searchVal === ""){
                 window.alert(Hypr.getLabel('blankSearchResult'));
                 e.preventDefault();
@@ -188,11 +192,16 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
                 e.preventDefault();
             }
             var newString = searchVal.replace(/[^\d\-]+/g, '');
-            var regEx = new RegExp(/[\d\d\d\d-\d\d\d\d]/g);
-            if (newString.indexOf('-') !== -1) {
+            var regEx = new RegExp(/\d{4}\-\d{4}/g);
+            var isProductCode = regEx.test(newString);            
+            
+            // if (newString.indexOf('-') !== -1) {
+            if (isProductCode) {
                 e.preventDefault();
-                // console.log('is item number');
+                console.log('is item number');
                 blockUiLoader.globalLoader();
+                newString.replace('-', '');
+
                 $.ajax({
                     url: '/search?categoryId=133&query=' + newString,
                     type: 'GET',
@@ -201,11 +210,9 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
                     },  
                     success: function (data) {
                         var items = $(data).find('#product-list-ul .mz-productlist-item');
-                        // var newString = searchVal.replace(/[^\d\-]+/g, '');
-                        // var regEx = new RegExp(/[\d\d\d\d-\d\d\d\d]/g);
 
                         console.log(items.length);
-                        if (items.length !== 0 && regEx.test(newString)) {
+                        if (items.length !== 0) {
                             var hasValidResults = [];
                             
                             items.each(function(id){
@@ -213,16 +220,13 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
 
                                 console.log(hasValidResults, id, items.length, newString, searchVal);
                                 if (hasValidResults.indexOf(true) === -1 && id === items.length - 1) {
-                                    $('#search-field').val(searchVal.replace('-', ''));
-                                    $('#searchbox').submit();
-                                }
-                                
+                                    handleNoResults(searchVal);
+                                }                                
                             });
 
                         } else {
                             console.log(newString, searchVal, items);
-                            $('#search-field').val(searchVal.replace('-', ''));
-                            $('#searchbox').submit();
+                            handleNoResults(searchVal);
                         }
                     },
                     always: function() {
