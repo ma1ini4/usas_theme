@@ -106,6 +106,16 @@
                     </li>
                 </ul>
             </nav>
+            
+            <nav class="mz-scrollnav affix-top" id="account-nav">
+                <ul class="mz-scrollnav-list nav">
+                    <li class="mz-scrollnav-item">
+                        <a class="mz-scrollnav-link" href="/logout">
+                            <span class="nav-item">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
 
         </div>
     </div>

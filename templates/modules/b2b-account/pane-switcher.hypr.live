@@ -7,16 +7,25 @@
            <div id="mzPaneSwitcherNav" class="mz-pane-switcher-nav mz-myaccount-nav">
                {% for pane in model.panes %}
                <nav class="mz-scrollnav affix-top" id="account-nav" data-mz-scrollnav="body">
-               <ul class="mz-scrollnav-list nav">
-                   <li class="mz-scrollnav-item">
-                       <a class="mz-scrollnav-link" href="/myaccount#{{pane.name}}">
-                           <span class="nav-item" data-mz-action="handlePaneSelect" data-mz-index="{{forloop.index}}"
-                               {% if pane.name == "Lists" %} data-mz-force-load="true" {% endif %} >{{pane.name}}</span>
-                       </a>
-                   </li>
-               </ul>
+                <ul class="mz-scrollnav-list nav">
+                    <li class="mz-scrollnav-item">
+                        <a class="mz-scrollnav-link" href="/myaccount#{{pane.name}}">
+                            <span class="nav-item" data-mz-action="handlePaneSelect" data-mz-index="{{forloop.index}}"
+                                {% if pane.name == "Lists" %} data-mz-force-load="true" {% endif %} >{{pane.name}}</span>
+                        </a>
+                    </li>
+                </ul>
                </nav>
                {% endfor %}
+               <nav class="mz-scrollnav affix-top" id="account-nav">
+                   <ul class="mz-scrollnav-list nav">
+                       <li class="mz-scrollnav-item">
+                           <a class="mz-scrollnav-link" href="/logout">
+                               <span class="nav-item">Logout</span>
+                           </a>
+                       </li>
+                   </ul>
+               </nav>
            </div>
        </div>
     {% endblock %}
