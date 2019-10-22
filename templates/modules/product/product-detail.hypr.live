@@ -44,7 +44,7 @@
 
     <div class="mz-productdetail-conversion-buttons col-xs-12 hide">
       <div class="col-xs-12 add-to-cart-container">
-        {% if model.inventoryInfo.onlineStockAvailable == 0 or model.inventoryInfo.onlineSoftStockAvailable == 0 %}
+        {% if model.inventoryInfo.manageStock == true and (model.inventoryInfo.onlineStockAvailable == 0 or model.inventoryInfo.onlineSoftStockAvailable == 0) %}
           <button class="secondary-btn button_disabled" style="cursor: not-allowed;">
               {{ labels.productDiscontinued }}
           </button>            
