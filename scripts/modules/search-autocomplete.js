@@ -195,10 +195,8 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
             var regEx = new RegExp(/\d{4}\-\d{4}/g);
             var isProductCode = regEx.test(newString);            
             
-            // if (newString.indexOf('-') !== -1) {
             if (isProductCode) {
                 e.preventDefault();
-                console.log('is item number');
                 blockUiLoader.globalLoader();
                 newString.replace('-', '');
 
@@ -211,21 +209,18 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
                     success: function (data) {
                         var items = $(data).find('#product-list-ul .mz-productlist-item');
 
-                        console.log(items.length);
                         if (items.length !== 0) {
                             var hasValidResults = [];
                             
                             items.each(function(id){
                                 hasValidResults.push(handleSearchResults(this, newString));                                
 
-                                console.log(hasValidResults, id, items.length, newString, searchVal);
                                 if (hasValidResults.indexOf(true) === -1 && id === items.length - 1) {
                                     handleNoResults(searchVal);
                                 }                                
                             });
 
                         } else {
-                            console.log(newString, searchVal, items);
                             handleNoResults(searchVal);
                         }
                     },
