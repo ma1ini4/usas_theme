@@ -248,7 +248,7 @@
   "guestCheckoutLink": "Continue As Guest",
   "height": "Height",
   "imagePDPPathFormat": "{0}/cms/files/{1}_{2}.jpg",
-  "imagePathFormat": "{0}/cms/files/{1}.jpg",
+  "imagePathFormat": "{0}/cms/files/{1}.gif",
   "inStockBlob1": "<p>Thank you for shopping at {0}!  We have good news for you-- we now have the following item(s) in stock:</p>",
   "inStockBlob2": "<p>TO ADD THE ITEMS TO YOUR CART: <a href=\"http://{0}/p/{1}\">CLICK HERE</a>.</p>",
   "inStoreOnly": "This item is available in-store only.",
