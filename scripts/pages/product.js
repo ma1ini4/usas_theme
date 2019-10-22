@@ -299,12 +299,12 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
         onOptionChange: function(e) {
             return this.configure($(e.currentTarget));
         },
-        configure: function($optionEl) {
-            var newValue = $optionEl.val(),
+        configure: function($optionEl, optionObj) {
+            var newValue = $optionEl ? $optionEl.val() : optionObj.value,
                 oldValue,
-                id = $optionEl.data('mz-product-option'),
-                optionEl = $optionEl[0],
-                isPicked = (optionEl.type !== "checkbox" && optionEl.type !== "radio") || optionEl.checked,
+                id = $optionEl ? $optionEl.data('mz-product-option') : optionObj.attributeFQN,
+                optionEl = $optionEl ? $optionEl[0] : {},
+                isPicked = $optionEl ? (optionEl.type !== "checkbox" && optionEl.type !== "radio") || optionEl.checked : true,
                 option = this.model.get('options').get(id);
             if (option) {
                 if (option.get('attributeDetail').inputType === "YesNo") {
@@ -732,6 +732,13 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
                     }
                 }
             });
+            var preselectedOptions = JSON.parse($.cookie('searchProductOptions'));
+            if (preselectedOptions) {
+                $(preselectedOptions.options).each(function() {
+                    me.configure(null, this);
+                });
+                $.cookie('searchProductOptions', null, {path: '/'});
+            }
             me.model.on( 'updateSwatchImage', function(){
                me.selectSwatchImage();
            });
@@ -748,7 +755,7 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
 
     function destroyZoom() {
         isMobile = ($(window).width() <= 992) ? true : false;
-        console.log(isMobile);
+
         if (isMobile) {
             setInterval(function() {
                 $('.zoomContainer').addClass('hidden');
@@ -854,7 +861,6 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
         
         if (activeOptions.length > 0) {
             activeOptions.each(function() {
-                console.log(this);
                 productView.configureAttribute($(this));
             });
         }
