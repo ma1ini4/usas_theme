@@ -201,7 +201,7 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
                 newString.replace('-', '');
 
                 $.ajax({
-                    url: '/search?categoryId=133&query=' + newString,
+                    url: '/search?categoryId=' + Hypr.getThemeSetting('allProductsCategoryId') + '&query=' + newString,
                     type: 'GET',
                     beforeSend: function(req){
                         req.setRequestHeader('Accept', 'text/html,application/xhtml+xml,application/x');

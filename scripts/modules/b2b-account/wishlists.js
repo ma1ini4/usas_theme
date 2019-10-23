@@ -578,11 +578,9 @@ define([
             $(this).prop('checked', !e.target.checked);
             
             var checkboxes = $('[data-mz-value="add-to-cart-quote"]');
-            var checkedItems = [];        
-            console.log(checkboxes);
+            var checkedItems = [];      
+              
             checkboxes.each(function() {
-                console.log($(this).prop('checked'));
-
                 checkedItems.push($(this).prop('checked'));
             }); 
 
@@ -593,7 +591,6 @@ define([
                 return val === false;
             });
 
-            console.log(allItemsSelected, allItemsDeselected);
 
             if(allItemsSelected) {
                 $("[data-mz-value='check-all-quote']").prop('checked', true);
