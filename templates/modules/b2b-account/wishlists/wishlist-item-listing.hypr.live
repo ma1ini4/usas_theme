@@ -3,20 +3,25 @@
 {% block item-listing-image %}
   {% if model.product.imageUrl %}
     <div class="mz-itemlisting-thumb">
-      <a href="{{ model.product.url }}{% if model.product.variationProductCode %}?vpc={{model.product.variationProductCode}}{% endif %}">
+      <!-- <a href="{{ model.product.url }}{% if model.product.variationProductCode %}?vpc={{model.product.variationProductCode}}{% endif %}"> -->
         <img class="mz-itemlisting-thumb-img" src="{% make_url "image" model.product with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameters %}" {% if model.product.imageAlternateText %}alt="{{ model.product.imageAlternateText }}"{% endif %} />
-      </a>
+      <!-- </a> -->
     </div>
   {% else %}
   <div class="mz-itemlisting-thumb">
-    <a href="{{ model.product.url }}{% if model.product.variationProductCode %}?vpc={{model.product.variationProductCode}}{% endif %}">
+    <!-- <a href="{{ model.product.url }}{% if model.product.variationProductCode %}?vpc={{model.product.variationProductCode}}{% endif %}"> -->
       <span class="mz-product-image-placeholder">
         <span class="mz-productlisting-imageplaceholdertext">{{ labels.productImagePlaceholder }}</span>
       </span>
-    </a>
+    <!-- </a> -->
   </div>
   {% endif %}
 {% endblock item-listing-image %}
+
+ {% block item-name %}
+    <span class="mz-itemlisting-title">
+      {{ model.product.name }}</span>
+  {% endblock item-name %}
 
 {% block item-details %}
 <div class="mz-itemlisting-description">
