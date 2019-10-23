@@ -105,10 +105,40 @@ define(["modules/mozu-utilities", "modules/jquery-mozu", 'modules/api', "undersc
         },
         handleDialogSave: function () {
             var self = this;
-            if (self._userForm ) {
-                self._userForm.model.saveUser();
+            var formIsValid = true;
+            var firstNameVal = $('#firstName').val(),
+                firstNameErrMsg = $('[data-mz-validationmessage-for="user.firstName"]'),
+                lastNameVal = $('#lastName').val(),
+                lastNameErrMsg = $('[data-mz-validationmessage-for="user.lastName"]'),
+                emailVal = $('#emailAddress').val(),
+                emailErrMsg = $('[data-mz-validationmessage-for="user.emailAddress"]');
+
+            if (!firstNameVal || firstNameVal.length === 0) {
+                firstNameErrMsg.text('Please, enter a first name.');
+                formIsValid = false;
+            } 
+            if (!lastNameVal || lastNameVal.length === 0) {
+                lastNameErrMsg.text('Please, enter a last name.');
+                formIsValid = false;
+            } 
+            if (!emailVal || emailVal.length === 0 || this.validateEmail(emailVal)) {
+                emailErrMsg.text('Please, enter a valid email address.');
+                formIsValid = false;
+            } 
+            if (formIsValid) {
+                if (self._userForm ) {
+                    self._userForm.model.saveUser();
+                }
+                
+                this.bootstrapInstance.hide();
             }
-            this.bootstrapInstance.hide();
+        },
+        validateEmail: function(email) {
+            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
+                return false;
+            } else {
+                return true;
+            }
         },
         setInit: function () {
             var self = this;
