@@ -32,50 +32,92 @@ define(["modules/jquery-mozu", 'modules/api', "underscore", "hyprlive", "modules
           'editingCard.contactId',
           'editingContact.address.countryCode'
       ],
-      beginEditCard: function(e) {
-          var self = this;
-          this.model.apiGet().then(function(){
-              var id = self.editing.card = e.currentTarget.getAttribute('data-mz-card');
-              self.model.beginEditCard(id);
-              self.render();
-          });
-      },
-      finishEditCard: function() {
-          var self = this;
-          var operation = this.doModelAction('saveCard');
-          if (operation) {
-              operation.otherwise(function() {
-                  self.editing.card = true;
-              });
-              this.editing.card = false;
-          }
-      },
-      cancelEditCard: function() {
-          this.editing.card = false;
-          this.model.endEditCard();
-          this.render();
-      },
-      beginDeleteCard: function(e) {
-          var self = this,
-              id = e.currentTarget.getAttribute('data-mz-card'),
-              card = this.model.get('cards').get(id);
-          if (window.confirm(Hypr.getLabel('confirmDeleteCard', card.get('cardNumberPart')))) {
-              this.doModelAction('deleteCard', id);
-          }
-      },
-      render: function(){
-          Backbone.MozuView.prototype.render.apply(this, arguments);
-          var self = this;
-          $(document).ready(function () {
-              var collection = new TransactionGridCollectionModel({id: self.model.get('id')});
-              var transactionsGrid = new MozuGrid({
-                  el: $('.mz-b2b-transactions-grid'),
-                  model: collection
-              });
-              transactionsGrid.render();
-              return;
-          });
-      }
+    additionalEvents: {
+        "blur #mz-payment-credit-card-number": "changeCardType",
+        "input  [name='security-code'],[name='credit-card-number']": "allowDigit"
+    },
+    allowDigit:function(e){
+        e.target.value= e.target.value.replace(/[^\d]/g,'');
+    },
+    changeCardType:function(e){
+        var number = e.target.value;
+        var cardType='';
+
+        // visa
+        var re = new RegExp("^4");
+        if (number.match(re) !== null){
+            cardType = "VISA";
+        }
+
+        // Mastercard
+        // Updated for Mastercard 2017 BINs expansion
+            if (/^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$/.test(number))
+            cardType = "MC";
+
+        // AMEX
+        re = new RegExp("^3[47]");
+        if (number.match(re) !== null)
+            cardType = "AMEX";
+
+        // Discover
+        re = new RegExp("^(6011|622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5]|64[4-9])|65)");
+        if (number.match(re) !== null)
+            cardType = "DISCOVER";
+
+        $('.mz-card-type-images').find('span').removeClass('active');
+        if(cardType){
+            this.model.set('editingCard.paymentOrCardType',cardType);
+            $('.mz-card-type-images').find('span[data-mz-card-type-image="'+cardType+'"]').addClass('active');
+        }
+        else{
+            this.model.set('editingCard.paymentOrCardType',null);
+        }
+
+    },
+    beginEditCard: function(e) {
+        var self = this;
+        this.model.apiGet().then(function(){
+            var id = self.editing.card = e.currentTarget.getAttribute('data-mz-card');
+            self.model.beginEditCard(id);
+            self.render();
+        });
+    },
+    finishEditCard: function() {
+        var self = this;
+        var operation = this.doModelAction('saveCard');
+        if (operation) {
+            operation.otherwise(function() {
+                self.editing.card = true;
+            });
+            this.editing.card = false;
+        }
+    },
+    cancelEditCard: function() {
+        this.editing.card = false;
+        this.model.endEditCard();
+        this.render();
+    },
+    beginDeleteCard: function(e) {
+        var self = this,
+            id = e.currentTarget.getAttribute('data-mz-card'),
+            card = this.model.get('cards').get(id);
+        if (window.confirm(Hypr.getLabel('confirmDeleteCard', card.get('cardNumberPart')))) {
+            this.doModelAction('deleteCard', id);
+        }
+    },
+    render: function(){
+        Backbone.MozuView.prototype.render.apply(this, arguments);
+        var self = this;
+        $(document).ready(function () {
+            var collection = new TransactionGridCollectionModel({id: self.model.get('id')});
+            var transactionsGrid = new MozuGrid({
+                el: $('.mz-b2b-transactions-grid'),
+                model: collection
+            });
+            transactionsGrid.render();
+            return;
+        });
+    }
   });
 
   var PaymentMethodsModel = CustomerModels.EditableCustomer.extend({
