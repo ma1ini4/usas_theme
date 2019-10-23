@@ -565,14 +565,43 @@ define([
                     $(this).prop('checked', true);
                 });
             } else {
+                checkboxes.each(function() {
+                    $(this).prop('checked', false);
+                });
+
                 $("[data-mz-value='check-all-quote']").each(function(){
                     $(this).prop('checked', false);
                 });
             }
-            console.log(e);
         },
         itemCheckbox: function(e) {
-            $("[data-mz-value='check-all-quote']").prop('checked', false);
+            $(this).prop('checked', !e.target.checked);
+            
+            var checkboxes = $('[data-mz-value="add-to-cart-quote"]');
+            var checkedItems = [];        
+            console.log(checkboxes);
+            checkboxes.each(function() {
+                console.log($(this).prop('checked'));
+
+                checkedItems.push($(this).prop('checked'));
+            }); 
+
+            var allItemsSelected = checkedItems.every(function(val, i, arr) {
+                return val === true;
+            });
+            var allItemsDeselected = checkedItems.every(function(val, i, arr) {
+                return val === false;
+            });
+
+            console.log(allItemsSelected, allItemsDeselected);
+
+            if(allItemsSelected) {
+                $("[data-mz-value='check-all-quote']").prop('checked', true);
+            } else if(allItemsDeselected) {
+                $("[data-mz-value='check-all-quote']").prop('checked', false);
+            } else {
+                $("[data-mz-value='check-all-quote']").prop('checked', false);
+            }
         }
     });
 
