@@ -140,8 +140,9 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
     
     function handleSearchResults(item, searchVal) {
         var productData = $(item).find('.primary-btn.quick-view-btn').data('mzProductData');
-        var variation;
-        if (productData.variations.length !== 0) {
+        var variation = null;
+
+        if (productData.variations && productData.variations.length !== 0) {
             variation = productData.variations.find(function (obj) {
                 return (obj.productCode === searchVal) ? obj : null;
             });
@@ -155,7 +156,6 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
                 });
             }
             window.location = productData.url;
-            console.log(productData.url);
             return true;
         } else {
             return false;
@@ -198,7 +198,7 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
             if (isProductCode) {
                 e.preventDefault();
                 blockUiLoader.globalLoader();
-                newString.replace('-', '');
+                // newString.replace('-', '');
 
                 $.ajax({
                     url: '/search?categoryId=' + Hypr.getThemeSetting('allProductsCategoryId') + '&query=' + newString,

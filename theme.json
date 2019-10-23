@@ -517,7 +517,7 @@
   "settings": {
     "__recaptchaSecrete": null,
     "addressLength": 80,
-    "allProductsCategoryId": 0,
+    "allProductsCategoryId": 127,
     "allowCustomerInitiatedReturns": true,
     "allowFilterByLocationInventory": false,
     "backofficeDateTimeFormat": "m/d/Y H:i:s O",
