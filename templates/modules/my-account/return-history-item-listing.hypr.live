@@ -30,7 +30,7 @@
 
 
       <div class="mz-itemlisting-description">
-        {% for option in model.product.options %}{{ option.name }}: {{option.stringValue|replace('µ', '<span class="lowercase">µ</span>'|safe)}},
+        {% for option in model.product.options %}{{ option.name }}: {{option.stringValue|replace('µ', '<span class="lowercase">µ</span>')|replace(' mL', ' <span class="lowercase">m</span>L'|safe)}},
         {% endfor %}{{ model.product.variationProductCode|default(model.product.productCode) }}{% if model.product.measurements.packageWeight.value %},
         {{ model.product.measurements.packageWeight.value }}{{model.measurements.packageWeight.unit }}{% endif %}
       </div>

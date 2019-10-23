@@ -148,7 +148,7 @@
                         {% for option in item.product.options %}
                             <div class="product-option">
                                 <em class="product-option-label">[option]</em>{{ option.name }}:
-                                {{ option.stringValue|replace('µ', '<span class="lowercase">µ</span>'|safe)|default(option.shopperEnteredValue)|default(option.value) }}
+                                {{ option.stringValue|replace('µ', '<span class="lowercase">µ</span>')|replace(' mL', ' <span class="lowercase">m</span>L'|safe)|default(option.shopperEnteredValue)|default(option.value) }}
                                 {% if option.stringValue %}
                                 <span class="product-option-raw">({{ option.value }})</span>
                                 {% endif %}

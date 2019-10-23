@@ -54,7 +54,7 @@
                                     {% if value.stringValue == "CHR(64)" %}
                                     @
                                     {% else %}
-                                        {{value.stringValue|replace('µ', '<span class="lowercase">µ</span>'|safe)}}
+                                        {{value.stringValue|replace('µ', '<span class="lowercase">µ</span>')|replace(' mL', ' <span class="lowercase">m</span>L')|safe}}
                                     {% endif %}
                                 {% endif %}
                             </a>

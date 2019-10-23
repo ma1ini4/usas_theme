@@ -40,7 +40,7 @@
 									{{ items.product.name }}
 								</a>
 							</h5>
-							<div class="item-options">
+							<div class="item-options flex-column">
 								<div class="mz-carttable-item-code">
 									{{ labels.item }}#:
 									<em>
@@ -57,7 +57,7 @@
 										{% if option.stringname %}
 											{{ option.stringname }}
 										{% else %}
-											{{option.stringValue|replace('µ', '<span class="lowercase">µ</span>'|safe)}}
+											{{option.stringValue|replace('µ', '<span class="lowercase">µ</span>')|replace(' mL', ' <span class="lowercase">m</span>L'|safe)}}
 										{% endif %}</span></div>
 									{% endfor %}
 								{% endif %}
