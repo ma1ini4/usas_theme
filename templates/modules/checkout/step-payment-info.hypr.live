@@ -206,13 +206,13 @@
             </div>
         </div>
         {% if siteContext.checkoutSettings.supportedGiftCards.giftcard %}
-        <div class="mz-l-stack-section mz-formfieldgroup-row mz-paymentselector-separator mz-checkoutform">
-            {% include "modules/checkout/checkout-gateway-giftcard" %}
-        </div>
+            <div class="mz-l-stack-section mz-formfieldgroup-row mz-paymentselector-separator mz-checkoutform">
+                {% include "modules/checkout/checkout-gateway-giftcard" %}
+            </div>
+            <div class="mz-l-stack-section mz-formfieldgroup-row mz-paymentselector-separator mz-checkoutform">
+                {% include "modules/checkout/checkout-digital-credit" %}
+            </div>
         {% endif %}
-        <div class="mz-l-stack-section mz-formfieldgroup-row mz-paymentselector-separator mz-checkoutform">
-            {% include "modules/checkout/checkout-digital-credit" %}
-        </div>
     </div>
 
     <div class="mz-formstep-next pull-right">
