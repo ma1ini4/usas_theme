@@ -817,7 +817,7 @@
     "enableProductCarousel": false,
     "enableProductPagingControl": true,
     "enableRecaptcha": false,
-    "enableQuickView": true,
+    "enableQuickView": false,
     "extendedPropertiesEnabled": false,
     "extendedPropertyParameters": "",
     "facebookShareLink": "https://www.facebook.com/MozuCommerce",
