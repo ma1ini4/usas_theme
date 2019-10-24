@@ -121,7 +121,7 @@ define(["modules/mozu-utilities", "modules/jquery-mozu", 'modules/api', "undersc
                 lastNameErrMsg.text('Please, enter a last name.');
                 formIsValid = false;
             } 
-            if (!emailVal || emailVal.length === 0 || this.validateEmail(emailVal)) {
+            if (!this.validateEmail(emailVal)) {
                 emailErrMsg.text('Please, enter a valid email address.');
                 formIsValid = false;
             } 
@@ -134,6 +134,7 @@ define(["modules/mozu-utilities", "modules/jquery-mozu", 'modules/api', "undersc
             }
         },
         validateEmail: function(email) {
+            console.log(email);
             if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
                 return false;
             } else {
