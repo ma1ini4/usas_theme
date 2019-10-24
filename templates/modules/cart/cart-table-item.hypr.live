@@ -1,29 +1,18 @@
 <div class="col-xs-12 mz-row-carttable-item">
   <div class="mz-carttable-item">
     <div class="mz-carttable-item-product col-xs-12 col-sm-5 nopaddingleft">
-     {% with item.product|get_product_attribute("tenant~color") as colorAttr %}
-          {% if colorAttr %}
-            {% with colorAttr.value|replace(" ","_") as colorValue %}
-              {% with "/cms/files/{0}_{1}_v1.jpg"|string_format(item.product.productCode, colorValue, themeSettings.globalCartItemImageMaxWidth) as fileName %}
-                  <a href="{{ item.product.url }}">
-                    <img class="mz-carttable-item-image" src="https:{% make_url "cdn" fileName with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameter %} " {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}"{% endif %} onerror="handleErrorImage(this,'{% if item.product.imageUrl %}{% make_url 'image' item.product with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameters %}{% else %}https:{% make_url 'cdn' '/cms/files/No_image_available.png' with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameter %}{% endif %}')" />
-                  </a>
-              {% endwith %}
-            {% endwith %}
-          {% else %}
-            {% if item.product.imageUrl %}
-                <a href="{{ item.product.url }}">
-                  <img class="mz-carttable-item-image" src="{% make_url "image" item.product with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameters %}" {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}"{% endif %} />
-                </a>
-            {% else %}
-              <a href="{{ item.product.url }}">
-                <div class="cart-noimage">
-                  [{{ labels.noImages }}]
-                </div>
-              </a>
-            {% endif %}
-          {% endif %}
-        {% endwith %}
+     
+      {% if item.product.imageUrl %}
+          <a href="{{ item.product.url }}">
+            <img class="mz-carttable-item-image" src="{% make_url "image" item.product with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameters %}" {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}"{% endif %} />
+          </a>
+      {% else %}
+        <a href="{{ item.product.url }}">
+          <div class="cart-noimage">
+            [{{ labels.noImages }}]
+          </div>
+        </a>
+      {% endif %}
 
       <div class="mz-carttable-item-info-wrap">
         <a class="mz-carttable-item-title" href="{{item.product.url}}">{{ item.product.name|safe }}</a>
