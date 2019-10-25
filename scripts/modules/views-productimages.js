@@ -210,51 +210,16 @@ define(['modules/jquery-mozu', 'underscore', "modules/backbone-mozu", 'hyprlive'
     }
 
     function initslider_mobile() {
-      var id;
-    //  console.log('current_zoom_id_added',current_zoom_id_added);
-    //  if (current_zoom_id_added) id = $(current_zoom_id_added)[0].attributes.id.value.replace('zoom_', '') - 1;
-    //  console.log('id', id);
-      slider_mobile = $('#productmobile-Carousel').bxSlider({
-          touchEnabled: false,
-          slideWidth: 10, // old value - 300
-          minSlides: 1,
-          maxSlides: 1,
-          moveSlides: 1,
-          preloadImages: 'all',
-          onSliderLoad: function(currentIndex) {
-             //console.log('onSliderLoad current index', currentIndex);
-              $('ul#productmobile-Carousel li').find('img').removeClass("active");
-              $('ul#productmobile-Carousel li').eq(currentIndex).find('img').addClass("active");
-              $("#productmobile-Carousel,#productCarousel-pager").css("visibility", "visible");
-          },
-          onSlideAfter: function($slideElement, oldIndex, newIndex) {
-             //console.log('onSlideAfter');
-              $('.zoomContainer').remove();
-              current_zoom_id_added.elevateZoom({ zoomType: "inner", cursor: "crosshair" }).addClass('active');
-              var bkimg = $(current_zoom_id_added)[0].attributes['data-zoom-image'].value;
-              // remove in case logic for mobile slider is different
-              $('.mz-productimages-mainimage').attr('src', bkimg);
-              $(".mz-productimages-pager div").removeClass("activepager").eq(newIndex).addClass("activepager");
-              setTimeout(function() {
-                  $('div.zoomWindowContainer div').css({ 'background-image': 'url(' + bkimg + ')' });
-              }, 500);
+      if ($('#productmobile-Carousel.slick-initialized').length > 0) {
+          $('#productmobile-Carousel').slick('unslick');
+      }
 
-          },
-          onSlideBefore: function(currentSlide, totalSlides, currentSlideHtmlObject) {
-          //  console.log('onSlideBefore');
-              var current_zoom_id = '#' + $('#productmobile-Carousel>li').eq(currentSlideHtmlObject).find('img').attr('id');
-              $('.zoomContainer').remove();
-              $(current_zoom_id).removeData('elevateZoom');
-              current_zoom_id_added = $('#productmobile-Carousel>li').eq(currentSlideHtmlObject).find('img');
-              $('ul#productmobile-Carousel li img').removeClass('active');
-          },
-          startSlide: id ? id : 0,
-          nextText: '<i class="fa fa-angle-right" aria-hidden="true"></i>',
-          prevText: '<i class="fa fa-angle-left" aria-hidden="true"></i>',
-          infiniteLoop: false,
-          hideControlOnEnd: true,
-          pager: true,
-          pagerCustom: '#productCarousel-pager'
+      slider_mobile = $('#productmobile-Carousel').slick({
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false,
+          infinite: false,
+          dots: true
       });
     }
 

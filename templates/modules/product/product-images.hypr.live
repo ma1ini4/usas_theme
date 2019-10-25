@@ -1,6 +1,7 @@
 {% if model.content.productImages %}
   {% if model.productImages.length %}
-      <figure class="hidden-xs mz-productimages-main text-center {% if model.productImages.length > 1 %} {% endif %}">
+      <figure
+          class="{% if model.content.productImages.length > 1 %}hidden-xs {% endif %}mz-productimages-main text-center {% if model.productImages.length > 1 %} {% endif %}">
          <!-- commented `hidden-xs` above so the main image now visible on the xs -->
           {% include "modules/product/product-image" with productImage=model.mainImage productAltText=model.mainImage.altText productMaxWidth=themeSettings.productImagePdpMaxWidth isMainImage="true" as_parameter %}
       </figure>
@@ -42,7 +43,8 @@
           <figure class="mz-productimages-pager col-xs-12 visible-xs"></figure>
       {% endif %}
   {% else %}
-      <figure class="mz-productimages-main text-center  {% if model.content.productImages.length > 1 %} {% endif %}">
+      <figure
+          class="mz-productimages-main text-center  {% if model.content.productImages.length > 1 %}hidden-xs{% endif %}">
           <!-- commented `hidden-xs` above so the main image now visible on the xs -->
           {% include "modules/product/product-image" with productImage=model.mainImage productAltText=model.mainImage.altText productMaxWidth=themeSettings.productImagePdpMaxWidth isMainImage="true" as_parameter %}
       </figure>
