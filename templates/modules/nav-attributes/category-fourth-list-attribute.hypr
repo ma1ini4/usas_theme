@@ -1,9 +1,0 @@
-{% if model %}
-	{% with model|first as entityModel %}
-		{% for item in entityModel.topNavHeader4Items %}
-		<div class="mz-sitenav-item sub-level-li">
-				<a class="mz-sitenav-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{ item.url }}">{{ item.name|safe }}</a>
-		</div>
-		{% endfor %}
-	{% endwith %}
-{% endif %}

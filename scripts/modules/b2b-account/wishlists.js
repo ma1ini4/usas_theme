@@ -119,28 +119,22 @@ define([
             });
 
         },
-        addToCart: function (deselectedItems) {
+        addToCart: function (selectedItems) {
           this.isLoading(true);
           var self = this;
           var items = this.get('items').toJSON();
 
-          if (deselectedItems && deselectedItems.length !== 0) {
+          if (selectedItems && selectedItems.length !== 0) {
+            var newItems = [];
 
-            if (deselectedItems.length === items.length) {
-                items = [];
-            } else {
-                var newItems = [];
-    
-                deselectedItems.forEach(function(id){
-    
-                    $.grep(items, function(obj){
-                        if (obj.id != id) {                        
-                            newItems.push(obj);
-                        }
-                    });          
-                });    
-                items = newItems;
-            }
+            _.each(items, function(item){
+                selectedItems.map(function(id) {
+                    if (item.id === id) {
+                        newItems.push(item);
+                    }
+                });                    
+            });
+            items = newItems;  
           }
 
           var cart = CartModels.Cart.fromCurrent();
@@ -233,7 +227,8 @@ define([
     var WishlistsView = Backbone.MozuView.extend({
         templateName: 'modules/b2b-account/wishlists/my-wishlists',
         additionalEvents: {
-            "change [data-mz-value='wishlist-quantity']": "onQuantityChange"
+            "change [data-mz-value='wishlist-quantity']": "onQuantityChange",
+            "click [data-mz-action='viewAll']": "onQuantityChange"
         },
         initialize: function(){
             var self = this;
@@ -341,6 +336,9 @@ define([
                 }
             });
         },
+        viewAll: function () {
+            $('[data-mz-action="cancelWishlistEdit"]').trigger('click');
+        },
         render: function () {
             Backbone.MozuView.prototype.render.apply(this, arguments);
             var self = this;
@@ -409,12 +407,12 @@ define([
 
         },
         addWishlistToCart: function(e){
-            var deselectedItems = [];
+            var selectedItems = [];
 
-            $('[data-mz-value="add-to-cart-quote"]:not(:checked)').each(function () {
-               deselectedItems.push($(this).data('mzItemId'));
+            $('[data-mz-value="add-to-cart-quote"]:checked').each(function () {
+               selectedItems.push($(this).data('mzItemId'));
             });
-            this.model.addToCart(deselectedItems);
+            this.model.addToCart(selectedItems);
         },
         saveAndCloseWishlistEdit: function () {
           // Name here is a bit misleading but the effect is the same -

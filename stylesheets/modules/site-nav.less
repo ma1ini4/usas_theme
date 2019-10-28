@@ -72,6 +72,8 @@
             .transition-delay(0s);
             .sub-level-col {
                 float: none;
+                width: 225px;
+                min-width: 225px;
                 // display: table-cell;
                 // padding-top: 10px;
 
@@ -108,6 +110,14 @@
 
                 img {
                   width: 100%;
+                }
+                @media @desktop {
+                  width: 175px;
+                  min-width: 185px; 
+                }
+                @media @desktop {
+                  width: 155px;
+                  min-width: 165px;
                 }
             }
         }

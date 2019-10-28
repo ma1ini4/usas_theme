@@ -48,10 +48,10 @@
   <a class="mz-itemlisting-action" href="javascript:;" data-mz-action="beginRemoveItem"
     data-mz-item-id="{{ model.id }}">{{ labels.b2bQuotesRemoveItem }}</a> -->
     <div class="mz-itemlisting-quantity">
-      {{ labels.qty }} {{ model.quantity }} or more
       <div class="mz-itemlisting-price">
-        {% include "modules/common/item-price" %}
+        List price: {% include "modules/common/item-price" %}
       </div>
+      Buy {{ model.quantity }} or more for Quote Price
       <!-- <div>
         <strong> {{ labels.total }} : </strong> 
         <span class="mz-itemlisting-item-total">

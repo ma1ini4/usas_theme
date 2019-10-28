@@ -1,27 +1,60 @@
 {% if model %}
 	{% with model|first as entityModel %}
-		{% if var == '2' %}
-			{% for item in entityModel.topNavHeader2Items %}
-			<div class="mz-sitenav-item sub-level-li">
-					<a class="mz-sitenav-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{ item.url }}">{{ item.name|safe }}</a>
-			</div>
-			{% endfor %}
-		{% else %}
-			{% if var == '3' %}
-				{% for item in entityModel.topNavHeader3Items %}
+		{% if var == '1a' %}
+			{% for item in entityModel.items1a %}
 				<div class="mz-sitenav-item sub-level-li">
-						<a class="mz-sitenav-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{ item.url }}">{{ item.name|safe }}</a>
+					<a class="mz-sitenav-link"  href="{{ item.url }}">{{ item.name|safe }}</a>
 				</div>
-				{% endfor %}
-			{% else %}
-					{% if var == '4' %}
-						{% for item in entityModel.topNavHeader4Items %}
-						<div class="mz-sitenav-item sub-level-li">
-								<a class="mz-sitenav-link" {% if link.openInNewWindow %}target='_blank'{% endif %} href="{{ item.url }}">{{ item.name|safe }}</a>
-						</div>
-						{% endfor %}
-					{% endif %}
-			{% endif %}
+			{% endfor %}
+		{% endif %}
+		{% if var == '1a' %}
+			{% for item in entityModel.items1b %}
+				<div class="mz-sitenav-item sub-level-li">
+					<a class="mz-sitenav-link"  href="{{ item.url }}">{{ item.name|safe }}</a>
+				</div>
+			{% endfor %}
+		{% endif %}
+		{% if var == '2a' %}
+			{% for item in entityModel.items2a %}
+				<div class="mz-sitenav-item sub-level-li">
+					<a class="mz-sitenav-link"  href="{{ item.url }}">{{ item.name|safe }}</a>
+				</div>
+			{% endfor %}
+		{% endif %}
+		{% if var == '2b' %}
+			{% for item in entityModel.items2b %}
+				<div class="mz-sitenav-item sub-level-li">
+					<a class="mz-sitenav-link"  href="{{ item.url }}">{{ item.name|safe }}</a>
+				</div>
+			{% endfor %}
+		{% endif %}
+		{% if var == '3a' %}
+			{% for item in entityModel.items3a %}
+				<div class="mz-sitenav-item sub-level-li">
+					<a class="mz-sitenav-link"  href="{{ item.url }}">{{ item.name|safe }}</a>
+				</div>
+			{% endfor %}
+		{% endif %}
+		{% if var == '3b' %}
+			{% for item in entityModel.items3b %}
+				<div class="mz-sitenav-item sub-level-li">
+					<a class="mz-sitenav-link"  href="{{ item.url }}">{{ item.name|safe }}</a>
+				</div>
+			{% endfor %}
+		{% endif %}
+		{% if var == '4a' %}
+			{% for item in entityModel.items4a %}
+				<div class="mz-sitenav-item sub-level-li">
+					<a class="mz-sitenav-link"  href="{{ item.url }}">{{ item.name|safe }}</a>
+				</div>
+			{% endfor %}
+		{% endif %}
+		{% if var == '4b' %}
+			{% for item in entityModel.items4b %}
+				<div class="mz-sitenav-item sub-level-li">
+					<a class="mz-sitenav-link"  href="{{ item.url }}">{{ item.name|safe }}</a>
+				</div>
+			{% endfor %}
 		{% endif %}
 	{% endwith %}
 {% endif %}

@@ -218,8 +218,15 @@
 }
 
 .mz-b2b-wishlists {
-
+    .wishlist-edit-form {
+        .mz-l-stack-sectiontitle {
+            border: none;
+        }
+    }
     .find-quote {
+        padding: 0 0 3.125px;
+        border-bottom: 1px solid @ghostWhite;
+
         .productpicker-label {
             margin-bottom: 7px;
         }
@@ -373,6 +380,7 @@
     }
     .wishlist-btns {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         justify-content: flex-end;
         margin-top: 15px;
@@ -400,21 +408,22 @@
             display: flex;
             // display: none;
             align-items: center;
-            margin-right: 15px;
+            width: 100%;
+            margin-top: 7px;
 
             input {
-                margin: 0 7px 0;
+                margin: 0 7px 0 auto;
                 padding: 10px;
-                -ms-transform: scale(1.5);
-                -moz-transform: scale(1.5);
-                -webkit-transform: scale(1.5);
-                -o-transform: scale(1.5);
-                transform: scale(1.5);
+                // -ms-transform: scale(1.5);
+                // -moz-transform: scale(1.5);
+                // -webkit-transform: scale(1.5);
+                // -o-transform: scale(1.5);
+                // transform: scale(1.5);
             }
 
             label {
                 margin: 0;
-                font-size: 17px;
+                font-size: 14px;
             }
         }
     }
