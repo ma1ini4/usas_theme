@@ -119,27 +119,26 @@ define([
             });
 
         },
-        addToCart: function (deselectedItems) {
+        addToCart: function (selectedItems) {
           this.isLoading(true);
           var self = this;
           var items = this.get('items').toJSON();
 
-          if (deselectedItems && deselectedItems.length !== 0) {
+          if (selectedItems && selectedItems.length !== 0) {
 
-            if (deselectedItems.length === items.length) {
+            if (selectedItems.length === items.length) {
                 items = [];
             } else {
                 var newItems = [];
     
-                deselectedItems.forEach(function(id){
-    
-                    $.grep(items, function(obj){
-                        if (obj.id != id) {                        
-                            newItems.push(obj);
+                _.each(items, function(item){
+                    selectedItems.map(function(id) {
+                        if (item.id === id) {
+                            newItems.push(item);
                         }
-                    });          
-                });    
-                items = newItems;
+                    });                    
+                });
+                items = newItems;  
             }
           }
 
@@ -409,12 +408,12 @@ define([
 
         },
         addWishlistToCart: function(e){
-            var deselectedItems = [];
+            var selectedItems = [];
 
-            $('[data-mz-value="add-to-cart-quote"]:not(:checked)').each(function () {
-               deselectedItems.push($(this).data('mzItemId'));
+            $('[data-mz-value="add-to-cart-quote"]:checked').each(function () {
+               selectedItems.push($(this).data('mzItemId'));
             });
-            this.model.addToCart(deselectedItems);
+            this.model.addToCart(selectedItems);
         },
         saveAndCloseWishlistEdit: function () {
           // Name here is a bit misleading but the effect is the same -
