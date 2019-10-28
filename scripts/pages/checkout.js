@@ -126,7 +126,8 @@ require(["modules/jquery-mozu",
             billingAddress.set('candidateValidatedAddresses', addressDefaults.candidateValidatedAddresses);
         },
         additionalEvents: {
-            "input [name='shippingphone']": "allowDigit"
+            "input [name='shippingphone']": "allowDigit",
+            "input [name='workphone']": "allowDigit"
         },
         allowDigit:function(e){
             e.target.value= e.target.value.replace(/[^\d]/g,'');
@@ -239,7 +240,7 @@ require(["modules/jquery-mozu",
             "change [data-mz-gift-card-enable]": "enableGiftCard",
             "change [data-mz-digital-add-remainder-to-customer]": "addRemainderToCustomer",
             "change [name='paymentType']": "resetPaymentData",
-            "input  [name='security-code'],[name='credit-card-number'],[name='shippingphone']": "allowDigit",
+            "input  [name='security-code'],[name='credit-card-number'],[name='shippingphone'],[name='workphone']": "allowDigit",
             "change [data-mz-purchase-order-payment-term]": "updatePurchaseOrderPaymentTerm"
         },
         changeCardType:function(e){
@@ -774,7 +775,9 @@ require(["modules/jquery-mozu",
                 window.amazon.Login.logout();
             window.location = (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + "/checkout/" + checkoutModel.get('id') + "/confirmation";
         });
-
+        $(":input").inputmask();
+        $('[name="shippingphone"]').inputmask({"mask": "(999) 999-9999"});
+        $('[name="workphone"]').inputmask({"mask": "(999) 999-9999"});
         var $reviewPanel = $('#step-review');
         checkoutModel.on('change:isReady',function (model, isReady) {
             if (isReady) {
