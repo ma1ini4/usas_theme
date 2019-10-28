@@ -16,7 +16,7 @@
                         value="{{user.accountId }}" class="hidden"/>
                     <button class="primary-btn" data-mz-action="viewQuote">{{ labels.b2bFindQuote }}</button>
                     {% if model.isEditMode %}
-                        <button class="secondary-btn" data-mz-action="cancelWishlistEdit" style="margin-left: auto;">{{ labels.b2bViewAllQuotes }}</button>
+                        <button class="secondary-btn" data-mz-action="viewAll" style="margin-left: auto;">{{ labels.b2bViewAllQuotes }}</button>
                     {% endif %}
             </div>
             <span class="mz-validationmessage" data-mz-validationmessage-for="quoteId"></span>
@@ -40,4 +40,3 @@
         {% include "modules/product-picker/product-modal" %}
     </div>
 </div>
-{% dump model %}

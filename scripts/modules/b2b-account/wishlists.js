@@ -125,21 +125,16 @@ define([
           var items = this.get('items').toJSON();
 
           if (selectedItems && selectedItems.length !== 0) {
+            var newItems = [];
 
-            if (selectedItems.length === items.length) {
-                items = [];
-            } else {
-                var newItems = [];
-    
-                _.each(items, function(item){
-                    selectedItems.map(function(id) {
-                        if (item.id === id) {
-                            newItems.push(item);
-                        }
-                    });                    
-                });
-                items = newItems;  
-            }
+            _.each(items, function(item){
+                selectedItems.map(function(id) {
+                    if (item.id === id) {
+                        newItems.push(item);
+                    }
+                });                    
+            });
+            items = newItems;  
           }
 
           var cart = CartModels.Cart.fromCurrent();
