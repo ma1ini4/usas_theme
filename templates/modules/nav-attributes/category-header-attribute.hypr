@@ -1,29 +1,47 @@
 {% if model %}
 	{% with model|first as entityModel %}
-		{% if var == "1" %}
-			{% if entityModel.topNavHeader != '' and entityModel.topNavHeader != '~' %}
-					<span class="sub-level-heading">{{ entityModel.topNavHeader|safe}}</span>
+		{% if var == "1a" %}
+			{% if entityModel.heading1a != '' %}
+					<span class="sub-level-heading">{{ entityModel.heading1a|safe}}</span>
 			{% endif %}
-			{% else %}
-				{% if var == "2" %}
-					{% if entityModel.topNavHeader2 != '' and entityModel.topNavHeader2 != '~' %}
-							<span class="sub-level-heading">{{ entityModel.topNavHeader2|safe}}</span>
-					{% endif %}
-					{% else %}
-						{% if var == "3" %}
-							{% if entityModel.topNavHeader3 != '' and entityModel.topNavHeader3 != '~' %}
-									<span class="sub-level-heading">{{ entityModel.topNavHeader3|safe}}</span>
-							{% endif %}
-							{% else %}
-								{% if var == "4" %}
-									{% if entityModel.topNavHeader4 != '' and entityModel.topNavHeader4 != '~' %}
-											<span class="sub-level-heading">{{ entityModel.topNavHeader4|safe}}</span>
-									{% endif %}
-								{% else %}
-									<span class="sub-level-heading">&nbsp;&nbsp;</span>
-								{% endif%}
-							{% endif%}
-						{% endif%}
 		{% endif %}
+		{% if var == "1b" %}
+			{% if entityModel.heading1b != '' %}
+					<span class="sub-level-heading">{{ entityModel.heading1b|safe}}</span>
+			{% endif %}
+		{% endif %}
+		{% if var == "2a" %}
+			{% if entityModel.heading2a != '' %}
+					<span class="sub-level-heading">{{ entityModel.heading2a|safe}}</span>
+			{% endif %}
+		{% endif %}
+		{% if var == "2b" %}
+			{% if entityModel.heading2b != '' %}
+					<span class="sub-level-heading">{{ entityModel.heading2b|safe}}</span>
+			{% endif %}
+		{% endif %}
+		{% if var == "3a" %}
+			{% if entityModel.heading3a != '' %}
+					<span class="sub-level-heading">{{ entityModel.heading3a|safe}}</span>
+			{% endif %}
+		{% endif %}
+		{% if var == "3b" %}
+			{% if entityModel.heading3b != '' %}
+					<span class="sub-level-heading">{{ entityModel.heading3b|safe}}</span>
+			{% endif %}
+		{% endif %}
+		{% if var == "4a" %}
+			{% if entityModel.heading4a != '' %}
+					<span class="sub-level-heading">{{ entityModel.heading4a|safe}}</span>
+			{% endif %}
+		{% endif %}
+		{% if var == "4b" %}
+			{% if entityModel.heading4b != '' %}
+					<span class="sub-level-heading">{{ entityModel.heading4b|safe}}</span>
+			{% endif %}
+		{% endif %}
+		{% if var != "1a" and var != "1b" and var != "2a" and var != "2b" and var != "3a" and var != "3b" and var != "4a" and var != "4b" %}
+			<span class="sub-level-heading">&nbsp;&nbsp;</span>
+		{% endif%}
 	{% endwith %}
 {% endif %}
