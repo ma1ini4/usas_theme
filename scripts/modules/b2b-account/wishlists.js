@@ -232,7 +232,8 @@ define([
     var WishlistsView = Backbone.MozuView.extend({
         templateName: 'modules/b2b-account/wishlists/my-wishlists',
         additionalEvents: {
-            "change [data-mz-value='wishlist-quantity']": "onQuantityChange"
+            "change [data-mz-value='wishlist-quantity']": "onQuantityChange",
+            "click [data-mz-action='viewAll']": "onQuantityChange"
         },
         initialize: function(){
             var self = this;
@@ -339,6 +340,9 @@ define([
                     console.log('model', self.model);
                 }
             });
+        },
+        viewAll: function () {
+            $('[data-mz-action="cancelWishlistEdit"]').trigger('click');
         },
         render: function () {
             Backbone.MozuView.prototype.render.apply(this, arguments);
