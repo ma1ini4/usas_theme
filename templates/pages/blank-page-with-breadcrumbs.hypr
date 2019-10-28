@@ -2,16 +2,13 @@
 
 {% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  - {% parent %}{% endblock title-tag-content %}
 
-{% block body-tag-classes %} mz-blankpage {% endblock body-tag-classes %}
+{% block body-tag-classes %} mz-blankpage with-breadcrumbs{% endblock body-tag-classes %}
 
-{% block body-content %}
-  <div class="title-sort-breadcrumb-wrapper">
-    {% block breadcrumbs %}
+{% block breadcrumbs %}
+    <div class="title-sort-breadcrumb-wrapper">
       {% if themeSettings.showBreadcrumbs %}
         {% include "modules/breadcrumbs" %}
       {% endif %}
-    {% endblock breadcrumbs %}
-  </div>
+    </div>
+{% endblock breadcrumbs %}
 
- {% dropzone "body" scope="page" %}
-{% endblock body-content %}
