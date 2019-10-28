@@ -131,13 +131,11 @@
             <div role="main" id="page-content" class="mz-l-pagecontent">
                 <div class="container">
                 <div class="row">
+                  
+                  {% block body-content %}
                     {% block breadcrumbs %}
-                    <!-- {% if themeSettings.showBreadcrumbs %}
-                    {% include "modules/breadcrumbs" %}
-                    {% endif %} -->
                     {% endblock breadcrumbs %}
-
-                    {% block body-content %}
+                    
                     {% dropzone "body" scope="page" %}
                     {% endblock body-content %}
 
