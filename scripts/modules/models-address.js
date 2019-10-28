@@ -12,23 +12,36 @@
             defaultStateProv = "n/a";
 
         var PhoneNumbers = Backbone.MozuModel.extend({
-            validation: {
-                home: [
-                {
-                    required: true,
-                    msg: Hypr.getLabel("phoneMissing")
-                },{
-                    pattern: "digits",
-                    msg: Hypr.getLabel("invalidPhone")
-                },{
-                    minLength: 10,
-                    maxLength: 20,
-                    msg: Hypr.getLabel("invalidPhone")
-                },{
-                    pattern: /^((\+)?[1-9]{1,2})?([-\s\.])?((\(\d{1,4}\))|\d{1,4})(([-\s\.])?[0-9]{1,12}){1,2}$/,
-                    msg: Hypr.getLabel("invalidPhone")
-                }]
-            }
+            // validation: {
+            //     home: [
+            //     {
+            //         required: true,
+            //         msg: Hypr.getLabel("phoneMissing")
+            //     },
+            //     // {
+            //     //     pattern: "digits",
+            //     //     msg: Hypr.getLabel("invalidPhone")
+            //     // },
+            //     {
+            //         minLength: 10,
+            //         maxLength: 20,
+            //         msg: Hypr.getLabel("invalidPhone")
+            //     },{
+            //         pattern: /^((\+)?[1-9]{1,2})?([-\s\.\(\)])?((\(\d{1,4}\))|\d{1,4})(([-\s\.\(\)])?[0-9]{1,12}){1,2}$/,
+            //         msg: Hypr.getLabel("invalidPhone")
+            //     }],
+            //     work: [{
+            //         required: true,
+            //         msg: Hypr.getLabel("phoneMissing")
+            //     }, {
+            //         minLength: 10,
+            //         maxLength: 20,
+            //         msg: Hypr.getLabel("invalidPhone")
+            //     }, {
+            //         pattern: /^((\+)?[1-9]{1,2})?([-\s\.])?((\(\d{1,4}\))|\d{1,4})(([-\s\.])?[0-9]{1,12}){1,2}$/,
+            //         msg: Hypr.getLabel("invalidPhone")
+            //     }]
+            // }
         }),
 
         StreetAddress = Backbone.MozuModel.extend({

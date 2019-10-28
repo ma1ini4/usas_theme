@@ -22,6 +22,7 @@ define(["modules/jquery-mozu", 'modules/api', "underscore", "hyprlive", "modules
           'editingContact.address.postalOrZipCode',
           'editingContact.address.addressType',
           'editingContact.phoneNumbers.home',
+          'editingContact.phoneNumbers.work',
           'editingContact.isBillingContact',
           'editingContact.isPrimaryBillingContact',
           'editingContact.isShippingContact',

@@ -9,7 +9,8 @@ require(["modules/jquery-mozu",
     'modules/preserve-element-through-render',
     'modules/xpress-paypal',
     'modules/amazonpay',
-    'modules/applepay'],
+    'modules/applepay'
+    ],
     function ($, _, Hypr, Backbone, CheckoutModels, messageViewFactory, CartMonitor, HyprLiveContext, EditableView, preserveElements, PayPal, AmazonPay, ApplePay) {
 
 
@@ -109,6 +110,7 @@ require(["modules/jquery-mozu",
             'address.postalOrZipCode',
             'address.addressType',
             'phoneNumbers.home',
+            'phoneNumbers.work',
             'contactId',
             'email'
         ],
@@ -217,6 +219,7 @@ require(["modules/jquery-mozu",
             'billingContact.address.stateOrProvince',
             'billingContact.address.postalOrZipCode',
             'billingContact.phoneNumbers.home',
+            'billingContact.phoneNumbers.work',
             'billingContact.email',
             'creditAmountToApply',
             'digitalCreditCode',
@@ -775,9 +778,10 @@ require(["modules/jquery-mozu",
                 window.amazon.Login.logout();
             window.location = (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + "/checkout/" + checkoutModel.get('id') + "/confirmation";
         });
-        $(":input").inputmask();
-        $('[name="shippingphone"]').inputmask({"mask": "(999) 999-9999"});
-        $('[name="workphone"]').inputmask({"mask": "(999) 999-9999"});
+        $('body').on('keydown keyup focus blur', '[type="tel"]', function (e) {
+            //  maskTel(e);
+            e.target.value = e.target.value.replace(/(\d{3})\)?(\d{3})\-?(\d{4})/, '($1) $2-$3');
+        });
         var $reviewPanel = $('#step-review');
         checkoutModel.on('change:isReady',function (model, isReady) {
             if (isReady) {
@@ -788,7 +792,6 @@ require(["modules/jquery-mozu",
         _.invoke(checkoutViews.steps, 'initStepView');
 
         $checkoutView.noFlickerFadeIn();
-
         if (AmazonPay.isEnabled)
             AmazonPay.addCheckoutButton(window.order.id, false);
     });

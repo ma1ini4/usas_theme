@@ -548,6 +548,7 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
             'editingContact.address.postalOrZipCode',
             'editingContact.address.addressType',
             'editingContact.phoneNumbers.home',
+            'editingContact.phoneNumbers.work',
             'editingContact.isBillingContact',
             'editingContact.isPrimaryBillingContact',
             'editingContact.isShippingContact',
@@ -560,7 +561,7 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         ],
         additionalEvents: {
             "blur #mz-payment-credit-card-number": "changeCardType",
-            "input  [name='security-code'],[name='credit-card-number']": "allowDigit"
+            "input [name='security-code'],[name='credit-card-number']": "allowDigit"
         },
         allowDigit:function(e){
             e.target.value= e.target.value.replace(/[^\d]/g,'');
@@ -649,6 +650,7 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
             'editingContact.address.postalOrZipCode',
             'editingContact.address.addressType',
             'editingContact.phoneNumbers.home',
+            'editingContact.phoneNumbers.work',
             'editingContact.isBillingContact',
             'editingContact.isPrimaryBillingContact',
             'editingContact.isShippingContact',
@@ -819,7 +821,11 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         // TODO: upgrade server-side models enough that there's no delta between server output and this render,
         // thus making an up-front render unnecessary.
         _.invoke(window.accountViews, 'render');
-
+        
+        $('body').on('keydown keyup focus blur', '[type="tel"]', function (e) {
+            //  maskTel(e);
+            e.target.value = e.target.value.replace(/(\d{3})\)?(\d{3})\-?(\d{4})/, '($1) $2-$3');
+        });
     });
 
     return {
