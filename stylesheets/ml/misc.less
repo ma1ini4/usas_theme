@@ -3446,7 +3446,9 @@ ul.tabs {
     &.with-breadcrumbs {
 
         .mz-l-pagecontent {
-            padding: 0 15px;
+            @media @mobile {
+                padding: 0 15px;
+            }
         }
     }
 }
