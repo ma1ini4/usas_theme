@@ -208,7 +208,13 @@
 
         a, .mz-itemlisting-thumb{
             min-width: 80px;
-            margin-right: 12.5px
+            margin-right: 12.5px;
+
+            @media @mobile {
+                width: 40px;
+                min-width: 40px;
+                margin-right: 6px;
+            }
         }         
 
         .mz-itemlisting-details {
@@ -231,9 +237,16 @@
             margin-bottom: 7px;
         }
         .flex {
+            button {
+                padding: 0 25px;
+            }
             @media @mobile {
                 flex-direction: row;
                 flex-wrap: wrap;
+
+                button {
+                    margin-left: auto;
+                }
             }
         }
         .quoteId {
@@ -248,6 +261,9 @@
             @media @mobile-sm-bootstrap {
                 width: 45%;
                 margin-right: 3%;
+            }
+            @media (max-width: 350px) {
+                width: 100%;
             }
         }
         .find-quote-text {
@@ -352,6 +368,9 @@
             a {
                 margin: 0;
             }
+            @media @mobile {
+                margin-right: 10px;
+            }
         }
 
         .add-to-cart-checkbox {
@@ -361,6 +380,18 @@
 
             input {
                 margin: 0 7px;
+
+                @media @desktop-bootstrap {
+                    display: none;
+
+                    &:checked~label {
+                        color: @secondaryColor;
+                        opacity: 1;
+                    }
+                    &:not(:checked)~label {
+                        opacity: 0.5;
+                    }
+                }
             }
 
             label {
@@ -373,6 +404,13 @@
                     .icon(before, '217', solid, 20px);
                 }
             }
+            @media @mobile {
+                flex-direction: column-reverse;
+            }
+        }
+        @media @mobile {
+            width: 40%;
+            margin: 0;
         }
     }
     .mz-b2b-wishlists-product-picker {
