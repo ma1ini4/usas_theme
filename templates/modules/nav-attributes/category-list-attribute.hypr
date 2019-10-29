@@ -7,7 +7,7 @@
 				</div>
 			{% endfor %}
 		{% endif %}
-		{% if var == '1a' %}
+		{% if var == '1b' %}
 			{% for item in entityModel.items1b %}
 				<div class="mz-sitenav-item sub-level-li">
 					<a class="mz-sitenav-link"  href="{{ item.url }}">{{ item.name|safe }}</a>
