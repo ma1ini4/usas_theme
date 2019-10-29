@@ -1,6 +1,6 @@
 {% if model.items.length %}
     <div class="wishlist-btns">
-        <button class="secondary-btn" data-mz-action="cancelWishlistEdit">{{ labels.b2bCancelQuote }}</button>
+        <button class="secondary-btn hidden" data-mz-action="cancelWishlistEdit">{{ labels.b2bCancelQuote }}</button>
         <button type="button" class="primary-btn" data-mz-action="addWishlistToCart">{{ labels.b2bActivateQuote }}</button>
             <div class="check-all-items">
                 <input type="checkbox" data-mz-value="check-all-quote" id="check-all-top" checked>
@@ -21,5 +21,5 @@
     <div>
         {{ labels.accountNoQuotes }}
     </div>
-    <button class="secondary-btn" data-mz-action="cancelWishlistEdit">{{ labels.b2bCancelQuoteReturn }}</button>
+    <button class="secondary-btn hidden" data-mz-action="cancelWishlistEdit">{{ labels.b2bCancelQuoteReturn }}</button>
 {% endif %}
