@@ -465,6 +465,7 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
             //$(this).parent()[onOrOff]('mouseover', '[data-mz-action="my-account"]', self.openPopover);
             $(this).parent()[onOrOff]('click', '[data-mz-action="my-account"]', self.openPopover);
             $(this).parent()[onOrOff]('click', '[data-mz-action="my-account-mobile"]', self.openPopoverMobile);
+            $(this).parents('.mz-utilitynav-list')[onOrOff]('click', 'body [data-mz-action="services"]', self.dismissPopover);
             // bind other events
         };
         this.openPopover = function(e){
@@ -489,6 +490,10 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
                 }
             }); //.popover('show');
         };
+        this.dismissPopover = function (e) {
+            e.preventDefault();
+            $("#services").popover('hide');
+        };
     };
     var ServicesPopover = function(e){
         var self = this;
@@ -501,6 +506,7 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
             var onOrOff = on ? "on" : "off";
             //$(this).parent()[onOrOff]('mouseover', '[data-mz-action="my-account"]', self.openPopover);
             $(this).parent()[onOrOff]('click', '[data-mz-action="services"]', self.openPopover);
+            $(this).parents('.mz-utilitynav-list')[onOrOff]('click', 'body [data-mz-action="my-account"]', self.dismissPopover);
             // bind other events
         };
         this.openPopover = function(e){
@@ -514,6 +520,10 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
                 }
             }); //.popover('show');
         };
+        this.dismissPopover = function (e) {
+            e.preventDefault();
+            $("#my-account").popover('hide');
+        };
     };
 
     var LoginRegistrationModal = function(){
@@ -523,17 +533,6 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
             self.bindListeners.call(el, true);
             self.doLogin = _.debounce(self.doLogin, 150);
             self.doSignup = _.debounce(self.doSignup, 150);
-            api.get('attributedefinition').then(function(attribute) {
-                console.log(attribute.data.items);
-                for(var i=0; i< attribute.data.items.length; i++){
-                    // if(attribute.data.items[i].attributeCode === "recovery-question"){
-                    //     var recVals = attribute.data.items[i].vocabularyValues;
-                    //     for(var j=0; j<recVals.length; j++){
-                    //         $('<option/>').text(recVals[j].content.value).attr('value',recVals[j].value).appendTo('#recoveryQuestionList');
-                    //     }
-                    // }
-                }
-            });
         };
 
         this.bindListeners =  function (on) {
@@ -690,47 +689,33 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
         });
         $('#my-account').attr('href', '#');
         $('#my-account-mobile').attr('href','#');
+        $('#services').attr('href','#');
 
-        $('[data-mz-action="my-account"]').click(function() {
-            var popover = new MyAccountPopover();
-            popover.init(this);
-            $(this).data('mz.popover', popover);
-        });
         $('[data-mz-action="my-account-mobile"]').click(function () {
             var popover = new MyAccountPopover();
             popover.init(this);
             $(this).data('mz.popover', popover);
         });
 
-        $("#my-account").popover({
-            html : true,
-            placement : 'bottom',
-            content: function() {
-                return $('#my-account-content').html();
-            }
+        $('[data-mz-action="my-account"]').click(function() {
+            var popover = new MyAccountPopover();
+            popover.init(this);
+            $(this).data('mz.popover', popover);
         });
-        $("#my-account-mobile").popover({
-            html: true,
-            placement: 'bottom',
-            content: function () {
-                return $('#my-account-content').html();
-            }
-        });
-
-
-        $('#services').attr('href','#');
         $('[data-mz-action="services"]').click(function() {
             var popover = new ServicesPopover();
             popover.init(this);
             $(this).data('mz.popover', popover);
         });
-        $("#services").popover({
-            html : true,
-            placement : 'bottom',
-            content: function() {
-                return $('#services-content').html();
-            }
+        
+        $('body').on('click', function (e) {
+            $('[data-toggle="popover"]').each(function () {
+                if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                    $(this).popover('hide');
+                }
+            });
         });
+
         $('body').on('touchend click', function (e) {
             //only buttons
             if ($(e.target).data('toggle') !== 'popover' && !$(e.target).parents().is('.popover.in')) {
