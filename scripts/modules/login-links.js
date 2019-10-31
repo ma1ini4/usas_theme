@@ -534,7 +534,6 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
                     // }
                 }
             });
-            console.log(this, 'modal');
         };
 
         this.bindListeners =  function (on) {
@@ -680,6 +679,12 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
                 }
             }
         });
+        $(document).keydown(function (e) {
+            if (e.key && e.key === 'Escape' && $('#liteRegistrationModal').hasClass('in')) {
+                e.preventDefault();
+                $('[data-dismiss="modal"]').trigger('click');
+            }
+        });
         $('body').on('click', '#cart-checkout-login', function (e) {
             $('.login-link-text[data-mz-action="lite-registration"]').trigger('click');
         });
@@ -720,21 +725,12 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
             $(this).data('mz.popover', popover);
         });
         $("#services").popover({
-                html : true,
-                placement : 'bottom',
-                content: function() {
-                  return $('#services-content').html();
-                }
-            });
-        /*$('[data-mz-action="my-account"]').hover(function() {
-            var popover = new MyAccountPopover();
-            popover.init(this);
-            $(this).data('mz.popover', popover);
+            html : true,
+            placement : 'bottom',
+            content: function() {
+                return $('#services-content').html();
+            }
         });
-        $(document).on('mouseleave','#mz-logged-in-notice',function(){
-            $('#my-account').popover('hide');
-        });
-        */
         $('body').on('touchend click', function (e) {
             //only buttons
             if ($(e.target).data('toggle') !== 'popover' && !$(e.target).parents().is('.popover.in')) {
@@ -822,18 +818,6 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
                 headingElemnt.removeAttr("aria-expanded aria-controls data-toggle role");
             }
 		});
-
-        // $('[data-mz-action="quickOrder"]').on('click', function(e){
-        //       // The Quick Order link takes us to the my account page and opens
-        //       // the appropriate pane.
-        //       // If we're already on the my account page we ensure the page reloads.
-        //       var isMyAccount = window.location.href.indexOf("myaccount") > 0;
-        //       if (isMyAccount){
-        //           //window.location.reload(false);
-        //           window.location.assign((HyprLiveContext.locals.siteContext.siteSubdirectory || '') + "/myaccount#QuickOrder");
-        //           window.location.reload(false);
-        //       }
-        // });
 
         $('[data-mz-action="logout"]').each(function(){
             var el = $(this);
