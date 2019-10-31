@@ -198,6 +198,7 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
                 return;
             }
             this.model.set('quantity',--qty);
+            this.render();
             setTimeout(function(){
                 if (typeof window.productView.model.attributes.inventoryInfo.onlineStockAvailable !== "undefined" && window.productView.model.attributes.inventoryInfo.outOfStockBehavior != "AllowBackOrder") {
                     var onlineStock = window.productView.model.attributes.inventoryInfo.onlineStockAvailable;
@@ -218,6 +219,7 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
                 this.model.messages.reset();
                 var qty = this.model.get('quantity');
                 this.model.set('quantity',++qty);
+                this.render();
                 setTimeout(function(){
                     if (typeof window.productView.model.attributes.inventoryInfo.onlineStockAvailable !== "undefined" && window.productView.model.attributes.inventoryInfo.outOfStockBehavior != "AllowBackOrder") {
                         var onlineStock = window.productView.model.attributes.inventoryInfo.onlineStockAvailable;
@@ -260,11 +262,12 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
                     if (option) {
                         if (option.get('attributeDetail').inputType === "YesNo") {
                             option.set("value", isPicked);
+                                $this.render();
                         } else if (isPicked) {
                             oldValue = option.get('value');
                             if (oldValue !== newValue && !(oldValue === undefined && newValue === '')) {
                                 option.set('value', newValue);
-                                this.render();
+                                $this.render();
                             }
                         }
                     }
@@ -274,6 +277,7 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
                                 $(".mz-productcodes-productcode").text(Hypr.getLabel('item')+" #" + window.productView.model.get('variationProductCode'));
                             }
                             $('.mz-productdetail-price.prize-mobile-view').html($('.mz-l-stack-section.mz-productdetail-conversion .mz-productdetail-price').html());
+                            $this.render();
                             blockUiLoader.unblockUi();
                             $this.isColorClicked = false;
                         }, 1000);
@@ -289,6 +293,7 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
                                 $(".mz-productcodes-productcode").text(Hypr.getLabel('item') + " #" + window.productView.model.get('variationProductCode'));
                             }
                             $('.mz-productdetail-price.prize-mobile-view').html($('.mz-l-stack-section.mz-productdetail-conversion .mz-productdetail-price').html());
+                            $this.render();
                             blockUiLoader.unblockUi();
                             $this.isColorClicked = false;
                         }, 1000);
@@ -305,17 +310,21 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
                 id = $optionEl ? $optionEl.data('mz-product-option') : optionObj.attributeFQN,
                 optionEl = $optionEl ? $optionEl[0] : {},
                 isPicked = $optionEl ? (optionEl.type !== "checkbox" && optionEl.type !== "radio") || optionEl.checked : true,
-                option = this.model.get('options').get(id);
+                option = this.model.get('options').get(id),
+                me = this;
             if (option) {
                 if (option.get('attributeDetail').inputType === "YesNo") {
                     option.set("value", isPicked);
+                    me.render();
                 } else if (isPicked) {
                     oldValue = option.get('value');
                     if (oldValue !== newValue && !(oldValue === undefined && newValue === '')) {
                         option.set('value', newValue);
+                        me.render();
                     }
                 }
             }
+            me.render();
         },
         addToCart: _.debounce(function() {
             var me = this;
