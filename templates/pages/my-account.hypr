@@ -17,13 +17,16 @@
         </div>
 
         <div id="account-panels" class="mz-l-stack mz-l-stack-large  col-xs-12 col-sm-8 col-md-9 flex-column bottom-border">
+          <div id="account-messages">
+            {% include "modules/common/message-bar" with model=model.messages %}
+          </div>
           {% dropzone "my-account-top" scope="template" %}
           <h1 class="mz-pagetitle">
             {{ labels.yourAccount }}
           </h1>
 
 
-            <div class="row">
+            <div class="row">             
               <div class="col-sm-6">
                 <a id="settings"></a>
                 <div class="mz-l-stack-section mz-accountsettings" id="account-settings">
