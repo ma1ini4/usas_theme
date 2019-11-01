@@ -11,7 +11,7 @@
 
 
 <div class="tabs-desktop hidden-xs ">
-    {% if model.content.productFullDescription or tab2 or tab3 or tab4 or tab5 %}
+    {% if model.content.productFullDescription or tab2 or tab3 or tab4 or tab5 or model.infoTab2Content or model.infoTab3Content or model.infoTab4Content or model.infoTab5Content %}
 
         <ul class="nav nav-tabs" id="infoTab">
             {% if model.content.productFullDescription %}
