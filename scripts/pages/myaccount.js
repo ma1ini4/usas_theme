@@ -3,9 +3,6 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
     var AccountSettingsView = EditableView.extend({
         templateName: 'modules/my-account/my-account-settings',
         autoUpdate: [
-            'firstName',
-            'lastName',
-            'emailAddress',
             'acceptsMarketing'
         ],
         constructor: function() {
@@ -52,6 +49,10 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         },
         finishEdit: function() {
             var self = this;
+
+            self.model.set('firstName', $('[data-mz-value="firstName"]').val());
+            self.model.set('lastName', $('[data-mz-value="lastName"]').val());
+            self.model.set('emailAddress', $('[data-mz-value="emailAddress"]').val());
 
             this.doModelAction('apiUpdate').then(function() {
                 self.editing = false;
