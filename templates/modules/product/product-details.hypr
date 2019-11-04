@@ -37,7 +37,7 @@
                     </div>
                     {% else %}
                     <div class="col-xs-5">
-                        <h4 class="mz-productcodes-productcode p-3 no-wrap" itemprop="sku">{{ labels.item}} {{ model.productCode }}</h4>
+                        <h4 class="mz-productcodes-productcode p-3 no-wrap" itemprop="sku">{{ labels.item}} #{{ model.productCode }}</h4>
                     </div>
                     {% endif %}
                     {% if model.productType != themeSettings.familyProductType %}
