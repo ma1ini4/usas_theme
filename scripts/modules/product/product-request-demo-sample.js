@@ -35,11 +35,10 @@ require(["modules/jquery-mozu", "hyprlive"], function ($, Hypr) {
     });
 
     function sendRequest(type, email){
-        $('input[data-custom-attribute="demo-sample"]').val(type);
-        $('input[data-custom-attribute="form-email"]').val(email);
+        $('#demo-sample input[data-custom-attribute="demo-sample"]').val(type);
+        $('#demo-sample input[data-custom-attribute="form-email"]').val(email);
 
-
-        $('input[name="submit-email-form"]').click();
+        $('#demo-sample input[name="submit-email-form"]').click();
 
         // $('#demo-sample-container .secondary-btn').hide();
 

@@ -1632,15 +1632,13 @@
       "validPageTypes": [
         "*"
       ]
-    },
-    {
+    }, {
       "defaultConfig": {
         "catalog": "[]"
       },
       "displayName": "Email Form",
       "displayTemplate": "sendEmail/sendemail",
-      "editViewFields": [
-        {
+      "editViewFields": [{
           "name": "subject",
           "fieldLabel": "Email Subject",
           "xtype": "mz-input-text"
@@ -1648,6 +1646,11 @@
         {
           "name": "email_from",
           "fieldLabel": "Email From",
+          "xtype": "mz-input-text"
+        },
+        {
+          "name": "reply_to",
+          "fieldLabel": "Reply To",
           "xtype": "mz-input-text"
         },
         {
@@ -1663,14 +1666,13 @@
         {
           "name": "form_html",
           "fieldLabel": "Form HTML",
-          "xtype": "textareafield",
+          "xtype": "mz-input-code",
           "width": "100%"
         },
         {
           "name": "form_email_template",
           "fieldLabel": "Form Email Template",
-          "xtype": "textareafield",
-          "width": "100%"
+          "xtype": "textareafield"
         },
         {
           "name": "customClass",
@@ -1685,14 +1687,22 @@
         {
           "name": "form_success_message",
           "fieldLabel": "Form Success Message",
-          "xtype": "textareafield",
-          "width": "100%"
+          "xtype": "mz-input-code"
         },
         {
           "name": "form_error_message",
           "fieldLabel": "Form Error Message",
-          "xtype": "textareafield",
-          "width": "100%"
+          "xtype": "mz-input-code"
+        },
+        {
+          "name": "msg_popup",
+          "fieldLabel": "Show message in popup",
+          "xtype": "mz-input-checkbox"
+        },
+        {
+          "name": "msg_selector",
+          "fieldLabel": "Message jQuery selector",
+          "xtype": "mz-input-text"
         },
         {
           "name": "customButtonValue",
