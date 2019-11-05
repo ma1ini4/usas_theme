@@ -370,7 +370,6 @@ define([
         }
         if ($(".view-all.selected").length) {
             InfiniteScroller.update();
-            console.log(123);
         }
 
         $('body').on('click', '.view-all.selected', function (e) {
