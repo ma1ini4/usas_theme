@@ -6,7 +6,7 @@
             <ul class="nav nav-tabs responsive" id="myTab">
                 <li class=" first-tab active"><div class="arrow"></div><a class="btn login-btn login-tab-btn" data-toggle="tab" href="#login">Login</a></li>
                 <li class="second-tab"><div class="arrow"></div><a class="btn login-btn" data-toggle="tab" href="#newshopper">New Shopper</a></li>
-                <li class="second-tab third-tab"><a class="btn login-btn" href="/cart/checkout">Checkout as guest</a></li>
+                <li class="second-tab third-tab"><a class="btn login-btn" href="/cart/checkout">New Shopper</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="login">

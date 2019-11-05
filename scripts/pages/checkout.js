@@ -651,14 +651,12 @@ require(["modules/jquery-mozu",
     var ReviewOrderView = Backbone.MozuView.extend({
         templateName: 'modules/checkout/step-review',
         autoUpdate: [
-            'createAccount',
             'agreeToTerms',
             'emailAddress',
             'password',
             'confirmPassword'
         ].concat(attributeFields()),
         renderOnChange: [
-            'createAccount',
             'isReady'
         ],
         initialize: function () {
@@ -669,6 +667,7 @@ require(["modules/jquery-mozu",
                     return false;
                 }
             });
+            me.model.set('createAccount', true);
             this.model.on('passwordinvalid', function(message) {
                 me.$('[data-mz-validationmessage-for="password"]').text(message);
             });
