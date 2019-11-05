@@ -180,13 +180,15 @@
         {% endcomment %}
         <div class="mz-l-formfieldgroup-cell">
             <input type="tel" class="input" {% if not model.hasRequiredBehavior %} disabled {% endif %} name="shippingphone" data-mz-value="{{ addresscontext }}phoneNumbers.home" value="{{ model.phoneNumbers.home }}" maxlength="{{themeSettings.phoneNumberLength}}" minlength="{{themeSettings.phoneNumberLength}}" placeholder="{{ labels.phone }}*">
-        </div>
-        <div class="mz-l-formfieldgroup-cell">
-            <input type="tel"  class="input" {% if not model.hasRequiredBehavior %} disabled {% endif %} name="workphone" data-mz-value="{{ addresscontext }}phoneNumbers.work" value="{{ model.phoneNumbers.work }}" maxlength="{{themeSettings.phoneNumberLength}}" minlength="{{themeSettings.phoneNumberLength}}" placeholder="{{ labels.workPhone }}">
+            <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}phoneNumbers.home" style="padding-bottom: 8px;"></span>
         </div>
     </div>
-    <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}phoneNumbers.home"></span>
-    <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}phoneNumbers.work"></span>
+    <div class="mz-l-formfieldgroup-row mz-addressform-phone">
+        <div class="mz-l-formfieldgroup-cell">
+            <input type="tel"  class="input" {% if not model.hasRequiredBehavior %} disabled {% endif %} name="workphone" data-mz-value="{{ addresscontext }}phoneNumbers.work" value="{{ model.phoneNumbers.work }}" maxlength="{{themeSettings.phoneNumberLength}}" minlength="{{themeSettings.phoneNumberLength}}" placeholder="{{ labels.workPhone }}">
+            <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}phoneNumbers.work" style="padding-bottom: 8px;"></span>
+        </div>
+    </div>
 
     {% endif %}
 
