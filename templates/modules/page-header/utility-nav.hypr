@@ -91,27 +91,27 @@
             <div id="services-content" style="display:none;">
                 <div class="services-details">
                     <a href="#">
-                        <h4>Customer Service</h4>
+                        <h4>{{labels.customerService}}</h4>
                     </a>
-                    <p>Ordering and account information. Talk to us 8 am to 8 pm</p>
+                    <p>{{labels.customerServiceText}}</p>
                 </div>
                 <div class="services-details">
                     <a href="#">
-                        <h4>Technical Support</h4>
+                        <h4>{{labels.technicalSupport}}</h4>
                     </a>
-                    <p>Product FAQs and help</p>
+                    <p>{{labels.technicalSupportText}}</p>
                 </div>
                 <div class="services-details">
                     <a href="#">
-                        <h4>Pipette Calibration and Service</h4>
+                        <h4>{{labels.calibrationService}}</h4>
                     </a>
-                    <p>Regular maintenance keeps your pipettes within specifications</p>
+                    <p>{{labels.calibrationServiceText}}</p>
                 </div>
                 <div class="services-details">
                     <a href="#">
-                        <h4>Custom & OEM Products</h4>
+                        <h4>{{labels.customProducts}}</h4>
                     </a>
-                    <p>Made-to-measure racks; custom packaging, colors, and more</p>
+                    <p>{{labels.customProductsText}}</p>
                 </div>
             </div>
         </li>
