@@ -277,7 +277,6 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
                                 $(".mz-productcodes-productcode").text(Hypr.getLabel('item')+" #" + window.productView.model.get('variationProductCode'));
                             }
                             $('.mz-productdetail-price.prize-mobile-view').html($('.mz-l-stack-section.mz-productdetail-conversion .mz-productdetail-price').html());
-                            $this.render();
                             blockUiLoader.unblockUi();
                             $this.isColorClicked = false;
                         }, 1000);
@@ -293,7 +292,6 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
                                 $(".mz-productcodes-productcode").text(Hypr.getLabel('item') + " #" + window.productView.model.get('variationProductCode'));
                             }
                             $('.mz-productdetail-price.prize-mobile-view').html($('.mz-l-stack-section.mz-productdetail-conversion .mz-productdetail-price').html());
-                            $this.render();
                             blockUiLoader.unblockUi();
                             $this.isColorClicked = false;
                         }, 1000);
@@ -315,16 +313,13 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
             if (option) {
                 if (option.get('attributeDetail').inputType === "YesNo") {
                     option.set("value", isPicked);
-                    me.render();
                 } else if (isPicked) {
                     oldValue = option.get('value');
                     if (oldValue !== newValue && !(oldValue === undefined && newValue === '')) {
                         option.set('value', newValue);
-                        me.render();
                     }
                 }
             }
-            me.render();
         },
         addToCart: _.debounce(function() {
             var me = this;
@@ -361,7 +356,6 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
                 }
                 var errors = { "items": [] };
                 async.series(promises, function(err, results) {
-                    console.log(1);
                         var resp = results.reduce(
                             function(flag, value) {
                                 return flag && results[0] === value;
@@ -759,12 +753,21 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
                         me.configure(null, this);
                     });
                     $.cookie('searchProductOptions', null, {path: '/'});
+                } else {
+                    $.cookie('searchProductOptions', null, {path: '/'});
                 }
-            }
+            } 
+
+            $(me.$el).on('click', '[data-mz-product-option-attribute]', function(e) {
+                console.log(me.model);
+                setTimeout(function() {
+                    me.render();
+                }, 777);
+            });
             
             me.model.on( 'updateSwatchImage', function(){
-               me.selectSwatchImage();
-           });
+                me.selectSwatchImage();
+            });
         },
         selectSwatchImage: function(e) {
             this.isColorClicked = true;

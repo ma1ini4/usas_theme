@@ -1,19 +1,29 @@
-<div class="{%if model.config.customClass %}{{model.config.customClass}}{% else %}default_email_form{% endif %} {%if model.config.hidden_form%} hidden{%endif%}">
-	<form id="{%if model.config.customId %}{{model.config.customId}}{% else %}{{model.definitionId}}{% endif %}">
-		{{model.config.form_html|safe}}
-		<input type="submit" name="submit-email-form" value="{%if model.config.customButtonValue %}{{model.config.customButtonValue}}{% else %}Submit{% endif %}">
-	</form>
+<div
+    class="{%if model.config.customClass %}{{model.config.customClass}}{% else %}default_email_form{% endif %} {%if model.config.hidden_form%} hidden{%endif%}">
+    <form id="{%if model.config.customId %}{{model.config.customId}}{% else %}{{model.definitionId}}{% endif %}"
+        data-sourceEmail="{{model.config.email_from}}" data-ccEmailAddresses="{{model.config.email_cc}}"
+        data-subjectdata="{{model.config.subject}}" data-emailTemplate="{{model.config.form_email_template}}"
+        data-successMessage="{{model.config.form_success_message}}"
+        data-errorMessage="{{model.config.form_error_message}}"
+        data-msgPopup="{{model.config.msg_popup}}"
+        data-msgSelector="{{model.config.msg_selector}}"
+        data-replyTo="{{model.config.reply_to}}">
+
+        {{model.config.form_html|safe}}
+        <input type="submit" class="submit-form {%if model.config.customId %}{{model.config.customId}}{% else %}{{model.definitionId}}{% endif %}" name="submit-email-form"
+            value="{%if model.config.customButtonValue %}{{model.config.customButtonValue}}{% else %}Submit{% endif %}">
+    </form>
 </div>
 
 <div class="popup-overlay">
-	<div class="email-form-popup">
-		<div class="close"><i class="fas fa-times"></i></div>
-		<span class="email-message"></span>
-	</div>
+    <div class="email-form-popup">
+        <div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
+        <span class="email-message"></span>
+    </div>
 </div>
 
 <style>
-  {% inline_style "form-styles.less" %}
+    {% inline_style "form-styles.less" %}
 </style>
 {% preload_json model "config" %}
 {% require_script "widgets/sendEmail/sendemail" %}

@@ -3,9 +3,6 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
     var AccountSettingsView = EditableView.extend({
         templateName: 'modules/my-account/my-account-settings',
         autoUpdate: [
-            'firstName',
-            'lastName',
-            'emailAddress',
             'acceptsMarketing'
         ],
         constructor: function() {
@@ -52,6 +49,10 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         },
         finishEdit: function() {
             var self = this;
+
+            self.model.set('firstName', $('[data-mz-value="firstName"]').val());
+            self.model.set('lastName', $('[data-mz-value="lastName"]').val());
+            self.model.set('emailAddress', $('[data-mz-value="emailAddress"]').val());
 
             this.doModelAction('apiUpdate').then(function() {
                 self.editing = false;
@@ -690,15 +691,73 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         },
         finishEditContact: function () {
             var self = this,
-                isAddressValidationEnabled = HyprLiveContext.locals.siteContext.generalSettings.isAddressValidationEnabled;
-            var operation = this.doModelAction('saveContact', { forceIsValid: isAddressValidationEnabled, editingView: self }); // hack in advance of doing real validation in the myaccount page, tells the model to add isValidated: true
-            if (operation) {
-                blockUiLoader.unblockUi();
-                operation.otherwise(function() {
-                    self.editing.contact = true;
-                });
-                this.editing.contact = false;
+                isAddressValidationEnabled = HyprLiveContext.locals.siteContext.generalSettings.isAddressValidationEnabled,
+                editingContact = self.model.get('editingContact'),
+                modelIsValid = this.validateAddress(editingContact.validation);
+            console.log(modelIsValid);
+            if (modelIsValid) {
+                var operation = this.doModelAction('saveContact', { forceIsValid: isAddressValidationEnabled, editingView: self }); // hack in advance of doing real validation in the myaccount page, tells the model to add isValidated: true
+                if (operation) {
+                    blockUiLoader.unblockUi();
+                    operation.otherwise(function() {
+                        self.editing.contact = true;
+                    });
+                    this.editing.contact = false;
+                }
+            } else {
+                return;
             }
+        },
+        validateAddress: function(validationObj) {
+            var me = this;
+            var modelIsValid = [];
+            console.log(validationObj);
+            for(var key in validationObj) {
+                var value = 'editingContact.' + key;
+                var keyValue = validationObj[key];
+                var input = me.$el.find('[data-mz-value="'+value+'"]');                
+                
+                if (key === 'address.stateOrProvince') {
+                    input = me.$el.find('select[data-mz-value="' + value + '"]');
+
+                    if (input.find('option:selected').val() && input.find('option:selected').val().length) {
+                        modelIsValid.push(true);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text('');
+                    } else {
+                        modelIsValid.push(false);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text(keyValue.msg);
+                    }
+                } 
+                if (key === 'address.postalOrZipCode') {
+                    // if ((keyValue[1].pattern).test(input.val())) {
+                    if (input.val()) {
+                        modelIsValid.push(true);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text('');
+                    } else {
+                        modelIsValid.push(false);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text(keyValue[1].msg);
+                    }
+                } 
+                if ((key === 'phoneNumbers.home' || key === 'phoneNumbers.home') && keyValue[0].required) {
+                    if (input.val().length >= keyValue[1].minLength && input.val().length <= keyValue[1].maxLength) {
+                       modelIsValid.push(true);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text('');
+                    } else {
+                        modelIsValid.push(false);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text(keyValue[1].msg);
+                    }
+                } 
+                if (keyValue.required) {
+                    if (input.val() && input.val().length > 0) {
+                        modelIsValid.push(true);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text('');
+                    } else {
+                        modelIsValid.push(false);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text(keyValue.msg);
+                    }
+                }
+            }
+            return modelIsValid.indexOf(false) !== -1 ? false : true;
         },
         cancelEditContact: function () {
             this.editing.contact = false;

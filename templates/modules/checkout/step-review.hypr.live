@@ -22,7 +22,7 @@
             {% endif %}
 
             {% if not user or user.isAnonymous %}
-            <div class="mz-l-formfieldgroup mz-l-formfieldgroup-norows mz-checkoutform">
+            <div class="mz-l-formfieldgroup mz-l-formfieldgroup-norows mz-checkoutform hidden">
                 <label class='inline'>
                     <input type="checkbox" name="create-new-account" data-mz-value="createAccount" {% if model.createAccount %} checked="checked"{% endif %} > {{ labels.createAccount }}
                 </label>

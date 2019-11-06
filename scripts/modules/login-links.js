@@ -480,17 +480,6 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
             self.bindListeners.call(el, true);
             self.doLogin = _.debounce(self.doLogin, 150);
             self.doSignup = _.debounce(self.doSignup, 150);
-            api.get('attributedefinition').then(function(attribute) {
-                console.log(attribute.data.items);
-                for(var i=0; i< attribute.data.items.length; i++){
-                    // if(attribute.data.items[i].attributeCode === "recovery-question"){
-                    //     var recVals = attribute.data.items[i].vocabularyValues;
-                    //     for(var j=0; j<recVals.length; j++){
-                    //         $('<option/>').text(recVals[j].content.value).attr('value',recVals[j].value).appendTo('#recoveryQuestionList');
-                    //     }
-                    // }
-                }
-            });
         };
 
         this.bindListeners =  function (on) {
@@ -550,7 +539,7 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
         };
         this.validateLogin = function (el, payload) {
             if (!payload.email) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailMissing')), false;
-            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(payload.email))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailwrongpattern')), false;
+            if (!(backbone.Validation.patterns.email.test(payload.email))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailwrongpattern')), false;
             return true;
         };
         this.doSignup = function(){
@@ -608,7 +597,7 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
         };
         this.validateSignup = function (el, payload) {
             if (!payload.account.emailAddress) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailMissing')), false;
-            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(payload.account.emailAddress))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailwrongpattern')), false;
+            if (!(backbone.Validation.patterns.email.test(payload.account.emailAddress))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailwrongpattern')), false;
             if (payload.password !== $(el).parents('#newshopper').find('[data-mz-signup-confirmpassword]').val()) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordsDoNotMatch')), false;
             // if (payload.account.attributes.recoveryquestion === "0") return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('chooseRecoveryQuestion')), false;
             // if($('#recoveryQuestionList').val() === "0") return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('chooseRecoveryQuestion')), false;

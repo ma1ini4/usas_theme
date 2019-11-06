@@ -641,5 +641,14 @@
   "b2bFindPlaceholder": "Enter Quote Number",
   "b2bQuotesHeader": "Quotes",
   "b2bQuotesATC": "Add to cart ",
-  "b2bQuotesRemoveItem": "Remove item"
+  "b2bQuotesRemoveItem": "Remove item",
+  "quotesInfo": "Find and maintain quotes with special prices",
+  "customerService": "Customer Service",
+  "customerServiceText": "Ordering and account information. Talk to us 8 am to 8 pm.",
+  "technicalSupport": "Technical Support",
+  "technicalSupportText": "Product FAQs and help.",
+  "calibrationService": "Pipette Calibration and Service",
+  "calibrationServiceText": "Regular maintenance keeps your pipettes within specifications.",
+  "customProducts": "Custom & OEM Products",
+  "customProductsText": "Made-to-measure racks, custom packaging or colors, and more."
 }

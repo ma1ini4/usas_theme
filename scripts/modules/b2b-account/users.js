@@ -134,8 +134,7 @@ define(["modules/mozu-utilities", "modules/jquery-mozu", 'modules/api', "undersc
             }
         },
         validateEmail: function(email) {
-            console.log(email);
-            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
+            if (!(Backbone.Validation.patterns.email.test(email))) {
                 return false;
             } else {
                 return true;

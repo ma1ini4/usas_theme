@@ -162,8 +162,7 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
         }
     }
     function handleNoResults(searchVal) {
-        $('#search-field').val(searchVal.replace('-', ''));
-        $('#searchbox').submit();
+        window.location = '/search?categoryId=' + Hypr.getThemeSetting('allProductsCategoryId') + '&query=' + searchVal;
     }
 
     $(document).ready(function () {
@@ -194,14 +193,14 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
             var newString = searchVal.replace(/[^\d\-]+/g, '');
             var regEx = new RegExp(/\d{4}\-\d{4}/g);
             var isProductCode = regEx.test(newString);            
+            var savedString = newString;
             
             if (isProductCode) {
                 e.preventDefault();
                 blockUiLoader.globalLoader();
-                // newString.replace('-', '');
+                newString = newString.replace('-', '');
                 // var url = 'https://' + window.location.hostname + '/search/?categoryId=' + Hypr.getThemeSetting('allProductsCategoryId') + '&query=' + newString;
-                var url = '/search/?categoryId=' + Hypr.getThemeSetting('allProductsCategoryId') + '&query=' + newString;
-                console.log(url);
+                var url = '/search?categoryId=' + Hypr.getThemeSetting('allProductsCategoryId') + '&query=' + newString;
 
                 $.ajax({
                     url: url,
@@ -217,20 +216,19 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
                     },  
                     success: function (data) {
                         var items = $(data).find('#product-list-ul .mz-productlist-item');
-
                         if (items.length !== 0) {
                             var hasValidResults = [];
                             
                             items.each(function(id){
-                                hasValidResults.push(handleSearchResults(this, newString));                                
 
+                                hasValidResults.push(handleSearchResults(this, savedString));                                
                                 if (hasValidResults.indexOf(true) === -1 && id === items.length - 1) {
-                                    handleNoResults(searchVal);
+                                    handleNoResults(savedString);
                                 }                                
                             });
 
                         } else {
-                            handleNoResults(searchVal);
+                            handleNoResults(savedString);
                         }
                     },
                     always: function() {

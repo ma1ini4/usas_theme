@@ -371,6 +371,12 @@ define([
         if ($(".view-all.selected").length) {
             InfiniteScroller.update();
         }
+
+        $('body').on('click', '.view-all.selected', function (e) {
+            e.preventDefault();
+            blockUiLoader.unblockUi();
+            return;
+        });
     }
 
     return {
