@@ -177,9 +177,6 @@
 
           {% include "modules/common/message-bar" %}
         </div>
-        {% dump user  %}
-        {% dump user.b2bAttributes %}
-
         {% block trailing-scripts %}
         {% include "modules/trailing-scripts" %}
         {% endblock trailing-scripts %}

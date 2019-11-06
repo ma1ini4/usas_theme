@@ -163,7 +163,6 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
         if ( this.get('properties') ) {
       		_.each(this.get('properties'), function(prop) {
       			if (!_.contains(Hypr.getThemeSetting('productAttrInfoTab' + infoTabNumber + 'ContentExclude').split(','), prop.attributeFQN)) {
-                      console.log(prop);
       				content.push({
       					name: prop.attributeDetail.name,
       					value: prop.values[0].stringValue
