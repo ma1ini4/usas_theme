@@ -1708,6 +1708,11 @@
           "name": "customButtonValue",
           "fieldLabel": "Custom Button Label",
           "xtype": "mz-input-text"
+        },
+        {
+          "name": "customBtnClass",
+          "fieldLabel": "Custom Button Class",
+          "xtype": "mz-input-text"
         }
 
       ],

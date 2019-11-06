@@ -673,7 +673,6 @@ require(["modules/jquery-mozu",
                 }
             });
             var user = require.mozuData('user');
-            console.log(user);
             if (user.isAnonymous) {
                 me.model.set('createAccount', true);
             }

@@ -10,7 +10,7 @@
         data-replyTo="{{model.config.reply_to}}">
 
         {{model.config.form_html|safe}}
-        <input type="submit" class="submit-form {%if model.config.customId %}{{model.config.customId}}{% else %}{{model.definitionId}}{% endif %}" name="submit-email-form"
+        <input type="submit" class="submit-form {%if model.config.customId %}{{model.config.customId}}{% else %}{{model.definitionId}}{% endif %}{%if model.config.customBtnClass%} {{model.config.customBtnClass}}{%endif%}" name="submit-email-form"s
             value="{%if model.config.customButtonValue %}{{model.config.customButtonValue}}{% else %}Submit{% endif %}">
     </form>
 </div>

@@ -146,12 +146,13 @@ function ($, backbone, Hypr, hyprlivecontext) {
                 });
         }
         $('body').on('click', '#demo-sample input[name="submit-email-form"]', function (e) {
-            var customId = $(this).closest('form').attr('id');
             e.preventDefault();
             sendEmail('demo-sample');
         });
+        $('body').on('click', '#quote-request input[name="submit-email-form"]', function (e) {
+            validateFormCompletion('quote-request', e);
+        });
         $('body').on('click', '#signup-submit', function (e) {
-            var customId = $(this).closest('form').attr('id');
             if (validateEmail($('#signup-email').val())) {
                 e.preventDefault();
                 sendEmail('signup-form');
@@ -159,12 +160,50 @@ function ($, backbone, Hypr, hyprlivecontext) {
                 return;
             }
         });
+        function validateFormCompletion(customId, e) {
+            $('body').find('.email-validation-error').remove();
+            
+            var isFilled = [];
+            var isValidEmail = false;
+            $('#' + customId).find('input[required]:visible, textarea[required]:visible, select[required] option:selected').each(function () {
+                if ($(this).val() || $(this).val() !== '') {
+                    if(this.type === 'email') {
+                        isValidEmail = validateEmail($(this).val());
+                        isFilled.push(isValidEmail);
+                        if(!isValidEmail) {
+                            showValidationError($(this), 'Please, enter a valid email');
+                        }
+                    } else {
+                        isFilled.push(true);
+                    }
+                } else {
+                    isFilled.push(false);
+                    if($(this).is('option')) {
+                        showValidationError($(this).parent(), 'Please, choose an option');
+                    } else if (this.type === 'email' && !isValidEmail) {
+                        showValidationError($(this), 'Please, enter a valid email');
+                    } else {
+                        showValidationError($(this), 'Please, fill out this field');
+                    }
+                }
+            });
+            if (isFilled.indexOf(false) === -1) {
+                e.preventDefault();
+                sendEmail(customId);
+            } else {
+                e.preventDefault();
+            }
+        }
     });
+    
     function validateEmail(email) {
         if (!(backbone.Validation.patterns.email.test(email))) {
             return false;
         } else {
             return true;
         }
+    }
+    function showValidationError(el, msg) {
+        $(el).parent().append('<span class="email-validation-error">'+msg+'</span>');
     }
 });
