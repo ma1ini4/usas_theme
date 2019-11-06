@@ -177,6 +177,8 @@
 
           {% include "modules/common/message-bar" %}
         </div>
+        {% dump user  %}
+        {% dump user.b2bAttributes %}
 
         {% block trailing-scripts %}
         {% include "modules/trailing-scripts" %}
@@ -184,6 +186,7 @@
 
         {% visitor_tracking_pixel %}
         {% include "modules/page-header/login-modal" %}
+
 
     </body>
     {% endblock body-tag %}

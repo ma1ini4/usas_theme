@@ -42,14 +42,12 @@
                     </a>
                     <p>{{ labels.orderHistoryInfo }}</p>
                 </div>
-                {% if siteContext.generalSettings.isWishlistCreationEnabled %}
-                <div class="my-account-details">
-                    <a href="/myaccount#Lists">
-                        <h4>{{ labels.wishLists }}</h4>
+                <div class="my-account-details my-account-popup-quotes">
+                    <a href="/myaccount#Quotes">
+                        <h4>{{ labels.b2bQuotesHeader }}</h4>
                     </a>
                     <p>{{ labels.wishListsInfo }}</p>
                 </div>
-                {% endif %}
                 <div class="my-account-details">
                     <a href="/myaccount#Shipping Information">
                         <h4>{{ labels.addressBook }}</h4>

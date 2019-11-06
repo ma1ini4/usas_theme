@@ -6,6 +6,26 @@
 
 define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modules/jquery-mozu=jQuery]>jQuery=jQuery]>jQuery', 'modules/api', 'hyprlive', 'underscore', 'hyprlivecontext', 'vendor/jquery-placeholder/jquery.placeholder','modules/backbone-mozu'],
 function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
+    var determineB2BUser = function() {
+        var apiData = require.mozuData('apicontext');
+        var user = require.mozuData('user');
+
+        if (!user.isAnonymous) {
+            $.ajax({
+                url: '/api/commerce/customer/accounts/' + user.accountId,
+                headers: apiData.headers,
+                method: 'GET',
+                success: function (data) {
+                    if(data.accountType === "B2B") {
+                        $('.my-account-popup-quotes').show();
+                    } else {
+                        $('.my-account-popup-quotes').hide();                        
+                    }
+                }
+            });
+        }
+    };
+    determineB2BUser();
     var current = "";
     var usePopovers = function() {
         return !Modernizr.mq('(max-width: 480px)');
@@ -452,69 +472,6 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
             }
         }
     });
-    var MyAccountPopover = function(e){
-        var self = this;
-        this.init = function(el){
-            self.popoverEl = $('#my-account-content');
-            self.bindListeners.call(el, true);
-            $('#my-account').attr('href', '#');
-            $('#my-account-mobile').attr('href', '#');
-        };
-        this.bindListeners =  function (on) {
-            var onOrOff = on ? "on" : "off";
-            //$(this).parent()[onOrOff]('mouseover', '[data-mz-action="my-account"]', self.openPopover);
-            $(this).parent()[onOrOff]('click', '[data-mz-action="my-account"]', self.openPopover);
-            $(this).parent()[onOrOff]('click', '[data-mz-action="my-account-mobile"]', self.openPopoverMobile);
-            // bind other events
-        };
-        this.openPopover = function(e){
-            //self.popoverEl.popover('show');
-            e.preventDefault();
-            $("#my-account").popover({
-                html : true,
-                placement : 'bottom',
-                content: function() {
-                  return self.popoverEl.html();
-                }
-            }); //.popover('show');
-        };
-        this.openPopoverMobile = function (e) {
-            //self.popoverEl.popover('show');
-            e.preventDefault();
-            $("#my-account-mobile").popover({
-                html: true,
-                placement: 'bottom',
-                content: function () {
-                    return self.popoverEl.html();
-                }
-            }); //.popover('show');
-        };
-    };
-    var ServicesPopover = function(e){
-        var self = this;
-        this.init = function(el){
-            self.popoverEl = $('#services-content');
-            self.bindListeners.call(el, true);
-            $('#services-account').attr('href','#');
-        };
-        this.bindListeners =  function (on) {
-            var onOrOff = on ? "on" : "off";
-            //$(this).parent()[onOrOff]('mouseover', '[data-mz-action="my-account"]', self.openPopover);
-            $(this).parent()[onOrOff]('click', '[data-mz-action="services"]', self.openPopover);
-            // bind other events
-        };
-        this.openPopover = function(e){
-            //self.popoverEl.popover('show');
-            e.preventDefault();
-            $("#services").popover({
-                html : true,
-                placement : 'bottom',
-                content: function() {
-                  return self.popoverEl.html();
-                }
-            }); //.popover('show');
-        };
-    };
 
     var LoginRegistrationModal = function(){
         var self = this;
@@ -690,17 +647,7 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
         });
         $('#my-account').attr('href', '#');
         $('#my-account-mobile').attr('href','#');
-
-        $('[data-mz-action="my-account"]').click(function() {
-            var popover = new MyAccountPopover();
-            popover.init(this);
-            $(this).data('mz.popover', popover);
-        });
-        $('[data-mz-action="my-account-mobile"]').click(function () {
-            var popover = new MyAccountPopover();
-            popover.init(this);
-            $(this).data('mz.popover', popover);
-        });
+        $('#services').attr('href', '#');
 
         $("#my-account").popover({
             html : true,
@@ -716,14 +663,6 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
                 return $('#my-account-content').html();
             }
         });
-
-
-        $('#services').attr('href','#');
-        $('[data-mz-action="services"]').click(function() {
-            var popover = new ServicesPopover();
-            popover.init(this);
-            $(this).data('mz.popover', popover);
-        });
         $("#services").popover({
             html : true,
             placement : 'bottom',
@@ -731,6 +670,26 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
                 return $('#services-content').html();
             }
         });
+
+        $('[data-toggle="popover"]').popover({
+            trigger: "manual",
+            html: true,
+            animation: false
+        }).on("mouseenter", function () {
+            var _this = this;
+            $(this).popover("show");
+            $(".popover").on("mouseleave", function () {
+                $(_this).popover('hide');
+            });
+        }).on("mouseleave", function () {
+            var _this = this;
+            setTimeout(function () {
+                if (!$(".popover:hover").length) {
+                    $(_this).popover("hide");
+                }
+            }, 300);
+        });
+
         $('body').on('touchend click', function (e) {
             //only buttons
             if ($(e.target).data('toggle') !== 'popover' && !$(e.target).parents().is('.popover.in')) {
