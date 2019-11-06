@@ -1,5 +1,5 @@
-require(["modules/jquery-mozu", "hyprlive", "hyprlivecontext"],
-function ($, Hypr, hyprlivecontext) {
+require(["modules/jquery-mozu", "modules/backbone-mozu", "hyprlive", "hyprlivecontext"],
+function ($, backbone, Hypr, hyprlivecontext) {
     var isExu = hyprlivecontext.locals.themeSettings.themeSelector === 'exuviance' ? true : false;
 
     $(document).ready(function () {
@@ -161,7 +161,7 @@ function ($, Hypr, hyprlivecontext) {
         });
     });
     function validateEmail(email) {
-        if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
+        if (!(backbone.Validation.patterns.email.test(email))) {
             return false;
         } else {
             return true;
