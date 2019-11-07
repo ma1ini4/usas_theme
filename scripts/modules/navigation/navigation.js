@@ -98,16 +98,16 @@ define([
         truncEmail();
         truncLongUsername(myAccount, 100);
 
-      } else if (($(window).width() < 1024) && ($(window).width() > 767)) {
+      } else if (($(window).width() <= 1024) && ($(window).width() > 767)) {
         truncEmail();
         truncLongUsername(myAccount, 47);
 
-      } else if ($(window).width() < 767) {
+      } else if ($(window).width() <= 767) {
         var mobileMaxWidth = ($(window).width() - $('.ml-header-logo-wrapper').width() - 100);
         truncEmail();
         truncLongUsername(myAccountMobile, mobileMaxWidth);
 
-      } else if ($(window).width() > 1199) {
+      } else if ($(window).width() >= 1199) {
         $(myAccount).text(username);
         $(myAccount).width('auto').removeClass('truncated-username');
       }
