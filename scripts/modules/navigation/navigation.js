@@ -92,24 +92,24 @@ define([
       }, 500);
     }
     function truncateUsername(){
-      var myAccount = $('#my-account'),
+      var $el = $('#my-account'),
           myAccountMobile = $('#my-account-mobile');
-      if (($(window).width() < 1199) && ($(window).width() > 1024)) {
+      if (($(window).width() <= 1199) && ($(window).width() > 1024)) {
         truncEmail();
-        truncLongUsername(myAccount, 100);
+        truncLongUsername($el, 100);
 
       } else if (($(window).width() <= 1024) && ($(window).width() > 767)) {
         truncEmail();
-        truncLongUsername(myAccount, 47);
+        truncLongUsername($el, 47);
 
       } else if ($(window).width() <= 767) {
         var mobileMaxWidth = ($(window).width() - $('.ml-header-logo-wrapper').width() - 100);
         truncEmail();
         truncLongUsername(myAccountMobile, mobileMaxWidth);
 
-      } else if ($(window).width() >= 1199) {
-        $(myAccount).text(username);
-        $(myAccount).width('auto').removeClass('truncated-username');
+      } else if ($(window).width() > 1199) {
+        $($el).text(username);
+        $($el).width('auto').removeClass('truncated-username');
       }
     }
     function navContainerVisible(el) {
