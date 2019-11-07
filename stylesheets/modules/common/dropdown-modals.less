@@ -1,30 +1,34 @@
-.my-account-details, .services-details {
-    border-bottom: 1px solid @lightBorder;
+.my-account-details,
+.services-details {
+  border-bottom: 1px solid @lightBorder;
 
-    a {
-      font-weight: @regular;
-        h4 {
-          margin-top: 8px;
-          margin-bottom: 6px;
-          color: @headingColor;
-          font-size: 16px;
-        }
-    }
+  a {
+    font-weight: @regular;
 
-    p {
-      display: block;
-      margin-top: 0;
-      margin-bottom: 8px;
-      color: @textColor;
-      font-size: 12px;
+    h4 {
+      margin-top: 8px;
+      margin-bottom: 6px;
+      color: @headingColor;
+      font-size: 16px;
       text-transform: none;
     }
+  }
 
-    &:last-child {
-      border-bottom: none;
-    }
+  p {
+    display: block;
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: @textColor;
+    font-size: 12px;
+    text-transform: none;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
 }
-#my-account-mobile + .popover {
+
+#my-account-mobile+.popover {
   left: 5% !important;
   right: 3px !important;
   width: 75%;
@@ -34,6 +38,7 @@
     p {
       display: none;
     }
+
     a {
       margin: 0;
     }

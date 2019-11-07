@@ -88,25 +88,25 @@
                 data-toggle="popover" data-content="" data-placement="bottom" class="">Our services</a>
             <div id="services-content" style="display:none;">
                 <div class="services-details">
-                    <a href="#">
+                    <a href="/faq">
                         <h4>{{labels.customerService}}</h4>
                     </a>
                     <p>{{labels.customerServiceText}}</p>
                 </div>
                 <div class="services-details">
-                    <a href="#">
+                    <a href="/tech-support">
                         <h4>{{labels.technicalSupport}}</h4>
                     </a>
                     <p>{{labels.technicalSupportText}}</p>
                 </div>
                 <div class="services-details">
-                    <a href="#">
+                    <a href="/calibration/c/32">
                         <h4>{{labels.calibrationService}}</h4>
                     </a>
                     <p>{{labels.calibrationServiceText}}</p>
                 </div>
                 <div class="services-details">
-                    <a href="#">
+                    <a href="/custom-forms">
                         <h4>{{labels.customProducts}}</h4>
                     </a>
                     <p>{{labels.customProductsText}}</p>
