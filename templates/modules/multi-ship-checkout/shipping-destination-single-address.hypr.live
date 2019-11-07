@@ -13,13 +13,15 @@
     <div class="mz-l-formfieldgroup-cell">
       <span>{{ labels.suggestionNum|string_format(forloop.index) }}</span>
     </div>
-    <div class="mz-l-formfieldgroup-cell">
-      <input data-mz-action="chooseCandidateAddress" name="candidateValidatedAddresses" type="radio" value="{{forloop.index0}}" {% if not siteContext.generalSettings.allowInvalidAddresses && forloop.first %} checked="checked"{% endif %} />
-    </div>
-    <div class="mz-l-formfieldgroup-cell">
-      {{addr.address1}}<br />
-      {% if addr.address2 %}{{addr.address2}}<br />{% endif %}
-      {{addr.cityOrTown}}, {{addr.stateOrProvince}} {{addr.postalOrZipCode}} {{addr.countryCode}}
+    <div class="mz-l-formfieldgroup-row address-suggestion">
+      <div class="mz-l-formfieldgroup-cell address-suggestion-radio">
+        <input data-mz-action="chooseCandidateAddress" name="candidateValidatedAddresses" type="radio" value="{{forloop.index0}}" {% if not siteContext.generalSettings.allowInvalidAddresses && forloop.first %} checked="checked"{% endif %} />
+      </div>
+      <div class="mz-l-formfieldgroup-cell">
+        {{addr.address1}}<br />
+        {% if addr.address2 %}{{addr.address2}}<br />{% endif %}
+        {{addr.cityOrTown}}, {{addr.stateOrProvince}} {{addr.postalOrZipCode}} {{addr.countryCode}}
+      </div>
     </div>
   </label>
   {% endfor %}
@@ -28,13 +30,15 @@
     <div class="mz-l-formfieldgroup-cell">
         <span>Original</span>
     </div>
-    <div class="mz-l-formfieldgroup-cell">
-      <input data-mz-action="chooseCandidateAddress" name="candidateValidatedAddresses" type="radio" value="-1"  checked="checked"/>
-    </div>
-    <div class="mz-l-formfieldgroup-cell">
-      {{model.destinationContact.address.address1}}<br />
-      {% if model.destinationContact.address.address2 %}{{model.destinationContact.address.address2}}<br />{% endif %}
-      {{model.destinationContact.address.cityOrTown}}, {{model.destinationContact.address.stateOrProvince}} {{model.destinationContact.address.postalOrZipCode}} {{model.destinationContact.address.countryCode}}
+    <div class="mz-l-formfieldgroup-row address-suggestion">
+      <div class="mz-l-formfieldgroup-cell address-suggestion-radio">
+        <input data-mz-action="chooseCandidateAddress" name="candidateValidatedAddresses" type="radio" value="-1"  checked="checked"/>
+      </div>
+      <div class="mz-l-formfieldgroup-cell">
+        {{model.destinationContact.address.address1}}<br />
+        {% if model.destinationContact.address.address2 %}{{model.destinationContact.address.address2}}<br />{% endif %}
+        {{model.destinationContact.address.cityOrTown}}, {{model.destinationContact.address.stateOrProvince}} {{model.destinationContact.address.postalOrZipCode}} {{model.destinationContact.address.countryCode}}
+      </div>
     </div>
   </label>
   {% endif %}
