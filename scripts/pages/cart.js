@@ -357,6 +357,37 @@ define(['modules/api',
                 self.render();
             });
         },
+        removeCoupon: function (e, coupon) {
+          var self = this;
+          var tentativeCoupon = self.model.get('tentativeCoupon');
+          if (tentativeCoupon) {
+            //self.model.get('couponCodes').splice(tentativeCoupon, 1);
+            self.model.unset('tentativeCoupon');
+          }
+          if ($.cookie('tentativeCouponCode')) {
+            $.removeCookie('tentativeCouponCode');
+          }
+          var getCouponCode;
+
+          if (e) {
+            getCouponCode = $(e.currentTarget).data('coupon');
+          } else {
+            getCouponCode = coupon;
+          }
+
+          var apiData = require.mozuData('apicontext');
+          //blockUiLoader.globalLoader();
+          var serviceurl = '/api/commerce/carts/' + this.model.id + '/coupons/' + getCouponCode;
+          api.request('DELETE', serviceurl).then(function (response) {
+            //blockUiLoader.unblockUi();
+            self.model.set(response);
+            self.render();
+          }, function (err) {
+            self.trigger('error', {
+              message: Hypr.getLabel('promoCodeError', getCouponCode)
+            });
+          });
+        },
         onEnterCouponCode: function (model, code) {
             if (code && !this.codeEntered) {
                 this.codeEntered = true;
