@@ -187,12 +187,12 @@
 
     var Check = PaymentMethod.extend({
         validation: {
-            nameOnCheck: {
+          /*  nameOnCheck: {
                 fn: "present"
             },
             routingNumber: {
                 fn: "present"
-            },
+            },*/
             checkNumber: {
                 fn: "present"
             }
