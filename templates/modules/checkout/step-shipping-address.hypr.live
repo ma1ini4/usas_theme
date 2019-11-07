@@ -56,13 +56,15 @@
             <div class="mz-l-formfieldgroup-cell">
             <span>{{ labels.suggestionNum|string_format(forloop.index) }}</span>
           </div>
-          <div class="mz-l-formfieldgroup-cell">
-            <input data-mz-action="choose" name="candidateValidatedAddresses" type="radio" value="{{forloop.index0}}" />
-          </div>
-          <div class="mz-l-formfieldgroup-cell">
-            {{addr.address1}}<br />
-            {% if addr.address2 %}{{addr.address2}}<br />{% endif %}
-            {{addr.cityOrTown}}, {{addr.stateOrProvince}} {{addr.postalOrZipCode}} {{addr.countryCode}}
+          <div class="mz-l-formfieldgroup-row address-suggestion">
+            <div class="mz-l-formfieldgroup-cell address-suggestion-radio">
+              <input data-mz-action="choose" name="candidateValidatedAddresses" type="radio" value="{{forloop.index0}}" />
+            </div>
+            <div class="mz-l-formfieldgroup-cell">
+              {{addr.address1}}<br />
+              {% if addr.address2 %}{{addr.address2}}<br />{% endif %}
+              {{addr.cityOrTown}}, {{addr.stateOrProvince}} {{addr.postalOrZipCode}} {{addr.countryCode}}
+            </div>
           </div>
         </label>
         {% endfor %}
@@ -71,13 +73,15 @@
           <div class="mz-l-formfieldgroup-cell">
               <span>Original</span>
           </div>
-          <div class="mz-l-formfieldgroup-cell">
-            <input data-mz-action="choose" name="candidateValidatedAddresses" type="radio" value="-1" />
-          </div>
-          <div class="mz-l-formfieldgroup-cell">
-            {{model.address.address1}}<br />
-            {% if model.address.address2 %}{{model.address.address2}}<br />{% endif %}
-            {{model.address.cityOrTown}}, {{model.address.stateOrProvince}} {{model.address.postalOrZipCode}} {{model.address.countryCode}}
+          <div class="mz-l-formfieldgroup-row address-suggestion">
+            <div class="mz-l-formfieldgroup-cell address-suggestion-radio">
+              <input data-mz-action="choose" name="candidateValidatedAddresses" type="radio" value="-1" />
+            </div>
+            <div class="mz-l-formfieldgroup-cell">
+              {{model.address.address1}}<br />
+              {% if model.address.address2 %}{{model.address.address2}}<br />{% endif %}
+              {{model.address.cityOrTown}}, {{model.address.stateOrProvince}} {{model.address.postalOrZipCode}} {{model.address.countryCode}}
+            </div>
           </div>
         </label>
         {% endif %}
