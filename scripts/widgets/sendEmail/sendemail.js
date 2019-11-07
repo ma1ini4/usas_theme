@@ -153,10 +153,14 @@ function ($, backbone, Hypr, hyprlivecontext) {
             validateFormCompletion('quote-request', e);
         });
         $('body').on('click', '#signup-submit', function (e) {
+            $('body').find('.email-validation-error').remove();
+
             if (validateEmail($('#signup-email').val())) {
                 e.preventDefault();
                 sendEmail('signup-form');
             } else {
+                e.preventDefault();
+                showValidationError($('#signup-email'), 'Please, enter a valid email');
                 return;
             }
         });
