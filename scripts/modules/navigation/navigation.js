@@ -94,11 +94,11 @@ define([
     function truncateUsername(){
       var $el = $('#my-account'),
           myAccountMobile = $('#my-account-mobile');
-      if (($(window).width() <= 1199) && ($(window).width() > 1024)) {
+      if ($(window).width() <= 1199 && $(window).width() > 1024) {
         truncEmail();
         truncLongUsername($el, 100);
 
-      } else if (($(window).width() <= 1024) && ($(window).width() > 767)) {
+      } else if ($(window).width() <= 1024 && $(window).width() > 767) {
         truncEmail();
         truncLongUsername($el, 47);
 
@@ -113,13 +113,14 @@ define([
       }
     }
     function navContainerVisible(el) {
-      return $(el).next('.mz-sitenav-sub-container').css('visibility') === 'visible';
+      return $(el).next('.mz-sitenav-sub-container').css('display') === 'block';
     }
     function touchHandler(el) {
       $(el).bind('touchstart', function (e) {        
         $(this).click(function () {
           return false;
         });
+
         var isVisible = navContainerVisible(e.target);
         
         if (!isVisible) {
@@ -134,7 +135,6 @@ define([
 
       if (isTablet) {
         $('.top-layer .mz-sitenav-item-inner > a.mz-sitenav-link').each(function () {            
-          
           touchHandler(this);
         });   
       } 
