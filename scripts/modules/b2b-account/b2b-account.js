@@ -72,28 +72,16 @@ define([
                 view: new ShippingInformation.AddressBookView({
                     model: ShippingInformation.AddressBookModel.fromCurrent()
                 })
-            },
-            // {
-            //     name: 'Payment Information',
-            //     view: new PaymentInformation.PaymentInformationView({
-            //         model: PaymentInformation.PaymentInformationModel.fromCurrent()
-            //     })
-            // },
-            {
-                name: 'Custom Attributes',
-                view: new CustomAttributes.CustomAttributesView({
-                    model: CustomerModels.EditableCustomer.fromCurrent()
-                })
             }
         ];
-        if (paneSwitcherModel.hasRequiredBehavior(1008)){ // user can place orders
-            panes.push({
-                name: 'Quick Order',
-                view: new QuickOrder.QuickOrderView({
-                    model: new QuickOrder.QuickOrderModel({})
-                })
-            });
-        }
+        // if (paneSwitcherModel.hasRequiredBehavior(1008)){ // user can place orders
+        //     panes.push({
+        //         name: 'Quick Order',
+        //         view: new QuickOrder.QuickOrderView({
+        //             model: new QuickOrder.QuickOrderModel({})
+        //         })
+        //     });
+        // }
         // Switch to the pane matching the hash in the URL.
         if (hash){
           // If we don't find a pane matching the hash given, perform the
