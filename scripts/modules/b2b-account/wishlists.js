@@ -276,36 +276,40 @@ define([
         },
         viewQuote: function (e) {
             var self = this;
-            var quoteId = $('[data-mz-value="quoteId"]').val(),
-                customerId = $('[data-mz-value="customerId"]').val(),
-                url = '/pricelist/runSchedule?quoteId=' + quoteId + '&customerId=' + customerId;
+            api.get('cart').then(function(cart) {
+
+                var quoteId = $('[data-mz-value="quoteId"]').val(),
+                    customerId = $('[data-mz-value="customerId"]').val(),
+                    url = '/pricelist/runSchedule?quoteId=' + quoteId + '&customerId=' + customerId + '&cartId=' + cart.data.id;
                 
-            console.log(customerId, quoteId, url);
-
-            
-            self.model.isLoading(true);
-
-            self.model.set('isEditMode', true);
-            $.ajax({
-                url: url,
-                method: 'GET',
-                success: function (res) {
-                    console.log('success', res);
-                    
-                    setTimeout(function () {
-                        self.render();
-                        self.findQuoteByNumber(customerId, quoteId);
-                    }, 500);            
-                },
-                error: function(err) {
-                    console.log('error', err);
-                    
-                    setTimeout(function(){
-                        self.model.isLoading(false);
-                        self.findQuoteByNumber(customerId, quoteId);
-                        self.render();
-                    }, 500);
-                }
+                console.log(cart.data);
+                console.log(customerId, quoteId, url);
+    
+                
+                self.model.isLoading(true);
+    
+                self.model.set('isEditMode', true);
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    success: function (res) {
+                        console.log('success', res);
+                        
+                        setTimeout(function () {
+                            self.render();
+                            self.findQuoteByNumber(customerId, quoteId);
+                        }, 500);            
+                    },
+                    error: function(err) {
+                        console.log('error', err);
+                        
+                        setTimeout(function(){
+                            self.model.isLoading(false);
+                            self.findQuoteByNumber(customerId, quoteId);
+                            self.render();
+                        }, 500);
+                    }
+                });
             });
         },
         findQuoteByNumber: function (customerId, id) {
