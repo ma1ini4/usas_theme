@@ -123,15 +123,17 @@ function ($, backbone, Hypr, hyprlivecontext) {
                     if (response.statusCode == 200) {
                         // console.log(msgSelector, msgPopup);
                         if (msgPopup && msgPopup !== 'False') {
-                            if (isExu && window.location.pathname.indexOf('contact-us') !== -1) {
-                                var thxHtml = '<div class="thank-you-text"><p>Thank you for your message! We will be contacting you as soon as possible. </p><p>Please note: Changes to your online order cannot be made while it is in progress. It might take a few days for us to reply to your email. </p><p>If you have an urgent request please call customer service at (800) 225-9411 Monday through Friday, 9am-6pm EST.</p></div>';
-                                var formContainer = $('#' + formId).parent();
-                                $('#' + formId).remove();
-                                formContainer.append(thxHtml);
-                            } else {
-                                $('.email-message').html(message);
-                                $('.popup-overlay').fadeIn(200);
+                            if (formId === 'signup-form') {
+                                $('#signup-email').val('');
                             }
+                            $(':input', '#' + formId)
+                                .not(':button, :submit, :reset, :hidden')
+                                .val('')
+                                .removeAttr('checked')
+                                .removeAttr('selected');
+                                
+                            $('.email-message').html(message);
+                            $('.popup-overlay').fadeIn(200);
                         } else {
                             $(msgSelector).html(message);
                         }
