@@ -73,12 +73,12 @@ define([
                     model: ShippingInformation.AddressBookModel.fromCurrent()
                 })
             },
-            {
-                name: 'Payment Information',
-                view: new PaymentInformation.PaymentInformationView({
-                    model: PaymentInformation.PaymentInformationModel.fromCurrent()
-                })
-            },
+            // {
+            //     name: 'Payment Information',
+            //     view: new PaymentInformation.PaymentInformationView({
+            //         model: PaymentInformation.PaymentInformationModel.fromCurrent()
+            //     })
+            // },
             {
                 name: 'Custom Attributes',
                 view: new CustomAttributes.CustomAttributesView({
