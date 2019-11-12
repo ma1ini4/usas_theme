@@ -132,9 +132,9 @@ define([
                     if (item.id === id) {
                         newItems.push(item);
                     }
-                });                    
+                });
             });
-            items = newItems;  
+            items = newItems;
           }
 
           var cart = CartModels.Cart.fromCurrent();
@@ -274,35 +274,35 @@ define([
               this._wishlistsGridView.model.filterBy(USER_LISTS_FILTER);
             }
         },
-        viewQuote: function (e) {
+        viewQuote: function (e, data) {
             var self = this;
+            self.model.isLoading(true);
             api.get('cart').then(function(cart) {
+                var quoteId = data,
+                    customerId = $('[data-mz-value="customerId"]').val();
+                if ( ! quoteId ) {
+                  quoteId = $('[data-mz-value="quoteId"]').val();
+                }
+                var url = '/pricelist/runSchedule?quoteId=' + quoteId + '&customerId=' + customerId + '&cartId=' + cart.data.id;
 
-                var quoteId = $('[data-mz-value="quoteId"]').val(),
-                    customerId = $('[data-mz-value="customerId"]').val(),
-                    url = '/pricelist/runSchedule?quoteId=' + quoteId + '&customerId=' + customerId + '&cartId=' + cart.data.id;
-                
                 console.log(cart.data);
                 console.log(customerId, quoteId, url);
-    
-                
-                self.model.isLoading(true);
-    
+
                 self.model.set('isEditMode', true);
                 $.ajax({
                     url: url,
                     method: 'GET',
                     success: function (res) {
                         console.log('success', res);
-                        
+
                         setTimeout(function () {
                             self.render();
                             self.findQuoteByNumber(customerId, quoteId);
-                        }, 500);            
+                        }, 500);
                     },
                     error: function(err) {
                         console.log('error', err);
-                        
+
                         setTimeout(function(){
                             self.model.isLoading(false);
                             self.findQuoteByNumber(customerId, quoteId);
@@ -332,6 +332,7 @@ define([
                 },
                 error: function (err) {
                     console.log('error', err);
+                    self.model.set('isEditMode', false);
                     self.model.get('wishlist').set('items', []).set('name', id);
 
                     self.render();
@@ -395,7 +396,7 @@ define([
         initialize: function() {
             var self = this;
             Backbone.MozuView.prototype.initialize.apply(this, arguments);
-            
+
             try {
                 this.originalData = this.model.toJSON() || {};
             } catch(e) {
@@ -578,13 +579,13 @@ define([
         },
         itemCheckbox: function(e) {
             $(this).prop('checked', !e.target.checked);
-            
+
             var checkboxes = $('[data-mz-value="add-to-cart-quote"]');
-            var checkedItems = [];      
-              
+            var checkedItems = [];
+
             checkboxes.each(function() {
                 checkedItems.push($(this).prop('checked'));
-            }); 
+            });
 
             var allItemsSelected = checkedItems.every(function(val, i, arr) {
                 return val === true;
@@ -672,9 +673,13 @@ define([
         },
         editWishlist: function (e, row) {
             //var rowIndex = $(e.target).parents('.mz-grid-row').data('mzRowIndex');
-            window.views.currentPane.model.setWishlist(row);
-            window.views.currentPane.model.setEditMode(true);
-            window.views.currentPane.render();
+            if ( row.get('name').indexOf('New') > -1 ){
+               window.views.currentPane.model.setWishlist(row);
+                window.views.currentPane.model.setEditMode(true);
+                window.views.currentPane.render();
+            } else {
+              $('[data-mz-action="viewQuote"]').trigger('click',[ row.get('name') ]);
+            }
         },
         addWishlistToCart: function (e, row) {
             row.addToCart();
