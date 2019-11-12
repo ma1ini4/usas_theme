@@ -276,41 +276,49 @@ define([
         },
         viewQuote: function (e, data) {
             var self = this;
-            self.model.isLoading(true);
-            api.get('cart').then(function(cart) {
-                var quoteId = data,
-                    customerId = $('[data-mz-value="customerId"]').val();
-                if ( ! quoteId ) {
-                  quoteId = $('[data-mz-value="quoteId"]').val();
-                }
-                var url = '/pricelist/runSchedule?quoteId=' + quoteId + '&customerId=' + customerId + '&cartId=' + cart.data.id;
+            $('[data-mz-validationmessage-for="quoteId"]').html('');
 
-                console.log(cart.data);
-                console.log(customerId, quoteId, url);
-
-                self.model.set('isEditMode', true);
-                $.ajax({
-                    url: url,
-                    method: 'GET',
-                    success: function (res) {
-                        console.log('success', res);
-
-                        setTimeout(function () {
-                            self.render();
-                            self.findQuoteByNumber(customerId, quoteId);
-                        }, 500);
-                    },
-                    error: function(err) {
-                        console.log('error', err);
-
-                        setTimeout(function(){
-                            self.model.isLoading(false);
-                            self.findQuoteByNumber(customerId, quoteId);
-                            self.render();
-                        }, 500);
-                    }
+            var quoteId = data,
+                customerId = $('[data-mz-value="customerId"]').val();
+            if ( ! quoteId ) {
+              quoteId = $('[data-mz-value="quoteId"]').val();
+            }
+            var regEx = /4000-\d{10}-\d+/;
+            var isValidQuote = regEx.test(quoteId);
+            if (isValidQuote) {
+                self.model.isLoading(true);
+                api.get('cart').then(function(cart) {
+                    var url = '/pricelist/runSchedule?quoteId=' + quoteId + '&customerId=' + customerId + '&cartId=' + cart.data.id;
+    
+                    console.log(cart.data);
+                    console.log(customerId, quoteId, url);
+    
+                    self.model.set('isEditMode', true);
+                    $.ajax({
+                        url: url,
+                        method: 'GET',
+                        success: function (res) {
+                            console.log('success', res);
+    
+                            setTimeout(function () {
+                                self.render();
+                                self.findQuoteByNumber(customerId, quoteId);
+                            }, 500);
+                        },
+                        error: function(err) {
+                            console.log('error', err);
+    
+                            setTimeout(function(){
+                                self.model.isLoading(false);
+                                self.findQuoteByNumber(customerId, quoteId);
+                                self.render();
+                            }, 500);
+                        }
+                    });
                 });
-            });
+            } else {
+                $('[data-mz-validationmessage-for="quoteId"]').html(Hypr.getLabel('viewQuoteValidationError'));
+            }
         },
         findQuoteByNumber: function (customerId, id) {
             var self = this;
@@ -646,19 +654,19 @@ define([
             {
                 displayName: 'Delete',
                 action: 'deleteWishlist'
-            },
+            }
             // {
             //     displayName: 'Copy',
             //     action: 'copyWishlist'
             // },
-            {
-                displayName: 'Add to Cart',
-                action: 'addWishlistToCart',
-                hidden: function () {
-                    // 1008 = Can place orders
-                    return !this.hasRequiredBehavior(1008);
-                }
-            }
+            // {
+            //     displayName: 'Add to Cart',
+            //     action: 'addWishlistToCart',
+            //     hidden: function () {
+            //         // 1008 = Can place orders
+            //         return !this.hasRequiredBehavior(1008);
+            //     }
+            // }
         ],
         relations: {
             items: Backbone.Collection.extend({

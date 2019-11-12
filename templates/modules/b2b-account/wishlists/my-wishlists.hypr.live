@@ -7,14 +7,14 @@
         </h3>
         <div class="wishlist-edit-form-section find-quote">
             <!-- <span class="productpicker-label">{{labels.b2bWishlistName}}</span> -->
-            <span class="find-quote-text">{{ labels.b2bFindLabel }}</span>
+            <span class="find-quote-text {% if model.isEditMode %} hidden{%endif%}">{{ labels.b2bFindLabel }}</span>
             <div class="flex">
-                <form class="quoteId" autocomplete="off">
+                <form class="quoteId {% if model.isEditMode %} hidden{%endif%}" autocomplete="off">
                     <input type="text" autocomplete="off" name="quoteId" id="quoteId" data-mz-value="quoteId" placeholder="{{labels.b2bFindPlaceholder}}" />
                 </form>
                     <input type="text" name="customerId" id="customerId" data-mz-value="customerId"
                         value="{{user.accountId }}" class="hidden"/>
-                    <button class="primary-btn" data-mz-action="viewQuote">{{ labels.b2bFindQuote }}</button>
+                    <button class="primary-btn {% if model.isEditMode %} hidden{%endif%}" data-mz-action="viewQuote">{{ labels.b2bFindQuote }}</button>
                     {% if model.isEditMode %}
                         <button class="secondary-btn" data-mz-action="viewAll" style="margin-left: auto;">{{ labels.b2bViewAllQuotes }}</button>
                     {% endif %}

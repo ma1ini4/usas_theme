@@ -650,5 +650,6 @@
   "calibrationService": "Pipette Calibration and Service",
   "calibrationServiceText": "Regular maintenance keeps your pipettes within specifications.",
   "customProducts": "Custom and OEM Products",
-  "customProductsText": "Made-to-measure racks, custom packaging or colors, and more."
+  "customProductsText": "Made-to-measure racks, custom packaging or colors, and more.",
+  "viewQuoteValidationError": "Please enter a valid quote number provided by your sales rep."
 }
