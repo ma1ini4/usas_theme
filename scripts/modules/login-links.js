@@ -632,7 +632,10 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
             }
         });
         $('body').on('click', '#cart-checkout-login', function (e) {
-            $('.login-link-text[data-mz-action="lite-registration"]').trigger('click');
+            $(".second-tab").hide();
+            $(".third-tab").show();
+            $('#liteRegistrationModal').modal('show');
+
         });
         $('#my-account').attr('href', '#');
         $('#my-account-mobile').attr('href','#');
