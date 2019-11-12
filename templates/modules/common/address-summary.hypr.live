@@ -5,10 +5,7 @@
     {% endif %}
     {% if model.address.address3 %}
         <div>{{ model.address.address3 }}</div>
-    {% endif %}
-    {% if model.address.address4 %}
-        <div>{{ model.address.address4 }}</div>
-    {% endif %}
+    {% endif %}    
     <div>{{ model.address.cityOrTown }} {{ model.address.stateOrProvince }} {{ model.address.postalOrZipCode }}</div>
     <div>{{ model.address.countryCode }}</div>
     {% if model.phoneNumbers.home %}
