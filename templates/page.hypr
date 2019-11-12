@@ -166,8 +166,8 @@
                 <div class="col-sm-4 col-xs-12">
                   <div id="copyright">
                     <div class="mz-pagefooter-copyright-links">
-                      <a href="#">Site map</a> |
-                      <a href="#">Privacy and security</a>
+                      <a href="/site-map">Site map</a> |
+                      <a href="/privacy-policy">Privacy and security</a>
                     </div>
                   </div>
                 </div>
