@@ -190,8 +190,8 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
                 window.alert(Hypr.getLabel('searchLessCharacters'));
                 e.preventDefault();
             }
-            var newString = searchVal.replace(/[^\d\-]+/g, '');
-            var regEx = new RegExp(/\d{4}\-\d{4}/g);
+            var newString = searchVal.replace(/[^\d\-\C]+/g, '');
+            var regEx = new RegExp(/\d{4}\-\d{4}|CC\d{4}\-\d{4}/g);
             var isProductCode = regEx.test(newString);            
             var savedString = newString;
             
