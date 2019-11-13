@@ -11,7 +11,8 @@
         </h2>
 
         <div class="mz-accountsettings-section">
-            <span class="mz-accountsettings-label mz-account-settings-label-name"><strong>Account ID: {% with model.attributes|findwhere("attributeFQN", "tenant~b2b-account-name") as accountAttr %}{{ accountAttr.values|first }}{% endwith %}</strong></span>
+            <span class="mz-accountsettings-label mz-account-settings-label-name"><strong>Account ID:
+                    {{ model.id }}</strong></span>
         </div>
 
         <div class="mz-accountsettings-section">
