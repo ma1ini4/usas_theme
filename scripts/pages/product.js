@@ -57,7 +57,7 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
     function initslider_mobile() {
         if ($('#productmobile-Carousel.slick-initialized').length > 0) {
             $('#productmobile-Carousel').slick('unslick');
-        }
+        }        
 
         slider_mobile = $('#productmobile-Carousel').slick({
             slidesToShow: 1,
@@ -189,6 +189,11 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
                         blockUiLoader.unblockUi();
                     }
                 } catch (e) {}
+            }
+            if (!$('.mobileCarousel').length) {
+                $('.mz-productimages-main').removeClass('hidden-xs');
+            } else {
+                $('.mz-productimages-main').addClass('hidden-xs');
             }
         },
         quantityMinus: function() {
