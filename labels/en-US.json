@@ -651,5 +651,6 @@
   "calibrationServiceText": "Regular maintenance keeps your pipettes within specifications.",
   "customProducts": "Custom and OEM Products",
   "customProductsText": "Made-to-measure racks, custom packaging or colors, and more.",
-  "viewQuoteValidationError": "Please enter a valid quote number provided by your sales rep."
+  "viewQuoteValidationError": "Please enter a valid quote number provided by your sales rep.",
+  "b2bAccountAddressNote": "*Please, contact USAS to change your shipping details"
 }

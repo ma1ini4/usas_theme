@@ -694,7 +694,6 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
                 isAddressValidationEnabled = HyprLiveContext.locals.siteContext.generalSettings.isAddressValidationEnabled,
                 editingContact = self.model.get('editingContact'),
                 modelIsValid = this.validateAddress(editingContact.validation);
-            console.log(modelIsValid);
             if (modelIsValid) {
                 var operation = this.doModelAction('saveContact', { forceIsValid: isAddressValidationEnabled, editingView: self }); // hack in advance of doing real validation in the myaccount page, tells the model to add isValidated: true
                 if (operation) {
@@ -711,7 +710,6 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         validateAddress: function(validationObj) {
             var me = this;
             var modelIsValid = [];
-            console.log(validationObj);
             for(var key in validationObj) {
                 var value = 'editingContact.' + key;
                 var keyValue = validationObj[key];
@@ -729,8 +727,8 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
                     }
                 } 
                 if (key === 'address.postalOrZipCode') {
-                    // if ((keyValue[1].pattern).test(input.val())) {
-                    if (input.val()) {
+                    input = me.$el.find('[name="postal-code"][data-mz-value="' + value + '"]');
+                    if ((keyValue[1].pattern).test(input.val())) {
                         modelIsValid.push(true);
                         input.next('[data-mz-validationmessage-for="' + value + '"]').text('');
                     } else {
