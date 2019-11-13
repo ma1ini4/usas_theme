@@ -676,6 +676,7 @@ require(["modules/jquery-mozu",
             if (user.isAnonymous) {
                 me.model.set('createAccount', true);
             }
+
             this.model.on('passwordinvalid', function(message) {
                 me.$('[data-mz-validationmessage-for="password"]').text(message);
             });
@@ -683,7 +684,17 @@ require(["modules/jquery-mozu",
                 me.$('[data-mz-validationmessage-for="emailAddress"]').html(Hypr.getLabel("customerAlreadyExists", user, encodeURIComponent(window.location.pathname)));
             });
         },
-
+        render: function() {
+          var me = this;
+          var user = require.mozuData('user');
+          if (user.isAnonymous && me.model.get('createAccount')) {
+              var billingEmail = me.model.get('billingInfo').get('billingContact').get('email');
+              if ( billingEmail ) {
+                me.model.set('emailAddress', billingEmail);
+             }
+          }
+          Backbone.MozuView.prototype.render.apply(this);
+        },
         submit: function () {
             console.log(this.model);
             var self = this;
