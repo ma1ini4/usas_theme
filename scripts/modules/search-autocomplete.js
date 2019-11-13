@@ -198,8 +198,7 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
             if (isProductCode) {
                 e.preventDefault();
                 blockUiLoader.globalLoader();
-                newString = newString.replace('-', '');
-                // var url = 'https://' + window.location.hostname + '/search/?categoryId=' + Hypr.getThemeSetting('allProductsCategoryId') + '&query=' + newString;
+                // newString = newString.replace('-', '');
                 var url = '/search?categoryId=' + Hypr.getThemeSetting('allProductsCategoryId') + '&query=' + newString;
 
                 $.ajax({
@@ -209,10 +208,7 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
                     contentType: 'html',
                     beforeSend: function(req){
                         req.setRequestHeader('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3');
-                        // req.setRequestHeader('Accept-Encoding', 'gzip, deflate');
                         req.setRequestHeader("Access-Control-Allow-Origin", "*");
-                        // req.setRequestHeader('Access-Control-Request-Headers', 'content-type');
-                        // req.setRequestHeader('Access-Control-Request-Method', 'GET');
                     },  
                     success: function (data) {
                         var items = $(data).find('#product-list-ul .mz-productlist-item');
