@@ -19,7 +19,7 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
                     if(data.accountType === "B2B") {
                         $('.my-account-popup-quotes').show();
                     } else {
-                        $('.my-account-popup-quotes').hide();                        
+                        $('.my-account-popup-quotes').hide();
                     }
                 }
             });
@@ -496,7 +496,7 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
                 $(".second-tab").show();
                 $(".third-tab").hide();
             }
-            
+
             self.modalEl.modal('show');
         };
 
@@ -515,20 +515,6 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
                     email: $(this).parents('#login').find('[data-mz-login-email]').val(),
                     password: $(this).parents('#login').find('[data-mz-login-password]').val()
                 }).then(function () {
-                  var serviceurl = '/custom/processAccount';
-                  var apiData = require.mozuData('apicontext');
-                   $.ajax({
-                      url: serviceurl,
-                      headers: apiData.headers,
-                      method: 'GET',
-                      //data: { id: me.model.id },
-                      success: function(response) {
-                        console.log('account ready');
-                      },
-                      error: function(jqXHR, exception) {
-                        console.log("error ", jqXHR);
-                      }
-                    });
                     if ( returnUrl ){
                         window.location.href= returnUrl;
                     }else{
