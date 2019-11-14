@@ -929,7 +929,7 @@
     "returnsInfo": "Return Item",
     "searchExpandOnFocus": true,
     "searchStorePlaceHolder": "Enter City, State or ZIP",
-    "showAddressTypeDropdown": true,
+    "showAddressTypeDropdown": false,
     "showBreadcrumbs": true,
     "showCartItemDimensions": true,
     "showCartItemImage": true,

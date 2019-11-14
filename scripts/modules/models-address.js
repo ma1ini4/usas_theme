@@ -59,7 +59,7 @@
                     msg: Hypr.getLabel("countryMissing")
                 },
                 addressType: {
-                    required: true,
+                    required: false,
                     msg: Hypr.getLabel("addressTypeMissing")
                 },
                 stateOrProvince: {
