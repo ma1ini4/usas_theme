@@ -174,9 +174,9 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
         template: Hypr.getTemplate('modules/common/login-popover').render(),
         bindListeners: function (on) {
             var onOrOff = on ? "on" : "off";
-            this.$parent[onOrOff]('click', '[data-mz-action="forgotpasswordform"]', this.slideRight);
-            this.$parent[onOrOff]('click', '[data-mz-action="loginform"]', this.slideLeft);
-            this.$parent[onOrOff]('click', '[data-mz-action="submitlogin"]', this.login);
+            // this.$parent[onOrOff]('click', '[data-mz-action="forgotpasswordform"]', this.slideRight);
+            this.$parent[onOrOff]('click', '[data-mz-action="loginform"]', this.dismissPopover);
+            // this.$parent[onOrOff]('click', '[data-mz-action="submitlogin"]', this.login);
             this.$parent[onOrOff]('click', '[data-mz-action="recaptchasubmitlogin"]', this.loginRecaptcha.bind(this));
             this.$parent[onOrOff]('click', '[data-mz-action="submitforgotpassword"]', this.retrievePassword);
             this.$parent[onOrOff]('keypress', 'input', this.handleEnterKey);
@@ -186,10 +186,6 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
             DismissablePopover.prototype.onPopoverShow.apply(this, arguments);
             this.panelWidth = this.$parent.find('.mz-l-slidebox-panel').first().outerWidth();
             this.$slideboxOuter = this.$parent.find('.mz-l-slidebox-outer');
-
-            if (this.$el.hasClass('mz-forgot')){
-                this.slideRight();
-            }
 
             var recaptchaType = HyprLiveContext.locals.themeSettings.recaptchaType;
 
@@ -237,6 +233,9 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
         slideRight: function (e) {
             if (e) e.preventDefault();
             this.$slideboxOuter.css('left', -this.panelWidth);
+        },
+        dismissPopover: function () {
+            $('#page-wrapper').click();
         },
         slideLeft: function (e) {
             if (e) e.preventDefault();

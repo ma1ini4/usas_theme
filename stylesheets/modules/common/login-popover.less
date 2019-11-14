@@ -1,9 +1,12 @@
 ﻿.mz-popover-login {
+    display: flex;
+    flex-direction:column;
     @popoverWidth: 200px;
     width: @popoverWidth;
 
     .mz-login-form, .mz-forgot-password {
         min-width: @popoverWidth;
+        // min-width: 200px;
     }
 
     .mz-login-form {
@@ -20,9 +23,9 @@
     }
 
     .mz-popover-action {
-        text-align: right;
+        text-align: left;
         .mz-button {
-            margin-top: 5px;
+            margin: 5px 0;
         }
     }
 
