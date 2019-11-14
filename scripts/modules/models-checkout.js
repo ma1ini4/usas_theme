@@ -488,6 +488,7 @@
                         newMethod = lowestValue;
                     }
                     if (newMethod) {
+                        blockUiLoader.globalLoader();
                         this.set(newMethod);
                         this.applyShipping(resetMessage);
                     }
@@ -509,6 +510,7 @@
                             })
                             .ensure(function() {
                                 me.isLoading(false);
+                                blockUiLoader.unblockUi();
                                 me.calculateStepStatus();
                                 me.parent.get('billingInfo').calculateStepStatus();
                                 if (resetMessage) {
@@ -523,7 +525,6 @@
                                     order.get('billingInfo').get('billingContact').set('email', oBilling.email);
                                     order.get('billingInfo').trigger('billingContactUpdate');
                                 }
-
                             });
                     }
                 },
