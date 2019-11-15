@@ -44,7 +44,7 @@
 								<div class="mz-carttable-item-code">
 									{{ labels.item }}#:
 									<em>
-										{% if items.product.variationProductCode and not items.product.variationProductCode.length == 0 %}
+										{% if items.product.variationProductCode and items.product.variationProductCode.length != 0 %}
 											{{ items.product.variationProductCode }}
 										{% else %}
 											{{ items.product.productCode }}

@@ -14,7 +14,13 @@
 
                   <div class="mz-carttable-item-title" >{{ item.itemName |safe }}</div>
                   <div class="mz-carttable-item-code">
-                    {{ labels.item }}# <span>{{ item.itemCode }}</span>
+                    {{ labels.item }}# <span>
+                      {% if items.product.variationProductCode and items.product.variationProductCode.length != 0 %}
+                        {{ items.product.variationProductCode }}
+                      {% else %}
+                        {{ items.product.productCode }}
+                      {% endif %}
+                    </span>
                   </div>
 
                   <div class="mz-propertylist">

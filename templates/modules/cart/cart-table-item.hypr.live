@@ -18,7 +18,7 @@
         <a class="mz-carttable-item-title" href="{{item.product.url}}">{{ item.product.name|safe }}</a>
         <span class="mz-carttable-item-code">
           {{ labels.item }}#: <em>
-            {% if item.product.variationProductCode and not item.product.variationProductCode.length == 0 %}
+            {% if item.product.variationProductCode and item.product.variationProductCode.length != 0 %}
               {{ item.product.variationProductCode }}
             {% else %}
               {{ item.product.productCode }}
