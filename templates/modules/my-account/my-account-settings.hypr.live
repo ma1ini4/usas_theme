@@ -86,6 +86,6 @@
 </div>
 
 {% if editing %}
-<button class="primary-btn mz-accountsettings-editdone" data-mz-action="finishEdit">{{ labels.save }}</button>
-<button class="secondary-btn mz-accountsettings-editdone" data-mz-action="cancelEdit">{{ labels.cancel }}</button>
+<button class="primary-btn mz-accountsettings-editdone" data-mz-action="finishEdit" style="margin-top: 7px;">{{ labels.save }}</button>
+<button class="secondary-btn mz-accountsettings-editdone" data-mz-action="cancelEdit" style="margin-top: 7px;">{{ labels.cancel }}</button>
 {% endif %}
