@@ -27,8 +27,8 @@
             <a href="/myaccount" tabindex="0" data-mz-action="my-account" id="my-account" role="button"
                 data-trigger="click" data-toggle="popover" data-content=""
                 class="">{{user.firstName|default(user.email)}}</a>
-            <span class="separator">&nbsp;/&nbsp;</span>
-            <a href="/logout" data-mz-action="logout" class="">{{ labels.logOut }}</a>
+            <span class="separator hidden-sm">&nbsp;/&nbsp;</span>
+            <a href="/logout" data-mz-action="logout" class="hidden-sm">{{ labels.logOut }}</a>
             <div id="my-account-content" style="display:none;">
                 <div class="my-account-details">
                     <a href="/myaccount#Account Information">
