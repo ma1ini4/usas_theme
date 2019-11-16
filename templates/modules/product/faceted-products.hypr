@@ -27,7 +27,7 @@
 	        {% dropzone "sidebar-below-facets" scope="template" %}
 	    </div>
 	{% endif %}
-	<div class="row col-xs-12 col-sm-8 col-md-9 flex-column bottom-border">
+	<div class="row {% if model.facets %}col-xs-12 col-sm-8 col-md-9{%else%} col-md-12{%endif%} flex-column bottom-border">
 		<div class="mz-l-paginatedlist pull-right{% if model.facets %} col-xs-12 {%else%} col-xs-12{% endif %}">
 			<div class="mz-l-paginatedlist pull-right main-directory-container">
 				<div class="title-sort-breadcrumb-wrapper">
