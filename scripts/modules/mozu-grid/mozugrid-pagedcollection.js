@@ -4,7 +4,7 @@ var MozuGridPagedCollection = Backbone.MozuPagedCollection.extend({
     mozuType: 'search',
     defaults: {
         autoload: true,
-        pageSize: 5,
+        pageSize: 50,
         startIndex: 0
     },
     helpers: ['gridItems', 'columnNames'],
