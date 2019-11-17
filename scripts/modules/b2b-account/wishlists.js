@@ -16,8 +16,10 @@ define([
   "modules/backbone-pane-switcher",
   "modules/product-picker/product-modal-view",
   "modules/mozu-utilities",
-  "modules/message-handler"
-], function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollection, PagingViews, ProductModels, WishlistModels, SearchAutoComplete, CartModels, ProductPicker, PaneSwitcher, ProductModalViews, MozuUtilities, MessageHandler) {
+  "modules/message-handler", 
+  'modules/block-ui'
+],
+function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollection, PagingViews, ProductModels, WishlistModels, SearchAutoComplete, CartModels, ProductPicker, PaneSwitcher, ProductModalViews, MozuUtilities, MessageHandler, blockUiLoader) {
     var ALL_LISTS_FILTER = "";
     var USER_LISTS_FILTER = "userId eq " + require.mozuData('user').userId;
     var WishlistModel = WishlistModels.Wishlist.extend({
@@ -120,44 +122,48 @@ define([
 
         },
         addToCart: function (selectedItems) {
-          this.isLoading(true);
-          var self = this;
-          var items = this.get('items').toJSON();
+          blockUiLoader.globalLoader();
+            this.isLoading(true);
+            var self = this;
+            var items = this.get('items').toJSON();
 
-          if (selectedItems && selectedItems.length !== 0) {
-            var newItems = [];
+            if (selectedItems && selectedItems.length !== 0) {
+                var newItems = [];
 
-            _.each(items, function(item){
-                selectedItems.map(function(id) {
-                    if (item.id === id) {
-                        newItems.push(item);
+                _.each(items, function(item){
+                    selectedItems.map(function(id) {
+                        if (item.id === id) {
+                            newItems.push(item);
+                        }
+                    });
+                });
+                items = newItems;
+            } else {
+                items = [];
+            }
+
+            var cart = CartModels.Cart.fromCurrent();
+            var products = [];
+            _.each(items, function(item) {
+                var isItemDigital = _.contains(item.product.fulfillmentTypesSupported, "Digital");
+
+                products.push({
+                    quantity : item.quantity,
+                    data: item.data,
+                    fulfillmentMethod : (!isItemDigital ? "Ship" : "Digital"),
+                    product: {
+                        productCode : item.product.productCode,
+                        variationProductCode : item.product.variationProductCode,
+                        bundledProducts : item.product.bundledProducts,
+                        options : item.product.options || []
                     }
                 });
             });
-            items = newItems;
-          }
-
-          var cart = CartModels.Cart.fromCurrent();
-          var products = [];
-          _.each(items, function(item) {
-              var isItemDigital = _.contains(item.product.fulfillmentTypesSupported, "Digital");
-
-              products.push({
-                  quantity : item.quantity,
-                  data: item.data,
-                  fulfillmentMethod : (!isItemDigital ? "Ship" : "Digital"),
-                  product: {
-                      productCode : item.product.productCode,
-                      variationProductCode : item.product.variationProductCode,
-                      bundledProducts : item.product.bundledProducts,
-                      options : item.product.options || []
-                  }
-              });
-          });
-          cart.apiModel.addBulkProducts({ postdata: products, throwErrorOnInvalidItems: true}).then(function(){
+            cart.apiModel.addBulkProducts({ postdata: products, throwErrorOnInvalidItems: true}).then(function(){
                 window.location = (HyprLiveContext.locals.siteContext.siteSubdirectory || '') + "/cart";
             }, function (error) {
                 self.isLoading(false);
+                blockUiLoader.unblockUi();
                 if (error.items) {
                     var errorMessage = "";
                     _.each(error.items, function(error){
@@ -227,8 +233,7 @@ define([
     var WishlistsView = Backbone.MozuView.extend({
         templateName: 'modules/b2b-account/wishlists/my-wishlists',
         additionalEvents: {
-            "change [data-mz-value='wishlist-quantity']": "onQuantityChange",
-            "click [data-mz-action='viewAll']": "onQuantityChange"
+            "change [data-mz-value='wishlist-quantity']": "onQuantityChange"
         },
         initialize: function(){
             var self = this;
@@ -286,29 +291,25 @@ define([
             var regEx = /4000-\d{10}-\d+/;
             var isValidQuote = regEx.test(quoteId);
             if (isValidQuote) {
+                blockUiLoader.globalLoader();
                 self.model.isLoading(true);
                 api.get('cart').then(function(cart) {
                     var url = '/pricelist/runSchedule?quoteId=' + quoteId + '&customerId=' + customerId + '&cartId=' + cart.data.id;
-    
-                    console.log(cart.data);
-                    console.log(customerId, quoteId, url);
     
                     self.model.set('isEditMode', true);
                     $.ajax({
                         url: url,
                         method: 'GET',
                         success: function (res) {
-                            console.log('success', res);
-    
                             setTimeout(function () {
                                 self.render();
                                 self.findQuoteByNumber(customerId, quoteId);
                             }, 500);
                         },
                         error: function(err) {
-                            console.log('error', err);
-    
                             setTimeout(function(){
+                                blockUiLoader.unblockUi();
+
                                 self.model.isLoading(false);
                                 self.findQuoteByNumber(customerId, quoteId);
                                 self.render();
@@ -328,28 +329,25 @@ define([
                 url: url,
                 method: 'GET',
                 success: function (res) {
-                    console.log(res);
                     self.model.set('isEditMode', true);
                     self.model.set('wishlist', res);
                     self.model.get('wishlist').set('items', res.items).set('name', res.name);
                     window.views.currentPane.render();
-                    // self.render();
-
-                    // self.render(res, true);
                     self.model.isLoading(false);
+                    blockUiLoader.unblockUi();
                 },
                 error: function (err) {
-                    console.log('error', err);
                     self.model.set('isEditMode', false);
                     self.model.get('wishlist').set('items', []).set('name', id);
-
                     self.render();
                     self.model.isLoading(false);
-                    console.log('model', self.model);
+                    blockUiLoader.unblockUi();
                 }
             });
         },
         viewAll: function () {
+            blockUiLoader.globalLoader();
+
             $('[data-mz-action="cancelWishlistEdit"]').trigger('click');
         },
         render: function () {
@@ -445,15 +443,18 @@ define([
             if (this.model.get('editingNew') && this.model.get('id')){
                 this.model.deleteWishlist((this.model.get('id'))).then(function(){
                     self.saveAndCloseWishlistEdit();
+                    blockUiLoader.unblockUi();
                 });
             } else if (!this.model.get('id')){
                   self.saveAndCloseWishlistEdit();
+                    blockUiLoader.unblockUi();
             } else {
                 // if !this.model.get('id'), this.originalData should be an empty,
                 // and there is no wishlist to save so this is fine.
                 this.model.set(self.originalData);
                 this.saveWishlist().then(function(){
                   self.saveAndCloseWishlistEdit();
+                    blockUiLoader.unblockUi();
                 });
             }
 
