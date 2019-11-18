@@ -115,14 +115,16 @@ define([
     function navContainerVisible(el) {
       return $(el).next('.mz-sitenav-sub-container').css('display') === 'block';
     }
+    function cartContainerVisible(el) {
+      return $(el).next('#global-cart').css('display') === 'block';
+    }
     function touchHandler(el) {
       $(el).bind('touchstart', function (e) {        
         $(this).click(function () {
           return false;
         });
 
-        var isVisible = navContainerVisible(e.target);
-        
+        var isVisible = navContainerVisible(e.target) ? navContainerVisible(e.target) : cartContainerVisible(e.target);
         if (!isVisible) {
           $(e.target).parents('li.top-layer').trigger('mouseover');          
         } else {
@@ -134,10 +136,10 @@ define([
       var isTablet = ($(window).width() >= 767 && $(window).width() <= 1024) ? true : false;
 
       if (isTablet) {
-        $('.top-layer .mz-sitenav-item-inner > a.mz-sitenav-link').each(function () {     
+        $('.top-layer .mz-sitenav-item-inner > a.mz-sitenav-link, .mz-utilitynav-link-cart').each(function () {
           $('[data-mz-action="launchforgotpassword"]').popover('hide');
           touchHandler(this);
-        });   
+        });
       } 
     }
     $(document).ready(function() {
@@ -155,7 +157,9 @@ define([
         truncateUsername();
         navLinksActions();
         // $(window).load(enableNavOnLoad());
-
+        $('.mz-utilitynav-link-cart').click(function() {
+          $('[data-mz-action="launchforgotpassword"]').popover('hide');
+        });
         $('.mz-sitenav-item').hover(          
           function() {
             $('[data-mz-action="launchforgotpassword"]').popover('hide');
