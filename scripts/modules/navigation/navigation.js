@@ -134,7 +134,8 @@ define([
       var isTablet = ($(window).width() >= 767 && $(window).width() <= 1024) ? true : false;
 
       if (isTablet) {
-        $('.top-layer .mz-sitenav-item-inner > a.mz-sitenav-link').each(function () {            
+        $('.top-layer .mz-sitenav-item-inner > a.mz-sitenav-link').each(function () {     
+          $('[data-mz-action="launchforgotpassword"]').popover('hide');
           touchHandler(this);
         });   
       } 
@@ -155,11 +156,12 @@ define([
         navLinksActions();
         // $(window).load(enableNavOnLoad());
 
-        $('.mz-sitenav-item').hover(
+        $('.mz-sitenav-item').hover(          
           function() {
+            $('[data-mz-action="launchforgotpassword"]').popover('hide');
             var $this = $(this);
             var $subMenu = $this.find('.mz-sitenav-sub-container');
-            $subMenu.stop(true, true).delay(200).fadeIn(200, 'easeInOutQuad');
+            $subMenu.stop(true, true).delay(200).fadeIn(200, 'easeInOut');
           },
           function() {
             var $this = $(this);
