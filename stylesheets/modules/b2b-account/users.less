@@ -19,12 +19,15 @@
                 
                 &:first-child {
                     width: 50%;
-                    min-width: 150px;
+                    max-width: 150px;
                     text-overflow: ellipsis;
                     overflow: hidden;
                 }
                 &:not(:first-child) {
                     text-align: center;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    width: 50px;
                 }            
             }
         }
