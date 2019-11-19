@@ -129,7 +129,7 @@
             {% include "modules/secondary-nav" %}
           {% endblock secondary-nav %}
             <div role="main" id="page-content" class="mz-l-pagecontent">
-                <div class="container">
+                <div class="{% if pageContext.cmsContext.template.path == "home"%}container-fluid{%else%}container{%endif%}">
                 <div class="row">
                   
                   {% block body-content %}
