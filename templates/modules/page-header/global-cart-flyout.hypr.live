@@ -131,7 +131,7 @@
 
 {% else %}
 	<div class="text-center">
-		<div class="cart-div">Your shopping basket is empty</div>
+		<div class="cart-div">Your shopping cart is empty</div>
 		{% if themeSettings.globalCartEmptyBasketFooter %}
 		  <a {% if themeSettings.globalCartEmptyBasketKickerLink %} href="{{ themeSettings.globalCartEmptyBasketKickerLink }}"{% else %} href="/home" {% endif %}>
 		  	<img src="{% make_url "image" themeSettings.globalCartEmptyBasketFooter.imageUrl with width=370 as_parameters %}"  />

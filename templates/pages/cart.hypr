@@ -50,11 +50,11 @@
 	<!-- Show empty cart if model is empty -->
 	{% else %}
 			<div class="cart-div">
-				<h3>Your bag is empty - continue shopping!</h3>
+				<h3>Your cart is empty - continue shopping!</h3>
 			</div>
 			<div class="cart-div">
 	            <a href="/" class="btn">
-	            	<div class="primary-btn"> Continue Shopping</div>
+	            	<div class="primary-btn">Continue Shopping</div>
 	            </a>
 	        </div>
 	{% endif %}
