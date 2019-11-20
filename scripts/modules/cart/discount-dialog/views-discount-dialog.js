@@ -344,6 +344,7 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
         templateName: "modules/cart/discount-modal/discount-modal",
         initialize: function () {
             var self = this;
+            console.log('self', self);
             this.listenTo(this.model, 'newDiscountSet', function () {
                 self.render();
             });

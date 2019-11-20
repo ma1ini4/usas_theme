@@ -1,7 +1,11 @@
 .mz-discount-modal {
 
     .modal-dialog{
-        width: 90%;
+        width: 75%;
+
+        @media @mobile {
+            width: 90%;
+        }
     }
     .modal-close-x {
         position: absolute;
@@ -13,6 +17,16 @@
     }
     .modal-body {
         overflow: hidden;
+        .mz-productimages {
+            padding: 15px 30px;
+
+            & > .row.hidden-xs.hidden-sm {
+                margin: 15px;
+                .rollover {
+                    display: none;
+                }
+            }
+        }
         .mz-productlist-tiled .mz-productlist-item {
             width: 30%;
             margin: 0 10%;

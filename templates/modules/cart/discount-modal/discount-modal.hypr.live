@@ -14,5 +14,5 @@
 {% endblock modal-body %} 
      
 {% block modal-footer %}
-    <button type="button" class="mz-button" data-mz-action="handleDialogCancel">Decline Discount</button>
+    <button type="button" class="mz-button secondary-btn" data-mz-action="handleDialogCancel">Decline Discount</button>
 {% endblock modal-footer %}
