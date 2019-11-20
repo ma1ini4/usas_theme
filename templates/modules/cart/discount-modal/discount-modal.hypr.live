@@ -1,6 +1,8 @@
 {% extends "modules/common/modal-dialog" %}
 
 {% block modal-header %} 
+    <button type="button" class="close modal-close-x" aria-hidden="true" data-mz-action="handleDialogClose">×</button>
+
     <h3 class="modal-title">{{labels.bogaModalHeading}}</h3>
 {% endblock modal-header %}
  

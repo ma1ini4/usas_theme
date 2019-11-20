@@ -1,4 +1,5 @@
-define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore', 'hyprlivecontext', 'modules/views-modal-dialog', 'modules/api', 'modules/models-product', 'modules/views-location', 'modules/models-location', 'modules/models-discount', "modules/views-productimages", "modules/dropdown"], function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductModels, LocationViews, LocationModels, Discount, ProductImageViews, Dropdown) {
+define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore', 'hyprlivecontext', 'modules/views-modal-dialog', 'modules/api', 'modules/models-product', 'modules/views-location', 'modules/models-location', 'modules/models-discount', "modules/views-productimages", "modules/dropdown", 'bxslider', 'slick'], 
+function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductModels, LocationViews, LocationModels, Discount, ProductImageViews, Dropdown, bxslider, slickSlider) {
 
     var ChooseProductStepView = Backbone.MozuView.extend({
         templateName: "modules/cart/discount-modal/discount-choose-product",
@@ -19,6 +20,7 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
 
             var productModel = this.model.get('products').findWhere({ 'productCode': productCode + ''});
 
+            console.log(productModel);
             if (productModel)
             {
                 if (self._productStepView) {
@@ -110,9 +112,18 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
                     if(hasOption != -1) {
                         opt.isEnabled = true;
                     } else {
-                        if(o.get('value') === opt.value && selectedOptionsMap.get('attributeFQN') !== o.get('attributeFQN')) {
+                        console.log(o);
+                        console.log(selectedOptionsMap.filter(function(opt) {return opt.attributeFQN !== o.get('attributeFQN');}));
+                        var optionMatch = selectedOptionsMap.filter(function(opt) {return opt.attributeFQN !== o.get('attributeFQN');});
+                         if(o.get('value') === opt.value && optionMatch) {
                             clearSelectedOption = true;
                         }
+                        // if(o.get('value') === opt.value && selectedOptionsMap.get('attributeFQN') !== o.get('attributeFQN')) {
+                        //     clearSelectedOption = true;
+                        // }
+                        // if(o.get('value') === opt.value && selectedOptionsMap.filter(function(o) {return o.attributeFQN !== o.get('attributeFQN');})) {
+                        //     clearSelectedOption = true;
+                        // }
                     }
                 }
             });
@@ -149,6 +160,8 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
                 var otherOptions = _.filter(avaiableOptionsMap, function(o, idx){
                     return idx !== index;
                 });
+                    console.log('otherOptions',otherOptions);
+
                 var variation = {};
                 var otherOpts = hasOtherOptions(variation, otherOptions, selectedOptionsMap);
 
@@ -172,6 +185,7 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
         },
         render: function () {
             var me = this;
+            console.log('AddProductStepView', me);
             if (!me.postponeRender) {
                 if (this.oldOptions) {
                     me.model.get('options').map(function(option){
@@ -183,9 +197,14 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
                         }
                     });
                 } else {
-                    var selectedOptionsMap = me.model.get('options').map(function(o){
-                        return { attributeFQN: {value: o .value}};
+                    console.log(me.model.get('options').models);
+                    var selectedOptionsMap = me.model.get('options').models.map(function(o){
+                        console.log(o);
+                        console.log(o.get('value'));
+                        
+                        return { attributeFQN: {value: o.get('value')}};
                     });
+                    console.log('selectedOptionsMap',selectedOptionsMap);
                     if(selectedOptionsMap) {
                         markEnabledConfigOptions.call(this, selectedOptionsMap);
                     }
@@ -206,6 +225,40 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
                     }
                 });
             }
+            if (!$('.mobileCarousel').length) {
+                $('.mz-productimages-main').removeClass('hidden-xs');
+            } else {
+                $('.mz-productimages-main').addClass('hidden-xs');
+            }
+            initSlider();
+            initslider_mobile();
+            me.handleInfoTabs();
+            if (!me.model._parent) {
+                // self.model._parent.render();
+                $('[data-mz-action="onBackToProductSelection"]').hide();
+            }
+        },
+        handleInfoTabs: function() {
+            var me = this;
+            var InfoTabsView = Backbone.MozuView.extend({
+                templateName: 'modules/product/product-info-tabs',
+                render: function () {
+                    Backbone.MozuView.prototype.render.call(this);
+                }
+            });
+            var productInfoTab = me.model;
+
+            var infoTabsView = new InfoTabsView({
+                el: $('.info-tabs-details'),
+                model: productInfoTab
+            });
+            window.infoTabsView = infoTabsView;
+            productInfoTab.processInfoTabsContent();
+            infoTabsView.render();
+
+            window.infoTabsView.on('infoTabsCollectionViewReady', function () {
+                this.render();
+            });
         },
         onOptionChange: function (e) {
             return this.configure($(e.currentTarget));
@@ -270,23 +323,35 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
             e.preventDefault();
             try {
                 var discountModel = self.model.collection.parent.parent;
+                console.log('discountModel', discountModel);
+                console.log(self.model);
                 if (discountModel) {
                     var cartItem = discountModel.get('selectedCartItem');
+                    console.log('cartItem', cartItem);
                     if (cartItem) {
                         discountModel.parent.removeItem(cartItem).then(function () {
                             self.model.addToCart(true).then(function () {
                                 discountModel.completeDiscount();
                                 discountModel.trigger('newDiscountSet');
+                                window.location.reload();
                             });
                         });
                         return;
+                    } else {
+                        try {
+                            self.model.apiModel.addToCart(e).then(function () {
+                                discountModel.completeDiscount();
+                                discountModel.trigger('newDiscountSet');
+                                window.location.reload();
+                            });
+                        } catch(err) {
+                            console.log('err', err );
+                        }
                     }
-                    self.model.addToCart(true).then(function () {
-                        discountModel.completeDiscount();
-                        discountModel.trigger('newDiscountSet');
-                    });
                 }
-            } catch(error) {}
+            } catch(error) {
+                console.log('atc err', error);
+            }
         },
         addToWishlist: function () {
             this.model.addToWishlist();
@@ -438,7 +503,38 @@ define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore'
             var self = this;
             self.setInit();
         }
-	});
+    });
+    function initSlider() {
+        var slider = $('#productpager-Carousel').bxSlider({
+            slideWidth: 90,
+            minSlides: 4,
+            maxSlides: 4,
+            moveSlides: 1,
+            slideMargin: 15,
+            nextText: '<i class="fa fa-angle-right" aria-hidden="true"></i>',
+            prevText: '<i class="fa fa-angle-left" aria-hidden="true"></i>',
+            infiniteLoop: false,
+            hideControlOnEnd: true,
+            pager: false,
+            touchEnabled: false
+        });
+
+        window.slider = slider;
+    }
+
+    function initslider_mobile() {
+        if ($('#productmobile-Carousel.slick-initialized').length > 0) {
+            $('#productmobile-Carousel').slick('unslick');
+        }
+
+        var slider_mobile = $('#productmobile-Carousel').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            infinite: false,
+            dots: true
+        });
+    }
 
 	return DiscountModalView;
 });

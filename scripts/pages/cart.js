@@ -58,14 +58,14 @@ define(['modules/api',
               model: this.model
             });
 
-            //var prouctDiscounts = me.model.get('items').each(function(item){
+            // var prouctDiscounts = me.model.get('items').each(function(item){
             //    _.each(item.productDiscounts, function(prodDiscount){
             //       var discount = new Discount(prodDiscount);
             //       discount.getDiscountDetails().then(function(){
 
-            //       })
-            //    })
-            //})
+            //       });
+            //    });
+            // });
         },
         render: function() {
             preserveElement(this, ['.v-button', '.p-button', '#AmazonPayButton', '#applePayButton'], function() {

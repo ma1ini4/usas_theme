@@ -29,6 +29,7 @@ define(["backbone", 'underscore', 'hyprlive', 'modules/api', 'modules/models-pro
             if (nextDiscount) {
                 this.setNewDiscount(nextDiscount);
                 if( this.get('discount').get('hasMultipleProducts') ){
+                    console.log(this.get('discount'));
                     return this.get('discount').getDiscountDetails().then(function(discount){
                         self.get('discount').set('productCodes', discount.includedProductCodes);
                     });

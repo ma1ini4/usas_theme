@@ -1,4 +1,4 @@
-﻿<div class="mz-productoptions">
+﻿<div class="mz-productoptions flex-column">
     {% for option in model.options %}
     <div class="mz-productoptions-optioncontainer">
         {% if option.isRequired %}
@@ -7,11 +7,47 @@
         <label class="mz-productoptions-optionlabel">{{ option.attributeDetail.name }}</label>
         <div class="mz-productoptions-valuecontainer">
             {% if option.attributeDetail.inputType == "List" %}
-                <div class="dropdown">
+                <select {% if option.isMultiValue %}multiple{% endif %} class="mz-productoptions-option hide"
+                    data-mz-product-option="{{ option.attributeFQN }}">
+                    {% if not option.isMultiValue %}<option></option>{% endif %}
+                    {% for value in option.values %}
+                    <option {% if not value.isEnabled %} class="is-disabled" {% endif %}
+                        {% if value.isSelected %}selected="true" {%else%}class="hidden"{% endif %} value="{{value.value}}">
+                        {{value.stringValue|default(value.value)}}{% if value.deltaPrice and value.deltaPrice > 0 %} (
+                        {{ value.deltaPrice|currency }} {{ labels.more }} ){% endif %}</option>
+                    {% endfor %}
+                </select>
+                {% if option.attributeFQN === themeSettings.colorAttributeName %}
+                <ul class="product-color-swatches">
+                    {% include "modules/facets/facet-color" with allfacets=option.values isPDP="true" as_parameter %}
+                </ul>
+                {% else %}
+                <ul class="product-swatches">
+                    {% for value in option.values %}
+                    <li data-mz-product-option-attribute="{{ option.attributeFQN }}"
+                        {% if not value.isEnabled   %}
+                        class="disabled" disabled {% endif %} {% if value.isSelected %}class="active"{%else%}class="hidden" {% endif %}
+                        data-value="{{value.value}}"><span class="size-swatches-container">
+                            <a href="javascript:void(0);">
+                                {% if value.stringValue == "CHR(38)" %}
+                                &amp;
+                                {% else %}
+                                {% if value.stringValue == "CHR(64)" %}
+                                @
+                                {% else %}
+                                {{value.stringValue|replace('µ', '<span class="lowercase">µ</span>')|replace(' mL', ' <span class="lowercase">m</span>L')|safe}}
+                                {% endif %}
+                                {% endif %}
+                            </a>
+                        </span></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <!-- <div class="dropdown">
                     <div class="select">
                         {% with option.values|findwhere("isSelected", "True") as selectedValue %}
                             {% if selectedValue %}
-                            <span>{{selectedValue.value}}</span>
+                            <span>{{selectedValue.stringValue}}</span>
                             {% endif %}
                         {% endwith %}
                         <span> </span>
@@ -26,7 +62,7 @@
                             {% endif %}
                         {% endfor %}
                     </ul>
-                </div>
+                </div> -->
                 
                 <!-- <select {% if option.isMultiValue %}multiple{% endif %} class="mz-productoptions-option" data-mz-product-option="{{ option.attributeFQN }}">
                     {% if not option.isMultiValue %}<option></option>{% endif %}
