@@ -177,7 +177,7 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
             if(this.get('family').length){
                 FamilyItem.addToCart();
             }
-            this.whenReady(function () {
+            return this.whenReady(function () {
                 if (!me.validate()) {
                     var fulfillMethod = me.get('fulfillmentMethod');
                     if (!fulfillMethod) {

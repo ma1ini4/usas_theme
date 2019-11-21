@@ -1,5 +1,5 @@
-define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore', 'hyprlivecontext', 'modules/views-modal-dialog', 'modules/api', 'modules/models-product', 'modules/views-location', 'modules/models-location', 'modules/models-discount', "modules/views-productimages", "modules/dropdown", 'bxslider', 'slick'], 
-function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductModels, LocationViews, LocationModels, Discount, ProductImageViews, Dropdown, bxslider, slickSlider) {
+define(['modules/backbone-mozu', 'hyprlive', 'modules/jquery-mozu', 'underscore', 'hyprlivecontext', 'modules/views-modal-dialog', 'modules/api', 'modules/models-product', 'modules/views-location', 'modules/models-location', 'modules/models-discount', "modules/views-productimages", "modules/dropdown", 'bxslider', 'slick', 'modules/block-ui'], 
+function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductModels, LocationViews, LocationModels, Discount, ProductImageViews, Dropdown, bxslider, slickSlider, blockUiLoader) {
 
     var ChooseProductStepView = Backbone.MozuView.extend({
         templateName: "modules/cart/discount-modal/discount-choose-product",
@@ -92,6 +92,7 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
     };
 
     var markOptions = function(optionName, variationsToMark, selectedOptionsMap){
+        var me = this;
         var reRunForSelected = false;
         this.model.get('options').each(function(o){
             var clearSelectedOption = false;
@@ -111,8 +112,15 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
                     if(hasOption != -1) {
                         opt.isEnabled = true;
                     } else {
-                        if(o.get('value') === opt.value && selectedOptionsMap.get('attributeFQN') !== o.get('attributeFQN')) {
-                            clearSelectedOption = true;
+                         if (me.model._parent && selectedOptionsMap) {
+                            var optionMatch = _.filter(selectedOptionsMap, function(opt){ return opt.attributeFQN !== o.get('attributeFQN'); });
+                            if(o.get('value') === opt.value && optionMatch.length) {
+                                clearSelectedOption = true;
+                            }
+                        } else {
+                            if(o.get('value') === opt.value && selectedOptionsMap.get('attributeFQN') !== o.get('attributeFQN')) {
+                                clearSelectedOption = true;
+                            }
                         }
                     }
                 }
@@ -189,9 +197,10 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
                     });
                 } else {
                     var selectedOptionsMap = me.model.get('options').models.map(function(o){
-                        
+                        console.log(o);
                         return { attributeFQN: {value: o.get('value')}};
                     });
+                    console.log(selectedOptionsMap);
 
                     if(selectedOptionsMap) {
                         markEnabledConfigOptions.call(this, selectedOptionsMap);
@@ -297,9 +306,9 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
                     if (oldValue !== newValue && !(oldValue === undefined && newValue === '')) {
                         option.set('value', newValue);
 
-                        // if(option.get('attributeDetail').usageType !== 'Extra') {
-                        //     markEnabledConfigOptions.call(this, option);
-                        // }
+                        if(option.get('attributeDetail').usageType !== 'Extra') {
+                            markEnabledConfigOptions.call(this, option);
+                        }
 
                         this.oldOptions = this.model.get('options').toJSON();
                         this.postponeRender = true;
@@ -322,15 +331,17 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
                             self.model.addToCart(true).then(function () {
                                 discountModel.completeDiscount();
                                 discountModel.trigger('newDiscountSet');
+                                blockUiLoader.globalLoader();
                                 window.location.reload();
                             });
                         });
                         return;
                     } else {
                         try {
-                            self.model.apiModel.addToCart(e).then(function () {
+                            self.model.addToCart(false).then(function () {
                                 discountModel.completeDiscount();
                                 discountModel.trigger('newDiscountSet');
+                                blockUiLoader.globalLoader();
                                 window.location.reload();
                             });
                         } catch(err) {
