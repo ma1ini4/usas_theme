@@ -20,7 +20,6 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
 
             var productModel = this.model.get('products').findWhere({ 'productCode': productCode + ''});
 
-            console.log(productModel);
             if (productModel)
             {
                 if (self._productStepView) {
@@ -94,7 +93,6 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
 
     var markOptions = function(optionName, variationsToMark, selectedOptionsMap){
         var reRunForSelected = false;
-        console.log('variationsToMark', variationsToMark);
         this.model.get('options').each(function(o){
             var clearSelectedOption = false;
             var variationOptionMap = _.map(variationsToMark, function(variation){
@@ -102,17 +100,14 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
                 if(option) return option.value;
 
             });
-            console.log('variationOptionMap', variationOptionMap);
-            console.log('o', o);
-
+            var newValues = [];
             o.get('values').forEach(function(opt){
                 var hasOption = -1;
 
                 if( o.get('attributeFQN') === optionName) {
                     opt.isEnabled = false;
+                    opt.autoAddEnabled = true;
                     hasOption = variationOptionMap.indexOf(opt.value);
-                    console.log(opt.value);
-                    console.log('hasOption', hasOption);
                     if(hasOption != -1) {
                         opt.isEnabled = true;
                     } else {
@@ -120,10 +115,11 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
                             clearSelectedOption = true;
                         }
                     }
-                    console.log(opt);
                 }
+                newValues.push(opt);
             });
-            console.log('clearSelectedOption', clearSelectedOption);
+            o.set('values', newValues);
+
             if (clearSelectedOption) {
                 o.set('value', "");
                 reRunForSelected = true;
@@ -152,7 +148,6 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
                     }
                 });
             });
-            console.log('avaiableOptionsMap', avaiableOptionsMap);
             var rerun = false;
             _.each(avaiableOptionsMap, function(ao, index){
                 var otherOptions = _.filter(avaiableOptionsMap, function(o, idx){
@@ -167,7 +162,6 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
                 }
             });
 
-            console.log('rerun', rerun);
             if(rerun) {
                 markEnabledConfigOptions.call(self, selectedOptionsMap);
             }
@@ -183,8 +177,7 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
         },
         render: function () {
             var me = this;
-            console.log('AddProductStepView', me);
-            if (!me.postponeRender) {
+            // if (!me.postponeRender) {
                 if (this.oldOptions) {
                     me.model.get('options').map(function(option){
                         var oldOption = _.find(me.oldOptions, function(old){
@@ -195,19 +188,15 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
                         }
                     });
                 } else {
-                    console.log(me.model.get('options').models);
                     var selectedOptionsMap = me.model.get('options').models.map(function(o){
-                        console.log(o);
-                        console.log(o.get('value'));
                         
                         return { attributeFQN: {value: o.get('value')}};
                     });
-                    console.log('selectedOptionsMap',selectedOptionsMap);
+
                     if(selectedOptionsMap) {
                         markEnabledConfigOptions.call(this, selectedOptionsMap);
                     }
                 }
-
                 Backbone.MozuView.prototype.render.apply(this);
                 this.$('[data-mz-is-datepicker]').each(function (ix, dp) {
                     $(dp).dateinput().css('color', Hypr.getThemeSetting('textColor')).on('change  blur', _.bind(me.onOptionChange, me));
@@ -222,7 +211,9 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
                         me.dropdownConfig(id, value);
                     }
                 });
-            }
+            // }
+            
+
             if (!$('.mobileCarousel').length) {
                 $('.mz-productimages-main').removeClass('hidden-xs');
             } else {
@@ -259,7 +250,6 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
             });
         },
         onOptionChange: function (e) {
-            console.log('onOptionChange', e);
             return this.configure($(e.currentTarget));
         },
         onBackToProductSelection: function (e) {
@@ -276,20 +266,18 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
             }
         }, 500),
         dropdownConfig: function(id, value){
-            console.log('dropdownConfig', id, value);
             var option = this.model.get('options').findWhere({ 'attributeFQN': id });
             if (option) {
                 var oldValue = option.get('value');
                 if (oldValue !== value && !(oldValue === undefined && value === '')) {
-                    console.log(option, this.model);
                     option.set('value', value);
-
                     if(option.get('attributeDetail').usageType !== 'Extra') {
                         markEnabledConfigOptions.call(this, option);
                     }
 
                     this.oldOptions = this.model.get('options').toJSON();
                     this.postponeRender = true;
+                    this.render();
                 }
             }
         },
@@ -301,28 +289,20 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
                 isPicked = (optionEl.type !== "checkbox" && optionEl.type !== "radio") || optionEl.checked,
                 option = this.model.get('options').findWhere({ 'attributeFQN': id }),
                 self = this;
-                console.log(id, isPicked, option);
             if (option) {
                 if (option.get('attributeDetail').inputType === "YesNo") {
-                    console.log(1);
                     option.set("value", isPicked);
                 } else if (isPicked) {
                     oldValue = option.get('value');
                     if (oldValue !== newValue && !(oldValue === undefined && newValue === '')) {
-                        console.log(2);
                         option.set('value', newValue);
 
-                        if(option.get('attributeDetail').usageType !== 'Extra') {
-                            markEnabledConfigOptions.call(this, option);
-                        }
+                        // if(option.get('attributeDetail').usageType !== 'Extra') {
+                        //     markEnabledConfigOptions.call(this, option);
+                        // }
 
                         this.oldOptions = this.model.get('options').toJSON();
                         this.postponeRender = true;
-                    } else {
-                        console.log(3);
-                        if (option.get('attributeDetail').usageType !== 'Extra') {
-                            markEnabledConfigOptions.call(this, option);
-                        }
                     }
                 }
             }
@@ -418,7 +398,6 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
         templateName: "modules/cart/discount-modal/discount-modal",
         initialize: function () {
             var self = this;
-            console.log('self', self);
             this.listenTo(this.model, 'newDiscountSet', function () {
                 self.render();
             });
@@ -442,6 +421,8 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
         },
         setInit: function (updatingItemId){
             var self = this;
+            console.log('setInit ', self);
+
             if (this.model.hasNextDiscount()) {
                 this.model.loadNextDiscount().then(function(){
                     if (!self.model.hasMultipleProducts() && self.model.productHasOptions()) {
