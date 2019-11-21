@@ -94,6 +94,7 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
 
     var markOptions = function(optionName, variationsToMark, selectedOptionsMap){
         var reRunForSelected = false;
+        console.log('variationsToMark', variationsToMark);
         this.model.get('options').each(function(o){
             var clearSelectedOption = false;
             var variationOptionMap = _.map(variationsToMark, function(variation){
@@ -101,6 +102,8 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
                 if(option) return option.value;
 
             });
+            console.log('variationOptionMap', variationOptionMap);
+            console.log('o', o);
 
             o.get('values').forEach(function(opt){
                 var hasOption = -1;
@@ -108,25 +111,19 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
                 if( o.get('attributeFQN') === optionName) {
                     opt.isEnabled = false;
                     hasOption = variationOptionMap.indexOf(opt.value);
-
+                    console.log(opt.value);
+                    console.log('hasOption', hasOption);
                     if(hasOption != -1) {
                         opt.isEnabled = true;
                     } else {
-                        console.log(o);
-                        console.log(selectedOptionsMap.filter(function(opt) {return opt.attributeFQN !== o.get('attributeFQN');}));
-                        var optionMatch = selectedOptionsMap.filter(function(opt) {return opt.attributeFQN !== o.get('attributeFQN');});
-                         if(o.get('value') === opt.value && optionMatch) {
+                        if(o.get('value') === opt.value && selectedOptionsMap.get('attributeFQN') !== o.get('attributeFQN')) {
                             clearSelectedOption = true;
                         }
-                        // if(o.get('value') === opt.value && selectedOptionsMap.get('attributeFQN') !== o.get('attributeFQN')) {
-                        //     clearSelectedOption = true;
-                        // }
-                        // if(o.get('value') === opt.value && selectedOptionsMap.filter(function(o) {return o.attributeFQN !== o.get('attributeFQN');})) {
-                        //     clearSelectedOption = true;
-                        // }
                     }
+                    console.log(opt);
                 }
             });
+            console.log('clearSelectedOption', clearSelectedOption);
             if (clearSelectedOption) {
                 o.set('value', "");
                 reRunForSelected = true;
@@ -145,6 +142,7 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
             //Probably a better way to do this.
             this.model.get('options').each(function(o){
                 avaiableOptionsMap.push({'key' : o.get('attributeFQN'), 'value': []});
+
                 self.model.get('options').each(function(o2){
                     if(o2.get('attributeFQN') === o.get('attributeFQN')) {
                         var option = _.find(avaiableOptionsMap, function(ao){
@@ -154,13 +152,12 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
                     }
                 });
             });
-
+            console.log('avaiableOptionsMap', avaiableOptionsMap);
             var rerun = false;
             _.each(avaiableOptionsMap, function(ao, index){
                 var otherOptions = _.filter(avaiableOptionsMap, function(o, idx){
                     return idx !== index;
                 });
-                    console.log('otherOptions',otherOptions);
 
                 var variation = {};
                 var otherOpts = hasOtherOptions(variation, otherOptions, selectedOptionsMap);
@@ -170,6 +167,7 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
                 }
             });
 
+            console.log('rerun', rerun);
             if(rerun) {
                 markEnabledConfigOptions.call(self, selectedOptionsMap);
             }
@@ -261,6 +259,7 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
             });
         },
         onOptionChange: function (e) {
+            console.log('onOptionChange', e);
             return this.configure($(e.currentTarget));
         },
         onBackToProductSelection: function (e) {
@@ -277,10 +276,12 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
             }
         }, 500),
         dropdownConfig: function(id, value){
+            console.log('dropdownConfig', id, value);
             var option = this.model.get('options').findWhere({ 'attributeFQN': id });
             if (option) {
                 var oldValue = option.get('value');
                 if (oldValue !== value && !(oldValue === undefined && value === '')) {
+                    console.log(option, this.model);
                     option.set('value', value);
 
                     if(option.get('attributeDetail').usageType !== 'Extra') {
@@ -300,12 +301,15 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
                 isPicked = (optionEl.type !== "checkbox" && optionEl.type !== "radio") || optionEl.checked,
                 option = this.model.get('options').findWhere({ 'attributeFQN': id }),
                 self = this;
+                console.log(id, isPicked, option);
             if (option) {
                 if (option.get('attributeDetail').inputType === "YesNo") {
+                    console.log(1);
                     option.set("value", isPicked);
                 } else if (isPicked) {
                     oldValue = option.get('value');
                     if (oldValue !== newValue && !(oldValue === undefined && newValue === '')) {
+                        console.log(2);
                         option.set('value', newValue);
 
                         if(option.get('attributeDetail').usageType !== 'Extra') {
@@ -314,6 +318,11 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
 
                         this.oldOptions = this.model.get('options').toJSON();
                         this.postponeRender = true;
+                    } else {
+                        console.log(3);
+                        if (option.get('attributeDetail').usageType !== 'Extra') {
+                            markEnabledConfigOptions.call(this, option);
+                        }
                     }
                 }
             }
@@ -505,21 +514,23 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
         }
     });
     function initSlider() {
-        var slider = $('#productpager-Carousel').bxSlider({
-            slideWidth: 90,
-            minSlides: 4,
-            maxSlides: 4,
-            moveSlides: 1,
-            slideMargin: 15,
-            nextText: '<i class="fa fa-angle-right" aria-hidden="true"></i>',
-            prevText: '<i class="fa fa-angle-left" aria-hidden="true"></i>',
-            infiniteLoop: false,
-            hideControlOnEnd: true,
-            pager: false,
-            touchEnabled: false
-        });
-
-        window.slider = slider;
+        if ($('.products_list li').length >= 3) {
+            var slider = $('.products_list').bxSlider({
+                slideWidth: 90,
+                minSlides: 3,
+                maxSlides: 3,
+                moveSlides: 1,
+                slideMargin: 15,
+                nextText: '<i class="fa fa-angle-right" aria-hidden="true"></i>',
+                prevText: '<i class="fa fa-angle-left" aria-hidden="true"></i>',
+                infiniteLoop: false,
+                hideControlOnEnd: true,
+                pager: false,
+                touchEnabled: false
+            });
+    
+            window.slider = slider;
+        }
     }
 
     function initslider_mobile() {

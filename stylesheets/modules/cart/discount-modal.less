@@ -1,11 +1,11 @@
 .mz-discount-modal {
 
     .modal-dialog{
-        width: 50%;
+        width: 90%;
         margin: auto;
 
         @media @tablet {
-            width: 75%;
+            width: 90%;
         }
         @media @mobile {
             width: 90%;
@@ -13,6 +13,8 @@
     }
     .modal-header {
         position: relative;
+        margin: 0;
+        
         .modal-close-x {
             position: absolute;
             right: 20px;
@@ -30,7 +32,7 @@
             cursor: pointer;
         }
         .mz-productimages {
-            padding: 15px 30px;
+            padding: 15px 0;
 
             @media @mobile {
                 padding: 15px 7px;
@@ -41,13 +43,12 @@
             }
 
             & > .row.hidden-xs.hidden-sm {
-                margin: 15px;
                 .rollover {
                     display: none;
                 }
             }
             .mobileCarousel  {
-                margin: 0;
+                margin: 15px 0 0;
 
                 .bx-wrapper {
                     background: transparent;

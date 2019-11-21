@@ -74,7 +74,7 @@
   "billingPhoneNumber": "Billing Phone Number",
   "billingPostalCode": "Billing Zip Code",
   "blankSearchResult": "Please enter a keyword or item number.",
-  "bogaModalHeading": "Your Free BOGA Item",
+  "bogaModalHeading": "Select Your Free Item",
   "bulkAddToCartErrors": "<h4>Issues adding the following to cart</h4> {0}",
   "returnValidationError": "Please, fill all required fields",
   "bulkReorderErrors": "Issue with Reordering {0}",
