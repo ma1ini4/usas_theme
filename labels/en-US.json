@@ -518,6 +518,7 @@
   "shipTo": "Ship to",
   "shipped": "Shipped",
   "shippedTo": "Shipped to",
+  "billedTo"  : "Billed to",
   "shippingContact": "Shipping Contact",
   "shippingDestinationAddAddress": "Ship to Another Address",
   "shippingDestinationAddressLabel": "Address",
@@ -652,5 +653,10 @@
   "customProducts": "Custom and OEM Products",
   "customProductsText": "Made-to-measure racks, custom packaging or colors, and more.",
   "viewQuoteValidationError": "Please enter a valid quote number provided by your sales rep.",
-  "b2bAccountAddressNote": "*Please, contact USAS to change your shipping details"
+  "b2bAccountAddressNote": "*Please, contact USAS to change your shipping details",
+  "billtoAccountId": "Bill To Account ID",
+  "shiptoAccountId": "Ship To Account ID",
+  "accountName": "Organization Name",
+  "pricelistCode": "Pricelist Code",
+  "viewB2cForm": "View Account Conversion Form"
 }

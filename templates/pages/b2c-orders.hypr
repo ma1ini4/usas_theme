@@ -1,0 +1,13 @@
+
+{% extends "page" %}
+{% block title-tag-content %}{% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-loginpage {% endblock body-tag-classes %}
+{% block site-nav %}{% endblock site-nav %}
+{% block body-content %}
+{% require_script "pages/b2c-orders" %}
+  <div id="b2c-orders">
+    {% include "modules/common/message-bar" with model=model.messages %}
+    {% include "modules/order/b2c-order-list" %}
+  </div>
+{% endblock body-content %}

@@ -1,0 +1,69 @@
+<div class="mz-orderlisting" data-mz-id="{{ model.id }}">
+    <div class="mz-orderlisting-detail">
+    {% block order-details %}
+        <ul class="mz-orderlisting-details-list">
+            <li class="mz-orderlisting-details-item">
+                <dl class="mz-propertylist mz-propertylist-order">
+                    {% if model.submittedDate %}
+                        <dt>{{ labels.orderDate }}</dt>
+                        <dd>{{ model.submittedDate|date("F j, Y") }}</dd>
+                    {% else %}
+                        <dt>{{ labels.orderDate }}</dt>
+                        <dd>{{ model.auditInfo.createDate|date("F j, Y") }}</dd>
+                    {% endif %}
+                </dl>
+            </li>
+            <li class="mz-orderlisting-details-item">
+                <dl class="mz-propertylist mz-propertylist-order">
+                    <dt>{{ labels.orderNumber }}</dt>
+                    <dd>{{ model.orderNumber }}</dd>
+                </dl>
+            </li>
+            {% for payment in model.payments %}
+                {% if payment.billingInfo.paymentType == "PurchaseOrder" and payment.status != "Voided" %}
+                <li class="mz-orderlisting-details-item">
+                    <dl class="mz-propertylist mz-propertylist-order">
+                        <dt>{{ labels.purchaseOrderNumber }}</dt>
+                        <dd>{{ payment.billingInfo.purchaseOrder.purchaseOrderNumber }}</dd>
+                    </dl>
+                </li>
+                {% endif %}
+            {% endfor %}
+            <li class="mz-orderlisting-details-item">
+                <dl class="mz-propertylist mz-propertylist-order">
+                    <dt>{{ labels.orderStatus }}</dt>
+                    <dd>{{ model.status }}</dd>
+                </dl>
+            </li>
+            {% if model.billingInfo.billingContact %}
+                <li class="mz-orderlisting-details-item">
+                    <dl class="mz-propertylist mz-propertylist-order">
+                        {% block order-bill-to %}
+                            <dt>{{ labels.billedTo }}</dt>
+                            <dd>{{ model.billingInfo.billingContact.firstName }} {{ model.billingInfo.billingContact.lastNameOrSurname }}</dd>
+                        {% endblock order-bill-to %}
+                    </dl>
+                </li>
+            {% endif %}
+            {% if model.fulfillmentInfo.fulfillmentContact %}
+                <li class="mz-orderlisting-details-item">
+                    <dl class="mz-propertylist mz-propertylist-order">
+                        {% block order-shipped-to %}
+                            <dt>{{ labels.shippedTo }}</dt>
+                            <dd>{{ model.fulfillmentInfo.fulfillmentContact.firstName }} {{ model.fulfillmentInfo.fulfillmentContact.lastNameOrSurname }}</dd>
+                        {% endblock order-shipped-to %}
+                    </dl>
+                </li>
+            {% endif %}
+            <li class="mz-orderlisting-details-item">
+                <dl class="mz-propertylist mz-propertylist-order">
+                    
+                    <dd><a class='mz-order-code' data-mz-order-code={{model.id}}>{{ labels.viewB2cForm }}</a></dd>
+                </dl>
+            </li>
+
+        </ul>
+    {% endblock order-details %}
+    </div>
+
+</div>
