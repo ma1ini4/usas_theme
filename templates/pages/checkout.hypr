@@ -28,14 +28,7 @@
     <div class="mz-checkout-header flex">
       <h1 class="mz-pagetitle">
           {{ labels.checkout }}
-      </h1>
-       {% if not user.isAuthenticated %}
-           <a data-toggle="modal" data-mz-action="lite-registration" class="mz-pagetitle-note">
-              <span>
-                  {{ labels.registeredCustomer }} {{ labels.logIn }}
-              </span>
-          </a>
-      {% endif %}
+      </h1>       
     </div>
 
     <div id="mz-discount-threshold-messages">
