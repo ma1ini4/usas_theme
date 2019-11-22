@@ -654,9 +654,12 @@
   "customProductsText": "Made-to-measure racks, custom packaging or colors, and more.",
   "viewQuoteValidationError": "Please enter a valid quote number provided by your sales rep.",
   "b2bAccountAddressNote": "*Please, contact USAS to change your shipping details",
-  "billtoAccountId": "Bill To Account ID",
+"billtoAccountId": "Bill To Account ID",
   "shiptoAccountId": "Ship To Account ID",
   "accountName": "Organization Name",
   "pricelistCode": "Pricelist Code",
-  "viewB2cForm": "View Account Conversion Form"
+  "viewB2cForm": "View Account Conversion Form",
+  "b2bCheckoutAddressNote": "Don't see your shipping address listed below? Contact Customer Service",
+  "b2bBillingAddressNote": "Billing address changed?  Contact Customer Service"
+
 }
