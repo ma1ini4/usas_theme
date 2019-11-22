@@ -215,7 +215,7 @@ require(["modules/jquery-mozu",
             'check.nameOnCheck',
             'check.routingNumber',
             'check.checkNumber',
-            'isSameBillingShippingAddress',
+            // 'isSameBillingShippingAddress',
             'billingContact.firstName',
             'billingContact.lastNameOrSurname',
             'billingContact.address.address1',
@@ -238,7 +238,7 @@ require(["modules/jquery-mozu",
         renderOnChange: [
             'billingContact.address.countryCode',
             'paymentType',
-            'isSameBillingShippingAddress',
+            // 'isSameBillingShippingAddress',
             'usingSavedCard',
             'savedPaymentMethodId'
         ],
@@ -337,9 +337,16 @@ require(["modules/jquery-mozu",
             }
             var me = this;
             var customer = me.model.parent.get('customer');
-            console.log(me.model);
+
             if (customer.get('accountType') == "B2B") {
-                me.$('.mz-contact-selector-b2b-note').removeClass('hidden');
+                var sameAddress =  me.model.get('isSameBillingShippingAddress');
+
+                me.$('[data-mz-value="isSameBillingShippingAddress"]').parent().hide();
+                me.$('#billing-email').parents('.mz-l-stack-section.mz-formfieldgroup-row.mz-paymentselector-separator.mz-checkoutform').hide();
+                if(!sameAddress) {
+                    me.model.set('isSameBillingShippingAddress', true);
+                    me.render();
+                }
             }
 
             if (this.$(".apple-pay-button").length > 0)

@@ -957,7 +957,8 @@ define([
                             me.set('usingSavedCard', false);
                         }
                         else {
-                            me.set('isSameBillingShippingAddress', false);
+                            me.set('isSameBillingShippingAddress', true
+                            );
                             me.setSavedPaymentMethod(me.get('savedPaymentMethodId'));
                         }
                     });
