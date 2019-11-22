@@ -1,0 +1,22 @@
+<div class="order-status" id='order-status'>
+  <div class="col-sm-12 mz-reset-padding-left">
+      <div class="order-detail-row">
+        <h4 class="mz-l-stack-sectiontitle">{{ labels.orderInformation }}</h4>
+        <div>{{ labels.orderDetailNumber}} <strong> {{model.orderNumber}} </strong> </div>
+        <div>{{ labels.orderDetailDate}} <strong>{{model.submittedDate|date('m/d/Y H:i:s') }}</strong>.</div>
+        <div>{{ labels.orderDetailStatus}} <strong>{{model.status }}</strong></div>
+      </div>
+      <div class="order-detail-row">
+          <h4 class="mz-l-stack-sectiontitle">{{ labels.billingInformation }}</h4>
+          <div class="mz-l-stack-item">
+              	{% include "modules/common/address-summary" with model=model.billingInfo.billingContact %}
+          </div>
+      </div>
+      <div class="order-detail-row">
+         <h4 class="mz-l-stack-sectiontitle">{{ labels.shippingInformation }}</h4>
+        <div class="mz-ordersummary-shipto">
+            	{% include "modules/common/address-summary" with model=model.fulfillmentInfo.fulfillmentContact %}
+          </div>
+      </div>
+
+</div>

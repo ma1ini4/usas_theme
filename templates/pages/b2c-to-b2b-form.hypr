@@ -1,0 +1,102 @@
+
+{% extends "page" %}
+{% block title-tag-content %}{% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-loginpage {% endblock body-tag-classes %}
+{% block site-nav %}{% endblock site-nav %}
+{% block body-content %}
+{% require_script "pages/b2c-to-b2b-form" %}
+    <div class="mz-l-container mz-l-stack-large">
+      {% include "modules/common/message-bar" with model=model.messages %}
+      <div class="mz-order-info col-sm-12" style="display:none">
+        <div class="mz-l-stack mz-order-status-detail-container col-sm-12">
+          <div class="mz-l-stack-section mz-order-status-detail col-sm-6" id="order-status-detail">
+              {% include "modules/order/b2c-to-b2b-order-detail" %}
+          </div>
+        </div>
+        <div class="mz-order-status-form col-sm-4">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="mz-pagetitle">{{ labels.accountInfo }}</h1>
+                    <p></p>
+                    <form method="post" class="mz-loginform mz-loginform-page" name="mz-b2c-customer-details">
+                        <input type="hidden" name="order-id" data-mz-order-id/>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label for="accountName" class="control-label col-xs-12"><span class="is-required">* </span>{{ labels.accountName }}</label>
+                                            <div class="col-xs-12">
+                                                <input type="text" class="form-control" id="accountName" name="accountName" placeholder="Organization Name" data-mz-account-name>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                          </div>
+                          <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label for="billto" class="control-label col-xs-12"><span class="is-required">* </span>{{ labels.billtoAccountId }}</label>
+                                            <div class="col-xs-12">
+                                                <input type="text" class="form-control" id="billto" name="billto" placeholder="Bill To Account ID" data-mz-billto>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label for="shipto" class="control-label col-xs-12"><span class="is-required">* </span>{{ labels.shiptoAccountId }}</label>
+                                            <div class="col-xs-12">
+                                                <input type="text" class="form-control" id="shipto" name="shipto" placeholder="Ship To Account ID" data-mz-shipto>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label for="pricelist" class="control-label col-xs-12"><span class="is-required">* </span>{{ labels.pricelistCode }}</label>
+                                            <div class="col-xs-12">
+                                                <input type="text" class="form-control" id="pricelist" name="pricelist" placeholder="Price List Code" data-mz-pricelist>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group text-right">
+                                         <button class="mz-button mz-button-large mz-login-button" data-mz-action="customer-details-submit">{{ labels.submit }}</button>
+                                        <div class="mz-l-formfieldgroup-cell">
+                                            <section data-mz-role="popover-message" class="mz-popover-message"></section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="success-message-panel" style="display:none">
+            <bold></bold>
+            <div class="message-preview"></div>
+            </p>
+            <div class="mz-l-formfieldgroup-row">
+            <div>
+                <a href="/">
+                    <button class="btn button-primary"> </button>
+                </a>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+{% endblock body-content %}

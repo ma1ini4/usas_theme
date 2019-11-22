@@ -273,6 +273,22 @@
       "userCreatable": false
     },
     {
+      "id": "b2c-to-b2b-form",
+      "documentType": "web_page",
+      "entityType": "webpage",
+      "template": "b2c-to-b2b-form",
+      "title": "USAS New Customer Processing Tool",
+      "userCreatable": false
+    },
+    {
+      "id": "b2c-orders",
+      "documentType": "web_page",
+      "entityType": "webpage",
+      "template": "b2c-orders",
+      "title": "USAS B2C Orders",
+      "userCreatable": false
+    },
+    {
       "id": "blank-page",
       "documentType": "web_page",
       "entityType": "webpage",
