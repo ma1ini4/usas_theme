@@ -1,5 +1,6 @@
 require(["modules/jquery-mozu",
     "underscore", "hyprlive",
+    'modules/api',
     "modules/backbone-mozu",
     "modules/models-checkout",
     "modules/views-messages",
@@ -11,9 +12,8 @@ require(["modules/jquery-mozu",
     'modules/amazonpay',
     'modules/applepay'
     ],
-    function ($, _, Hypr, Backbone, CheckoutModels, messageViewFactory, CartMonitor, HyprLiveContext, EditableView, preserveElements, PayPal, AmazonPay, ApplePay) {
-
-
+    function ($, _, Hypr, api, Backbone, CheckoutModels, messageViewFactory, CartMonitor, HyprLiveContext, EditableView, preserveElements, PayPal, AmazonPay, ApplePay) {
+        
     var ThresholdMessageView = Backbone.MozuView.extend({
       templateName: 'modules/checkout/checkout-discount-threshold-messages'
     });
@@ -81,6 +81,13 @@ require(["modules/jquery-mozu",
         templateName: 'modules/checkout/checkout-order-summary',
 
         initialize: function () {
+            var me = this;
+            var customer = me.model.get('customer');
+            
+            if (customer.get('accountType') == "B2B") {
+                me.model.set('isB2B', true);
+            }
+
             this.listenTo(this.model.get('billingInfo'), 'orderPayment', this.onOrderCreditChanged, this);
         },
 
@@ -328,13 +335,18 @@ require(["modules/jquery-mozu",
                 require([pageContext.visaCheckoutJavaScriptSdkUrl]);
                 this.visaCheckoutInitialized = true;
             }
+            var me = this;
+            var customer = me.model.parent.get('customer');
+            console.log(me.model);
+            if (customer.get('accountType') == "B2B") {
+                me.$('.mz-contact-selector-b2b-note').removeClass('hidden');
+            }
 
             if (this.$(".apple-pay-button").length > 0)
                 ApplePay.init();
 
             if (this.$(".p-button").length > 0)
-                PayPal.loadScript();
-
+                PayPal.loadScript();                
         },
         updateAcceptsMarketing: function(e) {
             this.model.getOrder().set('acceptsMarketing', $(e.currentTarget).prop('checked'));
@@ -368,7 +380,7 @@ require(["modules/jquery-mozu",
             }
         },
         beginEditingBillingAddress: function() {
-            this.editing.savedBillingAddress = true;
+            this.editing.savedBillingAddress = true;            
             this.render();
         },
         beginApplyCredit: function () {
@@ -736,6 +748,7 @@ require(["modules/jquery-mozu",
 
 
     $(document).ready(function () {
+        determineB2BUser();
 
         var $checkoutView = $('#checkout-form'),
             checkoutData = require.mozuData('checkout');
@@ -814,4 +827,36 @@ require(["modules/jquery-mozu",
         if (AmazonPay.isEnabled)
             AmazonPay.addCheckoutButton(window.order.id, false);
     });
+
+    function handleB2bUserInputs(isB2bUser) {
+        if(isB2bUser) {
+            // $('.mz-contact-selector-b2b-note').removeClass('hidden');
+            // console.log(isB2bUser);
+            $('body').on('click focus keypress keydown keyup change blur', '.mz-contactselector-new input, .mz-contactselector-new select', function (e) {
+                e.preventDefault();
+                $(e.target).prop('disabled', 'disabled');
+                return false;
+            });
+        }
+    }
+    function determineB2BUser() {
+        var apiData = require.mozuData('apicontext');
+        var user = require.mozuData('user');
+
+        if (!user.isAnonymous) {
+            $.ajax({
+                url: '/api/commerce/customer/accounts/' + user.accountId,
+                headers: apiData.headers,
+                method: 'GET'                
+            }).success(function (data) {
+                if (data.accountType === "B2B") {
+                    handleB2bUserInputs(true);
+                } else {
+                    handleB2bUserInputs(false);
+                }
+            }).fail(function (err) {
+                console.log('err', err);
+            });
+        }
+    }
 });

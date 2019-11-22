@@ -17,6 +17,7 @@
         {% include "modules/checkout/billing-purchase-order-form" with model=model.purchaseOrder %}
         <div class = "mz-l-stack-section">
             <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
+            <span class="mz-contact-selector-b2b-note hidden">{{ labels.b2bBillingAddressNote }}</span>
             {% include "modules/checkout/billing-address-purchase-order-selector" %}
         </div>
         {% endif %}
@@ -34,6 +35,7 @@
             {% include "modules/checkout/billing-credit-card-form" with model=model.card %}
             <div class="mz-l-stack-section">
                 <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
+                <span class="mz-contact-selector-b2b-note hidden">{{ labels.b2bBillingAddressNote }}</span>
                 {% include "modules/checkout/billing-address-selector" %}
             </div>
         {% endif %}
@@ -64,6 +66,7 @@
                 {% if model.paymentType == "CreditCard" and model.usingSavedCard and model.savedPaymentMethodId %}
                 <div class="mz-l-stack-section">
                     <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
+                    <span class="mz-contact-selector-b2b-note hidden">{{ labels.b2bBillingAddressNote }}</span>
                     {% include "modules/checkout/billing-address-selector" %}
                 </div>
                 {% endif %}
@@ -82,6 +85,7 @@
         {% include "modules/checkout/checking-account-form" %}
         <div class="mz-l-stack-section">
             <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
+            <span class="mz-contact-selector-b2b-note hidden">{{ labels.b2bBillingAddressNote }}</span>
             {% include "modules/checkout/billing-address-selector" %}
         </div>
         {% endif %}

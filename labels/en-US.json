@@ -652,5 +652,7 @@
   "customProducts": "Custom and OEM Products",
   "customProductsText": "Made-to-measure racks, custom packaging or colors, and more.",
   "viewQuoteValidationError": "Please enter a valid quote number provided by your sales rep.",
-  "b2bAccountAddressNote": "*Please, contact USAS to change your shipping details"
+  "b2bAccountAddressNote": "*Please, contact USAS to change your shipping details",
+  "b2bCheckoutAddressNote": "Don't see your shipping address listed below? Contact Customer Service",
+  "b2bBillingAddressNote": "Billing address changed?  Contact Customer Service"
 }
