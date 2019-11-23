@@ -1,0 +1,24 @@
+{% if model %}
+<div class="">
+  {% for attribute in model.attributes %}
+    <div class="mz-accountsettings-attribute-{{ attribute.inputType|lower }}">
+      {% if attribute.fullyQualifiedName === "tenant~b2b-account-name" %}
+          <span class="mz-accountsettings-label">{{ labels.accountName }}</span>
+          <span class="mz-accountsettings-value">{{ attribute.values|first|default("N/A")  }}</span>
+      {% endif %}
+      {% if attribute.fullyQualifiedName === "tenant~b2b-account-id" %}
+          <span class="mz-accountsettings-label">{{ labels.billtoAccountId }}</span>
+          <span class="mz-accountsettings-value">{{ attribute.values|first|default("N/A")  }}</span>
+        {% endif %}
+      {% if attribute.fullyQualifiedName === "tenant~ship-to-account-id" %}
+          <span class="mz-accountsettings-label">{{ labels.shiptoAccountId }}</span>
+          <span class="mz-accountsettings-value">{{ attribute.values|first|default("N/A")  }}</span>
+      {% endif %}
+      {% if attribute.fullyQualifiedName === "tenant~b2b-pricelist-code" %}
+          <span class="mz-accountsettings-label">{{ labels.pricelistCode }}</span>
+          <span class="mz-accountsettings-value">{{ attribute.values|first|default("N/A")  }}</span>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
+{% endif %}
