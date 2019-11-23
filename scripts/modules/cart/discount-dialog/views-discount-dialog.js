@@ -112,11 +112,11 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
                     if(hasOption != -1) {
                         opt.isEnabled = true;
                     } else {
-                         if (me.model._parent && selectedOptionsMap) {
-                            var optionMatch = _.filter(selectedOptionsMap, function(opt){ return opt.attributeFQN !== o.get('attributeFQN'); });
-                            if(o.get('value') === opt.value && optionMatch.length) {
-                                clearSelectedOption = true;
-                            }
+                        if (me.model._parent && selectedOptionsMap) {
+                            // var optionMatch = _.filter(selectedOptionsMap, function(opt){ return opt.attributeFQN !== o.get('attributeFQN'); });
+                            // if(o.get('value') === opt.value && !optionMatch.length) {
+                            //     clearSelectedOption = true;
+                            // }
                         } else {
                             if(o.get('value') === opt.value && selectedOptionsMap.get('attributeFQN') !== o.get('attributeFQN')) {
                                 clearSelectedOption = true;
@@ -133,6 +133,7 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
                 reRunForSelected = true;
             }
         });
+        console.log('options', this.model.get('options'));
         return reRunForSelected;
     };
 

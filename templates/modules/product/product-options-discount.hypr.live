@@ -12,6 +12,8 @@
                         {% with option.values|findwhere("isSelected", "True") as selectedValue %}
                             {% if selectedValue %}
                             <span>{{selectedValue.stringValue}}</span>
+                            {% else %}
+                            <span>{{(option.values|first).stringValue}}</span>
                             {% endif %}
                         {% endwith %}
                         <span> </span>
