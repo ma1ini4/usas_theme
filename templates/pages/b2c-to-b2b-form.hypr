@@ -79,11 +79,20 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                             <div class="col-sm-12">
+                                 <div id="b2c-customer" style="display:none">
+                                 {% include "modules/order/b2c-to-b2b-customer" %}
+                                 </div>
+                              </div>
+                            </div>
                     </form>
                 </div>
             </div>
         </div>
-
+        <div id="b2c-customer" style="display:none">
+        {% include "modules/order/b2c-to-b2b-customer" %}
+        </div>
         <div class="success-message-panel" style="display:none">
             <bold></bold>
             <div class="message-preview"></div>

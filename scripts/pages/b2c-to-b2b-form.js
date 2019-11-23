@@ -7,11 +7,20 @@ define(['modules/api',
         'modules/message-handler',
         'modules/order/b2cOrders',
         'modules/models-orders',
-        "modules/block-ui"
-], function (api, Backbone, _, $, HyprLiveContext, Hypr, MessageHandler, B2cOrdersApi, OrdersModels, blockUiLoader) {
+        "modules/block-ui",
+        'modules/models-customer'
+], function (api, Backbone, _, $, HyprLiveContext, Hypr, MessageHandler, B2cOrdersApi, OrdersModels, blockUiLoader, CustomerModels) {
 
     var B2cOrderView = Backbone.MozuView.extend({
        templateName: "modules/order/b2c-to-b2b-order-detail",
+       render: function() {
+           Backbone.MozuView.prototype.render.apply(this);
+           return this;
+       }
+    });
+
+    var B2cCustomerView = Backbone.MozuView.extend({
+       templateName: "modules/order/b2c-to-b2b-customer",
        render: function() {
            Backbone.MozuView.prototype.render.apply(this);
            return this;
@@ -32,7 +41,7 @@ define(['modules/api',
     	});
      return paramMap;
     }
-
+  //  var AccountModel = Backbone.MozuModel.extend({});
     var B2cOrderForm = function () {};
     $.extend(B2cOrderForm.prototype, {
         setLoading: function (yes) {
@@ -64,21 +73,59 @@ define(['modules/api',
                 orderId: params.id
               };
               if ( me.validate(payload) ) {
-               me.setLoading(true);
+                 me.setLoading(true);
                 // the new handle message needs to take the redirect.
                 B2cOrdersApi.OrderDetail.updateCustomer(payload).then(function (response) {
                   console.log('response ',response);
                   if ( response.code === 'success') {
-                      $('.mz-order-status-form').hide();
-                      me.displayMessage("Account has been converted succesfully - "+ response.result);
-                  } else {
-                    me.displayMessage(response.result);
-                  }
+                      me.displayMessage("Account has been converted succesfully");
+                      B2cOrdersApi.OrderDetail.processOrders( { orderId: params.id }).then( function( orderResp){
+
+                        if ( orderResp.code === 'success') {
+                          //$('.mz-order-status-form').hide();
+                          me.displayMessage("Order has been processed succesfully - "+ orderResp.result);
+                        } else {
+                          me.displayMessage("There was an error processing your order "+ orderResp.result);
+                        }
+                      }, function(error){
+                          me.displayMessage("There was an error processing your order "+ error.responseJSON.result);
+                      });
+                     } else{
+                        me.displayMessage(response.result);
+                     }
                   me.setLoading(false);
-                    //window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory||'') +  "/my-anonymous-account?returnUrl="+(HyprLiveContext.locals.siteContext.siteSubdirectory||'')+"/myaccount";
                 }, function(error){
-                   console.log('error ',error);
-                   me.displayMessage(error.responseJSON.message);
+                  if ( error.responseJSON.resultCode === '101') { //Account already converted
+                    me.displayMessage("Account already converted. Processing order ...");
+
+                    var accModel = new CustomerModels.Customer(error.responseJSON.result);
+                    var accView = new B2cCustomerView({
+                       el: $( '#b2c-customer' ),
+                       model: accModel
+                    });
+                    accView.render();
+                    $('#b2c-customer').show();
+                    console.log(accModel);
+                    me.setLoading(true);
+                    B2cOrdersApi.OrderDetail.orderRetry( { orderId: params.id }).then( function( orderResp){
+                      if ( orderResp.code === 'success') {
+                        //$('.mz-order-status-form').hide();
+                        me.displayMessage("Order processed succesfully - "+ orderResp.result);
+                        me.setLoading(false);
+                      } else {
+                        me.displayMessage("There was an error processing your order "+ orderResp.result);
+                        me.setLoading(false);
+                      }
+                    }, function(err){
+                      var errorMsg= err.responseJSON.result ? err.responseJSON.result : '';
+                        me.displayMessage("There was an error processing your order", errorMsg);
+                        me.setLoading(false);
+                    });
+                  } else{
+                     me.displayMessage(error.responseJSON.result);
+                     me.setLoading(false);
+                  }
+
                 }
                );
              }
