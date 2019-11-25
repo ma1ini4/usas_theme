@@ -75,25 +75,28 @@ define(['modules/api',
               if ( me.validate(payload) ) {
                  me.setLoading(true);
                 // the new handle message needs to take the redirect.
-                B2cOrdersApi.OrderDetail.updateCustomer(payload).then(function (response) {
+                B2cOrdersApi.OrderDetail.processCustomer(payload).then(function (response) {
                   console.log('response ',response);
                   if ( response.code === 'success') {
                       me.displayMessage("Account has been converted succesfully");
                       B2cOrdersApi.OrderDetail.processOrders( { orderId: params.id }).then( function( orderResp){
-
                         if ( orderResp.code === 'success') {
                           //$('.mz-order-status-form').hide();
                           me.displayMessage("Order has been processed succesfully - "+ orderResp.result);
+                            me.setLoading(false);
                         } else {
                           me.displayMessage("There was an error processing your order "+ orderResp.result);
+                            me.setLoading(false);
                         }
                       }, function(error){
                           me.displayMessage("There was an error processing your order "+ error.responseJSON.result);
+                            me.setLoading(false);
                       });
                      } else{
                         me.displayMessage(response.result);
+                          me.setLoading(false);
                      }
-                  me.setLoading(false);
+
                 }, function(error){
                   if ( error.responseJSON.resultCode === '101') { //Account already converted
                     me.displayMessage("Account already converted. Processing order ...");
@@ -113,16 +116,21 @@ define(['modules/api',
                         me.displayMessage("Order processed succesfully - "+ orderResp.result);
                         me.setLoading(false);
                       } else {
-                        me.displayMessage("There was an error processing your order "+ orderResp.result);
+                        var errorMsg= orderResp.result ? orderResp.result : '';
+                        me.displayMessage("There was an error processing your order "+ errorMsg);
                         me.setLoading(false);
                       }
                     }, function(err){
                       var errorMsg= err.responseJSON.result ? err.responseJSON.result : '';
-                        me.displayMessage("There was an error processing your order", errorMsg);
-                        me.setLoading(false);
+                      me.displayMessage("There was an error processing your order " + errorMsg);
+                      me.setLoading(false);
                     });
-                  } else{
-                     me.displayMessage(error.responseJSON.result);
+                  } else if (error.responseJSON.resultCode === '201') { //the order owner is a B2B Account
+                    me.displayMessage('The owner of this order is a B2B Account');
+                    me.setLoading(false);
+                  } else {
+                    var errorMsg= error.responseJSON.result ? error.responseJSON.result : '';
+                     me.displayMessage('There was an error processing your account '+ errorMsg);
                      me.setLoading(false);
                   }
 

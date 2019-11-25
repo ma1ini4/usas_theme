@@ -4,8 +4,8 @@ define(['jquery', 'hyprlive', 'modules/api','underscore'],
             getOrderDetail: function( params ) {
               return this.performAction( '/custom/orderDetail', params);
               },
-            updateCustomer: function( params ) {
-              return this.performAction( '/custom/updateCustomer', params);
+            processCustomer: function( params ) {
+              return this.performAction( '/custom/processCustomer', params);
             },
             processOrders: function( params ) {
               return this.performAction( '/custom/processOrders', params);
