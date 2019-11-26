@@ -78,23 +78,23 @@ define(['modules/api',
                 B2cOrdersApi.OrderDetail.processCustomer(payload).then(function (response) {
                   console.log('response ',response);
                   if ( response.code === 'success') {
-                      me.displayMessage("Account has been converted succesfully");
+                      me.displayMessage("Account has been converted succesfully... Processing Orders");
                       B2cOrdersApi.OrderDetail.processOrders( { orderId: params.id }).then( function( orderResp){
                         if ( orderResp.code === 'success') {
                           //$('.mz-order-status-form').hide();
                           me.displayMessage("Order has been processed succesfully - "+ orderResp.result);
-                            me.setLoading(false);
+                          me.setLoading(false);
                         } else {
                           me.displayMessage("There was an error processing your order "+ orderResp.result);
-                            me.setLoading(false);
+                          me.setLoading(false);
                         }
                       }, function(error){
-                          me.displayMessage("There was an error processing your order "+ error.responseJSON.result);
-                            me.setLoading(false);
+                         me.displayMessage("There was an error processing your order "+ error.responseJSON.result);
+                         me.setLoading(false);
                       });
                      } else{
                         me.displayMessage(response.result);
-                          me.setLoading(false);
+                        me.setLoading(false);
                      }
 
                 }, function(error){

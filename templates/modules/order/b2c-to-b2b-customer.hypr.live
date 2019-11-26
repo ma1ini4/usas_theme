@@ -1,5 +1,6 @@
 {% if model %}
 <div class="">
+  <div class="b2c-b2b-customer-info">{{labels.b2cB2bCustomerInfo}}</div>
   {% for attribute in model.attributes %}
     <div class="mz-accountsettings-attribute-{{ attribute.inputType|lower }}">
       {% if attribute.fullyQualifiedName === "tenant~b2b-account-name" %}
