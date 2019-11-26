@@ -14,7 +14,7 @@ define(['jquery', 'hyprlive', 'modules/api','underscore'],
               return this.performAction( '/custom/orderRetry', params);
             },
             getOrders: function(){
-              return this.performAction( '/custom/orders');
+              return this.performAction( '/custom/b2cOrders');
             },
             performAction: function (serviceurl,  params){
               var apiData = require.mozuData('apicontext');
