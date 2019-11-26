@@ -1,23 +1,23 @@
 {% if model %}
 <div class="">
-  <div class="b2c-b2b-customer-info">{{labels.b2cB2bCustomerInfo}}</div>
+  <div class="mz-l-stack-sectiontitle b2c-b2b-customer-info"><h4>{{labels.b2cB2bCustomerInfo}}</h4></div>
   {% for attribute in model.attributes %}
-    <div class="mz-accountsettings-attribute-{{ attribute.inputType|lower }}">
+    <div class="mz-accountsettings-attribute">
       {% if attribute.fullyQualifiedName === "tenant~b2b-account-name" %}
-          <span class="mz-accountsettings-label">{{ labels.accountName }}</span>
-          <span class="mz-accountsettings-value">{{ attribute.values|first|default("N/A")  }}</span>
+          <span class="b2b-account-attribute-label">{{ labels.accountName }}</span>
+          <span class="b2b-account-attribute-value">{{ attribute.values|first|default("N/A")  }}</span>
       {% endif %}
       {% if attribute.fullyQualifiedName === "tenant~b2b-account-id" %}
-          <span class="mz-accountsettings-label">{{ labels.billtoAccountId }}</span>
-          <span class="mz-accountsettings-value">{{ attribute.values|first|default("N/A")  }}</span>
+          <span class="b2b-account-attribute-label">{{ labels.billtoAccountId }}</span>
+          <span class="b2b-account-attribute-value">{{ attribute.values|first|default("N/A")  }}</span>
         {% endif %}
       {% if attribute.fullyQualifiedName === "tenant~ship-to-account-id" %}
-          <span class="mz-accountsettings-label">{{ labels.shiptoAccountId }}</span>
-          <span class="mz-accountsettings-value">{{ attribute.values|first|default("N/A")  }}</span>
+          <span class="b2b-account-attribute-label">{{ labels.shiptoAccountId }}</span>
+          <span class="b2b-account-attribute-value">{{ attribute.values|first|default("N/A")  }}</span>
       {% endif %}
       {% if attribute.fullyQualifiedName === "tenant~b2b-pricelist-code" %}
-          <span class="mz-accountsettings-label">{{ labels.pricelistCode }}</span>
-          <span class="mz-accountsettings-value">{{ attribute.values|first|default("N/A")  }}</span>
+          <span class="b2b-account-attribute-label">{{ labels.pricelistCode }}</span>
+          <span class="b2b-account-attribute-value">{{ attribute.values|first|default("N/A")  }}</span>
       {% endif %}
     </div>
   {% endfor %}

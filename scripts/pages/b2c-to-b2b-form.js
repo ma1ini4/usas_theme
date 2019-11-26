@@ -110,7 +110,7 @@ define(['modules/api',
                     $('#b2c-customer').show();
                     console.log(accModel);
                     me.setLoading(true);
-                    B2cOrdersApi.OrderDetail.orderRetry( { orderId: params.id }).then( function( orderResp){
+                    B2cOrdersApi.OrderDetail.processOrders( { orderId: params.id }).then( function( orderResp){
                       if ( orderResp.code === 'success') {
                         //$('.mz-order-status-form').hide();
                         me.displayMessage("Order processed succesfully - "+ orderResp.result);
@@ -121,8 +121,16 @@ define(['modules/api',
                         me.setLoading(false);
                       }
                     }, function(err){
-                      var errorMsg= err.responseJSON.result ? err.responseJSON.result : '';
-                      me.displayMessage("There was an error processing your order " + errorMsg);
+                      var errorMsg = err && err.responseJSON && err.responseJSON.result ? err.responseJSON.result : '';
+                      if ( err && err.responseJSON && err.responseJSON.resultCode ){
+                        try {
+                          errorMsg = Hypr.getLabel("b2cToB2bConversionError_"+err.responseJSON.resultCode, err.responseJSON.result);
+                        } catch( e ){
+                        }
+                        me.displayMessage(errorMsg);
+                      } else {
+                        me.displayMessage("There was an error processing your order " + errorMsg);
+                      }
                       me.setLoading(false);
                     });
                   } else if (error.responseJSON.resultCode === '201') { //the order owner is a B2B Account

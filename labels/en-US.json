@@ -661,5 +661,8 @@
   "viewB2cForm": "View Account Conversion Form",
   "b2bCheckoutAddressNote": "Don't see your shipping address listed below? Contact Customer Service",
   "b2bBillingAddressNote": "Billing address changed?  Contact Customer Service",
-  "b2cB2bCustomerInfo": "B2B Account Information"
+  "b2cB2bCustomerInfo": "B2B Account Information",
+  "b2cToB2bConversionError_401": "This order has been already converted, please check the B2B Order #{0}",
+  "b2cToB2bConversionError_402": "The new order #{0} has been accepted but the current order couldn't be cancelled. Please check its status in Admin to cancel it manually",
+  "b2cToB2bConversionError_403": "The new order #{0} has been created but it couldn't be submmitted. Please, check both orders in Admin to complete the conversion process manually"
 }

@@ -10,9 +10,9 @@ define(['jquery', 'hyprlive', 'modules/api','underscore'],
             processOrders: function( params ) {
               return this.performAction( '/custom/processOrders', params);
             },
-            orderRetry: function( params ) {
+            /*orderRetry: function( params ) {
               return this.performAction( '/custom/orderRetry', params);
-            },
+            },*/
             getOrders: function(){
               return this.performAction( '/custom/b2cOrders');
             },
