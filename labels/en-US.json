@@ -660,6 +660,6 @@
   "pricelistCode": "Pricelist Code",
   "viewB2cForm": "View Account Conversion Form",
   "b2bCheckoutAddressNote": "Don't see your shipping address listed below? Contact Customer Service",
-  "b2bBillingAddressNote": "Billing address changed?  Contact Customer Service"
-
+  "b2bBillingAddressNote": "Billing address changed?  Contact Customer Service",
+  "b2cB2bCustomerInfo": "B2B Account Information"
 }
