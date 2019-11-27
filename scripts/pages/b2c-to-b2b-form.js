@@ -7,11 +7,20 @@ define(['modules/api',
         'modules/message-handler',
         'modules/order/b2cOrders',
         'modules/models-orders',
-        "modules/block-ui"
-], function (api, Backbone, _, $, HyprLiveContext, Hypr, MessageHandler, B2cOrdersApi, OrdersModels, blockUiLoader) {
+        "modules/block-ui",
+        'modules/models-customer'
+], function (api, Backbone, _, $, HyprLiveContext, Hypr, MessageHandler, B2cOrdersApi, OrdersModels, blockUiLoader, CustomerModels) {
 
     var B2cOrderView = Backbone.MozuView.extend({
        templateName: "modules/order/b2c-to-b2b-order-detail",
+       render: function() {
+           Backbone.MozuView.prototype.render.apply(this);
+           return this;
+       }
+    });
+
+    var B2cCustomerView = Backbone.MozuView.extend({
+       templateName: "modules/order/b2c-to-b2b-customer",
        render: function() {
            Backbone.MozuView.prototype.render.apply(this);
            return this;
@@ -32,7 +41,7 @@ define(['modules/api',
     	});
      return paramMap;
     }
-
+  //  var AccountModel = Backbone.MozuModel.extend({});
     var B2cOrderForm = function () {};
     $.extend(B2cOrderForm.prototype, {
         setLoading: function (yes) {
@@ -64,22 +73,91 @@ define(['modules/api',
                 orderId: params.id
               };
               if ( me.validate(payload) ) {
-               me.setLoading(true);
+                 me.setLoading(true);
                 // the new handle message needs to take the redirect.
-                B2cOrdersApi.OrderDetail.updateCustomer(payload).then(function (response) {
+                B2cOrdersApi.OrderDetail.processCustomer(payload).then(function (response) {
                   console.log('response ',response);
                   if ( response.code === 'success') {
-                      $('.mz-order-status-form').hide();
-                      me.displayMessage("Account has been converted succesfully - "+ response.result);
+                      me.displayMessage("Processing your order ... ");
+                      me.setLoading(true);
+                      B2cOrdersApi.OrderDetail.processOrders( { orderId: params.id }).then( function( orderResp){
+                        var msg;
+                        try {
+                          var label =  "b2cToB2bConversionError_"+orderResp.resultCode;
+                          msg = Hypr.getLabel(label, orderResp.result);
+                        }  catch(e){
+                          msg = orderResp.code === 'success' ? "Order has been processed succesfully" : "There was an error processing your order";
+                        }
+                        me.displayMessage( msg );
+                        me.setLoading(false);
+                      }, function(err){
+                        var errorMsg = err && err.responseJSON && err.responseJSON.result ? err.responseJSON.result : '';
+                        if ( err && err.responseJSON && err.responseJSON.resultCode ){
+                          try {
+                            var label =  "b2cToB2bConversionError_"+err.responseJSON.resultCode;
+                            errorMsg = Hypr.getLabel(label, err.responseJSON.result);
+                          } catch( e ){
+                              console.log('error getting label',e);
+                          }
+                        }
+                         me.displayMessage(errorMsg);
+                         me.setLoading(false);
+                      });
+                     } else{
+                        me.displayMessage(response.result);
+                        me.setLoading(false);
+                     }
+
+                }, function(error) {
+                  if ( error.responseJSON.resultCode === '101') { //Account already converted
+                    me.setLoading(true);
+                    me.displayMessage("Processing your order ... ");
+                    B2cOrdersApi.OrderDetail.processOrders( { orderId: params.id }).then( function( orderResp){
+                      var msg;
+                      try {
+                        var label =  "b2cToB2bConversionError_"+orderResp.resultCode;
+                        msg = Hypr.getLabel(label, orderResp.result);
+                      }  catch(e){
+                        msg = orderResp.code === 'success' ? "Order has been processed succesfully" : "There was an error processing your order";
+                      }
+                      me.displayMessage( msg );
+                      me.setLoading(false);
+                    }, function(err){
+                      console.log(err);
+                      var errorMsg = err && err.responseJSON && err.responseJSON.result ? err.responseJSON.result : 'There was an error processing your order';
+                      if ( err && err.responseJSON && err.responseJSON.resultCode ){
+                        try {
+                          var label =  "b2cToB2bConversionError_"+err.responseJSON.resultCode;
+                          errorMsg = Hypr.getLabel(label, err.responseJSON.result);
+                        } catch( e ){
+                           console.log('error getting label',e);
+                           errorMsg = 'There was an error processing your order';
+                        }
+                        me.displayMessage(errorMsg);
+                        me.setLoading(false);
+                      } else {
+                        me.displayMessage("There was an error processing your order (" + errorMsg+")");
+                        me.setLoading(false);
+                      }
+                    });
                   } else {
-                    me.displayMessage(response.result);
-                  }
-                  me.setLoading(false);
-                    //window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory||'') +  "/my-anonymous-account?returnUrl="+(HyprLiveContext.locals.siteContext.siteSubdirectory||'')+"/myaccount";
-                }, function(error){
-                   console.log('error ',error);
-                   me.displayMessage(error.responseJSON.message);
-                }
+                    if (error.responseJSON.resultCode === '201') { //the order owner is a B2B Account
+                      me.displayMessage('The owner of this order is a B2B Account');
+                      me.setLoading(false);
+                    } else {
+                        var errorMsg;
+                        try {
+                          var label =  "b2cToB2bConversionError_"+error.responseJSON.resultCode;
+                          errorMsg = Hypr.getLabel(label, error.responseJSON.result);
+                        } catch( e ){
+                           console.log('error getting label',e);
+                           errorMsg = 'There was an error processing your order';
+                        }
+                        me.displayMessage(errorMsg);
+                        me.setLoading(false);
+                      }
+                    }
+                 }
                );
              }
            } else {
@@ -111,9 +189,17 @@ define(['modules/api',
                 model: B2cOrderFormModel,
                 messagesEl: $('[data-mz-message-bar]')
              });
+             var accModel = new CustomerModels.Customer(data.b2cAccount);
+             var accView = new B2cCustomerView({
+                el: $( '#b2c-customer' ),
+                model: accModel
+             });
+
 
              window.b2cOrderView = b2cOrderView;
+             window.b2cAccountView = accView;
 
+             accView.render();
              b2cOrderView.render();
              $(".mz-order-info").show();
              blockUiLoader.unblockUi();

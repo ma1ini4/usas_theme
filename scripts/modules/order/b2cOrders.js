@@ -4,11 +4,17 @@ define(['jquery', 'hyprlive', 'modules/api','underscore'],
             getOrderDetail: function( params ) {
               return this.performAction( '/custom/orderDetail', params);
               },
-            updateCustomer: function( params ) {
-              return this.performAction( '/custom/updateCustomer', params);
+            processCustomer: function( params ) {
+              return this.performAction( '/custom/processCustomer', params);
             },
+            processOrders: function( params ) {
+              return this.performAction( '/custom/processOrders', params);
+            },
+            /*orderRetry: function( params ) {
+              return this.performAction( '/custom/orderRetry', params);
+            },*/
             getOrders: function(){
-              return this.performAction( '/custom/orders');
+              return this.performAction( '/custom/b2cOrders');
             },
             performAction: function (serviceurl,  params){
               var apiData = require.mozuData('apicontext');
