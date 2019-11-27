@@ -78,18 +78,29 @@ define(['modules/api',
                 B2cOrdersApi.OrderDetail.processCustomer(payload).then(function (response) {
                   console.log('response ',response);
                   if ( response.code === 'success') {
-                      me.displayMessage("Account has been converted succesfully... Processing Orders");
+                      me.displayMessage("Processing your order ... ");
+                      me.setLoading(true);
                       B2cOrdersApi.OrderDetail.processOrders( { orderId: params.id }).then( function( orderResp){
-                        if ( orderResp.code === 'success') {
-                          //$('.mz-order-status-form').hide();
-                          me.displayMessage("Order has been processed succesfully - "+ orderResp.result);
-                          me.setLoading(false);
-                        } else {
-                          me.displayMessage("There was an error processing your order "+ orderResp.result);
-                          me.setLoading(false);
+                        var msg;
+                        try {
+                          var label =  "b2cToB2bConversionError_"+orderResp.resultCode;
+                          msg = Hypr.getLabel(label, orderResp.result);
+                        }  catch(e){
+                          msg = orderResp.code === 'success' ? "Order has been processed succesfully" : "There was an error processing your order";
                         }
-                      }, function(error){
-                         me.displayMessage("There was an error processing your order "+ error.responseJSON.result);
+                        me.displayMessage( msg );
+                        me.setLoading(false);
+                      }, function(err){
+                        var errorMsg = err && err.responseJSON && err.responseJSON.result ? err.responseJSON.result : '';
+                        if ( err && err.responseJSON && err.responseJSON.resultCode ){
+                          try {
+                            var label =  "b2cToB2bConversionError_"+err.responseJSON.resultCode;
+                            errorMsg = Hypr.getLabel(label, err.responseJSON.result);
+                          } catch( e ){
+                              console.log('error getting label',e);
+                          }
+                        }
+                         me.displayMessage(errorMsg);
                          me.setLoading(false);
                       });
                      } else{
@@ -97,52 +108,56 @@ define(['modules/api',
                         me.setLoading(false);
                      }
 
-                }, function(error){
+                }, function(error) {
                   if ( error.responseJSON.resultCode === '101') { //Account already converted
-                    me.displayMessage("Account already converted. Processing order ...");
-
-                    var accModel = new CustomerModels.Customer(error.responseJSON.result);
-                    var accView = new B2cCustomerView({
-                       el: $( '#b2c-customer' ),
-                       model: accModel
-                    });
-                    accView.render();
-                    $('#b2c-customer').show();
-                    console.log(accModel);
                     me.setLoading(true);
+                    me.displayMessage("Processing your order ... ");
                     B2cOrdersApi.OrderDetail.processOrders( { orderId: params.id }).then( function( orderResp){
-                      if ( orderResp.code === 'success') {
-                        //$('.mz-order-status-form').hide();
-                        me.displayMessage("Order processed succesfully - "+ orderResp.result);
-                        me.setLoading(false);
-                      } else {
-                        var errorMsg= orderResp.result ? orderResp.result : '';
-                        me.displayMessage("There was an error processing your order "+ errorMsg);
-                        me.setLoading(false);
+                      var msg;
+                      try {
+                        var label =  "b2cToB2bConversionError_"+orderResp.resultCode;
+                        msg = Hypr.getLabel(label, orderResp.result);
+                      }  catch(e){
+                        msg = orderResp.code === 'success' ? "Order has been processed succesfully" : "There was an error processing your order";
                       }
+                      me.displayMessage( msg );
+                      me.setLoading(false);
                     }, function(err){
-                      var errorMsg = err && err.responseJSON && err.responseJSON.result ? err.responseJSON.result : '';
+                      console.log(err);
+                      var errorMsg = err && err.responseJSON && err.responseJSON.result ? err.responseJSON.result : 'There was an error processing your order';
                       if ( err && err.responseJSON && err.responseJSON.resultCode ){
                         try {
-                          errorMsg = Hypr.getLabel("b2cToB2bConversionError_"+err.responseJSON.resultCode, err.responseJSON.result);
+                          var label =  "b2cToB2bConversionError_"+err.responseJSON.resultCode;
+                          errorMsg = Hypr.getLabel(label, err.responseJSON.result);
                         } catch( e ){
+                           console.log('error getting label',e);
+                           errorMsg = 'There was an error processing your order';
                         }
                         me.displayMessage(errorMsg);
+                        me.setLoading(false);
                       } else {
-                        me.displayMessage("There was an error processing your order " + errorMsg);
+                        me.displayMessage("There was an error processing your order (" + errorMsg+")");
+                        me.setLoading(false);
                       }
-                      me.setLoading(false);
                     });
-                  } else if (error.responseJSON.resultCode === '201') { //the order owner is a B2B Account
-                    me.displayMessage('The owner of this order is a B2B Account');
-                    me.setLoading(false);
                   } else {
-                    var errorMsg= error.responseJSON.result ? error.responseJSON.result : '';
-                     me.displayMessage('There was an error processing your account '+ errorMsg);
-                     me.setLoading(false);
-                  }
-
-                }
+                    if (error.responseJSON.resultCode === '201') { //the order owner is a B2B Account
+                      me.displayMessage('The owner of this order is a B2B Account');
+                      me.setLoading(false);
+                    } else {
+                        var errorMsg;
+                        try {
+                          var label =  "b2cToB2bConversionError_"+error.responseJSON.resultCode;
+                          errorMsg = Hypr.getLabel(label, error.responseJSON.result);
+                        } catch( e ){
+                           console.log('error getting label',e);
+                           errorMsg = 'There was an error processing your order';
+                        }
+                        me.displayMessage(errorMsg);
+                        me.setLoading(false);
+                      }
+                    }
+                 }
                );
              }
            } else {
@@ -174,9 +189,17 @@ define(['modules/api',
                 model: B2cOrderFormModel,
                 messagesEl: $('[data-mz-message-bar]')
              });
+             var accModel = new CustomerModels.Customer(data.b2cAccount);
+             var accView = new B2cCustomerView({
+                el: $( '#b2c-customer' ),
+                model: accModel
+             });
+
 
              window.b2cOrderView = b2cOrderView;
+             window.b2cAccountView = accView;
 
+             accView.render();
              b2cOrderView.render();
              $(".mz-order-info").show();
              blockUiLoader.unblockUi();
