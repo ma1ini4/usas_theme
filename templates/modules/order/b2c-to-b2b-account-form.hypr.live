@@ -1,0 +1,34 @@
+<form method="post" class="mz-loginform mz-loginform-page" name="mz-b2c-customer-details">
+  <div class="order-detail-row">
+    <div class="mz-accountsettings-attribute">
+        <span class="b2b-account-attribute-label">{{ labels.accountName }}</span>
+        <span class="b2b-account-attribute-value"><strong>{{ model.companyOrOrganization  }} </strong></span>
+        <input type="hidden" id="accountName" name="accountName" value="{{ model.companyOrOrganization }}" data-mz-account-name />
+      </div>
+      <div class="mz-accountsettings-attribute">
+          <span class="b2b-account-attribute-label">{{ labels.billtoAccountId }}</span>
+          <span class="b2b-account-attribute-value"><strong>{{ model.externalId  }}</strong></span>
+          <input type="hidden"  id="billto" name="billto"  value="{{ model.externalId|default("N/A") }}" data-mz-billto />
+      </div>
+      <div class="mz-accountsettings-attribute">
+          <span class="b2b-account-attribute-label">{{ labels.shiptoAccountId }}</span>
+          <span class="b2b-account-attribute-value"><strong>{{ shiptoAccountId.values|first|default("N/A")}}</strong></span>
+          <input type="hidden"  id="shipto" name="shipto"  value="{{ shiptoAccountId.values|first|default("N/A")}}" data-mz-shipto />
+      </div>
+      <div class="mz-accountsettings-attribute">
+          <span class="b2b-account-attribute-label">{{ labels.pricelistCode }}</span>
+          <span class="b2b-account-attribute-value"><strong>{{ model.priceList|default("N/A")  }}</strong></span>
+          <input type="hidden"  id="pricelist" name="pricelist"  value="{{ model.priceList|default("N/A")  }}" data-mz-pricelist />
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group text-right">
+                 <button class="mz-button mz-button-large mz-login-button" data-mz-action="customer-details-submit">{{ labels.submit }}</button>
+                <div class="mz-l-formfieldgroup-cell">
+                    <section data-mz-role="popover-message" class="mz-popover-message"></section>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</form>

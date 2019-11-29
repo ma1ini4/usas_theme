@@ -662,8 +662,9 @@
   "b2bCheckoutAddressNote": "Don't see your shipping address listed below? Contact Customer Service",
   "b2bBillingAddressNote": "Billing address changed?  Contact Customer Service",
   "b2cB2bCustomerInfo": "B2B Account Information",
-  "b2cToB2bConversionError_401": "Your order has been already converted, please check the order #{0}",
-  "b2cToB2bConversionError_402": "The new order #{0} has been accepted but your order couldn't be cancelled. Please check its status in Admin and cancel it manually",
-  "b2cToB2bConversionError_403": "The new order #{0} has been created but it couldn't be submmitted. Please, check your order and the order #{0} in Admin to complete the conversion process manually",
-  "b2cToB2bConversionError_404": "Your order has been converted succesfully, please check the new order #{0}"
+  "b2cToB2bConversionError_401": "Your order has been already converted, please check the new Order {0}",
+  "b2cToB2bConversionError_402": "The Order {0} has been accepted but your order couldn't be cancelled. Please check its status in Admin and cancel it manually",
+  "b2cToB2bConversionError_403": "The Order {0} has been created but it couldn't be submmitted. Please, check your order and the order {0} in Admin to complete the conversion process manually",
+  "b2cToB2bConversionError_404": "Your order has been converted succesfully, please check Order {0}",
+  "b2cToB2bConversionError_405": "Your order has been converted but the new order {0} is still Pending, please check the payments in the new order"
 }

@@ -8,11 +8,28 @@ define(['modules/api',
         'modules/order/b2cOrders',
         'modules/models-orders',
         "modules/block-ui",
-        'modules/models-customer'
-], function (api, Backbone, _, $, HyprLiveContext, Hypr, MessageHandler, B2cOrdersApi, OrdersModels, blockUiLoader, CustomerModels) {
+        'modules/models-customer',
+        'modules/models-b2b-account'
+], function (api, Backbone, _, $, HyprLiveContext, Hypr, MessageHandler, B2cOrdersApi, OrdersModels, blockUiLoader, CustomerModels,B2BAccountModels) {
 
     var B2cOrderView = Backbone.MozuView.extend({
        templateName: "modules/order/b2c-to-b2b-order-detail",
+       render: function() {
+           Backbone.MozuView.prototype.render.apply(this);
+           return this;
+       }
+    });
+
+    var B2cFormModel = Backbone.MozuModel.extend({
+      relations: {
+          order: OrdersModels.Order,
+          b2cAccount: CustomerModels.Customer,
+          b2bAccount: B2BAccountModels.b2bAccount
+      }
+    });
+
+    var B2cFormView = Backbone.MozuView.extend({
+       templateName: "modules/order/b2c-to-b2b-form",
        render: function() {
            Backbone.MozuView.prototype.render.apply(this);
            return this;
@@ -183,24 +200,25 @@ define(['modules/api',
       if(params && params.id) {
         B2cOrdersApi.OrderDetail.getOrderDetail( { orderId: params.id }).then( function( data ){
          if( data  ){
-             var B2cOrderFormModel = new OrdersModels.Order(data.order);
-             var b2cOrderView = new B2cOrderView({
-                el: $( '#order-status-detail' ),
-                model: B2cOrderFormModel,
+
+             var b2cFormModel = new B2cFormModel(data);
+             var b2cFormView = new B2cFormView({
+                el: $( '#b2c-to-b2b-info' ),
+                model: b2cFormModel,
                 messagesEl: $('[data-mz-message-bar]')
              });
-             var accModel = new CustomerModels.Customer(data.b2cAccount);
+             /*var accModel = new CustomerModels.Customer(data.b2cAccount);
              var accView = new B2cCustomerView({
                 el: $( '#b2c-customer' ),
                 model: accModel
-             });
+             });*/
 
 
-             window.b2cOrderView = b2cOrderView;
-             window.b2cAccountView = accView;
+             window.b2cFormView = b2cFormView;
+            // window.b2cAccountView = accView;
 
-             accView.render();
-             b2cOrderView.render();
+             b2cFormView.render();
+             //b2cOrderView.render();
              $(".mz-order-info").show();
              blockUiLoader.unblockUi();
              $('[data-mz-action="customer-details-submit"]').each(function () {

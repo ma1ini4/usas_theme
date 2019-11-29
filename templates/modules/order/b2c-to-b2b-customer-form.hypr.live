@@ -1,0 +1,87 @@
+<form method="post" class="mz-loginform mz-loginform-page" name="mz-b2c-customer-details">
+ <div class="order-detail-row">
+  <div class="col-xs-12 col-sm-12">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="form-group">
+                    <label for="accountName" class="control-label col-xs-12"><span class="is-required">* </span>{{ labels.accountName }}</label>
+                    <div class="col-xs-12">
+                    {% with  model.attributes|findwhere("fullyQualifiedName", "tenant~b2b-account-name") as attribute %}
+                         {% if attribute %}
+                           <input type="text" class="form-control" id="accountName" name="accountName" placeholder="Organization Name" data-mz-account-name value="{{attribute.values|first|default("")}}">
+                         {% else %}
+                           <input type="text" class="form-control" id="accountName" name="accountName" placeholder="Organization Name" data-mz-account-name>
+                         {% endif %}
+                    {% endwith %}
+                    </div>
+                  </div>
+                </div>
+            </div>
+      </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="form-group">
+              <label for="billto" class="control-label col-xs-12"><span class="is-required">* </span>{{ labels.billtoAccountId }}</label>
+              <div class="col-xs-12">
+              {% with  model.attributes|findwhere("fullyQualifiedName", "tenant~b2b-account-id") as attribute %}
+                   {% if attribute %}
+                      <input type="text" class="form-control" id="billto" name="billto" placeholder="Bill To Account ID" data-mz-billto value="{{ attribute.values|first|default("") }}">
+                   {% else %}
+                     <input type="text" class="form-control" id="billto" name="billto" placeholder="Bill To Account ID" data-mz-billto>
+                   {% endif %}
+              {% endwith %}
+              </div>
+          </div>
+        </div>
+     </div>
+   </div>
+   <div class="row">
+      <div class="col-sm-12">
+          <div class="row">
+              <div class="form-group">
+                  <label for="shipto" class="control-label col-xs-12"><span class="is-required">* </span>{{ labels.shiptoAccountId }}</label>
+                  <div class="col-xs-12">
+                  {% with  model.attributes|findwhere("fullyQualifiedName", "tenant~ship-to-account-id") as attribute %}
+                       {% if attribute %}
+                          <input type="text" class="form-control" id="shipto" name="shipto" placeholder="Ship To Account ID" data-mz-shipto value="{{attribute.values|first|default("")}}">
+                       {% else %}
+                         <input type="text" class="form-control" id="shipto" name="shipto" placeholder="Ship To Account ID" data-mz-shipto>
+                       {% endif %}
+                  {% endwith %}
+                </div>
+            </div>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-sm-12">
+          <div class="row">
+              <div class="form-group">
+                  <label for="pricelist" class="control-label col-xs-12"><span class="is-required">* </span>{{ labels.pricelistCode }}</label>
+                  <div class="col-xs-12">
+                  {% with  model.attributes|findwhere("fullyQualifiedName", "tenant~b2b-pricelist-code") as attribute %}
+                     {% if attribute %}
+                      <input type="text" class="form-control" id="pricelist" name="pricelist" placeholder="Price List Code" data-mz-pricelist value="{{attribute.values|first|default("")}}">
+                    {% else %}
+                      <input type="text" class="form-control" id="pricelist" name="pricelist" placeholder="Price List Code" data-mz-pricelist>
+                    {% endif %}
+                  {% endwith %}
+                 </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-sm-12">
+          <div class="form-group text-right">
+               <button class="mz-button mz-button-large mz-login-button" data-mz-action="customer-details-submit">{{ labels.submit }}</button>
+              <div class="mz-l-formfieldgroup-cell">
+                  <section data-mz-role="popover-message" class="mz-popover-message"></section>
+              </div>
+          </div>
+      </div>
+   </div>
+ </div>
+</form>
