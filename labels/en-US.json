@@ -670,5 +670,6 @@
   "b2cAccountInformation": "Customer Information",
   "b2bConfirmInfoMessage": "Please, verify the account information before submitting",
   "b2bConfirmInfo": "Confirm B2B Account info",
-  "backToOrders": "Back To Orders"
+  "backToOrders": "Back To Orders",
+  "b2cOrderUserNotAuthorized": "Access denied - Please log in via Admin URL and verify user permissions "
 }

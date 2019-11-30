@@ -5,9 +5,16 @@
 {% block body-tag-classes %} mz-loginpage {% endblock body-tag-classes %}
 {% block site-nav %}{% endblock site-nav %}
 {% block body-content %}
-{% require_script "pages/b2c-to-b2b-form" %}
-    <div class="mz-l-container mz-l-stack-large">
-      <div id="b2c-to-b2b-info"></div>
+<div class="mz-l-container mz-l-stack-large">
+{% with "t{0}-s{1}"|string_format(siteContext.tenantId, siteContext.siteId) as validUrl %}
+  {% if pageContext.user.isAuthenticated  &&  pageContext.user.segments|contains(themeSetting.userConvertCustomerSegment) &&  pageContext.url|contains(validUrl) %}
+  {% require_script "pages/b2c-to-b2b-form" %}
+        <div id="b2c-to-b2b-info"></div>
+  {% else %}
+    <div class="b2c-no-access-message">
+        {{labels.b2cOrderUserNotAuthorized}}
     </div>
-  
+{% endif %}
+{% endwith %}
+</div>
 {% endblock body-content %}

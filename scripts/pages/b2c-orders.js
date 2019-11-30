@@ -7,8 +7,9 @@ define(['modules/api',
         'modules/message-handler',
         'modules/order/b2cOrders',
         'modules/models-orders',
-        "modules/block-ui"
-], function (api, Backbone, _, $, HyprLiveContext, Hypr, MessageHandler, B2cOrdersApi, OrdersModels, blockUiLoader) {
+        "modules/block-ui",
+        'modules/models-customer'
+], function (api, Backbone, _, $, HyprLiveContext, Hypr, MessageHandler, B2cOrdersApi, OrdersModels, blockUiLoader, CustomerModels ) {
 
   var OrderCollectionModelView = Backbone.MozuView.extend({
      templateName: "modules/order/b2c-order-list",
@@ -29,6 +30,7 @@ define(['modules/api',
 
   $(document).ready(function(event){
    try{
+    
     blockUiLoader.globalLoader();
     B2cOrdersApi.OrderDetail.getOrders().then( function( data ){
        if( data  ){

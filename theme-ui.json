@@ -343,6 +343,7 @@
                 }
             ]
         },
+
         {
             "xtype": "panel",
             "title": "Global Cart",
@@ -1028,6 +1029,18 @@
                     "xtype": "mz-input-text",
                     "name": "xiInterceptGetAccessURL",
                     "fieldLabel": "Production Access Token URL"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "orders conversion",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "User Customer Segment",
+                    "xtype": "mz-input-text",
+                    "name": "userConvertCustomerSegment"
                 }
             ]
         }
