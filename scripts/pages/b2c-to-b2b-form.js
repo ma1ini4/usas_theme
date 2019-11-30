@@ -8,8 +8,11 @@ define(['modules/api',
         'modules/order/b2cOrders',
         'modules/models-orders',
         "modules/block-ui",
-        'modules/models-customer'
-], function (api, Backbone, _, $, HyprLiveContext, Hypr, MessageHandler, B2cOrdersApi, OrdersModels, blockUiLoader, CustomerModels) {
+        'modules/models-customer',
+        'modules/models-b2b-account',
+        'modules/views-modal-dialog',
+        'modules/models-dialog'
+], function (api, Backbone, _, $, HyprLiveContext, Hypr, MessageHandler, B2cOrdersApi, OrdersModels, blockUiLoader, CustomerModels,B2BAccountModels, ModalDialogView, DialogModels ) {
 
     var B2cOrderView = Backbone.MozuView.extend({
        templateName: "modules/order/b2c-to-b2b-order-detail",
@@ -25,6 +28,43 @@ define(['modules/api',
            Backbone.MozuView.prototype.render.apply(this);
            return this;
        }
+    });
+
+    var B2cFormModel = Backbone.MozuModel.extend({
+      relations: {
+          order: OrdersModels.Order,
+          b2cAccount: CustomerModels.Customer,
+          b2bAccount: B2BAccountModels.b2bAccount
+      }
+    });
+
+    var B2cFormView = Backbone.MozuView.extend({
+       templateName: "modules/order/b2c-to-b2b-form",
+       render: function() {
+           Backbone.MozuView.prototype.render.apply(this);
+           return this;
+       }
+    });
+
+
+    var ConfirmModalView = ModalDialogView.extend({
+       templateName : "modules/order/b2c-to-b2b-confirm-modal"
+       /*,
+       handleDialogOpen : function(){
+         this.model.trigger('openDialog');
+         this.bootstrapInstance.show();
+        },
+      handleDialogSave : function(){
+          this.trigger('submitForm');
+          this.model.trigger('saveDialog');
+         //this.handleDialogClose();
+         //this.bootstrapInstance.hide();
+      },
+      handleDialogClose : function(){
+          this.trigger('submitForm');
+         this.model.trigger('closeDialog');
+        //this.bootstrapInstance.hide();
+      }*/
     });
 
     function getParams() {
@@ -55,8 +95,24 @@ define(['modules/api',
         validate: function (payload) {
 
             if (!payload.accountName) return this.displayMessage('Organization Name missing'), false;
-            if (!payload.billto) return this.displayMessage('Bill To Account ID missing'), false;
-            if (!payload.shipto) return this.displayMessage('Ship To Account ID missing'), false;
+            if (!payload.billto) {
+              return this.displayMessage('Bill To Account ID missing'), false;
+            } else {
+              if ( payload.billto.length !== 10 || isNaN( payload.billto ) ){
+                return this.displayMessage('Bill To Account ID should be a 10-digit value ending in a 0'), false;
+              } else if ( payload.billto.length === 10 && !isNaN( payload.billto ) && payload.billto[payload.billto.length - 1] !== '0' ){
+                return this.displayMessage('Bill To Account ID  should be a 10-digit value ending in a 0'), false;
+              }
+            }
+            if (!payload.shipto) {
+              return this.displayMessage('Ship To Account ID missing'), false;
+            } else {
+              if ( payload.shipto.length !== 10  || isNaN( payload.shipto ) ){
+                return this.displayMessage('Ship To Account ID should be a 10-digit value not ending in a 0'), false;
+              } else if (payload.shipto.length === 10 && !isNaN( payload.shipto ) && payload.shipto[payload.shipto.length - 1] === '0'){
+                return this.displayMessage('Ship To Account ID  should be a 10-digit value not ending in a 0'), false;
+              }
+            }
             if (!payload.pricelist) return this.displayMessage('Pricelist Code missing'), false;
             if (!payload.orderId) return this.displayMessage('Order Id Missing'), false;
             return true;
@@ -72,14 +128,15 @@ define(['modules/api',
                 pricelist: this.$parent.find('[data-mz-pricelist]').val(),
                 orderId: params.id
               };
+                me.displayMessage("");
               if ( me.validate(payload) ) {
-                 me.setLoading(true);
+                me.setLoading(true);
                 // the new handle message needs to take the redirect.
                 B2cOrdersApi.OrderDetail.processCustomer(payload).then(function (response) {
                   console.log('response ',response);
                   if ( response.code === 'success') {
                       me.displayMessage("Processing your order ... ");
-                      me.setLoading(true);
+                      //me.setLoading(true);
                       B2cOrdersApi.OrderDetail.processOrders( { orderId: params.id }).then( function( orderResp){
                         var msg;
                         try {
@@ -110,7 +167,7 @@ define(['modules/api',
 
                 }, function(error) {
                   if ( error.responseJSON.resultCode === '101') { //Account already converted
-                    me.setLoading(true);
+                  //  me.setLoading(true);
                     me.displayMessage("Processing your order ... ");
                     B2cOrdersApi.OrderDetail.processOrders( { orderId: params.id }).then( function( orderResp){
                       var msg;
@@ -157,13 +214,13 @@ define(['modules/api',
                         me.setLoading(false);
                       }
                     }
-                 }
-               );
+                 });
              }
-           } else {
-             me.displayMessage("Order Id missing");
-           }
-        },
+            } else {
+              me.displayMessage("Order Id missing");
+            }
+          },
+
         init: function (el) {
             this.$el = $(el);
             this.loading = false;
@@ -183,24 +240,17 @@ define(['modules/api',
       if(params && params.id) {
         B2cOrdersApi.OrderDetail.getOrderDetail( { orderId: params.id }).then( function( data ){
          if( data  ){
-             var B2cOrderFormModel = new OrdersModels.Order(data.order);
-             var b2cOrderView = new B2cOrderView({
-                el: $( '#order-status-detail' ),
-                model: B2cOrderFormModel,
+
+             var b2cFormModel = new B2cFormModel(data);
+             var b2cFormView = new B2cFormView({
+                el: $( '#b2c-to-b2b-info' ),
+                model: b2cFormModel,
                 messagesEl: $('[data-mz-message-bar]')
              });
-             var accModel = new CustomerModels.Customer(data.b2cAccount);
-             var accView = new B2cCustomerView({
-                el: $( '#b2c-customer' ),
-                model: accModel
-             });
+             window.b2cFormView = b2cFormView;
 
-
-             window.b2cOrderView = b2cOrderView;
-             window.b2cAccountView = accView;
-
-             accView.render();
-             b2cOrderView.render();
+             b2cFormView.render();
+             //b2cOrderView.render();
              $(".mz-order-info").show();
              blockUiLoader.unblockUi();
              $('[data-mz-action="customer-details-submit"]').each(function () {
@@ -208,6 +258,7 @@ define(['modules/api',
                  loginPage.formSelector = 'form[name="mz-b2c-customer-details"]';
                  loginPage.pageType = 'b2ccustomerdetails';
                  loginPage.init(this);
+                 $('body').on('submitForm', loginPage.test);
              });
           } else {
             $('.mz-l-container').html("Order Missing");

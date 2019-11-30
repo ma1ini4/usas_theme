@@ -7,29 +7,7 @@
 {% block body-content %}
 {% require_script "pages/b2c-to-b2b-form" %}
     <div class="mz-l-container mz-l-stack-large">
-      {% include "modules/common/message-bar" with model=model.messages %}
-      <div class="mz-order-info col-sm-12" style="display:none">
-        <div class="mz-l-stack mz-order-status-detail-container col-sm-12">
-          <div class="mz-l-stack-section mz-order-status-detail col-sm-6" id="order-status-detail">
-              {% include "modules/order/b2c-to-b2b-order-detail" %}
-          </div>
-        </div>
-        <div id="b2c-customer" class="mz-l-stack-section mz-order-status-detail col-sm-6" style="clear:none">
-          {% include "modules/order/b2c-to-b2b-customer" %}
-        </div>
-        <div class="success-message-panel" style="display:none">
-            <bold></bold>
-            <div class="message-preview"></div>
-            </p>
-            <div class="mz-l-formfieldgroup-row">
-            <div>
-                <a href="/">
-                    <button class="btn button-primary"> </button>
-                </a>
-            </div>
-            </div>
-        </div>
-        </div>
+      <div id="b2c-to-b2b-info"></div>
     </div>
-
+  
 {% endblock body-content %}

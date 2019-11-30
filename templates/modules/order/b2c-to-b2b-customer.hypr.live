@@ -1,112 +1,12 @@
 <div class="b2b-account-info-details">
  <div class="col-sm-10 mz-reset-padding-left">
   <div class="order-detail-row"><h4 class="mz-l-stack-sectiontitle">{{labels.b2cB2bCustomerInfo}}</h4></div>
-  {% if model && model.attributes.length %}
-  <div class="order-detail-row">
-  <form method="post" class="mz-loginform mz-loginform-page" name="mz-b2c-customer-details">
-      {% for attribute in model.attributes %}
-        <div class="mz-accountsettings-attribute">
-          {% if attribute.fullyQualifiedName === "tenant~b2b-account-name" %}
-              <span class="b2b-account-attribute-label">{{ labels.accountName }}</span>
-              <span class="b2b-account-attribute-value"><strong>{{ attribute.values|first|default("N/A")  }} </strong></span>
-              <input type="hidden" id="accountName" name="accountName" value="{{ attribute.values|first|default("N/A")}}" data-mz-account-name />
-          {% endif %}
-          {% if attribute.fullyQualifiedName === "tenant~b2b-account-id" %}
-              <span class="b2b-account-attribute-label">{{ labels.billtoAccountId }}</span>
-              <span class="b2b-account-attribute-value"><strong>{{ attribute.values|first|default("N/A")  }}</strong></span>
-              <input type="hidden"  id="billto" name="billto"  value="{{ attribute.values|first|default("N/A")}}" data-mz-billto />
-            {% endif %}
-          {% if attribute.fullyQualifiedName === "tenant~ship-to-account-id" %}
-              <span class="b2b-account-attribute-label">{{ labels.shiptoAccountId }}</span>
-              <span class="b2b-account-attribute-value"><strong>{{ attribute.values|first|default("N/A")  }}</strong></span>
-              <input type="hidden"  id="shipto" name="shipto"  value="{{ attribute.values|first|default("N/A")}}" data-mz-shipto />
-          {% endif %}
-          {% if attribute.fullyQualifiedName === "tenant~b2b-pricelist-code" %}
-              <span class="b2b-account-attribute-label">{{ labels.pricelistCode }}</span>
-              <span class="b2b-account-attribute-value"><strong>{{ attribute.values|first|default("N/A")  }}</strong></span>
-              <input type="hidden"  id="pricelist" name="pricelist"  value="{{ attribute.values|first|default("N/A")}}" data-mz-pricelist />
-          {% endif %}
-        </div>
-  {% endfor %}
-    <div class="row">
-      <div class="col-sm-12">
-          <div class="form-group text-right">
-               <button class="mz-button mz-button-large mz-login-button" data-mz-action="customer-details-submit">{{ labels.submit }}</button>
-              <div class="mz-l-formfieldgroup-cell">
-                  <section data-mz-role="popover-message" class="mz-popover-message"></section>
-              </div>
-          </div>
-      </div>
-  </div>
-  </form>
-  </div>
+  {% if model.b2bAccount  %}
+      {% with  model.b2cAccount.attributes|findwhere("fullyQualifiedName", "tenant~ship-to-account-id") as shiptoAccountId %}
+          {% include "modules/order/b2c-to-b2b-account-form" with model=model.b2bAccount shiptoAccountId=shiptoAccountId as_paramater %}
+      {% endwith %}
   {% else %}
-    <div class="order-detail-row">
-      <div class="col-xs-12 col-sm-12">
-        <form method="post" class="mz-loginform mz-loginform-page" name="mz-b2c-customer-details">
-          <input type="hidden" name="order-id" data-mz-order-id/>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="row">
-                        <div class="form-group">
-                            <label for="accountName" class="control-label col-xs-12"><span class="is-required">* </span>{{ labels.accountName }}</label>
-                            <div class="col-xs-12">
-                                <input type="text" class="form-control" id="accountName" name="accountName" placeholder="Organization Name" data-mz-account-name>
-                            </div>
-                          </div>
-                      </div>
-                </div>
-          </div>
-          <div class="row">
-              <div class="col-sm-12">
-                <div class="row">
-                  <div class="form-group">
-                      <label for="billto" class="control-label col-xs-12"><span class="is-required">* </span>{{ labels.billtoAccountId }}</label>
-                      <div class="col-xs-12">
-                        <input type="text" class="form-control" id="billto" name="billto" placeholder="Bill To Account ID" data-mz-billto>
-                      </div>
-                  </div>
-                </div>
-             </div>
-           </div>
-       <div class="row">
-          <div class="col-sm-12">
-              <div class="row">
-                  <div class="form-group">
-                      <label for="shipto" class="control-label col-xs-12"><span class="is-required">* </span>{{ labels.shiptoAccountId }}</label>
-                      <div class="col-xs-12">
-                          <input type="text" class="form-control" id="shipto" name="shipto" placeholder="Ship To Account ID" data-mz-shipto>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="row">
-          <div class="col-sm-12">
-              <div class="row">
-                  <div class="form-group">
-                      <label for="pricelist" class="control-label col-xs-12"><span class="is-required">* </span>{{ labels.pricelistCode }}</label>
-                      <div class="col-xs-12">
-                          <input type="text" class="form-control" id="pricelist" name="pricelist" placeholder="Price List Code" data-mz-pricelist>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="row">
-          <div class="col-sm-12">
-              <div class="form-group text-right">
-                   <button class="mz-button mz-button-large mz-login-button" data-mz-action="customer-details-submit">{{ labels.submit }}</button>
-                  <div class="mz-l-formfieldgroup-cell">
-                      <section data-mz-role="popover-message" class="mz-popover-message"></section>
-                  </div>
-              </div>
-          </div>
-      </div>
-    </div>
-  </form>
-  </div>
-  </div>
-{% endif %}
+      {% include "modules/order/b2c-to-b2b-customer-form" with model=model.b2cAccount  %}
+  {% endif %}
  </div>
 </div>
