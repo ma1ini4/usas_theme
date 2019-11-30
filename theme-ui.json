@@ -1034,7 +1034,7 @@
         },
         {
             "xtype": "panel",
-            "title": "orders conversion",
+            "title": "Orders conversion",
             "collapsed": false,
             "items": [
                 {
