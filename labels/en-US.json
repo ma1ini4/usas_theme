@@ -666,5 +666,9 @@
   "b2cToB2bConversionError_402": "The Order {0} has been accepted but your order couldn't be cancelled. Please check its status in Admin and cancel it manually",
   "b2cToB2bConversionError_403": "The Order {0} has been created but it couldn't be submmitted. Please, check your order and the order {0} in Admin to complete the conversion process manually",
   "b2cToB2bConversionError_404": "Your order has been converted succesfully, please check Order {0}",
-  "b2cToB2bConversionError_405": "Your order has been converted but the new order {0} is still Pending, please check the payments in the new order"
+  "b2cToB2bConversionError_405": "Your order has been converted but the new order {0} is still Pending, please check the payments in the new order",
+  "b2cAccountInformation": "Customer Information",
+  "b2bConfirmInfoMessage": "Please, verify the account information before submitting",
+  "b2bConfirmInfo": "Confirm B2B Account info",
+  "backToOrders": "Back To Orders"
 }

@@ -7,6 +7,21 @@
         <div>{{ labels.orderDetailStatus}} <strong>{{model.status }}</strong></div>
       </div>
       <div class="order-detail-row">
+          <h4 class="mz-l-stack-sectiontitle">{{ labels.b2cAccountInformation }}</h4>
+          <div class="mz-l-stack-item">
+          <div><strong>{{b2cAccount.firstName}} {{b2cAccount.lastName}}</strong> </div>
+          <div>{{ labels.email}} <strong>{{b2cAccount.emailAddress }}</strong></div>
+          {% for contact in b2cAccount.contacts %}
+            {% with contact.types|findwhere("name","Shipping") as shippingType %}
+             {% if shippingType.isPrimary %}
+               <div>{{ labels.phone }} <strong>{{contact.phoneNumbers.home|default("N/A") }}</strong>.</div>
+              <div>{{ labels.workPhone }} <strong>{{contact.phoneNumbers.work|default("N/A") }}</strong>.</div>
+             {% endif %}
+            {% endwith %}
+          {% endfor %}
+          </div>
+      </div>
+      <div class="order-detail-row">
           <h4 class="mz-l-stack-sectiontitle">{{ labels.billingInformation }}</h4>
           <div class="mz-l-stack-item">
               	{% include "modules/common/address-summary" with model=model.billingInfo.billingContact %}

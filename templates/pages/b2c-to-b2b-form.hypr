@@ -9,4 +9,5 @@
     <div class="mz-l-container mz-l-stack-large">
       <div id="b2c-to-b2b-info"></div>
     </div>
+  
 {% endblock body-content %}

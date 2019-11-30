@@ -74,7 +74,8 @@
       </div>
   </div>
   <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-6 mz-back-to-orders-lnk" style="padding: 15px;text-decoration:underline"><a href='/templates/b2c-orders'>{{labels.backToOrders}}</a></div>
+      <div class="col-sm-6">
           <div class="form-group text-right">
                <button class="mz-button mz-button-large mz-login-button" data-mz-action="customer-details-submit">{{ labels.submit }}</button>
               <div class="mz-l-formfieldgroup-cell">
