@@ -7,7 +7,7 @@
 {% block body-content %}
 <div class="mz-l-container mz-l-stack-large">
 {% with "t{0}-s{1}"|string_format(siteContext.tenantId, siteContext.siteId) as validUrl %}
-  {% if pageContext.user.isAuthenticated  &&  pageContext.user.segments|contains(themeSetting.userConvertCustomerSegment) &&  pageContext.url|contains(validUrl) %}
+  {% if pageContext.user.isAuthenticated  and pageContext.user.segments|contains(themeSettings.userConvertCustomerSegment) and pageContext.url|contains(validUrl) %}
   {% require_script "pages/b2c-to-b2b-form" %}
         <div id="b2c-to-b2b-info"></div>
   {% else %}
