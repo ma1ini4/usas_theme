@@ -667,9 +667,11 @@
   "b2cToB2bConversionError_403": "The Order {0} has been created but it couldn't be submmitted. Please, check your order and the order {0} in Admin to complete the conversion process manually",
   "b2cToB2bConversionError_404": "Your order has been converted succesfully, please check Order {0}",
   "b2cToB2bConversionError_405": "Your order has been converted but the new order {0} is still Pending, please check the payments in the new order",
+  "b2cToB2bConversionError_406": "There was an error processing your order - Please re-submit the form",
   "b2cAccountInformation": "Customer Information",
   "b2bConfirmInfoMessage": "Please, verify the account information before submitting",
   "b2bConfirmInfo": "Confirm B2B Account info",
   "backToOrders": "Back To Orders",
   "b2cOrderUserNotAuthorized": "Access denied - Please log in via Admin URL and verify user permissions "
+
 }
