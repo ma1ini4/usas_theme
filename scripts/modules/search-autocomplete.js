@@ -137,7 +137,7 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
             }
         };
     };
-    
+
     function handleSearchResults(item, searchVal) {
         var productData = $(item).find('.primary-btn.quick-view-btn').data('mzProductData');
         var variation = null;
@@ -147,15 +147,13 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
                 return (obj.productCode === searchVal) ? obj : null;
             });
         }
-        
+
         if ((productData && productData.productCode === searchVal) || (variation && productData.variations.length !== 0 && variation.productCode === searchVal)) {
-        
+           var productUrl = productData.url;
             if (variation) {
-                $.cookie('searchProductOptions', JSON.stringify(variation), {
-                    path: '/'
-                });
+              productUrl = productUrl+"?vpc="+searchVal;
             }
-            window.location = productData.url;
+            window.location = productUrl;
             return true;
         } else {
             return false;
@@ -182,7 +180,7 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
         });
    		$('#searchbox').on('submit', function(e){
             var searchVal = $('#search-field').val().trim();
-            
+
             if(searchVal === ""){
                 window.alert(Hypr.getLabel('blankSearchResult'));
                 e.preventDefault();
@@ -192,9 +190,9 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
             }
             var newString = searchVal.replace(/[^\d\-\C]+/g, '');
             var regEx = new RegExp(/\d{4}\-\d{4}|CC\d{4}\-\d{4}/g);
-            var isProductCode = regEx.test(newString);            
+            var isProductCode = regEx.test(newString);
             var savedString = newString;
-            
+
             if (isProductCode) {
                 e.preventDefault();
                 blockUiLoader.globalLoader();
@@ -209,18 +207,18 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
                     beforeSend: function(req){
                         req.setRequestHeader('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3');
                         req.setRequestHeader("Access-Control-Allow-Origin", "*");
-                    },  
+                    },
                     success: function (data) {
                         var items = $(data).find('#product-list-ul .mz-productlist-item');
                         if (items.length !== 0) {
                             var hasValidResults = [];
-                            
+
                             items.each(function(id){
 
-                                hasValidResults.push(handleSearchResults(this, savedString));                                
+                                hasValidResults.push(handleSearchResults(this, savedString));
                                 if (hasValidResults.indexOf(true) === -1 && id === items.length - 1) {
                                     handleNoResults(savedString);
-                                }                                
+                                }
                             });
 
                         } else {
