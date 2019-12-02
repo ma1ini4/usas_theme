@@ -1,6 +1,6 @@
 ﻿<div class="mz-productlist {% block module-classes %}{% endblock module-classes %}">
     {% if model.items %}
-    <ul id="product-list-ul" class="mz-productlist-list row ml-list-view-toggle grid-view {% block list-classes %}{% endblock list-classes %}">
+    <ul id="product-list-ul" class="mz-productlist-list row ml-list-view-toggle grid-view clearfix{% block list-classes %}{% endblock list-classes %}">
         {% for prod in model.items %}
         <li class="mz-productlist-item col-xs-6 col-sm-4" data-mz-product="{{ prod.productCode }}">{% include "modules/product/product-listing" with model=prod %}</li>
         {% endfor %}
