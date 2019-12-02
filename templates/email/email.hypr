@@ -154,7 +154,7 @@
         <table cellpadding="0" cellspacing="0" border="0" id="backgroundTable">
             <tr>
                 <td colspan="2"  style="text-align: center; padding: 15px; background-color: #F1F1F2;">
-                    <img src="https:{% make_url "image" themeSettings.globalPageHeaderLogoSM.imageUrl %}" alt="USA Scientific Logo" style="max-width: 175px;"/>
+                    <img src="https://cdn-tp2.mozu.com/27776-m1/cms/files/0be3d27c-cae5-4b24-add0-994e9451273d" alt="USA Scientific Logo" style="max-width: 175px;"/>
                 </td>
             </tr>
             <tr>
@@ -171,7 +171,7 @@
             <tr>
                 <td width="150" style="position: relative;">
                     <img class="customLogo footer-contacts-logo" style="height: 50px;width: 115px;position: absolute;top: 0;bottom: 0;right: 0;left: 0;margin: auto;" alt="USA Scientific Logo" 
-                        src="https:{% make_url "image" themeSettings.globalPageHeaderLogoSM.imageUrl %}"/>
+                        src="https://cdn-tp2.mozu.com/27776-m1/cms/files/0be3d27c-cae5-4b24-add0-994e9451273d"/>
                 </td>
                 <td>
                     <p>

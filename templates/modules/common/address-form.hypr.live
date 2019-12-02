@@ -34,6 +34,16 @@
           <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}lastNameOrSurname"></span>
         </div>
     </div>
+    <div class="mz-l-formfieldgroup-row mz-addressform-address2">
+        <!--<div class="mz-l-formfieldgroup-cell mz-hide-column-catalog"></div>-->
+        <div class="mz-l-formfieldgroup-cell mz-custom-padding-address">
+            <input type="text" class="input" {% if not model.hasRequiredBehavior %} disabled {% endif %}
+                name="address-line-3" data-mz-value="{{ addresscontext }}address.address3"
+                value="{{ model.address.address3 }}" maxlength="{{themeSettings.addressLength}}"
+                placeholder="Organization">
+            <span class="mz-validationmessage"></span>
+        </div>
+    </div>
     <div class="mz-l-formfieldgroup-row mz-addressform-address1">
         {% comment %}
             <div class="mz-l-formfieldgroup-cell">
@@ -52,16 +62,6 @@
                 name="address-line-2" data-mz-value="{{ addresscontext }}address.address2"
                 value="{{ model.address.address2 }}" maxlength="{{themeSettings.addressLength}}"
                 placeholder="{{ labels.address }} Line 2">
-            <span class="mz-validationmessage"></span>
-        </div>
-    </div>
-    <div class="mz-l-formfieldgroup-row mz-addressform-address2">
-        <!--<div class="mz-l-formfieldgroup-cell mz-hide-column-catalog"></div>-->
-        <div class="mz-l-formfieldgroup-cell mz-custom-padding-address">
-            <input type="text" class="input" {% if not model.hasRequiredBehavior %} disabled {% endif %}
-                name="address-line-3" data-mz-value="{{ addresscontext }}address.address3"
-                value="{{ model.address.address3 }}" maxlength="{{themeSettings.addressLength}}"
-                placeholder="Organization">
             <span class="mz-validationmessage"></span>
         </div>
     </div>
