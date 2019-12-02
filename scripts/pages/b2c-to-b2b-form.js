@@ -136,7 +136,7 @@ define(['modules/api',
                   console.log('response ',response);
                   if ( response.code === 'success') {
                       me.displayMessage("Processing your order ... ");
-                      //me.setLoading(true);
+                      me.setLoading(true);
                       B2cOrdersApi.OrderDetail.processOrders( { orderId: params.id }).then( function( orderResp){
                         var msg;
                         try {
@@ -167,7 +167,7 @@ define(['modules/api',
 
                 }, function(error) {
                   if ( error.responseJSON.resultCode === '101') { //Account already converted
-                  //  me.setLoading(true);
+                    me.setLoading(true);
                     me.displayMessage("Processing your order ... ");
                     B2cOrdersApi.OrderDetail.processOrders( { orderId: params.id }).then( function( orderResp){
                       var msg;
