@@ -130,9 +130,9 @@
           {% endblock secondary-nav %}
             <div role="main" id="page-content" class="mz-l-pagecontent">
                 <div class="{% if pageContext.cmsContext.template.path == "home"%}container-fluid{%else%}container{%endif%}">
-                <div class="row">
+                  <div class="row">
 
-                  {% block body-content %}
+                    {% block body-content %}
                     {% block breadcrumbs %}
                     {% endblock breadcrumbs %}
 
@@ -145,35 +145,40 @@
                     </div>
                 </div>
             </div>
+            <div class="container-fluid">
+              <div class="row">
 
-            {% block page-footer %}
-            {% include "modules/page-footer" %}
-            {% endblock page-footer %}
-
-            <div class="mz-pagefooter-copyright redBG">
-              {% block copyright-footer %}
-
-              <div class="container">
-                <div class="row">
-                  <div class="col-sm-8 col-xs-12">
-                    <div id="copyright">
-                      <span class="mz-pagefooter-copyrighttext">
-                        &copy; {% now Y %}
-                        {{ siteContext.generalSettings.websiteName }}. All rights reserved. Product prices apply to US orders only.
-                      </span>
+                {% block page-footer %}
+                {% include "modules/page-footer" %}
+                {% endblock page-footer %}
+    
+                <div class="mz-pagefooter-copyright redBG">
+                  {% block copyright-footer %}
+    
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-sm-8 col-xs-12">
+                        <div id="copyright">
+                          <span class="mz-pagefooter-copyrighttext">
+                            &copy; {% now Y %}
+                            {{ siteContext.generalSettings.websiteName }}. All rights reserved. Product prices apply to US orders only.
+                          </span>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-4 col-xs-12">
-                  <div id="copyright">
-                    <div class="mz-pagefooter-copyright-links">
-                      <a href="/site-map">Site map</a> |
-                      <a href="/privacy-policy">Privacy and security</a>
+                    <div class="col-sm-4 col-xs-12">
+                      <div id="copyright">
+                        <div class="mz-pagefooter-copyright-links">
+                          <a href="/site-map">Site map</a> |
+                          <a href="/privacy-policy">Privacy and security</a>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                  {% endblock copyright-footer%}
                 </div>
               </div>
-              {% endblock copyright-footer%}
-            </div>
+              </div>
+
 
           {% include "modules/common/message-bar" %}
         </div>
