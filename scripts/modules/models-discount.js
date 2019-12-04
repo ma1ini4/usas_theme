@@ -18,6 +18,11 @@ define(["backbone", 'underscore', 'hyprlive', 'modules/api', 'modules/models-pro
             productCode: "",
             hasMultipleProducts: false
         },
+        initialize: function () {
+            console.log(123);
+            // Backbone.MozuView.prototype.initialize.apply(this, arguments);
+            this.getDiscountProducts();
+        },
         getProductDetails: function (productCode) {
             var self = this;
             productCode = productCode || this.get('productCode');
@@ -64,6 +69,7 @@ define(["backbone", 'underscore', 'hyprlive', 'modules/api', 'modules/models-pro
             var self = this;
             var deferred = api.defer();
             var products = [];
+            console.log(self);
 
             var hasBaseProduct = function (products, variationCode) {
                 return _.findIndex(products, function (product) {
