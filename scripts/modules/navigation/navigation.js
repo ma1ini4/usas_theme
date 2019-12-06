@@ -165,12 +165,12 @@ define([
             $('[data-mz-action="launchforgotpassword"]').popover('hide');
             var $this = $(this);
             var $subMenu = $this.find('.mz-sitenav-sub-container');
-            $subMenu.stop(true, true).delay(200).fadeIn(200, 'easeInOut');
+            $subMenu.stop(true, true).fadeIn(250);
           },
           function() {
             var $this = $(this);
             var $subMenu = $this.find('.mz-sitenav-sub-container');
-            $subMenu.stop(true, false).delay(200).fadeOut(0);
+            $subMenu.stop(true, false).fadeOut(50);
           }
         );
     });
