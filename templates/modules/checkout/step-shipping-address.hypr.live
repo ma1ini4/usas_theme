@@ -1,6 +1,6 @@
  <h3 class="mz-formstep-header mz-checkoutform-header">
         {{ labels.shippingInformation }}
-        {% if model.requiresFulfillmentInfo && model.hasRequiredBehavior %}
+        {% if model.requiresFulfillmentInfo %}
         <a href="javascript:;" class="mz-formstep-edit" data-mz-action="edit">{{ labels.change }}</a>
         {% endif %}
         {% if model.isAwsCheckout and model.stepStatus == "incomplete" %}
