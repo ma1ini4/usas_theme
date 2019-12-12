@@ -433,7 +433,7 @@ function (Backbone, Hypr, $, _, HyprLiveContext, ModalDialogView, Api, ProductMo
         },
         setInit: function (updatingItemId){
             var self = this;
-            console.log('setInit ', self);
+            console.log('setInit ', self.model);
 
             if (this.model.hasNextDiscount()) {
                 this.model.loadNextDiscount().then(function(){

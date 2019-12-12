@@ -10,7 +10,9 @@ define(["backbone", 'underscore', 'hyprlive', 'modules/api', 'modules/models-pro
             discount: DiscountModel
         },
         hasNextDiscount: function() {
+            console.log(this.get('discounts'));
             return this.get('discounts').find(function (discount) {
+                console.log(discount);
                 return !discount.get('complete') && ((discount.get('autoAdd') || (discount.get('hasOptions') || discount.get('hasMultipleProducts'))));
                 //return !discount.get('complete');
             });
