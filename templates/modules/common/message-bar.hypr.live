@@ -69,9 +69,16 @@
                         <li class="mz-message-item">{{ labels.returnValidationError }}</li>
                     </ul>
                 {% else %}
-                    <ul class="is-showing mz-errors">
-                        <li class="mz-message-item">{{ msg.message }}</li>
-                    </ul>
+                    {% if msg.message == "Missing or invalid parameter: variationProductCode Product is configurable. Variation code must be specified" %}
+                        <ul class="is-showing mz-errors">
+                            <li class="mz-message-item">{{ labels.pdpInvalidOptionsErr }}</li>
+                        </ul>
+                    {% else %}
+                        <ul class="is-showing mz-errors">
+                            <li class="mz-message-item">{{ msg.message }}</li>
+                        </ul>
+                    {% endif %}
+
                 {% endif %}
             {% endif %}
 

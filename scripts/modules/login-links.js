@@ -28,7 +28,7 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
     determineB2BUser();
     (function() {
         var urlParams = window.location.search;
-        console.log(urlParams);
+
         if (urlParams.indexOf('userstate=locked') !== -1) {
             $('#page-content [data-mz-message-bar]').html('<span class="mz-validationmessage">' + Hypr.getLabel('b2bAConversionErrorMsg') + '</span>');
         }
