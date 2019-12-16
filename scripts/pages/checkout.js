@@ -83,9 +83,10 @@ require(["modules/jquery-mozu",
         initialize: function () {
             var me = this;
             var customer = me.model.get('customer');
-            
-            if (customer.get('accountType') == "B2B") {
+            if (customer.get('accountType') === "B2B") {
                 me.model.set('isB2B', true);
+                me.model.get('fulfillmentInfo').set('isB2B', true);
+                me.model.get('fulfillmentInfo').get('fulfillmentContact').set('isB2B', true);
             }
 
             this.listenTo(this.model.get('billingInfo'), 'orderPayment', this.onOrderCreditChanged, this);
@@ -341,6 +342,7 @@ require(["modules/jquery-mozu",
             if (customer.get('accountType') == "B2B") {
                 var sameAddress =  me.model.get('isSameBillingShippingAddress');
 
+                me.$('.mz-contact-selector-b2b-note').removeClass('hidden');
                 me.$('[data-mz-value="isSameBillingShippingAddress"]').parent().hide();
                 me.$('#billing-email').parents('.mz-l-stack-section.mz-formfieldgroup-row.mz-paymentselector-separator.mz-checkoutform').hide();
                 if(!sameAddress) {
@@ -837,8 +839,6 @@ require(["modules/jquery-mozu",
 
     function handleB2bUserInputs(isB2bUser) {
         if(isB2bUser) {
-            // $('.mz-contact-selector-b2b-note').removeClass('hidden');
-            // console.log(isB2bUser);
             $('body').on('click focus keypress keydown keyup change blur', '.mz-contactselector-new input, .mz-contactselector-new select', function (e) {
                 e.preventDefault();
                 $(e.target).prop('disabled', 'disabled');
