@@ -674,5 +674,6 @@
   "backToOrders": "Back To Orders",
   "b2cOrderUserNotAuthorized": "Access denied - Please log in via Admin URL and verify user permissions ",
   "b2bAConversionErrorMsg": "We need to verify your account - please reset your password",
-  "pdpInvalidOptionsErr": "Please select one option from each selection below before adding product to cart"
+  "pdpInvalidOptionsErr": "Please select one option from each selection below before adding product to cart",
+  "disabledQuotesMsg": "Coming soon. </br>View and purchase directly from your quotes. Be sure to check back often as this feature is launching soon."
 }

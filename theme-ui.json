@@ -1043,6 +1043,16 @@
                     "name": "userConvertCustomerSegment"
                 }
             ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Disable Quotes",
+            "collapsed": false,
+            "items": [{
+                "xtype": "mz-input-checkbox",
+                "name": "disableQuotes",
+                "fieldLabel": "Disable quotes"
+            }]
         }
     ]
 }

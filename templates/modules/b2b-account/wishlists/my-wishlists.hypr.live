@@ -5,6 +5,9 @@
             {{labels.b2bQuotesHeader}}
             <!-- <a data-mz-action="newWishlist">Retrieve Quote</a> -->
         </h3>
+        {% if themeSettings.disableQuotes %}
+            <span class="find-quote-text">{{ labels.disabledQuotesMsg|safe }}</span>
+        {% else %}
         <div class="wishlist-edit-form-section find-quote">
             <!-- <span class="productpicker-label">{{labels.b2bWishlistName}}</span> -->
             <span class="find-quote-text {% if model.isEditMode %} hidden{%endif%}">{{ labels.b2bFindLabel }}</span>
@@ -31,6 +34,7 @@
                 <div class="is-loading"></div>
                 {% include "modules/b2b-account/wishlists/wishlist-grid" %}
             </div>
+        {% endif %}
         {% endif %}
     </div>
 </div>
