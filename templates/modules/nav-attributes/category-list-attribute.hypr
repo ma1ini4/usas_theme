@@ -16,6 +16,7 @@
 		{% endif %}
 		{% if var == 'm1a' %}
 			{% for item in entityModel.items1a %}
+				{% if item and (item.name or item.url) %}
 				<div class="panel">
 					<div class="panel-heading" role="tab">
 						<h4 class="panel-title-sub">
@@ -25,10 +26,12 @@
 						</h4>
 					</div>
 				</div>
+				{% endif %}
 			{% endfor %}
 		{% endif %}
 		{% if var == 'm1b' %}
 			{% for item in entityModel.items1b %}
+				{% if item and (item.name or item.url) %}
 				<div class="panel">
 					<div class="panel-heading" role="tab">
 						<h4 class="panel-title-sub">
@@ -38,6 +41,7 @@
 						</h4>
 					</div>
 				</div>
+				{% endif %}
 			{% endfor %}
 		{% endif %}
 		{% if var == '2a' %}
@@ -56,6 +60,7 @@
 		{% endif %}
 		{% if var == 'm2a' %}
 			{% for item in entityModel.items2a %}
+				{% if item and (item.name or item.url) %}
 				<div class="panel">
 					<div class="panel-heading" role="tab">
 						<h4 class="panel-title-sub">
@@ -65,10 +70,12 @@
 						</h4>
 					</div>
 				</div>
+				{% endif %}
 			{% endfor %}
 		{% endif %}
 		{% if var == 'm2b' %}
 			{% for item in entityModel.items2b %}
+				{% if item and (item.name or item.url) %}
 				<div class="panel">
 					<div class="panel-heading" role="tab">
 						<h4 class="panel-title-sub">
@@ -78,6 +85,7 @@
 						</h4>
 					</div>
 				</div>
+				{% endif %}
 			{% endfor %}
 		{% endif %}
 		{% if var == '3a' %}
@@ -96,6 +104,7 @@
 		{% endif %}
 		{% if var == 'm3a' %}
 			{% for item in entityModel.items3a %}
+				{% if item and (item.name or item.url) %}
 				<div class="panel">
 					<div class="panel-heading" role="tab">
 						<h4 class="panel-title-sub">
@@ -105,10 +114,12 @@
 						</h4>
 					</div>
 				</div>
+				{% endif %}
 			{% endfor %}
 		{% endif %}
 		{% if var == 'm3b' %}
 			{% for item in entityModel.items3b %}
+				{% if item and (item.name or item.url) %}
 				<div class="panel">
 					<div class="panel-heading" role="tab">
 						<h4 class="panel-title-sub">
@@ -118,6 +129,7 @@
 						</h4>
 					</div>
 				</div>
+				{% endif %}
 			{% endfor %}
 		{% endif %}
 		{% if var == '4a' %}
@@ -136,6 +148,7 @@
 		{% endif %}
 		{% if var == 'm4a' %}
 			{% for item in entityModel.items4a %}
+				{% if item and (item.name or item.url) %}
 				<div class="panel">
 					<div class="panel-heading" role="tab">
 						<h4 class="panel-title-sub">
@@ -145,10 +158,12 @@
 						</h4>
 					</div>
 				</div>
+				{% endif %}
 			{% endfor %}
 		{% endif %}
 		{% if var == 'm4b' %}
 			{% for item in entityModel.items4b %}
+				{% if item and (item.name or item.url) %}
 				<div class="panel">
 					<div class="panel-heading" role="tab">
 						<h4 class="panel-title-sub">
@@ -158,6 +173,7 @@
 						</h4>
 					</div>
 				</div>
+				{% endif %}
 			{% endfor %}
 		{% endif %}
 	{% endwith %}
