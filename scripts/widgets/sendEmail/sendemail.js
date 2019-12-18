@@ -172,7 +172,10 @@ function ($, backbone, Hypr, hyprlivecontext) {
             var isFilled = [];
             var isValidEmail = false;
             $('#' + customId).find('input[required]:visible, textarea[required]:visible, select[required] option:selected').each(function () {
+                console.log(this);
                 if ($(this).val() || $(this).val() !== '') {
+                    console.log(this.val());
+
                     if(this.type === 'email') {
                         isValidEmail = validateEmail($(this).val());
                         isFilled.push(isValidEmail);
@@ -184,6 +187,7 @@ function ($, backbone, Hypr, hyprlivecontext) {
                     }
                 } else {
                     isFilled.push(false);
+                    console.log(1);
                     if($(this).is('option')) {
                         showValidationError($(this).parent(), 'Please, choose an option');
                     } else if (this.type === 'email' && !isValidEmail) {
@@ -210,6 +214,7 @@ function ($, backbone, Hypr, hyprlivecontext) {
         }
     }
     function showValidationError(el, msg) {
+        console.log(msg);
         $(el).parent().append('<span class="email-validation-error">'+msg+'</span>');
     }
 });
