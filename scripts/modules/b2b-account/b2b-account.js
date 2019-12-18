@@ -50,12 +50,6 @@ define([
                 })
             }, 
             {
-                name: 'Returns',
-                view: new Returns.ReturnsView({
-                    model: CustomerModels.EditableCustomer.fromCurrent()
-                })
-            },
-            {
                 name: 'Users',
                 view: new Users.UsersView({
                     model: new Users.UsersModel({})
