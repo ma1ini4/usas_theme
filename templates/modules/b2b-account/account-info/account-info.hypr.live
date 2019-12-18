@@ -11,10 +11,13 @@
         </h2>
 
         <div class="mz-accountsettings-section">
-            <span class="mz-accountsettings-label mz-account-settings-label-name"><strong>Account ID:
-                    {{ model.id }}</strong></span>
+            <span class="mz-accountsettings-label mz-account-settings-label-name">
+                {% if model.externalId %}
+                    <strong>Account ID: {{ model.externalId }}</strong></span>
+                {% else %}
+                    <strong>Web Account ID: {{ model.id }}</strong></span>
+                {% endif %}
         </div>
-
         <div class="mz-accountsettings-section">
             <span class="mz-accountsettings-label mz-account-settings-label-name">{{ labels.firstName }} / {{ labels.lastName }}</span>
             {% if model.editing %}
