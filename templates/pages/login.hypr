@@ -34,7 +34,7 @@
                               <label for="email">{{ labels.logInInput }}</label>
                           </div> -->
                           <div class="mz-l-formfieldgroup-cell">
-                              <input name="email" value="{{model.email|default:user.email}}" placeholder="{{ labels.logInInput }}" type="email" data-mz-login-email maxlength="{{themeSettings.emailLength}}"/>
+                              <input name="email" value="{{(model.email|replace("B2C-", ""))|default(user.email)}}" placeholder="{{ labels.logInInput }}" type="email" data-mz-login-email maxlength="{{themeSettings.emailLength}}"/>
                           </div>
                       </div>
                       <div class="mz-l-formfieldgroup-row">
