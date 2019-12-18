@@ -10,6 +10,33 @@
 					<span class="sub-level-heading">{{ entityModel.heading1b|safe}}</span>
 			{% endif %}
 		{% endif %}
+		{% if var == "m1a" %}
+			{% if entityModel.heading1a != '' %}
+				<div class="panel">
+					<div class="panel-heading">
+						<h4 class="panel-title-sub-nolink">
+							{{ entityModel.heading1a|safe}}
+						</h4>
+					</div>
+				</div>
+			{% endif %}
+		{% endif %}
+		{% if var == "m1b" %}
+			{% if entityModel.heading1b != '' %}
+				<div class="panel">
+					<div class="panel-heading">
+						<h4 class="panel-title-sub-nolink"></h4>
+					</div>
+				</div>
+				<div class="panel">
+					<div class="panel-heading">
+						<h4 class="panel-title-sub-nolink">
+							{{ entityModel.heading1b|safe}}
+						</h4>
+					</div>
+				</div>
+			{% endif %}
+		{% endif %}
 		{% if var == "2a" %}
 			{% if entityModel.heading2a != '' %}
 					<span class="sub-level-heading">{{ entityModel.heading2a|safe}}</span>
@@ -18,6 +45,38 @@
 		{% if var == "2b" %}
 			{% if entityModel.heading2b != '' %}
 					<span class="sub-level-heading">{{ entityModel.heading2b|safe}}</span>
+			{% endif %}
+		{% endif %}
+		{% if var == "m2a" %}
+			{% if entityModel.heading2a != '' %}		
+				<div class="panel">
+					<div class="panel-heading">
+						<h4 class="panel-title-sub-nolink"></h4>
+					</div>
+				</div>
+				<div class="panel">
+					<div class="panel-heading">
+						<h4 class="panel-title-sub-nolink">
+							{{ entityModel.heading2a|safe}}
+						</h4>
+					</div>
+				</div>
+			{% endif %}
+		{% endif %}
+		{% if var == "m2b" %}
+			{% if entityModel.heading2b != '' %}
+				<div class="panel">
+					<div class="panel-heading">
+						<h4 class="panel-title-sub-nolink"></h4>
+					</div>
+				</div>
+				<div class="panel">
+					<div class="panel-heading">
+						<h4 class="panel-title-sub-nolink">
+							{{ entityModel.heading2b|safe}}
+						</h4>
+					</div>
+				</div>
 			{% endif %}
 		{% endif %}
 		{% if var == "3a" %}
@@ -30,6 +89,38 @@
 					<span class="sub-level-heading">{{ entityModel.heading3b|safe}}</span>
 			{% endif %}
 		{% endif %}
+		{% if var == "m2a" %}
+			{% if entityModel.heading3a != '' %}		
+				<div class="panel">
+					<div class="panel-heading">
+						<h4 class="panel-title-sub-nolink"></h4>
+					</div>
+				</div>
+				<div class="panel">
+					<div class="panel-heading">
+						<h4 class="panel-title-sub-nolink">
+							{{ entityModel.heading3a|safe}}
+						</h4>
+					</div>
+				</div>
+			{% endif %}
+		{% endif %}
+		{% if var == "m3b" %}
+			{% if entityModel.heading3b != '' %}
+				<div class="panel">
+					<div class="panel-heading">
+						<h4 class="panel-title-sub-nolink"></h4>
+					</div>
+				</div>
+				<div class="panel">
+					<div class="panel-heading">
+						<h4 class="panel-title-sub-nolink">
+							{{ entityModel.heading3b|safe}}
+						</h4>
+					</div>
+				</div>
+			{% endif %}
+		{% endif %}
 		{% if var == "4a" %}
 			{% if entityModel.heading4a != '' %}
 					<span class="sub-level-heading">{{ entityModel.heading4a|safe}}</span>
@@ -40,8 +131,40 @@
 					<span class="sub-level-heading">{{ entityModel.heading4b|safe}}</span>
 			{% endif %}
 		{% endif %}
+		{% if var == "m4a" %}
+			{% if entityModel.heading4a != '' %}		
+				<div class="panel">
+					<div class="panel-heading">
+						<h4 class="panel-title-sub-nolink"></h4>
+					</div>
+				</div>
+				<div class="panel">
+					<div class="panel-heading">
+						<h4 class="panel-title-sub-nolink">
+							{{ entityModel.heading4a|safe}}
+						</h4>
+					</div>
+				</div>
+			{% endif %}
+		{% endif %}
+		{% if var == "m4b" %}
+			{% if entityModel.heading4b != '' %}
+				<div class="panel">
+					<div class="panel-heading">
+						<h4 class="panel-title-sub-nolink"></h4>
+					</div>
+				</div>
+				<div class="panel">
+					<div class="panel-heading">
+						<h4 class="panel-title-sub-nolink">
+							{{ entityModel.heading4b|safe}}
+						</h4>
+					</div>
+				</div>
+			{% endif %}
+		{% endif %}
 		{% if var != "1a" and var != "1b" and var != "2a" and var != "2b" and var != "3a" and var != "3b" and var != "4a" and var != "4b" %}
-			<span class="sub-level-heading">&nbsp;&nbsp;</span>
+			<!-- <span class="sub-level-heading"></span>&nbsp;&nbsp;</span> -->
 		{% endif%}
 	{% endwith %}
 {% endif %}
