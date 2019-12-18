@@ -35,7 +35,7 @@
             {% include "modules/checkout/billing-credit-card-form" with model=model.card %}
             <div class="mz-l-stack-section">
                 <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
-                <span class="mz-contact-selector-b2b-note hidden">{{ labels.b2bBillingAddressNote }}</span>
+                <!-- <span class="mz-contact-selector-b2b-note hidden">{{ labels.b2bBillingAddressNote }}</span> -->
                 {% include "modules/checkout/billing-address-selector" %}
             </div>
         {% endif %}
@@ -85,7 +85,7 @@
         {% include "modules/checkout/checking-account-form" %}
         <div class="mz-l-stack-section">
             <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
-            <span class="mz-contact-selector-b2b-note hidden">{{ labels.b2bBillingAddressNote }}</span>
+            <!-- <span class="mz-contact-selector-b2b-note hidden">{{ labels.b2bBillingAddressNote }}</span> -->
             {% include "modules/checkout/billing-address-selector" %}
         </div>
         {% endif %}

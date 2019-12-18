@@ -66,22 +66,8 @@ define([
                 view: new Lists.WishlistsView({
                     model: new Lists.WishlistsModel({})
                 })
-            },
-            {
-                name: 'Shipping Information',
-                view: new ShippingInformation.AddressBookView({
-                    model: ShippingInformation.AddressBookModel.fromCurrent()
-                })
             }
         ];
-        // if (paneSwitcherModel.hasRequiredBehavior(1008)){ // user can place orders
-        //     panes.push({
-        //         name: 'Quick Order',
-        //         view: new QuickOrder.QuickOrderView({
-        //             model: new QuickOrder.QuickOrderModel({})
-        //         })
-        //     });
-        // }
         // Switch to the pane matching the hash in the URL.
         if (hash){
           // If we don't find a pane matching the hash given, perform the
@@ -125,41 +111,5 @@ define([
           window.views = views;
           _.invoke(views, 'render');
       });
-
     });
-
-    // $(window).bind('hashchange', function () {
-    //     var paneSwitcherModel = new PaneSwitcher.PaneSwitcherModel({});
-    //     var hash = false;
-    //     var quickOrder = false;
-    //     if (window.location.hash) {
-    //         // Fix escaped characters, remove spaces, and make lowercase
-    //         hash = decodeURI(window.location.hash.substring(1)).split(' ').join('').toLowerCase();
-            
-    //         if (hash === 'quickorder') {
-    //             if (!paneSwitcherModel.hasRequiredBehavior(1008)) { //user can place orders
-    //                 hash = 'lists';
-    //             }
-    //         }
-    //     }
-    //     console.log(hash);
-
-    //     // Switch to the pane matching the hash in the URL.
-    //     if (hash) {
-    //         // If we don't find a pane matching the hash given, perform the
-    //         // default and open on the first pane.
-    //         var indexOfPane = 0;
-    //         // .some is like forEach but it short circuits upon returning true.
-    //         panes.some(function (pane, idx) {
-    //             var name = pane.name.split(' ').join('').toLowerCase();
-    //             if (name === hash) {
-    //                 indexOfPane = idx;
-    //                 return true;
-    //             }
-    //         });
-    //         paneSwitcherModel.setPane(indexOfPane);
-    //     }
-
-    //     paneSwitcherModel.set('panes', panes);
-    // });
 });

@@ -5,13 +5,6 @@
                 {{ labels.accountSettings }}
             </a>
         </li>
-        {% if siteContext.generalSettings.isWishlistCreationEnabled %}
-        <li class="mz-scrollnav-item">
-            <a class="mz-scrollnav-link" href="#wishlist">
-                {{ labels.accountMyWishlist }}
-            </a>
-        </li>
-        {% endif %}
         <li class="mz-scrollnav-item">
             <a class="mz-scrollnav-link" href="#orderhistory">
                 {{ labels.orderHistory }}

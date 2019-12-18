@@ -340,12 +340,14 @@ require(["modules/jquery-mozu",
             var customer = me.model.parent.get('customer');
 
             if (customer.get('accountType') == "B2B") {
-                var sameAddress =  me.model.get('isSameBillingShippingAddress');
+                var sameAddress =  me.model.get('isSameBillingShippingAddress'),
+                    paymentType = me.model.get('paymentType');
 
-                me.$('.mz-contact-selector-b2b-note').removeClass('hidden');
-                me.$('[data-mz-value="isSameBillingShippingAddress"]').parent().hide();
+                // me.$('.mz-contact-selector-b2b-note').removeClass('hidden');
                 me.$('#billing-email').parents('.mz-l-stack-section.mz-formfieldgroup-row.mz-paymentselector-separator.mz-checkoutform').hide();
-                if(!sameAddress) {
+                me.$('[data-mz-value="isSameBillingShippingAddress"]').parent().hide();
+
+                if (!sameAddress && paymentType === 'Check') {
                     me.model.set('isSameBillingShippingAddress', true);
                     me.render();
                 }

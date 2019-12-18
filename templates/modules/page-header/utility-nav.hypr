@@ -49,12 +49,6 @@
                     <p>{{ labels.quotesInfo }}</p>
                 </div>
                 <div class="my-account-details">
-                    <a href="/myaccount#Shipping Information">
-                        <h4>{{ labels.addressBook }}</h4>
-                    </a>
-                    <p>{{ labels.addressBookInfo }}</p>
-                </div>
-                <div class="my-account-details">
                     <a href="/logout">
                         <h4>{{ labels.logOut }}</h4>
                     </a>

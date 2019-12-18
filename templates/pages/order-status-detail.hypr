@@ -63,7 +63,7 @@
                 </ul>
             </nav>
             {% endif %}
-            <nav class="mz-scrollnav affix-top" id="account-nav" data-mz-scrollnav="body">
+            <!-- <nav class="mz-scrollnav affix-top" id="account-nav" data-mz-scrollnav="body">
                 <ul class="mz-scrollnav-list nav">
                     <li class="mz-scrollnav-item">
                         <a class="mz-scrollnav-link" href="/myaccount#Shipping Information">
@@ -72,7 +72,7 @@
                         </a>
                     </li>
                 </ul>
-            </nav>
+            </nav> -->
 
             <!-- <nav class="mz-scrollnav affix-top" id="account-nav" data-mz-scrollnav="body">
                 <ul class="mz-scrollnav-list nav">
