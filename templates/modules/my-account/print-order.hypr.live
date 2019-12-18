@@ -87,7 +87,7 @@
             <div>
                 <dt>{{ labels.shippingMethod }}</dt>
                 <dd>
-                    {{ model.fulfillmentInfo.shippingMethodName }}
+                    {{ model.fulfillmentInfo.shippingMethodName|replace("FedEx") }}
                 </dd>
             </div>
     
