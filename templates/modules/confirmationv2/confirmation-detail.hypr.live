@@ -21,7 +21,8 @@
               <div style="display:-webkit-flex;margin:10px;width:100%">
                 {% with model.destinations|findwhere("id", grouping.destinationId) as destination %}
                 <div class="mz-addresssummary" style="width:50%"><b>{{ labels.shipTo }}</b>{% include "modules/common/address-summary" with model=destination.destinationContact %}</div>
-                <div style="width:50%"><b>{{ labels.shippingMethod }}</b>: {{ grouping.shippingMethodName }}</div>
+                <div style="width:50%"><b>{{ labels.shippingMethod }}</b>:
+                  {{ grouping.shippingMethodName|replace("FedEx") }}</div>
                 {% endwith %}
               </div>
 

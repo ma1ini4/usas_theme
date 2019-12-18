@@ -18,7 +18,7 @@
                 </div>
                 <div class="mz-l-stack-item">
                     <small>{{ labels.shippingMethod }}</small>
-                    <div>{{ model.fulfillmentInfo.shippingMethodName }}</div>
+                    <div>{{ model.fulfillmentInfo.shippingMethodName|replace("FedEx") }}</div>
                 </div>
             </div>
             {% endif %}
