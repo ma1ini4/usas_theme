@@ -620,7 +620,7 @@ function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollecti
         columns: [
             {
                 index: 'name',
-                displayName: 'List Name',
+                displayName: 'Quote Number',
                 sortable: true
             },
             {
