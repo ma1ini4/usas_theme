@@ -54,10 +54,10 @@ function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollecti
       },
       initialize: function(){
         Backbone.MozuView.prototype.initialize.apply(this, arguments);
-        this.model.set('viewingAllOrders', false);
+        this.model.set('viewingAllOrders', true);
       },
-      getOrderDetail: function (event) {
-          var orderCode = $(event.currentTarget).data('mzOrderCode');
+      getOrderDetail: function (event, orderId) {
+          var orderCode = event ? $(event.currentTarget).data('mzOrderCode') : orderId;
           if (!require.mozuData('pagecontext').isEditMode) {
               window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory || '') + '/order-status-detail?orderNumber=' + orderCode;
           }
@@ -100,10 +100,12 @@ function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollecti
         }
       },
       viewOrder: function(row){
-          this.model.set('viewOrder', true);
-          this.model.set('currentOrder', row);
-          var currentOrder = this.model.get('currentOrder');
-          this.render();
+          console.log(row);
+          this.getOrderDetail(null, row.get('orderNumber'));
+        //   this.model.set('viewOrder', true);
+        //   this.model.set('currentOrder', row);
+        //   var currentOrder = this.model.get('currentOrder');
+        //   this.render();
       },
       returnToGrid: function(){
           this.model.set('viewOrder', false);
@@ -178,7 +180,7 @@ function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollecti
           },
           {
               index: 'submittedDate',
-              displayName: 'Submitted Date',
+              displayName: 'Date',
               sortable: true,
               displayTemplate: function(value){
                 var date = new Date(value);
@@ -186,47 +188,11 @@ function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollecti
               }
           },
           {
-              index: 'fulfillmentInfo',
-              displayName: 'Ship To',
-              sortable: false,
-              displayTemplate: function(fulfillmentInfo){
-                // Form a readable address string.
-                // TODO: WOW. This is all really bad. Try again.
-                var fulfilmentContact = fulfillmentInfo.fulfillmentContact || {};
-
-                if (fulfilmentContact.address){
-                    var address = fulfillmentInfo.fulfillmentContact.address;
-                    var firstLine = address.address1;
-                    var tooltip = $('<span />').attr('class', 'tooltiptext').html('tooly');
-                    var container = $('<div />').attr('class', 'tooltip').html(firstLine+tooltip.prop('outerHTML'));
-                    var tooltipText = address.address1;
-                    if (address.address2) tooltipText += '</br>' + address.address2;
-                    if (address.address3) tooltipText += '</br>' + address.address3;
-                    if (address.address4) tooltipText += '</br>' + address.address4;
-                    tooltipText += '</br>' + (address.cityOrTown || '');
-                    tooltipText += ', '+ (address.stateOrProvince || '') + ' ';
-                    tooltipText += address.postalOrZipCode;
-                    tooltipText += '</br>' + (address.countryCode || '');
-
-                    return '<span class="grid-tooltip">'+firstLine+'<span class="tooltiptext">'+tooltipText+'</span></span>';
-                }
-                return "N/A";
-              }
-          },
-          {
               index: 'fullName',
-              displayName: 'Created By',
+              displayName: 'Shipped to',
               sortable: false,
               displayTemplate: function(fullName){
                   return fullName || '';
-              }
-          },
-          {
-              index: 'total',
-              displayName: 'Order Total',
-              sortable: false,
-              displayTemplate: function (amount){
-                  return '$'+amount.toFixed(2);
               }
           },
           {
@@ -239,14 +205,6 @@ function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollecti
           {
               displayName: 'View',
               action: 'viewOrder'
-          },
-          {
-              displayName: 'Reorder',
-              action: 'reorder',
-              isHidden: function () {
-                  // 1008 = Can place orders
-                  return !this.hasRequiredBehavior(1008);
-              }
           }
       ],
       relations: {

@@ -53,6 +53,10 @@
   <div class="mz-l-stack-section mz-order-status-section">
       {% include "modules/order/order-status-order-summary" %}
   </div>
+  <div class="mz-l-stack-section0">
+      <h4 class="mz-l-stack-sectiontitle">{{ labels.orderSummary }} </h4>
+      {% include "modules/common/order-summary" %}
+  </div>
   <!-- <div class="col-sm-12 text-right mz-reset-padding mz-order-status-totals-container">
      {% include "modules/order/order-status-totals" %}
   </div> -->

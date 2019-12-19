@@ -1,4 +1,7 @@
 .mz-b2b-orders, .mz-b2b-returns {
+    .mz-pagenumbers {
+        display: none;
+    }
    .mz-btns {
       padding: @gutter/4 0 @gutter/4 0;
 
@@ -64,6 +67,69 @@
           visibility: visible;
       }
    }
+
+   .mz-grid-table {
+        overflow-x: auto;
+
+        .mz-grid-header {
+            min-width: 480px;
+        }
+    }
+    .mz-grid {
+        border: none;
+
+        .mz-grid-cols {
+            display: flex;
+            align-items: center;
+    
+            span.mz-grid-column {
+                font-size: 14px!important;
+                
+                &:first-child {
+                    width: 60px;
+                }
+                &:not(:first-child) {
+                    text-align: center;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    width: 25%;
+
+                    @media only screen and (min-width: 768px) and (max-width: 992px) {
+                        max-width: 111px;
+                    }
+                }            
+            }
+        }
+        .mz-grid-row {
+            min-width: 480px;
+            &-actions {
+                display: flex;
+                align-items: center;
+                .mz-grid-column {
+                    display: flex;
+                }
+
+                @media @desktop-bootstrap {
+
+                    a {
+                        padding: 0 7px;
+                    }
+
+                    [data-mz-action="viewOrder"] {
+                        span {
+                            display: none;
+                        }
+
+                        .icon(before, '06e', solid, 20px);
+                    }
+                }
+            }
+            
+            a {
+                cursor: pointer;
+            }            
+        }
+    }
 }
 
 .order-status {
