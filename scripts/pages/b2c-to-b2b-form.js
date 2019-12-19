@@ -29,7 +29,6 @@ define(['modules/api',
            return this;
        }
     });
-
     var B2cFormModel = Backbone.MozuModel.extend({
       relations: {
           order: OrdersModels.Order,

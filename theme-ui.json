@@ -1046,6 +1046,18 @@
         },
         {
             "xtype": "panel",
+            "title": "SAP Integration",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "SAP Order Number Attribute Code",
+                    "xtype": "mz-input-text",
+                    "name": "sapOrderNumberAttribute"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
             "title": "Disable Quotes",
             "collapsed": false,
             "items": [{

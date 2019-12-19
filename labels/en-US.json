@@ -675,5 +675,10 @@
   "b2cOrderUserNotAuthorized": "Access denied - Please log in via Admin URL and verify user permissions ",
   "b2bAConversionErrorMsg": "We need to verify your account - Please reset your password using the <strong>Forgot your password?</strong> option above",
   "pdpInvalidOptionsErr": "Please select one option from each selection below before adding product to cart",
-  "disabledQuotesMsg": "Coming soon. </br>View and purchase directly from your quotes. Be sure to check back often as this feature is launching soon."
+  "disabledQuotesMsg": "Coming soon. </br>View and purchase directly from your quotes. Be sure to check back often as this feature is launching soon.",
+  "viewOrderForm": "Update Order",
+  "sapOrderNumber": "SAP Order Number",
+  "nonSapOrders": "Order without SAP Order Number",
+  "resubmitOrderToSAP": "Submit all orders to SAP",
+  "orderEmptyList": "There are no orders to process"
 }
