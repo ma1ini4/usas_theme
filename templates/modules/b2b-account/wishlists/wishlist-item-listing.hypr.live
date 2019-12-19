@@ -1,0 +1,82 @@
+{% extends "modules/common/item-listing" %}
+
+{% block item-listing-image %}
+  {% if model.product.imageUrl %}
+    <div class="mz-itemlisting-thumb">
+      <!-- <a href="{{ model.product.url }}{% if model.product.variationProductCode %}?vpc={{model.product.variationProductCode}}{% endif %}"> -->
+        <img class="mz-itemlisting-thumb-img" src="{% make_url "image" model.product with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameters %}" {% if model.product.imageAlternateText %}alt="{{ model.product.imageAlternateText }}"{% endif %} />
+      <!-- </a> -->
+    </div>
+  {% else %}
+  <div class="mz-itemlisting-thumb">
+    <!-- <a href="{{ model.product.url }}{% if model.product.variationProductCode %}?vpc={{model.product.variationProductCode}}{% endif %}"> -->
+      <span class="mz-product-image-placeholder">
+        <span class="mz-productlisting-imageplaceholdertext">{{ labels.productImagePlaceholder }}</span>
+      </span>
+    <!-- </a> -->
+  </div>
+  {% endif %}
+{% endblock item-listing-image %}
+
+ {% block item-name %}
+    <span class="mz-itemlisting-title">
+      {{ model.product.name }}</span>
+  {% endblock item-name %}
+
+{% block item-details %}
+<div class="mz-itemlisting-description">
+  <div class="mz-itemlisting-item-code">Item#: <em>{{ model.product.variationProductCode|default(model.product.productCode) }}</em></div>
+  {% if model.product.options.length !== 0 %}
+  <div class="mz-itemlisting-item-options">
+    Options: 
+    {% for option in model.product.options %}
+      {{ option.name }}: {{option.stringValue|replace('µ', '<span class="lowercase">µ</span>')|replace(' mL', ' <span class="lowercase">m</span>L'|safe)}},
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if model.product.measurements.packageWeight.value %},
+    {{ model.product.measurements.packageWeight.value }}
+    {{model.measurements.packageWeight.unit }}
+  {% endif %}
+</div>
+{% endblock item-details %}
+
+{% block item-listing-actions %}
+<div class="qty-block">
+  <!-- <input class="mz-itemlisting-action mz-carttable-qty-field" type="number" min="1" {% if model.isLoading %}disabled="disabled" {% endif %} data-mz-cart-item="{{ item.id }}"
+  data-mz-value="wishlist-quantity" value="{{ item.quantity }}" />
+  <a class="mz-itemlisting-action" href="javascript:;" data-mz-action="beginRemoveItem"
+    data-mz-item-id="{{ model.id }}">{{ labels.b2bQuotesRemoveItem }}</a> -->
+    <div class="mz-itemlisting-quantity">
+      <div class="mz-itemlisting-price">
+        List price: {% include "modules/common/item-price" %}
+      </div>
+      Buy {{ model.quantity }} or more for Quote Price
+      <!-- <div>
+        <strong> {{ labels.total }} : </strong> 
+        <span class="mz-itemlisting-item-total">
+        {% include "modules/common/item-total" %}
+        </span>
+      </div> -->
+    </div>
+</div>
+<div class="add-to-cart-checkbox">
+  <input type="checkbox" id="add-box-{{ model.id }}" data-mz-value="add-to-cart-quote" data-mz-item-id="{{ model.id }}" checked />
+  <label for="add-box-{{ model.id }}">
+    <span>
+      {{ labels.b2bQuotesATC }}
+    </span>
+  </label>
+</div>
+{% endblock item-listing-actions %}
+
+{% block item-listing-extras %}
+{% if model.id %}
+{% if editing.added == model.id %}
+<p class="mz-itemlisting-prompt is-success">{{ labels.addedToCart|string_format(model.product.name) }} <a href="javascript:;" class="mz-action" data-mz-action="finishRemoveItem" data-mz-item-id="{{ model.id }}">{{ labels.removeFromWishlist }}</a> <a href="javascript:;" data-mz-action="doNotRemove">{{ labels.leaveOnWishlist }}</a></p>
+{% endif %}
+{% if editing.remove == model.id %}
+<p class="mz-itemlisting-prompt is-warning">{{ labels.confirmRemoveFromWishlist|string_format(model.product.name) }} <a class="mz-action" href="javascript:;" data-mz-action="finishRemoveItem" data-mz-item-id="{{ model.id }}">{{ labels.remove }}</a> <a href="javascript:;" data-mz-action="doNotRemove">{{ labels.cancel }}</a></p>
+{% endif %}
+{% endif %}
+{% endblock item-listing-extras %}

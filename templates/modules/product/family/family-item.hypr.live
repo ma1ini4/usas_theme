@@ -15,7 +15,7 @@
 	</div>
 	<div class="col-xs-12 col-sm-4 item-desc">
 		<h1 class="mz-pagetitle" itemprop="name">{{ model.content.productName|replace("'","&rsquo;")|safe }}</h1>
-		<h4 class="mz-productcodes-productcode p-3" itemprop="sku">{{ model.itemCode }}</h4>
+		<h4 class="mz-productcodes-productcode p-3 no-wrap" itemprop="sku">{{ model.itemCode }}</h4>
 		<div class="mz-productdetail-shortdesc mz-l-stack-section">
 		  	<span itemscope itemprop="description">{{ model.content.productShortDescription|safe }}</span>
 		</div>

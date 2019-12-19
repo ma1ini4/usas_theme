@@ -3,9 +3,6 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
     var AccountSettingsView = EditableView.extend({
         templateName: 'modules/my-account/my-account-settings',
         autoUpdate: [
-            'firstName',
-            'lastName',
-            'emailAddress',
             'acceptsMarketing'
         ],
         constructor: function() {
@@ -53,6 +50,10 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         finishEdit: function() {
             var self = this;
 
+            self.model.set('firstName', $('[data-mz-value="firstName"]').val());
+            self.model.set('lastName', $('[data-mz-value="lastName"]').val());
+            self.model.set('emailAddress', $('[data-mz-value="emailAddress"]').val());
+
             this.doModelAction('apiUpdate').then(function() {
                 self.editing = false;
             }).otherwise(function() {
@@ -83,6 +84,11 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         },
         finishEditPassword: function() {
             var self = this;
+            var payload = {
+                password: $('#account-password').val()
+            };
+
+            if (!this.validatePassword($('#password-section [data-mz-validationmessage-for="password"]'), payload)) return false;
             this.doModelAction('changePassword').then(function() {
                 _.delay(function() {
                     self.$('[data-mz-validationmessage-for="passwordChanged"]').show().text(Hypr.getLabel('passwordChanged')).fadeOut(3000);
@@ -91,6 +97,25 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
                 self.editing.password = true;
             });
             this.editing.password = false;
+        },
+        validatePassword: function (el, payload) {
+            var passMinLen = Hypr.getThemeSetting('passwordMinLength'),
+                passMaxLen = Hypr.getThemeSetting('passwordMaxLength');
+
+            if (!payload.password)
+                return el.show().text(Hypr.getLabel('passwordMissing')).fadeOut(3000), false;
+            if (payload.password.length < passMinLen) {
+                return el.show().text(Hypr.getLabel('passwordMinlength', passMinLen)).fadeOut(3000), false;
+            } else if (payload.password.length > passMaxLen) {
+                return el.show().text(Hypr.getLabel('passwordMaxlength', passMaxLen)).fadeOut(3000), false;
+            } else if (payload.password.search(/\d/) == -1) {
+                return el.show().text(Hypr.getLabel('passwordDigit', passMinLen)).fadeOut(3000), false;
+            } else if (payload.password.search(/[a-zA-Z]/) == -1) {
+                return el.show().text(Hypr.getLabel('passwordLetter', passMinLen)).fadeOut(3000), false;
+            } else if (payload.password.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\-\+\.\,\;\:]/) != -1) {
+                return el.show().text(Hypr.getLabel('passwordSpecial', passMinLen)).fadeOut(3000), false;
+            }
+            return true;
         },
         cancelEditPassword: function() {
             this.editing.password = false;
@@ -199,11 +224,20 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
 
     var OrderHistoryListingView = Backbone.MozuView.extend({
         templateName: "modules/my-account/order-history-listing",
+        additionalEvents: {
+            'click a.mz-order-code' : 'getOrderDetail'
+        },
         initialize: function() {
             this._views = {
                 standardView: this,
                 returnView: null
             };
+        },
+        getOrderDetail: function(event) {
+            var orderCode = $(event.currentTarget).data('mzOrderCode');
+            if (!require.mozuData('pagecontext').isEditMode) {
+                window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory || '') + '/order-status-detail?orderNumber='+orderCode;
+            }
         },
         views: function() {
             return this._views;
@@ -515,6 +549,7 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
             'editingContact.address.postalOrZipCode',
             'editingContact.address.addressType',
             'editingContact.phoneNumbers.home',
+            'editingContact.phoneNumbers.work',
             'editingContact.isBillingContact',
             'editingContact.isPrimaryBillingContact',
             'editingContact.isShippingContact',
@@ -527,11 +562,11 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         ],
         additionalEvents: {
             "blur #mz-payment-credit-card-number": "changeCardType",
-            "input  [name='security-code'],[name='credit-card-number']": "allowDigit"
-        },  
+            "input [name='security-code'],[name='credit-card-number']": "allowDigit"
+        },
         allowDigit:function(e){
             e.target.value= e.target.value.replace(/[^\d]/g,'');
-        },         
+        },
         changeCardType:function(e){
             window.checkoutModel = this.model;
             var number = e.target.value;
@@ -543,9 +578,9 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
                 cardType = "VISA";
             }
 
-            // Mastercard 
+            // Mastercard
             // Updated for Mastercard 2017 BINs expansion
-             if (/^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$/.test(number)) 
+             if (/^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$/.test(number))
                 cardType = "MC";
 
             // AMEX
@@ -557,17 +592,17 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
             re = new RegExp("^(6011|622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5]|64[4-9])|65)");
             if (number.match(re) !== null)
                 cardType = "DISCOVER";
-            
+
             $('.mz-card-type-images').find('span').removeClass('active');
             if(cardType){
                 this.model.set('editingCard.paymentOrCardType',cardType);
                 $('.mz-card-type-images').find('span[data-mz-card-type-image="'+cardType+'"]').addClass('active');
             }
             else{
-                this.model.set('editingCard.paymentOrCardType',null);    
+                this.model.set('editingCard.paymentOrCardType',null);
             }
 
-        },             
+        },
         beginEditCard: function (e) {
             var id = this.editing.card = e.currentTarget.getAttribute('data-mz-card');
             this.model.beginEditCard(id);
@@ -616,13 +651,14 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
             'editingContact.address.postalOrZipCode',
             'editingContact.address.addressType',
             'editingContact.phoneNumbers.home',
+            'editingContact.phoneNumbers.work',
             'editingContact.isBillingContact',
             'editingContact.isPrimaryBillingContact',
             'editingContact.isShippingContact',
             'editingContact.isPrimaryShippingContact'
             ],
-        renderOnChange: [    
-            'editingContact.address.countryCode',              
+        renderOnChange: [
+            'editingContact.address.countryCode',
             'editingContact.address.candidateValidatedAddresses',
             'editingContact.isBillingContact',
             'editingContact.isShippingContact'
@@ -640,7 +676,7 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
             addr.set('candidateValidatedAddresses',null);
             addr.set('isValidated', true);
             this.render();
-        },        
+        },
         beginAddContact: function () {
             this.editing.contact = false;
             this.model.endEditContact();
@@ -655,15 +691,71 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         },
         finishEditContact: function () {
             var self = this,
-                isAddressValidationEnabled = HyprLiveContext.locals.siteContext.generalSettings.isAddressValidationEnabled;
-            var operation = this.doModelAction('saveContact', { forceIsValid: isAddressValidationEnabled, editingView: self }); // hack in advance of doing real validation in the myaccount page, tells the model to add isValidated: true
-            if (operation) {
-                blockUiLoader.unblockUi();
-                operation.otherwise(function() {
-                    self.editing.contact = true;
-                });
-                this.editing.contact = false;
+                isAddressValidationEnabled = HyprLiveContext.locals.siteContext.generalSettings.isAddressValidationEnabled,
+                editingContact = self.model.get('editingContact'),
+                modelIsValid = this.validateAddress(editingContact.validation);
+            if (modelIsValid) {
+                var operation = this.doModelAction('saveContact', { forceIsValid: isAddressValidationEnabled, editingView: self }); // hack in advance of doing real validation in the myaccount page, tells the model to add isValidated: true
+                if (operation) {
+                    blockUiLoader.unblockUi();
+                    operation.otherwise(function() {
+                        self.editing.contact = true;
+                    });
+                    this.editing.contact = false;
+                }
+            } else {
+                return;
             }
+        },
+        validateAddress: function(validationObj) {
+            var me = this;
+            var modelIsValid = [];
+            for(var key in validationObj) {
+                var value = 'editingContact.' + key;
+                var keyValue = validationObj[key];
+                var input = me.$el.find('[data-mz-value="'+value+'"]');                
+                
+                if (key === 'address.stateOrProvince') {
+                    input = me.$el.find('select[data-mz-value="' + value + '"]');
+
+                    if (input.find('option:selected').val() && input.find('option:selected').val().length) {
+                        modelIsValid.push(true);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text('');
+                    } else {
+                        modelIsValid.push(false);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text(keyValue.msg);
+                    }
+                } 
+                if (key === 'address.postalOrZipCode') {
+                    input = me.$el.find('[name="postal-code"][data-mz-value="' + value + '"]');
+                    if ((keyValue[1].pattern).test(input.val())) {
+                        modelIsValid.push(true);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text('');
+                    } else {
+                        modelIsValid.push(false);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text(keyValue[1].msg);
+                    }
+                } 
+                if ((key === 'phoneNumbers.home' || key === 'phoneNumbers.home') && keyValue[0].required) {
+                    if (input.val().length >= keyValue[1].minLength && input.val().length <= keyValue[1].maxLength) {
+                       modelIsValid.push(true);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text('');
+                    } else {
+                        modelIsValid.push(false);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text(keyValue[1].msg);
+                    }
+                } 
+                if (keyValue.required) {
+                    if (input.val() && input.val().length > 0) {
+                        modelIsValid.push(true);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text('');
+                    } else {
+                        modelIsValid.push(false);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text(keyValue.msg);
+                    }
+                }
+            }
+            return modelIsValid.indexOf(false) !== -1 ? false : true;
         },
         cancelEditContact: function () {
             this.editing.contact = false;
@@ -686,7 +778,7 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
                 go = function() {
                     return self.doModelAction('deleteMultipleCards', _.pluck(associatedCards, 'id')).then(doDeleteContact);
                 };
-               
+
             }
 
             if (window.confirm(windowMessage)) {
@@ -734,7 +826,6 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
                 model: accountModel,
                 messagesEl: $messagesEl
             }),
-
             orderHistory: new OrderHistoryView({
                 el: $orderHistoryEl.find('[data-mz-orderlist]'),
                 model: orderHistory
@@ -778,7 +869,6 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
             })
         };
 
-
         if (HyprLiveContext.locals.siteContext.generalSettings.isWishlistCreationEnabled) accountViews.wishList = new WishListView({
             el: $wishListEl,
             model: accountModel.get('wishlist'),
@@ -788,6 +878,16 @@ define(['modules/backbone-mozu', "modules/api", 'hyprlive', 'hyprlivecontext', '
         // TODO: upgrade server-side models enough that there's no delta between server output and this render,
         // thus making an up-front render unnecessary.
         _.invoke(window.accountViews, 'render');
-
+        
+        $('body').on('keydown keyup focus blur', '[type="tel"]', function (e) {
+            //  maskTel(e);
+            e.target.value = e.target.value.replace(/(\d{3})\)?(\d{3})\-?(\d{4})/, '($1) $2-$3');
+        });
     });
+
+    return {
+       'OrderHistoryListingView': OrderHistoryListingView,
+       'ReturnPrintLabelView': PrintView,
+       'AddressBookView': AddressBookView
+    };
 });

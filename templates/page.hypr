@@ -79,14 +79,22 @@
         <link rel="next" href="{{PageContext.CrawlerInfo.NextUrl}}">
         {% endif %}
 
+        {% if themeSettings.enableRecaptcha %}
+            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        {% endif %}
+
         {% block stylesheets %}
-        <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/vendor/bootstrap-3.3.7/css/bootstrap.min.css" %}" title="default" /> 
-        <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/storefront.less" %}" title="default" />          
-        <link rel="stylesheet" type="text/css" href="{% make_url "stylesheet" "/stylesheets/vendor/font-awesome/css/font-awesome.min.css" %}" media="all">     
+        <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/vendor/bootstrap-3.3.7/css/bootstrap.min.css" %}" title="default" />
+        <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/storefront.less" %}" title="default" />
+        <link rel="stylesheet" type="text/css" href="{% make_url "stylesheet" "/stylesheets/vendor/font-awesome/css/font-awesome.min.css" %}" media="all">
+        <link rel="stylesheet" type="text/css" href="{% make_url "stylesheet" "/stylesheets/vendor/usas-icons/css/custom-icons.css" %}" media="all">
+        <link rel="stylesheet" href="{% make_url "stylesheet" "/stylesheets/vendor/swiper/swiper.min.css" %}" title="default"/>
         {% endblock stylesheets %}
 
         {% block head-tag-scripts %}
         <script src="{% make_url "cdn" "/scripts/vendor/modernizr.min.js" %}"></script>
+        <!--script src="{% make_url "cdn" "/scripts/vendor/xi/xiplugin.js" %}"></script-->
+        <script type="text/javascript" src="https://prdapp02.XiSecurenet.com/DIeComm/Scripts/XIPlugin/XIPlugin-1.1.0.js"></script>
         {% include "modules/web-fonts-loader" %}
         {% endblock head-tag-scripts %}
         {% cms_resources %}
@@ -105,64 +113,83 @@
     <body class="{% block body-tag-classes %}{% endblock body-tag-classes %}">
     {% endblock open-body-tag %}
         <div id="page-wrapper" class="mz-l-pagewrapper">
+            {% if themeSettings.enableRecaptcha %}
+            <div id="recaptcha-container-global"></div>
+            {% endif %}
             {% block utility-bar %}
                 {% include "modules/utility-bar/header" %}
             {% endblock utility-bar %}
             {% block page-header %}
-				{% include "modules/page-header" %}
-			{% endblock page-header %}
+				      {% include "modules/page-header" %}
+			      {% endblock page-header %}
             {% block site-nav %}
-				{% include "modules/site-nav" %}
+				        {% include "modules/site-nav" %}
             {% endblock site-nav %}
+          {% block secondary-nav %}
+            {% include "modules/secondary-nav" %}
+          {% endblock secondary-nav %}
             <div role="main" id="page-content" class="mz-l-pagecontent">
-                <div class="container">
-                <div class="row">
-                   <!--  {% block breadcrumbs %}
-                    {% if themeSettings.showBreadcrumbs %}
-                    {% include "modules/breadcrumbs" %}
-                    {% endif %}
-                    {% endblock breadcrumbs %} -->
-                    
+                <div class="{% if pageContext.cmsContext.template.path == "home"%}container-fluid{%else%}container{%endif%}">
+                  <div class="row">
+
                     {% block body-content %}
+                    {% block breadcrumbs %}
+                    {% endblock breadcrumbs %}
+
                     {% dropzone "body" scope="page" %}
                     {% endblock body-content %}
-                    
+
                     {% block body-below-content %}
                     {% dropzone "body-bottom" scope="template" %}
                     {% endblock body-below-content %}
                     </div>
                 </div>
             </div>
-            {% block secondary-nav %}
-             {% include "modules/secondary-nav" %}
-            {% endblock secondary-nav %}
+            <div class="container-fluid">
+              <div class="row">
 
-            {% block page-footer %}
-            {% include "modules/page-footer" %}
-            {% endblock page-footer %}
-
-            {% block copyright-footer %}
-                <div class="container">
+                {% block page-footer %}
+                {% include "modules/page-footer" %}
+                {% endblock page-footer %}
+    
+                <div class="mz-pagefooter-copyright redBG">
+                  {% block copyright-footer %}
+    
+                  <div class="container">
                     <div class="row">
-                        <div class="col-xs-12">
-                            <div class="mz-pagefooter-copyright" id="copyright">
-                                <span class="mz-pagefooter-copyrighttext">
-                                    &copy; {% now Y %} 
-                                </span>
-                                {{ siteContext.generalSettings.websiteName }}. {% dropzone "copyright" scope="site" %}
-                            </div>
+                      <div class="col-sm-8 col-xs-12">
+                        <div id="copyright">
+                          <span class="mz-pagefooter-copyrighttext">
+                            &copy; {% now Y %}
+                            {{ siteContext.generalSettings.websiteName }}. All rights reserved. Product prices apply to US orders only.
+                          </span>
                         </div>
-                    </div>                
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                      <div id="copyright">
+                        <div class="mz-pagefooter-copyright-links">
+                          <a href="/site-map">Site map</a> |
+                          <a href="/privacy-policy">Privacy and security</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endblock copyright-footer%}
                 </div>
-            {% endblock copyright-footer%}
+              </div>
+              </div>
 
+
+          {% include "modules/common/message-bar" %}
         </div>
-
         {% block trailing-scripts %}
         {% include "modules/trailing-scripts" %}
         {% endblock trailing-scripts %}
 
         {% visitor_tracking_pixel %}
+        {% include "modules/page-header/login-modal" %}
+
+
     </body>
     {% endblock body-tag %}
 

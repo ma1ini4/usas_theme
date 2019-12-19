@@ -1,0 +1,13 @@
+<div>{{ model.firstName }} {{ model.lastNameOrSurname }}</div>
+<div>{{ model.address1 }}</div>
+{% if model.address2 %}
+    <div>{{ model.address2 }}</div>
+{% endif %}
+<div>{{ model.cityOrTown }}, {{ model.stateOrProvince }}, {{ model.postalOrZipCode }}</div>
+<div>{{ model.countryCode }}</div>
+{% if model.email %}
+    <div class="mz-addresssummary-email">{{ model.email }}</div>
+{% endif %}
+{% if model.phoneNumber %}
+    <div>{{ model.phoneNumber }}</div>
+{% endif %}

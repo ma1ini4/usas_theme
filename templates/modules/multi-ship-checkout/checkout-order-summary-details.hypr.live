@@ -15,28 +15,25 @@
               <div class="mz-ordersummary-line mz-ordersummary-line-item {% if item.discountTotal > 0 %}is-discounted{% endif %}">
                     <div class="mz-ordersummary-item-product col-sm-6 col-xs-12 mz-order-content-container mz-reset-padding">
                       <div class="pull-left mz-order-summary-image">
-                        {% with item.product|get_product_attribute("tenant~color") as colorAttr %}  
-                          {% if colorAttr %}
-                            {% with colorAttr.value|replace(" ","_") as colorValue %}
-                              {% with "/cms/files/{0}_{1}_v1.jpg"|string_format(item.product.productCode, colorValue) as fileName %}
-                                  {% include "modules/product/product-image" with productImage=fileName productAltText=item.product.imageAlternateText productMaxWidth=themeSettings.maxProductImageThumbnailSize productImageClass="mz-productimages-thumbimage" isThumb="true" as_parameter %}
-                              {% endwith %}     
-                            {% endwith %}
-                          {% else %}
-                            {% if item.product.imageUrl %}
-                                  <img class="mz-carttable-item-image" src="{% make_url "image" item.product with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameters %}" {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}"{% endif %} />
-                            {% else %}
-                                <span class="mz-carttable-item-image mz-product-image-placeholder pull-left">
-                                  <span class="mz-productlisting-imageplaceholdertext">{{ labels.productImagePlaceholder }}</span>
-                                </span>
-                            {% endif %}    
-                          {% endif %}  
-                        {% endwith %}                       
+                        {% if item.product.imageUrl %}
+                              <img class="mz-carttable-item-image" src="{% make_url "image" item.product with maxWidth=themeSettings.globalCartItemImageMaxWidth as_parameters %}" {% if item.product.imageAlternateText %}alt="{{ item.product.imageAlternateText }}"{% endif %} />
+                        {% else %}
+                            <span class="mz-carttable-item-image mz-product-image-placeholder pull-left">
+                              <span class="mz-productlisting-imageplaceholdertext">{{ labels.productImagePlaceholder }}</span>
+                            </span>
+                        {% endif %}                      
                       </div>
                       <div class="mz-carttable-item-info-wrap pull-left col-xs-8 mz-reset-padding-right">
                         <div class="mz-carttable-item-title" >{{ item.product.name |safe }}</div>
                          <div class="mz-carttable-item-code">
-                          {{ labels.item }}# <span>{{ item.product.productCode }}</span>
+                          {{ labels.item }}#
+                          <span>
+                            {% if item.product.variationProductCode and item.product.variationProductCode.length != 0 %}
+                              {{ item.product.variationProductCode }}
+                            {% else %}
+                              {{ item.product.productCode }}
+                            {% endif %}
+                          </span>
                         </div>
                         {% if item.product.options and themeSettings.showCartItemOptions %}
                         <div class="mz-propertylist">
@@ -54,7 +51,7 @@
                                       {% if option.stringValue == 'CHR(64)' %}
                                       @
                                       {% else %}
-                                        {{ option.stringValue }}
+                                        {{option.stringValue|replace('µ', '<span class="lowercase">µ</span>')|replace(' mL', ' <span class="lowercase">m</span>L'|safe)}}
                                       {% endif %}
                                     {% endif %}
                               {% else %}

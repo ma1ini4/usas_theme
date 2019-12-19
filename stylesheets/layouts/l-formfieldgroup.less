@@ -1,13 +1,21 @@
 ﻿.mz-l-formfieldgroup, .mz-l-formfieldgroup-full {
-    display: table;
+    display: block;
+    width: 100%;
+
     .mz-l-formfieldgroup-row {
-        display: table-row;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .mz-l-formfieldgroup-cell {
-        display: table-cell;
-        padding-right: @gutter/2;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        padding-right: 0;
         padding-bottom: 8px;
         label {
+            color: @headingColor;
             text-align: left;
             display: block;
             min-width: 100px;
@@ -28,12 +36,16 @@
         }
     }
     input[type="text"],
+    input[type="number"],
     input[type="password"],
     input[type="tel"],
     input[type="email"],
+    textarea,
     select {
-        width: 240px;
+        .checkout-form-field();
+
         box-sizing: border-box;
+
         &.is-invalid {
             background-color: @errorBackground;
         }

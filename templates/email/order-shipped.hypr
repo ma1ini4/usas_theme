@@ -21,7 +21,7 @@
         <thead>
             <tr>
                 <td bgcolor="#EEEEEE" colspan="2">
-                    {{ labels.orderShippedPkgHeader|string_format(package.fulfillmentDate, package.shippingMethodName) }}
+                    {{ labels.orderShippedPkgHeader|string_format(package.fulfillmentDate, package.shippingMethodName|replace("FedEx")) }}
                 </td>
             </tr>
             <tr>
@@ -29,6 +29,7 @@
                 <td bgcolor="#666666"><font color="#FFFFFF">{{ labels.product }}</font></td>
             </tr>
         </thead>
+        
         {% for packageItem in package.items %}
          
             <tbody class="mz-ordersummary-package">

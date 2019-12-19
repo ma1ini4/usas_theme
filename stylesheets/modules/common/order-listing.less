@@ -1,8 +1,10 @@
 ﻿.mz-orderlisting {
     @leftWidth: @orderDetailWidth + @gutter;
     position: relative;
-    border: 1px solid #999;
+    border-bottom: 1px solid @lightBorder;
     min-height: @orderDetailWidth;
+    margin-bottom: 15px;
+
     .mz-orderlisting-detail {
         position: block;
         display: table;
@@ -10,7 +12,14 @@
         box-sizing: border-box;
         height: 100%;
         padding: @gutter/2;
-        background-color: #eee;
+        background-color: @ghostWhite;
+
+        .myaccount-print-order-btn {
+          position: absolute;
+          bottom: 5px;
+          right: 15px;
+          color: @headingColor;
+        }
         .mz-orderlisting-details-list {
             margin: 0px;
             padding: 0px;
@@ -21,6 +30,7 @@
             display: table-cell;
             .mz-propertylist-order {
                 margin:0px;
+                padding: 0 5px;
                 dd, dt {
                     display: block;
                     float: none;
@@ -28,6 +38,7 @@
                 }
                 dd {
                     margin-left: 0px;
+                    word-wrap: anywhere;
                 }
                 dt {
 
@@ -37,7 +48,7 @@
         }
     }
     .mz-orderlisting-items {
-        width: 96%;
+        width: 100%;
         padding: 0 2% @gutter/2 2%;
     }
     .mz-orderlisting-footer{
@@ -55,14 +66,76 @@
         margin: 0 -@gutter/2
     }
 
+    .mz-itemlisting {
+        // min-width: 700px;
+        width: 100%;
+    }
+
     .mz-orderlisting-nonShipped {
         margin-bottom: @gutter/2;
     }
+    .mz-order-returns {
+        & + .mz-orderlisting-footer {
+            text-align: center;
+        }
+
+        .mz-returnform {
+            .mz-l-formfieldgroup-row {
+                align-items: flex-start;
+            }
+        }
+    }
     .mz-order-history-return-status {
         text-align: center;
-        padding: @gutter/4;
-        margin: 0 -@gutter/2;
-        background: limegreen; 
+        padding: 15px 0 0;
+        // margin: 0 -@gutter/2;
+        // background: limegreen;
+
+    }
+    .mz-order-history-return-status-checkbox {
+        width: auto;
+    }
+    .mz-order-history-return-status-image {
+        width: auto;
+    }
+    .mz-order-history-return-status-details {
+        display: flex;
+        align-items: center;
+    }
+    .mz-itemlisting-return {
+        .mz-order-history-return-status-returnform {
+            & > div {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 5px;
+            }
+            .mz-returnform-returntype,
+            .mz-returnform-quantity {
+                max-width: 90px;
+            }
+            textarea {
+                width: auto;
+            }
+        }
+
+        .mz-returnform-optionalcomments {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 5px;
+        }
+
+        .is-warning {
+            background-color: transparent;
+            border: none;
+
+            a {
+                display: inline;
+                font-size: inherit;
+                text-decoration: underline;                
+            }
+        }
     }
     .mz-order-packages {
         & > div.mz-order-package {
@@ -92,7 +165,20 @@
             .mz-itemlisting-action {
                 display: inline-block;
                 width: 100%;
+                
             }
+        }
+        .mz-order-package-actions:empty {
+            display: none;
+        }
+    }
+
+    .mz-order-packages > div.mz-order-package {
+        margin: 0;
+        padding: 0;
+        
+        .mz-package-status-heading:empty {
+            display: none;
         }
     }
 }

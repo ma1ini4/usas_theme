@@ -1,7 +1,6 @@
 define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive", "modules/models-price", "modules/api", "hyprlivecontext", 'modules/models-family', 'modules/models-product-options', "modules/models-messages"], function($, _, Backbone, Hypr, PriceModels, api, HyprLiveContext, FamilyItem, ProductOption, MessageModels) {
 
     var ProductContent = Backbone.MozuModel.extend({}),
-
     Product = Backbone.MozuModel.extend({
         mozuType: 'product',
         idAttribute: 'productCode',
@@ -54,7 +53,7 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
                     me.trigger('error', err);
                 });
             });
-        },           
+        },
         hasPriceRange: function() {
             return this._hasPriceRange;
         },
@@ -65,7 +64,7 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
             this._hasPriceRange = json && !!json.priceRange;
         },
         initialize: function(conf) {
-            window.familyArray = [];            
+            window.familyArray = [];
             window.checkInventory = false;
             var slug = this.get('content').get('seoFriendlyUrl');
             _.bindAll(this, 'calculateHasPriceRange', 'onOptionChange', 'getFamilyMembers');
@@ -91,7 +90,7 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
         },
         getFamilyMembers: function(e){
             //console.log(e);
-            var checkInArray = false;            
+            var checkInArray = false;
             if(window.familyArray.length){
                 if($.inArray(e.get('productCode'), window.familyArray) === -1){
                     window.familyArray.push(e.get('productCode'));
@@ -147,27 +146,53 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
                 return biscuit;
             }, []);
         },
-        addToCart: function () {
+        processInfoTabsContent: function() {
+    		var content = [];
+    		for (var infoTabNumber = 2; infoTabNumber <= 5; infoTabNumber++) {
+    			if (Hypr.getThemeSetting('productAttrInfoTab' + infoTabNumber + 'ContentEnabled')) {
+    				content = this.getExcludedAttributes(infoTabNumber);
+    				if (content.length > 0) {
+    					this.set('infoTab' + infoTabNumber + 'Content', content);
+    				}
+    				content = [];
+    			}
+    		}
+    	},
+    	getExcludedAttributes: function(infoTabNumber) {
+    		var content = [];
+        if ( this.get('properties') ) {
+      		_.each(this.get('properties'), function(prop) {
+      			if (!_.contains(Hypr.getThemeSetting('productAttrInfoTab' + infoTabNumber + 'ContentExclude').split(','), prop.attributeFQN)) {
+      				content.push({
+      					name: prop.attributeDetail.name,
+      					value: prop.values[0].stringValue
+      				});
+      			}
+      		});
+        }
+    		return content;
+    	},
+        addToCart: function (stopRedirect) {
             var me = this;
             if(this.get('family').length){
                 FamilyItem.addToCart();
             }
-            this.whenReady(function () {
+            return this.whenReady(function () {
                 if (!me.validate()) {
                     var fulfillMethod = me.get('fulfillmentMethod');
                     if (!fulfillMethod) {
                         fulfillMethod = (me.get('goodsType') === 'Physical') ? Product.Constants.FulfillmentMethods.SHIP : Product.Constants.FulfillmentMethods.DIGITAL;
                     }
-                    me.apiAddToCart({
+                    return me.apiAddToCart({
                         options: me.getConfiguredOptions(),
                         fulfillmentMethod: fulfillMethod,
                         quantity: me.get("quantity")
                     }).then(function (item) {
-                        me.trigger('addedtocart', item);
+                        me.trigger('addedtocart', item, stopRedirect);
                     }, function(err) {
-                        if(err.message.indexOf("Validation Error: The following items have limited quantity or are out of stock:") !== -1){ 
+                        if(err.message.indexOf("Validation Error: The following items have limited quantity or are out of stock:") !== -1){
                             me.messages.reset({ message: Hypr.getLabel('productOutOfStockError') });
-                        }                        
+                        }
                     });
                 }
             });
@@ -229,7 +254,7 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
         },
         updateConfiguration: function() {
             var me = this,
-              newConfiguration = this.getConfiguredOptions();            
+              newConfiguration = this.getConfiguredOptions();
             if (JSON.stringify(this.lastConfiguration) !== JSON.stringify(newConfiguration)) {
                 this.lastConfiguration = newConfiguration;
                 this.apiConfigure({ options: newConfiguration }, { useExistingInstances: true })
@@ -245,7 +270,7 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
                                     sp_price = me.get('price').get('salePrice');
                                 else
                                     sp_price = me.get('price').get('price');
-                                price = Hypr.engine.render("{{price|currency}}",{ locals: { price: sp_price }}); 
+                                price = Hypr.engine.render("{{price|currency}}",{ locals: { price: sp_price }});
                             }else{
                                 //If price is in a range
                                 var lower_sp_price = "";
@@ -253,22 +278,23 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
                                 //get lower salePrice/price
                                 if(typeof me.get('priceRange').get('lower').get('salePrice') != 'undefined')
                                     lower_sp_price = me.get('priceRange').get('lower').get('salePrice');
-                                else 
+                                else
                                     lower_sp_price = me.get('priceRange').get('lower').get('price');
                                 //get upper salePrice/price
                                 if(typeof me.get('priceRange').get('upper').get('salePrice') != 'undefined')
                                     upper_sp_price = me.get('priceRange').get('upper').get('salePrice');
-                                else 
+                                else
                                     upper_sp_price = me.get('priceRange').get('upper').get('price');
                                 lower_sp_price = Hypr.engine.render("{{price|currency}}",{ locals: { price: lower_sp_price }});
                                 upper_sp_price = Hypr.engine.render("{{price|currency}}",{ locals: { price: upper_sp_price }});
                                 price = lower_sp_price + ' - '+ upper_sp_price;
-                            } 
+                            }
                             me.set('stockInfo', price);
                         }
                         if (me._hasVolumePricing) {
                             me.handleMixedVolumePricingTransitions(apiModel.data);
                         }
+                        me.trigger('optionsUpdated');
                      });
             } else {
                 this.isLoading(false);

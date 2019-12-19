@@ -1,17 +1,37 @@
 ﻿html {
     height: 100%;
+    overflow-x: hidden;
 }
 
 body {
     margin: 0 auto;
     height: 100%;
     background-color: @bodyBackgroundColor;
-	font-family: @fontFamily;
+	  font-family: @fontFamily;
     font-size: @fontSize;
-	color: @textColor;
+    color: @textColor;
+    // overflow-x: hidden;
 }
 h1, h2, h3, h4, h5, h6 {
-    color: @textColor;
+    color: @headingColor;
+}
+h1 {
+   font-size: 36px;
+}
+h2 {
+   font-size: 32px;
+}
+h3 {
+   font-size: 26px;
+}
+h4 {
+   font-size: 24px;
+}
+h5 {
+   font-size: 22px;
+}
+h6 {
+   font-size: 18px;
 }
 a {
     color: @linkColor;
@@ -27,7 +47,7 @@ p {
     margin: @gutter/2 0;
 }
 
-// preventing FOUT since web fonts are loading asynchronously    
+// preventing FOUT since web fonts are loading asynchronously
 html.js.fontface.wf-loading body {
     visibility: hidden;
 }
@@ -136,6 +156,25 @@ select[size] {
 
 button {
     font-family: @fontFamily;
+}
+
+.blueBG,
+.blueBG * {
+  background-color: @secondaryColor;
+  color: @colorWhite;
+}
+.redBG,
+.redBG * {
+  background-color: @primaryColor;
+  color: @colorWhite;
+}
+
+.lowercase {
+  text-transform: lowercase!important;
+}
+
+.no-wrap {
+  white-space: nowrap;
 }
 
 // TODO: JBZ: file these

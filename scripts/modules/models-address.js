@@ -17,17 +17,19 @@
                 {
                     required: true,
                     msg: Hypr.getLabel("phoneMissing")
-                },{
-                    pattern: "digits",
-                    msg: Hypr.getLabel("invalidPhone")
-                },{
+                }, {
                     minLength: 10,
                     maxLength: 20,
                     msg: Hypr.getLabel("invalidPhone")
-                },{
-                    pattern: /^((\+)?[1-9]{1,2})?([-\s\.])?((\(\d{1,4}\))|\d{1,4})(([-\s\.])?[0-9]{1,12}){1,2}$/,
+                }],
+                work: [{
+                    required: false,
+                    msg: Hypr.getLabel("phoneMissing")
+                }, {
+                    minLength: 10,
+                    maxLength: 20,
                     msg: Hypr.getLabel("invalidPhone")
-                }] 
+                }]
             }
         }),
 
@@ -47,7 +49,7 @@
                 },
                 address2: {
                     fn: "address2Validation"
-                },                
+                },
                 cityOrTown: {
                     required: true,
                     msg: Hypr.getLabel("cityMissing")
@@ -57,7 +59,7 @@
                     msg: Hypr.getLabel("countryMissing")
                 },
                 addressType: {
-                    required: true,
+                    required: false,
                     msg: Hypr.getLabel("addressTypeMissing")
                 },
                 stateOrProvince: {
@@ -76,8 +78,8 @@
                     if(this.get('address1')===this.get('address2')){
                         this.set('address2',null);
                     }
-                    return false; 
-            },            
+                    return false;
+            },
             requiresStateAndZip: function(value, attr) {
                 if ((this.get('countryCode') in countriesRequiringStateAndZip) && !value) return this.validation[attr.split('.').pop()].msg;
             },

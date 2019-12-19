@@ -1,0 +1,14 @@
+﻿{% extends "page" %}
+
+{% block title-tag-content %}{% firstof pageContext.metaTitle model.name %}  - {% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-blankpage with-breadcrumbs{% endblock body-tag-classes %}
+
+{% block breadcrumbs %}
+    <div class="title-sort-breadcrumb-wrapper">
+      {% if themeSettings.showBreadcrumbs %}
+        {% include "modules/breadcrumbs" %}
+      {% endif %}
+    </div>
+{% endblock breadcrumbs %}
+

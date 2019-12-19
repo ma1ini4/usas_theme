@@ -1,0 +1,10 @@
+<div class="mz-productlist mz-productlist-tiled">
+    {% if model.products %}
+    <ul id="product-list-ul" class="mz-productlist-list mz-l-tiles row ml-list-view-toggle grid-view">
+        {% for prod in model.products %}
+        <li class="mz-productlist-item col-xs-6 col-sm-4" data-mz-product="{{ prod.productCode }}">
+            {% include "modules/product/product-discount-listing" with model=prod %}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>

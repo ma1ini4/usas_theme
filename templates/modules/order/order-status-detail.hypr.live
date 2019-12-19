@@ -1,0 +1,64 @@
+<div class="order-status" id="order-status">
+{% if model.orderNumber %}
+  <div class="col-sm-12 mz-reset-padding-left mz-order-status-section">
+      <h4 class="mz-l-stack-sectiontitle">{{ labels.orderInformation }}</h4>
+    </div>
+    <div class="mz-order-status-section">
+        <div class="col-sm-6">
+            <div class="mz-order-status-section-subheading">
+                Order Information
+            </div>
+            <div>{{ labels.orderDetailNumber }}: <strong><span> {{ model.orderNumber }}</span></strong> </div>
+            <div>{{ labels.orderDetailDate }}: <span>{{model.creationDate|date("F j, Y") }}</span></div>
+            <div>{{ labels.orderDetailStatus }}: <strong><span> {{ model.status }}</span></strong> </div>
+      </div>
+  </div>
+  <div class="mz-order-status-section">
+      <div class="col-sm-6">
+          <div class="mz-order-status-section-subheading">
+              Billing information
+          </div>
+        <div class="mz-addresssummary">
+            {% include "modules/order/order-status-address-summary" with model=model.billingAddress %}</div>
+      </div>
+      <div class="col-sm-6">
+          <div class="mz-order-status-section-subheading">
+              Payment method
+          </div>
+          {% if model.orderTotal === "0"  %}
+              {% with model.orderTotal|currency as total %}
+                  <h4 class="mz-confirmation-nopaymentrequired">{{ labels.noPaymentWasRequired|string_format(total) }}</h4>
+              {% endwith %}
+          {% else %}
+              {% for payment in model.payments %}
+                {% include "modules/order/order-status-payment" with model=payment %}
+              {% endfor %}
+          {% endif %}   
+      </div>
+  </div>
+  <div class="mz-order-status-section">
+    <div class="col-sm-6">
+        <div class="mz-order-status-section-subheading">
+            Shipping information
+        </div>
+        {% include "modules/order/order-status-shipto-info" with model=model.shippingAddress %}        
+    </div>
+    <div class="col-sm-6">
+        <div class="mz-order-status-section-subheading">
+            Shipping method
+        </div>
+        {% include "modules/order/order-status-tracking" with model=model.shipment %}
+    </div>
+  </div>
+  <div class="mz-l-stack-section mz-order-status-section">
+      {% include "modules/order/order-status-order-summary" %}
+  </div>
+  <div class="mz-l-stack-section0">
+      <h4 class="mz-l-stack-sectiontitle">{{ labels.orderSummary }} </h4>
+      {% include "modules/common/order-summary" %}
+  </div>
+  <!-- <div class="col-sm-12 text-right mz-reset-padding mz-order-status-totals-container">
+     {% include "modules/order/order-status-totals" %}
+  </div> -->
+{% endif %}
+</div>

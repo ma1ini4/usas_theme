@@ -1,0 +1,345 @@
+{% with model|get_product_attribute(themeSettings.productAttrInfoTab1Content) as tab1 %}
+{% with model|get_product_attribute(themeSettings.productAttrInfoTab2Content) as tab2 %}
+{% with model|get_product_attribute(themeSettings.productAttrInfoTab3Content) as tab3 %}
+{% with model|get_product_attribute(themeSettings.productAttrInfoTab4Content) as tab4 %}
+{% with model|get_product_attribute(themeSettings.productAttrInfoTab5Content) as tab5 %}
+{% with themeSettings.titleInfoTab1 as titleInfoTab1 %}
+{% with themeSettings.titleInfoTab2 as titleInfoTab2 %}
+{% with themeSettings.titleInfoTab3 as titleInfoTab3 %}
+{% with themeSettings.titleInfoTab4 as titleInfoTab4 %}
+{% with themeSettings.titleInfoTab5 as titleInfoTab5 %}
+
+
+<div class="tabs-desktop hidden-xs ">
+    {% if model.content.productFullDescription or tab2 or tab3 or tab4 or tab5 or model.infoTab2Content or model.infoTab3Content or model.infoTab4Content or model.infoTab5Content %}
+
+        <ul class="nav nav-tabs" id="infoTab">
+            {% if model.content.productFullDescription %}
+                <li class="tab-title active"><a data-toggle="tab" data-target="#tab1" aria-expanded="true"><i class="fa"></i> 
+                    {{ titleInfoTab1 }}                    
+                </a></li>
+            {% endif %}
+            {% if tab2 or model.infoTab2Content %}
+                <li class="tab-title {% if not model.content.productFullDescription %}active{% endif %}"><a data-toggle="tab" data-target="#tab2" {% if not model.content.productFullDescription %} aria-expanded="true"{% endif %}><i class="fa"></i> {{ titleInfoTab2 }}</a></li>
+            {% endif %}
+            {% if tab3 or model.infoTab3Content %}
+                <li class="tab-title"><a data-toggle="tab" data-target="#tab3"><i class="fa"></i> {{ titleInfoTab3 }}</a></li>
+            {% endif %}
+            {% if tab4 or model.infoTab4Content %}
+                <li class="tab-title"><a data-toggle="tab" data-target="#tab4"><i class="fa"></i> {{ titleInfoTab4 }}</a></li>
+            {% endif %}
+            {% if tab5 or model.infoTab5Content %}
+                <li class="tab-title"><a data-toggle="tab" data-target="#tab5"><i class="fa"></i> {{ titleInfoTab5 }}</a></li>
+            {% endif %}
+        </ul>
+    {% endif %}
+    <div class="tab-content">
+        {% if model.content.productFullDescription %}
+            <div id="tab1" class="tab-pane fade active in">
+                <div class="tab-content-1">
+                    {{ model.content.productFullDescription|safe }}
+                    <div id="demo-sample-container" class="flex tab-content-request">
+                        {% with model.properties|findwhere("attributeFQN", "tenant~request-demo") as demo %}
+                            {% with demo.values|first as demoValue %}
+                                {% if demoValue.value %}
+                                    {% include "modules/common/product-request-demo" %}
+                                {% endif %}
+                            {% endwith %}
+                        {% endwith %}
+                                
+                        {% with model.properties|findwhere("attributeFQN", "tenant~request-sample") as sample %}
+                            {% with sample.values|first as sampleValue %}
+                                {% if sampleValue.value %}
+                                    {% include "modules/common/product-request-sample" %}
+                                {% endif %}
+                            {% endwith %}
+                        {% endwith %}
+                        <input id="form-email" value="{{ themeSettings.requestDemoEmail }}" hidden>
+                        <input id="product-name" value="{{ model.content.productName|slugify }}" hidden>
+                        <input id="product-id" value="{{ model.productCode }}" hidden>
+                        <input id="user-name" value="{{ user.firstName }} {{ user.lastName }}" hidden>
+                        <input id="user-email" value="{{ user.email }}" hidden>
+                    </div>
+                    
+                    <div>
+                        {% dropzone "send-mail-zone" scope="template" %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if tab2 or model.infoTab2Content %}
+            <div id="tab2" class="tab-pane tab-dimensions fade {% if not model.content.productFullDescription %} active in{% endif %}">
+                {% if model.infoTab2Content %}
+                     <div class="tab-content-2">
+                        <div class="col-sm-12 col-md-12 prop-list ">
+                            {% for content in model.infoTab2Content %}
+                            <div class="prop-list-item">
+                                <div class="prop-name col-sm-3">{{content.name}}</div>
+                                <div class="prop-value col-sm-9">{{content.value}}</div>
+                            </div>
+                            {% endfor %}
+                            </div>
+                            <div class="clearfix"></div>
+                     </div>
+                {% else %}
+                    {% for v in tab2.values %}
+                        <div class="tab-content-2">
+                            {% if v.stringValue %}
+                                    {{ v.stringValue|safe }}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endif %}
+        {% if tab3 or model.infoTab3Content %}
+            <div id="tab3" class="tab-pane fade">
+            {% if model.infoTab3Content %}
+                 <div class="tab-content-3">
+                    <div class="col-sm-12 col-md-12 prop-list ">
+                        {% for content in model.infoTab3Content %}
+                            <div class="prop-list-item">
+                                <div class="prop-name col-sm-3">{{content.name}}</div>
+                                <div class="prop-value col-sm-9">{{content.value}}</div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                        <div class="clearfix"></div>
+                 </div>
+            {% else %}
+                {% for v in tab3.values %}
+                    <div class="tab-content-3">
+                        {% if v.stringValue %}
+                                {{ v.stringValue|safe }}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            </div>
+        {% endif %}
+        {% if tab4 or model.infoTab4Content %}
+            <div id="tab4" class="tab-pane fade">
+            {% if model.infoTab4Content %}
+                 <div class="tab-content-4">
+                    <div class="col-sm-12 col-md-12 prop-list ">
+                        {% for content in model.infoTab4Content %}
+                            <div class="prop-list-item">
+                                <div class="prop-name col-sm-3">{{content.name}}</div>
+                                <div class="prop-value col-sm-9">{{content.value}}</div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                        <div class="clearfix"></div>
+                 </div>
+            {% else %}
+                {% for v in tab4.values %}
+                    <div class="tab-content-4">
+                        {% if v.stringValue %}
+                                {{ v.stringValue|safe }}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            </div>
+        {% endif %}
+        {% if tab5 or model.infoTab5Content %}
+            <div id="tab5" class="tab-pane fade">
+            {% if model.infoTab5Content %}
+                 <div class="tab-content-5">
+                    <div class="col-sm-12 col-md-12 prop-list ">
+                        {% for content in model.infoTab5Content %}
+                            <div class="prop-list-item">
+                                <div class="prop-name col-sm-3">{{content.name}}</div>
+                                <div class="prop-value col-sm-9">{{content.value}}</div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                        <div class="clearfix"></div>
+                 </div>
+            {% else %}
+                {% for v in tab5.values %}
+                    <div class="tab-content-5">
+                        {% if v.stringValue %}
+                                {{ v.stringValue|safe }}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            </div>
+        {% endif %}
+        
+    </div>
+</div>
+
+
+<div class="tabs-mobile visible-xs">
+
+    <div class="panel-group" id="accordionMobile">
+        {% if model.content.productFullDescription %}
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordionMobile" href="#collapse1">
+                  <h4 class="panel-title">
+                    <a class="mobileTab">
+                    <i class="fa"></i>
+                    {{ titleInfoTab1 }}</a>
+                  </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      <div class="tab-content-1">
+                          {{ model.content.productFullDescription|safe }}
+                      </div>
+                  </div>
+                </div>
+              </div>
+      {% endif %}
+      {% if tab2 or model.infoTab2Content %}
+          <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-parent="#accordionMobile" href="#collapse2">
+              <h4 class="panel-title">
+                <a class="mobileTab">
+                    <i class="fa"></i>
+                {{ titleInfoTab2 }}</a>
+              </h4>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+              <div class="panel-body">
+                  {% if model.infoTab2Content %}
+                       <div class="tab-content-2 prop-list">
+                          {% for content in model.infoTab2Content %}
+                              <div class="prop-list-item">
+                                <div class="prop-name col-xs-6">{{content.name}}</div>
+                                <div class="prop-value col-xs-6">{{content.value}}</div>
+                              </div>
+                          {% endfor %}
+                       </div>
+                  {% else %}
+                      {% for v in tab2.values %}
+                          <div class="tab-content-2">
+                              {% if v.stringValue %}
+                                      {{ v.stringValue|safe }}
+                              {% endif %}
+                          </div>
+                      {% endfor %}
+                  {% endif %}
+              </div>
+            </div>
+          </div>
+      {% endif %}
+      {% if tab3 or model.infoTab3Content %}
+          <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-parent="#accordionMobile" href="#collapse3">
+              <h4 class="panel-title">
+                <a class="mobileTab">
+                <i class="fa"></i>
+                {{ titleInfoTab3 }}</a>
+              </h4>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse">
+              <div class="panel-body">
+              {% if model.infoTab3Content %}
+                   <div class="tab-content-2 prop-list">
+                      {% for content in model.infoTab3Content %}
+                          <div class="prop-list-item">
+                              <div class="prop-name col-xs-6">{{content.name}}</div>
+                              <div class="prop-value col-xs-6">{{content.value}}</div>
+                          </div>
+                      {% endfor %}
+                   </div>
+              {% else %}
+                  {% for v in tab3.values %}
+                      <div class="tab-content-3">
+                          {% if v.stringValue %}
+                                  {{ v.stringValue|safe }}
+                          {% endif %}
+                      </div>
+                  {% endfor %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+      {% endif %}
+      {% if tab4 or model.infoTab4Content %}
+          <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-parent="#accordionMobile" href="#collapse4">
+              <h4 class="panel-title">
+                <a class="mobileTab">
+                <i class="fa"></i>
+                {{ titleInfoTab4 }}</a>
+              </h4>
+            </div>
+            <div id="collapse4" class="panel-collapse collapse">
+              <div class="panel-body">
+              {% if model.infoTab4Content %}
+                   <div class="tab-content-2 prop-list">
+                      {% for content in model.infoTab4Content %}
+                          <div class="prop-list-item">
+                              <div class="prop-name col-xs-6">{{content.name}}</div>
+                              <div class="prop-value col-xs-6">{{content.value}}</div>
+                          </div>
+                      {% endfor %}
+                   </div>
+              {% else %}
+                  {% for v in tab4.values %}
+                      <div class="tab-content-4">
+                          {% if v.stringValue %}
+                                  {{ v.stringValue|safe }}
+                          {% endif %}
+                      </div>
+                  {% endfor %}
+              {% endif %}
+              </div>
+            </div>
+          </div>
+      {% endif %}
+      {% if tab5 or model.infoTab5Content %}
+          <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-parent="#accordionMobile" href="#collapse5">
+              <h4 class="panel-title">
+                <a class="mobileTab">
+                <i class="fa"></i>
+                {{ titleInfoTab5 }}</a>
+              </h4>
+            </div>
+            <div id="collapse5" class="panel-collapse collapse">
+              <div class="panel-body">
+              {% if model.infoTab5Content %}
+                   <div class="tab-content-2 prop-list">
+                      {% for content in model.infoTab5Content %}
+                          <div class="prop-list-item">
+                              <div class="prop-name col-xs-6">{{content.name}}</div>
+                              <div class="prop-value col-xs-6">{{content.value}}</div>
+                          </div>
+                      {% endfor %}
+                   </div>
+              {% else %}
+                  {% for v in tab5.values %}
+                      <div class="tab-content-5">
+                          {% if v.stringValue %}
+                                  {{ v.stringValue|safe }}
+                          {% endif %}
+                      </div>
+                  {% endfor %}
+              {% endif %}
+              </div>
+            </div>
+          </div>
+      {% endif %}
+    </div>
+
+</div>
+
+
+
+{% endwith %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+
+{% require_script "modules/product/product-request-demo-sample" %}

@@ -1,30 +1,49 @@
 ﻿.mz-popover-signup {
-    @popoverWidth: 200px;
-    width: @popoverWidth;
+    width: auto;
+
+    .mz-popover-signup-fullname {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+
+      input {
+        width: 49%!important;
+      }
+    input[type=checkbox] {
+        text-align: left;
+        width: auto;
+        margin: @gutter/4;
+    }
+    label {
+      font-size: @fontSizeSmall;
+    }
+   }
 
     input {
+      .checkout-form-field();
+
         float: left;
-        width: @popoverWidth - @gutter/2;
+        width: 100%!important;
     }
 
-    .mz-popover-signup-firstname {
-        width: @popoverWidth/2 - @gutter/8;
-        margin-right: @gutter/4.01;
-        box-sizing: border-box;
+    .mz-popover-agreeToGDPR {
+      width: 100%;
+      margin-top: 13px;
+
+      .mz-popover-signup-agreeToGDPR {
+        width: 25px !important;
+      }
     }
 
-    .mz-popover-signup-lastname {
-        width: @popoverWidth/2 - @gutter/8;
-        box-sizing: border-box;
-    }
-
-    .mz-button {
+    .mz-popover-signup-register {
         float: right;
-        margin-bottom: @gutter/2;
+        margin: 8px 0;
     }
 
     .mz-validationmessage {
         display: inline-block;
-        margin: @gutter/4 @gutter/2;
+        width: 100%;
+        margin: @gutter/4 auto;
+        text-align: center;
     }
 }

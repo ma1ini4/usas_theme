@@ -1,0 +1,84 @@
+.mz-b2baccount-users,
+.mz-b2b-wishlists {
+    .has-required-behavior {
+        .mz-grid-row-actions {
+            display: none;
+        }
+    }
+    .mz-grid-table {
+        overflow-x: auto;
+
+        .mz-grid-header {
+            min-width: 480px;
+        }
+    }
+    .mz-grid {
+        border: none;
+
+        .mz-grid-cols {
+            display: flex;
+            align-items: center;
+    
+            span.mz-grid-column {
+                font-size: 14px!important;
+                
+                &:first-child {
+                    width: 50%;
+                    max-width: 150px;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
+                &:not(:first-child) {
+                    text-align: center;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    width: 50px;
+                }            
+            }
+        }
+        .mz-grid-row {
+            min-width: 480px;
+            &-actions {
+                display: flex;
+                align-items: center;
+                .mz-grid-column {
+                    display: flex;
+                }
+
+                @media @desktop-bootstrap {
+
+                    a {
+                        padding: 0 7px;
+                    }
+
+                    [data-mz-action="editUser"] {
+                        span {
+                            display: none;
+                        }
+
+                        .icon(before, '06e', solid, 20px);
+                    }
+
+                    [data-mz-action="deleteUser"] {
+                        span {
+                            display: none;
+                        }
+
+                        .icon(before, '2ed', solid, 20px);
+                    }
+                }
+            }
+
+            a:not(:last-child) {
+                padding-right: 5px;
+                border-right: 1px solid @lightBorder;
+            }
+            
+            a {
+                cursor: pointer;
+            }
+
+            
+        }
+    }    
+}

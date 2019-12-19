@@ -1,8 +1,38 @@
+/* globals grecaptcha */
+
 /**
  * Adds a login popover to all login links on a page.
  */
 
-define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modules/jquery-mozu=jQuery]>jQuery=jQuery]>jQuery', 'modules/api', 'hyprlive', 'underscore', 'hyprlivecontext', 'vendor/jquery-placeholder/jquery.placeholder','modules/backbone-mozu'], function ($, api, Hypr, _, HyprLiveContext,backbone) {
+define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modules/jquery-mozu=jQuery]>jQuery=jQuery]>jQuery', 'modules/api', 'hyprlive', 'underscore', 'hyprlivecontext', 'vendor/jquery-placeholder/jquery.placeholder','modules/backbone-mozu'],
+function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
+    var determineB2BUser = function() {
+        var apiData = require.mozuData('apicontext');
+        var user = require.mozuData('user');
+
+        if (!user.isAnonymous) {
+            $.ajax({
+                url: '/api/commerce/customer/accounts/' + user.accountId,
+                headers: apiData.headers,
+                method: 'GET',
+                success: function (data) {
+                    if(data.accountType === "B2B") {
+                        $('.my-account-popup-quotes').show();
+                    } else {
+                        $('.my-account-popup-quotes').hide();
+                    }
+                }
+            });
+        }
+    };
+    determineB2BUser();
+    (function() {
+        var urlParams = window.location.search;
+
+        if (urlParams.indexOf('userstate=locked') !== -1) {
+            $('#page-content [data-mz-message-bar]').html('<span class="mz-validationmessage">' + Hypr.getLabel('b2bAConversionErrorMsg') + '</span>');
+        }
+    })();
     var current = "";
     var usePopovers = function() {
         return !Modernizr.mq('(max-width: 480px)');
@@ -126,14 +156,14 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             this.$el = $(el);
             this.loading = false;
             this.setMethodContext();
-            if (!this.pageType){
+            if (!this.pageType) {
                 this.$el.on('click', this.createPopover);
             }
             else {
                this.$el.on('click', _.bind(this.doFormSubmit, this));
             }
         },
-        doFormSubmit: function(e){
+        doFormSubmit: function(e) {
             e.preventDefault();
             this.$parent = this.$el.closest(this.formSelector);
             this[this.pageType]();
@@ -151,19 +181,46 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
         template: Hypr.getTemplate('modules/common/login-popover').render(),
         bindListeners: function (on) {
             var onOrOff = on ? "on" : "off";
-            this.$parent[onOrOff]('click', '[data-mz-action="forgotpasswordform"]', this.slideRight);
-            this.$parent[onOrOff]('click', '[data-mz-action="loginform"]', this.slideLeft);
-            this.$parent[onOrOff]('click', '[data-mz-action="submitlogin"]', this.login);
+            // this.$parent[onOrOff]('click', '[data-mz-action="forgotpasswordform"]', this.slideRight);
+            this.$parent[onOrOff]('click', '[data-mz-action="loginform"]', this.dismissPopover);
+            // this.$parent[onOrOff]('click', '[data-mz-action="submitlogin"]', this.login);
+            this.$parent[onOrOff]('click', '[data-mz-action="recaptchasubmitlogin"]', this.loginRecaptcha.bind(this));
             this.$parent[onOrOff]('click', '[data-mz-action="submitforgotpassword"]', this.retrievePassword);
             this.$parent[onOrOff]('keypress', 'input', this.handleEnterKey);
         },
         onPopoverShow: function () {
+            var me = this;
             DismissablePopover.prototype.onPopoverShow.apply(this, arguments);
             this.panelWidth = this.$parent.find('.mz-l-slidebox-panel').first().outerWidth();
             this.$slideboxOuter = this.$parent.find('.mz-l-slidebox-outer');
 
-            if (this.$el.hasClass('mz-forgot')){
-                this.slideRight();
+            var recaptchaType = HyprLiveContext.locals.themeSettings.recaptchaType;
+
+            var recaptchaContainer = recaptchaType === 'Invisible' ? 'recaptcha-container-global' : 'recaptcha-container-popup';
+
+            if (HyprLiveContext.locals.themeSettings.enableRecaptcha) {
+                if (recaptchaType !== 'Invisible' || !window.renderedRecaptcha) {
+                    grecaptcha.render(
+                        recaptchaContainer,
+                        {
+                            size: recaptchaType === 'Invisible' ? 'invisible' : 'compact',
+                            badge: HyprLiveContext.locals.themeSettings.recaptchaBadgePosition,
+                            theme: HyprLiveContext.locals.themeSettings.recaptchaTheme,
+                            sitekey: HyprLiveContext.locals.themeSettings.recaptchaSiteKey,
+                            callback: function(result) {
+                                window.captchaToken = result;
+
+                                if (recaptchaType === 'Invisible') {
+                                    me.login(result);
+                                }
+                            }
+                        }
+                    );
+                }
+            }
+
+            if (recaptchaType === 'Invisible') {
+                window.renderedRecaptcha = true;
             }
         },
         handleEnterKey: function (e) {
@@ -184,12 +241,45 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             if (e) e.preventDefault();
             this.$slideboxOuter.css('left', -this.panelWidth);
         },
+        dismissPopover: function () {
+            $('#page-wrapper').click();
+        },
         slideLeft: function (e) {
             if (e) e.preventDefault();
             this.$slideboxOuter.css('left', 0);
         },
-        login: function () {
+        loginRecaptcha: function() {
+            var me = this;
 
+            if (HyprLiveContext.locals.themeSettings.recaptchaType !== 'Invisible') {
+                return me.login();
+            }
+
+            if (window.captchaToken) {
+                return me.login(window.captchaToken);
+            }
+
+            if (!window.renderedRecaptcha) {
+                grecaptcha.render(
+                    'recaptcha-container-global',
+                    {
+                        size: HyprLiveContext.locals.themeSettings.recaptchaType === 'Invisible' ? 'invisible' : HyprLiveContext.locals.themeSettings.recaptchaSize,
+                        badge: HyprLiveContext.locals.themeSettings.recaptchaBadgePosition,
+                        theme: HyprLiveContext.locals.themeSettings.recaptchaTheme,
+                        sitekey: HyprLiveContext.locals.themeSettings.recaptchaSiteKey,
+                        callback: function(result) {
+                            window.captchaToken = result;
+                            me.login(result);
+                        }
+                    }
+                );
+
+                window.renderedRecaptcha = true;
+            }
+
+            grecaptcha.execute();
+        },
+        login: function (token) {
             this.setLoading(true);
 
             //NGCOM-623
@@ -207,11 +297,18 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
               returnUrl = this.$parent.find('input[name=returnUrl]').val();
             }
 
-
-            api.action('customer', 'loginStorefront', {
+            var data = {
                 email: this.$parent.find('[data-mz-login-email]').val(),
                 password: this.$parent.find('[data-mz-login-password]').val()
-            }).then(this.handleLoginComplete.bind(this, returnUrl), this.displayApiMessage);
+            };
+
+            if (token && typeof token === 'string') {
+                data.token = token;
+            } else if (window.captchaToken) {
+                data.token = window.captchaToken;
+            }
+
+            api.action('customer', 'loginStorefront', data).then(this.handleLoginComplete.bind(this, returnUrl), this.displayApiMessage);
 
         },
         anonymousorder: function() {
@@ -298,6 +395,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             if (!payload.account.emailAddress) return this.displayMessage(Hypr.getLabel('emailMissing')), false;
             if (!payload.password) return this.displayMessage(Hypr.getLabel('passwordMissing')), false;
             if (payload.password !== this.$parent.find('[data-mz-signup-confirmpassword]').val()) return this.displayMessage(Hypr.getLabel('passwordsDoNotMatch')), false;
+            if (!payload.agreeToGDPR) return this.displayMessage(Hypr.getLabel('didNotAgreeToGDPR')), false;
             return true;
         },
         signup: function () {
@@ -305,6 +403,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                 email = this.$parent.find('[data-mz-signup-emailaddress]').val(),
                 firstName = this.$parent.find('[data-mz-signup-firstname]').val(),
                 lastName = this.$parent.find('[data-mz-signup-lastname]').val(),
+                agreeToGDPR = this.$parent.find('[data-mz-signup-agreeToGDPR]').prop('checked'),
                 payload = {
                     account: {
                         emailAddress: email,
@@ -317,9 +416,11 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                             lastNameOrSurname: lastName
                         }]
                     },
-                    password: this.$parent.find('[data-mz-signup-password]').val()
+                    password: this.$parent.find('[data-mz-signup-password]').val(),
+                    agreeToGDPR: agreeToGDPR
                 };
             if (this.validate(payload)) {
+                delete payload.agreeToGDPR;
                 //var user = api.createSync('user', payload);
                 this.setLoading(true);
                 return api.action('customer', 'createStorefront', payload).then(function () {
@@ -377,32 +478,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             }
         }
     });
-    var MyAccountPopover = function(e){
-        var self = this;
-        this.init = function(el){
-            self.popoverEl = $('#my-account-content');
-            self.bindListeners.call(el, true);
-            $('#my-account').attr('href','#');
-        };
-        this.bindListeners =  function (on) {
-            var onOrOff = on ? "on" : "off";
-            //$(this).parent()[onOrOff]('mouseover', '[data-mz-action="my-account"]', self.openPopover);
-            $(this).parent()[onOrOff]('click', '[data-mz-action="my-account"]', self.openPopover);
-            // bind other events
-        };
-        this.openPopover = function(e){
-            //self.popoverEl.popover('show');
-            e.preventDefault(); 
-            $("#my-account").popover({
-                html : true,
-                placement : 'bottom',
-                content: function() {
-                  return self.popoverEl.html();
-                }                
-            }); //.popover('show');
-        };
-    };
-        
+
     var LoginRegistrationModal = function(){
         var self = this;
         this.init = function(el){
@@ -410,25 +486,14 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             self.bindListeners.call(el, true);
             self.doLogin = _.debounce(self.doLogin, 150);
             self.doSignup = _.debounce(self.doSignup, 150);
-            api.get('attributedefinition').then(function(attribute) {
-                console.log(attribute.data.items);
-                for(var i=0; i< attribute.data.items.length; i++){
-                    if(attribute.data.items[i].attributeCode === "recovery-question"){
-                        var recVals = attribute.data.items[i].vocabularyValues;
-                        for(var j=0; j<recVals.length; j++){
-                            $('<option/>').text(recVals[j].content.value).attr('value',recVals[j].value).appendTo('#recoveryQuestionList');
-                        }
-                    }
-                }
-            });
         };
 
         this.bindListeners =  function (on) {
             var onOrOff = on ? "on" : "off";
             $(this).parent()[onOrOff]('click', '[data-mz-action="lite-registration"]', self.openLiteModal);
-            $(this).parents('.mz-utilitynav')[onOrOff]('click', '[data-mz-action="doLogin"]', self.doLogin);
-            $(this).parents('.mz-utilitynav')[onOrOff]('click', '[data-mz-action="doSignup"]', self.doSignup);
-            
+            $(this).parents('#page-wrapper')[onOrOff]('click', '[data-mz-action="doLogin"]', self.doLogin);
+            $(this).parents('#page-wrapper')[onOrOff]('click', '[data-mz-action="doSignup"]', self.doSignup);
+
             // bind other events
         };
 
@@ -437,6 +502,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                 $(".second-tab").show();
                 $(".third-tab").hide();
             }
+
             self.modalEl.modal('show');
         };
 
@@ -448,24 +514,24 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                 password: $(this).parents('#login').find('[data-mz-login-password]').val()
             };
             current = this;
-            if (self.validateLogin(this, payload) && self.validatePassword(this, payload)) {   
+            if (self.validateLogin(this, payload)) {
                 //var user = api.createSync('user', payload);
                 (LoginPopover.prototype).newsetLoading(true);
                 return api.action('customer', 'loginStorefront', {
-                    email: $(this).parents('#login').find('[data-mz-login-email]').val(), 
+                    email: $(this).parents('#login').find('[data-mz-login-email]').val(),
                     password: $(this).parents('#login').find('[data-mz-login-password]').val()
                 }).then(function () {
                     if ( returnUrl ){
                         window.location.href= returnUrl;
                     }else{
                         window.location.reload();
-                    } 
+                    }
                 }, (LoginPopover.prototype).newdisplayApiMessage);
-            } 
+            }
         };
-        this.validateLogin = function (el, payload) { 
+        this.validateLogin = function (el, payload) {
             if (!payload.email) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailMissing')), false;
-            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(payload.email))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailwrongpattern')), false;            
+            if (!(backbone.Validation.patterns.email.test(payload.email))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailwrongpattern')), false;
             return true;
         };
         this.doSignup = function(){
@@ -476,8 +542,6 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             if(emailupdates === "on")
                 accMarketing = true;
             var email = $(this).parents('#newshopper').find('[data-mz-signup-emailaddress]').val().trim();
-            var recoveryquestion = $(this).parents('#newshopper').find('[data-mz-signup-recoveryquestion]').val();
-            var recoveryanswer = $(this).parents('#newshopper').find('[data-mz-signup-recoveryanswer]').val().trim();
             var payload = {
                 account: {
                     emailAddress: email,
@@ -485,25 +549,13 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                     acceptsMarketing: accMarketing,
                     contacts: [{
                         email: email
-                    }],
-                    attributes: [
-                      {
-                         //"attributeDefinitionId": "14",
-                         "fullyQualifiedName": "tenant~recovery-question",
-                         "values": [recoveryquestion]
-                      },
-                      {
-                         //"attributeDefinitionId": "16",
-                         "fullyQualifiedName": "tenant~recovery-answer",
-                         "values": [recoveryanswer]
-                      }
-                   ]               
-                },
+                    }]
+                  },
                 password: $(this).parents('#newshopper').find('[data-mz-signup-password]').val()
             };
-            current = this; 
-            if (self.validateSignup(this, payload) && self.validatePassword(this, payload)) {   
-                //var user = api.createSync('user', payload);
+            current = this;
+            if (self.validateSignup(this, payload) && self.validatePassword(this, payload)) {
+                // var user = api.createSync('user', payload);
                 (LoginPopover.prototype).newsetLoading(true);
                 return api.action('customer', 'createStorefront', payload).then(function () {
                     if(returnUrl){
@@ -517,28 +569,31 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             }
         };
         this.validatePassword = function(el, payload){
-            if (!payload.password) 
-                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordMissing')), false; 
-            if (payload.password.length < 6) {
-                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
-            } else if (payload.password.length > 50) {
-                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
+            var passMinLen = Hypr.getThemeSetting('passwordMinLength'),
+                passMaxLen = Hypr.getThemeSetting('passwordMaxLength');
+
+            if (!payload.password)
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordMissing')), false;
+            if (payload.password.length < passMinLen) {
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordMinlength', passMinLen)), false;
+            } else if (payload.password.length > passMaxLen) {
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordMaxlength', passMaxLen)), false;
             } else if (payload.password.search(/\d/) == -1) {
-                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordDigit', passMinLen)), false;
             } else if (payload.password.search(/[a-zA-Z]/) == -1) {
-                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
-            } else if (payload.password.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\+\.\,\;\:]/) != -1) {
-                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordlength')), false;
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordLetter', passMinLen)), false;
+            } else if (payload.password.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\-\+\.\,\;\:]/) != -1) {
+                return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordSpecial', passMinLen)), false;
             }
             return true;
         };
-        this.validateSignup = function (el, payload) { 
+        this.validateSignup = function (el, payload) {
             if (!payload.account.emailAddress) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailMissing')), false;
-            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(payload.account.emailAddress))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailwrongpattern')), false;                       
+            if (!(backbone.Validation.patterns.email.test(payload.account.emailAddress))) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('emailwrongpattern')), false;
             if (payload.password !== $(el).parents('#newshopper').find('[data-mz-signup-confirmpassword]').val()) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordsDoNotMatch')), false;
-            if (payload.account.attributes.recoveryquestion === "0") return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('chooseRecoveryQuestion')), false;
-            if($('#recoveryQuestionList').val() === "0") return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('chooseRecoveryQuestion')), false;
-            if(!$('#recoveryAnswer').val()) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('recoveryAnswerMissing')), false;
+            // if (payload.account.attributes.recoveryquestion === "0") return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('chooseRecoveryQuestion')), false;
+            // if($('#recoveryQuestionList').val() === "0") return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('chooseRecoveryQuestion')), false;
+            // if(!$('#recoveryAnswer').val()) return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('recoveryAnswerMissing')), false;
             return true;
         };
     };
@@ -549,31 +604,79 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             var modal = new LoginRegistrationModal();
             modal.init(this);
         });
-        $('#my-account').attr('href','#');
-        $('[data-mz-action="my-account"]').click(function() {
-            var popover = new MyAccountPopover();
-            popover.init(this);
-            $(this).data('mz.popover', popover);
+        $('body').on('keypress', '#liteRegistrationModal input', function (e) {
+            if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
+                e.preventDefault();
+                switch($(e.target).parents('.tab-pane.active').attr('id')) {
+                    case 'login':
+                        $('[data-mz-action="doLogin"]').trigger('click');
+                        break;
+                    case 'newshopper':
+                        $('[data-mz-action="doSignup"]').trigger('click');
+                        break;
+                }
+            }
         });
+        $(document).keydown(function (e) {
+            if (e.key && e.key === 'Escape' && $('#liteRegistrationModal').hasClass('in')) {
+                e.preventDefault();
+                $('[data-dismiss="modal"]').trigger('click');
+            }
+        });
+        $('body').on('click', '#cart-checkout-login', function (e) {
+            $(".second-tab").hide();
+            $(".third-tab").show();
+            $('#liteRegistrationModal').modal('show');
+
+        });
+        $('#my-account').attr('href', '#');
+        $('#my-account-mobile').attr('href','#');
+        $('#services').attr('href', '#');
+
         $("#my-account").popover({
-                html : true,
-                placement : 'bottom',
-                content: function() {
-                  return $('#my-account-content').html();
-                }                
+            html : true,
+            placement : 'bottom',
+            content: function() {
+                return $('#my-account-content').html();
+            }
+        });
+        $("#my-account-mobile").popover({
+            html: true,
+            placement: 'bottom',
+            content: function () {
+                return $('#my-account-content').html();
+            }
+        });
+        $("#services").popover({
+            html : true,
+            placement : 'bottom',
+            content: function() {
+                return $('#services-content').html();
+            }
+        });
+
+        $('[data-toggle="popover"]').popover({
+            trigger: "manual",
+            html: true,
+            animation: false
+        }).on("mouseenter", function () {
+            var _this = this;
+            $(this).popover("show");
+            $(".popover").on("mouseleave", function () {
+                $(_this).popover('hide');
             });
-        /*$('[data-mz-action="my-account"]').hover(function() {
-            var popover = new MyAccountPopover();
-            popover.init(this);
-            $(this).data('mz.popover', popover);
+        }).on("mouseleave", function () {
+            var _this = this;
+            setTimeout(function () {
+                if (!$(".popover:hover").length) {
+                    $(_this).popover("hide");
+                }
+            }, 300);
         });
-        $(document).on('mouseleave','#mz-logged-in-notice',function(){
-            $('#my-account').popover('hide');
-        });
-        */  
+
         $('body').on('touchend click', function (e) {
             //only buttons
-            if ($(e.target).data('toggle') !== 'popover' && !$(e.target).parents().is('.popover.in')) { 
+            if ($(e.target).data('toggle') !== 'popover' && !$(e.target).parents().is('.popover.in')) {
                 $('[data-toggle="popover"]').popover('hide');
             }
         });
@@ -628,6 +731,14 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             loginPage.formSelector = 'form[name="mz-loginform"]';
             loginPage.pageType = 'login';
             loginPage.init(this);
+            $(loginPage.formSelector+" input").keypress(function (e) {
+                if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+                    $(".mz-login-button[data-mz-action='loginpage-submit']").click();
+                    return false;
+                } else {
+                    return true;
+                }
+            });
         });
         $('[data-mz-action="anonymousorder-submit"]').each(function () {
             var loginPage = new SignupPopover();
@@ -649,7 +760,7 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
                 headingElemnt.attr("href", "/c/" + headingElemnt.data("target").replace("#sub-nav-", "").replace("#main-nav-", ""));
                 headingElemnt.removeAttr("aria-expanded aria-controls data-toggle role");
             }
-        });
+		});
 
         $('[data-mz-action="logout"]').each(function(){
             var el = $(this);
@@ -668,6 +779,32 @@ define(['shim!vendor/bootstrap/js/popover[shim!vendor/bootstrap/js/tooltip[modul
             }
 
         });
-    });
 
-});
+        $('[data-mz-action="recaptcha-submit"]').each(function() {
+            var loginPage = new SignupPopover();
+            loginPage.formSelector = 'form[name="mz-loginform"]';
+            loginPage.pageType = 'loginRecaptcha';
+            loginPage.init(this);
+
+            var recaptchaContainer = HyprLiveContext.locals.themeSettings.recaptchaType === 'Invisible' ? 'recaptcha-container-global' : 'recaptcha-container';
+
+            if (!window.renderedRecaptcha) {
+                grecaptcha.render(
+                    recaptchaContainer,
+                    {
+                        size: HyprLiveContext.locals.themeSettings.recaptchaType === 'Invisible' ? 'invisible' : HyprLiveContext.locals.themeSettings.recaptchaSize,
+                        badge: HyprLiveContext.locals.themeSettings.recaptchaBadgePosition,
+                        theme: HyprLiveContext.locals.themeSettings.recaptchaTheme,
+                        sitekey: HyprLiveContext.locals.themeSettings.recaptchaSiteKey,
+                        callback: function(result) {
+                            window.captchaToken = result;
+                            loginPage.login(result);
+                        }
+                    }
+                );
+            }
+
+            window.renderedRecaptcha = true;
+        });
+      });
+  });

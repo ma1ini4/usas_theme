@@ -1,11 +1,27 @@
 ﻿.mz-myaccount {
+
     .mz-myaccount-panels {
         margin-left: 200px;
     }
 
     .mz-myaccount-nav {
-        width: 200px;
+        // width: 200px;
         box-sizing: border-box;
+    }
+    .mz-l-sidebar {
+        @media @mobile {
+            display: none;
+        }
+    }
+    .mz-b2b-pane-switcher .mz-l-sidebar {
+        @media @mobile {
+            display: block;
+
+            .mz-pane-switcher-nav {
+                display: flex;
+                flex-wrap: wrap;
+            }
+        }
     }
 
     .mz-contacttype-isprimary {
@@ -48,8 +64,8 @@
 
         .mz-accountsettings-label {
             display: block;
-            color: #999;
-            font-size: 80%;
+            color: @textColor;
+            font-style: italic;
         }
     }
 
@@ -66,11 +82,24 @@
                 font-weight: bold;
             }
         }
-        
+
     }
 
     #mz-printReturnLabelView {
         display: none;
+    }
+    .mz-pagingcontrols .btn-group {
+        @media @mobile {
+            margin-right: 15px;
+        }
+    }
+}
+
+.mz-accountreturnhistory {
+    
+    .mz-propertylist {
+        display: flex;
+        flex-direction: column;
     }
 }
 

@@ -1,0 +1,15 @@
+{% require_script "modules/b2b-account/orders" %}
+<div id="orders-messages">
+    {% include "modules/common/message-bar" with model=model.messages %}
+</div>
+<div class="mz-l-stack-section mz-orderlist" style="clear:none">
+    <h3 class="mz-l-stack-sectiontitle">{{ labels.orderHistory }}</h3>
+    <div class="mz-b2b-orders">
+        <div class="mz-order-grid-container">
+            <div class="mz-b2b-orders-grid">
+                <div class="is-loading"></div>
+                {% include "modules/b2b-account/orders/orders-grid" %}
+            </div>
+        </div>
+    </div>
+</div>

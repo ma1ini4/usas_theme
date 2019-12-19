@@ -51,45 +51,84 @@
 }
 
 .primary-btn {
-    background-color: @gray-lighter;
-    .border-radius(4px);
-    text-transform: capitalize;
-    border: 1px solid @inputBorder;    
+  .button-prop();
+  .button-focus();
+
+    height: 45px;
+    padding: 10px 25px;
+    background: @secondaryColor;
+
+    color: @colorWhite!important;
+    font-size: 21px;
+    font-weight: @thin;
+    text-transform: @uppercase;
     font-weight: normal;
-    .button-prop(); 
+
+    // border: 1px solid @inputBorder;
+    .border-radius(@borderRadius);
+    border: none;
+
     &:hover{
-        background-color: @btnGrayDarkHover;
-        color: @colorGray;
+      background: fade(@secondaryColor, 70%);
+        // color: @colorGray;
         text-decoration: none;
     }
-    .button-focus();
 }
 .secondary-btn {
-    border: 0;
-    cursor: pointer;
-    background: @secondaryBtnColor;
-    border: 1px solid @secondaryBtnColor;    
-    border-radius: 0px;    
-    .button-prop(); 
-    .button-focus();
+  .button-prop();
+  .button-focus();
+
+    height: 45px;
+    padding: 0 25px;
+    background: @secondaryButtonCollor;
+
+    color: @colorWhite!important;
+    font-size: 21px;
+    font-weight: @thin;
+    text-transform: @uppercase;
+    font-weight: normal;
+
+    // border: 1px solid @inputBorder;
+    .border-radius(@borderRadius);
+    border: none;
+
+    &:hover{
+        background: fade(@secondaryButtonCollor, 70%);
+        // color: @colorGray;
+        text-decoration: none;
+    }
 }
 
 .tertiary-btn {
-    cursor: pointer;
-    background: @white;
-    border: 1px solid @inputBorder;
-    border-radius: 0px;
-    .button-prop();
+  .button-prop();
+  .button-focus();
+
+    padding: 6px 25px;
+    background: none;
+
+    color: @tertiaryButtonCollor!important;
+    font-size: 21px;
+    font-weight: @thin;
+    text-transform: @uppercase;
+    font-weight: normal;
+
+    border: 1px solid @tertiaryButtonCollor;
+    .border-radius(@borderRadius);
+    // border: none;
+
     &:hover{
-        background-color: @btnGrayDarkHover;
+        border: 1px solid fade(@tertiaryButtonCollor, 70%);
+        background: none;
+        text-decoration: none;
     }
-    .button-focus();
 }
+
 .gray-btn {
-    background-color: @btnGrayDarkHover;    
+    background-color: @btnGrayDarkHover;
     text-transform: capitalize;
     font-weight: 700;
-    .button-prop(); 
+
+    .button-prop();
     .button-focus();
 
 }

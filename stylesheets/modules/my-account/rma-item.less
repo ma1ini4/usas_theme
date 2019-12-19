@@ -1,23 +1,41 @@
-﻿.mz-itemlisting-rmaitem {
-    h3 {
-        margin: 0 0 @gutter/4 0;
+﻿.mz-b2b-returns {
+
+    .mz-orderlisting .mz-orderlisting-items {
+        padding: 0;
     }
-    .mz-propertylist {
-        margin-top: 0;
-    }
-    .mz-itemlisting-rmaitem-details {
-        margin-top: @gutter / 2;
+
+    .mz-itemlisting-rmaitem {
+        h3 {
+            margin: 0 0 @gutter/4 0;
+        }
         .mz-propertylist {
-            dd{
-                display: block;
-                float: none;
-            }
-            dd.return-type {
-                margin-top: @gutter/2;
+            margin-top: 0;
+        }
+    
+        .mz-itemlisting-rmaitem-details-block {
+            width: 50%;
+        }
+        .mz-itemlisting-rmaitem-details {
+            // margin-top: @gutter / 2;
+            .mz-propertylist {
+                display: flex;
+                flex-direction: column;
+                
+                dd{
+                    display: block;
+                    float: none;
+                }
+                dd.return-type {
+                    margin-top: @gutter/2;
+                }
             }
         }
-    }
-    .mz-l-formfieldgroup {
-        width: 100%;
+        .mz-l-formfieldgroup-cell {
+            justify-content: flex-start;
+        }
+        .mz-l-formfieldgroup {
+            width: 100%;
+            padding: 0;
+        }
     }
 }

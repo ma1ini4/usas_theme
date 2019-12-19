@@ -1,0 +1,81 @@
+<div class="row">
+    <div class="col-sm-12">        
+        <h1 class="mz-pagetitle" itemprop="name"><a data-mz-action="onBackToProductSelection"><i
+                    class="fa fa-arrow-circle-left fa-1x"></i></a> {{ model.content.productName }}</h1>
+    </div>
+    <div class="mz-product-img col-sm-12 col-md-6">        
+        <div data-mz-productimages class="mz-productimages">
+            {% include "modules/product/product-images" %}
+        </div>
+    </div>
+    
+    <div class="mz-productdetail-wrap col-sm-12 col-md-6">
+        {% include "modules/common/message-bar" %}
+        <div id="product-detail" class="mz-productdetail mz-l-stack flex-column">   
+            <div class="row">
+                <div class="col-sm-12">
+                    {% if model.options and model.options.length > 0 %}
+                    <div class="mz-productdetail-options mz-l-stack-section">
+                        <h4 class="mz-l-stack-sectiontitle">{{ labels.options }}</h4>
+                        {% include "modules/product/product-options-discount" %}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="col-sm-12">
+                    <!-- {% if model.content.productShortDescription %}
+                    <div class="mz-productdetail-shortdesc mz-l-stack-section">
+                        <span itemscope="description"
+                            itemprop="description">{{ model.content.productShortDescription|safe }}</span>
+                    </div>
+                    {% endif %} -->
+                    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section">
+                        <h4 class="mz-l-stack-sectiontitle">{{ labels.price }}</h4>
+                        
+                        <span class="not-range">
+                            <span class="is-not-ranged mz-price is-crossedout">
+                                {{model.price.price|currency}}
+                            </span>
+                            <span itemprop="price" class="mz-price is-saleprice">
+                                {{"0"|currency}}
+                            </span>
+                        </span>
+                    </div>
+                    <div class="mz-price-container">                
+                        <dl class="mz-productcodes mz-propertylist mz-pagetitle-note mz-l-stack-section">
+                            <dt class="mz-productcodes-productcode-label"> 
+                                {{ labels.item }}#
+                            </dt>
+                            <dd class="mz-productcodes-productcode">                        
+                                    {% if model.variationProductCode and model.variationProductCode.length != 0 %}
+                                    {{ model.variationProductCode }}
+                                    {% else %}
+                                    {{ model.productCode }}
+                                    {% endif %}
+                            </dd>
+                        </dl>                    
+                        <section class="mz-l-stack-section mz-productdetail-conversion">
+                            <div class="mz-productdetail-conversion-buttons">
+                                <button id="add-to-cart" class="primary-btn {% if not model.isPurchasable %}is-disabled{% endif %}"
+                                    {% if not model.isPurchasable %} disabled="disabled" {% endif %} data-mz-action="addToCart">
+                                    {{ labels.addToCart }}
+                                </button>
+                            </div>
+                    
+                            {% if not model.isPurchasable %}
+                            <p class="mz-productdetail-notpurchasable">
+                                {{ labels.notPurchasable }}: {% for message in model.purchasableState.messages %}
+                                <span>{{ message.message }}</span>
+                                {% endfor %}
+                            </p>
+                            {% endif %}
+                        </section>
+                    </div>
+                </div>
+            </div>          
+                <div class="info-tabs-details">
+                    {% include "modules/product/product-info-tabs" %}
+                </div>
+
+        </div>
+    </div>
+</div>

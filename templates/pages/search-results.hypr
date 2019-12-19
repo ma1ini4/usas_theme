@@ -11,6 +11,12 @@
 <div {% if pageContext.categoryId %}data-mz-category="{{ pageContext.categoryId }}" {% endif %}data-mz-search="{{ pageContext.search.query }}" class="mz-l-container">
 	{% include "pages/search-interior" %}
 </div>
+<div class="quickviewSlider">
+	{% block quickview-slider %}
+		{% include "modules/product/product-quick-view" %}
+	{% endblock quickview-slider %}
+</div>
+{% require_script "modules/quickview" %}
 
 {% endblock body-content %}
 

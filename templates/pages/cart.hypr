@@ -4,14 +4,16 @@
 
 {% block head-tag-scripts %}
 {% parent %}
-{% if siteContext.checkoutSettings.visaCheckout.isEnabled and not pageContext.isEditMode %}
+{% if siteContext.checkoutSettings.visaCheckout.isEnabled and not pageContext.isEditMode and not pageContext.isAdminMode %}
 {% include "modules/common/anti-clickjacking-script" %}
 {% endif %}
 {% endblock head-tag-scripts %}
 
 {% block body-tag-classes %} mz-cart {% endblock body-tag-classes %}
 
-{% block secondary-nav %}{% endblock secondary-nav %}
+{% block secondary-nav %}
+{% include "modules/secondary-nav" %}
+{% endblock secondary-nav %}
 
 {% block body-content %}
 
@@ -21,12 +23,15 @@
 <div class="modal fade" id="mz-location-selector">
 	{% include "modules/cart/cart-location-select" %}
 </div>
-<div class="mz-l-container">
+<div class="mz-l-container mobile-padding">
+	<div id="mz-discount-threshold-messages">
+		{% include "modules/cart/cart-discount-threshold-messages" with model=model %}
+	</div>
 	<div class="mz-cart-heading">
 		<h1 class="mz-pagetitle">{{ labels.cart }}</h1>
 	</div>
 	<!-- Check if model is not empty and form product table if not-->
-	{% if not model.isEmpty %}  
+	{% if not model.isEmpty %}
 			<form method="post" action="{{ siteContext.secureHost }}{{siteContext.siteSubdirectory}}/cart/checkout" id="cartform">
 				{% dropzone "cart-top" scope="template" %}
 				<input type="hidden" name="id" value="{{model.id}}" />
@@ -34,13 +39,22 @@
 		        <div class="mz-table mz-table-cart" id="cart">
 		            {% include "modules/cart/cart-table" %}
 		        </div>
+						{% block modal-dialog %}
+			 			<div mz-modal-discount-dialog class="mz-discount-modal">
+			 				<div id="mzModalDialog" data-backdrop="static" class="modal fade" tabindex="-1" role="dialog">
+			 					{% include "modules/cart/discount-modal/discount-modal" %}
+			 				</div>
+			 			</div>
+			 		{% endblock modal-dialog %}
 			</form>
 	<!-- Show empty cart if model is empty -->
 	{% else %}
-			<div class="cart-div">Your bag is empty - continue shopping!</div>
+			<div class="cart-div">
+				<h3>Your cart is empty - continue shopping!</h3>
+			</div>
 			<div class="cart-div">
 	            <a href="/" class="btn">
-	            	<div class="cart-btn-continue"> Continue Shopping</div>
+	            	<div class="primary-btn">Continue Shopping</div>
 	            </a>
 	        </div>
 	{% endif %}
@@ -50,6 +64,5 @@
 			{% dropzone "cart-advert" scope="page" %}
 		</div>
 	</div>
-
 </div>
 {% endblock body-content %}

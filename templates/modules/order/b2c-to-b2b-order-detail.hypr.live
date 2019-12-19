@@ -1,0 +1,37 @@
+<div class="order-status" id='order-status'>
+  <div class="col-sm-12 mz-reset-padding-left">
+      <div class="order-detail-row">
+        <h4 class="mz-l-stack-sectiontitle">{{ labels.orderInformation }}</h4>
+        <div>{{ labels.orderDetailNumber}} <strong> {{model.orderNumber}} </strong> </div>
+        <div>{{ labels.orderDetailDate}} <strong>{{model.submittedDate|date('m/d/Y H:i:s') }}</strong>.</div>
+        <div>{{ labels.orderDetailStatus}} <strong>{{model.status }}</strong></div>
+      </div>
+      <div class="order-detail-row">
+          <h4 class="mz-l-stack-sectiontitle">{{ labels.b2cAccountInformation }}</h4>
+          <div class="mz-l-stack-item">
+          <div><strong>{{b2cAccount.firstName}} {{b2cAccount.lastName}}</strong> </div>
+          <div>{{ labels.email}} <strong>{{b2cAccount.emailAddress }}</strong></div>
+          {% for contact in b2cAccount.contacts %}
+            {% with contact.types|findwhere("name","Shipping") as shippingType %}
+             {% if shippingType.isPrimary %}
+               <div>{{ labels.phone }} <strong>{{contact.phoneNumbers.home|default("N/A") }}</strong>.</div>
+              <div>{{ labels.workPhone }} <strong>{{contact.phoneNumbers.work|default("N/A") }}</strong>.</div>
+             {% endif %}
+            {% endwith %}
+          {% endfor %}
+          </div>
+      </div>
+      <div class="order-detail-row">
+          <h4 class="mz-l-stack-sectiontitle">{{ labels.billingInformation }}</h4>
+          <div class="mz-l-stack-item">
+              	{% include "modules/common/address-summary" with model=model.billingInfo.billingContact %}
+          </div>
+      </div>
+      <div class="order-detail-row">
+         <h4 class="mz-l-stack-sectiontitle">{{ labels.shippingInformation }}</h4>
+        <div class="mz-ordersummary-shipto">
+            	{% include "modules/common/address-summary" with model=model.fulfillmentInfo.fulfillmentContact %}
+          </div>
+      </div>
+
+</div>

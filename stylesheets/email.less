@@ -42,6 +42,7 @@
 @import "/stylesheets/modules/location/location-list.less";
 // Page Header
 @import "/stylesheets/modules/page-header/store-branding.less";
+@import "/stylesheets/modules/page-footer.less";
 // Product
 @import "/stylesheets/modules/product/price-stack.less";
 @import "/stylesheets/modules/product/product-list.less";
@@ -103,7 +104,7 @@
             padding-right: 0;
         }
     }
-    .mz-ordersummary-totalname {
+    .mz-ordersummary-totalname, .mz-ordersummary-discountname {
         display: inline-block;
         padding-right: @gutter;
     }
@@ -194,7 +195,7 @@ dl.mz-orderheader {
         }
 
 
-        .mz-item-rowtotal, .mz-ordersummary-grandtotal {
+        .mz-ordersummary-grandtotal {
           color: #ae1231;
         }
 
@@ -215,10 +216,10 @@ dl.mz-orderheader {
             font-weight: bold;
         }
 
-            .mz-item-discount {
+            .mz-item-discount, .mz-ordersummary-discount {
             font-weight: bold;
 
-            .mz-item-discountamt {
+            .mz-item-discountamt, .mz-ordersummary-discountamt {
                 color: #900;
             }
         }

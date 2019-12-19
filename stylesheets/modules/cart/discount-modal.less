@@ -1,0 +1,100 @@
+.mz-discount-modal {
+
+    .modal-dialog{
+        width: 90%;
+        margin: auto;
+
+        @media @tablet {
+            width: 90%;
+        }
+        @media @mobile {
+            width: 90%;
+        }
+        @media @desktop-xl {
+            width: 75%;
+        }
+    }
+    .modal-header {
+        position: relative;
+        margin: 0;
+        
+        .modal-close-x {
+            position: absolute;
+            right: 20px;
+            top: 0; 
+            bottom: 0;
+            margin: auto;
+            cursor: pointer;
+            font-size: 30px;
+            font-weight: 600;
+        }
+    }
+    .modal-body {
+        overflow: hidden;
+        a {
+            cursor: pointer;
+        }
+        .mz-productimages {
+            padding: 15px 0;
+
+            @media @mobile {
+                padding: 15px 7px;
+
+                .mz-productimages-thumbs {
+                    margin-left: 5px;
+                }
+            }
+
+            & > .row.hidden-xs.hidden-sm {
+                .rollover {
+                    display: none;
+                }
+            }
+            .mobileCarousel  {
+                margin: 15px 0 0;
+
+                .bx-wrapper {
+                    background: transparent;
+        
+                    .bx-viewport {
+                        height: auto !important;
+        
+                        #productpager-Carousel {
+                            & > li {
+                                width: 90px !important;
+                            }
+                        }
+                    }
+                    .bx-next {
+                        right: -26px!important;
+                    }
+                }
+            }
+        }
+        .mobile-carousel #productmobile-Carousel.slick-initialized {
+            width: 100%;
+            // max-width: 240px;
+
+            .slick-list {
+                width: 100%;
+            }
+
+            img {
+                width: 100%!important;
+            }
+        }
+        #product-detail {
+            margin-top: 15px;
+            padding: 0;
+
+            .row {
+                max-width: 100%;
+            }
+        }
+        .mz-productlist-tiled .mz-productlist-item {
+            // width: 30%;
+            // margin: 0 10%;
+            // max-width: 300px;
+        }
+    }
+}

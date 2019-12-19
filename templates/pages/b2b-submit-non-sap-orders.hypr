@@ -1,0 +1,23 @@
+
+{% extends "page" %}
+{% block title-tag-content %}{% parent %}{% endblock title-tag-content %}
+
+{% block body-tag-classes %} mz-loginpage {% endblock body-tag-classes %}
+{% block site-nav %}{% endblock site-nav %}
+{% block body-content %}
+
+<div class="mz-l-container mz-l-stack-large">
+{% with "t{0}-s{1}"|string_format(siteContext.tenantId, siteContext.siteId) as validUrl %}
+  {% if pageContext.user.isAuthenticated  and  pageContext.user.segments|contains(themeSettings.userConvertCustomerSegment) and  pageContext.url|contains(validUrl) %}
+    {% require_script "pages/b2b-submit-non-sap-orders" %}
+    <div id="b2b-orders">
+      {% include "modules/order/b2b-order-list" %}
+    </div>
+  {% else %}
+    <div class="b2c-no-access-message">
+        {{labels.b2cOrderUserNotAuthorized}}
+    </div>
+  {% endif %}
+{% endwith %}
+</div>
+{% endblock body-content %}

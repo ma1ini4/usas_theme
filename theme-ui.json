@@ -23,7 +23,7 @@
                 {
                     "xtype": "mz-input-text",
                     "name": "categoryEntityName",
-                    "fieldLabel": "Category Entity Name"   
+                    "fieldLabel": "Category Entity Name"
                 },
                 {
                     "xtype": "mz-input-image",
@@ -34,6 +34,124 @@
                     "xtype": "mz-input-image",
                     "name": "globalPageHeaderLogoXS",
                     "fieldLabel": "Logo XS"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "PDP",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "enableProductPagingControl",
+                    "fieldLabel": "Enable Product Paging Control"
+                },
+                {
+                  "xtype": "mz-input-text",
+                  "name": "colorAttributeName",
+                  "fieldLabel": "Color Option Attribute"
+              }
+            ]
+        },
+        {
+        "xtype": "panel",
+            "title": "Recaptcha",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "enableRecaptcha",
+                    "fieldLabel": "Enable Recaptcha"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "recaptchaSiteKey",
+                    "fieldLabel": "Recaptcha Site Key"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "__recaptchaSecrete",
+                    "fieldLabel": "Recaptcha Secret",
+                    "inputType": "password"
+                },
+                {
+                    "xtype": "mz-input-dropdown",
+                    "name": "recaptchaType",
+                    "fieldLabel": "Recaptcha Type",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        "Invisible",
+                        "I'm not a robot"
+                    ]
+                },
+                {
+                    "xtype": "mz-input-dropdown",
+                    "name": "recaptchaSize",
+                    "fieldLabel": "Recaptcha Size",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        "normal",
+                        "compact"
+                    ]
+                },
+                {
+                    "xtype": "mz-input-dropdown",
+                    "name": "recaptchaTheme",
+                    "fieldLabel": "Recaptcha Theme",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        "light",
+                        "dark"
+                    ]
+                },
+                {
+                    "xtype": "mz-input-dropdown",
+                    "name": "recaptchaBadgePosition",
+                    "fieldLabel": "Recaptcha Badge Position",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        "bottomright",
+                        "bottomleft",
+                        "inline"
+                    ]
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Filters",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "allowFilterByLocationInventory",
+                    "fieldLabel": "Allow Filter by Location Inventory"
+                },
+                                {
+                   "fieldLabel": "Max Number of Locations",
+                    "xtype": "mz-input-dropdown",
+                    "name": "maxFilterLocations",
+                    "allowBlank": false,
+                    "forceSelection": true,
+                    "store": [
+                        50,
+                        100,
+                        150,
+                        200
+                    ]
+                },
+                {
+                    "fieldLabel": "Filter Label Text (limit 30 characters)",
+                    "xtype": "mz-input-text",
+                    "name": "locationInventoryFilterText",
+                    "allowBlank": true,
+                    "allowOnlyWhitespace": true,
+                    "maxValue": 30
                 }
             ]
         },
@@ -106,7 +224,7 @@
                     "xtype": "mz-input-number",
                     "name": "allProductsCategoryId",
                     "fieldLabel": "Enter CategoryId which is having all products"
-                }                
+                }
             ]
         },
         {
@@ -222,9 +340,10 @@
                     "fieldLabel": "Enable XS Mini footer",
                     "xtype": "mz-input-checkbox",
                     "name": "footerEnableMini"
-                }                              
+                }
             ]
-        },         
+        },
+
         {
             "xtype": "panel",
             "title": "Global Cart",
@@ -233,7 +352,7 @@
                 {
                     "fieldLabel": "Pick an image for Basket",
                     "xtype": "mz-input-image",
-                    "name": "globalCartEmptyBasketFooter" 
+                    "name": "globalCartEmptyBasketFooter"
                 },
                 {
                     "fieldLabel": "Basket kicker link",
@@ -254,12 +373,12 @@
                     "fieldLabel": "Enable Save Cart",
                     "xtype": "mz-input-checkbox",
                     "name": "globalCartEnableSaveCart"
-                },                
+                },
                 {
                     "fieldLabel": "Maximum number of items to show in global Cart",
                     "xtype": "mz-input-number",
                     "name": "globalCartMaxItemCount"
-                }, 
+                },
                 {
                     "fieldLabel": "Max width of global Cart item image",
                     "xtype": "mz-input-number",
@@ -274,7 +393,7 @@
                     "fieldLabel": "Show Subtotal",
                     "xtype": "mz-input-checkbox",
                     "name": "globalCartShowSubtotal"
-                }                            
+                }
             ]
         },
         {
@@ -308,9 +427,9 @@
                     "xtype": "mz-input-number",
                     "name": "maxRecentlyViewedItems",
                     "fieldLabel": "Maximum number of Recently Viewed Items supported"
-                }                                                
+                }
             ]
-        },{            
+        },{
             "xtype": "panel",
             "title": "Form Validations",
             "collapsed": false,
@@ -393,7 +512,7 @@
                     "fieldLabel": "Gift Message Length",
                     "xtype": "mz-input-number",
                     "name": "checkoutGiftMessageLength"
-                },                
+                },
                 {
                     "fieldLabel": "Checkout Comments Length",
                     "xtype": "mz-input-number",
@@ -480,8 +599,8 @@
                     "allowBlank": false,
                     "forceSelection": true,
                     "store": [
-                        36,
-                        72
+                        12,
+                        24
                     ]
                 },
                 {
@@ -536,7 +655,7 @@
                     "fieldLabel": "Also change alternate images"
                 }
             ]
-        },        
+        },
         {
             "xtype": "panel",
             "title": "Category Filters",
@@ -586,6 +705,11 @@
             "title": "Product Images",
             "collapsed": false,
             "items": [
+              {
+                  "xtype": "mz-input-checkbox",
+                    "name": "pdpMobileZoomEnabled",
+                  "fieldLabel": "Enable Mobile image zoom"
+                },
                 {
                     "xtype": "mz-input-text",
                     "name": "pdpMainImageNameSwatch",
@@ -600,7 +724,7 @@
                     "xtype": "mz-input-text",
                     "name": "pdpMainImageMaxWidth",
                     "fieldLabel": "Main Image Max Width"
-                }, 
+                },
                 {
                     "xtype": "mz-input-text",
                     "name": "pdpAltImageName",
@@ -710,6 +834,237 @@
                     "fieldLabel": "One Size Product Type"
                 }
             ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Info Tabs",
+            "collapsed": false,
+            "collapsible": true,
+            "items": [
+                {
+                    "xtype": "panel",
+                    "title": "Tab 1",
+                    "collapsed": false,
+                    "items": [{
+                    "xtype": "mz-input-text",
+                    "name": "titleInfoTab1",
+                    "fieldLabel": "Title Info Tab 1"
+                    },
+                    {
+                        "xtype": "mz-input-text",
+                        "name": "productAttrInfoTab1Content",
+                        "fieldLabel": "Produc Attribute Info Tab 1 Content"
+                    }
+                    ]
+                },
+                {
+                    "xtype": "panel",
+                    "title": "Tab 2",
+                    "collapsed": false,
+                    "items": [{
+                    "xtype": "mz-input-text",
+                    "name": "titleInfoTab2",
+                    "fieldLabel": "Title Info Tab 2"
+                    },
+                    {
+                        "xtype": "mz-input-text",
+                        "name": "productAttrInfoTab2Content",
+                        "fieldLabel": "Produc Attribute Info Tab 2 Content"
+                    },
+                    {
+                        "xtype": "mz-input-text",
+                        "name": "productAttrInfoTab2ContentExclude",
+                        "fieldLabel": "Input for attributes exclusion (comma separated)"
+                    },
+                    {
+                        "xtype": "mz-input-checkbox",
+                        "name": "productAttrInfoTab2ContentEnabled",
+                        "fieldLabel": "Display all attributes EXCEPT those indicated above"
+                    }
+                    ]
+                },
+                {
+                    "xtype": "panel",
+                    "title": "Tab 3",
+                    "collapsed": false,
+                    "items": [{
+                    "xtype": "mz-input-text",
+                    "name": "titleInfoTab3",
+                    "fieldLabel": "Title Info Tab 3"
+                    },
+                    {
+                        "xtype": "mz-input-text",
+                        "name": "productAttrInfoTab3Content",
+                        "fieldLabel": "Produc Attribute Info Tab 3 Content"
+                    },
+                    {
+                        "xtype": "mz-input-text",
+                        "name": "productAttrInfoTab3ContentExclude",
+                        "fieldLabel": "Input for attributes exclusion (comma separated)"
+                    },
+                    {
+                        "xtype": "mz-input-checkbox",
+                        "name": "productAttrInfoTab3ContentEnabled",
+                        "fieldLabel": "Display all attributes EXCEPT those indicated above"
+                    }
+                    ]
+                },
+                {
+                    "xtype": "panel",
+                    "title": "Tab 4",
+                    "collapsed": false,
+                    "items": [{
+                    "xtype": "mz-input-text",
+                    "name": "titleInfoTab4",
+                    "fieldLabel": "Title Info Tab 4"
+                    },
+                    {
+                        "xtype": "mz-input-text",
+                        "name": "productAttrInfoTab4Content",
+                        "fieldLabel": "Produc Attribute Info Tab 4 Content"
+                    },
+                    {
+                        "xtype": "mz-input-text",
+                        "name": "productAttrInfoTab4ContentExclude",
+                        "fieldLabel": "Input for attributes exclusion (comma separated)"
+                    },
+                    {
+                        "xtype": "mz-input-checkbox",
+                        "name": "productAttrInfoTab4ContentEnabled",
+                        "fieldLabel": "Display all attributes EXCEPT those indicated above"
+                    }
+                    ]
+                },
+                {
+                    "xtype": "panel",
+                    "title": "Tab 5",
+                    "collapsed": false,
+                    "items": [{
+                    "xtype": "mz-input-text",
+                    "name": "titleInfoTab5",
+                    "fieldLabel": "Title Info Tab 5"
+                    },
+                    {
+                        "xtype": "mz-input-text",
+                        "name": "productAttrInfoTab5Content",
+                        "fieldLabel": "Produc Attribute Info Tab 5 Content"
+                    },
+                    {
+                        "xtype": "mz-input-text",
+                        "name": "productAttrInfoTab5ContentExclude",
+                        "fieldLabel": "Input for attributes exclusion (comma separated)"
+                    },
+                    {
+                        "xtype": "mz-input-checkbox",
+                        "name": "productAttrInfoTab5ContentEnabled",
+                        "fieldLabel": "Display all attributes EXCEPT those indicated above"
+                    }
+                    ]
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Request Sample/Demo",
+            "collapsed": false,
+            "items": [{
+                    "xtype": "mz-input-text",
+                    "name": "requestSampleEmail",
+                    "fieldLabel": "Email address to receive requests for Equipment Samples"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "requestDemoEmail",
+                    "fieldLabel": "Email address to receive requests for Equipment Demo"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Border Configuration",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "enableborderFree",
+                    "fieldLabel": "Enable Border Free"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "merchantId",
+                    "fieldLabel": "MerchantId"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "borderFreeUsername",
+                    "fieldLabel": "Username for BorderFree"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "borderFreePassword",
+                    "fieldLabel": "Password for BorderFree"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "XI Intercept",
+            "collapsed": false,
+            "items": [{
+                    "xtype": "mz-input-text",
+                    "name": "xiInterceptMerchantguid",
+                    "fieldLabel": "MerchantGuid"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "xiInterceptQAEnvironment",
+                    "fieldLabel": "QA Environment? (It will use QA urls)"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "xiInterceptQAGetAccessURL",
+                    "fieldLabel": "QA Access Token URL"
+                },
+                {
+                    "xtype": "mz-input-text",
+                    "name": "xiInterceptGetAccessURL",
+                    "fieldLabel": "Production Access Token URL"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Orders conversion",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "User Customer Segment",
+                    "xtype": "mz-input-text",
+                    "name": "userConvertCustomerSegment"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "SAP Integration",
+            "collapsed": false,
+            "items": [
+                {
+                    "fieldLabel": "SAP Order Number Attribute Code",
+                    "xtype": "mz-input-text",
+                    "name": "sapOrderNumberAttribute"
+                }
+            ]
+        },
+        {
+            "xtype": "panel",
+            "title": "Disable Quotes",
+            "collapsed": false,
+            "items": [{
+                "xtype": "mz-input-checkbox",
+                "name": "disableQuotes",
+                "fieldLabel": "Disable quotes"
+            }]
         }
     ]
 }

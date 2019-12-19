@@ -1,5 +1,10 @@
 {% with paymentId|default(0) as paymentId %}
 <div class="mz-l-formfieldgroup mz-paymentselector">
+    {% if model.paymentType == "PayWithAmazon" %}
+        <div class="mz-l-formfieldgroup-row mz-l-security-box" >
+            {{ labels.awsPaymentWarning }}
+         </div>
+    {%endif%}
     {% if siteContext.checkoutSettings.purchaseOrder.isEnabled and model.purchaseOrder.isEnabled %}
     <div class="mz-l-formfieldgroup-row mz-paymentselector-option mz-paymentselector-newcreditcard mz-checkoutform {% if model.paymentType == "PurchaseOrder" %}mz-checkoutform-active{% endif %}">
         <div class="mz-l-formfieldgroup-row">
@@ -12,11 +17,13 @@
         {% include "modules/checkout/billing-purchase-order-form" with model=model.purchaseOrder %}
         <div class = "mz-l-stack-section">
             <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
+            <!-- <span class="mz-contact-selector-b2b-note hidden">{{ labels.b2bBillingAddressNote }}</span> -->
             {% include "modules/checkout/billing-address-purchase-order-selector" %}
         </div>
         {% endif %}
     </div>
     {% endif %}
+
     <div class="mz-l-formfieldgroup-row mz-paymentselector-option mz-paymentselector-newcreditcard mz-checkoutform {% if model.paymentType == "CreditCard" and not model.usingSavedCard %}mz-checkoutform-active{% endif %}">
         <div class="mz-l-formfieldgroup-row">
             <div class="mz-l-formfieldgroup-cell">
@@ -28,12 +35,13 @@
             {% include "modules/checkout/billing-credit-card-form" with model=model.card %}
             <div class="mz-l-stack-section">
                 <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
+                <!-- <span class="mz-contact-selector-b2b-note hidden">{{ labels.b2bBillingAddressNote }}</span> -->
                 {% include "modules/checkout/billing-address-selector" %}
             </div>
         {% endif %}
     </div>
     {% if model.savedPaymentMethods %}
-        <div class="mz-l-formfieldgroup-row mz-paymentselector-option mz-paymentselector-savedcreditcard mz-checkoutform {% if model.paymentType == "CreditCard" and model.usingSavedCard %}mz-checkoutform-active{% endif %}">
+        <div class="hidden mz-l-formfieldgroup-row mz-paymentselector-option mz-paymentselector-savedcreditcard mz-checkoutform {% if model.paymentType == "CreditCard" and model.usingSavedCard %}mz-checkoutform-active{% endif %}">
             <div class="mz-l-formfieldgroup-row">
                 <div class="mz-l-formfieldgroup-cell">
                     <input data-mz-value="paymentType" data-mz-saved-credit-card data-mz-payment-type id="paymentType-savedcreditcard-{{ paymentId }}" name="paymentType" type="radio" class="mz-paymenttype-input" value="CreditCard" {% if model.paymentType == "CreditCard" and model.usingSavedCard %}checked="checked"{% endif %} />
@@ -58,6 +66,7 @@
                 {% if model.paymentType == "CreditCard" and model.usingSavedCard and model.savedPaymentMethodId %}
                 <div class="mz-l-stack-section">
                     <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
+                    <!-- <span class="mz-contact-selector-b2b-note hidden">{{ labels.b2bBillingAddressNote }}</span> -->
                     {% include "modules/checkout/billing-address-selector" %}
                 </div>
                 {% endif %}
@@ -76,13 +85,14 @@
         {% include "modules/checkout/checking-account-form" %}
         <div class="mz-l-stack-section">
             <h4 class="mz-checkoutform-title">{{ labels.billingAddress }}</h4>
+            <!-- <span class="mz-contact-selector-b2b-note hidden">{{ labels.b2bBillingAddressNote }}</span> -->
             {% include "modules/checkout/billing-address-selector" %}
         </div>
         {% endif %}
     </div>
     {% endif %}
-    
-    {% with siteContext.checkoutSettings.externalPaymentWorkflowSettings|findwhere("isEnabled", true) as externalPaymentWorkflowsEnabled %} 
+
+    {% with siteContext.checkoutSettings.externalPaymentWorkflowSettings|findwhere("isEnabled", true) as externalPaymentWorkflowsEnabled %}
         {% if externalPaymentWorkflowsEnabled %}
             <div class="mz-l-formfieldgroup-row">
                 <div class="mz-paymentselector-label-separator">&ndash; {{ labels.or }} &ndash;</div>
@@ -103,6 +113,13 @@
                             {% if name == "paypalexpress2" %}
                                 <img id="btn_xpressPaypal" class="p-button" alt="Check out with PayPal" role="button" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png" width="170px" height="32px" align="left" style="margin-right:7px; float:right;"/>
                             {%endif%}
+                             {% if name == "paywithamazon" %}
+                                <div class="mz-paymenttype" id="amazonButtonPaymentSection">
+                                </div>
+                             {% endif %}
+                             {% if name == "applepay" %}
+                             <div class="apple-pay-button" role="button" width="200px" style="display: none" id="applePayButton"></div>
+                             {% endif %}
                         </div>
                     </div>
                 {% endwith %}

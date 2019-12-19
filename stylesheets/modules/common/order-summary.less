@@ -1,5 +1,10 @@
 ﻿.mz-ordersummary {
     background: #eee;
+    .order-summary-price {
+      span {
+        padding: 0;
+      }
+    }
     th {
         text-align: right;
         padding: @gutter/2 @gutter;
@@ -15,6 +20,14 @@
             text-align: left;
         }
     }
+    .mz-carttable-item-info-wrap {
+
+      @media @tablet-only {
+        width: 100%!important;
+        padding-right: 0px;
+        padding-left: 5px;
+      }
+    }
     .mz-ordersummary-lineitems tr:last-child td {
         border-bottom: 1px solid #fff;
     }
@@ -24,7 +37,7 @@
             padding-right: 0;
         }
     }
-    .mz-ordersummary-totalname {
+    .mz-ordersummary-totalname, .mz-ordersummary-discountname {
         display: inline-block;
         padding-right: @gutter;
     }
@@ -36,15 +49,21 @@
         font-weight: bold;
     }
 
-        .mz-item-discount {
+        .mz-item-discount, .mz-ordersummary-discount {
         font-weight: bold;
 
-        .mz-item-discountamt {
-            color: #900;
+        .mz-item-discountamt, .mz-ordersummary-discountamt {
+            color: @primaryColor;
         }
     }
 }
 .mz-ordersummary-checkout {
+    .mz-ordersummary-checkout-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
     margin-bottom: @gutter;
     .mz-formstep-header {
         margin-bottom: 0;
@@ -84,6 +103,59 @@
      }
 
 }
+
+#confirmation-container {
+  padding: 20px;
+  .mz-pagetitle{
+    margin: 0 0 7.5px;
+    padding: 0 0 3.75px;
+    font-size: 16px;
+    border-bottom: 1px solid @colorLightGray;
+  }
+  .mz-l-stack-item {
+    & > div:not(.mz-addresssummary) {
+      max-width: 300px;
+      background: #e9e9e9;
+      padding: 8px 15px;
+      border-radius: 5px;
+      z-index: 2;
+      position: relative;
+      &:after {
+        content: '';
+        position: absolute;
+        background: #fff;
+        width: 96%;
+        height: 70%;
+        left: 0;
+        top: 0;
+        margin: 2%;
+        z-index: -1;
+      }
+    }
+    .mz-addresssummary {
+      background-color: @colorLightGray;
+      font-weight: normal;
+      text-align: left;
+      width: auto;
+      padding: 5px;
+      border-radius: 5px;
+      max-width: 300px;
+      div, span {
+        background: @white;
+        font-weight: normal;
+        text-align: left;
+        width: auto;
+        padding: 10px;
+        border-bottom: 1px solid @colorLightGray;
+        padding: 0 10px;
+      }
+    }
+  }
+  .mz-checkout-total-row {
+    padding-top: 0px;
+  }
+}
+
 .mz-ordersummary-checkout .mz-confirmation-price-summary {
   background-color: #f7f7f7;
   width: 100%;
@@ -94,6 +166,14 @@
 
    .mz-ordersummary-ms2-checkout {
      border-bottom: 0px;
+
+     .mz-ordersummary-discount {
+       font-weight: bold;
+     }
+
+     .mz-ordersummary-discountamt {
+         color: #900;
+     }
    }
 
 
@@ -127,7 +207,7 @@
     td {
         background-color: #f7f7f7;
         text-align: right;
-        padding: @gutter/2 @gutter;
+        padding: @gutter/4 @gutter;
         &.mz-ordersummary-item-product {
             text-align: left;
         }
@@ -143,7 +223,7 @@
             padding-right: 0;
         }
     }
-    .mz-ordersummary-totalname {
+    .mz-ordersummary-totalname, .mz-ordersummary-discountname {
         display: inline-block;
         padding-right: @gutter;
     }
@@ -155,14 +235,15 @@
 
     }
     .mz-item-rowtotal{
-      color: #900;
+      color: @primaryColor;
+
     }
 
-        .mz-item-discount {
+        .mz-item-discount, .mz-ordersummary-discount {
         font-weight: bold;
 
-        .mz-item-discountamt {
-            color: #900;
+        .mz-item-discountamt, .mz-ordersummary-discountamt {
+            color: ;
         }
     }
 }
@@ -200,7 +281,7 @@
     }
 
 
-    .mz-item-rowtotal, .mz-ordersummary-grandtotal {
+    .mz-ordersummary-grandtotal {
       color: #ae1231;
     }
 
@@ -210,7 +291,7 @@
             padding-right: 0;
         }
     }
-    .mz-ordersummary-totalname {
+    .mz-ordersummary-totalname, .mz-ordersummary-discountname {
         display: inline-block;
         padding-right: @gutter;
     }
@@ -221,12 +302,17 @@
         font-weight: bold;
     }
 
-        .mz-item-discount {
+        .mz-item-discount, .mz-ordersummary-discount {
         font-weight: bold;
 
-        .mz-item-discountamt {
-            color: #900;
+        .mz-item-discountamt, .mz-ordersummary-discountamt {
+            color: @primaryColor;
         }
     }
 
+}
+.mz-ordersummary-grandtotal {
+  .mz-ordersummary-totalvalue {
+      color: @primaryColor!important;
+  }
 }

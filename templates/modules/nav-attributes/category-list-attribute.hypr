@@ -1,0 +1,180 @@
+{% if model %}
+	{% with model|first as entityModel %}
+		{% if var == '1a' %}
+			{% for item in entityModel.items1a %}
+				<div class="mz-sitenav-item sub-level-li">
+					<a class="mz-sitenav-link"  href="{{ item.url }}">{{ item.name|safe }}</a>
+				</div>
+			{% endfor %}
+		{% endif %}
+		{% if var == '1b' %}
+			{% for item in entityModel.items1b %}
+				<div class="mz-sitenav-item sub-level-li">
+					<a class="mz-sitenav-link"  href="{{ item.url }}">{{ item.name|safe }}</a>
+				</div>
+			{% endfor %}
+		{% endif %}
+		{% if var == 'm1a' %}
+			{% for item in entityModel.items1a %}
+				{% if item and (item.name or item.url) %}
+				<div class="panel">
+					<div class="panel-heading" role="tab">
+						<h4 class="panel-title-sub">
+							<a role="button" href="{{item.url}}">
+								{{item.name|safe}}
+							</a>
+						</h4>
+					</div>
+				</div>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		{% if var == 'm1b' %}
+			{% for item in entityModel.items1b %}
+				{% if item and (item.name or item.url) %}
+				<div class="panel">
+					<div class="panel-heading" role="tab">
+						<h4 class="panel-title-sub">
+							<a role="button" href="{{item.url}}">
+								{{item.name|safe}}
+							</a>
+						</h4>
+					</div>
+				</div>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		{% if var == '2a' %}
+			{% for item in entityModel.items2a %}
+				<div class="mz-sitenav-item sub-level-li">
+					<a class="mz-sitenav-link"  href="{{ item.url }}">{{ item.name|safe }}</a>
+				</div>
+			{% endfor %}
+		{% endif %}
+		{% if var == '2b' %}
+			{% for item in entityModel.items2b %}
+				<div class="mz-sitenav-item sub-level-li">
+					<a class="mz-sitenav-link"  href="{{ item.url }}">{{ item.name|safe }}</a>
+				</div>
+			{% endfor %}
+		{% endif %}
+		{% if var == 'm2a' %}
+			{% for item in entityModel.items2a %}
+				{% if item and (item.name or item.url) %}
+				<div class="panel">
+					<div class="panel-heading" role="tab">
+						<h4 class="panel-title-sub">
+							<a role="button" href="{{item.url}}">
+								{{item.name|safe}}
+							</a>
+						</h4>
+					</div>
+				</div>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		{% if var == 'm2b' %}
+			{% for item in entityModel.items2b %}
+				{% if item and (item.name or item.url) %}
+				<div class="panel">
+					<div class="panel-heading" role="tab">
+						<h4 class="panel-title-sub">
+							<a role="button" href="{{item.url}}">
+								{{item.name|safe}}
+							</a>
+						</h4>
+					</div>
+				</div>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		{% if var == '3a' %}
+			{% for item in entityModel.items3a %}
+				<div class="mz-sitenav-item sub-level-li">
+					<a class="mz-sitenav-link"  href="{{ item.url }}">{{ item.name|safe }}</a>
+				</div>
+			{% endfor %}
+		{% endif %}
+		{% if var == '3b' %}
+			{% for item in entityModel.items3b %}
+				<div class="mz-sitenav-item sub-level-li">
+					<a class="mz-sitenav-link"  href="{{ item.url }}">{{ item.name|safe }}</a>
+				</div>
+			{% endfor %}
+		{% endif %}
+		{% if var == 'm3a' %}
+			{% for item in entityModel.items3a %}
+				{% if item and (item.name or item.url) %}
+				<div class="panel">
+					<div class="panel-heading" role="tab">
+						<h4 class="panel-title-sub">
+							<a role="button" href="{{item.url}}">
+								{{item.name|safe}}
+							</a>
+						</h4>
+					</div>
+				</div>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		{% if var == 'm3b' %}
+			{% for item in entityModel.items3b %}
+				{% if item and (item.name or item.url) %}
+				<div class="panel">
+					<div class="panel-heading" role="tab">
+						<h4 class="panel-title-sub">
+							<a role="button" href="{{item.url}}">
+								{{item.name|safe}}
+							</a>
+						</h4>
+					</div>
+				</div>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		{% if var == '4a' %}
+			{% for item in entityModel.items4a %}
+				<div class="mz-sitenav-item sub-level-li">
+					<a class="mz-sitenav-link"  href="{{ item.url }}">{{ item.name|safe }}</a>
+				</div>
+			{% endfor %}
+		{% endif %}
+		{% if var == '4b' %}
+			{% for item in entityModel.items4b %}
+				<div class="mz-sitenav-item sub-level-li">
+					<a class="mz-sitenav-link"  href="{{ item.url }}">{{ item.name|safe }}</a>
+				</div>
+			{% endfor %}
+		{% endif %}
+		{% if var == 'm4a' %}
+			{% for item in entityModel.items4a %}
+				{% if item and (item.name or item.url) %}
+				<div class="panel">
+					<div class="panel-heading" role="tab">
+						<h4 class="panel-title-sub">
+							<a role="button" href="{{item.url}}">
+								{{item.name|safe}}
+							</a>
+						</h4>
+					</div>
+				</div>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		{% if var == 'm4b' %}
+			{% for item in entityModel.items4b %}
+				{% if item and (item.name or item.url) %}
+				<div class="panel">
+					<div class="panel-heading" role="tab">
+						<h4 class="panel-title-sub">
+							<a role="button" href="{{item.url}}">
+								{{item.name|safe}}
+							</a>
+						</h4>
+					</div>
+				</div>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+{% endif %}

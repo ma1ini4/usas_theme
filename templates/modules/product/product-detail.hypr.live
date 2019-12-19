@@ -2,9 +2,9 @@
   <span itemscope="description" itemprop="description">{{ model.content.productShortDescription|safe }}</span>
 </div>
 {% if model.stockInfo %}
-<div class="stock-info">{{ labels.upcInStock }}
+<!-- <div class="stock-info">{{ labels.upcInStock }}
   <span class="stock-price">{{ model.stockInfo }}</span>
-</div>
+</div> -->
 {% endif %}
 <div class="col-xs-12 mz-reset-padding-left">
     <div class="col-xs-12 email-popup">
@@ -27,26 +27,32 @@
 {% endif %}
 <section class="mz-l-stack-section mz-productdetail-conversion row">
   {% if model.productType != themeSettings.familyProductType %}
-    <div class="mz-productdetail-conversion-controls col-xs-4 col-sm-4">
-      <label class="mz-qty-label text-uppercase" for="mz_pdp_qty">{{ labels.qty }}</label>
-      <div class="qty-block">
-        <div class="qty-counter" id="minus" data-mz-qty-minus role="button"><i class="fa fa-minus"  aria-hidden="true"></i></div>
-        <input id="mz_pdp_qty" class="mz-productdetail-qty text-center" type="text" value="{{model.quantity}}" readonly onfocus="this.blur()" data-mz-value="{{model.quantity}}" title="Quantity" />
-        <div class="qty-counter" id="plus" data-mz-qty-plus role="button"><i class="fa fa-plus" aria-hidden="true"></i></div>
+      <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section col-xs-4 col-sm-5 col-md-7 text-left">
+        {% include "modules/product/price-stack" %}
       </div>
-      <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
-    </div>
-    
-    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section pull-right col-xs-8 col-sm-8 text-right">
-      {% include "modules/product/price-stack" %}
-    </div>
+
+      <div class="mz-productdetail-conversion-controls col-xs-8 col-sm-7 col-md-5">
+        <label class="mz-qty-label text-uppercase" for="mz_pdp_qty">{{ labels.qty }}</label>
+        <div class="qty-block">
+          <div class="qty-counter" id="minus" data-mz-qty-minus role="button"><i class="fa fa-minus"  aria-hidden="true"></i></div>
+          <input name="mz_pdp_qty" class="mz-productdetail-qty text-center" type="text" value="{{model.quantity}}" readonly onfocus="this.blur()" data-mz-value="{{model.quantity}}" title="Quantity" />
+          <div class="qty-counter" id="plus" data-mz-qty-plus role="button"><i class="fa fa-plus" aria-hidden="true"></i></div>
+        </div>
+        <span class="mz-validationmessage" data-mz-validationmessage-for="quantity"></span>
+      </div>
     {% endif %}
 
     <div class="mz-productdetail-conversion-buttons col-xs-12 hide">
       <div class="col-xs-12 add-to-cart-container">
+        {% if model.inventoryInfo.manageStock == true and (model.inventoryInfo.onlineStockAvailable == 0 or model.inventoryInfo.onlineSoftStockAvailable == 0) %}
+          <button class="secondary-btn button_disabled" style="cursor: not-allowed;">
+              {{ labels.productDiscontinued }}
+          </button>            
+        {% else %}
         <button id="add-to-cart" class="mz-button mz-productdetail-addtocart font-large button_primary pull-right {% if not model.purchasableState.isPurchasable %}button_disabled{% endif %}" data-mz-action="addToCart" >
             {{ labels.addToCart }}
         </button>
+        {% endif %}
       </div>
     </div>
 </section>
@@ -96,7 +102,7 @@
 {% if themeSettings.showProductDetailMeasurements and model.bundledProducts %}
 <div class="mz-productdetail-measurements mz-l-stack-section">
   <h4 class="mz-l-stack-sectiontitle">{{ labels.measurements }}</h4>
-  
+
   {% for product in model.bundledProducts %}
     {% if product.measurements %}
     <div class="mz-productbundle-measurements-product">

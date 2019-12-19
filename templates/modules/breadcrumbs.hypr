@@ -5,11 +5,15 @@
    {% endif %}
   {% for crumb in navigation.breadcrumbs %}
     {% if not crumb.isHidden %}
-    <span class="mz-breadcrumb-separator">/</span>
+    <span class="mz-breadcrumb-separator">></span>
       {% if not forloop.last %}
         <a href="{{crumb.url}}" class="mz-breadcrumb-link{% if forloop.first %} is-first{% endif %}">{{crumb.name|safe}}</a>
       {% else %}
-        <span class="mz-breadcrumb-current">{{ crumb.name|safe }}</span>
+        {% if pageModel.documentTypeFQN and pageModel.documentTypeFQN == "web_page@mozu" and pageModel.properties.link_title %}
+          <span class="mz-breadcrumb-current">{{ pageModel.properties.link_title|safe }}</span>
+          {% else %}
+          <span class="mz-breadcrumb-current">{{ crumb.name|safe }}</span>
+          {% endif %}
       {% endif %}
     {% endif %}
   {% endfor %}

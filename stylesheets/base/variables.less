@@ -3,9 +3,21 @@
 @fontSizeSmall:         @fontSize - 2px;
 @fontSizeLarger:        @fontSize + 2px;
 @fontSizeLarge:         @fontSize + 6px;
+@fontSizeLargeDetail:   @fontSize + 1px;
 @storeBrandingFontSize: 36px;
 
-@textColor:             {{ themeSettings.textColor }};
+/* Font weights */
+@thin:                  400;
+@regular:               500;
+@semi-bold:             700;
+@bold:                  900;
+
+//Extra Variables
+@borderRadius: 10px;
+@uppercase: uppercase;
+
+// @textColor:             {{ themeSettings.textColor }};
+@textColor:             #6D6F70 ;
 @linkColor:             #4F4F4F;
 @linkHoverColor:        #666;
 @linkVisitedColor:      #3F3F3F;
@@ -29,7 +41,7 @@
 @errorIcon:				"../resources/images/error-exclamation.png";
 @columnWidth-2col:		435px;
 @gutter:				{{themeSettings.gutterWidth}};
-@inputBorder:			#a7a7a7;
+// @inputBorder:			#a7a7a7;
 
 @defaultTileHeight:            250px;
 @defaultTileWidth:             250px;
@@ -43,9 +55,30 @@
 @productListingThumbSize: {{ themeSettings.listProductThumbSize }}px;
 
 /* Colors */
-@primaryColor: #002C50;
-@secondaryColor: #0EB1C9;
-@navBorder: #48708a;
+@primaryColor: #CC2036;
+@secondaryColor: #22205F;
+
+@secondaryButtonCollor: #B3B3B3;
+@tertiaryButtonCollor: #414141;
+
+@grayBackground: #E6E7E8;
+@overlayColor: #231F20;
+
+@headingColor: #58595B;
+@inputBorder: @headingColor;
+
+@navText: @headingColor;
+@navBorder: #CCCBCB;
+@navRedBorder: @primaryColor;
+
+@lightBorder: #D0D2D3;
+@ghostWhite: #F1F1F2;
+@textColor: #6D6F70;
+@bestSellersColor: #6D6E70;
+
+@iconGreen: #009345;
+@iconRed: #CC2036;
+
 @colorWhite: #FFFFFF;
 @colorGray: #333333;
 @colorMediumGray: #666666;
@@ -68,6 +101,9 @@
 @table-bg-accent: #f9f9f9;
 @btnGrayDarkHover: #e3e3e3;
 @secondaryBtnColor:#FFCE06;
+@colorDetailPageGrey:#6D6F70;
+@colorDetailPageControlGrey: #808083;
+@buyButtonColor: #27235e;
 
 @colorMediumGray: @colorLightGray;
 @primaryGreyBtnBgClr: @colorLightGray;

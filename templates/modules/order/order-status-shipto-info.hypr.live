@@ -1,0 +1,24 @@
+<div>
+    <div>{{ model.firstName }} {{ model.lastNameOrSurname }}</div>
+    <div>{{ model.address1 }}</div>
+    {% if model.address2 %}
+        <div>{{ model.address2 }}</div>
+    {% endif %}
+    <div>{{ model.cityOrTown }}, {{ model.stateOrProvince }}, {{ model.postalOrZipCode }}</div>
+    <div>{{ model.countryCode }}</div>
+    {% if model.email %}
+        <span>{{ model.email }}</span>
+    {% endif %}
+    {% if model.phoneNumber %}
+        <span>{{ model.phoneNumber }}</span>
+    {% endif %}
+</div>
+
+<!-- <div class="mz-l-stack-item col-sm-6 col-xs-12">
+    <div class="mz-addresssummary">
+        <div class="mz-order-status-label">{{labels.orderStatusShippingMethod}}</div>
+        <div class="mz-order-status-value">{{model.shipMethod}}</div>
+        <div class="mz-order-status-label">{{labels.shipmentStatus}}</div>
+        <div class="mz-order-status-value">{{model.shipmentStatus}}</div>
+    </div>
+</div> -->

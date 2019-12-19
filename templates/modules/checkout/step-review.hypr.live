@@ -8,7 +8,9 @@
             <div class="mz-orderattributes">
                 {% include "modules/checkout/checkout-attributes" with model=model.orderAttributes %}
             </div>
-
+            <div class="mz-l-formfieldgroup mz-l-formfieldgroup-norows mz-checkoutform">
+              <p>{{ labels.agreeToGDPRCheckout|string_format("https://kibocommerce.com/privacy/")|safe }}</p>
+            </div>
             {% if themeSettings.requireCheckoutAgreeToTerms %}
             <div class="mz-l-formfieldgroup mz-l-formfieldgroup-norows mz-checkoutform">
             <label class='inline'>
@@ -16,10 +18,11 @@
             </label>
             <span class="mz-validationmessage" data-mz-validationmessage-for="agreeToTerms"></span>
             </div>
+
             {% endif %}
 
             {% if not user or user.isAnonymous %}
-            <div class="mz-l-formfieldgroup mz-l-formfieldgroup-norows mz-checkoutform">
+            <div class="mz-l-formfieldgroup mz-l-formfieldgroup-norows mz-checkoutform hidden">
                 <label class='inline'>
                     <input type="checkbox" name="create-new-account" data-mz-value="createAccount" {% if model.createAccount %} checked="checked"{% endif %} > {{ labels.createAccount }}
                 </label>
@@ -32,7 +35,7 @@
                     <label for="new-account-email"> {{ labels.email }}<span class="is-required"> *</span>: </label>
                       </div>
                       <div class="mz-l-formfieldgroup-cell">
-                        <input type="text" name="new-account-email" data-mz-value="emailAddress" value="{{ model.emailAddress|default(model.billingInfo.billingContact.email) }}" maxlength="{{themeSettings.emailLength}}">
+                        <input type="text" name="new-account-email" data-mz-value="emailAddress" value="{{ model.emailAddress}}" maxlength="{{themeSettings.emailLength}}">
                         <span class="mz-validationmessage" data-mz-validationmessage-for="emailAddress"></span>
                        </div>
                     </div>
@@ -52,14 +55,14 @@
                       <div class="mz-l-formfieldgroup-cell">
                         <input type="password" name="new-account-confirm" data-mz-value="confirmPassword" value="{{ model.confirmPassword }}" maxlength="{{themeSettings.passwordMaxLength}}">
                         <span class="mz-validationmessage" data-mz-validationmessage-for="confirmPassword"></span>
-                       </div>
+                      </div>
                     </div>
                 </div>
                 {% endif %}
             {% endif %}
 
-            <div class="mz-formstep-next">
-                <button type="button" class="mz-button primary-btn" data-mz-action="submit">{{ labels.placeOrder }}</button>
+            <div class="mz-formstep-next pull-right">
+                <button type="button" class="primary-btn" data-mz-action="submit">{{ labels.placeOrder }}</button>
             </div>
         {% endif %}
     </div>

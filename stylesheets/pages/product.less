@@ -51,3 +51,106 @@ body.mz-product.desktop-screen .product-backgroundimg {
         }
     }
 }
+.product-paging-control {
+    margin-right: 15px;
+    a {
+        width: 85px;
+        text-align: center;
+        height: 35px;
+        line-height: 32px;
+        border: 1px solid @lightBorder;
+        &.mz-next-button {
+            border-radius: 0 10px 10px 0;
+            span {
+                text-transform: lowercase;
+                padding-right: 5px;
+                color: @headingColor;
+            }
+        }
+        &.mz-previous-button {
+            right: -1px;
+            position: relative;
+            border-radius: 10px 0 0 10px;
+            span {
+                text-transform: lowercase;
+                padding-left: 5px;
+            }
+        }
+        i {
+            font-size: 10px;
+        }
+        &:hover {
+            text-decoration: none;
+            span {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+.zoomContainer {
+    // margin: 16px;
+    border-radius: 20px;
+    overflow: hidden;
+    @media @mobile {
+        display: none;
+    }
+    &:hover {
+        border-left: 1px solid @colorLighterGray;
+        border-top: 1px solid @colorLighterGray;
+    }
+}
+.product-wrapper {
+    .product-paging-control {
+        @media @mobile {
+            padding: 0 20px;
+        }
+    }
+    .mz-breadcrumbs {
+        padding: 0px 20px 10px;
+    }
+    .mz-productimages-thumbs {
+        @media @mobile {
+            margin: 0;
+            width: auto;
+            .bx-prev {
+                left: -25px !important;  
+            }
+            .bx-next {
+                right: -25px !important;
+            }
+            // img {
+            //     max-height: 60px !important;
+            //     margin: 0 auto;
+                
+            // }
+        }
+    }
+    .mz-product-content-block {
+        @media @mobile {
+            padding: 0 30px 30px;
+        }
+    } 
+    .related-product-container {
+        position: relative;
+        margin: 3em 0 0;
+    }
+}
+
+.social-sharing {
+    margin-top: 20px;
+    text-align: center;
+    .addthis_default_style .addthis_separator, 
+    .addthis_default_style .at4-icon, 
+    .addthis_default_style .at300b, 
+    .addthis_default_style .at300bo, 
+    .addthis_default_style .at300bs, 
+    .addthis_default_style .at300m {
+        float: initial;
+    }
+}
+
+.rollover-block {
+    max-width: 400px;
+    margin: 0 auto;
+    float: initial;
+}

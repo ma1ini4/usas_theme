@@ -1,0 +1,11 @@
+<div>
+			{{model.paymentType}} : 
+			
+			{% if model.billingInfo.card.cardNumberPartOrMask %}
+				{{ model.billingInfo.card.cardNumberPartOrMask }}
+			{% else %} 
+				{{ model.billingInfo.check.checkNumber }}
+			{% endif %}
+			for {{ model.amountRequested|floatformat(2)|currency }}
+</div>
+

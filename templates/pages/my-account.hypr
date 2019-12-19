@@ -3,7 +3,6 @@
 {% block title-tag-content %}{% firstof pageContext.metaTitle labels.yourAccount %} - {% parent %}{% endblock title-tag-content %}
 
 {% block body-tag-classes %} mz-myaccount {% endblock body-tag-classes %}
-{% block secondary-nav %}{% endblock secondary-nav %}
 
 {% block body-content %}
 
@@ -12,68 +11,58 @@
 {% preload_json model "customer" %}
 
 <div class="mz-l-container">
-    <h1 class="mz-pagetitle">
-        {{ labels.yourAccount }}
-    </h1>
+    <div class="row flex">
+        <div class="mz-l-sidebar col-xs-12 col-sm-4 col-md-3">
+            {% include "modules/my-account/my-account-nav" with navtarget="body" %}
+        </div>
 
-    <div class="mz-l-sidebar mz-myaccount-nav">
-        {% include "modules/my-account/my-account-nav" with navtarget="body" %}
-    </div>
-
-    <div id="account-panels" class="mz-myaccount-panels mz-l-stack mz-l-stack-large">
-
-		{% dropzone "my-account-top" scope="template" %}
-
-        <div id="account-messages">
+        <div id="account-panels" class="mz-l-stack mz-l-stack-large  col-xs-12 col-sm-8 col-md-9 flex-column bottom-border">
+          <div id="account-messages">
             {% include "modules/common/message-bar" with model=model.messages %}
+          </div>
+          {% dropzone "my-account-top" scope="template" %}
+          <h1 class="mz-pagetitle">
+            {{ labels.yourAccount }}
+          </h1>
+
+
+            <div class="row">             
+              <div class="col-sm-6">
+                <a id="settings"></a>
+                <div class="mz-l-stack-section mz-accountsettings" id="account-settings">
+                  {% include "modules/my-account/my-account-settings" %}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <a id="password"></a>
+                <div class="mz-l-stack-section mz-passwordsection" id="password-section">
+                  {% include "modules/my-account/my-account-password" %}
+                </div>
+              </div>
+            </div>
+
+            {% if siteContext.generalSettings.isWishlistCreationEnabled %}
+            <a id="wishlist"></a>
+            <div class="mz-l-stack-section mz-accountwishlist" id="account-wishlist">
+                {% include "modules/my-account/my-account-wishlist" with model=model.wishlist %}
+            </div>
+            {% endif %}
+
+            <a id="orderhistory"></a>
+            <div class="mz-l-stack-section mz-accountorderhistory" id="account-orderhistory">
+                {% include "modules/my-account/my-account-orderhistory" with model=model.orderHistory showPaging=true %}
+            </div>
+
+            <a id="addressbook"></a>
+            <div class="mz-l-stack-section mz-accountaddressbook" id="account-addressbook">
+                {% include "modules/my-account/my-account-addressbook" %}
+            </div>
+
+            {% include "modules/my-account/my-account-print-window" %}
+
+    		{% dropzone "my-account-bottom" scope="template" %}
+
         </div>
-
-        <a id="settings"></a>
-        <div class="mz-l-stack-section mz-accountsettings" id="account-settings">
-            {% include "modules/my-account/my-account-settings" %}
-        </div>
-
-        <a id="password"></a>
-        <div class="mz-l-stack-section mz-passwordsection" id="password-section">
-            {% include "modules/my-account/my-account-password" %}
-        </div>
-
-        {% if siteContext.generalSettings.isWishlistCreationEnabled %}
-        <a id="wishlist"></a>
-        <div class="mz-l-stack-section mz-accountwishlist" id="account-wishlist">
-            {% include "modules/my-account/my-account-wishlist" with model=model.wishlist %}
-        </div>
-        {% endif %}
-
-        <a id="orderhistory"></a>
-        <div class="mz-l-stack-section mz-accountorderhistory" id="account-orderhistory">
-            {% include "modules/my-account/my-account-orderhistory" with model=model.orderHistory showPaging=true %}
-        </div>
-        
-        <a id="returnhistory"></a>
-        <div class="mz-l-stack-section mz-accountreturnhistory" id="account-returnhistory">
-            {% include "modules/my-account/my-account-returnhistory" with model=model.returnHistory %}
-        </div>
-
-        <a id="paymentmethods"></a>
-        <div class="mz-l-stack-section mz-accountpaymentmethods" id="account-paymentmethods">
-            {% include "modules/my-account/my-account-paymentmethods" %}
-        </div>
-
-        <a id="addressbook"></a>
-        <div class="mz-l-stack-section mz-accountaddressbook" id="account-addressbook">
-            {% include "modules/my-account/my-account-addressbook" %}
-        </div>
-
-        <a id="{{ labels.digitalCreditsAnchor }}"></a>
-        <div class="mz-l-stack-section mz-accountstorecredit" id="account-storecredit">
-            {% include "modules/my-account/my-account-storecredit" %}
-        </div>
-
-        {% include "modules/my-account/my-account-print-window" %}
-
-		{% dropzone "my-account-bottom" scope="template" %}
-
     </div>
 </div>
 {% endblock body-content %}

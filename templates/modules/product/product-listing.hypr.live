@@ -5,36 +5,29 @@
             <a href='{% make_url "product" model %}'>
                 {% include "modules/product/product-image" with productImage=model.mainImage productMaxWidth=themeSettings.productImageDirectoryMaxWidth productAltText=model.mainImage.altText as_parameter %}
             </a>
-            {% if themeSettings.enableQuickView and model.productType != themeSettings.familyProductType %}
-                <button class="primary-btn quick-view-btn primary qvButton quickview-btn" type="button" data-mz-product-data="{% json_attribute model %}" data-toggle="modal" data-target="{{ model.productCode }}">
-                        <span>{{ labels.quickView }}</span>
+            <button class="primary-btn quick-view-btn primary qvButton quickview-btn" type="button" data-mz-product-data="{% json_attribute model %}" data-toggle="modal" data-target="{{ model.productCode }}"
+                {% if not themeSettings.enableQuickView %} style="display: none;" {% endif %}>
+                    <span>{{ labels.quickView }}</span>
                 </button>
-            {% endif %}
             {% endblock product-image %}
         </div>
         <a class="mz-productlisting-title visible-xs" href='{% make_url "product" model %}'>{{model.content.productName|safe}}</a>
-        <!--Color Swatch-->
-        {% for option in model.options %}
-            {% if option.attributeFQN=="tenant~color" and option.values.length!=0 %}
-                <div class="ml-product-swatch">
-                    <div class="row">
-                        <ul>
-                            {% include "modules/facets/facet-color" with allfacets=option.values parent=option isListing="true" as_parameter %}
-                        </ul>
-                    </div>
-                </div>
-            {% endif %}
-        {% endfor %}
     </div>
     <div class="mz-productlisting-info">
         <div class="ml-product-info-wrapper">
             <a class="mz-productlisting-title hidden-xs" href='{% make_url "product" model %}'>{{model.content.productName|safe}}</a>
-            {% if model.content.productShortDescription and themeSettings.listProductShortDesc %}
-            <p class="mz-productlisting-shortdesc">{{ model.content.productShortDescription|truncatewords(themeSettings.maxProductSummaryWords)|safe }}</p>
-            {% endif %}
+            {% comment %}
+                {% if model.content.productShortDescription and themeSettings.listProductShortDesc %}
+                <p class="mz-productlisting-shortdesc">
+                    {{ model.content.productShortDescription|truncatewords(themeSettings.maxProductSummaryWords)|safe }}</p>
+                {% endif %}
+            {% endcomment %}
+
             {% block product-code %}
-            {% if themeSettings.listProductCode %}
-            <div class="mz-productlisting-productcode">#{{model.productCode}}</div>
+            {% if themeSettings.listProductCode or pageContext.search.query %}
+                {% if model.productType|lower  == 'simple' %}
+                    <div class="mz-productlisting-productcode" style="display: block;">#{{model.productCode}}</div>
+                {% endif %}
             {% endif %}
             {% endblock product-code %}
             {% block product-extrainfo %}
@@ -55,8 +48,17 @@
         <div class="ml-product-price-wrapper">
             {% include "modules/product/price-stack" %}
         </div>
-        <div class="mz-directory-ratings">
-            {% include "modules/product/product-ratings" %}
+        <!--Color Swatch-->
+        {% comment %}
+        {% for option in model.options %}
+        {% if option.attributeFQN=="tenant~volume-color-style" and option.values.length!=0 %}
+        <div class="ml-product-swatch">
+          <ul>
+            {% include "modules/facets/facet-color" with allfacets=option.values parent=option isListing="true" as_parameter %}
+          </ul>
         </div>
+        {% endif %}
+        {% endfor %}
+        {% endcomment %}
     </div>
 </div>
