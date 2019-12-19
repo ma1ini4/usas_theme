@@ -3,12 +3,12 @@
     <div class="col-sm-12 mz-reset-padding-left">
     	<p class="col-md-5 col-sm-12 mz-reset-padding-left confirmation-text">{{ labels.confirmationText }}</p>
         <i id="mz-print-content-confirmation" class="mz-reset-padding-left fa fa-print pull-right text-right" title="print"  aria-hidden="true" data-mz-print-order></i>
-    </div>
+    </div> 
 
     <p class="confirmation-text">{{ labels.yourOrderNumber|string_format(model.orderNumber)|safe }}</p>
     <div class="mz-l-stack">
         <div class="flex">
-
+            
             {% if model.hasDirectShip %}
             <div class="mz-l-stack-section">
                 <h4 class="mz-l-stack-sectiontitle">{{ labels.shippingInformation }}</h4>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="mz-l-stack-item">
                     <small>{{ labels.shippingMethod }}</small>
-                    <div>{{ model.fulfillmentInfo.shippingMethodName|replace("FedEx ", "") }}</div>
+                    <div>{{ model.fulfillmentInfo.shippingMethodName }}</div>
                 </div>
             </div>
             {% endif %}
@@ -45,7 +45,7 @@
             </div>
             {% endif %}
             {% endfor %}
-
+            
             <div class="mz-l-stack-section">
                 <h4 class="mz-l-stack-sectiontitle">{{ labels.payments }}</h4>
                 {% if model.total == 0 %}
