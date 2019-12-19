@@ -32,15 +32,6 @@
                 </ul>
             </nav>
 
-            <nav class="mz-scrollnav affix-top" id="account-nav" data-mz-scrollnav="body">
-                <ul class="mz-scrollnav-list nav">
-                    <li class="mz-scrollnav-item">
-                        <a class="mz-scrollnav-link" href="/myaccount#Users">
-                            <span class="nav-item" data-mz-action="handlePaneSelect" data-mz-index="5">Users</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
             {% if siteContext.generalSettings.isWishlistCreationEnabled %}
             <nav class="mz-scrollnav affix-top" id="account-nav" data-mz-scrollnav="body">
                 <ul class="mz-scrollnav-list nav">

@@ -1,5 +1,5 @@
 <div>
-			{{model.paymentType}} : 
+			{{model.paymentType|replace("Check", "PO#")}} :
 			
 			{% if model.billingInfo.card.cardNumberPartOrMask %}
 				{{ model.billingInfo.card.cardNumberPartOrMask }}
