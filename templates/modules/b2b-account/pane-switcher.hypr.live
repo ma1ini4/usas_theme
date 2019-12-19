@@ -6,7 +6,7 @@
        <div class="mz-l-sidebar col-xs-12 col-sm-4 col-md-3">
            <div id="mzPaneSwitcherNav" class="mz-pane-switcher-nav mz-myaccount-nav">
                {% for pane in model.panes %}
-               <nav class="mz-scrollnav affix-top" id="account-nav" data-mz-scrollnav="body">
+               <nav class="mz-scrollnav affix-top b2b-pane-{{pane.name|slugify}}" id="account-nav" data-mz-scrollnav="body">
                 <ul class="mz-scrollnav-list nav">
                     <li class="mz-scrollnav-item" data-mz-action="handlePaneSelect" data-mz-index="{{forloop.index}}">
                         <a class="mz-scrollnav-link" href="/myaccount#{{pane.name}}">
