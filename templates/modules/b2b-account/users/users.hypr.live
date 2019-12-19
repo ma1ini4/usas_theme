@@ -2,8 +2,8 @@
 <div class="mz-l-stack-section" style="clear:none">
   <h3 class="mz-l-stack-sectiontitle">Users
     {% if model.hasRequiredBehavior %}
-      <a data-mz-action="addNewUser">Add User</a>
     {% endif %}
+    <a data-mz-action="addNewUser">Add User</a>
   </h3>
   <div class="mz-b2baccount-users {% if not model.hasRequiredBehavior %} has-required-behavior{% endif %}">
   </div>

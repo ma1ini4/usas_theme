@@ -85,6 +85,18 @@ define([
       // This call is gluttonous and should be replaced with a call to users with filter params for
       // the user IDs we need.
       var b2bAccount = new B2BAccountModels.b2bAccount({id: require.mozuData('user').accountId});
+      var b2bUser = new B2BAccountModels.b2bUser({
+          userId: require.mozuData('user').userId,
+          accountId: require.mozuData('user').accountId
+      });
+
+      b2bUser.apiGetUserRoles().then(function (res) {
+        var isAdmin = _.filter(res.data.items, function(item) { return item.roleId === 1; });
+        
+        if (!isAdmin.length) {
+            $('#mzPaneSwitcherNav').addClass('has-required-behavior');
+        }
+      });
       return b2bAccount.apiGetUsers().then(function(users){
           var strippedDownUsers = _.map(users.data.items, function(user){
              return {
