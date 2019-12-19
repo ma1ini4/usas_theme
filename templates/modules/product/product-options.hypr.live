@@ -26,7 +26,11 @@
                 {% if option.attributeDetail.name == "OTHER" %}
                     Select Option</label>
                 {% else %}
-                    Select a {{ option.attributeDetail.name }}
+                    {% if option.attributeDetail.name == "Serial number" %}
+                        Add a {{ option.attributeDetail.name }}
+                    {% else %}
+                        Select a {{ option.attributeDetail.name }}
+                    {% endif %}
                 {% endif %}
                 </label>
             {% endif %}
