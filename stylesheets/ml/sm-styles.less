@@ -583,9 +583,22 @@
 			 font-size: : 20px;
 		}
 	}
-	#b2c-orders {
+	#b2c-orders, #b2b-orders {
 		.mz-orderlisting {
 			min-height: unset
 		}
+	}
+	#b2b-orders .mz-orderlisting{
+		position: inherit;
+	}
+	.sap-order-list-header {
+    float: left;
+    clear: both;
+	}
+	a.sap-submit-order{
+		 font-size: 20px;
+		float: right;
+		padding: 10px;
+		cursor: pointer;
 	}
 }

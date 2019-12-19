@@ -289,6 +289,22 @@
       "userCreatable": false
     },
     {
+      "id": "b2b-submit-non-sap-orders",
+      "documentType": "web_page",
+      "entityType": "webpage",
+      "template": "b2b-submit-non-sap-orders",
+      "title": "USAS B2B SAP Orders",
+      "userCreatable": false
+    },
+    {
+      "id": "b2b-sap-update-form",
+      "documentType": "web_page",
+      "entityType": "webpage",
+      "template": "b2b-sap-update-form",
+      "title": "USAS B2B SAP Form",
+      "userCreatable": false
+    },
+    {
       "id": "blank-page",
       "documentType": "web_page",
       "entityType": "webpage",
@@ -975,6 +991,7 @@
     "xiInterceptQATokenizeURL": "https://qaapp02.xisecurenet.com/diecomm/Ajax",
     "xiInterceptTokenizeURL": "https://prdapp02.xisecurenet.com/diecomm/Ajax",
     "userConvertCustomerSegment": "Admin",
+    "sapOrderNumberAttribute": "tenant~sap-order-number",
     "usStates": [
       {
         "abbreviation": "AL",
