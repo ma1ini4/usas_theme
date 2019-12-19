@@ -41,10 +41,8 @@ require([
           OrderStatusApi.OrderStatusDetail.getOrderStatusDetail({
             orderNumber: params.orderNumber
           }).then(function (data) {
-            console.log(params.orderNumber);
             if (data) {
               var orderStatusModel = new OrderStatusModels.SapOrderStatus(data);
-              console.log('SapOrderStatus ', orderStatusModel);
               var ccOrderStatusView = new OrderStatusView({
                 el: $('#order-status-detail'),
                 model: orderStatusModel,
