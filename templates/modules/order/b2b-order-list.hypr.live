@@ -1,13 +1,16 @@
 {% if model.items.length > 0 %}
 <div>
   <div class="sap-order-list-header"><h4 class="mz-l-stack-sectiontitle">{{labels.nonSapOrders}}</h4></div>
-  <div><a data-mz-submit-orders href="#" class="sap-submit-order">{{labels.resubmitOrderToSAP}}</a></div>
+  <div><a data-mz-submit-orders href="#" class="sap-submit-order mz-button mz-button-medium mz-login-button">{{labels.resubmitOrderToSAP}}</a></div>
 </div>
 <ul class="mz-orderlist">
     {% for order in model.items %}
     <li>{% include "modules/order/b2b-order-listing" with model=order %}</li>
     {% endfor %}
   </ul>
+<div>
+  <div><a data-mz-submit-orders href="#" class="sap-submit-order mz-button mz-button-medium mz-login-button">{{labels.resubmitOrderToSAP}}</a></div>
+</div>
 {% else %}
   <div class="sap-order-list-header">{{labels.orderEmptyList}}</div>
 {% endif%}
