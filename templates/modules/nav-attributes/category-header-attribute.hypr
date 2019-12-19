@@ -11,7 +11,7 @@
 			{% endif %}
 		{% endif %}
 		{% if var == "m1a" %}
-			{% if entityModel.heading1a != '' %}
+			{% if entityModel.heading1a != '' and entityModel.heading1a != ' ' and entityModel.heading1a != '&nbsp;' %}
 				<div class="panel">
 					<div class="panel-heading">
 						<h4 class="panel-title-sub-nolink">
@@ -22,7 +22,7 @@
 			{% endif %}
 		{% endif %}
 		{% if var == "m1b" %}
-			{% if entityModel.heading1b != '' %}
+			{% if entityModel.heading1b != '' and entityModel.heading1b != ' ' and entityModel.heading1b != '&nbsp;' %}
 				<div class="panel">
 					<div class="panel-heading">
 						<h4 class="panel-title-sub-nolink"></h4>
@@ -48,7 +48,7 @@
 			{% endif %}
 		{% endif %}
 		{% if var == "m2a" %}
-			{% if entityModel.heading2a != '' %}		
+			{% if entityModel.heading2a != '' and entityModel.heading2a != ' ' and entityModel.heading2a != '&nbsp;' %}		
 				<div class="panel">
 					<div class="panel-heading">
 						<h4 class="panel-title-sub-nolink"></h4>
@@ -64,7 +64,7 @@
 			{% endif %}
 		{% endif %}
 		{% if var == "m2b" %}
-			{% if entityModel.heading2b != '' %}
+			{% if entityModel.heading2b != '' and entityModel.heading2b != ' ' and entityModel.heading2b != '&nbsp;' %}
 				<div class="panel">
 					<div class="panel-heading">
 						<h4 class="panel-title-sub-nolink"></h4>
@@ -89,8 +89,8 @@
 					<span class="sub-level-heading">{{ entityModel.heading3b|safe}}</span>
 			{% endif %}
 		{% endif %}
-		{% if var == "m2a" %}
-			{% if entityModel.heading3a != '' %}		
+		{% if var == "m3a" %}
+			{% if entityModel.heading3a != '' and entityModel.heading3a != ' ' and entityModel.heading3a != '&nbsp;' %}		
 				<div class="panel">
 					<div class="panel-heading">
 						<h4 class="panel-title-sub-nolink"></h4>
@@ -106,7 +106,7 @@
 			{% endif %}
 		{% endif %}
 		{% if var == "m3b" %}
-			{% if entityModel.heading3b != '' %}
+			{% if entityModel.heading3b != '' and entityModel.heading3b != ' ' and entityModel.heading3b != '&nbsp;' %}
 				<div class="panel">
 					<div class="panel-heading">
 						<h4 class="panel-title-sub-nolink"></h4>
@@ -132,7 +132,7 @@
 			{% endif %}
 		{% endif %}
 		{% if var == "m4a" %}
-			{% if entityModel.heading4a != '' %}		
+			{% if entityModel.heading4a != '' and entityModel.heading4a != ' ' and entityModel.heading4a != '&nbsp;' %}		
 				<div class="panel">
 					<div class="panel-heading">
 						<h4 class="panel-title-sub-nolink"></h4>
@@ -148,7 +148,7 @@
 			{% endif %}
 		{% endif %}
 		{% if var == "m4b" %}
-			{% if entityModel.heading4b != '' %}
+			{% if entityModel.heading4b != '' and entityModel.heading4b != ' ' and entityModel.heading4b != '&nbsp;' %}
 				<div class="panel">
 					<div class="panel-heading">
 						<h4 class="panel-title-sub-nolink"></h4>
