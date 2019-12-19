@@ -1,11 +1,11 @@
 <div>
-			{{model.paymentType}} : 
-			
-			{% if model.billingInfo.card.cardNumberPartOrMask %}
-				{{ model.billingInfo.card.cardNumberPartOrMask }}
-			{% else %} 
-				{{ model.billingInfo.check.checkNumber }}
-			{% endif %}
-			for {{ model.amountRequested|floatformat(2)|currency }}
+	{% if model.status == "New" %}
+		{{model.paymentType|replace("Check", "PO#")}} :
+		{% if model.billingInfo.card.cardNumberPartOrMask %}
+			{{ model.billingInfo.card.cardNumberPartOrMask }}
+		{% else %} 
+			{{ model.billingInfo.check.checkNumber }}
+		{% endif %}
+		for {{ model.amountRequested|floatformat(2)|currency }}
+	{% endif %}
 </div>
-
