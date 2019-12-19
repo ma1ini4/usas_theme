@@ -680,5 +680,6 @@
   "sapOrderNumber": "SAP Order Number",
   "nonSapOrders": "Order without SAP Order Number",
   "resubmitOrderToSAP": "Submit all orders to SAP",
-  "orderEmptyList": "There are no orders to process"
+  "orderEmptyList": "There are no orders to process",
+  "convertB2cToB2b": "Order Conversion List"
 }
