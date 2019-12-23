@@ -266,10 +266,12 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
                             var price = "";
                             if(typeof me.get('price').get('priceType') != 'undefined'){
                                 var sp_price = "";
-                                if(typeof me.get('price').get('salePrice') != 'undefined')
+                                if(typeof me.get('price').get('salePrice') != 'undefined') {
                                     sp_price = me.get('price').get('salePrice');
-                                else
+                                } else {
                                     sp_price = me.get('price').get('price');
+                                }
+                                me.set('hasPriceRange', false);
                                 price = Hypr.engine.render("{{price|currency}}",{ locals: { price: sp_price }});
                             }else{
                                 //If price is in a range
@@ -295,6 +297,8 @@ define(["modules/jquery-mozu", "underscore", "modules/backbone-mozu", "hyprlive"
                             me.handleMixedVolumePricingTransitions(apiModel.data);
                         }
                         me.trigger('optionsUpdated');
+                     }, function(err) {
+                         console.log(err);
                      });
             } else {
                 this.isLoading(false);
