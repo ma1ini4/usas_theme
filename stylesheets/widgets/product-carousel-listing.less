@@ -119,7 +119,7 @@
       align-items: center;
       width: 100%;
       max-height: 65px;
-      min-height: 35px;
+      // min-height: 35px;
       height: 100%;
       padding: 7px 2px;
       border: none;
@@ -159,6 +159,15 @@
       }
       .mz-price.is-saleprice {
         color: @primaryColor;
+      }
+      @media @mobile {
+        .mz-price {
+          font-size: 16px;
+        }
+
+        .mz-price.is-crossedout {
+          font-size: 14px;
+        }
       }
     }
   }
