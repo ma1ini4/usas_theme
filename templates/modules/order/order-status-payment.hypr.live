@@ -1,5 +1,5 @@
 <div>
-	{% if model.status == "New" %}
+	{% if model.status != "Voided" and model.status != "Declined" %}
 		{{model.paymentType|replace("Check", "PO#")}} :
 		{% if model.billingInfo.card.cardNumberPartOrMask %}
 			{{ model.billingInfo.card.cardNumberPartOrMask }}
