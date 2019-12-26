@@ -8,10 +8,12 @@
         <span itemprop="maxPrice" class="mz-pricestack-price-upper">
             {% include "modules/common/price" with model=model.priceRange.upper %}
         </span>
+        <span class="hidden" itemprop="priceCurrency">USD</span>
     {% else %}
         <span class="not-range">
         {% include "modules/common/price" with model=model.price %}
         </span>
         {% include "modules/product/price-discount" with model=model.price %}
     {% endif %}
+
 </div>

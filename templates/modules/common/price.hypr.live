@@ -5,15 +5,19 @@
 <span class="is-ranged mz-price is-crossedout">
 	{{model.price|currency}}
 </span>
-<span itemprop="price" class="mz-price is-saleprice">
+<span class="mz-price is-saleprice">
+    <span class="hidden" itemprop="price">{{model.salePrice}}</span>
+    <span class="hidden" itemprop="priceCurrency">USD</span>
     {{model.salePrice|currency}}
     {% if model.priceType == "MAP" %}
     <div>add to cart to see final price</div>
     {% endif %}
 </span>
 {% else %}
-<span itemprop="price" class="mz-price">
-{{model.price|currency}}
+<span class="mz-price">
+    <span class="hidden" itemprop="price">{{model.price}}</span>
+    <span class="hidden" itemprop="priceCurrency">USD</span>
+    {{model.price|currency}}
     {% if model.priceType == "MAP" %}
     <div>add to cart to see final price</div>
     {% endif %}

@@ -1,5 +1,5 @@
 <div class="mz-productdetail-shortdesc mz-l-stack-section">
-  <span itemscope="description" itemprop="description">{{ model.content.productShortDescription|safe }}</span>
+  <span itemprop="description">{{ model.content.productShortDescription|safe }}</span>
 </div>
 {% if model.stockInfo %}
 <!-- <div class="stock-info">{{ labels.upcInStock }}
@@ -29,6 +29,9 @@
   {% if model.productType != themeSettings.familyProductType %}
       <div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="mz-productdetail-price mz-l-stack-section col-xs-4 col-sm-5 col-md-7 text-left">
         {% include "modules/product/price-stack" %}
+        <span class="hidden" itemprop="priceCurrency">USD</span>
+        <span class="hidden" itemprop="url">{{pageContext.url}}</span>
+        <link itemprop="availability" href="http://schema.org/InStock" />
       </div>
 
       <div class="mz-productdetail-conversion-controls col-xs-8 col-sm-7 col-md-5">
