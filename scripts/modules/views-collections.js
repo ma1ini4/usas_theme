@@ -293,6 +293,7 @@ define([
             var path = getFacet();
             path = decodeURIComponent(path);
             var url= path.replace(new RegExp(facetVal+'\:(.*?)(,|&)', 'g'), '');
+            url = url.replace(',query', '&query');
             if(url[url.length -1]==','){
                 url = url.replace(new RegExp(',$', 'g'), '\&');
 
