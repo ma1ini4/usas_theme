@@ -1613,7 +1613,7 @@
                     var self = this;
                     var xiToken = self.getXIToken(this.parent.get('xiResponsePacket'));
                     var signature = self.getXISignature(this.parent.get('xiResponsePacket'));
-                    if (xiToken && card.get('cardNumber') && !card.get('cardNumber').includes('*')) {
+                    if (xiToken && card.get('cardNumber') && card.get('cardNumber').indexOf('*') > -1) {
                         var $XIPlugin = window.$XIPlugin;
                         var cc = card.get('cardNumber');
                         var name = card.get('nameOnCard');
@@ -2053,7 +2053,7 @@
                 var order = this,
                     errorHandled = false;
                 order.isLoading(false);
-                
+
                 blockUiLoader.unblockUi();
                 if (!error || !error.items || error.items.length === 0) {
                     if (error.message.indexOf('10486') != -1) {
@@ -2437,7 +2437,7 @@
 
                 api.steps(process).then(this.onCheckoutSuccess, this.onCheckoutError);
                 window.checkoutViews.parentView.model.get("fulfillmentInfo").unset('prevoiusSelectedMethod');
-                
+
             },
             update: function() {
                 var j = this.toJSON();
