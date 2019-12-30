@@ -203,7 +203,7 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
             if (qty === 1) {
                 return;
             }
-            this.model.set('quantity',--qty);
+            this.model.updateQuantity(--qty);
             this.render();
             setTimeout(function(){
                 if (typeof window.productView.model.attributes.inventoryInfo.onlineStockAvailable !== "undefined" && window.productView.model.attributes.inventoryInfo.outOfStockBehavior != "AllowBackOrder") {
@@ -224,7 +224,7 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
             if(!$("#plus").hasClass('disabled')){
                 this.model.messages.reset();
                 var qty = this.model.get('quantity');
-                this.model.set('quantity',++qty);
+                this.model.updateQuantity(++qty);
                 this.render();
                 setTimeout(function(){
                     if (typeof window.productView.model.attributes.inventoryInfo.onlineStockAvailable !== "undefined" && window.productView.model.attributes.inventoryInfo.outOfStockBehavior != "AllowBackOrder") {
