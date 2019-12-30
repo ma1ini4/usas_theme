@@ -107,9 +107,9 @@ define(['modules/api',
               return this.displayMessage('Ship To Account ID missing'), false;
             } else {
               if ( payload.shipto.length !== 10  || isNaN( payload.shipto ) ){
-                return this.displayMessage('Ship To Account ID should be a 10-digit value not ending in a 0'), false;
-              } else if (payload.shipto.length === 10 && !isNaN( payload.shipto ) && payload.shipto[payload.shipto.length - 1] === '0'){
-                return this.displayMessage('Ship To Account ID  should be a 10-digit value not ending in a 0'), false;
+                return this.displayMessage('Ship To Account ID should be a 10-digit value not ending with 0000'), false;
+              } else if (payload.shipto.length === 10 && !isNaN(payload.shipto) && payload.shipto.slice(payload.shipto.length - 4, payload.shipto.length) === '0000') {
+                return this.displayMessage('Ship To Account ID  should be a 10-digit value not ending with 0000'), false;
               }
             }
             if (!payload.pricelist) return this.displayMessage('Pricelist Code missing'), false;
