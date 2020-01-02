@@ -213,22 +213,36 @@ function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollecti
     });
 
     var WishlistsMozuGrid = MozuGrid.extend({
-      render: function(){
-          var self = this;
-        //   this.populateWithUsers();
-          MozuGrid.prototype.render.apply(self, arguments);
-      },
-      populateWithUsers: function(){
-          var self = this;
-          self.model.get('items').models.forEach(function(list){
-              var userInQuestion = window.b2bUsers.find(function(user){
-                  return (user.userId === list.get('userId'));
-              });
-              list.set('fullName', userInQuestion.firstName+' '+userInQuestion.lastName);
-          });
-          return self.model;
-      }
-    });
+        render: function(){
+            var self = this;
+            this.filterItemsByUserId();
+            MozuGrid.prototype.render.apply(self, arguments);
+        },
+        filterItemsByUserId: function () {
+            var self = this,
+                currentUser = require.mozuData('user').userId,
+                filteredItems = [];
+            console.log(self.model.get('items'));
+            filteredItems = self.model.get('items').filter(function (item) {
+                console.log(item.get('userId'), currentUser);
+                return item.get('userId') === currentUser;
+            });
+            console.log(filteredItems);
+            // self.model.set('items', filteredItems);
+            console.log(self);
+            return self;
+        },
+        populateWithUsers: function(){
+            var self = this;
+            self.model.get('items').models.forEach(function(list){
+                var userInQuestion = window.b2bUsers.find(function(user){
+                    return (user.userId === list.get('userId'));
+                });
+                list.set('fullName', userInQuestion.firstName+' '+userInQuestion.lastName);
+            });
+            return self.model;
+        }
+        });
 
     var WishlistsView = Backbone.MozuView.extend({
         templateName: 'modules/b2b-account/wishlists/my-wishlists',
