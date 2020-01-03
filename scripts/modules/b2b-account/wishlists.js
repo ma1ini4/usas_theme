@@ -16,7 +16,7 @@ define([
   "modules/backbone-pane-switcher",
   "modules/product-picker/product-modal-view",
   "modules/mozu-utilities",
-  "modules/message-handler", 
+  "modules/message-handler",
   'modules/block-ui'
 ],
 function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollection, PagingViews, ProductModels, WishlistModels, SearchAutoComplete, CartModels, ProductPicker, PaneSwitcher, ProductModalViews, MozuUtilities, MessageHandler, blockUiLoader) {
@@ -309,7 +309,10 @@ function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollecti
                 self.model.isLoading(true);
                 api.get('cart').then(function(cart) {
                     var url = '/pricelist/runSchedule?quoteId=' + quoteId + '&customerId=' + customerId + '&cartId=' + cart.data.id + '&userId=' + require.mozuData('user').userId;
-    
+                    var  userId = require.mozuData('user').userId;
+                    //var userQuoteId = (quoteId + '-' + userId).substring(0,30);
+                    var userQuoteId = (quoteId + '-' + userId);
+                    console.log('userQuoteId', userQuoteId);
                     self.model.set('isEditMode', true);
                     $.ajax({
                         url: url,
@@ -317,7 +320,8 @@ function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollecti
                         success: function (res) {
                             setTimeout(function () {
                                 self.render();
-                                self.findQuoteByNumber(customerId, quoteId);
+
+                                self.findQuoteByNumber(customerId, userQuoteId);
                             }, 500);
                         },
                         error: function(err) {
@@ -325,7 +329,7 @@ function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollecti
                                 blockUiLoader.unblockUi();
 
                                 self.model.isLoading(false);
-                                self.findQuoteByNumber(customerId, quoteId);
+                                self.findQuoteByNumber(customerId, userQuoteId);
                                 self.render();
                             }, 500);
                         }
@@ -635,7 +639,11 @@ function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollecti
             {
                 index: 'name',
                 displayName: 'Quote Number',
-                sortable: true
+                sortable: true,
+                displayTemplate: function (name) {
+                  var startUserId = name.lastIndexOf('-');
+                  return name.substring(0,startUserId);
+                }
             },
             {
                 index: 'auditInfo',
@@ -701,17 +709,22 @@ function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollecti
                 window.views.currentPane.model.setEditMode(true);
                 window.views.currentPane.render();
             } else {
-              $('[data-mz-action="viewQuote"]').trigger('click',[ row.get('name') ]);
+              var startUserId = row.get('name').lastIndexOf('-');
+              var name = row.get('name').substring(0,startUserId);
+              $('[data-mz-action="viewQuote"]').trigger('click',[ name ]);
             }
         },
         addWishlistToCart: function (e, row) {
             row.addToCart();
         },
         copyWishlist: function (e, row) {
-            var wishlistName = 'copy - ' + row.get('name');
-            row.set('name', wishlistName);
-            row.set('userId', require.mozuData('user').userId);
-            window.views.currentPane.copyWishlist(row);
+          var startUserId = row.get('name').lastIndexOf('-');
+          var name = row.get('name').substring(0,startUserId);
+          var wishlistName = 'copy - ' + name;
+
+          row.set('name', wishlistName);
+          row.set('userId', require.mozuData('user').userId);
+          window.views.currentPane.copyWishlist(row);
         }
     });
 
