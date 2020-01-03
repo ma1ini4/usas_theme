@@ -228,7 +228,7 @@ function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollecti
                 return item.get('userId') === currentUser;
             });
             console.log(filteredItems);
-            // self.model.set('items', filteredItems);
+            self.model.set('items', filteredItems);
             console.log(self);
             return self;
         },
@@ -308,7 +308,7 @@ function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollecti
                 blockUiLoader.globalLoader();
                 self.model.isLoading(true);
                 api.get('cart').then(function(cart) {
-                    var url = '/pricelist/runSchedule?quoteId=' + quoteId + '&customerId=' + customerId + '&cartId=' + cart.data.id;
+                    var url = '/pricelist/runSchedule?quoteId=' + quoteId + '&customerId=' + customerId + '&cartId=' + cart.data.id + '&userId=' + require.mozuData('user').userId;
     
                     self.model.set('isEditMode', true);
                     $.ajax({
