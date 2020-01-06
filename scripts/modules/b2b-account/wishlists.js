@@ -216,20 +216,29 @@ function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollecti
         render: function(){
             var self = this;
             this.filterItemsByUserId();
+            this.filterItemsWithPrefixes();
             MozuGrid.prototype.render.apply(self, arguments);
+        },
+        filterItemsWithPrefixes: function () {
+            var self = this,
+                invalidPrefix = 'upd-',
+                filteredItems = [];
+
+            filteredItems = self.model.get('items').filter(function (item) {
+                return item.get('name').indexOf(invalidPrefix) === -1;
+            });
+            self.model.set('items', filteredItems);
+            return self;
         },
         filterItemsByUserId: function () {
             var self = this,
                 currentUser = require.mozuData('user').userId,
                 filteredItems = [];
-            console.log(self.model.get('items'));
+
             filteredItems = self.model.get('items').filter(function (item) {
-                console.log(item.get('userId'), currentUser);
                 return item.get('userId') === currentUser;
             });
-            console.log(filteredItems);
             self.model.set('items', filteredItems);
-            console.log(self);
             return self;
         },
         populateWithUsers: function(){
