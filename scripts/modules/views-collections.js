@@ -174,6 +174,9 @@ define([
         }
          function updateUi(response) {
             var url = response.canonicalUrl;
+            if (url.indexOf(url.length - 1) !== "&") {
+                url = url + '&';
+            }
             if (url && url.substr(url.length - 2) === '&&')
                 url = url.substring(0, url.length - 1);
             _$body.html(response.body);
@@ -292,11 +295,13 @@ define([
             var facetVal = _self.attr("data-clear-text");
             var path = getFacet();
             path = decodeURIComponent(path);
+            if (path[path.length - 1] !== '&' && path[path.length - 1] !== ',') {
+                path = path + '&';
+            }
             var url= path.replace(new RegExp(facetVal+'\:(.*?)(,|&)', 'g'), '');
             url = url.replace(',query', '&query');
             if(url[url.length -1]==','){
                 url = url.replace(new RegExp(',$', 'g'), '\&');
-
             }
             var parser = document.createElement('a');
             parser.href = url;
