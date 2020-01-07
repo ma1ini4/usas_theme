@@ -89,12 +89,11 @@ define([
           userId: require.mozuData('user').userId,
           accountId: require.mozuData('user').accountId
       });
-
       b2bUser.apiGetUserRoles().then(function (res) {
         var isAdmin = _.filter(res.data.items, function(item) { return item.roleId === 1; });
         
-        if (!isAdmin.length) {
-            $('#mzPaneSwitcherNav').addClass('has-required-behavior');
+        if (isAdmin.length) {
+            $('#mzPaneSwitcherNav').removeClass('has-required-behavior');
         }
       });
       return b2bAccount.apiGetUsers().then(function(users){
