@@ -600,12 +600,28 @@
         "value": "Alaska"
       },
       {
+        "key": "AS",
+        "value": "American Samoa"
+      },
+      {
         "key": "AZ",
         "value": "Arizona"
       },
       {
         "key": "AR",
         "value": "Arkansas"
+      },
+      {
+        "key": "AA",
+        "value": "Armed Forces Americas"
+      },
+      {
+        "key": "AE",
+        "value": "Armed Forces Europe"
+      },
+      {
+        "key": "AP",
+        "value": "Armed Forces Pacific"
       },
       {
         "key": "CA",
@@ -628,12 +644,20 @@
         "value": "District Of Columbia"
       },
       {
+        "key": "FM",
+        "value": "Federated States Of Micronesia"
+      },
+      {
         "key": "FL",
         "value": "Florida"
       },
       {
         "key": "GA",
         "value": "Georgia"
+      },
+      {
+        "key": "GU",
+        "value": "Guam"
       },
       {
         "key": "HI",
@@ -670,6 +694,10 @@
       {
         "key": "ME",
         "value": "Maine"
+      },
+      {
+        "key": "MH",
+        "value": "Marshall Islands"
       },
       {
         "key": "MD",
@@ -732,6 +760,10 @@
         "value": "North Dakota"
       },
       {
+        "key": "MP",
+        "value": "Northern Mariana Islands"
+      },
+      {
         "key": "OH",
         "value": "Ohio"
       },
@@ -742,6 +774,10 @@
       {
         "key": "OR",
         "value": "Oregon"
+      },
+      {
+        "key": "PW",
+        "value": "Palau"
       },
       {
         "key": "PA",
@@ -778,6 +814,10 @@
       {
         "key": "VT",
         "value": "Vermont"
+      },
+      {
+        "key": "VI",
+        "value": "Virgin Islands"
       },
       {
         "key": "VA",
@@ -962,6 +1002,10 @@
         "name": "Alaska"
       },
       {
+        "abbreviation": "AS",
+        "name": "American Samoa"
+      },
+      {
         "abbreviation": "AZ",
         "name": "Arizona"
       },
@@ -990,12 +1034,20 @@
         "name": "District Of Columbia"
       },
       {
+        "abbreviation": "FM",
+        "name": "Federated States Of Micronesia"
+      },
+      {
         "abbreviation": "FL",
         "name": "Florida"
       },
       {
         "abbreviation": "GA",
         "name": "Georgia"
+      },
+      {
+        "abbreviation": "GU",
+        "name": "Guam"
       },
       {
         "abbreviation": "HI",
@@ -1098,6 +1150,10 @@
         "name": "North Dakota"
       },
       {
+        "abbreviation": "MP",
+        "name": "Northern Mariana Islands"
+      },
+      {
         "abbreviation": "OH",
         "name": "Ohio"
       },
@@ -1108,6 +1164,10 @@
       {
         "abbreviation": "OR",
         "name": "Oregon"
+      },
+      {
+        "abbreviation": "PW",
+        "name": "Palau"
       },
       {
         "abbreviation": "PA",
@@ -1144,6 +1204,10 @@
       {
         "abbreviation": "VT",
         "name": "Vermont"
+      },
+      {
+        "abbreviation": "VI",
+        "name": "Virgin Islands"
       },
       {
         "abbreviation": "VA",
