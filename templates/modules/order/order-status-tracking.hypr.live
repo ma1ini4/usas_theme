@@ -5,6 +5,12 @@
   <div>
     <p class="mz-tracking-title">{{labels.orderStatusTrackings}}</p>
     <span>{{model.shippingMethod|replace("FedEx")}} - </span>
-      <span><a href="{{model.itemTrackingCarrierURL}}">{{model.trackingNumber}}</a></span>
+      <span>
+        {% if model.trackingNumber != "Shipment pending" %}
+        <a href="https://www.fedex.com/apps/fedextrack/?tracknumbers={{model.trackingNumber}}" target="_blank">{{model.trackingNumber}}</a>
+        {% else %}
+          {{model.trackingNumber}}
+        {% endif %}
+      </span>
   </div>
 </div>
