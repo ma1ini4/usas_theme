@@ -8,7 +8,13 @@
             <div class="mz-order-status-section-subheading">
                 Order Information
             </div>
-            <div>{{ labels.orderDetailNumber }}: <strong><span> {{ model.orderNumber }}</span></strong> </div>
+            <div>{{ labels.orderDetailNumber }}: <strong><span> 
+                {% if model.sapOrderNumber %}
+                    {{ model.sapOrderNumber }}
+                {% else %}
+                    {{ model.orderNumber }}
+                {% endif %}
+            </span></strong> </div>
             <div>{{ labels.orderDetailDate }}: <span>{{model.creationDate|date("F j, Y") }}</span></div>
             <div>{{ labels.orderDetailStatus }}: <strong><span> {{ model.status }}</span></strong> </div>
       </div>
