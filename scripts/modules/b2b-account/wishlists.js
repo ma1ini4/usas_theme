@@ -221,7 +221,7 @@ function ($, api, _, Hypr, Backbone, HyprLiveContext, MozuGrid, MozuGridCollecti
         },
         filterItemsWithPrefixes: function () {
             var self = this,
-                invalidPrefix = 'upd-',
+                invalidPrefix = 'up-',
                 filteredItems = [];
 
             filteredItems = self.model.get('items').filter(function (item) {
