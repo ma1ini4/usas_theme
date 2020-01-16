@@ -960,6 +960,7 @@
     "recaptchaType": "Invisible",
     "requireCheckoutAgreeToTerms": true,
     "returnsInfo": "Return Item",
+    "resetPaymentData" : true,
     "searchExpandOnFocus": true,
     "searchStorePlaceHolder": "Enter City, State or ZIP",
     "showAddressTypeDropdown": false,
