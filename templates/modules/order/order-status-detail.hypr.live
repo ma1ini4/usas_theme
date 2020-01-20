@@ -4,11 +4,17 @@
       <h4 class="mz-l-stack-sectiontitle">{{ labels.orderInformation }}</h4>
     </div>
     <div class="mz-order-status-section">
-        <div class="col-sm-6">
+        <div class="col-sm-12">
             <div class="mz-order-status-section-subheading">
                 Order Information
             </div>
-            <div>{{ labels.orderDetailNumber }}: <strong><span> {{ model.orderNumber }}</span></strong> </div>
+            <div>{{ labels.orderDetailNumber }}: <strong><span> 
+                {% if model.sapOrderNumber %}
+                    {{ model.sapOrderNumber }}
+                {% else %}
+                    {{ model.orderNumber }}
+                {% endif %}
+            </span></strong> </div>
             <div>{{ labels.orderDetailDate }}: <span>{{model.creationDate|date("F j, Y") }}</span></div>
             <div>{{ labels.orderDetailStatus }}: <strong><span> {{ model.status }}</span></strong> </div>
       </div>
@@ -33,7 +39,7 @@
               {% for payment in model.payments %}
                 {% include "modules/order/order-status-payment" with model=payment %}
               {% endfor %}
-          {% endif %}   
+          {% endif %}
       </div>
   </div>
   <div class="mz-order-status-section">
@@ -41,7 +47,7 @@
         <div class="mz-order-status-section-subheading">
             Shipping information
         </div>
-        {% include "modules/order/order-status-shipto-info" with model=model.shippingAddress %}        
+        {% include "modules/order/order-status-shipto-info" with model=model.shippingAddress %}
     </div>
     <div class="col-sm-6">
         <div class="mz-order-status-section-subheading">

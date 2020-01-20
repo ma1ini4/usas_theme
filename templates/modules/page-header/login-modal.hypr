@@ -12,6 +12,7 @@
                 <div class="tab-pane active" id="login">
                     <form name="login" onsubmit="return false">
                     <p class="login-text">Login with an email address and password.</p>
+                    <p class="login-text"><strong>First time logging into our new site? Please register as a New Shopper.</strong></p>
                     <div class="input-group">
                         <span class="input-group-addon glyphicon glyphicon-envelope" aria-hidden="true" id="email"></span>
                         <input type="email" class="form-control" data-mz-login-email placeholder="{{ labels.emailAddress }}" aria-describedby="basic-addon1" maxlength="{{themeSettings.emailLength}}">

@@ -1,5 +1,12 @@
+{% if model.items.length > 0 %}
+<div>
+  <div class="sap-order-list-header"><h4 class="mz-l-stack-sectiontitle">{{labels.convertB2cToB2b}}</h4></div>
+</div>
 <ul class="mz-orderlist">
     {% for order in model.items %}
     <li>{% include "modules/order/b2c-order-listing" with model=order %}</li>
     {% endfor %}
   </ul>
+{% else %}
+    <div class="sap-order-list-header">{{labels.orderEmptyList}}</div>
+  {% endif%}

@@ -7,7 +7,7 @@
 
 {% block body-content %}
 
-{% require_script "pages/category" %}
+{% require_script "pages/clp-category" %}
 
 <div data-mz-category="{{model.categoryId}}" class="mz-l-container">
     <div class="row flex">
@@ -40,11 +40,11 @@
             {% endblock breadcrumbs %}
             {% dropzone "parent-category-page-top" scope="page" %}
               <div class="category-grid">
-                <div class="row">
+                <!-- <div class="row"> -->
                   {% with categories|find(model.categoryId) as cat %}
                     {% for subcat in cat.childrenCategories %}
                       {% if subcat.isDisplayed %}
-                        <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="grid-item">
                           <div class="category-grid-subcat">
                             <div class="category-grid-subcat-image">
                               {% if subcat.content.categoryImages %}
@@ -70,7 +70,7 @@
                       {% endif %}
                     {% endfor %}
                   {% endwith %}
-                </div>
+                <!-- </div> -->
               </div>
             {% dropzone "parent-category-page-bottom" scope="page" %}
         </div>

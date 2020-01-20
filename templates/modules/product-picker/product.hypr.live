@@ -12,7 +12,7 @@
             {% if model.content.productShortDescription and themeSettings.showProductDetailShortDesc %}
             <div class="mz-productdetail-shortdesc mz-l-stack-section">
                 <h4 class="mz-l-stack-sectiontitle">{{ labels.shortDesc }}</h4>
-                <span itemscope="description">{{ model.content.productShortDescription|safe }}</span>
+                <span>{{ model.content.productShortDescription|safe }}</span>
             </div>
             {% endif %} {% if model.options and model.options.length > 0 %}
             <div class="mz-productdetail-options mz-l-stack-section">
@@ -100,77 +100,7 @@
                 </dl>
             </div>
             {% endif %} 
-            <!-- {% if model.measurements and themeSettings.showProductDetailMeasurements and not model.bundledProducts %}
-            <div class="mz-productdetail-measurements mz-l-stack-section">
-                <h4 class="mz-l-stack-sectiontitle">{{ labels.measurements }}</h4>
-                <dl class="mz-propertylist mz-propertylist-justified">
-                    <dt>{{ labels.weight }}</dt>
-                    <dd itemprop="weight" itemscope itemtype="http://schema.org/QuantitativeValue">
-                        <span itemprop="value">{{ model.measurements.packageWeight.value }}</span>
-                        <span itemprop="unitCode">{{ model.measurements.packageWeight.unit }}</span>
-                    </dd>
 
-                    <dt>{{ labels.length }}</dt>
-                    <dd itemprop="length" itemscope itemtype="http://schema.org/QuantitativeValue">
-                        <span itemprop="value">{{ model.measurements.packageLength.value }}</span>
-                        <span itemprop="unitCode">{{ model.measurements.packageLength.unit }}</span>
-                    </dd>
-
-                    <dt>{{ labels.width }}</dt>
-                    <dd itemprop="width" itemscope itemtype="http://schema.org/QuantitativeValue">
-                        <span itemprop="value">{{ model.measurements.packageWidth.value }}</span>
-                        <span itemprop="unitCode">{{ model.measurements.packageWidth.unit }}</span>
-                    </dd>
-
-                    <dt>{{ labels.height }}</dt>
-                    <dd itemprop="height" itemscope itemtype="http://schema.org/QuantitativeValue">
-                        <span itemprop="value">{{ model.measurements.packageHeight.value }}</span>
-                        <span itemprop="unitCode">{{ model.measurements.packageHeight.unit }}</span>
-                    </dd>
-
-                </dl>
-            </div> -->
-
-
-<!-- 
-            {% endif %} {% if themeSettings.showProductDetailMeasurements and model.bundledProducts %}
-            <div class="mz-productdetail-measurements mz-l-stack-section">
-                <h4 class="mz-l-stack-sectiontitle">{{ labels.measurements }}</h4>
-
-                {% for product in model.bundledProducts %} {% if product.measurements %}
-                <div class="mz-productbundle-measurements-product">
-                    <span class="mz-productbundle-measurements-productname">{{ product.content.productName }}</span>
-                    <span> x {{ product.quantity }}</span>
-                </div>
-                <dl class="mz-propertylist mz-propertylist-justified mz-propertylist-inline">
-                    <dt>{{ labels.weight }}</dt>
-                    <dd itemprop="weight" itemscope itemtype="http://schema.org/QuantitativeValue">
-                        <span itemprop="value">{{ product.measurements.packageWeight.value }}</span>
-                        <span itemprop="unitCode">{{ product.measurements.packageWeight.unit }}</span>
-                    </dd>
-
-                    <dt>{{ labels.length }}</dt>
-                    <dd itemprop="length" itemscope itemtype="http://schema.org/QuantitativeValue">
-                        <span itemprop="value">{{ product.measurements.packageLength.value }}</span>
-                        <span itemprop="unitCode">{{ product.measurements.packageLength.unit }}</span>
-                    </dd>
-
-                    <dt>{{ labels.width }}</dt>
-                    <dd itemprop="width" itemscope itemtype="http://schema.org/QuantitativeValue">
-                        <span itemprop="value">{{ product.measurements.packageWidth.value }}</span>
-                        <span itemprop="unitCode">{{ product.measurements.packageWidth.unit }}</span>
-                    </dd>
-
-                    <dt>{{ labels.height }}</dt>
-                    <dd itemprop="height" itemscope itemtype="http://schema.org/QuantitativeValue">
-                        <span itemprop="value">{{ product.measurements.packageHeight.value }}</span>
-                        <span itemprop="unitCode">{{ product.measurements.packageHeight.unit }}</span>
-                    </dd>
-
-                </dl>
-                {% endif %} {% endfor %}
-            </div>
-            {% endif %} -->
         </div>
     </div>
 </div>

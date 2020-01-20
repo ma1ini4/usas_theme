@@ -250,13 +250,18 @@
         },
         {
             "xtype": "panel",
-            "title": "Suppress CVV During Express Checkout",
+            "title": "Checkout",
             "collapsed": false,
             "items": [
                 {
                     "xtype": "mz-input-checkbox",
                     "name": "isCvvSuppressed",
-                    "fieldLabel": "CVV Suppressed"
+                    "fieldLabel": "Suppress CVV During Express Checkout"
+                },
+                {
+                    "xtype": "mz-input-checkbox",
+                    "name": "resetPaymentData",
+                    "fieldLabel": "Reset Payment Data"
                 }
             ]
         },

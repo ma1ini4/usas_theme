@@ -1,6 +1,6 @@
 
 <div class="wishlist-edit-form">
-    
+
     <!-- {% if not model.quickOrder %}
     <div class="wishlist-edit-form-section">
         <span class="productpicker-label">{{labels.b2bWishlistName}}</span>
@@ -20,15 +20,14 @@
             <span class="productpicker-label">{{labels.b2bQuantity}}</span>
             <div class="flex">
                 <input type="number" name="pickerItemQuantity" id="pickerItemQuantity" data-mz-value="pickerItemQuantity" value="{{ model.pickerItemQuantity }}">
-                <button class="primary-btn" data-mz-action="addWishlistItem" {% if productNotSelected %} disabled {% endif %}>Add To List</button>                
+                <button class="primary-btn" data-mz-action="addWishlistItem" {% if productNotSelected %} disabled {% endif %}>Add To List</button>
             </div>
             <span class="mz-validationmessage" data-mz-validationmessage-for="pickerItemQuantity"></span>
         </div>
 
     </div> -->
     <div class="clear"></div>
-    <h3 class="mz-l-stack-sectiontitle">{{ model.name }}</h3>
-
+    <h3 class="mz-l-stack-sectiontitle">{{ model.name|replace(pageContext.user.userId,'userId')|replace('-userId','')}}</h3>
     <div class="mz-b2b-wishlist-list">
         {% include "modules/b2b-account/wishlists/wishlist-list" %}
     </div>

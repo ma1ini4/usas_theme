@@ -203,7 +203,7 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
             if (qty === 1) {
                 return;
             }
-            this.model.set('quantity',--qty);
+            this.model.updateQuantity(--qty);
             this.render();
             setTimeout(function(){
                 if (typeof window.productView.model.attributes.inventoryInfo.onlineStockAvailable !== "undefined" && window.productView.model.attributes.inventoryInfo.outOfStockBehavior != "AllowBackOrder") {
@@ -224,7 +224,7 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
             if(!$("#plus").hasClass('disabled')){
                 this.model.messages.reset();
                 var qty = this.model.get('quantity');
-                this.model.set('quantity',++qty);
+                this.model.updateQuantity(++qty);
                 this.render();
                 setTimeout(function(){
                     if (typeof window.productView.model.attributes.inventoryInfo.onlineStockAvailable !== "undefined" && window.productView.model.attributes.inventoryInfo.outOfStockBehavior != "AllowBackOrder") {
@@ -281,6 +281,7 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
                         setTimeout(function() {
                             if (window.productView.model.get('variationProductCode') && typeof window.productView.model.get('variationProductCode') !== "undefined") {
                                 $(".mz-productcodes-productcode").text(Hypr.getLabel('item')+" #" + window.productView.model.get('variationProductCode'));
+                                $this.render();
                             }
                             $('.mz-productdetail-price.prize-mobile-view').html($('.mz-l-stack-section.mz-productdetail-conversion .mz-productdetail-price').html());
                             blockUiLoader.unblockUi();
@@ -298,6 +299,7 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
                                 $(".mz-productcodes-productcode").text(Hypr.getLabel('item') + " #" + window.productView.model.get('variationProductCode'));
                             }
                             $('.mz-productdetail-price.prize-mobile-view').html($('.mz-l-stack-section.mz-productdetail-conversion .mz-productdetail-price').html());
+                            $this.render();
                             blockUiLoader.unblockUi();
                             $this.isColorClicked = false;
                         }, 1000);
@@ -319,10 +321,12 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
             if (option) {
                 if (option.get('attributeDetail').inputType === "YesNo") {
                     option.set("value", isPicked);
+                    me.render();
                 } else if (isPicked) {
                     oldValue = option.get('value');
                     if (oldValue !== newValue && !(oldValue === undefined && newValue === '')) {
                         option.set('value', newValue);
+                        me.render();
                     }
                 }
             }

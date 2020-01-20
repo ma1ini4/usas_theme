@@ -31,7 +31,7 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
             slidesPerView: 2,
             spaceBetween: 10
           },
-          320: {
+          420: {
             slidesPerView: 1,
             spaceBetween: 10
           }
@@ -65,7 +65,7 @@ define(['shim!vendor/typeahead.js/typeahead.bundle[modules/jquery-mozu=jQuery]>j
       minSlides = 3;
     } else if (width <= 640 && width > 320) {
       minSlides = 2;
-    } else if (width <= 320) {
+    } else if (width <= 420) {
       minSlides = 1;
     }
 

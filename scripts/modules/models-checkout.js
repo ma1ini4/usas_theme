@@ -1245,14 +1245,16 @@
                         cardBillingContact = card && customer.get('contacts').get(card.get('contactId'));
                     if (card) {
                         me.get('billingContact').set(cardBillingContact.toJSON(), { silent: true });
-                        me.get('card').set(card.toJSON());
-                        me.set('paymentType', 'CreditCard');
-                        me.set('usingSavedCard', true);
-                        if (Hypr.getThemeSetting('isCvvSuppressed')) {
-                            me.get('card').set('isCvvOptional', true);
-                            if (me.parent.get('amountRemainingForPayment') > 0) {
-                                return me.applyPayment();
-                            }
+                        //if (!true ) { //USASNGI-840
+                          me.get('card').set(card.toJSON());
+                          me.set('paymentType', 'CreditCard');
+                          me.set('usingSavedCard', true);
+                          if (Hypr.getThemeSetting('isCvvSuppressed')) {
+                              me.get('card').set('isCvvOptional', true);
+                              if (me.parent.get('amountRemainingForPayment') > 0) {
+                                  return me.applyPayment();
+                              }
+                          //}
                         }
                     }
                 },
@@ -1433,15 +1435,21 @@
                         //set purchaseOrder defaults here.
                         me.setPurchaseOrderInfo();
                         me.getPaymentTypeFromCurrentPayment();
+                        var resetCreditCardInfo = Hypr.getThemeSetting('resetPaymentData'); //USASNGI-840: reset credit card info
+                        if( !resetCreditCardInfo ){
+                          var savedCardId = me.get('card.paymentServiceCardId');
+                          me.set('savedPaymentMethodId', savedCardId, { silent: true });
+                          me.setSavedPaymentMethod(savedCardId);
 
-                        var savedCardId = me.get('card.paymentServiceCardId');
-                        me.set('savedPaymentMethodId', savedCardId, { silent: true });
-                        me.setSavedPaymentMethod(savedCardId);
-
-                        if (!savedCardId) {
+                          if (!savedCardId ) {
+                              me.setDefaultPaymentType(me);
+                          }
+                        } else {  //USASNGI-840: reset credit card info
+                            me.get('card').clear();
+                            me.set('usingSavedCard', false);
+                            me.unset('savedPaymentMethodId');
                             me.setDefaultPaymentType(me);
                         }
-
                         me.on('change:usingSavedCard', function(me, yes) {
                             if (!yes) {
                                 me.get('card').clear();
@@ -1494,8 +1502,11 @@
 
                         me.set('paymentType', 'CreditCard');
                         me.selectPaymentType(me, 'CreditCard');
-                        if (me.savedPaymentMethods() && me.savedPaymentMethods().length > 0) {
-                            me.set('usingSavedCard', true);
+                        var resetSavedPaymentData = Hypr.getThemeSetting('resetPaymentData'); //USASNGI-840
+                        if (!resetSavedPaymentData) {
+                          if (me.savedPaymentMethods() && me.savedPaymentMethods().length > 0) {
+                              me.set('usingSavedCard', true);
+                          }
                         }
                     }
                 },
@@ -1613,7 +1624,7 @@
                     var self = this;
                     var xiToken = self.getXIToken(this.parent.get('xiResponsePacket'));
                     var signature = self.getXISignature(this.parent.get('xiResponsePacket'));
-                    if (xiToken && card.get('cardNumber') && !card.get('cardNumber').includes('*')) {
+                    if (xiToken && card.get('cardNumber') && card.get('cardNumber').indexOf('*') > -1) {
                         var $XIPlugin = window.$XIPlugin;
                         var cc = card.get('cardNumber');
                         var name = card.get('nameOnCard');
@@ -2053,7 +2064,7 @@
                 var order = this,
                     errorHandled = false;
                 order.isLoading(false);
-                
+
                 blockUiLoader.unblockUi();
                 if (!error || !error.items || error.items.length === 0) {
                     if (error.message.indexOf('10486') != -1) {
@@ -2437,7 +2448,7 @@
 
                 api.steps(process).then(this.onCheckoutSuccess, this.onCheckoutError);
                 window.checkoutViews.parentView.model.get("fulfillmentInfo").unset('prevoiusSelectedMethod');
-                
+
             },
             update: function() {
                 var j = this.toJSON();
