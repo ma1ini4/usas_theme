@@ -30,7 +30,7 @@ define(['modules/jquery-mozu', 'modules/api'], function($, api) {
             if (canonical) {
                 canonical = removePartialParam(canonical);
             } else {
-                canonical = window.location.origin + url;
+                canonical = url;
             }
             deferred.resolve({
                 canonicalUrl: canonical,
