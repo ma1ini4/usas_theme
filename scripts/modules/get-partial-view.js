@@ -23,13 +23,14 @@ define(['modules/jquery-mozu', 'modules/api'], function($, api) {
     }
 
     return function getPartialView(url, partialTemplate) {
-
         var deferred = api.defer();
 
         function handleSuccess(body, __, res) {
             var canonical = res.getResponseHeader('x-vol-canonical-url');
             if (canonical) {
                 canonical = removePartialParam(canonical);
+            } else {
+                canonical = window.location.origin + url;
             }
             deferred.resolve({
                 canonicalUrl: canonical,
