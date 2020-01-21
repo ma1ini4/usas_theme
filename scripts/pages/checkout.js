@@ -341,10 +341,11 @@ require(["modules/jquery-mozu",
 
             if (customer.get('accountType') == "B2B") {
                 var sameAddress =  me.model.get('isSameBillingShippingAddress'),
-                    paymentType = me.model.get('paymentType');
+                    paymentType = me.model.get('paymentType'),
+                    userEmail = require.mozuData('user').email;
 
                 // me.$('.mz-contact-selector-b2b-note').removeClass('hidden');
-                me.$('#billing-email').parents('.mz-l-stack-section.mz-formfieldgroup-row.mz-paymentselector-separator.mz-checkoutform').hide();
+                me.$('#billing-email').val(userEmail);
                 me.$('[data-mz-value="isSameBillingShippingAddress"]').parent().hide();
 
                 if (!sameAddress && paymentType === 'Check') {
@@ -358,6 +359,47 @@ require(["modules/jquery-mozu",
 
             if (this.$(".p-button").length > 0)
                 PayPal.loadScript();                
+        },
+        next: function() {
+            var me = this;
+            var user = require.mozuData('user');
+            var apiData = require.mozuData('apicontext');
+            var billingEmail = me.model.get('billingContact.email');
+
+            if(billingEmail !== user.email) {
+                $.ajax({
+                    url: '/api/commerce/customer/accounts/' + user.accountId,
+                    headers: apiData.headers,
+                    method: 'GET',
+                    success: function (data) {
+                        if (data.accountType === "B2B") {
+                            $.ajax({
+                                url: '/api/commerce/customer/b2baccounts/' + user.accountId + '/users',
+                                headers: apiData.headers,
+                                method: 'GET',
+                                success: function(b2bUsers) {
+                                    var currentB2bUser = b2bUsers.items.find(function(b2buser) {
+                                        return b2buser.emailAddress === user.email;
+                                    });
+    
+                                    currentB2bUser.emailAddress = billingEmail;
+                                    currentB2bUser.userName = billingEmail;
+    
+                                    $.ajax({
+                                        url: '/api/commerce/customer/b2baccounts/' + user.accountId + '/user/' + currentB2bUser.userId,
+                                        headers: apiData.headers,
+                                        method: 'PUT',
+                                        data: currentB2bUser
+                                    });
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+
+            CheckoutStepView.prototype.next.apply(this, arguments);
+            
         },
         updateAcceptsMarketing: function(e) {
             this.model.getOrder().set('acceptsMarketing', $(e.currentTarget).prop('checked'));
