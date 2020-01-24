@@ -1448,7 +1448,8 @@
                             me.get('card').clear();
                             me.set('usingSavedCard', false);
                             me.unset('savedPaymentMethodId');
-                            me.setDefaultPaymentType(me);
+                            me.set('paymentType', 'CreditCard');
+                            me.selectPaymentType(me, 'CreditCard');
                         }
                         me.on('change:usingSavedCard', function(me, yes) {
                             if (!yes) {
@@ -1502,13 +1503,11 @@
 
                         me.set('paymentType', 'CreditCard');
                         me.selectPaymentType(me, 'CreditCard');
-                        var resetSavedPaymentData = Hypr.getThemeSetting('resetPaymentData'); //USASNGI-840
-                        if (!resetSavedPaymentData) {
-                          if (me.savedPaymentMethods() && me.savedPaymentMethods().length > 0) {
-                              me.set('usingSavedCard', true);
-                          }
+                        if (me.savedPaymentMethods() && me.savedPaymentMethods().length > 0) {
+                            me.set('usingSavedCard', true);
                         }
-                    }
+                      }
+                  }
                 },
                 calculateStepStatus: function() {
                     var fulfillmentComplete = this.parent.get('fulfillmentInfo').stepStatus() === 'complete',
