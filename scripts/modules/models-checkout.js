@@ -1507,7 +1507,6 @@
                             me.set('usingSavedCard', true);
                         }
                       }
-                  }
                 },
                 calculateStepStatus: function() {
                     var fulfillmentComplete = this.parent.get('fulfillmentInfo').stepStatus() === 'complete',
