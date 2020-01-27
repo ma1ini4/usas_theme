@@ -512,7 +512,13 @@
                                 me.isLoading(false);
                                 blockUiLoader.unblockUi();
                                 me.calculateStepStatus();
-                                me.parent.get('billingInfo').calculateStepStatus();
+                                var billingInfo = me.parent.get('billingInfo');
+                                var billingStatus = billingInfo.calculateStepStatus();
+
+                                if(billingStatus === 'incomplete') {
+                                    billingInfo.resetCreditCardInfo(billingInfo);
+                                }
+
                                 if (resetMessage) {
                                     me.parent.messages.reset(me.parent.get('messages'));
                                 }
@@ -1427,6 +1433,14 @@
                     });
                     currentPurchaseOrder.set('paymentTerm', foundTerm, { silent: true });
                 },
+                resetCreditCardInfo: function(me){
+                    me.get('card').clear();
+                    me.set('usingSavedCard', false);
+                    me.unset('savedPaymentMethodId');
+                    me.set('paymentType', 'CreditCard');
+                    me.selectPaymentType(me, 'CreditCard');
+                    window.checkoutViews.steps.paymentInfo.editing.savedCard = true;
+                },
                 initialize: function() {
                     var me = this;
                     this._cachedGiftCards = [];
@@ -1445,11 +1459,7 @@
                               me.setDefaultPaymentType(me);
                           }
                         } else {  //USASNGI-840: reset credit card info
-                            me.get('card').clear();
-                            me.set('usingSavedCard', false);
-                            me.unset('savedPaymentMethodId');
-                            me.set('paymentType', 'CreditCard');
-                            me.selectPaymentType(me, 'CreditCard');
+                            me.resetCreditCardInfo(me);
                         }
                         me.on('change:usingSavedCard', function(me, yes) {
                             if (!yes) {
@@ -1500,7 +1510,6 @@
                         me.set('paymentType', 'PurchaseOrder');
                         me.selectPaymentType(me, 'PurchaseOrder');
                     } else if (!me.get('paymentType', 'check')) {
-
                         me.set('paymentType', 'CreditCard');
                         me.selectPaymentType(me, 'CreditCard');
                         if (me.savedPaymentMethods() && me.savedPaymentMethods().length > 0) {
