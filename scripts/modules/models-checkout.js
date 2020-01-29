@@ -529,8 +529,8 @@
                                     var oBilling = order.get('billingInfo').get('billingContact').toJSON();
                                     order.get('billingInfo').get('billingContact').set(order.get('fulfillmentInfo').get('fulfillmentContact').toJSON());
                                     order.get('billingInfo').get('billingContact').set('email', oBilling.email);
-                                    order.get('billingInfo').trigger('billingContactUpdate');
                                 }
+                                order.get('billingInfo').trigger('billingContactUpdate');
                             });
                     }
                 },
@@ -1436,6 +1436,7 @@
                 resetCreditCardInfo: function(me){
                     me.get('card').clear();
                     me.set('usingSavedCard', false);
+                    me.set('saveCustomerCard', false);
                     me.unset('savedPaymentMethodId');
                     me.set('paymentType', 'CreditCard');
                     me.selectPaymentType(me, 'CreditCard');
@@ -2168,6 +2169,8 @@
                 return this.addCustomerContact('fulfillmentInfo', 'fulfillmentContact', [{ name: 'Shipping' }, { name: 'Billing' }]);
             },
             addCustomerContact: function(infoName, contactName, contactTypes) {
+                console.log(this);
+
                 var customer = this.get('customer'),
                     contactInfo = this.get(infoName),
                     process = [function() {
@@ -2180,9 +2183,13 @@
                         if (orderContact.id === -1 || orderContact.id === 1 || orderContact.id === 'new') {
                             delete orderContact.id;
                         }
+                        console.log(customer);
                         return customer.apiModel.addContact(orderContact).then(function(contactResult) {
                             orderContact.id = contactResult.data.id;
                             return contactResult;
+                        }, function(err) {
+                            console.log(err);
+                            return;
                         });
                     }];
                 var contactInfoContactName = contactInfo.get(contactName);
@@ -2275,6 +2282,9 @@
                     return this.addCustomerContact('billingInfo', 'billingContact', billingContact.types).then(function(contact) {
                         billingContact.id = contact.data.id;
                         return contact;
+                    }, function(err) {
+                        console.log(err);
+                        return;
                     }).then(doSaveCard);
                 } else {
                     return doSaveCard();

@@ -365,7 +365,6 @@ require(["modules/jquery-mozu",
             var user = require.mozuData('user');
             var apiData = require.mozuData('apicontext');
             var billingEmail = me.model.get('billingContact.email');
-
             if(billingEmail !== user.email) {
                 $.ajax({
                     url: '/api/commerce/customer/accounts/' + user.accountId,
@@ -862,6 +861,13 @@ require(["modules/jquery-mozu",
             if (window.amazon)
                 window.amazon.Login.logout();
             window.location = (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + "/checkout/" + checkoutModel.get('id') + "/confirmation";
+        });
+        checkoutModel.on('error', function (error) {
+            console.log(1, error);
+            if(error.message == "The system does not permit the attempted operation.  Not authorized to perform 'CustomerAccount/AddAccountContact'") {
+                $('.mz-messagebar').html();
+                console.log($('.mz-messagebar'));
+            }
         });
         $('body').on('keydown keyup focus blur', '[type="tel"]', function (e) {
             //  maskTel(e);
