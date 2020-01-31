@@ -14,7 +14,10 @@ define(['jquery', 'hyprlive', 'modules/api','underscore'],
               return this.performAction( '/custom/orderRetry', params);
             },*/
             getOrders: function(){
-              return this.performAction( '/custom/b2cOrders');
+                //get startIndex from url
+                var indexRegex = /startIndex=([^&]+)/.exec(window.location.href);
+                var startIndex = indexRegex ? indexRegex[1] : 0;
+                return this.performAction( '/custom/b2cOrders', {startIndex: startIndex});
             },
             performAction: function (serviceurl,  params){
               var apiData = require.mozuData('apicontext');

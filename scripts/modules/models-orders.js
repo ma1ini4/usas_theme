@@ -580,7 +580,8 @@ define(["modules/api", 'underscore', "modules/backbone-mozu", "hyprlive", "modul
         OrderCollection = Backbone.MozuPagedCollection.extend({
             mozuType: 'orders',
             defaults: {
-                pageSize: 5
+                pageSize: 5,
+                startIndex: 0
             },
             relations: {
                 items: Backbone.Collection.extend({
