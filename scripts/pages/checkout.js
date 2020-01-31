@@ -862,13 +862,6 @@ require(["modules/jquery-mozu",
                 window.amazon.Login.logout();
             window.location = (HyprLiveContext.locals.siteContext.siteSubdirectory||'') + "/checkout/" + checkoutModel.get('id') + "/confirmation";
         });
-        checkoutModel.on('error', function (error) {
-            console.log(1, error);
-            if(error.message == "The system does not permit the attempted operation.  Not authorized to perform 'CustomerAccount/AddAccountContact'") {
-                $('.mz-messagebar').html();
-                console.log($('.mz-messagebar'));
-            }
-        });
         $('body').on('keydown keyup focus blur', '[type="tel"]', function (e) {
             //  maskTel(e);
             e.target.value = e.target.value.replace(/(\d{3})\)?(\d{3})\-?(\d{4})/, '($1) $2-$3');

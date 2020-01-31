@@ -522,7 +522,7 @@
                                 if (resetMessage) {
                                     me.parent.messages.reset(me.parent.get('messages'));
                                 }
-
+                                console.log(order.get('billingInfo').get('isSameBillingShippingAddress'));
                                 //In order to resync our billing address with shipping.
                                 //Not a great fix, look into correcting.
                                 if (order.get('billingInfo').get('isSameBillingShippingAddress')) {
@@ -2169,12 +2169,11 @@
                 return this.addCustomerContact('fulfillmentInfo', 'fulfillmentContact', [{ name: 'Shipping' }, { name: 'Billing' }]);
             },
             addCustomerContact: function(infoName, contactName, contactTypes) {
-                console.log(this);
 
                 var customer = this.get('customer'),
                     contactInfo = this.get(infoName),
                     process = [function() {
-
+  
                         // Update contact if a valid contact ID exists
                         if (orderContact.id && orderContact.id > 0) {
                             return customer.apiModel.updateContact(orderContact);
@@ -2183,15 +2182,18 @@
                         if (orderContact.id === -1 || orderContact.id === 1 || orderContact.id === 'new') {
                             delete orderContact.id;
                         }
-                        console.log(customer);
-                        return customer.apiModel.addContact(orderContact).then(function(contactResult) {
-                            orderContact.id = contactResult.data.id;
-                            return contactResult;
-                        }, function(err) {
-                            console.log(err);
-                            return;
-                        });
+
+                        if (customer.get('accountType') === 'B2B' && contactName === 'billingContact') {
+                            return orderContact;
+                        } else {
+                            return customer.apiModel.addContact(orderContact).then(function(contactResult) {
+                                orderContact.id = contactResult.data.id;
+                                return contactResult;
+                            });
+                        }
                     }];
+
+                    
                 var contactInfoContactName = contactInfo.get(contactName);
                 var customerContacts = customer.get('contacts');
 
@@ -2199,6 +2201,7 @@
                     contactInfoContactName.set('accountId', customer.id);
                 }
                 var orderContact = contactInfoContactName.toJSON();
+
                 // if customer doesn't have a primary of any of the contact types we're setting, then set primary for those types
                 if (!this.isSavingNewCustomer()) {
                     process.unshift(function() {
@@ -2282,9 +2285,6 @@
                     return this.addCustomerContact('billingInfo', 'billingContact', billingContact.types).then(function(contact) {
                         billingContact.id = contact.data.id;
                         return contact;
-                    }, function(err) {
-                        console.log(err);
-                        return;
                     }).then(doSaveCard);
                 } else {
                     return doSaveCard();
