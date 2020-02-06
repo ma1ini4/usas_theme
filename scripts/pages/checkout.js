@@ -360,11 +360,61 @@ require(["modules/jquery-mozu",
             if (this.$(".p-button").length > 0)
                 PayPal.loadScript();                
         },
+        validateAddress: function (validationObj) {
+            var me = this;
+            var modelIsValid = [];
+            for (var key in validationObj) {
+                var value = 'billingContact.address.' + key;
+                var keyValue = validationObj[key];
+                var input = me.$el.find('[data-mz-value="' + value + '"]');
+
+                console.log(key, input.val());
+                if (key === 'stateOrProvince') {
+                    input = me.$el.find('select[data-mz-value="' + value + '"]');
+
+                    if (input.find('option:selected').val() && input.find('option:selected').val().length) {
+                        modelIsValid.push(true);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text('');
+                    } else {
+                        modelIsValid.push(false);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text(keyValue.msg);
+                    }
+                }
+                if (key === 'postalOrZipCode') {
+                    input = me.$el.find('[name="postal-code"][data-mz-value="' + value + '"]');
+                    if ((keyValue[1].pattern).test(input.val())) {
+                        modelIsValid.push(true);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text('');
+                    } else {
+                        modelIsValid.push(false);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text(keyValue[1].msg);
+                    }
+                }
+                if (keyValue.required) {
+                    if (input.val() && input.val().length > 0) {
+                        modelIsValid.push(true);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text('');
+                    } else {
+                        modelIsValid.push(false);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text(keyValue.msg);
+                    }
+                }
+            }
+            return modelIsValid.indexOf(false) !== -1 ? false : true;
+        },
         next: function() {
             var me = this;
             var user = require.mozuData('user');
             var apiData = require.mozuData('apicontext');
             var billingEmail = me.model.get('billingContact.email');
+            console.log(me.model.get('billingContact'));
+            // var billingAddressIsValid = this.get('billingContact').get('address').address2Validation();
+            var billingAddressIsValid = me.validateAddress(me.model.get('billingContact').get('address').validation);
+            console.log(billingAddressIsValid);
+
+            if (!billingAddressIsValid) {
+                return false;
+            }
             if(billingEmail !== user.email) {
                 $.ajax({
                     url: '/api/commerce/customer/accounts/' + user.accountId,
