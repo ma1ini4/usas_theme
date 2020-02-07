@@ -74,11 +74,18 @@
         {% include "modules/common/coupon-code-field" %}
       </div>
       {% endif %}
-      <div class="col-xs-12 col-sm-8 pull-right mz-button-bottom-cart">
+      <div class="col-xs-12 col-sm-12 pull-right mz-button-bottom-cart">
       {% if  themeSettings.showemptyBasket %}
        {% if not model.isEmpty %}<span class="mz-empty-cart-link-container"><button class="font-large button_promotional" href="javascript:;" data-mz-action="empty">{{ labels.emptyCart }}</button></span>{% endif %}
        {% endif %}
-      <div class="mz-common-button-padding pull-right">
+
+        <div class="pull-left">
+          <a href="/" class="mz-button font-large primary-btn">
+            Continue Shopping
+          </a>
+        </div>
+
+      <div class="pull-right">
 
           {% if not user.isAuthenticated %}
             <a id="cart-checkout-login" class="mz-button font-large primary-btn">

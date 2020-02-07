@@ -442,6 +442,18 @@
 
     .mz-button-bottom-cart {
         margin-top: 5px;
+
+        @media @mobile {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            flex-direction: column;
+
+            .pull-left {
+                order: 2;
+                margin: 20px 0 0;
+            }
+        }
     }
 
     .mz-carttable-shipping-row {
