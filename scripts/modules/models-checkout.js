@@ -522,7 +522,7 @@
                                 if (resetMessage) {
                                     me.parent.messages.reset(me.parent.get('messages'));
                                 }
-                                console.log(order.get('billingInfo').get('isSameBillingShippingAddress'));
+
                                 //In order to resync our billing address with shipping.
                                 //Not a great fix, look into correcting.
                                 if (order.get('billingInfo').get('isSameBillingShippingAddress')) {
@@ -1621,7 +1621,6 @@
                     if (this.get('paymentType').toLowerCase() === "purchaseorder") {
                         this.get('purchaseOrder').inflateCustomFields();
                     }
-
                     if (this.get('paymentType').toLowerCase() === "creditcard") {
                         this.doXiInterceptTokenizationCall(currentPayment, order, card);
                     } else {
@@ -1632,7 +1631,8 @@
                     var self = this;
                     var xiToken = self.getXIToken(this.parent.get('xiResponsePacket'));
                     var signature = self.getXISignature(this.parent.get('xiResponsePacket'));
-                    if (xiToken && card.get('cardNumber') && card.get('cardNumber').indexOf('*') > -1) {
+
+                    if (xiToken && card.get('cardNumber')) {
                         var $XIPlugin = window.$XIPlugin;
                         var cc = card.get('cardNumber');
                         var name = card.get('nameOnCard');
