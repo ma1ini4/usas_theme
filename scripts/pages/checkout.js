@@ -368,7 +368,6 @@ require(["modules/jquery-mozu",
                 var keyValue = validationObj[key];
                 var input = me.$el.find('[data-mz-value="' + value + '"]');
 
-                console.log(key, input.val());
                 if (key === 'stateOrProvince') {
                     input = me.$el.find('select[data-mz-value="' + value + '"]');
 
@@ -407,10 +406,10 @@ require(["modules/jquery-mozu",
             var user = require.mozuData('user');
             var apiData = require.mozuData('apicontext');
             var billingEmail = me.model.get('billingContact.email');
-            console.log(me.model.get('billingContact'));
-            // var billingAddressIsValid = this.get('billingContact').get('address').address2Validation();
-            var billingAddressIsValid = me.validateAddress(me.model.get('billingContact').get('address').validation);
-            console.log(billingAddressIsValid);
+            var billingAddressIsValid = true;
+            if (!me.model.get('isSameBillingShippingAddress')) {
+                billingAddressIsValid = me.validateAddress(me.model.get('billingContact').get('address').validation);
+            }
 
             if (!billingAddressIsValid) {
                 return false;
