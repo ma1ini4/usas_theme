@@ -118,6 +118,7 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
             "click [data-mz-product-option-attribute]": "onOptionChangeAttribute",
             "click [data-mz-qty-minus]": "quantityMinus",
             "click [data-mz-qty-plus]": "quantityPlus",
+            'blur .mz-productdetail-qty': "enterQuantity",
             'mouseenter .color-options': 'onMouseEnterChangeImage',
             'mouseleave .color-options': 'onMouseLeaveResetImage'
         },
@@ -196,6 +197,11 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
                 $('.mz-productimages-main').addClass('hidden-xs');
             }
 
+        },
+        enterQuantity: function(e){
+            var qty = $(e.currentTarget).val();
+
+            this.model.updateQuantity(qty);
         },
         quantityMinus: function() {
             this.model.messages.reset();

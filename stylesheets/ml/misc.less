@@ -2796,7 +2796,7 @@ ul.tabs {
             }
         }
 
-        input[type=text] {
+        input[type=text], input[type=number] {
             border: none;
             border: 1px solid @colorDetailPageControlGrey;
             height: 34px;
@@ -2807,6 +2807,14 @@ ul.tabs {
             border-radius: 8px;
             margin-left: 5px;
             margin-right: 5px;
+
+            -moz-appearance:textfield;
+
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
         }
 
     }

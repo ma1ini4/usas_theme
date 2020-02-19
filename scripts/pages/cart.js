@@ -25,7 +25,8 @@ define(['modules/api',
         templateName: "modules/cart/cart-table",
         additionalEvents: {
             "click [data-mz-qty-minus]": "quantityMinus",
-            "click [data-mz-qty-plus]": "quantityPlus"
+            "click [data-mz-qty-plus]": "quantityPlus",
+            'blur .mz-productdetail-qty': "enterQuantity"
         },
         initialize: function () {
             this.pickerDialog = this.initializeStorePickerDialog();
@@ -113,6 +114,17 @@ define(['modules/api',
                 item.saveQuantity();
             }
         },400),
+        enterQuantity: _.debounce(function(e) {
+            var $qField = $(e.currentTarget),
+              newQuantity = parseInt($qField.val(), 10),
+              id = $qField.data('mz-cart-item'),
+              item = this.model.get("items").get(id);
+
+            if (item && !isNaN(newQuantity)) {
+              item.set('quantity', newQuantity);
+              item.saveQuantity();
+            }
+        }, 400),
         onQuantityUpdateFailed: function(model, oldQuantity) {
             var field = this.$('[data-mz-cart-item=' + model.get('id') + ']');
             if (field) {
