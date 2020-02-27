@@ -1,6 +1,7 @@
 ﻿    <table class="mz-ordersummary" cellpadding="1" width="100%">
         <thead>
             <tr>
+                <td bgcolor="#666666"><font color="#ffffff">#</font></td>
                 <td bgcolor="#666666" class="mz-ordersummary-header-product"><font color="#ffffff">{{ labels.product }}</font></td>
                 <td bgcolor="#666666" class="mz-ordersummary-header-qty"><font color="#ffffff">{{ labels.qty }}</font></td>
                 <td bgcolor="#666666" class="mz-ordersummary-header-each"><font color="#ffffff">{{ labels.each }}</font></td>
@@ -10,6 +11,9 @@
         {% for item in model.items %}
             <tbody class="mz-ordersummary-lineitems">
               <tr class="mz-ordersummary-line mz-ordersummary-line-item {% if item.discountTotal > 0 %}is-discounted{% endif %}">
+                    <td>
+                      {{forloop.index}}
+                    </td>
                     <td class="mz-ordersummary-item-product">
                       {{ item.product.name }}
                       {% if item.product.productUsage == 'Bundle' %}
