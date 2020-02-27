@@ -401,17 +401,40 @@ require(["modules/jquery-mozu",
             }
             return modelIsValid.indexOf(false) !== -1 ? false : true;
         },
+        validatePhoneNumber: function(validationObj) {
+            var me = this;
+            var modelIsValid = [];
+            for (var key in validationObj) {
+                var value = 'billingContact.phoneNumbers.' + key;
+                var keyValue = validationObj[key];
+                var input = me.$el.find('[data-mz-value="' + value + '"]');
+
+                if (keyValue[0].required) {
+                    if (input.val() && input.val().length >= keyValue[1].minLength && input.val().length <= keyValue[1].maxLength) {
+                        modelIsValid.push(true);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text('');
+                    } else {
+                        modelIsValid.push(false);
+                        input.next('[data-mz-validationmessage-for="' + value + '"]').text(keyValue[1].msg);
+                    }
+                }
+            }
+            return modelIsValid.indexOf(false) !== -1 ? false : true;
+        },
         next: function() {
             var me = this;
             var user = require.mozuData('user');
             var apiData = require.mozuData('apicontext');
             var billingEmail = me.model.get('billingContact.email');
-            var billingAddressIsValid = true;
+            var billingAddressIsValid = true,
+                billingPhoneNumberIsValid = true;
+
             if (!me.model.get('isSameBillingShippingAddress')) {
                 billingAddressIsValid = me.validateAddress(me.model.get('billingContact').get('address').validation);
+                billingPhoneNumberIsValid = me.validatePhoneNumber(me.model.get('billingContact').get('phoneNumbers').validation);
             }
 
-            if (!billingAddressIsValid) {
+            if (!billingAddressIsValid || !billingPhoneNumberIsValid) {
                 return false;
             }
             if(billingEmail !== user.email) {
