@@ -431,7 +431,7 @@ require(["modules/jquery-mozu",
                                     });
     
                                     currentB2bUser.emailAddress = billingEmail;
-                                    currentB2bUser.userName = billingEmail;
+                                    // currentB2bUser.userName = billingEmail;
     
                                     $.ajax({
                                         url: '/api/commerce/customer/b2baccounts/' + user.accountId + '/user/' + currentB2bUser.userId,
