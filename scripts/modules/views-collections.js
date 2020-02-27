@@ -299,7 +299,9 @@ define([
                 path = path + '&';
             }
             var url= path.replace(new RegExp(facetVal+'\:(.*?)(,|&)', 'g'), '');
-            url = url.replace(',query', '&query');
+            if (url.substr(url.indexOf('query') - 1, 1) != '&') {
+                url = url.split('query').join('&query');
+            }
             if(url[url.length -1]==','){
                 url = url.replace(new RegExp(',$', 'g'), '\&');
             }
