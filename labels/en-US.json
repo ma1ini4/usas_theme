@@ -506,7 +506,7 @@
   "selectBillingAddress": "Select Billing Address",
   "selectPaymentType": "Select a payment type",
   "selectPurchaseOrderPaymentTerm": "Select a Payment Term",
-  "selectSavedAddress": "Select a saved address",
+  "selectSavedAddress": "Please Select a Shipping Address",
   "selectSavedCreditCard": "Select a credit card",
   "selectSavedPaymentMethod": "Select a saved payment method",
   "selectStore": "Select Store",

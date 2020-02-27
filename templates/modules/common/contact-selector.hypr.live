@@ -7,9 +7,7 @@
         <span class="mz-contact-selector-b2b-note">{{ labels.b2bCheckoutAddressNote }}</span>
       {% endif %}
       <select id="mz--contactselector-savedcontact" class="mz-contactselector" data-mz-value="{{ contactcontext }}contactId" name="contactId" >
-        {% if not model.isB2B %}
           <option>{{labels.selectSavedAddress}}</option>
-        {% endif %}
 
         {% for contact in model.contacts %}
           {% if contact.types|findwhere("name", "Shipping") %}
