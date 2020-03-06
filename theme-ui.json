@@ -807,6 +807,11 @@
             "collapsed": false,
             "items": [
                 {
+                    "xtype": "mz-input-checkbox",
+                    "name": "requirePasswordSpecialChar",
+                    "fieldLabel": "Require special symbol in password"
+                },
+                {
                     "xtype": "mz-input-textarea",
                     "name": "returnsInfo",
                     "fieldLabel": "Returns Description"

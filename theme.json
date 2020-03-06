@@ -959,6 +959,7 @@
     "recaptchaTheme": "light",
     "recaptchaType": "Invisible",
     "requireCheckoutAgreeToTerms": true,
+    "requirePasswordSpecialChar": false,
     "returnsInfo": "Return Item",
     "resetPaymentData" : true,
     "searchExpandOnFocus": true,

@@ -582,7 +582,7 @@ function ($, api, Hypr, _, HyprLiveContext,placeHolder, backbone) {
                 return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordDigit', passMinLen)), false;
             } else if (payload.password.search(/[a-zA-Z]/) == -1) {
                 return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordLetter', passMinLen)), false;
-            } else if (payload.password.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\-\+\.\,\;\:]/) != -1) {
+            } else if (Hypr.getThemeSetting('requirePasswordSpecialChar') && payload.password.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\-\+\.\,\;\:\?\\\[\]\{\}\=]/) === -1) {
                 return (LoginPopover.prototype).newdisplayMessage(el, Hypr.getLabel('passwordSpecial', passMinLen)), false;
             }
             return true;
