@@ -174,7 +174,7 @@ function ($, backbone, Hypr, hyprlivecontext) {
             $('#' + customId).find('input[required]:visible, textarea[required]:visible, select[required] option:selected').each(function () {
                 console.log(this);
                 if ($(this).val() || $(this).val() !== '') {
-                    console.log(this.val());
+                    console.log($(this).val());
 
                     if(this.type === 'email') {
                         isValidEmail = validateEmail($(this).val());
