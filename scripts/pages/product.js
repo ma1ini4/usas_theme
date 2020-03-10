@@ -861,7 +861,7 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
         });
 
         product.on('error', function(err) {
-            if (err.message.indexOf('Could not validate product') !== -1) {
+            if (err.message.indexOf('Could not validate product') !== -1 || err.message.indexOf('Not done configuring') !== -1) {
                 $('.mz-messagebar .is-showing.mz-errors .mz-message-item').text(Hypr.getLabel('pdpInvalidOptionsErr'));
             }
         });
