@@ -248,21 +248,21 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
             }
         },
         onOptionChangeAttribute: function(e) {
-            return this.configureAttribute($(e.currentTarget));
+            return this.configureAttribute($(e.currentTarget), e);
         },
-        configureAttribute: function($optionEl) {
+        configureAttribute: function($optionEl, userEvent) {
             var $this = this;
+            var newValue = $optionEl.data('value'),
+                oldValue,
+                id = $optionEl.data('mz-product-option-attribute'),
+                optionEl = $optionEl[0],
+                isPicked = (optionEl.type !== "checkbox" && optionEl.type !== "radio") || optionEl.checked,
+                option = this.model.get('options').get(id);
             if (!$optionEl.hasClass("active")) {
                 if ($optionEl.attr('disabled') == 'disabled') {
                     return false;
                 } else {
                     blockUiLoader.globalLoader();
-                    var newValue = $optionEl.data('value'),
-                        oldValue,
-                        id = $optionEl.data('mz-product-option-attribute'),
-                        optionEl = $optionEl[0],
-                        isPicked = (optionEl.type !== "checkbox" && optionEl.type !== "radio") || optionEl.checked,
-                        option = this.model.get('options').get(id);
                     if (!option) {
                         var byIDVal = JSON.parse(JSON.stringify(this.model.get('options')._byId));
                         for (var key in byIDVal) {
@@ -299,6 +299,17 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
                 if ($optionEl.attr('disabled') == 'disabled') {
                     return false;
                 } else {
+                    if(userEvent) {
+                        option.unset('value');
+                        var deselectedValues = _.each(option.get('values'), function(value) {
+                            value.isSelected = false;
+                        });
+                        option.set('values', deselectedValues);
+                        // $(".mz-productcodes-productcode").text('');
+                        $this.model.set('variationProductCode', '');
+                        $this.render();
+                    }
+
                     this.model.whenReady(function () {
                         setTimeout(function () {
                             if (window.productView.model.get('variationProductCode') && typeof window.productView.model.get('variationProductCode') !== "undefined") {
@@ -847,6 +858,12 @@ function ($, _, bxslider, elevatezoom, blockUiLoader, Hypr, Backbone, CartMonito
 
         product.on('addedtowishlist', function(cartitem) {
             $('#add-to-wishlist').prop('disabled', 'disabled').text(Hypr.getLabel('addedToWishlist'));
+        });
+
+        product.on('error', function(err) {
+            if (err.message.indexOf('Could not validate product') !== -1) {
+                $('.mz-messagebar .is-showing.mz-errors .mz-message-item').text(Hypr.getLabel('pdpInvalidOptionsErr'));
+            }
         });
 
         initSlider();
