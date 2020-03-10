@@ -74,9 +74,15 @@
                             <li class="mz-message-item">{{ labels.pdpInvalidOptionsErr }}</li>
                         </ul>
                     {% else %}
-                        <ul class="is-showing mz-errors">
-                            <li class="mz-message-item">{{ msg.message }}</li>
-                        </ul>
+                        {% if msg.message == "Validation Error: Seal-Rite® 1.5 mL Microcentrifuge Tubes (1615-5510): Not done configuring" %}
+                            <ul class="is-showing mz-errors">
+                                <li class="mz-message-item">{{ labels.pdpInvalidOptionsErr }}</li>
+                            </ul>
+                        {% else %}
+                            <ul class="is-showing mz-errors">
+                                <li class="mz-message-item">{{ msg.message }}</li>
+                            </ul>
+                        {% endif %}
                     {% endif %}
 
                 {% endif %}
