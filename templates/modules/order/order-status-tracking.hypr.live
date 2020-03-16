@@ -7,7 +7,13 @@
     <span>{{model.shippingMethod|replace("FedEx")}}</span>
       <span>
         {% if model.trackingNumber and model.trackingNumber != "Shipment pending" %}
-        <a href="https://www.fedex.com/apps/fedextrack/?tracknumbers={{model.trackingNumber}}" target="_blank">{{model.trackingNumber}}</a>
+          {% with model.trackingNumber|split("") as trackingArr%}
+            {% if trackingArr[0] == "1" && trackingArr[1] == "Z" %} 
+              <a href="https://www.ups.com/track?loc=en_US&tracknum={{model.trackingNumber}}" target="_blank">{{model.trackingNumber}}</a>
+            {% else %}
+              <a href="https://www.fedex.com/apps/fedextrack/?tracknumbers={{model.trackingNumber}}" target="_blank">{{model.trackingNumber}}</a>
+            {% endif %}
+          {% endwith %}
         {% else %}
           {% if model.trackingNumber %}
              - {{model.trackingNumber}}
