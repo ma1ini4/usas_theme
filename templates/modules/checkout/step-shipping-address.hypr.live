@@ -8,11 +8,12 @@
         {% endif %}
     </h3>
     <div class="mz-formstep-body">
-        {% if model.requiresFulfillmentInfo or model.requiresDigitalFulfillmentContact %}
+    {% if model.requiresFulfillmentInfo or model.requiresDigitalFulfillmentContact %}
         {% endif %}
       {% if not model.address.candidateValidatedAddresses %}
           <div class="mz-formstep-summary mz-addresssummary mz-checkoutform">
           {% if model.requiresFulfillmentInfo %}
+            <div><b>Your shipping label will look like this:</b></div>
             {% include "modules/common/address-summary" %}
              {% if model.isAwsCheckout %}
               <div style="margin-top:5px;margin-bottom:20px;">
@@ -31,9 +32,14 @@
           {%endif%}
         <div class="mz-formstep-fields mz-l-formfieldgroup mz-checkoutform  mz-checkoutform-shipping mz-checkoutform-section mz-checkoutform-active">
           {% if model.contacts %}
-            {% include "modules/checkout/checkout-shipping-contact-selector" with editingContact=model hasRequiredBehavior=model.hasRequiredBehavior %}
+            {% include "modules/checkout/checkout-shipping-contact-selector" with editingContact=model hasRequiredBehavior=model.hasRequiredBehavior isShippingAddress="true" %}
           {% else %}
-            {% include "modules/common/address-form" with countries=pageContext.shippingCountries states=pageContext.shippingStates %}
+            {% include "modules/common/address-form" with countries=pageContext.shippingCountries states=pageContext.shippingStates isShippingAddress="true" %}
+          {% endif %}
+          {% if model.isB2B %}
+            <div class="add-new-address">
+              <a href="#" data-mz-action="addNewAddress" >Add new address</a>
+            </div>
           {% endif %}
         </div>
         {% endif %}

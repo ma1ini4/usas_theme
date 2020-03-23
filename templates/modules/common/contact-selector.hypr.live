@@ -21,7 +21,7 @@
     <div class="mz-contactselector-contact mz-contactselector-new mz-checkoutform-shipping">
       <span class="mz-contactselector-summarywrapper">
                     {% block enter-new-form %}
-                      {% include "modules/common/address-form" with model=editingContact %}
+                      {% include "modules/common/address-form" with model=editingContact isShippingAddress=isShippingAddress %}
                     {% endblock enter-new-form %}
                 </span>
             </div>

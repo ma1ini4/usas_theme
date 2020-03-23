@@ -1,4 +1,14 @@
 ﻿{% block address-form %}
+    <div class="mz-l-formfieldgroup-row mz-addressform-address2">
+        <!--<div class="mz-l-formfieldgroup-cell mz-hide-column-catalog"></div>-->
+        <div class="mz-l-formfieldgroup-cell mz-custom-padding-address">
+            <input type="text" class="input" {% if not model.hasRequiredBehavior %} disabled {% endif %}
+                name="address-line-3" data-mz-value="{{ addresscontext }}address.address3"
+                value="{{ model.address.address3 }}" maxlength="{{themeSettings.addressLength}}"
+                placeholder="Organization" autocomplete="organization" {% if model.disableOrganization %}readonly{% endif %}>
+            <span class="mz-validationmessage"></span>
+        </div>
+    </div>
     <div class="mz-l-formfieldgroup-row mz-addressform-firstname">
         {% comment %}
             <div class="mz-l-formfieldgroup-cell">
@@ -30,20 +40,30 @@
             </div>
         {% endcomment %}
         <div class="mz-l-formfieldgroup-cell">
-          <input type="text" class="input" {% if not model.hasRequiredBehavior %} disabled {% endif %} name="lastname" data-mz-value="{{ addresscontext }}lastNameOrSurname" value="{{ model.lastNameOrSurname }}" maxlength="{{themeSettings.firstNameLength}}" placeholder="{{ labels.lastName }}*">
-          <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}lastNameOrSurname"></span>
+        <input type="text" class="input" {% if not model.hasRequiredBehavior %} disabled {% endif %} name="lastname" data-mz-value="{{ addresscontext }}lastNameOrSurname" value="{{ model.lastNameOrSurname }}" placeholder="{{ labels.lastName }}*">
+        <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}lastNameOrSurname"></span>
         </div>
     </div>
-    <div class="mz-l-formfieldgroup-row mz-addressform-address2">
-        <!--<div class="mz-l-formfieldgroup-cell mz-hide-column-catalog"></div>-->
-        <div class="mz-l-formfieldgroup-cell mz-custom-padding-address">
-            <input type="text" class="input" {% if not model.hasRequiredBehavior %} disabled {% endif %}
-                name="address-line-3" data-mz-value="{{ addresscontext }}address.address3"
-                value="{{ model.address.address3 }}" maxlength="{{themeSettings.addressLength}}"
-                placeholder="Organization">
-            <span class="mz-validationmessage"></span>
+    {% if isShippingAddress == "true" %}
+        <div class="mz-l-formfieldgroup-row">
+            <div class="mz-l-formfieldgroup-cell">
+                <label for="shippingLabelAttention">{{ labels.shippingLabelAttention }}<span class="is-required"> *</span></label>
+            </div>
+            <div class="mz-l-formfieldgroup-cell">
+                <input type="text" class="input" name="shippingLabelAttention" data-mz-value="shippingLabelAttention" value="{{ model.firstName }} {{ model.lastNameOrSurname }}" placeholder="{{ labels.shippingLabelAttention }}*">
+                <span class="mz-validationmessage" data-mz-validationmessage-for="shippingLabelAttention"></span>
+            </div>
         </div>
-    </div>
+        <div class="mz-l-formfieldgroup-row">
+            <div class="mz-l-formfieldgroup-cell">
+                <label for="shippingLabelComment">{{ labels.shippingLabelComment }}</label>
+            </div>
+            <div class="mz-l-formfieldgroup-cell">
+                <input type="text" class="input" name="shippingLabelComment" data-mz-value="shippingLabelComment" placeholder="{{ labels.shippingLabelComment }}">
+                <span class="mz-validationmessage" data-mz-validationmessage-for="shippingLabelComment"></span>
+            </div>
+        </div>
+    {% endif %}
     <div class="mz-l-formfieldgroup-row mz-addressform-address1">
         {% comment %}
             <div class="mz-l-formfieldgroup-cell">
@@ -51,7 +71,7 @@
             </div>
         {% endcomment %}
         <div class="mz-l-formfieldgroup-cell">
-            <input type="text" class="input" {% if not model.hasRequiredBehavior %} disabled {% endif %} name="address-line-1" data-mz-value="{{ addresscontext }}address.address1" value="{{ model.address.address1 }}" maxlength="{{themeSettings.addressLength}}" placeholder="{{ labels.address }} Line 1*">
+            <input type="text" class="input" {% if not model.hasRequiredBehavior %} disabled {% endif %} name="address-line-1" data-mz-value="{{ addresscontext }}address.address1" value="{{ model.address.address1 }}" maxlength="{{themeSettings.addressLength}}" placeholder="{{ labels.address }} Line 1*" autocomplete="address-line1">
             <span class="mz-validationmessage" data-mz-validationmessage-for="{{ addresscontext }}address.address1"></span>
         </div>
     </div>
@@ -61,7 +81,7 @@
             <input type="text" class="input" {% if not model.hasRequiredBehavior %} disabled {% endif %}
                 name="address-line-2" data-mz-value="{{ addresscontext }}address.address2"
                 value="{{ model.address.address2 }}" maxlength="{{themeSettings.addressLength}}"
-                placeholder="{{ labels.address }} Line 2">
+                placeholder="{{ labels.address }} Line 2" autocomplete="address-line2">
             <span class="mz-validationmessage"></span>
         </div>
     </div>

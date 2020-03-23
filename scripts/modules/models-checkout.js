@@ -515,7 +515,7 @@
                                 var billingInfo = me.parent.get('billingInfo');
                                 var billingStatus = billingInfo.calculateStepStatus();
 
-                                if(billingStatus === 'incomplete') {
+                                if(billingStatus === 'incomplete' && Hypr.getThemeSetting('resetPaymentData')) {
                                     billingInfo.resetCreditCardInfo(billingInfo);
                                 }
 

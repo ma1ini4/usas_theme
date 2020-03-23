@@ -1,14 +1,20 @@
-﻿    <div>{{ model.firstName }} {{ model.lastNameOrSurname }}</div>
+﻿    {% if model.address.address3 %}
+        <div>{{ model.address.address3 }}</div>
+    {% endif %}    
+    {% if model.shippingLabelAttention %}
+        <div>{{model.shippingLabelAttention}}</div>
+    {% else %}
+        <div>{{ model.firstName }} {{ model.lastNameOrSurname }}</div>
+    {% endif %}
+    {% if model.shippingLabelComment %}
+        <div>{{model.shippingLabelComment}}</div>
+    {% endif %}
     <div>{{ model.address.address1 }}</div>
     {% if model.address.address2 %}
         <div>{{ model.address.address2 }}</div>
     {% endif %}
-    {% if model.address.address3 %}
-        <div>{{ model.address.address3 }}</div>
-    {% endif %}    
     <div>{{ model.address.cityOrTown }} {{ model.address.stateOrProvince }} {{ model.address.postalOrZipCode }}</div>
     <div>{{ model.address.countryCode }}</div>
     {% if model.phoneNumbers.home %}
         <div>{{ model.phoneNumbers.home }}</div>
     {% endif %}
-   

@@ -127,6 +127,38 @@ require(["modules/jquery-mozu",
             'contactId'
         ],
         requiredBehaviors: [1003],
+        initialize: function() {
+            var me = this;
+
+            $('body').on('keypress change', '[name="firstname"]', _.debounce(function (e) {
+                me.render();
+            }, 777));
+            $('body').on('keypress change', '[name="lastname"]', _.debounce(function (e) {
+                me.render();
+            }, 777));
+        },
+        next: function() {
+            var me = this;
+            var updateAttrs = [{
+                'fullyQualifiedName': 'tenant~shippingLabelAttention',
+                'values': [me.$el.find('[name="shippingLabelAttention"]').val()]
+            },{
+                'fullyQualifiedName': 'tenant~shippingLabelComment',
+                'values': [me.$el.find('[name="shippingLabelComment"]').val()]
+            }];
+            console.log(updateAttrs);
+            window.order.apiUpdateAttributes(updateAttrs).then(function(res) {
+                me.model.set('shippingLabelAttention', me.$el.find('[name="shippingLabelAttention"]').val());
+                me.model.set('shippingLabelComment', me.$el.find('[name="shippingLabelComment"]').val());
+                
+                CheckoutStepView.prototype.next.apply(me, arguments);
+            }, function(err) {
+                if(err.message === "Validation Error: Attribute tenant~shippingLabelAttention is invalid") {
+                    window.order.messages.reset();
+                    me.$el.find('[data-mz-validationmessage-for="shippingLabelAttention"]').text(Hypr.getLabel('requiredFieldMissing'));
+                }
+            });
+        },
         beginAddContact: function () {
             this.model.set('contactId', 'new');
             var billingAddress = this.model.get('address');
@@ -134,6 +166,18 @@ require(["modules/jquery-mozu",
             billingAddress.set('countryCode', addressDefaults.countryCode);
             billingAddress.set('addressType', addressDefaults.addressType);
             billingAddress.set('candidateValidatedAddresses', addressDefaults.candidateValidatedAddresses);
+        },
+        addNewAddress: function(e) {
+            var me = this;
+            var organization = me.model.get('address.address3');
+
+            me.beginAddContact();
+            me.model.set('address.address3', organization);
+            me.model.set('address.address4', null);
+            if (organization) {
+                me.model.set('disableOrganization', true);
+            }
+            // me.disableB2bUserInputs(true, organization ? ['address.address3'] : organization);
         },
         additionalEvents: {
             "input [name='shippingphone']": "allowDigit",
@@ -872,8 +916,6 @@ require(["modules/jquery-mozu",
 
 
     $(document).ready(function () {
-        determineB2BUser();
-
         var $checkoutView = $('#checkout-form'),
             checkoutData = require.mozuData('checkout');
 
@@ -952,33 +994,4 @@ require(["modules/jquery-mozu",
             AmazonPay.addCheckoutButton(window.order.id, false);
     });
 
-    function handleB2bUserInputs(isB2bUser) {
-        if(isB2bUser) {
-            $('body').on('click focus keypress keydown keyup change blur', '.mz-contactselector-new input, .mz-contactselector-new select', function (e) {
-                e.preventDefault();
-                $(e.target).prop('disabled', 'disabled');
-                return false;
-            });
-        }
-    }
-    function determineB2BUser() {
-        var apiData = require.mozuData('apicontext');
-        var user = require.mozuData('user');
-
-        if (!user.isAnonymous) {
-            $.ajax({
-                url: '/api/commerce/customer/accounts/' + user.accountId,
-                headers: apiData.headers,
-                method: 'GET'                
-            }).success(function (data) {
-                if (data.accountType === "B2B") {
-                    handleB2bUserInputs(true);
-                } else {
-                    handleB2bUserInputs(false);
-                }
-            }).fail(function (err) {
-                console.log('err', err);
-            });
-        }
-    }
 });

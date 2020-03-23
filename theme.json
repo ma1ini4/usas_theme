@@ -961,7 +961,7 @@
     "requireCheckoutAgreeToTerms": true,
     "requirePasswordSpecialChar": false,
     "returnsInfo": "Return Item",
-    "resetPaymentData" : true,
+    "resetPaymentData" : false,
     "searchExpandOnFocus": true,
     "searchStorePlaceHolder": "Enter City, State or ZIP",
     "showAddressTypeDropdown": false,
