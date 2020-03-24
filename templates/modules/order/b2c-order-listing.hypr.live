@@ -57,8 +57,11 @@
             {% endif %}
             <li class="mz-orderlisting-details-item">
                 <dl class="mz-propertylist mz-propertylist-order">
-                    
-                    <dd><a class='mz-order-code' data-mz-order-code={{model.id}}>{{ labels.viewB2cForm }}</a></dd>
+                    {% if model.fullfillmentInfo.fulfillmentContact.address.address4 && model.fullfillmentInfo.fulfillmentContact.address.address4 !== "" %}
+                        <dd><a class='mz-order-code' data-mz-action="newAddress" data-mz-order-code={{model.id}}>{{ labels.viewNewAddressForm }}</a></dd>
+                    {% else %}
+                        <dd><a class='mz-order-code' data-mz-action="newCustomer" data-mz-order-code={{model.id}}>{{ labels.viewNewCustomerForm }}</a></dd>
+                    {% endif %}
                 </dl>
             </li>
 

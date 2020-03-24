@@ -14,7 +14,7 @@ define(['modules/api',
   var OrderCollectionModelView = Backbone.MozuView.extend({
      templateName: "modules/order/b2c-order-list",
      additionalEvents: {
-        'click a.mz-order-code' : 'getOrderDetail'
+        // 'click a.mz-order-code' : 'getOrderDetail'
       },
       getOrderDetail: function(event) {
         var orderCode = $(event.currentTarget).data('mzOrderCode').trim();
@@ -22,17 +22,32 @@ define(['modules/api',
             window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory || '') + '/templates/b2c-to-b2b-form?id='+orderCode;
         }
       },
-     render: function() {
-         Backbone.MozuView.prototype.render.apply(this);
-         return this;
-     }
+      newAddress: function(e) {
+        var orderCode = $(event.currentTarget).data('mzOrderCode').trim();
+        console.log(orderCode);
+        if (!require.mozuData('pagecontext').isEditMode) {
+            window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory || '') + '/templates/b2c-to-b2b-form?id='+orderCode;
+        }
+      },
+      newCustomer: function(e) {
+        var orderCode = $(event.currentTarget).data('mzOrderCode').trim();
+        console.log(orderCode);
+        if (!require.mozuData('pagecontext').isEditMode) {
+            window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory || '') + '/templates/new-b2c-address-form?id='+orderCode;
+        }
+      },
+      render: function() {
+          Backbone.MozuView.prototype.render.apply(this);
+          return this;
+      }
   });
 
   $(document).ready(function(event){
    try{
     
     blockUiLoader.globalLoader();
-    B2cOrdersApi.OrderDetail.getOrders().then( function( data ){
+    B2cOrdersApi.OrderDetail.getOrders({filter: 'status eq PendingReview'}).then( function( data ){
+      console.log(data);
        if( data  ){
            var OrderCollectionModel = new OrdersModels.OrderCollection(data);
            var orderCollectionView = new OrderCollectionModelView({
