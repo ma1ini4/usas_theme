@@ -7,6 +7,9 @@ define(['jquery', 'hyprlive', 'modules/api','underscore'],
             processCustomer: function( params ) {
               return this.performAction( '/custom/processCustomer', params);
             },
+            processNewAddress: function( params ) {
+              return this.performAction( '/custom/processNewAddress', params);
+            },
             processOrders: function( params ) {
               return this.performAction( '/custom/processOrders', params);
             },

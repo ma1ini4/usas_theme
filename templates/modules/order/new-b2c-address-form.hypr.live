@@ -1,0 +1,11 @@
+{% include "modules/common/message-bar" with model=model.messages %}
+<div class="mz-order-info col-sm-12" style="display:none">
+  <div class="mz-l-stack mz-order-status-detail-container col-sm-12">
+    <div class="mz-l-stack-section mz-order-status-detail col-sm-6" id="order-status-detail">
+        {% include "modules/order/b2c-to-b2b-order-detail" with model=model.order b2cAccount=model.b2cAccount as_parameter%}
+    </div>
+  </div>
+  <div id="b2c-customer" class="mz-l-stack-section mz-order-status-detail col-sm-6" style="clear:none">
+    {% include "modules/order/b2c-to-b2b-address" %}
+  </div>
+  </div>

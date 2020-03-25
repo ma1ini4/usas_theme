@@ -281,6 +281,14 @@
       "userCreatable": false
     },
     {
+      "id": "new-b2c-address-form",
+      "documentType": "web_page",
+      "entityType": "webpage",
+      "template": "new-b2c-address-form",
+      "title": "USAS New Address Processing Tool",
+      "userCreatable": false
+    },
+    {
       "id": "b2c-orders",
       "documentType": "web_page",
       "entityType": "webpage",

@@ -38,7 +38,7 @@ define(['modules/api',
     });
 
     var B2cFormView = Backbone.MozuView.extend({
-       templateName: "modules/order/b2c-to-b2b-form",
+       templateName: "modules/order/new-b2c-address-form",
        render: function() {
            Backbone.MozuView.prototype.render.apply(this);
            return this;
@@ -93,28 +93,27 @@ define(['modules/api',
         },
         validate: function (payload) {
 
-            if (!payload.accountName) return this.displayMessage('Organization Name missing'), false;
-            if (!payload.billto) {
-              return this.displayMessage('Bill To Account ID missing'), false;
-            } else {
-              if ( payload.billto.length !== 10 || isNaN( payload.billto ) ){
-                return this.displayMessage('Bill To Account ID should be a 10-digit value ending in a 0'), false;
-              } else if ( payload.billto.length === 10 && !isNaN( payload.billto ) && payload.billto[payload.billto.length - 1] !== '0' ){
-                return this.displayMessage('Bill To Account ID  should be a 10-digit value ending in a 0'), false;
-              }
+          if (!payload.accountName) return this.displayMessage('Organization Name missing'), false;
+          if (!payload.billto) {
+            return this.displayMessage('Bill To Account ID missing'), false;
+          } else {
+            if ( payload.billto.length !== 10 || isNaN( payload.billto ) ){
+              return this.displayMessage('Bill To Account ID should be a 10-digit value ending in a 0'), false;
+            } else if ( payload.billto.length === 10 && !isNaN( payload.billto ) && payload.billto[payload.billto.length - 1] !== '0' ){
+              return this.displayMessage('Bill To Account ID  should be a 10-digit value ending in a 0'), false;
             }
-            if (!payload.shipto) {
-              return this.displayMessage('Ship To Account ID missing'), false;
-            } else {
-              if ( payload.shipto.length !== 10  || isNaN( payload.shipto ) ){
-                return this.displayMessage('Ship To Account ID should be a 10-digit value not ending with 0000'), false;
-              } else if (payload.shipto.length === 10 && !isNaN(payload.shipto) && payload.shipto.slice(payload.shipto.length - 4, payload.shipto.length) === '0000') {
-                return this.displayMessage('Ship To Account ID  should be a 10-digit value not ending with 0000'), false;
-              }
+          }
+          if (!payload.shipto) {
+            return this.displayMessage('Ship To Account ID missing'), false;
+          } else {
+            if ( payload.shipto.length !== 10  || isNaN( payload.shipto ) ){
+              return this.displayMessage('Ship To Account ID should be a 10-digit value not ending with 0000'), false;
+            } else if (payload.shipto.length === 10 && !isNaN(payload.shipto) && payload.shipto.slice(payload.shipto.length - 4, payload.shipto.length) === '0000') {
+              return this.displayMessage('Ship To Account ID  should be a 10-digit value not ending with 0000'), false;
             }
-            if (!payload.pricelist) return this.displayMessage('Pricelist Code missing'), false;
-            if (!payload.orderId) return this.displayMessage('Order Id Missing'), false;
-            return true;
+          }
+          if (!payload.orderId) return this.displayMessage('Order Id Missing'), false;
+          return true;
         },
         b2ccustomerdetails: function() {
             var me = this;
@@ -124,7 +123,6 @@ define(['modules/api',
                 accountName: this.$parent.find('[data-mz-account-name]').val(),
                 billto: this.$parent.find('[data-mz-billto]').val(),
                 shipto: this.$parent.find('[data-mz-shipto]').val(),
-                pricelist: this.$parent.find('[data-mz-pricelist]').val(),
                 disposition: this.$parent.find('[data-mz-disposition] option:selected').val(),
                 orderComment: this.$parent.find('[data-mz-orderComment]').val(),
                 orderId: params.id
@@ -244,7 +242,7 @@ define(['modules/api',
 
              var b2cFormModel = new B2cFormModel(data);
              var b2cFormView = new B2cFormView({
-                el: $( '#b2c-to-b2b-info' ),
+                el: $( '#new-b2c-address-form' ),
                 model: b2cFormModel,
                 messagesEl: $('[data-mz-message-bar]')
              });
