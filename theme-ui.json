@@ -1051,6 +1051,11 @@
                     "fieldLabel": "User Customer Segment",
                     "xtype": "mz-input-text",
                     "name": "userConvertCustomerSegment"
+                },
+                {
+                    "fieldLabel": "Order dispositions list",
+                    "xtype": "mz-input-textarea",
+                    "name": "orderDispositions"
                 }
             ]
         },

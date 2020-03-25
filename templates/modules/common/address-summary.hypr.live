@@ -1,12 +1,12 @@
 ﻿    {% if model.address.address3 %}
         <div>{{ model.address.address3 }}</div>
     {% endif %}    
-    {% if model.shippingLabelAttention %}
-        <div>{{model.shippingLabelAttention}}</div>
+    {% if model.shippingLabelAttention or shippingLabelAttention %}
+        <div>{{shippingLabelAttention|default(model.shippingLabelAttention)}}</div>
     {% else %}
         <div>{{ model.firstName }} {{ model.lastNameOrSurname }}</div>
     {% endif %}
-    {% if model.shippingLabelComment %}
+    {% if model.shippingLabelComment or shippingLabelComment %}
         <div>{{model.shippingLabelComment}}</div>
     {% endif %}
     <div>{{ model.address.address1 }}</div>

@@ -993,6 +993,7 @@
     "xiInterceptQATokenizeURL": "https://qaapp02.xisecurenet.com/diecomm/Ajax",
     "xiInterceptTokenizeURL": "https://prdapp02.xisecurenet.com/diecomm/Ajax",
     "userConvertCustomerSegment": "Admin",
+    "orderDispositions": "[\"Blocked by SAP\"]",
     "sapOrderNumberAttribute": "tenant~sap-order-number",
     "usStates": [
       {

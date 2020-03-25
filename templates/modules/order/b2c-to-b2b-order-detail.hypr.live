@@ -5,6 +5,14 @@
         <div>{{ labels.orderDetailNumber}} <strong> {{model.orderNumber}} </strong> </div>
         <div>{{ labels.orderDetailDate}} <strong>{{model.submittedDate|date('m/d/Y H:i:s') }}</strong>.</div>
         <div>{{ labels.orderDetailStatus}} <strong>{{model.status }}</strong></div>
+        {% with model.attributes|findwhere("fullyQualifiedName","tenant~shippingLabelComment") as userComment %}
+          {% if userComment && userComment.values.length %}
+            <div>
+              {{ labels.orderDetailComment}} 
+              <strong>{{ userComment.values|first }}</strong>
+            </div>
+          {% endif %}
+        {% endwith %}
       </div>
       <div class="order-detail-row">
           <h4 class="mz-l-stack-sectiontitle">{{ labels.b2cAccountInformation }}</h4>
@@ -30,8 +38,13 @@
       <div class="order-detail-row">
          <h4 class="mz-l-stack-sectiontitle">{{ labels.shippingInformation }}</h4>
         <div class="mz-ordersummary-shipto">
-            	{% include "modules/common/address-summary" with model=model.fulfillmentInfo.fulfillmentContact %}
+          {% with model.attributes|findwhere("fullyQualifiedName","tenant~shippingLabelAttention") as userAttn %}
+            {% if userAttn && userAttn.values.length %}
+              {% include "modules/common/address-summary" with model=model.fulfillmentInfo.fulfillmentContact shippingLabelAttention=userAttn.values[0] %}
+            {% else %}
+              {% include "modules/common/address-summary" with model=model.fulfillmentInfo.fulfillmentContact %}
+            {% endif %}
+          {% endwith %}
           </div>
       </div>
-
 </div>

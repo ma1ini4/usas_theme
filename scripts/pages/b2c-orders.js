@@ -13,9 +13,6 @@ define(['modules/api',
 
   var OrderCollectionModelView = Backbone.MozuView.extend({
      templateName: "modules/order/b2c-order-list",
-     additionalEvents: {
-        // 'click a.mz-order-code' : 'getOrderDetail'
-      },
       getOrderDetail: function(event) {
         var orderCode = $(event.currentTarget).data('mzOrderCode').trim();
         if (!require.mozuData('pagecontext').isEditMode) {
@@ -23,17 +20,17 @@ define(['modules/api',
         }
       },
       newAddress: function(e) {
-        var orderCode = $(event.currentTarget).data('mzOrderCode').trim();
-        console.log(orderCode);
+        var orderCode = $(e.currentTarget).data('mzOrderCode').trim();
+        console.log('newAddress');
         if (!require.mozuData('pagecontext').isEditMode) {
-            window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory || '') + '/templates/b2c-to-b2b-form?id='+orderCode;
+            window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory || '') + '/templates/new-b2c-address-form?id='+orderCode;
         }
       },
       newCustomer: function(e) {
-        var orderCode = $(event.currentTarget).data('mzOrderCode').trim();
-        console.log(orderCode);
+        var orderCode = $(e.currentTarget).data('mzOrderCode').trim();
+        console.log('newCustomer');
         if (!require.mozuData('pagecontext').isEditMode) {
-            window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory || '') + '/templates/new-b2c-address-form?id='+orderCode;
+            window.location.href = (HyprLiveContext.locals.siteContext.siteSubdirectory || '') + '/templates/b2c-to-b2b-form?id='+orderCode;
         }
       },
       render: function() {

@@ -125,6 +125,8 @@ define(['modules/api',
                 billto: this.$parent.find('[data-mz-billto]').val(),
                 shipto: this.$parent.find('[data-mz-shipto]').val(),
                 pricelist: this.$parent.find('[data-mz-pricelist]').val(),
+                disposition: this.$parent.find('[data-mz-disposition] option:selected').val(),
+                orderComment: this.$parent.find('[data-mz-orderComment]').val(),
                 orderId: params.id
               };
                 me.displayMessage("");
@@ -257,7 +259,10 @@ define(['modules/api',
                  loginPage.formSelector = 'form[name="mz-b2c-customer-details"]';
                  loginPage.pageType = 'b2ccustomerdetails';
                  loginPage.init(this);
-                 $('body').on('submitForm', loginPage.test);
+                 $('body').on('submitForm', function() {
+                  console.log(loginPage.test);
+                  return loginPage.test;
+                 });
              });
           } else {
             $('.mz-l-container').html("Order Missing");
