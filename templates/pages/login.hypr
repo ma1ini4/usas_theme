@@ -23,59 +23,67 @@
                     </div>
                 </div>
             </div> -->
-              <h1 class="mz-pagetitle">{{ labels.logIn2 }}</h1>
+              <h1 class="mz-pagetitle">
+                {% if user.isAnonymous %}
+                    {{ labels.logIn2 }}
+                {% else %}
+                    <a href="{{ themeSettings.loggedInRedirectURL }}">{{ labels.loggedIn }}</a>
+                {% endif %}
+            </h1>
 
 	        {% dropzone "login-top" scope="template" %}
-              <form method="post" class="mz-loginform mz-loginform-page" name="mz-loginform">
-                 <input type="hidden" name="returnUrl" value="{{ model.returnUrl }}" />
-                 <div class="mz-l-formfieldgroup">
-                      <div class="mz-l-formfieldgroup-row">
-                          <!-- <div class="mz-l-formfieldgroup-cell">
-                              <label for="email">{{ labels.logInInput }}</label>
-                          </div> -->
-                          <div class="mz-l-formfieldgroup-cell">
-                              <input name="email" value="{{model.email|replace("B2C-", "")|default(user.email)|replace("B2C-", "")}}" placeholder="{{ labels.logInInput }}" type="email" data-mz-login-email maxlength="{{themeSettings.emailLength}}"/>
+              {% if user.isAnonymous %}
+                <form method="post" class="mz-loginform mz-loginform-page" name="mz-loginform">
+                     <input type="hidden" name="returnUrl" value="{{ model.returnUrl }}" />
+                     <div class="mz-l-formfieldgroup">
+                          <div class="mz-l-formfieldgroup-row">
+                              <!-- <div class="mz-l-formfieldgroup-cell">
+                                  <label for="email">{{ labels.logInInput }}</label>
+                              </div> -->
+                              <div class="mz-l-formfieldgroup-cell">
+                                  <input name="email" value="{{model.email|replace("B2C-", "")|default(user.email)|replace("B2C-", "")}}" placeholder="{{ labels.logInInput }}" type="email" data-mz-login-email maxlength="{{themeSettings.emailLength}}"/>
+                              </div>
+                          </div>
+                          <div class="mz-l-formfieldgroup-row">
+                              <!-- <div class="mz-l-formfieldgroup-cell">
+                                  <label for="password">{{ labels.password }}</label>
+                              </div> -->
+                              <div class="mz-l-formfieldgroup-cell">
+                                  <input name="password"  type="password" placeholder="{{ labels.password }}" data-mz-login-password maxlength="{{themeSettings.passwordMaxLength}}" />
+                              </div>
+                          </div>
+                          {% if themeSettings.enableRecaptcha %}
+                          <div class="mz-l-formfieldgroup-row">
+                              <div class="mz-l-formfieldgroup-cell"></div>
+                              <div class="mz-l-formfieldgroup-cell">
+                                  <div id="recaptcha-container"></div>
+                              </div>
+                          </div>
+                          {% endif %}
+                          <div class="mz-l-formfieldgroup-row">
+                              <div class="mz-l-formfieldgroup-cell">
+                                  <a href="/user/forgotpassword" class="mz-forgot" data-mz-action="launchforgotpassword">{{ labels.forgotPassword }}</a>
+                              </div>
+                          </div>
+                          <div class="mz-l-formfieldgroup-row mz-login-button-group">
+                              <div class="mz-l-formfieldgroup-cell">
+                                <button class="mz-button primary-btn mz-login-button" data-mz-action="signup">
+                                    {{ labels.signUpLink }}
+                                </button>
+                              </div>
+                              <div class="mz-l-formfieldgroup-cell">
+                                {% if themeSettings.enableRecaptcha %}
+                                <button class=""mz-button primary-btn mz-login-button pull-left" data-mz-action="recaptcha-submit">{{ labels.logIn }}</button>
+                                {% else %}
+                                <button class="mz-button primary-btn mz-login-button pull-left" data-mz-action="loginpage-submit">{{ labels.logIn }}</button>
+                                {% endif %}
+                              </div>
                           </div>
                       </div>
-                      <div class="mz-l-formfieldgroup-row">
-                          <!-- <div class="mz-l-formfieldgroup-cell">
-                              <label for="password">{{ labels.password }}</label>
-                          </div> -->
-                          <div class="mz-l-formfieldgroup-cell">
-                              <input name="password"  type="password" placeholder="{{ labels.password }}" data-mz-login-password maxlength="{{themeSettings.passwordMaxLength}}" />
-                          </div>
-                      </div>
-                      {% if themeSettings.enableRecaptcha %}
-                      <div class="mz-l-formfieldgroup-row">
-                          <div class="mz-l-formfieldgroup-cell"></div>
-                          <div class="mz-l-formfieldgroup-cell">
-                              <div id="recaptcha-container"></div>
-                          </div>
-                      </div>
-                      {% endif %}
-                      <div class="mz-l-formfieldgroup-row">
-                          <div class="mz-l-formfieldgroup-cell">
-                              <a href="/user/forgotpassword" class="mz-forgot" data-mz-action="launchforgotpassword">{{ labels.forgotPassword }}</a>
-                          </div>
-                      </div>
-                      <div class="mz-l-formfieldgroup-row mz-login-button-group">
-                          <div class="mz-l-formfieldgroup-cell">
-                            <button class="mz-button primary-btn mz-login-button" data-mz-action="signup">
-                                {{ labels.signUpLink }}
-                            </button>
-                          </div>
-                          <div class="mz-l-formfieldgroup-cell">
-                            {% if themeSettings.enableRecaptcha %}
-                            <button class=""mz-button primary-btn mz-login-button pull-left" data-mz-action="recaptcha-submit">{{ labels.logIn }}</button>
-                            {% else %}
-                            <button class="mz-button primary-btn mz-login-button pull-left" data-mz-action="loginpage-submit">{{ labels.logIn }}</button>
-                            {% endif %}
-                          </div>
-                      </div>
-                  </div>
-                  <section data-mz-role="popover-message" class="mz-popover-message"></section>
-              </form>
-              {% include "modules/common/message-bar" with model=model.messages %}
+                      <section data-mz-role="popover-message" class="mz-popover-message"></section>
+                  </form>
+                  {% include "modules/common/message-bar" with model=model.messages %}
+              {% endif %}
       </div>
     </div>
 {% endblock body-content %}

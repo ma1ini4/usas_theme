@@ -896,6 +896,7 @@
     "isCvvSuppressed": false,
     "itemListingThumbSize": 80,
     "lastNameLength": 40,
+    "linkLoggedIn": "#",
     "listProductCode": false,
     "listProductShortDesc": true,
     "listProductThumbSize": 265,

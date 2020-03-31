@@ -276,6 +276,7 @@
   "locationWaitProd": "We're searching local stores for <strong>{0}</strong>. Your browser may ask for permission to use your location. Click \"Allow\" to sort the search results by distance.",
   "logIn": "Log In",
   "logIn2": "Sign in to your account",
+  "loggedIn": "You are already logged in!",
   "logInInput": "User Name or Email Address",
   "logOut": "Logout",
   "logOutInfo": "Sign out of your account",

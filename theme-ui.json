@@ -55,6 +55,18 @@
             ]
         },
         {
+            "xtype": "panel",
+            "title": "Links",
+            "collapsed": false,
+            "items": [
+                {
+                    "xtype": "mz-input-text",
+                    "name": "linkLoggedIn",
+                    "fieldLabel": "Logged In User Link"
+                }
+            ]
+        },
+        {
         "xtype": "panel",
             "title": "Recaptcha",
             "collapsed": false,
