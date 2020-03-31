@@ -27,7 +27,7 @@
                 {% if user.isAnonymous %}
                     {{ labels.logIn2 }}
                 {% else %}
-                    <a href="{{ themeSettings.loggedInRedirectURL }}">{{ labels.loggedIn }}</a>
+                    <a href="{{ themeSettings.linkLoggedIn }}">{{ labels.loggedIn }}</a>
                 {% endif %}
             </h1>
 
