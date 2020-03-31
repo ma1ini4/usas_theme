@@ -1,0 +1,13 @@
+<div class="mz-drop-zone-footer-cat-links-col">
+    <div class="mz-drop-zone-footer-cat-links-col-title">
+        <h4 class="mz-drop-zone-footer-cat-links-col-title-default">{{ model.config.title }}</h4>
+        <h4 class="mz-drop-zone-footer-cat-links-col-title-collapse">
+            <a role="button" data-toggle="collapse" href="#{{ model.config.id }}" aria-expanded="false" aria-controls="{{ model.config.id }}">
+              {{ model.config.title }}
+            </a>
+        </h4>
+    </div>
+    <ul class="mz-drop-zone-footer-cat-links-col-list collapse" id="{{ model.config.id }}">
+        {{ model.config.list_items|safe }}
+    </ul>
+</div>

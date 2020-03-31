@@ -2760,6 +2760,33 @@
       "validPageTypes": [
         "*"
       ]
+    }, {
+      "displayName": "Footer",
+      "displayTemplate": "footer/footer",
+      "editViewFields": [
+        {
+          "anchor": "100%",
+          "fieldLabel": "Title",
+          "name": "title",
+          "xtype": "mz-input-text"
+        },
+        {
+          "fieldLabel": "Id",
+          "name": "id",
+          "xtype": "mz-input-text"
+        },
+        {
+          "name": "list_items",
+          "fieldLabel": "List items HTML (each need to be in <li> tag)",
+          "xtype": "mz-input-code",
+          "width": "100%"
+        }
+      ],
+      "icon": "/resources/admin/widgets/rti-configuration.png",
+      "id": "footer",
+      "validPageTypes": [
+        "*"
+      ]
     }
   ]
 }
